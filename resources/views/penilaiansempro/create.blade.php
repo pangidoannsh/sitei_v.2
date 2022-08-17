@@ -116,7 +116,7 @@
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori5" name="penguasaan_dasar_teori" value="9" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '9' ? 'checked' : null }} >
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori5" name="penguasaan_dasar_teori" value="9" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '9' ? 'checked' : null }} >
                     <label for="penguasaan_dasar_teori5" class="form-check-label">Sangat Baik</label>
                   </div>                                                                   
                   
