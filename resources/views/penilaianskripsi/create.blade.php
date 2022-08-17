@@ -89,198 +89,228 @@
       <div class="tab-content" id="custom-tabs-one-tabContent">
         <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
           <form action="/penilaian-skripsi-pembimbing/create/{{$skripsi->id}}" method="POST">
-            @csrf
+            @csrf              
 
               <div class="mb-3">
                 <label for="penguasaan_dasar_teori" class="col-form-label">Penguasaan Dasar Teori</label>
                 <div class="radio1 d-inline">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="2" onclick="hasil()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori1" name="penguasaan_dasar_teori" value="2" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '2' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori1" class="form-check-label">Sangat Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="4" onclick="hasil()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori2" name="penguasaan_dasar_teori" value="4" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '4' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="6" onclick="hasil()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori3" name="penguasaan_dasar_teori" value="6" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '6' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori3" class="form-check-label">Biasa</label>
                   </div>  
                   
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="8" onclick="hasil()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori4" name="penguasaan_dasar_teori" value="8" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '8' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="10" onclick="hasil()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori5" name="penguasaan_dasar_teori" value="10" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '10' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori5" class="form-check-label">Sangat Baik</label>
                   </div>                                                                   
                    
                 </div>                                                         
               </div>
+              @error('penguasaan_dasar_teori')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
               
               <div class="mb-3">
                 <label for="tingkat_penguasaan_materi" class="col-form-label">Tingkat Penguasaan Materi</label>
                 <div class="radio2 d-inline">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="2" onclick="hasil()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi1" name="tingkat_penguasaan_materi" value="2" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '2' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi1" class="form-check-label">Sangat Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="4" onclick="hasil()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi2" name="tingkat_penguasaan_materi" value="4" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '4' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="6" onclick="hasil()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi3" name="tingkat_penguasaan_materi" value="6" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '6' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi3" class="form-check-label">Biasa</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="8" onclick="hasil()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi4" name="tingkat_penguasaan_materi" value="8" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '8' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="10" onclick="hasil()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi5" name="tingkat_penguasaan_materi" value="10" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '10' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi5" class="form-check-label">Sangat Baik</label>
                   </div>                              
                 </div>                                                         
               </div>
+              @error('tingkat_penguasaan_materi')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
 
               <div class="mb-3">
                 <label for="tinjauan_pustaka" class="col-form-label">Tinjauan Pustaka</label>
                 <div class="radio3 d-inline">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="1.8" onclick="hasil()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka1" name="tinjauan_pustaka" value="1.8" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.8' ? 'checked' : null }}>
+                    <label for="tinjauan_pustaka1" class="form-check-label">Sangat Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="3.6" onclick="hasil()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka2" name="tinjauan_pustaka" value="3.6" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '3.6' ? 'checked' : null }}>
+                    <label for="tinjauan_pustaka2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="5.4" onclick="hasil()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka3" name="tinjauan_pustaka" value="5.4" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '5.4' ? 'checked' : null }}>
+                    <label for="tinjauan_pustaka3" class="form-check-label">Biasa</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="7.2" onclick="hasil()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka4" name="tinjauan_pustaka" value="7.2" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '7.2' ? 'checked' : null }}>
+                    <label for="tinjauan_pustaka4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="9" onclick="hasil()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka5" name="tinjauan_pustaka" value="9" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '9' ? 'checked' : null }}>
+                    <label for="tinjauan_pustaka5" class="form-check-label">Sangat Baik</label>
                   </div>                           
                    
                 </div>                                                         
               </div>
+              @error('tinjauan_pustaka')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
 
               <div class="mb-3">
-                <label for="penguasaan_dasar_teori" class="col-form-label">Tata Tulis</label>
+                <label for="tata_tulis" class="col-form-label">Tata Tulis</label>
                 <div class="radio4 d-inline">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="1.6" onclick="hasil()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis1" name="tata_tulis" value="1.6" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.6' ? 'checked' : null }}>
+                    <label for="tata_tulis1" class="form-check-label">Sangat Kurang Baik</label>       
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="3.2" onclick="hasil()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis2" name="tata_tulis" value="3.2" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '3.2' ? 'checked' : null }}>
+                    <label for="tata_tulis2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="4.8" onclick="hasil()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis3" name="tata_tulis" value="4.8" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '4.8' ? 'checked' : null }}>
+                    <label for="tata_tulis3" class="form-check-label">Biasa</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="6.4" onclick="hasil()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis4" name="tata_tulis" value="6.4" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '6.4' ? 'checked' : null }}>
+                    <label for="tata_tulis4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="8" onclick="hasil()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis5" name="tata_tulis" value="8" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '8' ? 'checked' : null }}>
+                    <label for="tata_tulis5" class="form-check-label">Sangat Baik</label>
                   </div>                        
                    
                 </div>                                                         
               </div>
+              @error('tata_tulis')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
 
               <div class="mb-3">
                 <label for="hasil_dan_pembahasan" class="col-form-label">Hasil dan Pembahasan</label>
                 <div class="radio15 d-inline">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="2" onclick="hasil()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('hasil_dan_pembahasan') is-invalid @enderror" type="radio" id="hasil_dan_pembahasan1" name="hasil_dan_pembahasan" value="2" onclick="total()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '2' ? 'checked' : null }}>
+                    <label for="hasil_dan_pembahasan1" class="form-check-label">Sangat Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="4" onclick="hasil()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('hasil_dan_pembahasan') is-invalid @enderror" type="radio" id="hasil_dan_pembahasan2" name="hasil_dan_pembahasan" value="4" onclick="total()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '4' ? 'checked' : null }}>
+                    <label for="hasil_dan_pembahasan2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="6" onclick="hasil()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('hasil_dan_pembahasan') is-invalid @enderror" type="radio" id="hasil_dan_pembahasan3" name="hasil_dan_pembahasan" value="6" onclick="total()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '6' ? 'checked' : null }}>
+                    <label for="hasil_dan_pembahasan3" class="form-check-label">Biasa</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="8" onclick="hasil()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('hasil_dan_pembahasan') is-invalid @enderror" type="radio" id="hasil_dan_pembahasan4" name="hasil_dan_pembahasan" value="8" onclick="total()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '8' ? 'checked' : null }}>
+                    <label for="hasil_dan_pembahasan4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="10" onclick="hasil()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('hasil_dan_pembahasan') is-invalid @enderror" type="radio" id="hasil_dan_pembahasan5" name="hasil_dan_pembahasan" value="10" onclick="total()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '10' ? 'checked' : null }}>
+                    <label for="hasil_dan_pembahasan5" class="form-check-label">Sangat Baik</label>
                   </div>                        
                    
                 </div>                                                         
               </div>
+              @error('hasil_dan_pembahasan')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
 
               <div class="mb-3">
-                <label for="hasil_dan_pembahasan" class="col-form-label">Sikap dan Kepribadian Ketika Bimbingan</label>
+                <label for="sikap_dan_kepribadian" class="col-form-label">Sikap dan Kepribadian Ketika Bimbingan</label>
                 <div class="radio5 d-inline">
                   
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="1.6" onclick="hasil()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('sikap_dan_kepribadian') is-invalid @enderror" type="radio" id="sikap_dan_kepribadian1" name="sikap_dan_kepribadian" value="1.6" onclick="total()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '1.6' ? 'checked' : null }}>
+                    <label for="sikap_dan_kepribadian1" class="form-check-label">Sangat Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="3.2" onclick="hasil()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('sikap_dan_kepribadian') is-invalid @enderror" type="radio" id="sikap_dan_kepribadian2" name="sikap_dan_kepribadian" value="3.2" onclick="total()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '3.2' ? 'checked' : null }}>
+                    <label for="sikap_dan_kepribadian2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="4.8" onclick="hasil()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('sikap_dan_kepribadian') is-invalid @enderror" type="radio" id="sikap_dan_kepribadian3" name="sikap_dan_kepribadian" value="4.8" onclick="total()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '4.8' ? 'checked' : null }}>
+                    <label for="sikap_dan_kepribadian3" class="form-check-label">Biasa</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="6.4" onclick="hasil()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('sikap_dan_kepribadian') is-invalid @enderror" type="radio" id="sikap_dan_kepribadian4" name="sikap_dan_kepribadian" value="6.4" onclick="total()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '6.4' ? 'checked' : null }}>
+                    <label for="sikap_dan_kepribadian4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="8" onclick="hasil()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('sikap_dan_kepribadian') is-invalid @enderror" type="radio" id="sikap_dan_kepribadian5" name="sikap_dan_kepribadian" value="8" onclick="total()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '8' ? 'checked' : null }}>
+                    <label for="sikap_dan_kepribadian5" class="form-check-label">Sangat Baik</label>
                   </div>                            
                    
                 </div>                                                         
               </div>
+              @error('sikap_dan_kepribadian')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
               
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaiangka">
@@ -683,28 +713,28 @@
                   <div class="radio17 d-inline">
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="penyajian_data" value="0.6" onclick="total()">
-                      <label class="form-check-label">Sangat Kurang Baik</label>
+                      <input class="form-check-input @error ('penyajian_data') is-invalid @enderror" type="radio" id="penyajian_data1" name="penyajian_data" value="0.6" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '0.6' ? 'checked' : null }} >
+                      <label for="penyajian_data1" class="form-check-label">Sangat Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="penyajian_data" value="1.2" onclick="total()">
-                      <label class="form-check-label">Kurang Baik</label>
+                      <input class="form-check-input @error ('penyajian_data') is-invalid @enderror" type="radio" id="penyajian_data2" name="penyajian_data" value="1.2" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '1.2' ? 'checked' : null }} >
+                      <label for="penyajian_data2" class="form-check-label">Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="penyajian_data" value="1.8" onclick="total()">
-                      <label class="form-check-label">Biasa</label>
+                      <input class="form-check-input @error ('penyajian_data') is-invalid @enderror" type="radio" id="penyajian_data3" name="penyajian_data" value="1.8" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '1.8' ? 'checked' : null }} >
+                      <label for="penyajian_data3" class="form-check-label">Biasa</label>
                     </div>  
                     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="penyajian_data" value="2.4" onclick="total()">
-                      <label class="form-check-label">Baik</label>
+                      <input class="form-check-input @error ('penyajian_data') is-invalid @enderror" type="radio" id="penyajian_data4" name="penyajian_data" value="2.4" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '2.4' ? 'checked' : null }} >
+                      <label for="penyajian_data4" class="form-check-label">Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="penyajian_data" value="3" onclick="total()">
-                      <label class="form-check-label">Sangat Baik</label>
+                      <input class="form-check-input @error ('penyajian_data') is-invalid @enderror" type="radio" id="penyajian_data5" name="penyajian_data" value="3" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '3' ? 'checked' : null }} >
+                      <label for="penyajian_data5" class="form-check-label">Sangat Baik</label>
                     </div>                                                                   
                     
                   </div>                                                         
@@ -720,160 +750,185 @@
                   <div class="radio18 d-inline">
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="hasil" value="0.8" onclick="total()">
-                      <label class="form-check-label">Sangat Kurang Baik</label>
+                      <input class="form-check-input @error ('hasil') is-invalid @enderror" type="radio" id="hasil1" name="hasil" value="0.8" onclick="total()" {{ old('hasil', $skripsi->hasil) == '0.8' ? 'checked' : null }} >
+                      <label for="hasil1" class="form-check-label">Sangat Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="hasil" value="1.6" onclick="total()">
-                      <label class="form-check-label">Kurang Baik</label>
+                      <input class="form-check-input @error ('hasil') is-invalid @enderror" type="radio" id="hasil2" name="hasil" value="1.6" onclick="total()" {{ old('hasil', $skripsi->hasil) == '1.6' ? 'checked' : null }} >
+                      <label for="hasil2" class="form-check-label">Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="hasil" value="2.4" onclick="total()">
-                      <label class="form-check-label">Biasa</label>
+                      <input class="form-check-input @error ('hasil') is-invalid @enderror" type="radio" id="hasil3" name="hasil" value="2.4" onclick="total()" {{ old('hasil', $skripsi->hasil) == '2.4' ? 'checked' : null }} >
+                      <label for="hasil3" class="form-check-label">Biasa</label>
                     </div>  
                     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="hasil" value="3.2" onclick="total()">
-                      <label class="form-check-label">Baik</label>
+                      <input class="form-check-input @error ('hasil') is-invalid @enderror" type="radio" id="hasil4" name="hasil" value="3.2" onclick="total()" {{ old('hasil', $skripsi->hasil) == '3.2' ? 'checked' : null }} >
+                      <label for="hasil4" class="form-check-label">Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="hasil" value="4" onclick="total()">
-                      <label class="form-check-label">Sangat Baik</label>
+                      <input class="form-check-input @error ('hasil') is-invalid @enderror" type="radio" id="hasil5" name="hasil" value="4" onclick="total()" {{ old('hasil', $skripsi->hasil) == '4' ? 'checked' : null }} >
+                      <label for="hasil5" class="form-check-label">Sangat Baik</label>
                     </div>                                                                   
                     
                   </div>                                                         
               </div>
+              @error('hasil')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
 
               <div class="mb-3">
                   <label for="pembahasan" class="col-form-label">Pembahasan</label>
                   <div class="radio19 d-inline">
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pembahasan" value="0.8" onclick="total()">
-                      <label class="form-check-label">Sangat Kurang Baik</label>
+                      <input class="form-check-input @error ('pembahasan') is-invalid @enderror" type="radio" id="pembahasan1" name="pembahasan" value="0.8" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '0.8' ? 'checked' : null }} >
+                      <label for="pembahasan1" class="form-check-label">Sangat Kurang Baik</label>     
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pembahasan" value="1.6" onclick="total()">
-                      <label class="form-check-label">Kurang Baik</label>
+                      <input class="form-check-input @error ('pembahasan') is-invalid @enderror" type="radio" id="pembahasan2" name="pembahasan" value="1.6" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '1.6' ? 'checked' : null }} >
+                      <label for="pembahasan2" class="form-check-label">Kurang Baik</label> 
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pembahasan" value="2.4" onclick="total()">
-                      <label class="form-check-label">Biasa</label>
+                      <input class="form-check-input @error ('pembahasan') is-invalid @enderror" type="radio" id="pembahasan3" name="pembahasan" value="2.4" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '2.4' ? 'checked' : null }} >
+                      <label for="pembahasan3" class="form-check-label">Biasa</label> 
                     </div>  
                     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pembahasan" value="3.2" onclick="total()">
-                      <label class="form-check-label">Baik</label>
+                      <input class="form-check-input @error ('pembahasan') is-invalid @enderror" type="radio" id="pembahasan4" name="pembahasan" value="3.2" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '3.2' ? 'checked' : null }} >
+                      <label for="pembahasan4" class="form-check-label">Baik</label> 
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pembahasan" value="4" onclick="total()">
-                      <label class="form-check-label">Sangat Baik</label>
+                      <input class="form-check-input @error ('pembahasan') is-invalid @enderror" type="radio" id="pembahasan5" name="pembahasan" value="4" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '4' ? 'checked' : null }} >
+                      <label for="pembahasan5" class="form-check-label">Sangat Baik</label> 
                     </div>                                                                   
                     
                   </div>                                                         
               </div>
+              @error('hasil')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
 
               <div class="mb-3">
                   <label for="kesimpulan" class="col-form-label">Kesimpulan</label>
                   <div class="radio20 d-inline">
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="kesimpulan" value="0.6" onclick="total()">
-                      <label class="form-check-label">Sangat Kurang Baik</label>
+                      <input class="form-check-input @error ('kesimpulan') is-invalid @enderror" type="radio" id="kesimpulan1" name="kesimpulan" value="0.6" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '0.6' ? 'checked' : null }} >
+                      <label for="kesimpulan1" class="form-check-label">Sangat Kurang Baik</label>    
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="kesimpulan" value="1.2" onclick="total()">
-                      <label class="form-check-label">Kurang Baik</label>
+                      <input class="form-check-input @error ('kesimpulan') is-invalid @enderror" type="radio" id="kesimpulan2" name="kesimpulan" value="1.2" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '1.2' ? 'checked' : null }} >
+                      <label for="kesimpulan2" class="form-check-label">Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="kesimpulan" value="1.8" onclick="total()">
-                      <label class="form-check-label">Biasa</label>
+                      <input class="form-check-input @error ('kesimpulan') is-invalid @enderror" type="radio" id="kesimpulan3" name="kesimpulan" value="1.8" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '1.8' ? 'checked' : null }} >
+                      <label for="kesimpulan3" class="form-check-label">Biasa</label>
                     </div>  
                     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="kesimpulan" value="2.4" onclick="total()">
-                      <label class="form-check-label">Baik</label>
+                      <input class="form-check-input @error ('kesimpulan') is-invalid @enderror" type="radio" id="kesimpulan4" name="kesimpulan" value="2.4" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '2.4' ? 'checked' : null }} >
+                      <label for="kesimpulan4" class="form-check-label">Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="kesimpulan" value="3" onclick="total()">
-                      <label class="form-check-label">Sangat Baik</label>
+                      <input class="form-check-input @error ('kesimpulan') is-invalid @enderror" type="radio" id="kesimpulan5" name="kesimpulan" value="3" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '3' ? 'checked' : null }} >
+                      <label for="kesimpulan5" class="form-check-label">Sangat Baik</label>
                     </div>                                                                   
                       
                   </div>                                                         
               </div>
+              @error('kesimpulan')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
 
               <div class="mb-3">
                   <label for="luaran" class="col-form-label">Luaran</label>
                   <div class="radio21 d-inline">
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="luaran" value="0.6" onclick="total()">
-                      <label class="form-check-label">Sangat Kurang Baik</label>
+                      <input class="form-check-input @error ('luaran') is-invalid @enderror" type="radio" id="luaran1" name="luaran" value="0.6" onclick="total()" {{ old('luaran', $skripsi->luaran) == '0.6' ? 'checked' : null }} >
+                      <label for="luaran1" class="form-check-label">Sangat Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="luaran" value="1.2" onclick="total()">
-                      <label class="form-check-label">Kurang Baik</label>
+                      <input class="form-check-input @error ('luaran') is-invalid @enderror" type="radio" id="luaran2" name="luaran" value="1.2" onclick="total()" {{ old('luaran', $skripsi->luaran) == '1.2' ? 'checked' : null }} >
+                      <label for="luaran2" class="form-check-label">Kurang Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="luaran" value="1.8" onclick="total()">
-                      <label class="form-check-label">Biasa</label>
+                      <input class="form-check-input @error ('luaran') is-invalid @enderror" type="radio" id="luaran3" name="luaran" value="1.8" onclick="total()" {{ old('luaran', $skripsi->luaran) == '1.8' ? 'checked' : null }} >
+                      <label for="luaran3" class="form-check-label">Biasa</label>
                     </div>  
                     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="luaran" value="2.4" onclick="total()">
-                      <label class="form-check-label">Baik</label>
+                      <input class="form-check-input @error ('luaran') is-invalid @enderror" type="radio" id="luaran4" name="luaran" value="2.4" onclick="total()" {{ old('luaran', $skripsi->luaran) == '2.4' ? 'checked' : null }} >
+                      <label for="luaran4" class="form-check-label">Baik</label>
                     </div>
     
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="luaran" value="3" onclick="total()">
-                      <label class="form-check-label">Sangat Baik</label>
+                      <input class="form-check-input @error ('luaran') is-invalid @enderror" type="radio" id="luaran5" name="luaran" value="3" onclick="total()" {{ old('luaran', $skripsi->luaran) == '3' ? 'checked' : null }} >
+                      <label for="luaran5" class="form-check-label">Sangat Baik</label>
                     </div>                                                                   
                       
                   </div>                                                         
               </div>
+              @error('luaran')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
               
               <div class="mb-3">
                 <label for="sumbangan_pemikiran" class="col-form-label">Sumbangan Pemikiran Terhadap Ilmu Pengetahuan</label>
                 <div class="radio14 d-inline">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="0.6" onclick="total()">
-                    <label class="form-check-label">Sangat Kurang Baik</label>
+                    <input class="form-check-input @error ('sumbangan_pemikiran') is-invalid @enderror" type="radio" id="sumbangan_pemikiran1" name="sumbangan_pemikiran" value="0.6" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '0.6' ? 'checked' : null }} >
+                    <label for="sumbangan_pemikiran1" class="form-check-label">Sangat Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="1.2" onclick="total()">
-                    <label class="form-check-label">Kurang Baik</label>
+                    <input class="form-check-input @error ('sumbangan_pemikiran') is-invalid @enderror" type="radio" id="sumbangan_pemikiran2" name="sumbangan_pemikiran" value="1.2" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '1.2' ? 'checked' : null }} >
+                    <label for="sumbangan_pemikiran2" class="form-check-label">Kurang Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="1.8" onclick="total()">
-                    <label class="form-check-label">Biasa</label>
+                    <input class="form-check-input @error ('sumbangan_pemikiran') is-invalid @enderror" type="radio" id="sumbangan_pemikiran3" name="sumbangan_pemikiran" value="1.8" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '1.8' ? 'checked' : null }} >
+                    <label for="sumbangan_pemikiran3" class="form-check-label">Biasa</label>
                   </div>  
                   
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="2.4" onclick="total()">
-                    <label class="form-check-label">Baik</label>
+                    <input class="form-check-input @error ('sumbangan_pemikiran') is-invalid @enderror" type="radio" id="sumbangan_pemikiran4" name="sumbangan_pemikiran" value="2.4" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '2.4' ? 'checked' : null }} >
+                    <label for="sumbangan_pemikiran4" class="form-check-label">Baik</label>
                   </div>
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="3" onclick="total()">
-                    <label class="form-check-label">Sangat Baik</label>
+                    <input class="form-check-input @error ('sumbangan_pemikiran') is-invalid @enderror" type="radio" id="sumbangan_pemikiran5" name="sumbangan_pemikiran" value="3" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '3' ? 'checked' : null }} >
+                    <label for="sumbangan_pemikiran5" class="form-check-label">Sangat Baik</label>
                   </div>                                                                   
                   
                 </div>                                                         
               </div>
+              @error('sumbangan_pemikiran')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
                                 
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaiangka">

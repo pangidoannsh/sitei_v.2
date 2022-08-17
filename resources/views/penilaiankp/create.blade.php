@@ -95,7 +95,12 @@
                         </div>
 
                         <div class="col-lg-3">
-                          <input type="text" id="presentasi" class="form-control presentasi" name="presentasi" onkeyup="hasil()">
+                          <input type="text" id="presentasi" class="form-control presentasi @error('presentasi') is-invalid @enderror" name="presentasi" onkeyup="hasil()" value="{{ old('presentasi') }}">
+                          @error('presentasi')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                          @enderror
                         </div>                        
                     </div>
 
@@ -105,7 +110,12 @@
                         </div>
 
                         <div class="col-lg-3">
-                          <input type="text" id="materi" class="form-control materi" name="materi" onkeyup="hasil()">
+                          <input type="text" id="materi" class="form-control materi @error('materi') is-invalid @enderror" name="materi" onkeyup="hasil()" value="{{ old('materi') }}">
+                          @error('materi')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                          @enderror
                         </div>                        
                     </div>
 
@@ -115,7 +125,12 @@
                         </div>
 
                         <div class="col-lg-3">
-                          <input type="text" id="tanya_jawab" class="form-control tanya_jawab" name="tanya_jawab" onkeyup="hasil()">
+                          <input type="text" id="tanya_jawab" class="form-control tanya_jawab  @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" onkeyup="hasil()" value="{{ old('tanya_jawab') }}">
+                          @error('tanya_jawab')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                          @enderror
                         </div>                        
                     </div>
 
@@ -137,7 +152,12 @@
                             </label>
                         </div>
                         <div class="col-lg-3 nilai_pembimbing_kp">
-                            <input type="text" id="nilai_pembimbing_kp" class="form-control text-bold" name="nilai_pembimbing_kp" onkeyup="total()">
+                            <input type="text" id="nilai_pembimbing_kp" class="form-control text-bold @error('nilai_pembimbing_kp') is-invalid @enderror" name="nilai_pembimbing_kp" onkeyup="total()" value="{{ old('nilai_pembimbing_kp') }}">
+                            @error('nilai_pembimbing_kp')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                          @enderror
                         </div>
                     </div>
 
@@ -148,7 +168,12 @@
                             </label>
                         </div>
                         <div class="col-lg-3 nilai_pembimbing_lapangan">
-                            <input type="text" id="nilai_pembimbing_lapangan" class="form-control text-bold" name="nilai_pembimbing_lapangan" onkeyup="total()">
+                            <input type="text" id="nilai_pembimbing_lapangan" class="form-control text-bold @error('nilai_pembimbing_lapangan') is-invalid @enderror" name="nilai_pembimbing_lapangan" onkeyup="total()" value="{{ old('nilai_pembimbing_lapangan') }}">
+                            @error('nilai_pembimbing_lapangan')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                          @enderror
                         </div>
                     </div>
                                     
