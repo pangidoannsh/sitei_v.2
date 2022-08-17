@@ -1,0 +1,87 @@
+@extends('layouts.main')
+
+@php
+    Use Carbon\Carbon;
+@endphp
+
+@section('title')
+    Penilaian KP | SIA ELEKTRO
+@endsection
+
+@section('sub-title')
+    Penilaian Seminar KP
+@endsection
+
+@section('content')
+
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{session('message')}}
+</div>
+@endif
+
+@if (session()->has('loginError'))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{session('loginError')}}        
+      </div>
+@endif
+
+<ol class="breadcrumb col-lg-3">
+  <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/penilaian-kp">Hari Ini</a></li>
+  <li class="breadcrumb-item"><a href="#">Bulan Ini</a></li>  
+  <li class="breadcrumb-item"><a href="/riwayat-penilaian-kp">Riwayat Penilaian</a></li>  
+</ol>
+
+<table class="table text-center table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">NIM</th>
+      <th scope="col">Nama</th>
+      <th scope="col">Seminar</th>
+      <th scope="col">Tanggal</th>
+      <th scope="col">Waktu</th>
+      <th scope="col">Lokasi</th>              
+      <th scope="col">Pembimbing</th>
+      <th scope="col">Penguji</th>          
+      <th scope="col">Aksi</th>
+    </tr>
+  </thead>
+  <tbody>    
+    @foreach ($penjadwalan_kps as $kp)    
+        <tr>
+          <td>{{$loop->iteration}}</td>          
+          <td>{{$kp->mahasiswa->nim}}</td>
+          <td>{{$kp->mahasiswa->nama}}</td>                   
+          <td>{{$kp->jenis_seminar}}</td>                   
+          <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td>{{$kp->waktu}}</td>                   
+          <td>{{$kp->lokasi}}</td>               
+          <td>
+            <p>{{$kp->pembimbing->nama}}</p>           
+          </td>         
+          <td>
+            <p>{{$kp->penguji->nama}}</p>           
+          </td>                    
+          <td>            
+              @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
+              <a href="/penilaian-kp/create/{{$kp->id}}" class="badge bg-primary"> Input Nilai<a>          
+              @else
+              <span class="badge bg-danger">Belum Dimulai</span>
+              @endif            
+          </td>                        
+        </tr>               
+    @endforeach
+  </tbody>
+</table>
+@endsection
+
+@push('scripts')
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 2000);
+</script>
+@endpush()

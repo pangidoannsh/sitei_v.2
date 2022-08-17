@@ -1,0 +1,206 @@
+@extends('layouts.layout')
+
+@php
+    use Carbon\Carbon;
+@endphp
+
+@section('isi')
+
+<div class="row mb-5">
+
+    <div class="col-6">
+        <ol class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">NIM</div>
+            <span>{{$penjadwalan->mahasiswa->nim}}</span>         
+            </div>        
+        </li> 
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Nama</div> 
+            <span>{{$penjadwalan->mahasiswa->nama}}</span>            
+            </div>        
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Judul</div>
+            <span>{{$penjadwalan->judul_proposal}}</span>
+            </div>        
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Jadwal</div>
+            <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
+            </div>        
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Lokasi</div>
+            <span>{{$penjadwalan->lokasi}}</span>    
+            </div>        
+        </li>   
+        </ol>
+    </div>
+
+    <div class="col-6">
+        <ol class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Pembimbing</div>
+                <span>1. {{$penjadwalan->pembimbingsatu->nama}}</span>
+                <br>
+                @if ($penjadwalan->pembimbingdua_nip != null)
+                <span>{{$penjadwalan->pembimbingdua->nama}}</span>
+                @endif                
+            </div>        
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Penguji</div>
+                <span>1. {{$penjadwalan->pengujisatu->nama}}</span>
+                <br>
+                <span>2. {{$penjadwalan->pengujidua->nama}}</span>
+                <br>
+                <span>3. {{$penjadwalan->pengujitiga->nama}}</span>
+            </div>        
+        </li>     
+        </ol>
+    </div>
+
+</div>
+
+<div> 
+    @if ($penilaianpenguji != null)
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 100px">#</th>
+                    <th style="width: 700px">Aspek Penilaian Penguji</th>
+                    <th class="bg-danger" style="width: 30px">B</th>
+                    <th>Nilai Penguji</th>                        
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>  
+                    <td>Presentasi</td>
+                    <td class="bg-secondary">5</td>
+                    <td>{{$penilaianpenguji->presentasi}}</td>                        
+                </tr>
+                <tr>
+                    <td>2</td> 
+                    <td>Tingkat Penguasaan Materi</td>
+                    <td class="bg-secondary">8</td>
+                    <td>{{$penilaianpenguji->tingkat_penguasaan_materi}}</td>                        
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Keaslian</td>
+                    <td class="bg-secondary">5</td>
+                    <td>{{$penilaianpenguji->keaslian}}</td>                                                                      
+                </tr>
+                <tr>
+                    <td>4</td> 
+                    <td>Ketepatan Metodologi</td>
+                    <td class="bg-secondary">7</td>
+                    <td>{{$penilaianpenguji->ketepatan_metodologi}}</td>                                          
+                </tr>
+                <tr>
+                    <td>5</td> 
+                    <td>Penguasaan Dasar Teori</td>
+                    <td class="bg-secondary">6</td>
+                    <td>{{$penilaianpenguji->penguasaan_dasar_teori}}</td>                                       
+                </tr>
+                <tr>
+                    <td>6</td>       
+                    <td>Kecermatan Perumusan Masalah</td>
+                    <td class="bg-secondary">6</td>
+                    <td>{{$penilaianpenguji->kecermatan_perumusan_masalah}}</td>          
+                </tr>
+                <tr>
+                    <td>7</td>        
+                    <td>Tinjauan Pustaka</td>
+                    <td class="bg-secondary">7</td>
+                    <td>{{$penilaianpenguji->tinjauan_pustaka}}</td>                        
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Tata Tulis</td>
+                    <td class="bg-secondary">5</td>
+                    <td>{{$penilaianpenguji->tata_tulis}}</td>                                                                      
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Sumbangan Pemikiran Terhadap Ilmu Pengetahuan dan Penerapannya</td>
+                    <td class="bg-secondary">6</td>
+                    <td>{{$penilaianpenguji->sumbangan_pemikiran}}</td>                                               
+                </tr>
+
+                <tr>
+                    <td colspan="2">Total Nilai Penguji</td>
+                    <td class="bg-danger">55</td>
+                    <td class="bg-warning">{{$penilaianpenguji->total_nilai_angka}}</td>                        
+                </tr>
+                <tr>
+                    <td colspan="3">Nilai Huruf Penguji</td>                        
+                    <td class="bg-warning">{{$penilaianpenguji->total_nilai_huruf}}</td>                       
+                </tr>                    
+            </tbody>
+        </table>  
+    @else
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 100px">#</th>
+                    <th style="width: 700px">Aspek Penilaian Pembimbing</th>
+                    <th class="bg-danger" style="width: 30px">B</th>
+                    <th>Nilai Pembimbing</th>                        
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>  
+                    <td>Penguasaan Dasar Teori</td>
+                    <td class="bg-secondary">9</td>
+                    <td>{{$penilaianpembimbing->penguasaan_dasar_teori}}</td>                        
+                </tr>
+                <tr>
+                    <td>2</td> 
+                    <td>Tingkat Penguasaan Materi</td>
+                    <td class="bg-secondary">9</td>
+                    <td>{{$penilaianpembimbing->tingkat_penguasaan_materi}}</td>                        
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tinjauan Pustaka</td>
+                    <td class="bg-secondary">9</td>
+                    <td>{{$penilaianpembimbing->tinjauan_pustaka}}</td>                                                                      
+                </tr>
+                <tr>
+                    <td>4</td> 
+                    <td>Tata Tulis</td>
+                    <td class="bg-secondary">9</td>
+                    <td>{{$penilaianpembimbing->tata_tulis}}</td>                                          
+                </tr>
+                <tr>
+                    <td>5</td> 
+                    <td>Sikap dan Kepribadian Ketika Bimbingan</td>
+                    <td class="bg-secondary">9</td>
+                    <td>{{$penilaianpembimbing->sikap_dan_kepribadian}}</td>                                       
+                </tr>            
+
+                <tr>
+                    <td colspan="2">Total Nilai Pembimbing</td>
+                    <td class="bg-danger">45</td>
+                    <td class="bg-warning">{{$penilaianpembimbing->total_nilai_angka}}</td>                        
+                </tr>
+                <tr>
+                    <td colspan="3">Nilai Huruf Pembimbing</td>                        
+                    <td class="bg-warning">{{$penilaianpembimbing->total_nilai_huruf}}</td>                       
+                </tr>                    
+            </tbody>
+        </table> 
+    @endif            
+</div>
+@endsection   

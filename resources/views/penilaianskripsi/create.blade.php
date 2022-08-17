@@ -1,0 +1,1070 @@
+@extends('layouts.layout')
+
+@php
+    use Carbon\Carbon;
+@endphp
+
+@section('header')
+    Penilaian Skripsi | SIA Elektro
+@endsection
+
+@section('isi')
+
+<div class="row mb-5">
+  <div class="col-6">
+    <ol class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">NIM</div>
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->mahasiswa->nim}}</span>
+        </div>        
+      </li> 
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Nama</div>
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->mahasiswa->nama}}</span>
+        </div>        
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Judul</div>
+          <span>{{$skripsi->judul_skripsi}}</span>
+        </div>        
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Jadwal</div>          
+          <span>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}, : {{$skripsi->waktu}}</span>  
+        </div>        
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Lokasi</div>
+          <span>{{$skripsi->lokasi}}</span>
+        </div>        
+      </li>   
+    </ol>
+  </div>
+  
+  <div class="col-6">
+    <ol class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Pembimbing</div>
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pembimbingsatu->nama}}</span>                                      
+          @if ($skripsi->pembimbingdua == !null)
+          <br>
+          <br>
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pembimbingdua->nama}}</span>                             
+          @endif
+        </div>        
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Penguji</div>
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pengujisatu->nama}}</span> 
+          <br>                   
+          <br>                   
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pengujidua->nama}}</span>
+          <br>                    
+          <br>                    
+          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pengujitiga->nama}}</span>                    
+        </div>        
+      </li>     
+    </ol>
+  </div>
+</div>
+
+
+@if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
+  <div class="card card-primary card-tabs">
+    <div class="card-header p-0">
+      <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Form Nilai</a>
+        </li>         
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content" id="custom-tabs-one-tabContent">
+        <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+          <form action="/penilaian-skripsi-pembimbing/create/{{$skripsi->id}}" method="POST">
+            @csrf
+
+              <div class="mb-3">
+                <label for="penguasaan_dasar_teori" class="col-form-label">Penguasaan Dasar Teori</label>
+                <div class="radio1 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="2" onclick="hasil()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="4" onclick="hasil()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="6" onclick="hasil()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="8" onclick="hasil()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="10" onclick="hasil()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                                                                   
+                   
+                </div>                                                         
+              </div>
+              
+              <div class="mb-3">
+                <label for="tingkat_penguasaan_materi" class="col-form-label">Tingkat Penguasaan Materi</label>
+                <div class="radio2 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="2" onclick="hasil()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="4" onclick="hasil()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="6" onclick="hasil()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="8" onclick="hasil()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="10" onclick="hasil()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                              
+                </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                <label for="tinjauan_pustaka" class="col-form-label">Tinjauan Pustaka</label>
+                <div class="radio3 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="1.8" onclick="hasil()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="3.6" onclick="hasil()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="5.4" onclick="hasil()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="7.2" onclick="hasil()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="9" onclick="hasil()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                           
+                   
+                </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                <label for="penguasaan_dasar_teori" class="col-form-label">Tata Tulis</label>
+                <div class="radio4 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tata_tulis" value="1.6" onclick="hasil()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tata_tulis" value="3.2" onclick="hasil()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tata_tulis" value="4.8" onclick="hasil()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tata_tulis" value="6.4" onclick="hasil()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tata_tulis" value="8" onclick="hasil()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                        
+                   
+                </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                <label for="hasil_dan_pembahasan" class="col-form-label">Hasil dan Pembahasan</label>
+                <div class="radio15 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="2" onclick="hasil()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="4" onclick="hasil()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="6" onclick="hasil()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="8" onclick="hasil()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasil_dan_pembahasan" value="10" onclick="hasil()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                        
+                   
+                </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                <label for="hasil_dan_pembahasan" class="col-form-label">Sikap dan Kepribadian Ketika Bimbingan</label>
+                <div class="radio5 d-inline">
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="1.6" onclick="hasil()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="3.2" onclick="hasil()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="4.8" onclick="hasil()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="6.4" onclick="hasil()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="8" onclick="hasil()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                            
+                   
+                </div>                                                         
+              </div>
+              
+              <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto totalnilaiangka">
+                  <label for="total_nilai_angka" class="col-form-label">Total Nilai
+                    <span class="badge badge-danger ml-3">Angka</span>
+                  </label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="total_nilai_angka" class="form-control text-bold" name="total_nilai_angka" style="border-top-style: hidden;
+                  border-right-style: hidden;
+                  border-left-style: hidden;
+                  border-bottom-style: hidden;
+                  background-color: rgb(255, 255, 255);                                                
+                " readonly>
+                </div>
+              </div>
+
+              <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto totalnilaihuruf">
+                  <label for="total_nilai_huruf" class="col-form-label">Total Nilai
+                    <span class="badge badge-danger ml-3">Huruf</span>
+                  </label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="total_nilai_huruf" class="form-control text-bold" name="total_nilai_huruf" style="border-top-style: hidden;
+                  border-right-style: hidden;
+                  border-left-style: hidden;
+                  border-bottom-style: hidden;
+                  background-color: rgb(255, 255, 255);
+                " readonly>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary float-right">Save</button>
+          </form> 
+        </div>    
+      </div>
+    </div>  
+  </div>
+@endif
+
+@if (auth()->user()->nip == $skripsi->pengujisatu_nip || auth()->user()->nip == $skripsi->pengujidua_nip || auth()->user()->nip == $skripsi->pengujitiga_nip)
+
+  <form action="/penilaian-skripsi-penguji/create/{{$skripsi->id}}" method="POST">
+    @csrf
+      <div class="card card-primary card-tabs">
+        <div class="card-header p-0 pt-1">
+          <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
+                aria-selected="true">Form Nilai</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
+                aria-selected="false">Saran Perbaikan</a>
+            </li>              
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="custom-tabs-one-tabContent">
+            <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
+              aria-labelledby="custom-tabs-one-home-tab">
+              
+              <div class="mb-3">
+                <label for="presentasi" class="col-form-label">Presentasi</label>
+                <div class="radio6 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('presentasi') is-invalid @enderror" type="radio" id="presentasi1" name="presentasi" value="0.4" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '0.4' ? 'checked' : null }} >
+                    <label for="presentasi1" class="form-check-label">Sangat Kurang Baik</label>
+                  </div>              
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('presentasi') is-invalid @enderror" type="radio" id="presentasi2" name="presentasi" value="0.8" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '0.8' ? 'checked' : null }}>
+                    <label for="presentasi2" class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('presentasi') is-invalid @enderror" type="radio" id="presentasi3" name="presentasi" value="1.2" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '1.2' ? 'checked' : null }}>
+                    <label for="presentasi3" class="form-check-label">Biasa</label>
+                  </div>                  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('presentasi') is-invalid @enderror" type="radio" id="presentasi4" name="presentasi" value="1.6" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '1.6' ? 'checked' : null }}>
+                    <label for="presentasi4" class="form-check-label">Baik</label>
+                  </div>                  
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('presentasi') is-invalid @enderror" type="radio" id="presentasi5" name="presentasi" value="2" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '2' ? 'checked' : null }}>
+                    <label for="presentasi5" class="form-check-label">Sangat Baik</label>
+                  </div>                                
+                  
+                </div>                                                                       
+              </div>
+              @error('presentasi')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror             
+
+              <div class="mb-3">
+                <label for="tingkat_penguasaan_materi" class="col-form-label">Tingkat Penguasaan Materi</label>
+                <div class="radio7 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi1" name="tingkat_penguasaan_materi" value="0.6" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '0.6' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi1" class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi2" name="tingkat_penguasaan_materi" value="1.2" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '1.2' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi2" class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi3" name="tingkat_penguasaan_materi" value="1.8" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '1.8' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi3" class="form-check-label">Biasa</label>
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi4" name="tingkat_penguasaan_materi" value="2.4" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '2.4' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi4" class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tingkat_penguasaan_materi') is-invalid @enderror" type="radio" id="tingkat_penguasaan_materi5" name="tingkat_penguasaan_materi" value="3" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '3' ? 'checked' : null }} >
+                    <label for="tingkat_penguasaan_materi5" class="form-check-label">Sangat Baik</label>
+                  </div>                                                                   
+                    
+                </div>                                                         
+              </div>
+              @error('tingkat_penguasaan_materi')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
+
+              <div class="mb-3">
+                <label for="keaslian" class="col-form-label">Keaslian</label>
+                <div class="radio8 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('keaslian') is-invalid @enderror" type="radio" id="keaslian1" name="keaslian" value="0.4" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '0.4' ? 'checked' : null }} >
+                    <label for="keaslian1" class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('keaslian') is-invalid @enderror" type="radio" id="keaslian2" name="keaslian" value="0.8" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '0.8' ? 'checked' : null }} >
+                    <label for="keaslian2" class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('keaslian') is-invalid @enderror" type="radio" id="keaslian3" name="keaslian" value="1.2" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '1.2' ? 'checked' : null }} >
+                    <label for="keaslian3" class="form-check-label">Biasa</label>
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('keaslian') is-invalid @enderror" type="radio" id="keaslian4" name="keaslian" value="1.6" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '1.6' ? 'checked' : null }} >
+                    <label for="keaslian4" class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('keaslian') is-invalid @enderror" type="radio" id="keaslian5" name="keaslian" value="2" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '2' ? 'checked' : null }} >
+                    <label for="keaslian5" class="form-check-label">Sangat Baik</label>
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+              @error('keaslian')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
+
+              <div class="mb-3">
+                <label for="ketepatan_metodologi" class="col-form-label">Ketepatan Metodologi</label>
+                <div class="radio9 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('ketepatan_metodologi') is-invalid @enderror" type="radio" id="ketepatan_metodologi1" name="ketepatan_metodologi" value="0.8" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '0.8' ? 'checked' : null }} >
+                    <label for="ketepatan_metodologi1" class="form-check-label">Sangat Kurang Baik</label>                    
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('ketepatan_metodologi') is-invalid @enderror" type="radio" id="ketepatan_metodologi2" name="ketepatan_metodologi" value="1.6" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '1.6' ? 'checked' : null }} >
+                    <label for="ketepatan_metodologi2" class="form-check-label">Kurang Baik</label>  
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('ketepatan_metodologi') is-invalid @enderror" type="radio" id="ketepatan_metodologi3" name="ketepatan_metodologi" value="2.4" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '2.4' ? 'checked' : null }} >
+                    <label for="ketepatan_metodologi3" class="form-check-label">Biasa</label>  
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('ketepatan_metodologi') is-invalid @enderror" type="radio" id="ketepatan_metodologi4" name="ketepatan_metodologi" value="3.2" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '3.2' ? 'checked' : null }} >
+                    <label for="ketepatan_metodologi4" class="form-check-label">Baik</label>  
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('ketepatan_metodologi') is-invalid @enderror" type="radio" id="ketepatan_metodologi5" name="ketepatan_metodologi" value="4" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '4' ? 'checked' : null }} >
+                    <label for="ketepatan_metodologi5" class="form-check-label">Sangat Baik</label>  
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+              @error('ketepatan_metodologi')
+                  <div class="invalid-feedback">
+                    Error
+                  </div>
+              @enderror
+
+              <div class="mb-3">
+                <label for="penguasaan_dasar_teori" class="col-form-label">Penguasaan Dasar Teori</label>
+                <div class="radio10 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori1" name="penguasaan_dasar_teori" value="0.8" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '0.8' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori1" class="form-check-label">Sangat Kurang Baik</label>                    
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori2" name="penguasaan_dasar_teori" value="1.6" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '1.6' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori2" class="form-check-label">Kurang Baik</label> 
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori3" name="penguasaan_dasar_teori" value="2.4" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '2.4' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori3" class="form-check-label">Biasa</label> 
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori4" name="penguasaan_dasar_teori" value="3.2" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '3.2' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori4" class="form-check-label">Baik</label> 
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('penguasaan_dasar_teori') is-invalid @enderror" type="radio" id="penguasaan_dasar_teori5" name="penguasaan_dasar_teori" value="4" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '4' ? 'checked' : null }} >
+                    <label for="penguasaan_dasar_teori5" class="form-check-label">Sangat Baik</label> 
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+              @error('penguasaan_dasar_teori')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
+
+              <div class="mb-3">
+                <label for="kecermatan_perumusan_masalah" class="col-form-label">Kecermatan Perumusan Masalah</label>
+                <div class="radio11 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('kecermatan_perumusan_masalah') is-invalid @enderror" type="radio" id="kecermatan_perumusan_masalah1" name="kecermatan_perumusan_masalah" value="0.6" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '0.6' ? 'checked' : null }} >
+                    <label for="kecermatan_perumusan_masalah1" class="form-check-label">Sangat Kurang Baik</label>                     
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('kecermatan_perumusan_masalah') is-invalid @enderror" type="radio" id="kecermatan_perumusan_masalah2" name="kecermatan_perumusan_masalah" value="1.2" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '1.2' ? 'checked' : null }} >
+                    <label for="kecermatan_perumusan_masalah2" class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('kecermatan_perumusan_masalah') is-invalid @enderror" type="radio" id="kecermatan_perumusan_masalah3" name="kecermatan_perumusan_masalah" value="1.8" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '1.8' ? 'checked' : null }} >
+                    <label for="kecermatan_perumusan_masalah3" class="form-check-label">Biasa</label>
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('kecermatan_perumusan_masalah') is-invalid @enderror" type="radio" id="kecermatan_perumusan_masalah4" name="kecermatan_perumusan_masalah" value="2.4" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '2.4' ? 'checked' : null }} >
+                    <label for="kecermatan_perumusan_masalah4" class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('kecermatan_perumusan_masalah') is-invalid @enderror" type="radio" id="kecermatan_perumusan_masalah5" name="kecermatan_perumusan_masalah" value="3" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '3' ? 'checked' : null }} >
+                    <label for="kecermatan_perumusan_masalah5" class="form-check-label">Sangat Baik</label>
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+              @error('kecermatan_perumusan_masalah')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
+
+              <div class="mb-3">
+                <label for="tinjauan_pustaka" class="col-form-label">Tinjauan Pustaka</label>
+                <div class="radio12 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka1" name="tinjauan_pustaka" value="0.6" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '0.6' ? 'checked' : null }} >
+                    <label for="tinjauan_pustaka1" class="form-check-label">Sangat Kurang Baik</label>                    
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka2" name="tinjauan_pustaka" value="1.2" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.2' ? 'checked' : null }} >
+                    <label for="tinjauan_pustaka2" class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka3" name="tinjauan_pustaka" value="1.8" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.8' ? 'checked' : null }} >
+                    <label for="tinjauan_pustaka3" class="form-check-label">Biasa</label>  
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka4" name="tinjauan_pustaka" value="2.4" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '2.4' ? 'checked' : null }} >
+                    <label for="tinjauan_pustaka4" class="form-check-label">Baik</label>  
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tinjauan_pustaka') is-invalid @enderror" type="radio" id="tinjauan_pustaka5" name="tinjauan_pustaka" value="3" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '3' ? 'checked' : null }} >
+                    <label for="tinjauan_pustaka5" class="form-check-label">Sangat Baik</label>  
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+              @error('tinjauan_pustaka')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
+
+              <div class="mb-3">
+                <label for="tata_tulis" class="col-form-label">Tata Tulis</label>
+                <div class="radio13 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis1" name="tata_tulis" value="0.4" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '0.4' ? 'checked' : null }} >
+                    <label for="tata_tulis1" class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis2" name="tata_tulis" value="0.8" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '0.8' ? 'checked' : null }} >
+                    <label for="tata_tulis2" class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis3" name="tata_tulis" value="1.2" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.2' ? 'checked' : null }} >
+                    <label for="tata_tulis3" class="form-check-label">Biasa</label>
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis4" name="tata_tulis" value="1.6" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.6' ? 'checked' : null }} >
+                    <label for="tata_tulis4" class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input @error ('tata_tulis') is-invalid @enderror" type="radio" id="tata_tulis5" name="tata_tulis" value="2" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '2' ? 'checked' : null }} >
+                    <label for="tata_tulis5" class="form-check-label">Sangat Baik</label>
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+              @error('tata_tulis')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
+
+              <div class="mb-3">
+                  <label for="tools" class="col-form-label">Tools yang digunakan</label>
+                  <div class="radio16 d-inline">
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input @error ('tools') is-invalid @enderror" type="radio" id="tools1" name="tools" value="0.4" onclick="total()" {{ old('tools', $skripsi->tools) == '0.4' ? 'checked' : null }} >
+                      <label for="tools1" class="form-check-label">Sangat Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input @error ('tools') is-invalid @enderror" type="radio" id="tools2" name="tools" value="0.8" onclick="total()" {{ old('tools', $skripsi->tools) == '0.8' ? 'checked' : null }} >
+                      <label for="tools2" class="form-check-label">Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input @error ('tools') is-invalid @enderror" type="radio" id="tools3" name="tools" value="1.2" onclick="total()" {{ old('tools', $skripsi->tools) == '1.2' ? 'checked' : null }} >
+                      <label for="tools3" class="form-check-label">Biasa</label>
+                    </div>  
+                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input @error ('tools') is-invalid @enderror" type="radio" id="tools4" name="tools" value="1.6" onclick="total()" {{ old('tools', $skripsi->tools) == '1.6' ? 'checked' : null }} >
+                      <label for="tools4" class="form-check-label">Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input @error ('tools') is-invalid @enderror" type="radio" id="tools5" name="tools" value="2" onclick="total()" {{ old('tools', $skripsi->tools) == '2' ? 'checked' : null }} >
+                      <label for="tools5" class="form-check-label">Sangat Baik</label>
+                    </div>                                                                   
+                    
+                  </div>                                                         
+              </div>
+              @error('tools')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
+
+              <div class="mb-3">
+                  <label for="penyajian_data" class="col-form-label">Penyajian Data</label>
+                  <div class="radio17 d-inline">
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="penyajian_data" value="0.6" onclick="total()">
+                      <label class="form-check-label">Sangat Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="penyajian_data" value="1.2" onclick="total()">
+                      <label class="form-check-label">Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="penyajian_data" value="1.8" onclick="total()">
+                      <label class="form-check-label">Biasa</label>
+                    </div>  
+                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="penyajian_data" value="2.4" onclick="total()">
+                      <label class="form-check-label">Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="penyajian_data" value="3" onclick="total()">
+                      <label class="form-check-label">Sangat Baik</label>
+                    </div>                                                                   
+                    
+                  </div>                                                         
+              </div>
+              @error('penyajian_data')
+              <div class="invalid-feedback">
+                Error
+              </div>
+              @enderror
+
+              <div class="mb-3">
+                  <label for="hasil" class="col-form-label">Hasil</label>
+                  <div class="radio18 d-inline">
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="hasil" value="0.8" onclick="total()">
+                      <label class="form-check-label">Sangat Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="hasil" value="1.6" onclick="total()">
+                      <label class="form-check-label">Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="hasil" value="2.4" onclick="total()">
+                      <label class="form-check-label">Biasa</label>
+                    </div>  
+                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="hasil" value="3.2" onclick="total()">
+                      <label class="form-check-label">Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="hasil" value="4" onclick="total()">
+                      <label class="form-check-label">Sangat Baik</label>
+                    </div>                                                                   
+                    
+                  </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                  <label for="pembahasan" class="col-form-label">Pembahasan</label>
+                  <div class="radio19 d-inline">
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pembahasan" value="0.8" onclick="total()">
+                      <label class="form-check-label">Sangat Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pembahasan" value="1.6" onclick="total()">
+                      <label class="form-check-label">Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pembahasan" value="2.4" onclick="total()">
+                      <label class="form-check-label">Biasa</label>
+                    </div>  
+                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pembahasan" value="3.2" onclick="total()">
+                      <label class="form-check-label">Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pembahasan" value="4" onclick="total()">
+                      <label class="form-check-label">Sangat Baik</label>
+                    </div>                                                                   
+                    
+                  </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                  <label for="kesimpulan" class="col-form-label">Kesimpulan</label>
+                  <div class="radio20 d-inline">
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="kesimpulan" value="0.6" onclick="total()">
+                      <label class="form-check-label">Sangat Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="kesimpulan" value="1.2" onclick="total()">
+                      <label class="form-check-label">Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="kesimpulan" value="1.8" onclick="total()">
+                      <label class="form-check-label">Biasa</label>
+                    </div>  
+                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="kesimpulan" value="2.4" onclick="total()">
+                      <label class="form-check-label">Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="kesimpulan" value="3" onclick="total()">
+                      <label class="form-check-label">Sangat Baik</label>
+                    </div>                                                                   
+                      
+                  </div>                                                         
+              </div>
+
+              <div class="mb-3">
+                  <label for="luaran" class="col-form-label">Luaran</label>
+                  <div class="radio21 d-inline">
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="luaran" value="0.6" onclick="total()">
+                      <label class="form-check-label">Sangat Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="luaran" value="1.2" onclick="total()">
+                      <label class="form-check-label">Kurang Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="luaran" value="1.8" onclick="total()">
+                      <label class="form-check-label">Biasa</label>
+                    </div>  
+                    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="luaran" value="2.4" onclick="total()">
+                      <label class="form-check-label">Baik</label>
+                    </div>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="luaran" value="3" onclick="total()">
+                      <label class="form-check-label">Sangat Baik</label>
+                    </div>                                                                   
+                      
+                  </div>                                                         
+              </div>
+              
+              <div class="mb-3">
+                <label for="sumbangan_pemikiran" class="col-form-label">Sumbangan Pemikiran Terhadap Ilmu Pengetahuan</label>
+                <div class="radio14 d-inline">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="0.6" onclick="total()">
+                    <label class="form-check-label">Sangat Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="1.2" onclick="total()">
+                    <label class="form-check-label">Kurang Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="1.8" onclick="total()">
+                    <label class="form-check-label">Biasa</label>
+                  </div>  
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="2.4" onclick="total()">
+                    <label class="form-check-label">Baik</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="3" onclick="total()">
+                    <label class="form-check-label">Sangat Baik</label>
+                  </div>                                                                   
+                  
+                </div>                                                         
+              </div>
+                                
+              <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto totalnilaiangka">
+                  <label for="total_nilai_angka" class="col-form-label">Total Nilai
+                    <span class="badge badge-danger ml-3">Angka</span>
+                  </label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="total_nilai_angka" class="form-control text-bold" name="total_nilai_angka" style="border-top-style: hidden;
+                  border-right-style: hidden;
+                  border-left-style: hidden;
+                  border-bottom-style: hidden;
+                  background-color: rgb(255, 255, 255);                                                
+                " readonly>
+                </div>
+              </div>
+
+              <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto totalnilaihuruf">
+                  <label for="total_nilai_huruf" class="col-form-label">Total Nilai
+                    <span class="badge badge-danger ml-3">Huruf</span>
+                  </label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" id="total_nilai_huruf" class="form-control text-bold" name="total_nilai_huruf" style="border-top-style: hidden;
+                  border-right-style: hidden;
+                  border-left-style: hidden;
+                  border-bottom-style: hidden;
+                  background-color: rgb(255, 255, 255);
+                " readonly>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
+              aria-labelledby="custom-tabs-one-profile-tab">
+              <div class="input-group mb-3">
+                <span class="input-group-text">1</span>
+                <div class="form-floating">
+                  <textarea name="revisi_naskah1" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                  <label for="floatingTextarea2">Perbaikan 1</label>
+                </div>
+              </div>
+              
+              <div class="input-group mb-3">
+                <span class="input-group-text">2</span>
+                <div class="form-floating">
+                  <textarea name="revisi_naskah2" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                  <label for="floatingTextarea2">Perbaikan 2</label>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">3</span>
+                <div class="form-floating">
+                  <textarea name="revisi_naskah3" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                  <label for="floatingTextarea2">Perbaikan 3</label>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">4</span>
+                <div class="form-floating">
+                  <textarea name="revisi_naskah4" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                  <label for="floatingTextarea2">Perbaikan 4</label>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">5</span>
+                <div class="form-floating">
+                  <textarea name="revisi_naskah5" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                  <label for="floatingTextarea2">Perbaikan 5</label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary float-right">Save</button>    
+            </div>        
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+  </form>
+
+@endif
+
+@endsection
+
+@push('scripts')
+  <script>
+
+  function hasil(){
+
+    var penguasaan_dasar_teori = $('input[name="penguasaan_dasar_teori"]:checked').val();
+    var tingkat_penguasaan_materi = $('input[name="tingkat_penguasaan_materi"]:checked').val();
+    var tinjauan_pustaka = $('input[name="tinjauan_pustaka"]:checked').val();
+    var tata_tulis = $('input[name="tata_tulis"]:checked').val();
+    var hasil_dan_pembahasan = $('input[name="hasil_dan_pembahasan"]:checked').val();
+    var sikap_dan_kepribadian = $('input[name="sikap_dan_kepribadian"]:checked').val();
+    var total = parseFloat(penguasaan_dasar_teori) + parseFloat(tingkat_penguasaan_materi) + parseFloat(tinjauan_pustaka) + parseFloat(tata_tulis) + parseFloat(hasil_dan_pembahasan) + parseFloat(sikap_dan_kepribadian);
+    var total_angka = parseFloat(total) * parseFloat(1.81818182);;
+
+    if (!isNaN(total_angka)) {
+      $('input[name="total_nilai_angka"]').val(Math.round(total_angka));
+      if (total_angka >= 85) {
+        $('input[name="total_nilai_huruf"]').val("A");
+      }
+      else if(total_angka > 79){
+        $('input[name="total_nilai_huruf"]').val("A-");
+      }
+      else if(total_angka > 74){
+        $('input[name="total_nilai_huruf"]').val("B+");
+      }   
+      else if(total_angka > 69){
+        $('input[name="total_nilai_huruf"]').val("B");
+      }   
+      else if(total_angka > 64){
+        $('input[name="total_nilai_huruf"]').val("B-");
+      }
+      else if(total_angka > 59){
+        $('input[name="total_nilai_huruf"]').val("C+");
+      }
+      else if(total_angka > 54){
+        $('input[name="total_nilai_huruf"]').val("C");
+      }
+      else if(total_angka > 40){
+        $('input[name="total_nilai_huruf"]').val("D");
+      } 
+      else{
+        $('input[name="total_nilai_huruf"]').val("E");
+      } 
+    }
+    else{
+      $('input[name="total_nilai_angka"]').val(0);
+    }
+
+  }
+
+  function total() {
+    var presentasi = $('input[name="presentasi"]:checked').val();
+    var tingkat_penguasaan_materi = $('input[name="tingkat_penguasaan_materi"]:checked').val();
+    var keaslian = $('input[name="keaslian"]:checked').val();
+    var ketepatan_metodologi = $('input[name="ketepatan_metodologi"]:checked').val();
+    var penguasaan_dasar_teori = $('input[name="penguasaan_dasar_teori"]:checked').val();
+    var kecermatan_perumusan_masalah = $('input[name="kecermatan_perumusan_masalah"]:checked').val();
+    var tinjauan_pustaka = $('input[name="tinjauan_pustaka"]:checked').val();
+    var tata_tulis = $('input[name="tata_tulis"]:checked').val();
+    var tools = $('input[name="tools"]:checked').val();
+    var penyajian_data = $('input[name="penyajian_data"]:checked').val();
+    var hasil = $('input[name="hasil"]:checked').val();
+    var pembahasan = $('input[name="pembahasan"]:checked').val();
+    var kesimpulan = $('input[name="kesimpulan"]:checked').val();
+    var luaran = $('input[name="luaran"]:checked').val();
+    var sumbangan_pemikiran = $('input[name="sumbangan_pemikiran"]:checked').val();
+    var jumlah = parseFloat(presentasi) + parseFloat(tingkat_penguasaan_materi) + parseFloat(keaslian) + parseFloat(ketepatan_metodologi) + parseFloat(penguasaan_dasar_teori) +parseFloat(kecermatan_perumusan_masalah) + parseFloat(tinjauan_pustaka) + parseFloat(tata_tulis) + parseFloat(tools) + parseFloat(penyajian_data) + parseFloat(hasil) + parseFloat(pembahasan) + parseFloat(kesimpulan) + parseFloat(luaran) +parseFloat(sumbangan_pemikiran);
+    var angka = parseFloat(jumlah) * parseFloat(2.2222);
+
+    if (!isNaN(angka)) {
+      $('input[name="total_nilai_angka"]').val(Math.round(angka));
+      if (angka >= 85) {
+        $('input[name="total_nilai_huruf"]').val("A");
+      }
+      else if(angka > 79){
+        $('input[name="total_nilai_huruf"]').val("A-");
+      }
+      else if(angka > 74){
+        $('input[name="total_nilai_huruf"]').val("B+");
+      }   
+      else if(angka > 69){
+        $('input[name="total_nilai_huruf"]').val("B");
+      }   
+      else if(angka > 64){
+        $('input[name="total_nilai_huruf"]').val("B-");
+      }
+      else if(angka > 59){
+        $('input[name="total_nilai_huruf"]').val("C+");
+      }
+      else if(angka > 54){
+        $('input[name="total_nilai_huruf"]').val("C");
+      }
+      else if(angka > 39){
+        $('input[name="total_nilai_huruf"]').val("D");
+      } 
+      else{
+        $('input[name="total_nilai_huruf"]').val("E");
+      } 
+    }
+    else{
+      $('input[name="total_nilai_angka"]').val(0);
+    }
+  }
+
+  </script>
+@endpush
