@@ -14,48 +14,59 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('/assets/dist/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('/assets/dataTables/datatables.min.css')}}">
+
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
 
-  {{-- @include('layouts.navbar') --}}
-
-  {{-- @include('layouts.sidebar') --}}
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-    <div class="container-fluid">             
+  <div class="atas">
+  <nav class="main-header navbar navbar-expand-md fixed-top bayangan">
+    <div class="container">             
       <div class="collapse navbar-collapse order-3" id="navbarCollapse"> 
+        <nav>
+  <div class="container judul">
+  <a href="">
+  <img src="/assets/dist/img/unri.png" alt="" width="30" height="30" class="d-inline-block mr-2">
+  </a>
+    <a class="navbar-brand mt-1" href="#">SIA JTE
+    </a>
 
+  </div>
+</nav>
         <ul class="navbar-nav">
           @if (Str::length(Auth::guard('dosen')->user()) > 0)         
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Penilaian</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="/penilaian-kp" class="dropdown-item">Kerja Praktek</a></li>
-              <li><a href="/penilaian-sempro" class="dropdown-item">Proposal</a></li>                    
-              <li><a href="/penilaian-skripsi" class="dropdown-item">Skripsi</a></li>                    
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow "style="border-radius:10px;">
+              <li><a class="nav-item active" style="margin-left:-5px;" href="/penilaian-kp" class="dropdown-item">Kerja Praktek</a></li>
+              <li><a class="nav-item"style="margin-left:-5px;" href="/penilaian-sempro" class="dropdown-item">Proposal</a></li>                    
+              <li><a class="nav-item"style="margin-left:-5px;" href="/penilaian-skripsi" class="dropdown-item">Skripsi</a></li>                    
             </ul>
           </li>
 
           @if (Str::length(Auth::guard('dosen')->user()) > 0) 
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown jarak2">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Jadwal</a>
-              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
                 <li>                        
                   <a href="/form-kp" class="dropdown-item">Kerja Praktek</a>
                 </li>
                 <li><a href="/form-sempro" class="dropdown-item">Proposal</a></li>                    
                 <li><a href="/form-skripsi" class="dropdown-item">Skripsi</a></li>                    
               </ul>
+              @endif
           </li>
           @endif
           @endif
-          @endif
+
+          
 
           @if (Str::length(Auth::guard('web')->user()) > 0) 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Jurusan</a>
-              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
                 <li>                        
                   <a href="/role" class="dropdown-item">Hak Akses</a>
                 </li>
@@ -64,13 +75,13 @@
               </ul>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Pengguna</a>
-              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
                 <li>                        
                   <a href="/dosen" class="dropdown-item">Dosen</a>
                 </li>
-                <li><a href="/mahasiswa" class="dropdown-item">Mahasiswa</a></li>                    
+                {{-- <li><a href="/mahasiswa" class="dropdown-item">Mahasiswa</a></li>                     --}}
                 <li><a href="/user" class="dropdown-item">Staff Jurusan</a></li>                    
               </ul>
           </li>
@@ -87,36 +98,41 @@
               {{Auth::guard('web')->user()->nama}}
               @endif          
               </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              @if (Str::length(Auth::guard('dosen')->user()) > 0)
+              <div>
+              <ul class="dropdown-menu dropdown-menu-end"style="border-radius:10px;" aria-labelledby="navbarDropdown">
+              {{-- @if (Str::length(Auth::guard('dosen')->user()) > 0)
               @if (Auth::guard('dosen')->user())    
-              <li><a class="dropdown-item" href="/profil-dosen"><i class="bi bi-person"></i> Profil</a></li>              
+              
+              <li class="pp"><a class="dropdown-item" href="/profil-dosen"><i class="bi bi-person-circle mr-2"></i>Profil</a></li>
               @endif
-              @endif          
+              @endif  --}}
+              
               <form action="/logout" method="POST">
                   @csrf
                   <li>
                   <button type="submit" class="dropdown-item" href="#">
-                      <i class="bi bi-box-arrow-right"></i> Logout
+                      <i class="bi bi-box-arrow-right"></i> <span>Logout</span>
                   </button>
                   </li>
               </form>
               </ul>
+              </div>
           </li>
       </ul>
 
       </div>
     </div>
   </nav>
+  </div>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>@yield('sub-title')</h1>
+      <div class="container">
+        <div>
+          <div>
+            <h4>@yield('sub-title')</h4><hr>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -125,7 +141,7 @@
 
     <!-- Main content -->
     <div class="content">
-      <div class="container-fluid">
+      <div class="container">
         @yield('content')
       </div><!-- /.container-fluid -->
     </div>
@@ -134,9 +150,12 @@
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <footer class="main-footer bg-dark">
+  <div class="container">
+  <strong>Copyright &copy; Jurusan Teknik Elektro</strong>
+</div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; Jurusan Teknik Elektro</strong>
+    <!-- <strong>Copyright &copy; Jurusan Teknik Elektro</strong> -->
   </footer>
   
 </div>
@@ -146,8 +165,14 @@
 
 <!-- jQuery -->
 <script src="{{asset('/assets/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('/assets/dataTables/datatables.min.js')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#datatables').DataTable();
+});
+</script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></scri>
 <!-- AdminLTE App -->
 <script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('assets/dist/js/bootstrap.bundle.min.js')}}"></script>

@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-
 <div class="col-lg-5">
     <form action="/dosen/edit/{{$dosen->id}}" method="POST" enctype="multipart/form-data">
         @method('put')
@@ -75,7 +74,7 @@
             @enderror
         </div>        
 
-        <button type="submit" class="btn btn-outline-dark mb-5">Update</button>
+        <button type="submit" class="btn btn-success mb-5">Update</button>
 
       </form>
 </div>

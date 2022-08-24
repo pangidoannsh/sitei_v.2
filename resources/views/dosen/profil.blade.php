@@ -18,7 +18,7 @@
 
     @foreach ($dosens as $dosen)
     
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 20rem">
             <img src="{{asset('storage/'. $dosen->gambar)}}" class="card-img-top">
             <div class="card-body">
                 <p>NIP : {{$dosen->nip}}</p>

@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.main')
 
 @php
     use Carbon\Carbon;
@@ -8,7 +8,11 @@
     Penilaian KP | SIA Elektro
 @endsection
 
-@section('isi')
+@section('sub-title')
+    Penilaian Seminar KP
+@endsection
+
+@section('content')
 
 <div class="row mb-5">
   <div class="col-6">
@@ -16,13 +20,13 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">NIM</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$kp->mahasiswa->nim}}</span>
+          <span>{{$kp->mahasiswa->nim}}</span>
         </div>        
       </li> 
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Nama</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$kp->mahasiswa->nama}}</span>
+          <span>{{$kp->mahasiswa->nama}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -51,13 +55,13 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Pembimbing</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$kp->pembimbing->nama}}</span>
+          <span>{{$kp->pembimbing->nama}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Penguji</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$kp->penguji->nama}}</span>
+          <span>{{$kp->penguji->nama}}</span>
         </div>        
       </li>     
     </ol>
@@ -68,7 +72,7 @@
 
 <form action="/penilaian-kp/create/{{$kp->id}}" method="POST">
 @csrf
-    <div class="card card-primary card-tabs">
+    <div class="card card-success card-tabs">
         <div class="card-header p-0 pt-1">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
@@ -137,7 +141,7 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-auto">
                             <label for="total_nilai_seminar" class="col-form-label">Total Nilai
-                            <span class="badge badge-danger ml-3">Penguji</span>
+                            <span class="badge badge-success ml-3">Penguji</span>
                             </label>
                         </div>
                         <div class="col-lg-3 nilai_penguji">
@@ -148,7 +152,7 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-auto">
                             <label for="nilai_pembimbing_kp" class="col-form-label">Nilai
-                            <span class="badge badge-danger ml-3">Pembimbing KP</span>
+                            <span class="badge badge-success ml-3">Pembimbing KP</span>
                             </label>
                         </div>
                         <div class="col-lg-3 nilai_pembimbing_kp">
@@ -164,7 +168,7 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-auto">
                             <label for="nilai_pembimbing_lapangan" class="col-form-label">Nilai
-                            <span class="badge badge-danger ml-3">Pembimbing Lapangan</span>
+                            <span class="badge badge-success ml-3">Pembimbing Lapangan</span>
                             </label>
                         </div>
                         <div class="col-lg-3 nilai_pembimbing_lapangan">
@@ -180,7 +184,7 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-auto totalnilaiangka">
                             <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                            <span class="badge badge-danger ml-3">Angka</span>
+                            <span class="badge badge-success ml-3">Angka</span>
                             </label>
                         </div>
                         <div class="col-auto">
@@ -196,7 +200,7 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-auto totalnilaihuruf">
                             <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                            <span class="badge badge-danger ml-3">Huruf</span>
+                            <span class="badge badge-success ml-3">Huruf</span>
                             </label>
                         </div>
                         <div class="col-auto">
@@ -207,6 +211,8 @@
                             background-color: rgb(255, 255, 255);
                         " readonly>
                         </div>
+                        <a href="#custom-tabs-one-profile">
+                        <button type="button" class="btn btn-success float-right">Next</button></a>
                     </div>
                 </div>
 
@@ -251,7 +257,7 @@
                         <label for="floatingTextarea2">Perbaikan 5</label>
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Save</button>    
+                    <button type="submit" class="btn btn-success float-right">Save</button>    
                 </div>
 
             </div>

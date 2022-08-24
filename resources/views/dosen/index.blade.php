@@ -14,15 +14,14 @@
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{session('message')}}
 </div>
+
 @endif
+<a href="{{url ('/dosen/create')}}" class="btn btn-success mb-3">+ Dosen</a>
 
-<a href="{{url ('/dosen/create')}}" class="btn btn-outline-dark mb-3">+ Dosen</a>
-
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Foto</th>
+      <th scope="col">#</th>      
       <th scope="col">NIP</th>
       <th scope="col">Nama</th>
       <th scope="col">Email</th>
@@ -33,10 +32,7 @@
   <tbody>
     @foreach ($dosens as $dosen)
         <tr>
-          <td>{{$loop->iteration}}</td>
-          <td>
-            <img src="{{asset('storage/'. $dosen->gambar)}}" width="50px">
-          </td>
+          <td>{{$loop->iteration}}</td>          
           <td>{{$dosen->nip}}</td>
           <td>{{$dosen->nama}}</td>
           <td>{{$dosen->email}}</td>

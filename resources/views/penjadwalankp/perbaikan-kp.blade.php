@@ -1,15 +1,23 @@
-@extends('layouts.layout')
+@extends('layouts.main')
 
 @php
     use Carbon\Carbon;
 @endphp
 
-@section('isi')
+@section('title')
+    Perbaikan KP | SIA ELEKTRO
+@endsection
+
+@section('sub-title')
+    Perbaikan Seminar KP
+@endsection
+
+@section('content')
 
 <div class="row mb-5">
 
     <div class="col-6">
-        <ol class="list-group">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -44,7 +52,7 @@
     </div>
 
     <div class="col-6">
-        <ol class="list-group">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold mb-2">Penguji</div>
@@ -57,8 +65,8 @@
 </div>
 
 <div>    
-    <table class="table table-bordered mb-5">
-        <thead>
+    <table class="table table-bordered mb-5" style="background-color:white;">
+        <thead class="bg-success">
             <tr>
                 <th style="width: 50px">#</th>
                 <th style="width: 700px">Saran dan Perbaikan</th>                     

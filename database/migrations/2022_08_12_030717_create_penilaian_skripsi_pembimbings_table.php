@@ -17,14 +17,14 @@ class CreatePenilaianSkripsiPembimbingsTable extends Migration
             $table->id();
             $table->foreignId('penjadwalan_skripsi_id');
             $table->string('pembimbing_nip');
-            $table->string('penguasaan_dasar_teori');
-            $table->string('tingkat_penguasaan_materi');
-            $table->string('tinjauan_pustaka');
-            $table->string('tata_tulis');
-            $table->string('hasil_dan_pembahasan');
-            $table->string('sikap_dan_kepribadian');
-            $table->string('total_nilai_angka');
-            $table->string('total_nilai_huruf');
+            $table->string('penguasaan_dasar_teori')->nullable();
+            $table->string('tingkat_penguasaan_materi')->nullable();
+            $table->string('tinjauan_pustaka')->nullable();
+            $table->string('tata_tulis')->nullable();
+            $table->string('hasil_dan_pembahasan')->nullable();
+            $table->string('sikap_dan_kepribadian')->nullable();
+            $table->string('total_nilai_angka')->nullable();
+            $table->string('total_nilai_huruf')->nullable();
             $table->timestamps();
         });
     }

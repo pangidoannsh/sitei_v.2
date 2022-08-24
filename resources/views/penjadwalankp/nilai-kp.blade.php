@@ -1,15 +1,23 @@
-@extends('layouts.layout')
+@extends('layouts.main')
 
 @php
     use Carbon\Carbon;
 @endphp
 
-@section('isi')
+@section('title')
+    Berita Acara KP | SIA ELEKTRO
+@endsection
+
+@section('sub-title')
+    Berita Acara Seminar KP
+@endsection
+
+@section('content')
 
 <div class="row mb-5">
 
     <div class="col-6">
-        <ol class="list-group">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -44,7 +52,7 @@
     </div>
 
     <div class="col-6">
-        <ol class="list-group">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold mb-2">Pembimbing</div>
@@ -63,8 +71,8 @@
 </div>
 
 <div>     
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered" style="background-color:white;">
+        <thead class="bg-success">
             <tr>
                 <th style="width: 50px">#</th>
                 <th style="width: 600px">Aspek Penilaian</th>                
@@ -92,33 +100,33 @@
 
             <tr>
                 <td colspan="2">Total Nilai Seminar
-                    <span class="badge bg-danger ml-3">30%</span>
+                    <span class="badge bg-success ml-3">30%</span>
                 </td>                               
-                <td class="bg-warning">{{$penilaiankp->total_nilai_seminar}}</td>                        
+                <td >{{$penilaiankp->total_nilai_seminar}}</td>                        
             </tr>
             
             <tr>
                 <td colspan="2">Nilai Pembimbing Lapangan
-                    <span class="badge bg-danger ml-3">40%</span>
+                    <span class="badge bg-success ml-3">40%</span>
                 </td>                               
-                <td class="bg-warning">{{$penilaiankp->nilai_pembimbing_lapangan}}</td>                        
+                <td >{{$penilaiankp->nilai_pembimbing_lapangan}}</td>                        
             </tr>
 
             <tr>
                 <td colspan="2">Nilai Pembimbing KP
-                    <span class="badge bg-danger ml-3">30%</span>
+                    <span class="badge bg-success ml-3">30%</span>
                 </td>                               
-                <td class="bg-warning">{{$penilaiankp->nilai_pembimbing_kp}}</td>                        
+                <td >{{$penilaiankp->nilai_pembimbing_kp}}</td>                        
             </tr>
 
             <tr>
-                <td class="bg-primary" colspan="2">Total Nilai Angka</td>                               
-                <td class="bg-primary">{{$penilaiankp->total_nilai_angka}}</td>                        
+                <td class="bg-secondary" colspan="2">Total Nilai Angka</td>                               
+                <td class="bg-secondary">{{$penilaiankp->total_nilai_angka}}</td>                        
             </tr>
 
             <tr>
-                <td class="bg-primary" colspan="2">Total Nilai Huruf</td>                               
-                <td class="bg-primary">{{$penilaiankp->total_nilai_huruf}}</td>                        
+                <td class="bg-secondary" colspan="2">Total Nilai Huruf</td>                               
+                <td class="bg-secondary">{{$penilaiankp->total_nilai_huruf}}</td>                        
             </tr>
 
         </tbody>

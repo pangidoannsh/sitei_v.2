@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@php
+    Use Carbon\Carbon;
+@endphp
+
 @section('title')
     Riwayat Penilaian Skripsi | SIA ELEKTRO
 @endsection
@@ -10,37 +14,37 @@
 
 @section('content')
 
-<ol class="breadcrumb col-lg-3">
+<ol class="breadcrumb col-lg-12">
   <li class="breadcrumb-item"><a href="/penilaian-skripsi">Hari Ini</a></li>
   <li class="breadcrumb-item"><a href="#">Bulan Ini</a></li>  
   <li class="breadcrumb-item"><a class="breadcrumb-item active" href="riwayat-penilaian-skripsi">Riwayat Penilaian</a></li>  
 </ol>
 
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">NIM</th>
       <th scope="col">Nama</th>
-      <th scope="col">Seminar</th>
+      <th scope="col">Prodi</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Waktu</th>
       <th scope="col">Lokasi</th>              
       <th scope="col">Pembimbing</th>
       <th scope="col">Penguji</th>          
-      <th scope="col">Aksi</th>
+      <th scope="col">Aksi</th>    
     </tr>
   </thead>
   <tbody>    
     @foreach ($penjadwalan_skripsis as $skripsi)    
         <tr>
           <td>{{$loop->iteration}}</td>          
-          <td>{{$skripsi->mahasiswa->nim}}</td>
-          <td>{{$skripsi->mahasiswa->nama}}</td>                   
-          <td>{{$skripsi->jenis_seminar}}</td>                   
-          <td>{{$skripsi->tanggal}}</td>                   
+          <td>{{$skripsi->nim}}</td>                             
+          <td>{{$skripsi->nama}}</td>                     
+          <td>{{$skripsi->prodi->nama_prodi}}</td>          
+          <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$skripsi->waktu}}</td>                   
-          <td>{{$skripsi->lokasi}}</td>               
+          <td>{{$skripsi->lokasi}}</td>                
           <td>
             <p>{{$skripsi->pembimbingsatu->nama}}</p>
             @if ($skripsi->pembimbingdua == !null)

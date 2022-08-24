@@ -10,9 +10,14 @@ class PenjadwalanKP extends Model
     protected $table = 'penjadwalan_kp';
     protected $guarded = [];
 
-    public function mahasiswa()
+    public function prodi()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_nim', 'nim');
+        return $this->belongsTo(Prodi::class);
+    }
+
+    public function konsentrasi()
+    {
+        return $this->belongsTo(Konsentrasi::class);
     }
 
     public function pembimbing()

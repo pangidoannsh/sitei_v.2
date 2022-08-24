@@ -19,10 +19,10 @@ class CreateMahasiswasTable extends Migration
             $table->foreignId('prodi_id');
             $table->foreignId('konsentrasi_id')->nullable();
             $table->string('nim');
-            // $table->string('password');
             $table->string('nama');
-            $table->string('email');
             $table->string('angkatan');
+            $table->string('email');
+            // $table->string('password');
             // $table->string('gambar');
             $table->timestamps();
         });

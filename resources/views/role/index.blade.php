@@ -16,9 +16,9 @@
 </div>
 @endif
 
-<a href="{{url ('/role/create')}}" class="btn btn-outline-dark mb-3">+ Hak Akses</a>
+<a href="{{url ('/role/create')}}" class="btn btn-success mb-3">+ Hak Akses</a>
 
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>

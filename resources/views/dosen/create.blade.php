@@ -82,20 +82,9 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
+        </div>        
 
-        <div class="mb-3">
-            <label for="imgdosen" class="form-label">Foto Dosen</label>
-            <img class="img-preview-dsn img-fluid mb-3 col-sm-5">
-            <input class="form-control @error('gambar') is-invalid @enderror" type="file" id="imgdosen" name="gambar" onchange="previewImgdosen()">
-            @error('gambar')
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
-            @enderror
-        </div>
-
-        <button type="submit" class="btn btn-outline-dark mb-5">Submit</button>
+        <button type="submit" class="btn btn-success mb-5">Submit</button>
 
       </form>
 </div>

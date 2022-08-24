@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@php
+    Use Carbon\Carbon;
+@endphp
+
 @section('title')
     Riwayat Penilaian Sempro | SIA ELEKTRO
 @endsection
@@ -10,19 +14,19 @@
 
 @section('content')
 
-<ol class="breadcrumb col-lg-3">
+<ol class="breadcrumb col-lg-12">
   <li class="breadcrumb-item"><a href="/penilaian-sempro">Hari Ini</a></li>
   <li class="breadcrumb-item"><a href="#">Bulan Ini</a></li>  
   <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/riwayat-penilaian-sempro">Riwayat Penilaian</a></li>  
 </ol>
 
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">NIM</th>
       <th scope="col">Nama</th>
-      <th scope="col">Seminar</th>
+      <th scope="col">Prodi</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Waktu</th>
       <th scope="col">Lokasi</th>              
@@ -35,9 +39,9 @@
     @foreach ($penjadwalan_sempros as $sempro)    
         <tr>
           <td>{{$loop->iteration}}</td>          
-          <td>{{$sempro->mahasiswa->nim}}</td>
-          <td>{{$sempro->mahasiswa->nama}}</td>                   
-          <td>{{$sempro->jenis_seminar}}</td>                   
+          <td>{{$sempro->nim}}</td>
+          <td>{{$sempro->nama}}</td>                   
+          <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$sempro->tanggal}}</td>                   
           <td>{{$sempro->waktu}}</td>                   
           <td>{{$sempro->lokasi}}</td>               

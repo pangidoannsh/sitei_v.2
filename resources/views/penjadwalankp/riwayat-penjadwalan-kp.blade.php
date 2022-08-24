@@ -10,12 +10,12 @@
 
 @section('content')
 
-<ol class="breadcrumb col-lg-3">   
-  <li class="breadcrumb-item"><a href="/form-sempro">Penjadwalan</a></li>  
+<ol class="breadcrumb col-lg-12">   
+  <li class="breadcrumb-item"><a href="/form-kp">Penjadwalan</a></li>  
   <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/riwayat-penjadwalan-kp">Riwayat Penjadwalan</a></li>  
 </ol>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>

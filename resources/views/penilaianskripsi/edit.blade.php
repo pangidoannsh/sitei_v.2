@@ -1,10 +1,18 @@
-@extends('layouts.layout')
+@extends('layouts.main')
+
+@php
+    use Carbon\Carbon;
+@endphp
 
 @section('header')
     Penilaian Skripsi | SIA Elektro
 @endsection
 
-@section('isi')
+@section('sub-title')
+    Edit Penilaian Sidang Skripsi
+@endsection
+
+@section('content')
     @if (session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('message') }}
@@ -13,18 +21,18 @@
 
     <div class="row mb-5">
         <div class="col-6">
-            <ol class="list-group">
+            <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">NIM</div>
-                        <span class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->mahasiswa->nim }}</span>
+                        <span>{{ $skripsi->penjadwalan_skripsi->nim }}</span>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">Nama</div>
                         <span
-                            class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->mahasiswa->nama }}</span>
+                           >{{ $skripsi->penjadwalan_skripsi->nama }}</span>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -36,8 +44,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">Jadwal</div>
-                        <span>{{ $skripsi->penjadwalan_skripsi->tanggal }},
-                            {{ $skripsi->penjadwalan_skripsi->waktu }}</span>
+                        <span>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}, {{$skripsi->waktu}}</span>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -50,17 +57,17 @@
         </div>
 
         <div class="col-6">
-            <ol class="list-group">
+            <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">Pembimbing</div>
                         <span
-                            class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->pembimbingsatu->nama }}</span>
+                           >{{ $skripsi->penjadwalan_skripsi->pembimbingsatu->nama }}</span>
                         @if ($skripsi->penjadwalan_skripsi->pembimbingdua != null)
                             <br>
                             <br>
                             <span
-                                class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->pembimbingdua->nama }}</span>
+                               >{{ $skripsi->penjadwalan_skripsi->pembimbingdua->nama }}</span>
                         @endif
                     </div>
                 </li>
@@ -68,15 +75,15 @@
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">Penguji</div>
                         <span
-                            class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->pengujisatu->nama }}</span>
+                           >{{ $skripsi->penjadwalan_skripsi->pengujisatu->nama }}</span>
                         <br>
                         <br>
                         <span
-                            class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->pengujidua->nama }}</span>
+                           >{{ $skripsi->penjadwalan_skripsi->pengujidua->nama }}</span>
                         <br>
                         <br>
                         <span
-                            class="bg-primary py-1 px-1 rounded">{{ $skripsi->penjadwalan_skripsi->pengujitiga->nama }}</span>
+                           >{{ $skripsi->penjadwalan_skripsi->pengujitiga->nama }}</span>
                     </div>
                 </li>
             </ol>
@@ -85,7 +92,7 @@
 
     @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingsatu_nip ||
         auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingdua_nip)
-        <div class="card card-primary card-tabs">
+        <div class="card card-success card-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item">
@@ -359,7 +366,7 @@
                             <div class="row g-3 align-items-center mb-3">
                                 <div class="col-auto totalnilaiangka">
                                     <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                                        <span class="badge badge-danger ml-3">Angka</span>
+                                        <span class="badge badge-success ml-3">Angka</span>
                                     </label>
                                 </div>
                                 <div class="col-auto">
@@ -378,7 +385,7 @@
                             <div class="row g-3 align-items-center mb-3">
                                 <div class="col-auto totalnilaihuruf">
                                     <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                                        <span class="badge badge-danger ml-3">Huruf</span>
+                                        <span class="badge badge-success ml-3">Huruf</span>
                                     </label>
                                 </div>
                                 <div class="col-auto">
@@ -394,7 +401,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary float-right">Update</button>
+                            <button type="submit" class="btn btn-success float-right">Update</button>
                         </form>
                     </div>
                 </div>
@@ -409,7 +416,7 @@
         <form action="/penilaian-skripsi-penguji/edit/{{ $skripsi->id }}" method="POST">
             @method('put')
             @csrf
-            <div class="card card-primary card-tabs">
+            <div class="card card-success card-tabs">
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                         <li class="nav-item">
@@ -1074,7 +1081,7 @@
                             <div class="row g-3 align-items-center mb-3">
                                 <div class="col-auto totalnilaiangka">
                                     <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                                        <span class="badge badge-danger ml-3">Angka</span>
+                                        <span class="badge badge-success ml-3">Angka</span>
                                     </label>
                                 </div>
                                 <div class="col-auto">
@@ -1093,7 +1100,7 @@
                             <div class="row g-3 align-items-center mb-3">
                                 <div class="col-auto totalnilaihuruf">
                                     <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                                        <span class="badge badge-danger ml-3">Huruf</span>
+                                        <span class="badge badge-success ml-3">Huruf</span>
                                     </label>
                                 </div>
                                 <div class="col-auto">
@@ -1108,6 +1115,8 @@
                                         readonly value="{{ $skripsi->total_nilai_huruf }}">
                                 </div>
                             </div>
+
+                            <button type="submit" class="btn btn-success float-right">Update</button>
 
                         </div>
 
@@ -1158,7 +1167,7 @@
                                     <label for="floatingTextarea2">Perbaikan 5</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary float-right">Update</button>
+                            <button type="submit" class="btn btn-success float-right">Update</button>
                         </div>
 
                         @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujisatu_nip)
@@ -1172,7 +1181,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th style="width: 200px">Penilaian Penguji</th>
-                                                        <th class="bg-danger" style="width: 30px">B</th>
+                                                        <th class="bg-success" style="width: 30px">B</th>
                                                         <th>Penguji 1</th>
                                                         <th>Penguji 2</th>
                                                         <th>Penguji 3</th>
@@ -1340,7 +1349,7 @@
 
                                                     <tr>
                                                         <td colspan="2">Total Nilai Penguji</td>
-                                                        <td class="bg-danger">45</td>
+                                                        <td class="bg-success">45</td>
                                                         <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_angka : '-' }}
                                                         </td>
                                                         <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->total_nilai_angka : '-' }}
@@ -1379,7 +1388,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th style="width: 230px">Penilaian Pembimbing</th>
-                                                        <th class="bg-danger">B</th>
+                                                        <th class="bg-success">B</th>
                                                         <th>Pembimbing 1</th>
                                                         <th>Pembimbing 2</th>
                                                     </tr>
@@ -1442,7 +1451,7 @@
 
                                                     <tr>
                                                         <td colspan="2">Total Nilai Pembimbing</td>
-                                                        <td class="bg-danger">55</td>
+                                                        <td class="bg-success">55</td>
                                                         <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_angka : '-' }}
                                                         </td>
                                                         <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_angka : '-' }}
@@ -1483,7 +1492,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td style="width: 250px">NILAI AKHIR</td>
-                                                        <td class="bg-danger text-center">
+                                                        <td class="bg-success text-center">
                                                             <h3 class="text-bold">
                                                                 @if ($penjadwalan->pembimbingdua_nip == null)
                                                                     @if ($nilaipembimbing1 != '')
@@ -1511,7 +1520,7 @@
                                                     <tr>
                                                         <td style="width: 250px">NILAI HURUF</td>
 
-                                                        <td class="bg-danger text-center">
+                                                        <td class="bg-success text-center">
                                                             <h3 class="text-bold">
                                                               @if ($penjadwalan->pembimbingdua_nip == null)
                                                               @if ($nilaipembimbing1 == '')
@@ -1646,7 +1655,7 @@
 
     </div>
     </div>
-    </div>
+    <!-- </div> -->
     <!-- /.card -->
     </div>
 
@@ -1764,3 +1773,13 @@
         }
     </script>
 @endpush
+
+@push('scripts')
+    <script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+        });
+    }, 2000);
+    </script>
+@endpush()

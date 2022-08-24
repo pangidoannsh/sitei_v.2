@@ -26,13 +26,13 @@
       </div>
 @endif
 
-<ol class="breadcrumb col-lg-3">
+<ol class="breadcrumb col-lg-12">
   <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/penilaian-kp">Hari Ini</a></li>
   <li class="breadcrumb-item"><a href="#">Bulan Ini</a></li>  
   <li class="breadcrumb-item"><a href="/riwayat-penilaian-kp">Riwayat Penilaian</a></li>  
 </ol>
 
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
@@ -65,9 +65,9 @@
           </td>                    
           <td>            
               @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
-              <a href="/penilaian-kp/create/{{$kp->id}}" class="badge bg-primary"> Input Nilai<a>          
+              <a href="/penilaian-kp/create/{{$kp->id}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
-              <span class="badge bg-danger">Belum Dimulai</span>
+              <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
               @endif            
           </td>                        
         </tr>               

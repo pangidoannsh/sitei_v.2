@@ -20,7 +20,7 @@
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user())    
-          <li><a class="dropdown-item" href="/profil-dosen"><i class="bi bi-person"></i> Profil</a></li>
+          <li><a class="dropdown-item" href="/profil-dosen"><i class="fa-solid fa-circle-user"></i> Profil</a></li>
           <li><hr class="dropdown-divider"></li>
           @endif
           @endif          

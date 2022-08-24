@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.main')
 
 @php
     use Carbon\Carbon;
@@ -8,21 +8,25 @@
     Penilaian Skripsi | SIA Elektro
 @endsection
 
-@section('isi')
+@section('sub-title')
+    Penilaian Sidang Skripsi
+@endsection
+
+@section('content')
 
 <div class="row mb-5">
   <div class="col-6">
-    <ol class="list-group">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">NIM</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->mahasiswa->nim}}</span>
+          <span>{{$skripsi->nim}}</span>
         </div>        
       </li> 
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Nama</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->mahasiswa->nama}}</span>
+          <span>{{$skripsi->nama}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -34,7 +38,7 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Jadwal</div>          
-          <span>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}, : {{$skripsi->waktu}}</span>  
+          <span>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}, {{$skripsi->waktu}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -47,28 +51,28 @@
   </div>
   
   <div class="col-6">
-    <ol class="list-group">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Pembimbing</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pembimbingsatu->nama}}</span>                                      
+          <span>{{$skripsi->pembimbingsatu->nama}}</span>                                      
           @if ($skripsi->pembimbingdua == !null)
           <br>
           <br>
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pembimbingdua->nama}}</span>                             
+          <span>{{$skripsi->pembimbingdua->nama}}</span>                             
           @endif
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Penguji</div>
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pengujisatu->nama}}</span> 
+          <span>{{$skripsi->pengujisatu->nama}}</span> 
           <br>                   
           <br>                   
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pengujidua->nama}}</span>
+          <span>{{$skripsi->pengujidua->nama}}</span>
           <br>                    
           <br>                    
-          <span class="bg-primary py-1 px-1 rounded">{{$skripsi->pengujitiga->nama}}</span>                    
+          <span>{{$skripsi->pengujitiga->nama}}</span>                    
         </div>        
       </li>     
     </ol>
@@ -77,7 +81,7 @@
 
 
 @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
-  <div class="card card-primary card-tabs">
+  <div class="card card-success card-tabs">
     <div class="card-header p-0">
       <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
         <li class="nav-item">
@@ -315,7 +319,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaiangka">
                   <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Angka</span>
+                    <span class="badge badge-success ml-3">Angka</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -331,7 +335,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaihuruf">
                   <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Huruf</span>
+                    <span class="badge badge-success ml-3">Huruf</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -343,7 +347,7 @@
                 " readonly>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary float-right">Save</button>
+              <button type="submit" class="btn btn-success float-right">Save</button>
           </form> 
         </div>    
       </div>
@@ -355,7 +359,7 @@
 
   <form action="/penilaian-skripsi-penguji/create/{{$skripsi->id}}" method="POST">
     @csrf
-      <div class="card card-primary card-tabs">
+      <div class="card card-success card-tabs">
         <div class="card-header p-0 pt-1">
           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
@@ -367,7 +371,14 @@
               <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
                 href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
                 aria-selected="false">Saran Perbaikan</a>
-            </li>              
+            </li>
+            @if (auth()->user()->nip == $skripsi->pengujisatu_nip)
+            <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-setting-tab" data-toggle="pill"
+                    href="#custom-tabs-one-setting" role="tab"
+                    aria-controls="custom-tabs-one-setting" aria-selected="false">Berita Acara</a>
+            </li>
+            @endif            
           </ul>
         </div>
         <div class="card-body">
@@ -933,7 +944,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaiangka">
                   <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Angka</span>
+                    <span class="badge badge-success ml-3">Angka</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -949,7 +960,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaihuruf">
                   <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Huruf</span>
+                    <span class="badge badge-success ml-3">Huruf</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -961,6 +972,8 @@
                 " readonly>
                 </div>
               </div>
+
+              <button type="submit" class="btn btn-success float-right">Save</button>    
 
             </div>
 
@@ -1005,8 +1018,491 @@
                   <label for="floatingTextarea2">Perbaikan 5</label>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary float-right">Save</button>    
-            </div>        
+              <button type="submit" class="btn btn-success float-right">Save</button>    
+            </div> 
+            
+            @if (auth()->user()->nip == $skripsi->pengujisatu_nip)
+                            <div class="tab-pane fade" id="custom-tabs-one-setting" role="tabpanel"
+                                aria-labelledby="custom-tabs-one-setting-tab">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th style="width: 200px">Penilaian Penguji</th>
+                                                        <th class="bg-success" style="width: 30px">B</th>
+                                                        <th>Penguji 1</th>
+                                                        <th>Penguji 2</th>
+                                                        <th>Penguji 3</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Presentasi</td>
+                                                        <td class="bg-secondary">2</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->presentasi : '-' }}
+                                                        </td>
+
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->presentasi : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->presentasi : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Tingkat Penguasaan Materi</td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->tingkat_penguasaan_materi : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->tingkat_penguasaan_materi : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->tingkat_penguasaan_materi : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Keaslian</td>
+                                                        <td class="bg-secondary">2</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->keaslian : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->keaslian : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->keaslian : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Ketepatan Metodologi</td>
+                                                        <td class="bg-secondary">4</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->ketepatan_metodologi : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->ketepatan_metodologi : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->ketepatan_metodologi : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Penguasaan Dasar Teori</td>
+                                                        <td class="bg-secondary">4</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->penguasaan_dasar_teori : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->penguasaan_dasar_teori : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->penguasaan_dasar_teori : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6</td>
+                                                        <td>Kecermatan Perumusan Masalah</td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->kecermatan_perumusan_masalah : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->kecermatan_perumusan_masalah : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->kecermatan_perumusan_masalah : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>7</td>
+                                                        <td>Tinjauan Pustaka</td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->tinjauan_pustaka : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->tinjauan_pustaka : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->tinjauan_pustaka : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>8</td>
+                                                        <td>Tata Tulis</td>
+                                                        <td class="bg-secondary">2</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->tata_tulis : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->tata_tulis : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->tata_tulis : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>9</td>
+                                                        <td>Tools Yang Digunakan</td>
+                                                        <td class="bg-secondary">2</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->tools : '-' }}</td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->tools : '-' }}</td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->tools : '-' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>10</td>
+                                                        <td>Penyajian Data</td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->penyajian_data : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->penyajian_data : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->penyajian_data : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>11</td>
+                                                        <td>Hasil</td>
+                                                        <td class="bg-secondary">4</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->hasil : '-' }}</td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->hasil : '-' }}</td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->hasil : '-' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>12</td>
+                                                        <td>Pembahasan</td>
+                                                        <td class="bg-secondary">4</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->pembahasan : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->pembahasan : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->pembahasan : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>13</td>
+                                                        <td>Kesimpulan</td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->pembahasan : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->pembahasan : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji1->pembahasan : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>14</td>
+                                                        <td>Luaran</td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->luaran : '-' }}</td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->luaran : '-' }}</td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->luaran : '-' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>15</td>
+                                                        <td>Sumbangan Pemikiran Terhadap Ilmu Pengetahuan dan Penerapannya
+                                                        </td>
+                                                        <td class="bg-secondary">3</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->sumbangan_pemikiran : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->sumbangan_pemikiran : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->sumbangan_pemikiran : '-' }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="2">Total Nilai Penguji</td>
+                                                        <td class="bg-success">45</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_angka : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->total_nilai_angka : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->total_nilai_angka : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">Nilai Huruf Penguji</td>
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_huruf : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->total_nilai_huruf : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->total_nilai_huruf : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">Rata Rata Nilai Penguji</td>
+                                                        <td class="text-center" colspan="3">
+                                                            <h3 class="text-bold">
+                                                                @if ($nilaipenguji1 && $nilaipenguji2 && $nilaipenguji3)
+                                                                    {{ round(($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th style="width: 230px">Penilaian Pembimbing</th>
+                                                        <th class="bg-success">B</th>
+                                                        <th>Pembimbing 1</th>
+                                                        <th>Pembimbing 2</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Penguasaan Dasar Teori</td>
+                                                        <td class="bg-secondary">10</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->penguasaan_dasar_teori : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->penguasaan_dasar_teori : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Tingkat Penguasaan Materi</td>
+                                                        <td class="bg-secondary">10</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->tingkat_penguasaan_materi : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->tingkat_penguasaan_materi : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Tinjauan Pustaka</td>
+                                                        <td class="bg-secondary">9</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->tinjauan_pustaka : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->tinjauan_pustaka : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Tata Tulis</td>
+                                                        <td class="bg-secondary">8</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->tata_tulis : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->tata_tulis : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Hasil dan Pembahasan</td>
+                                                        <td class="bg-secondary">10</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->hasil_dan_pembahasan : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->hasil_dan_pembahasan : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6</td>
+                                                        <td>Sikap dan Kepribadian Ketika Bimbingan</td>
+                                                        <td class="bg-secondary">8</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->sikap_dan_kepribadian : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->sikap_dan_kepribadian : '-' }}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="2">Total Nilai Pembimbing</td>
+                                                        <td class="bg-success">55</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_angka : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_angka : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">Nilai Huruf Pembimbing</td>
+                                                        <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_huruf : '-' }}
+                                                        </td>
+                                                        <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_huruf : '-' }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">Rata Rata Nilai Pembimbing</td>
+                                                        <td class="text-center" colspan="2">
+                                                            <h3 class="text-bold">
+                                                                @if ($penjadwalan->pembimbingdua_nip == null)
+                                                                    @if ($nilaipembimbing1 != '')
+                                                                        {{ $nilaipembimbing1->total_nilai_angka }}
+                                                                    @else
+                                                                        -
+                                                                    @endif
+                                                                @else
+                                                                    @if ($nilaipembimbing1 != '' && $nilaipembimbing2 != '')
+                                                                        {{ round(($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2) }}
+                                                                    @else
+                                                                        -
+                                                                    @endif
+                                                                @endif
+                                                            </h3>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 250px">NILAI AKHIR</td>
+                                                        <td class="bg-success text-center">
+                                                            <h3 class="text-bold">
+                                                                @if ($penjadwalan->pembimbingdua_nip == null)
+                                                                    @if ($nilaipembimbing1 != '')
+                                                                        @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                                                            -
+                                                                        @else
+                                                                            {{ round(($nilaipembimbing1->total_nilai_angka + ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) / 2) }}
+                                                                        @endif
+                                                                    @endif
+                                                                @else
+                                                                    @if ($nilaipembimbing1 != '' && $nilaipembimbing2 != '')
+                                                                        @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                                                            -
+                                                                        @else
+                                                                            {{ round((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 + ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) / 2) }}
+                                                                        @endif
+                                                                    @else
+                                                                        -
+                                                                    @endif
+                                                                @endif
+
+                                                            </h3>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 250px">NILAI HURUF</td>
+
+                                                        <td class="bg-success text-center">
+                                                            <h3 class="text-bold">
+                                                              @if ($penjadwalan->pembimbingdua_nip == null)
+                                                              @if ($nilaipembimbing1 == '')
+                                                              -
+                                                          @else
+                                                              @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                                                  -
+                                                              @else
+                                                                  @if (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      85)
+                                                                      A
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      80)
+                                                                      A-
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      75)
+                                                                      B+
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      70)
+                                                                      B
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      65)
+                                                                      B-
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      60)
+                                                                      C+
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      55)
+                                                                      C
+                                                                  @elseif (($nilaipembimbing1->total_nilai_angka +
+                                                                      ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                      2 >=
+                                                                      40)
+                                                                      D
+                                                                  @else
+                                                                      E
+                                                                  @endif
+                                                              @endif
+                                                          @endif
+                                                              @else
+                                                                  @if ($nilaipembimbing1 != '' && $nilaipembimbing2 != '')
+                                                                    @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                                                        -
+                                                                    @else
+                                                                        @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            85)
+                                                                            A
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            80)
+                                                                            A-
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            75)
+                                                                            B+
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            70)
+                                                                            B
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            65)
+                                                                            B-
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            60)
+                                                                            C+
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            55)
+                                                                            C
+                                                                        @elseif ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                            2 >=
+                                                                            40)
+                                                                            D
+                                                                        @else
+                                                                            E
+                                                                        @endif
+                                                                    @endif
+                                                                  @else
+                                                                  -
+                                                                  @endif
+                                                              @endif
+                                                            </h3>
+                                                        </td>
+                                                    <tr>
+                                                </tbody>
+                                            </table>
+        </form>
+
+        @if ($penjadwalan->status_seminar == 0)
+            @if ($penjadwalan->cek($penjadwalan->id) == $penjadwalan->jmlpenilaian($penjadwalan->id))
+                @if ($penjadwalan->pengujisatu_nip == auth()->user()->nip)
+                    <form action="/penilaian-skripsi/approve/{{ $penjadwalan->id }}" method="POST">
+                        @method('put')
+                        @csrf
+                        <button type="submit" class="btn btn-lg btn-success float-right"> Approve Penilaian</button>
+                    </form>
+                @endif
+            @endif
+        @endif
+
+        </div>
+
+        </div>
+        </div>
+
+    @endif
           </div>
         </div>
         <!-- /.card -->
@@ -1123,3 +1619,13 @@
 
   </script>
 @endpush
+
+@push('scripts')
+  <script>
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+      });
+    }, 2000);
+  </script>
+@endpush()

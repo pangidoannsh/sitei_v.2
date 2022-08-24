@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Dosen;
 use App\Models\Konsentrasi;
 use App\Models\Mahasiswa;
 use App\Models\Role;
@@ -170,6 +171,60 @@ class DatabaseSeeder extends Seeder
             'nama' => 'M. Seprinaldi',
             'email' => 'm.seprinaldi5152@student.unri.ac.id',
             'angkatan' => '2018',
+        ]);
+
+        Mahasiswa::create([
+            'prodi_id' => 3,
+            'konsentrasi_id' => 4,
+            'nim' => '1807125153',
+            'nama' => 'Aqil Muafa',
+            'email' => 'aqilmuafa@student.unri.ac.id',
+            'angkatan' => '2018',
+        ]);
+
+        Dosen::create([
+            'role_id' => 5,            
+            'nip' => 000,
+            'password' => bcrypt('123456'),
+            'nama' => 'Anhar, ST., MT., Ph.D',
+            'email' => 'anhar.lecturer@unri.ac.id',
+        ]);
+
+        Dosen::create([
+            'role_id' => 8,            
+            'nip' => 111,
+            'password' => bcrypt('123456'),
+            'nama' => 'Dr. Feri Candra, ST., MT',
+            'email' => 'fericandra.lecturer@unri.ac.id',
+        ]);
+
+        Dosen::create([
+            'role_id' => 11,            
+            'nip' => 222,
+            'password' => bcrypt('123456'),
+            'nama' => 'Edi Susilo, S.Pd., M.Kom., M.Eng',
+            'email' => 'edisusilo.lecturer@unri.ac.id',
+        ]);
+
+        Dosen::create([                       
+            'nip' => 333,
+            'password' => bcrypt('123456'),
+            'nama' => 'T. Yudi Hadiwandra, S.Kom., M.Kom',
+            'email' => 'yudi.lecturer@unri.ac.id',
+        ]);
+
+        Dosen::create([                     
+            'nip' => 444,
+            'password' => bcrypt('123456'),
+            'nama' => 'Dr. Irsan Taufik Ali, ST., MT',
+            'email' => 'anhar.lecturer@unri.ac.id',
+        ]);
+
+        Dosen::create([                        
+            'nip' => 555,
+            'password' => bcrypt('123456'),
+            'nama' => 'Rahyul Amri, ST., MT',
+            'email' => 'rahyulamri.lecturer@unri.ac.id',
         ]);
     }
 }

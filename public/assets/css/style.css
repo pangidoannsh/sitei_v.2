@@ -1,6 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 * {
-    font-family: 'Poppins', Courier, monospace;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
+}
+
+.atas ul li a{
+    font-size: 14px;
+    font-weight: bold;
+    color: #192f59;
+    position: relative;
+    transition: 0.5s;
+    padding-left: 30px;
+    padding-right: 15px;
+}
+
+.atas ul li a:hover{
+    color: #36c482;
+}
+
+.page-item.active .page-link{
+    background-color:darkgrey;
+    border-color:darkgray;
+}
+
+.content-wrapper{
+    margin-top: 55px;
+}
+
+nav{
+    background-color: white;
+}
+
+.bayangan{
+    box-shadow: 0px 0px 10px 1px #afafaf;
+}
+
+.btn {
+    background-color: #146c43;
+}
+
+.pp i{
+    margin-left: -17px;
+}
+
+span{
+    font-weight: bold;
+}
+
+.baru:hover .dropdown-menu {
+    display: block;
+}
+
+.baru ul li a:hover{
+    background: none;
+}
+
+.baru ul li a{
+    padding: 0;
+    margin-left: 23px;
+}
+
+.dropdown-item{
+    color:#192f59;
+}
+
+.jarak2 ul li a{
+    padding:0;
+    margin-left: 25px;
+}
+
+.jarak2 ul li a:hover{
+    background: none;
+}
+
+.dropdown-item:hover {
+    color: #0c8a4f;
+    background-color: white;
+}
+
+
+.btn:hover {
+    background-color: #0c8a4f;
+}
+
+hr {
+     background-color:#192f59;
+     margin-bottom: 5px;
+}
+
+.breadcrumb li a {
+    color: #192f59;
+}
+
+.breadcrumb li a:hover{
+    color: #36c482;
+}
+
+.judul a{
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Viga', sans-serif;
+}
+
+.judul a img {
+    margin-left: -5px;
 }
 
 .bd-placeholder-img {
@@ -172,4 +276,22 @@
 
 .nilai_pembimbing_lapangan {
     margin-left: 10px;
+}
+
+footer strong{
+    font-weight: normal;
+}
+
+span{
+    font-weight: normal;
+}
+
+.dropdown ul li a{
+    font-weight: normal;
+}
+
+.form-check-input:checked {
+    background-color: green;
+    border-color: green;
+
 }

@@ -16,14 +16,14 @@
 </div>
 @endif
 
-<a href="{{url ('/form-kp/create')}}" class="btn btn-outline-dark mb-3">+ Jadwal KP</a>
+<a href="{{url ('/form-kp/create')}}" class="btn btn-success mb-3">+ Jadwal KP</a>
 
-<ol class="breadcrumb col-lg-3">   
+<ol class="breadcrumb col-lg-12">   
   <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/form-kp">Penjadwalan</a></li>  
   <li class="breadcrumb-item"><a href="/riwayat-penjadwalan-kp">Riwayat Penjadwalan</a></li>  
 </ol>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>

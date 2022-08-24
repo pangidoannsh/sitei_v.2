@@ -20,8 +20,12 @@ class CreatePenjadwalanSkripsisTable extends Migration
             $table->string('pengujisatu_nip');
             $table->string('pengujidua_nip');
             $table->string('pengujitiga_nip');
-            $table->string('mahasiswa_nim');
-            $table->string('jenis_seminar');
+            $table->foreignId('prodi_id');
+            $table->foreignId('konsentrasi_id');
+            $table->string('nim');
+            $table->string('nama');
+            $table->string('angkatan');
+            $table->string('jenis_seminar')->default('Sidang Skripsi');
             $table->string('judul_skripsi');
             $table->date('tanggal');
             $table->time('waktu');

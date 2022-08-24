@@ -16,9 +16,9 @@
 </div>
 @endif
 
-<a href="{{url ('/prodi/create')}}" class="btn btn-outline-dark mb-3">+ Program Studi</a>
+<a href="{{url ('/prodi/create')}}" class="btn btn-success mb-3">+ Program Studi</a>
 
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>

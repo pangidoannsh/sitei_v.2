@@ -25,14 +25,14 @@ class Mahasiswa extends Authenticatable
     protected $table = 'mahasiswa';
     protected $guarded = [];
 
-    public function prodi()
-    {
-        return $this->belongsTo(Prodi::class);
-    }
-
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
     }
 
     public function konsentrasi()

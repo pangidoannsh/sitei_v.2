@@ -1,10 +1,18 @@
-@extends('layouts.layout')
+@extends('layouts.main')
+
+@php
+    use Carbon\Carbon;
+@endphp
 
 @section('header')
     Penilaian Sempro | SIA Elektro
 @endsection
 
-@section('isi')
+@section('sub-title')
+    Edit Penilaian Seminar Proposal
+@endsection
+
+@section('content')
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{session('message')}}
@@ -13,17 +21,17 @@
 
 <div class="row mb-5">
     <div class="col-6">
-      <ol class="list-group">
+      <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->mahasiswa->nim}}</span>
+            <span>{{$sempro->penjadwalan_sempro->nim}}</span>
           </div>        
         </li> 
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Nama</div>
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->mahasiswa->nama}}</span>
+            <span>{{$sempro->penjadwalan_sempro->nama}}</span>
           </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -35,7 +43,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Jadwal</div>
-            <span>{{$sempro->penjadwalan_sempro->tanggal}}, {{$sempro->penjadwalan_sempro->waktu}}</span>
+            <span>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}, {{$sempro->waktu}}</span>
           </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -48,28 +56,28 @@
     </div>
     
     <div class="col-6">
-      <ol class="list-group">
+      <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Pembimbing</div>
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->pembimbingsatu->nama}}</span>                                      
+            <span>{{$sempro->penjadwalan_sempro->pembimbingsatu->nama}}</span>                                      
             @if ($sempro->penjadwalan_sempro->pembimbingdua != null)
             <br>
             <br>
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->pembimbingdua->nama}}</span>                             
+            <span>{{$sempro->penjadwalan_sempro->pembimbingdua->nama}}</span>                             
             @endif
           </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Penguji</div>
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->pengujisatu->nama}}</span> 
+            <span>{{$sempro->penjadwalan_sempro->pengujisatu->nama}}</span> 
             <br>                   
             <br>                   
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->pengujidua->nama}}</span>
+            <span>{{$sempro->penjadwalan_sempro->pengujidua->nama}}</span>
             <br>                    
             <br>                    
-            <span class="bg-primary py-1 px-1 rounded">{{$sempro->penjadwalan_sempro->pengujitiga->nama}}</span>                    
+            <span>{{$sempro->penjadwalan_sempro->pengujitiga->nama}}</span>                    
           </div>        
         </li>     
       </ol>
@@ -77,7 +85,7 @@
 </div>
 
 @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingsatu_nip || auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingdua_nip)
-  <div class="card card-primary card-tabs">
+  <div class="card card-success card-tabs">
     <div class="card-header p-0">
       <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
         <li class="nav-item">
@@ -254,7 +262,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaiangka">
                   <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Angka</span>
+                    <span class="badge badge-success ml-3">Angka</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -270,7 +278,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaihuruf">
                   <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Huruf</span>
+                    <span class="badge badge-success ml-3">Huruf</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -283,7 +291,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-primary float-right">Update</button>
+              <button type="submit" class="btn btn-success float-right">Update</button>
           </form> 
         </div>    
       </div>
@@ -296,7 +304,7 @@
   <form action="/penilaian-sempro-penguji/edit/{{$sempro->id}}" method="POST">
     @method('put')
     @csrf    
-      <div class="card card-primary card-tabs">
+      <div class="card card-success card-tabs">
         <div class="card-header p-0 pt-1">
           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
@@ -616,7 +624,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaiangka">
                   <label for="total_nilai_angka" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Angka</span>
+                    <span class="badge badge-success ml-3">Angka</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -632,7 +640,7 @@
               <div class="row g-3 align-items-center mb-3">
                 <div class="col-auto totalnilaihuruf">
                   <label for="total_nilai_huruf" class="col-form-label">Total Nilai
-                    <span class="badge badge-danger ml-3">Huruf</span>
+                    <span class="badge badge-success ml-3">Huruf</span>
                   </label>
                 </div>
                 <div class="col-auto">
@@ -644,6 +652,7 @@
                 " readonly value="{{$sempro->total_nilai_huruf}}">
                 </div>
               </div>
+              <button type="submit" class="btn btn-primary float-right">Update</button>    
 
             </div>
 
@@ -692,6 +701,7 @@
               <button type="submit" class="btn btn-primary float-right">Update</button>    
             </div>
             
+            
             @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pengujisatu_nip)
             <div class="tab-pane fade" id="custom-tabs-one-setting" role="tabpanel"
               aria-labelledby="custom-tabs-one-setting-tab">
@@ -703,7 +713,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th style="width: 200px">Penilaian Penguji</th>
-                                    <th class="bg-danger" style="width: 30px">B</th>
+                                    <th class="bg-success" style="width: 30px">B</th>
                                     <th>Penguji 1</th>
                                     <th>Penguji 2</th>
                                     <th>Penguji 3</th>
@@ -786,7 +796,7 @@
             
                                 <tr>
                                     <td colspan="2">Total Nilai Penguji</td>
-                                    <td class="bg-danger">55</td>
+                                    <td class="bg-success">55</td>
                                     <td>{{$nilaipenguji1 != '' ?$nilaipenguji1->total_nilai_angka : '-'}}</td>                                           
                                     <td>{{$nilaipenguji2 != '' ?$nilaipenguji2->total_nilai_angka : '-'}}</td>                                           
                                     <td>{{$nilaipenguji3 != '' ?$nilaipenguji3->total_nilai_angka : '-'}}</td>
@@ -811,7 +821,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                      </div>
             
                     <div class="col-lg-6">
                       <table class="table table-bordered">
@@ -819,7 +829,7 @@
                             <tr>
                                 <th>#</th>
                                 <th style="width: 230px">Penilaian Pembimbing</th>
-                                <th class="bg-danger">B</th>
+                                <th class="bg-success">B</th>
                                 <th>Pembimbing 1</th>
                                 <th>Pembimbing 2</th>
                             </tr>
@@ -873,7 +883,7 @@
 
                             <tr>
                                 <td colspan="2">Total Nilai Pembimbing</td>
-                                <td class="bg-danger">45</td>
+                                <td class="bg-success">45</td>
                                 <td>{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_angka : '-' }}
                                 </td>
                                 <td>{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_angka : '-' }}
@@ -914,7 +924,7 @@
                       <tbody>
                           <tr>
                               <td style="width: 250px">NILAI AKHIR</td>
-                              <td class="bg-danger text-center">
+                              <td class="bg-success text-center">
                                   <h3 class="text-bold">
                                       @if ($penjadwalan->pembimbingdua_nip == null)
                                           @if ($nilaipembimbing1 != '')
@@ -942,7 +952,7 @@
                           <tr>
                               <td style="width: 250px">NILAI HURUF</td>
 
-                              <td class="bg-danger text-center">
+                              <td class="bg-success text-center">
                                   <h3 class="text-bold">
                                     @if ($penjadwalan->pembimbingdua_nip == null)
                                     @if ($nilaipembimbing1 == '')
@@ -1056,7 +1066,7 @@
                   </table>
 
                   </form>
-            
+                  
                         @if ($penjadwalan->status_seminar == 0)
                         @if ($penjadwalan->cek($penjadwalan->id) == $penjadwalan->jmlpenilaian($penjadwalan->id))
                         @if ($penjadwalan->pengujisatu_nip == auth()->user()->nip)                    
@@ -1078,13 +1088,11 @@
 
             </div>
           </div>
-        </div>
+        <!-- </div> -->
         <!-- /.card -->
       </div>
 
 @endif
-
-
 
 @endsection
 
@@ -1187,3 +1195,13 @@
 
   </script>
 @endpush
+
+@push('scripts')
+  <script>
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+      });
+    }, 2000);
+  </script>
+@endpush()

@@ -10,13 +10,13 @@
 
 @section('content')
 
-<ol class="breadcrumb col-lg-3">
+<ol class="breadcrumb col-lg-12">
   <li class="breadcrumb-item"><a href="/penilaian-kp">Hari Ini</a></li>
   <li class="breadcrumb-item"><a href="#">Bulan Ini</a></li>  
   <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/riwayat-penilaian-kp">Riwayat Penilaian</a></li>  
 </ol>
 
-<table class="table text-center table-bordered table-striped">
+<table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
@@ -48,8 +48,8 @@
             <p>{{$kp->penguji->nama}}</p>            
           </td>                    
           <td>                        
-              <a href="/perbaikan-kp/{{$kp->id}}" class="badge bg-primary">Perbaikan</a>            
-              <a href="/nilai-kp/{{$kp->id}}" class="badge bg-success">Berita Acara</a>
+              <a href="/perbaikan-kp/{{$kp->id}}" class="badge bg-info p-2"style="border-radius:20px;">Perbaikan</a>            
+              <a href="/nilai-kp/{{$kp->id}}" class="badge bg-success mt-2 p-2"style="border-radius:20px;">Berita Acara</a>
           </td>                        
         </tr>               
     @endforeach
