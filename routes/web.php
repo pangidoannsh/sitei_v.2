@@ -2,23 +2,24 @@
 
 use GuzzleHttp\Middleware;
 use App\Http\Middleware\CekRole;
+use App\Models\PenjadwalanSempro;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
-use App\Http\Controllers\DosenProfilController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\DosenProfilController;
 use App\Http\Controllers\KonsentrasiController;
 use App\Http\Controllers\PenilaianKPController;
+use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\PenilaianSemproController;
 use App\Http\Controllers\PenilaianSkripsiController;
-use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\PenjadwalanSemproController;
 use App\Http\Controllers\PenjadwalanSkripsiController;
-use App\Models\PenjadwalanSempro;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,22 +31,6 @@ use App\Models\PenjadwalanSempro;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/template', function () {
-    return view('template');
-});
-
-Route::get('/table', function () {
-    return view('table');
-});
-
-Route::get('/table2', function () {
-    return view('table2');
-});
-
-Route::get('/table3', function () {
-    return view('table3');
-});
 
 Route::group(['middleware' => ['guest:web,dosen']], function () {
     Route::get('/', [LoginController::class, 'index']);
@@ -108,6 +93,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/profil-dosen/editfotodsn/{dosen:id}', [DosenProfilController::class, 'updatefotodsn']);
     Route::get('/profil-dosen/editpassworddsn/{dosen:id}', [DosenProfilController::class, 'editpswdsn']);
     Route::put('/profil-dosen/editpassworddsn/{dosen:id}', [DosenProfilController::class, 'updatepswdsn']);
+    
+    Route::get('/penilaian', [PenilaianController::class, 'index']);
 
     Route::get('/penilaian-kp', [PenilaianKPController::class, 'index']);
     Route::get('/penilaian-kp/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'create']);

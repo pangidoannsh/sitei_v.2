@@ -7,6 +7,8 @@ use App\Models\PenjadwalanSempro;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PenilaianSemproPenguji;
 use App\Models\PenilaianSemproPembimbing;
+use App\Models\PenjadwalanKP;
+use App\Models\PenjadwalanSkripsi;
 
 class PenilaianSemproController extends Controller
 {
@@ -14,8 +16,14 @@ class PenilaianSemproController extends Controller
     {
         $dosen = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
 
+        $dosens = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
+
+        $dosenss = PenjadwalanKP::where('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
+
         return view('penilaiansempro.index', [
             'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
         ]);
     }
 

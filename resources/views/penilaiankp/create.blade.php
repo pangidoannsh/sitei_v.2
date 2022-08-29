@@ -20,13 +20,13 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">NIM</div>
-          <span>{{$kp->mahasiswa->nim}}</span>
+          <span>{{$kp->nim}}</span>
         </div>        
       </li> 
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Nama</div>
-          <span>{{$kp->mahasiswa->nama}}</span>
+          <span>{{$kp->nama}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -210,9 +210,7 @@
                             border-bottom-style: hidden;
                             background-color: rgb(255, 255, 255);
                         " readonly>
-                        </div>
-                        <a href="#custom-tabs-one-profile">
-                        <button type="button" class="btn btn-success float-right">Next</button></a>
+                        </div>                        
                     </div>
                 </div>
 

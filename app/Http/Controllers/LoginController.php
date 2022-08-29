@@ -16,6 +16,7 @@ class LoginController extends Controller
     {
         if (Auth::guard('dosen')->attempt(['nip' => $request->username, 'password' => $request->password])) {
             return redirect('/penilaian-sempro');
+            // return redirect('/penilaian');
         } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect('/dosen');
         }

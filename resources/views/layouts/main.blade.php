@@ -44,6 +44,9 @@
               <li><a class="nav-item"style="margin-left:-5px;" href="/penilaian-skripsi" class="dropdown-item">Skripsi</a></li>                    
             </ul>
           </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/penilaian">Seminar</a>
+          </li> --}}
 
           @if (Str::length(Auth::guard('dosen')->user()) > 0) 
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )

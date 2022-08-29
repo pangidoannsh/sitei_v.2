@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@php
+    Use Carbon\Carbon;
+@endphp
+
 @section('title')
     Jadwal KP | SIA ELEKTRO
 @endsection
@@ -25,28 +29,26 @@
 
 <table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">NIM</th>      
-      <th scope="col">Mahasiswa</th>      
-      <th scope="col">Seminar</th>      
-      <th scope="col">Jadwal</th>
+    <tr>      
+      <th scope="col">NIM</th>
+      <th scope="col">Nama</th>
+      <th scope="col">Prodi</th>
+      <th scope="col">Tanggal</th>
       <th scope="col">Waktu</th>
-      <th scope="col">Lokasi</th>
+      <th scope="col">Lokasi</th>              
       <th scope="col">Pembimbing</th>
-      <th scope="col">Penguji</th>      
+      <th scope="col">Penguji</th>          
       <th scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($penjadwalan_kps as $kp)
-        <tr>
-          <td>{{$loop->iteration}}</td>
-          <td>{{$kp->mahasiswa->nim}}</td>  
-          <td>{{$kp->mahasiswa->nama}}</td>  
-          <td>{{$kp->jenis_seminar}}</td>                    
-          <td>{{$kp->tanggal}}</td>                    
-          <td>{{$kp->waktu}}</td>                    
+        <tr>                  
+          <td>{{$kp->nim}}</td>                             
+          <td>{{$kp->nama}}</td>                                                                                     
+          <td>{{$kp->prodi->nama_prodi}}</td>          
+          <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>
+          <td>{{$kp->waktu}}</td>                   
           <td>{{$kp->lokasi}}</td>                    
           <td>{{$kp->pembimbing->nama}}</td>
           <td>{{$kp->penguji->nama}}</td>                    

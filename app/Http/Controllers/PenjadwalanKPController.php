@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
+use App\Models\Prodi;
 use App\Models\Mahasiswa;
+use App\Models\Konsentrasi;
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
@@ -12,15 +14,28 @@ class PenjadwalanKPController extends Controller
 {
     public function index()
     {
-        return view('penjadwalankp.index', [
-            'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->get(),
-        ]);
+        if (auth()->user()->role_id == 9) {            
+            return view('penjadwalankp.index', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 1)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 10) {            
+            return view('penjadwalankp.index', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 2)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 11) {            
+            return view('penjadwalankp.index', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 3)->get(),
+            ]);
+        }
     }
 
     public function create()
     {
         return view('penjadwalankp.create', [
-            'mahasiswas' => Mahasiswa::all(),
+            'prodis' => Prodi::all(),
+            'konsentrasis' => Konsentrasi::all(),
             'dosens' => Dosen::all(),
         ]);
     }
@@ -30,8 +45,11 @@ class PenjadwalanKPController extends Controller
         $request->validate([
             'pembimbing_nip' => 'required',
             'penguji_nip' => 'required',
-            'mahasiswa_nim' => 'required|unique:penjadwalan_kp',
-            'jenis_seminar' => 'required',
+            'prodi_id' => 'required',      
+            'konsentrasi_id' => 'required',      
+            'nim' => 'required|unique:penjadwalan_kp',            
+            'nama' => 'required',          
+            'angkatan' => 'required',            
             'judul_kp' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
@@ -40,9 +58,12 @@ class PenjadwalanKPController extends Controller
 
         PenjadwalanKP::create([
             'pembimbing_nip' => $request->pembimbing_nip,
-            'penguji_nip' => $request->penguji_nip,
-            'mahasiswa_nim' => $request->mahasiswa_nim,
-            'jenis_seminar' => $request->jenis_seminar,
+            'penguji_nip' => $request->penguji_nip,                        
+            'prodi_id' => $request->prodi_id,                        
+            'konsentrasi_id' => $request->konsentrasi_id,                        
+            'nim' => $request->nim,                        
+            'nama' => $request->nama,                        
+            'angkatan' => $request->angkatan,                        
             'judul_kp' => $request->judul_kp,
             'tanggal' => $request->tanggal,
             'waktu' => $request->waktu,
@@ -57,7 +78,8 @@ class PenjadwalanKPController extends Controller
     {
         return view('penjadwalankp.edit', [
             'kp' => $penjadwalan_kp,
-            'mahasiswas' => Mahasiswa::all(),
+            'prodis' => Prodi::all(),
+            'konsentrasis' => Konsentrasi::all(),           
             'dosens' => Dosen::all(),
         ]);
     }
@@ -67,15 +89,18 @@ class PenjadwalanKPController extends Controller
         $rules = [
             'pembimbing_nip' => 'required',
             'penguji_nip' => 'required',
-            'jenis_seminar' => 'required',
+            'prodi_id' => 'required',      
+            'konsentrasi_id' => 'required',                             
+            'nama' => 'required',          
+            'angkatan' => 'required',            
             'judul_kp' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
             'lokasi' => 'required',
         ];
 
-        if ($penjadwalan_kp->mahasiswa_nim != $request->mahasiswa_nim) {
-            $rules['mahasiswa_nim'] = 'required|unique:penjadwalan_kp';
+        if ($penjadwalan_kp->nim != $request->nim) {
+            $rules['nim'] = 'required|unique:penjadwalan_kp';
         }
 
         $validated = $request->validate($rules);
