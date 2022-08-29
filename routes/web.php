@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/profil-dosen/editpassworddsn/{dosen:id}', [DosenProfilController::class, 'updatepswdsn']);
     
     Route::get('/penilaian', [PenilaianController::class, 'index']);
+    Route::get('/riwayat-penilaian', [PenilaianController::class, 'riwayat']);
 
     Route::get('/penilaian-kp', [PenilaianKPController::class, 'index']);
     Route::get('/penilaian-kp/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'create']);

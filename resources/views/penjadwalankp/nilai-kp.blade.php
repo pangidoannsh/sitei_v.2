@@ -21,13 +21,13 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
-            <span>{{$penjadwalan->mahasiswa->nim}}</span>         
+            <span>{{$penjadwalan->nim}}</span>         
             </div>        
         </li> 
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Nama</div> 
-            <span>{{$penjadwalan->mahasiswa->nama}}</span>            
+            <span>{{$penjadwalan->nama}}</span>            
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">

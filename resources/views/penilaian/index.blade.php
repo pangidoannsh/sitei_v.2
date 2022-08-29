@@ -26,11 +26,11 @@
       </div>
 @endif
 
-{{-- <ol class="breadcrumb col-lg-12">
-  <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/penilaian-sempro">Hari Ini</a></li>
+<ol class="breadcrumb col-lg-12">
+  <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/penilaian">Hari Ini</a></li>
   <li class="breadcrumb-item"><a href="#">Bulan Ini</a></li>  
-  <li class="breadcrumb-item"><a href="/riwayat-penilaian-sempro">Riwayat Penilaian</a></li>  
-</ol> --}}
+  <li class="breadcrumb-item"><a href="/riwayat-penilaian">Riwayat Penilaian</a></li>  
+</ol>
 
 <table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
@@ -47,7 +47,32 @@
       <th scope="col">Aksi</th>
     </tr>
   </thead>
-  <tbody>    
+  <tbody> 
+    
+    @foreach ($penjadwalan_kps as $kp)    
+      <tr>                 
+        <td>{{$kp->nim}}</td>                             
+        <td>{{$kp->nama}}</td>                     
+        <td>{{$kp->jenis_seminar}}</td>                     
+        <td>{{$kp->prodi->nama_prodi}}</td>          
+        <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+        <td>{{$kp->waktu}}</td>                   
+        <td>{{$kp->lokasi}}</td>             
+        <td>
+          <p>{{$kp->pembimbing->nama}}</p>           
+        </td>         
+        <td>
+          <p>{{$kp->penguji->nama}}</p>           
+        </td>                    
+        <td>            
+            @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
+            <a href="/penilaian-kp/create/{{$kp->id}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
+            @else
+            <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+            @endif            
+        </td>                        
+      </tr>               
+    @endforeach
 
     @foreach ($penjadwalan_sempros as $sempro)    
         <tr>                  
