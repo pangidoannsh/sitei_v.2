@@ -22,9 +22,9 @@
 <table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">NIM</th>
       <th scope="col">Nama</th>
+      <th scope="col">Seminar</th>
       <th scope="col">Prodi</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Waktu</th>
@@ -37,13 +37,13 @@
   <tbody>
     @foreach ($penjadwalan_skripsis as $skripsi)
         <tr>
-          <td>{{$loop->iteration}}</td>          
           <td>{{$skripsi->nim}}</td>                             
           <td>{{$skripsi->nama}}</td>                     
+          <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                     
           <td>{{$skripsi->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$skripsi->waktu}}</td>                   
-          <td>{{$skripsi->lokasi}}</td>                    
+          <td>{{$skripsi->lokasi}}</td>                     
           <td>
             <p>1. {{$skripsi->pembimbingsatu->nama}}</p>
             @if ($skripsi->pembimbingdua == !null)

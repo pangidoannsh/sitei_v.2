@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@php
+    use Carbon\Carbon;
+@endphp
+
 @section('title')
     Riwayat Jadwal Sempro | SIA ELEKTRO
 @endsection
@@ -18,9 +22,9 @@
 <table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">NIM</th>
       <th scope="col">Nama</th>
+      <th scope="col">Seminar</th>
       <th scope="col">Prodi</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Waktu</th>
@@ -33,13 +37,13 @@
   <tbody>
     @foreach ($penjadwalan_sempros as $sempro)
         <tr>
-          <td>{{$loop->iteration}}</td>          
           <td>{{$sempro->nim}}</td>                             
-          <td>{{$sempro->nama}}</td>                                                                                     
+          <td>{{$sempro->nama}}</td>                     
+          <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
           <td>{{$sempro->prodi->nama_prodi}}</td>          
-          <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>
+          <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$sempro->waktu}}</td>                   
-          <td>{{$sempro->lokasi}}</td>                 
+          <td>{{$sempro->lokasi}}</td>                   
           <td>
             <p>1. {{$sempro->pembimbingsatu->nama}}</p>
             @if ($sempro->pembimbingdua == !null)

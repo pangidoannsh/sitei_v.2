@@ -39,7 +39,7 @@
         <tr>
           <td>{{$kp->nim}}</td>                             
           <td>{{$kp->nama}}</td>                     
-          <td>{{$kp->jenis_seminar}}</td>                     
+          <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
           <td>{{$kp->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$kp->waktu}}</td>                   

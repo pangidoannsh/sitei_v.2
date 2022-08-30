@@ -1061,7 +1061,49 @@
                                     @endif
                                   </h3>
                               </td>
+                          </tr>
                           <tr>
+                              <td style="width: 250px">KETERANGAN</td>
+
+                              <td class="bg-success text-center">
+                                  <h3 class="text-bold">
+                                    @if ($penjadwalan->pembimbingdua_nip == null)
+                                    @if ($nilaipembimbing1 == '')
+                                    -
+                                    @else
+                                    @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                        -
+                                    @else
+                                        @if (($nilaipembimbing1->total_nilai_angka +
+                                            ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                            2 >=
+                                            60)
+                                            LAYAK LULUS                                            
+                                        @else
+                                            TIDAK LAYAK LULUS
+                                        @endif
+                                    @endif
+                                @endif
+                                    @else
+                                        @if ($nilaipembimbing1 != '' && $nilaipembimbing2 != '')
+                                          @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                              -
+                                          @else
+                                              @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                  ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                  2 >= 60)
+                                                  LAYAK LULUS
+                                              @else
+                                                  TIDAK LAYAK LULUS
+                                              @endif
+                                          @endif
+                                        @else
+                                        -
+                                        @endif
+                                    @endif
+                                  </h3>
+                              </td>
+                          </tr>
                       </tbody>
                   </table>
 

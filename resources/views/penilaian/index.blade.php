@@ -52,8 +52,8 @@
     @foreach ($penjadwalan_kps as $kp)    
       <tr>                 
         <td>{{$kp->nim}}</td>                             
-        <td>{{$kp->nama}}</td>                     
-        <td>{{$kp->jenis_seminar}}</td>                     
+        <td>{{$kp->nama}}</td>                    
+        <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
         <td>{{$kp->prodi->nama_prodi}}</td>          
         <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
         <td>{{$kp->waktu}}</td>                   
@@ -78,7 +78,7 @@
         <tr>                  
           <td>{{$sempro->nim}}</td>                             
           <td>{{$sempro->nama}}</td>                     
-          <td>{{$sempro->jenis_seminar}}</td>                     
+          <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
           <td>{{$sempro->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$sempro->waktu}}</td>                   
@@ -112,7 +112,7 @@
         <tr>               
           <td>{{$skripsi->nim}}</td>                             
           <td>{{$skripsi->nama}}</td>
-          <td>{{$skripsi->jenis_seminar}}</td>                                     
+          <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                                     
           <td>{{$skripsi->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td>{{$skripsi->waktu}}</td>                   

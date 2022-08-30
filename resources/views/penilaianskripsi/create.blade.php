@@ -1170,11 +1170,11 @@
                                                         <td>13</td>
                                                         <td>Kesimpulan</td>
                                                         <td class="bg-secondary">3</td>
-                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->pembahasan : '-' }}
+                                                        <td>{{ $nilaipenguji1 != '' ? $nilaipenguji1->kesimpulan : '-' }}
                                                         </td>
-                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->pembahasan : '-' }}
+                                                        <td>{{ $nilaipenguji2 != '' ? $nilaipenguji2->kesimpulan : '-' }}
                                                         </td>
-                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji1->pembahasan : '-' }}
+                                                        <td>{{ $nilaipenguji3 != '' ? $nilaipenguji3->kesimpulan : '-' }}
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1480,7 +1480,49 @@
                                                               @endif
                                                             </h3>
                                                         </td>
+                                                    </tr>
                                                     <tr>
+                                                      <td style="width: 250px">KETERANGAN</td>
+                        
+                                                      <td class="bg-success text-center">
+                                                          <h3 class="text-bold">
+                                                            @if ($penjadwalan->pembimbingdua_nip == null)
+                                                            @if ($nilaipembimbing1 == '')
+                                                            -
+                                                            @else
+                                                            @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                                                -
+                                                            @else
+                                                                @if (($nilaipembimbing1->total_nilai_angka +
+                                                                    ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                    2 >=
+                                                                    60)
+                                                                    LAYAK LULUS                                            
+                                                                @else
+                                                                    TIDAK LAYAK LULUS
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                            @else
+                                                                @if ($nilaipembimbing1 != '' && $nilaipembimbing2 != '')
+                                                                  @if ($nilaipenguji1 == '' || $nilaipenguji2 == '' || $nilaipenguji3 == '')
+                                                                      -
+                                                                  @else
+                                                                      @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                                                          ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
+                                                                          2 >= 60)
+                                                                          LAYAK LULUS
+                                                                      @else
+                                                                          TIDAK LAYAK LULUS
+                                                                      @endif
+                                                                  @endif
+                                                                @else
+                                                                -
+                                                                @endif
+                                                            @endif
+                                                          </h3>
+                                                      </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
         </form>

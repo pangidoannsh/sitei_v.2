@@ -242,7 +242,7 @@ class PenilaianSemproController extends Controller
         $edit->total_nilai_huruf = $request->total_nilai_huruf;
         $edit->update();
 
-        return redirect('/penilaian-sempro')->with('message', 'Nilai Berhasil Diedit!');
+        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
     }
 
     public function update_penguji(Request $request, $id)
@@ -313,7 +313,7 @@ class PenilaianSemproController extends Controller
         if ($cari_penguji1->pengujisatu_nip == auth()->user()->nip) {
             return redirect('/penilaian-sempro/edit/' . $request->penjadwalan_sempro_id)->with('message', 'Nilai Berhasil Diedit!');
         } else {
-            return redirect('/penilaian-sempro')->with('message', 'Nilai Berhasil Diedit!');
+            return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
         }
     }
 

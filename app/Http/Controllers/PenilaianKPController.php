@@ -92,7 +92,7 @@ class PenilaianKPController extends Controller
         $jadwal->status_seminar = 1;
         $jadwal->update();
 
-        return redirect('/penilaian-kp')->with('message', 'Nilai Berhasil Diinput!');
+        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diinput!');
     }
 
     public function riwayat()

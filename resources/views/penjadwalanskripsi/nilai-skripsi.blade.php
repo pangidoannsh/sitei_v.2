@@ -1,10 +1,10 @@
-@extends('layouts.layout')
+@extends('layouts.main')
 
 @php
     use Carbon\Carbon;
 @endphp
 
-@section('isi')
+@section('content')
 
 <div class="row mb-5">
 

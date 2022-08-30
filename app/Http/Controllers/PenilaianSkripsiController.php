@@ -104,7 +104,7 @@ class PenilaianSkripsiController extends Controller
             'penjadwalan_skripsi_id' => $request['penjadwalan_skripsi_id'] = $id,
         ]);
 
-        return redirect('/penilaian-skripsi')->with('message', 'Nilai Berhasil Diinput!');
+        return redirect('/penilaian-skripsi/edit/' . $id)->with('message', 'Nilai Berhasil Diinput!');
     }
 
     public function store_penguji(Request $request, $id)
@@ -244,7 +244,7 @@ class PenilaianSkripsiController extends Controller
         $edit->total_nilai_huruf = $request->total_nilai_huruf;
         $edit->update();
 
-        return redirect('/penilaian-skripsi')->with('message', 'Nilai Berhasil Diedit!');
+        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
     }
 
     public function update_penguji(Request $request, $id)
@@ -327,7 +327,7 @@ class PenilaianSkripsiController extends Controller
         if ($cari_penguji1->pengujisatu_nip == auth()->user()->nip) {
             return redirect('/penilaian-skripsi/edit/' . $request->penjadwalan_skripsi_id)->with('message', 'Nilai Berhasil Diedit!');
         } else {
-            return redirect('/penilaian-skripsi')->with('message', 'Nilai Berhasil Diedit!');
+            return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
         }
     }
 

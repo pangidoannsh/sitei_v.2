@@ -232,7 +232,7 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 1;
         $jadwal->update();
 
-        return redirect('/penilaian-skripsi')->with('message', 'Seminar Telah Selesai!');
+        return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
     }
 
     public function riwayat()
