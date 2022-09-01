@@ -35,23 +35,18 @@
   </div>
 </nav>
         <ul class="navbar-nav">
-          @if (Str::length(Auth::guard('dosen')->user()) > 0)         
-          {{-- <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Penilaian</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow "style="border-radius:10px;">
-              <li><a class="nav-item active" style="margin-left:-5px;" href="/penilaian-kp" class="dropdown-item">Kerja Praktek</a></li>
-              <li><a class="nav-item"style="margin-left:-5px;" href="/penilaian-sempro" class="dropdown-item">Proposal</a></li>                    
-              <li><a class="nav-item"style="margin-left:-5px;" href="/penilaian-skripsi" class="dropdown-item">Skripsi</a></li>                    
-            </ul>
-          </li> --}}
-          
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/penilaian">Seminar</a>
           </li>
+          @endif
 
-          @if (Str::length(Auth::guard('dosen')->user()) > 0) 
-          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-          <li class="nav-item dropdown jarak2">
+          @if (Str::length(Auth::guard('web')->user()) > 0) 
+          @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/form">Jadwal</a>
+          </li>
+          {{-- <li class="nav-item dropdown jarak2">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Jadwal</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
                 <li>                        
@@ -59,15 +54,10 @@
                 </li>
                 <li><a href="/form-sempro" class="dropdown-item">Proposal</a></li>                    
                 <li><a href="/form-skripsi" class="dropdown-item">Skripsi</a></li>                    
-              </ul>
-              @endif
-          </li>
-          @endif
-          @endif
-
-          
-
-          @if (Str::length(Auth::guard('web')->user()) > 0) 
+              </ul>              
+          </li> --}}
+          @endif          
+                
           <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Jurusan</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
@@ -85,12 +75,11 @@
                 <li>                        
                   <a href="/dosen" class="dropdown-item">Dosen</a>
                 </li>
-                {{-- <li><a href="/mahasiswa" class="dropdown-item">Mahasiswa</a></li>                     --}}
+                <li><a href="/mahasiswa" class="dropdown-item">Mahasiswa</a></li>                    
                 <li><a href="/user" class="dropdown-item">Staff Jurusan</a></li>                    
               </ul>
           </li>
           @endif
-
         </ul>
 
         <ul class="navbar-nav ml-auto">

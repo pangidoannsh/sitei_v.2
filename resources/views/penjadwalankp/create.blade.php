@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Jadwal | SIA ELEKTRO
+    Tambah Jadwal KP | SIA ELEKTRO
 @endsection
 
 @section('sub-title')
-    Tambah Jadwal
+    Tambah Jadwal KP
 @endsection
 
 @section('content')

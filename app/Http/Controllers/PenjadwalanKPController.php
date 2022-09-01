@@ -14,17 +14,17 @@ class PenjadwalanKPController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->role_id == 9) {            
+        if (auth()->user()->role_id == 2) {            
             return view('penjadwalankp.index', [
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 1)->get(),
             ]);
         }
-        if (auth()->user()->role_id == 10) {            
+        if (auth()->user()->role_id == 3) {            
             return view('penjadwalankp.index', [
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 2)->get(),
             ]);
         }
-        if (auth()->user()->role_id == 11) {            
+        if (auth()->user()->role_id == 4) {            
             return view('penjadwalankp.index', [
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 3)->get(),
             ]);
@@ -68,10 +68,10 @@ class PenjadwalanKPController extends Controller
             'tanggal' => $request->tanggal,
             'waktu' => $request->waktu,
             'lokasi' => $request->lokasi,
-            'dibuat_oleh' => auth()->user()->nip,
+            'dibuat_oleh' => auth()->user()->username,
         ]);
 
-        return redirect('/form-kp')->with('message', 'Jadwal Berhasil Dibuat!');
+        return redirect('/form')->with('message', 'Jadwal Berhasil Dibuat!');
     }
 
     public function edit(PenjadwalanKP $penjadwalan_kp)
@@ -105,12 +105,12 @@ class PenjadwalanKPController extends Controller
 
         $validated = $request->validate($rules);
 
-        $validated['dibuat_oleh'] = auth()->user()->nip;
+        $validated['dibuat_oleh'] = auth()->user()->username;
 
         PenjadwalanKP::where('id', $penjadwalan_kp->id)
             ->update($validated);
 
-        return redirect('/form-kp')->with('message', 'Jadwal Berhasil Diedit!');
+        return redirect('/form')->with('message', 'Jadwal Berhasil Diedit!');
     }
 
     public function riwayat()

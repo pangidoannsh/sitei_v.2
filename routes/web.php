@@ -15,6 +15,7 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\DosenProfilController;
 use App\Http\Controllers\KonsentrasiController;
 use App\Http\Controllers\PenilaianKPController;
+use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\PenilaianSemproController;
 use App\Http\Controllers\PenilaianSkripsiController;
@@ -111,7 +112,6 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/penilaian-sempro/edit/{penjadwalan_sempro:id}', [PenilaianSemproController::class, 'edit']);
     Route::put('/penilaian-sempro-pembimbing/edit/{penilaian_sempro_pembimbing:id}', [PenilaianSemproController::class, 'update_pembimbing']);
     Route::put('/penilaian-sempro-penguji/edit/{penilaian_sempro_penguji:id}', [PenilaianSemproController::class, 'update_penguji']);
-    Route::get('/penilaian-sempro/cek-nilai/{id}', [PenjadwalanSemproController::class, 'ceknilai']);
     Route::put('/penilaian-sempro/approve/{id}', [PenjadwalanSemproController::class, 'approve']);
     Route::get('/riwayat-penilaian-sempro', [PenilaianSemproController::class, 'riwayat']);
     Route::get('/nilai-sempro/{id}', [PenjadwalanSemproController::class, 'nilaisempro']);
@@ -131,7 +131,10 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/perbaikan-skripsi/{id}', [PenjadwalanSkripsiController::class, 'perbaikan']);
 });
 
-Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function () {
+Route::group(['middleware' => ['auth:web']], function () {
+    Route::get('/form', [PenjadwalanController::class, 'index']);
+    Route::get('/riwayat-penjadwalan', [PenjadwalanController::class, 'riwayat']);    
+
     Route::get('/form-kp', [PenjadwalanKPController::class, 'index']);
     Route::get('/form-kp/create', [PenjadwalanKPController::class, 'create']);
     Route::post('/form-kp/create', [PenjadwalanKPController::class, 'store']);
@@ -152,4 +155,10 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function () {
     Route::get('/form-skripsi/edit/{penjadwalan_skripsi:id}', [PenjadwalanSkripsiController::class, 'edit']);
     Route::put('/form-skripsi/edit/{penjadwalan_skripsi:id}', [PenjadwalanSkripsiController::class, 'update']);
     Route::get('/riwayat-penjadwalan-skripsi', [PenjadwalanSkripsiController::class, 'riwayat']);
+});
+
+Route::group(['middleware' => ['auth:web,dosen']], function(){
+    Route::get('/nilai-kp/{id}', [PenjadwalanKPController::class, 'nilaikp']);
+    Route::get('/penilaian-sempro/cek-nilai/{id}', [PenjadwalanSemproController::class, 'ceknilai']);
+    Route::get('/penilaian-skripsi/cek-nilai/{id}', [PenjadwalanSkripsiController::class, 'ceknilai']);
 });

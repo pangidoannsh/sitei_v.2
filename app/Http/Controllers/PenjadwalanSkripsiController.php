@@ -15,17 +15,17 @@ class PenjadwalanSkripsiController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->role_id == 9) {            
+        if (auth()->user()->role_id == 2) {            
             return view('penjadwalanskripsi.index', [
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 1)->get(),
             ]);
         }
-        if (auth()->user()->role_id == 10) {            
+        if (auth()->user()->role_id == 3) {            
             return view('penjadwalanskripsi.index', [
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 2)->get(),
             ]);
         }
-        if (auth()->user()->role_id == 11) {            
+        if (auth()->user()->role_id == 4) {            
             return view('penjadwalanskripsi.index', [
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 3)->get(),
             ]);
@@ -81,7 +81,7 @@ class PenjadwalanSkripsiController extends Controller
                 'tanggal' => $validatedData['tanggal'],
                 'waktu' => $validatedData['waktu'],
                 'lokasi' => $validatedData['lokasi'],
-                'dibuat_oleh' => auth()->user()->nip,
+                'dibuat_oleh' => auth()->user()->username,
             ]);
         } else {
             PenjadwalanSkripsi::create([
@@ -98,11 +98,11 @@ class PenjadwalanSkripsiController extends Controller
                 'tanggal' => $validatedData['tanggal'],
                 'waktu' => $validatedData['waktu'],
                 'lokasi' => $validatedData['lokasi'],
-                'dibuat_oleh' => auth()->user()->nip,
+                'dibuat_oleh' => auth()->user()->username,
             ]);
         }
 
-        return redirect('/form-skripsi')->with('message', 'Jadwal Berhasil Dibuat!');
+        return redirect('/form')->with('message', 'Jadwal Berhasil Dibuat!');
     }
 
     public function edit(PenjadwalanSkripsi $penjadwalan_skripsi)
@@ -143,7 +143,7 @@ class PenjadwalanSkripsiController extends Controller
         }
 
         $validated = $request->validate($rules);
-        $validated['dibuat_oleh'] = auth()->user()->nip;
+        $validated['dibuat_oleh'] = auth()->user()->username;
 
         $edit = PenjadwalanSkripsi::find($penjadwalan_skripsi->id);
         $edit->pembimbingsatu_nip = $validated['pembimbingsatu_nip'];
@@ -177,7 +177,7 @@ class PenjadwalanSkripsiController extends Controller
         $edit->dibuat_oleh = $validated['dibuat_oleh'];
         $edit->update();
 
-        return redirect('/form-skripsi')->with('message', 'Jadwal Berhasil Diedit!');
+        return redirect('/form')->with('message', 'Jadwal Berhasil Diedit!');
     }
 
     public function ceknilai($id)
