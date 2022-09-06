@@ -123,8 +123,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::post('/penilaian-skripsi-penguji/create/{penjadwalan_skripsi:id}', [PenilaianSkripsiController::class, 'store_penguji']);
     Route::get('/penilaian-skripsi/edit/{penjadwalan_skripsi:id}', [PenilaianSkripsiController::class, 'edit']);
     Route::put('/penilaian-skripsi-pembimbing/edit/{penilaian_skripsi_pembimbing:id}', [PenilaianSkripsiController::class, 'update_pembimbing']);
-    Route::put('/penilaian-skripsi-penguji/edit/{penilaian_skripsi_penguji:id}', [PenilaianSkripsiController::class, 'update_penguji']);
-    Route::get('/penilaian-skripsi/cek-nilai/{id}', [PenjadwalanSkripsiController::class, 'ceknilai']);
+    Route::put('/penilaian-skripsi-penguji/edit/{penilaian_skripsi_penguji:id}', [PenilaianSkripsiController::class, 'update_penguji']);    
     Route::put('/penilaian-skripsi/approve/{id}', [PenjadwalanSkripsiController::class, 'approve']);
     Route::get('/riwayat-penilaian-skripsi', [PenilaianSkripsiController::class, 'riwayat']);
     Route::get('/nilai-skripsi/{id}', [PenjadwalanSkripsiController::class, 'nilaiskripsi']);
@@ -161,4 +160,16 @@ Route::group(['middleware' => ['auth:web,dosen']], function(){
     Route::get('/nilai-kp/{id}', [PenjadwalanKPController::class, 'nilaikp']);
     Route::get('/penilaian-sempro/cek-nilai/{id}', [PenjadwalanSemproController::class, 'ceknilai']);
     Route::get('/penilaian-skripsi/cek-nilai/{id}', [PenjadwalanSkripsiController::class, 'ceknilai']);
+});
+
+Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
+    Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
+    Route::put('/persetujuan-koordinator/approve/{id}', [PenjadwalanSemproController::class, 'approve_koordinator']);
+    Route::put('/persetujuan-koordinator/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_koordinator']);
+});
+
+Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
+    Route::get('/persetujuan-kaprodi', [PenjadwalanController::class, 'persetujuan_kaprodi']);
+    Route::put('/persetujuan-kaprodi/approve/{id}', [PenjadwalanSemproController::class, 'approve_kaprodi']);
+    Route::put('/persetujuan-kaprodi/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_kaprodi']);
 });

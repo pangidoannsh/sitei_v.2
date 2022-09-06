@@ -41,6 +41,22 @@
           </li>
           @endif
 
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/persetujuan-koordinator">Persetujuan</a>
+          </li>
+          @endif
+          @endif
+
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/persetujuan-kaprodi">Persetujuan</a>
+          </li>
+          @endif
+          @endif
+
           @if (Str::length(Auth::guard('web')->user()) > 0) 
           @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
           <li class="nav-item">
