@@ -164,12 +164,20 @@ Route::group(['middleware' => ['auth:web,dosen']], function(){
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
-    Route::put('/persetujuan-koordinator/approve/{id}', [PenjadwalanSemproController::class, 'approve_koordinator']);
-    Route::put('/persetujuan-koordinator/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_koordinator']);
+    Route::put('/persetujuankp-koordinator/approve/{id}', [PenjadwalanKPController::class, 'approve_koordinator']);
+    Route::put('/persetujuankp-koordinator/tolak/{id}', [PenjadwalanKPController::class, 'tolak_koordinator']);
+    Route::put('/persetujuansempro-koordinator/approve/{id}', [PenjadwalanSemproController::class, 'approve_koordinator']);
+    Route::put('/persetujuansempro-koordinator/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_koordinator']);
+    Route::put('/persetujuanskripsi-koordinator/approve/{id}', [PenjadwalanSkripsiController::class, 'approve_koordinator']);
+    Route::put('/persetujuanskripsi-koordinator/tolak/{id}', [PenjadwalanSkripsiController::class, 'tolak_koordinator']);
 });
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     Route::get('/persetujuan-kaprodi', [PenjadwalanController::class, 'persetujuan_kaprodi']);
-    Route::put('/persetujuan-kaprodi/approve/{id}', [PenjadwalanSemproController::class, 'approve_kaprodi']);
-    Route::put('/persetujuan-kaprodi/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_kaprodi']);
+    Route::put('/persetujuankp-kaprodi/approve/{id}', [PenjadwalanKPController::class, 'approve_kaprodi']);
+    Route::put('/persetujuankp-kaprodi/tolak/{id}', [PenjadwalanKPController::class, 'tolak_kaprodi']);
+    Route::put('/persetujuansempro-kaprodi/approve/{id}', [PenjadwalanSemproController::class, 'approve_kaprodi']);
+    Route::put('/persetujuansempro-kaprodi/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_kaprodi']);
+    Route::put('/persetujuanskripsi-kaprodi/approve/{id}', [PenjadwalanSkripsiController::class, 'approve_kaprodi']);
+    Route::put('/persetujuanskripsi-kaprodi/tolak/{id}', [PenjadwalanSkripsiController::class, 'tolak_kaprodi']);
 });

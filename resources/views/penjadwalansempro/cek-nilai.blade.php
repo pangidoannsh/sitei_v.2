@@ -401,37 +401,37 @@
             </table>
 
             @if ($penjadwalan->status_seminar == 0)
-            <form action="/penilaian-skripsi/approve/{{$penjadwalan->id}}" method="POST">
-                @method('put')
-                @csrf
-                <button type="submit" class="btn btn-lg btn-success float-right"> Approve Penilaian</button>
-            </form>
+                <form action="/penilaian-sempro/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn btn-lg btn-success float-right"> Approve Penilaian</button>
+                </form>
             @endif
 
             @if ($penjadwalan->status_seminar == 1)
-            <form action="/persetujuan-koordinator/approve/{{$penjadwalan->id}}" method="POST">
-                @method('put')
-                @csrf
-                <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
-            </form>
-            <form action="/persetujuan-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
-                @method('put')
-                @csrf
-                <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
-            </form>
+                <form action="/persetujuansempro-koordinator/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                </form>
+                <form action="/persetujuansempro-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                </form>
             @endif
 
             @if ($penjadwalan->status_seminar == 2)
-            <form action="/persetujuan-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
-                @method('put')
-                @csrf
-                <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
-            </form>
-            <form action="/persetujuan-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
-                @method('put')
-                @csrf
-                <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
-            </form>
+                <form action="/persetujuansempro-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                </form>
+                <form action="/persetujuansempro-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                </form>
             @endif
 
         </div>         

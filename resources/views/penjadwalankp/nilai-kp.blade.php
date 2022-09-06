@@ -130,6 +130,33 @@
             </tr>
 
         </tbody>
-    </table>            
+    </table>
+
+            @if ($penjadwalan->status_seminar == 1)
+                <form action="/persetujuankp-koordinator/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                </form>
+                <form action="/persetujuankp-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                </form>
+            @endif
+
+            @if ($penjadwalan->status_seminar == 2)
+                <form action="/persetujuankp-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                </form>
+                <form action="/persetujuankp-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                </form>
+            @endif
+             
 </div>
 @endsection   

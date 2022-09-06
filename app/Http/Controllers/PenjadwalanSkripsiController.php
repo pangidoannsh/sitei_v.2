@@ -235,6 +235,42 @@ class PenjadwalanSkripsiController extends Controller
         return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
     }
 
+    public function approve_koordinator($id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);        
+        $jadwal->status_seminar = 2;
+        $jadwal->update();
+
+        return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Disetujui!');
+    }
+
+    public function tolak_koordinator($id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);        
+        $jadwal->status_seminar = 0;
+        $jadwal->update();
+
+        return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Ditolak!');
+    }
+
+    public function approve_kaprodi($id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);        
+        $jadwal->status_seminar = 3;
+        $jadwal->update();
+
+        return redirect('/persetujuan-kaprodi')->with('message', 'Berita Acara Disetujui!');
+    }
+
+    public function tolak_kaprodi($id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);        
+        $jadwal->status_seminar = 0;
+        $jadwal->update();
+
+        return redirect('/persetujuan-kaprodi')->with('message', 'Berita Acara Ditolak!');
+    }
+
     public function riwayat()
     {
         return view('penjadwalanskripsi.riwayat-penjadwalan-skripsi', [

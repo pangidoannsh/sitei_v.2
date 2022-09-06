@@ -461,11 +461,37 @@
             </table>
 
             @if ($penjadwalan->status_seminar == 0)
-            <form action="/penilaian-skripsi/approve/{{$penjadwalan->id}}" method="POST">
-                @method('put')
-                @csrf
-                <button type="submit" class="btn btn-lg btn-success float-right"> Approve Penilaian</button>
-            </form>
+                <form action="/penilaian-skripsi/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn btn-lg btn-success float-right"> Approve Penilaian</button>
+                </form>
+            @endif
+
+            @if ($penjadwalan->status_seminar == 1)
+                <form action="/persetujuanskripsi-koordinator/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                </form>
+                <form action="/persetujuanskripsi-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                </form>
+            @endif
+
+            @if ($penjadwalan->status_seminar == 2)
+                <form action="/persetujuanskripsi-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                </form>
+                <form action="/persetujuanskripsi-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                </form>
             @endif
 
         </div>         
