@@ -134,6 +134,7 @@ class DatabaseSeeder extends Seeder
             'nim' => '1807125148',
             'nama' => 'Rahul Ilsa Tajri Mukhti',
             'email' => 'rahul.ilsa5148@student.unri.ac.id',
+            'password' => bcrypt('123456'),
             'angkatan' => '2018',
         ]);
 
@@ -143,6 +144,7 @@ class DatabaseSeeder extends Seeder
             'nim' => '1807125149',
             'nama' => 'Murdillah Rezky',
             'email' => 'murdillah.rezky5149@student.unri.ac.id',
+            'password' => bcrypt('123456'),
             'angkatan' => '2018',
         ]);
 
@@ -152,6 +154,7 @@ class DatabaseSeeder extends Seeder
             'nim' => '1807125150',
             'nama' => 'M. Fajar Edwin Saputra',
             'email' => 'fajar.edwin5150@student.unri.ac.id',
+            'password' => bcrypt('123456'),
             'angkatan' => '2018',
         ]);
 
@@ -161,6 +164,7 @@ class DatabaseSeeder extends Seeder
             'nim' => '1807125151',
             'nama' => 'Fahril Hadi',
             'email' => 'fahril.hadi515q@student.unri.ac.id',
+            'password' => bcrypt('123456'),
             'angkatan' => '2018',
         ]);
 
@@ -170,6 +174,7 @@ class DatabaseSeeder extends Seeder
             'nim' => '1807125152',
             'nama' => 'M. Seprinaldi',
             'email' => 'm.seprinaldi5152@student.unri.ac.id',
+            'password' => bcrypt('123456'),
             'angkatan' => '2018',
         ]);
 
@@ -179,6 +184,7 @@ class DatabaseSeeder extends Seeder
             'nim' => '1807125153',
             'nama' => 'Aqil Muafa',
             'email' => 'aqilmuafa@student.unri.ac.id',
+            'password' => bcrypt('123456'),
             'angkatan' => '2018',
         ]);
 

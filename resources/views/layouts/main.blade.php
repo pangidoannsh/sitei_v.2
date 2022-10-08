@@ -41,6 +41,12 @@
           </li>
           @endif
 
+          @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/seminar">Seminar</a>
+          </li>
+          @endif
+
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <li class="nav-item">
@@ -57,8 +63,7 @@
           @endif
           @endif
 
-          @if (Str::length(Auth::guard('web')->user()) > 0) 
-          @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+          @if (Str::length(Auth::guard('web')->user()) > 0)        
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/form">Jadwal</a>
           </li>
@@ -71,9 +76,9 @@
                 <li><a href="/form-sempro" class="dropdown-item">Proposal</a></li>                    
                 <li><a href="/form-skripsi" class="dropdown-item">Skripsi</a></li>                    
               </ul>              
-          </li> --}}
-          @endif          
-                
+          </li> --}}          
+          
+          @if (Auth::guard('web')->user()->role_id == 1 )
           <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Jurusan</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
@@ -84,15 +89,18 @@
                 <li><a href="/konsentrasi" class="dropdown-item">Konsentrasi</a></li>                    
               </ul>
           </li>
+          @endif
 
           <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Pengguna</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
-                <li>                        
-                  <a href="/dosen" class="dropdown-item">Dosen</a>
-                </li>
-                <li><a href="/mahasiswa" class="dropdown-item">Mahasiswa</a></li>                    
-                <li><a href="/user" class="dropdown-item">Staff Jurusan</a></li>                    
+                @if (Auth::guard('web')->user()->role_id == 1 )
+                <li><a href="/dosen" class="dropdown-item">Dosen</a></li>
+                <li><a href="/user" class="dropdown-item">Staff Jurusan</a></li>
+                @endif             
+                @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 ) 
+                <li><a href="/mahasiswa" class="dropdown-item">Mahasiswa</a></li>
+                @endif             
               </ul>
           </li>
           @endif
@@ -105,6 +113,8 @@
               {{Auth::guard('dosen')->user()->nama}}
               @elseif (Str::length(Auth::guard('web')->user()) > 0)
               {{Auth::guard('web')->user()->nama}}
+              @elseif (Str::length(Auth::guard('mahasiswa')->user()) > 0)
+              {{Auth::guard('mahasiswa')->user()->nama}}
               @endif          
               </a>
               <div>
@@ -115,15 +125,44 @@
               <li class="pp"><a class="dropdown-item" href="/profil-dosen"><i class="bi bi-person-circle mr-2"></i>Profil</a></li>
               @endif
               @endif  --}}
+              @if (Str::length(Auth::guard('dosen')->user()) > 0)
+              @if (Auth::guard('dosen')->user())          
+              <li>
+              <a class="nav-link dropdown-item" href="/profil-dosen/editpassworddsn/">
+                  <i class="bi bi-key"></i> <span>Ubah Password</span>
+              </a>
+              </li>
+              @endif
+              @endif
               
+              @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
+              @if (Auth::guard('mahasiswa')->user())          
+              <li>
+              <a class="nav-link dropdown-item" href="/profil-mhs/editpasswordmhs/">
+                  <i class="bi bi-key"></i> <span>Ubah Password</span>
+              </a>
+              </li>
+              @endif
+              @endif 
+              
+              @if (Str::length(Auth::guard('web')->user()) > 0)
+              @if (Auth::guard('web')->user())          
+              <li>
+              <a class="nav-link dropdown-item" href="/profil-staff/editpasswordstaff/">
+                  <i class="bi bi-key"></i> <span>Ubah Password</span>
+              </a>
+              </li>
+              @endif
+              @endif 
+
               <form action="/logout" method="POST">
                   @csrf
                   <li>
-                  <button type="submit" class="dropdown-item" href="#">
-                      <i class="bi bi-box-arrow-right"></i> <span>Logout</span>
+                  <button type="submit" class="dropdown-item">
+                      <i class="bi bi-box-arrow-right"></i> <span>Keluar</span>
                   </button>
                   </li>
-              </form>
+              </form>          
               </ul>
               </div>
           </li>

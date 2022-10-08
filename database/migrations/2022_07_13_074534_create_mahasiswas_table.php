@@ -22,7 +22,7 @@ class CreateMahasiswasTable extends Migration
             $table->string('nama');
             $table->string('angkatan');
             $table->string('email');
-            // $table->string('password');
+            $table->string('password');
             // $table->string('gambar');
             $table->timestamps();
         });

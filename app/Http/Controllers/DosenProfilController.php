@@ -72,12 +72,10 @@ class DosenProfilController extends Controller
             $dosen->password = Hash::make(request('password'));
 
             if ($dosen->save()) {
-                return redirect('/profil-dosen')->with('message', 'Password Berhasil Diedit!');
+                return redirect('/penilaian')->with('message', 'Password Berhasil Diedit!');
             } else {
                 return back()->with('message', 'Password Salah!');
-            }
-
-            return redirect('/profil-dosen')->with('message', 'Password Berhasil Diedit!');
+            }            
         } else {
             return back()->with('message', 'Password Salah!');
         }

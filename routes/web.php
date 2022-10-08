@@ -17,10 +17,12 @@ use App\Http\Controllers\KonsentrasiController;
 use App\Http\Controllers\PenilaianKPController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PenjadwalanKPController;
+use App\Http\Controllers\MahasiswaProfilController;
 use App\Http\Controllers\PenilaianSemproController;
 use App\Http\Controllers\PenilaianSkripsiController;
 use App\Http\Controllers\PenjadwalanSemproController;
 use App\Http\Controllers\PenjadwalanSkripsiController;
+use App\Http\Controllers\StaffProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,17 +35,26 @@ use App\Http\Controllers\PenjadwalanSkripsiController;
 |
 */
 
-Route::group(['middleware' => ['guest:web,dosen']], function () {
+Route::group(['middleware' => ['guest:web,dosen,mahasiswa']], function () {
     Route::get('/', [LoginController::class, 'index']);
     Route::post('/', [LoginController::class, 'postlogin'])->name('login');
 });
 
-Route::group(['middleware' => ['auth:dosen,web']], function () {
-
+Route::group(['middleware' => ['auth:dosen,web,mahasiswa']], function () {
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 
+Route::group(['middleware' => ['auth:mahasiswa']], function () {
+    Route::get('/profil-mhs/editpasswordmhs', [MahasiswaProfilController::class, 'editpswmhs']);
+    Route::put('/profil-mhs/editpasswordmhs', [MahasiswaProfilController::class, 'updatepswmhs']);
+    Route::get('/seminar', [PenjadwalanController::class, 'riwayat_mahasiswa']);    
+});
+
+
 Route::group(['middleware' => ['auth:web']], function () {
+
+    Route::get('/profil-staff/editpasswordstaff', [StaffProfilController::class, 'editpswstaff']);
+    Route::put('/profil-staff/editpasswordstaff', [StaffProfilController::class, 'updatepswstaff']);
 
     Route::get('/dosen', [DosenController::class, 'index']);
     Route::get('/dosen/create', [DosenController::class, 'create']);
@@ -92,8 +103,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/profil-dosen', [DosenProfilController::class, 'index']);
     Route::get('/profil-dosen/editfotodsn/{dosen:id}', [DosenProfilController::class, 'editfotodsn']);
     Route::put('/profil-dosen/editfotodsn/{dosen:id}', [DosenProfilController::class, 'updatefotodsn']);
-    Route::get('/profil-dosen/editpassworddsn/{dosen:id}', [DosenProfilController::class, 'editpswdsn']);
-    Route::put('/profil-dosen/editpassworddsn/{dosen:id}', [DosenProfilController::class, 'updatepswdsn']);
+    Route::get('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'editpswdsn']);
+    Route::put('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'updatepswdsn']);
     
     Route::get('/penilaian', [PenilaianController::class, 'index']);
     Route::get('/riwayat-penilaian', [PenilaianController::class, 'riwayat']);
@@ -116,6 +127,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/riwayat-penilaian-sempro', [PenilaianSemproController::class, 'riwayat']);
     Route::get('/nilai-sempro/{id}', [PenjadwalanSemproController::class, 'nilaisempro']);
     Route::get('/perbaikan-sempro/{id}', [PenjadwalanSemproController::class, 'perbaikan']);
+    Route::post('/revisi-naskah/create/{id}', [PenjadwalanSemproController::class, 'revisi']);
 
     Route::get('/penilaian-skripsi', [PenilaianSkripsiController::class, 'index']);
     Route::get('/penilaian-skripsi/create/{penjadwalan_skripsi:id}', [PenilaianSkripsiController::class, 'create']);
@@ -158,8 +170,17 @@ Route::group(['middleware' => ['auth:web']], function () {
 
 Route::group(['middleware' => ['auth:web,dosen']], function(){
     Route::get('/nilai-kp/{id}', [PenjadwalanKPController::class, 'nilaikp']);
+    Route::get('/nilai-sempro-pembimbing/{id}/{pembimbing}', [PenjadwalanSemproController::class, 'nilaipembimbing']);
+    Route::get('/nilai-sempro-penguji/{id}/{penguji}', [PenjadwalanSemproController::class, 'nilaipenguji']);
+    Route::get('/perbaikan-penguji/{id}/{penguji}', [PenjadwalanSemproController::class, 'perbaikanpenguji']);
     Route::get('/penilaian-sempro/cek-nilai/{id}', [PenjadwalanSemproController::class, 'ceknilai']);
     Route::get('/penilaian-skripsi/cek-nilai/{id}', [PenjadwalanSkripsiController::class, 'ceknilai']);
+
+});
+
+Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){    
+    Route::get('/perbaikan-penguji/{id}/{penguji}', [PenjadwalanSemproController::class, 'perbaikanpenguji']);    
+
 });
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){

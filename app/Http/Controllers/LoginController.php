@@ -17,8 +17,11 @@ class LoginController extends Controller
         if (Auth::guard('dosen')->attempt(['nip' => $request->username, 'password' => $request->password])) {
             return redirect('/penilaian');
         } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect('/dosen');
+            return redirect('/form');
+        } elseif (Auth::guard('mahasiswa')->attempt(['nim' => $request->username, 'password' => $request->password])) {
+            return redirect('/seminar');
         }
+        
 
         return redirect('/')->with('loginError', 'Login Gagal!');
     }

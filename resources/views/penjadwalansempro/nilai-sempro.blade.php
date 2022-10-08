@@ -13,19 +13,19 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
-            <span>{{$penjadwalan->nim}}</span>         
+            <span>{{$penjadwalan->mahasiswa->nim}}</span>
             </div>        
         </li> 
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Nama</div> 
-            <span>{{$penjadwalan->nama}}</span>            
+            <span>{{$penjadwalan->mahasiswa->nama}}</span>            
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->judul_proposal}}</span>
+            <div class="fw-bold mb-2">Judul</div>            
+            <span>{{$penjadwalan->revisi_naskah != null ? $penjadwalan->revisi_naskah : $penjadwalan->judul_proposal }}</span>
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">

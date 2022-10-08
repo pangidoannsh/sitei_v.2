@@ -65,8 +65,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @endif
           @endif
 
-          
-
           @if (Str::length(Auth::guard('web')->user()) > 0) 
           <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Jurusan</a>

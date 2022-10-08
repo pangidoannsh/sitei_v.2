@@ -6,13 +6,25 @@ use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
 use App\Models\PenjadwalanSempro;
 use App\Models\PenjadwalanSkripsi;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PenjadwalanController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role_id == 1) {            
+            return view('penjadwalan.index', [
+                'role' => Role::all(),
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->get(),
+            ]);
+        }
         if (auth()->user()->role_id == 2) {            
             return view('penjadwalan.index', [
+                'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 1)->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('prodi_id', 1)->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 1)->get(),
@@ -20,6 +32,7 @@ class PenjadwalanController extends Controller
         }
         if (auth()->user()->role_id == 3) {            
             return view('penjadwalan.index', [
+                'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 2)->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('prodi_id', 2)->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 2)->get(),
@@ -27,6 +40,7 @@ class PenjadwalanController extends Controller
         }
         if (auth()->user()->role_id == 4) {            
             return view('penjadwalan.index', [
+                'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 3)->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('prodi_id', 3)->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 3)->get(),
@@ -36,8 +50,17 @@ class PenjadwalanController extends Controller
 
     public function riwayat()
     {       
+        if (auth()->user()->role_id == 1) {            
+            return view('penjadwalan.riwayat-penjadwalan', [
+                'role' => Role::all(),
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->get(),
+            ]);
+        }
         if (auth()->user()->role_id == 2) {            
             return view('penjadwalan.riwayat-penjadwalan', [
+                'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 1)->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 1)->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 1)->get(),
@@ -45,6 +68,7 @@ class PenjadwalanController extends Controller
         }
         if (auth()->user()->role_id == 3) {            
             return view('penjadwalan.riwayat-penjadwalan', [
+                'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 2)->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 2)->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 2)->get(),
@@ -52,6 +76,7 @@ class PenjadwalanController extends Controller
         }
         if (auth()->user()->role_id == 4) {            
             return view('penjadwalan.riwayat-penjadwalan', [
+                'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 3)->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 3)->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 3)->get(),
@@ -107,5 +132,12 @@ class PenjadwalanController extends Controller
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 3)->get(),
             ]);
         }
+    }
+
+    public function riwayat_mahasiswa()
+    {       
+        return view('penjadwalan.riwayat-mahasiswa', [
+            'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('mahasiswa_nim', Auth::user()->nim)->get(),
+        ]);
     }
 }

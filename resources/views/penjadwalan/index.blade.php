@@ -26,9 +26,13 @@
   <li class="breadcrumb-item"><a href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li>  
 </ol>
 
+@if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+    
 <a href="{{url ('/form-kp/create')}}" class="btn btn-success mb-3">+ KP</a>
 <a href="{{url('/form-sempro/create')}}" class="btn btn-success mb-3">+ Sempro</a>
 <a href="{{url('/form-skripsi/create')}}" class="btn btn-success mb-3">+ Skripsi</a>
+
+@endif
 
 <table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
@@ -41,8 +45,10 @@
         <th scope="col">Waktu</th>
         <th scope="col">Lokasi</th>              
         <th scope="col">Pembimbing</th>
-        <th scope="col">Penguji</th>          
+        <th scope="col">Penguji</th>
+        @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
         <th scope="col">Aksi</th>
+        @endif
     </tr>
   </thead>
   <tbody>

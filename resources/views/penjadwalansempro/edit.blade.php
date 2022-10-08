@@ -16,22 +16,17 @@
         @csrf
 
         <div class="mb-3">
-            <label class="form-label">NIM</label>
-            <input type="text" name="nim" class="form-control @error('nim') is-invalid @enderror" value="{{ old('nim', $sempro->nim) }}">
-            @error('nim')
-              <div class="invalid-feedback">
-                  {{$message}}
-              </div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $sempro->nama) }}">
-            @error('nama')
-              <div class="invalid-feedback">
-                  {{$message}}
-              </div>
+            <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
+            <select name="mahasiswa_nim" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
+                <option value="">-Pilih-</option>
+                @foreach ($mahasiswas as $mhs)
+                    <option value="{{$mhs->id}}" {{old('mahasiswa_nim', $sempro->mahasiswa_nim) == $mhs->id ? 'selected' : null}}>{{$mhs->nama}}</option>
+                @endforeach
+            </select>
+            @error('mahasiswa_nim')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
             @enderror
         </div>
 
@@ -48,32 +43,7 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="konsentrasi_id" class="form-label">Konsentrasi</label>
-            <select name="konsentrasi_id" class="form-select @error('konsentrasi_id') is-invalid @enderror">
-                <option value="">-Pilih-</option>
-                @foreach ($konsentrasis as $konsentrasi)
-                    <option value="{{$konsentrasi->id}}" {{old('konsentrasi_id', $sempro->konsentrasi_id) == $konsentrasi->id ? 'selected' : null}}>{{$konsentrasi->nama_konsentrasi}}</option>
-                @endforeach
-            </select>
-            @error('konsentrasi_id')
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Angkatan</label>
-            <input type="number" name="angkatan" class="form-control @error('angkatan') is-invalid @enderror" value="{{ old('angkatan', $sempro->angkatan) }}">
-            @error('angkatan')
-              <div class="invalid-feedback">
-                  {{$message}}
-              </div>
-            @enderror
-        </div>
+        </div>      
 
         <div class="mb-3">
             <label class="form-label">Judul Proposal</label>

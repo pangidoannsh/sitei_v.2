@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Dosen;
 use App\Models\Konsentrasi;
+use App\Models\Mahasiswa;
 use App\Models\PenilaianSemproPembimbing;
 use App\Models\PenilaianSemproPenguji;
+use App\Models\PenjadwalanKP;
 use App\Models\PenjadwalanSempro;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
@@ -34,24 +36,21 @@ class PenjadwalanSemproController extends Controller
     public function create()
     {
         return view('penjadwalansempro.create', [
-            'prodis' => Prodi::all(),
-            'konsentrasis' => Konsentrasi::all(),
+            'prodis' => Prodi::all(),            
             'dosens' => Dosen::all(),
+            'mahasiswas' => Mahasiswa::all(),
         ]);
     }
 
     public function store(Request $request)
     {
         $data = [
+            'mahasiswa_nim' => 'required',
             'pembimbingsatu_nip' => 'required',
             'pengujisatu_nip' => 'required',
             'pengujidua_nip' => 'required',
             'pengujitiga_nip' => 'required',
-            'prodi_id' => 'required',      
-            'konsentrasi_id' => 'required',      
-            'nim' => 'required|unique:penjadwalan_sempro',            
-            'nama' => 'required',          
-            'angkatan' => 'required',          
+            'prodi_id' => 'required',                            
             'judul_proposal' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
@@ -66,16 +65,13 @@ class PenjadwalanSemproController extends Controller
 
         if ($request->pembimbingdua_nip) {
             PenjadwalanSempro::create([
+                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],
                 'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],
                 'pembimbingdua_nip' => $validatedData['pembimbingdua_nip'],
                 'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
                 'pengujidua_nip' => $validatedData['pengujidua_nip'],
                 'pengujitiga_nip' => $validatedData['pengujitiga_nip'],
-                'prodi_id' => $validatedData['prodi_id'],
-                'konsentrasi_id' => $validatedData['konsentrasi_id'],
-                'nim' => $validatedData['nim'],
-                'nama' => $validatedData['nama'],
-                'angkatan' => $validatedData['angkatan'],                
+                'prodi_id' => $validatedData['prodi_id'],                
                 'judul_proposal' => $validatedData['judul_proposal'],
                 'tanggal' => $validatedData['tanggal'],
                 'waktu' => $validatedData['waktu'],
@@ -85,15 +81,12 @@ class PenjadwalanSemproController extends Controller
         }    
         else {
             PenjadwalanSempro::create([
+                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],                
                 'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],                
                 'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
                 'pengujidua_nip' => $validatedData['pengujidua_nip'],
                 'pengujitiga_nip' => $validatedData['pengujitiga_nip'],
-                'prodi_id' => $validatedData['prodi_id'],
-                'konsentrasi_id' => $validatedData['konsentrasi_id'],
-                'nim' => $validatedData['nim'],
-                'nama' => $validatedData['nama'],
-                'angkatan' => $validatedData['angkatan'],                
+                'prodi_id' => $validatedData['prodi_id'],                
                 'judul_proposal' => $validatedData['judul_proposal'],
                 'tanggal' => $validatedData['tanggal'],
                 'waktu' => $validatedData['waktu'],
@@ -110,7 +103,7 @@ class PenjadwalanSemproController extends Controller
         return view('penjadwalansempro.edit', [
             'sempro' => $penjadwalan_sempro,
             'prodis' => Prodi::all(),
-            'konsentrasis' => Konsentrasi::all(),           
+            'mahasiswas' => Mahasiswa::all(),
             'dosens' => Dosen::all(),
         ]);
     }
@@ -118,23 +111,17 @@ class PenjadwalanSemproController extends Controller
     public function update(Request $request, PenjadwalanSempro $penjadwalan_sempro)
     {
         $rules = [
+            'mahasiswa_nim' => 'required',
             'pembimbingsatu_nip' => 'required',
             'pengujisatu_nip' => 'required',
             'pengujidua_nip' => 'required',
             'pengujitiga_nip' => 'required',
-            'prodi_id' => 'required',      
-            'konsentrasi_id' => 'required',                       
-            'nama' => 'required',          
-            'angkatan' => 'required',          
+            'prodi_id' => 'required',                           
             'judul_proposal' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
             'lokasi' => 'required',
-        ];
-
-        if ($penjadwalan_sempro->nim != $request->nim) {
-            $rules['nim'] = 'required|unique:penjadwalan_sempro';
-        }
+        ];        
 
         if ($request->pembimbingdua_nip) {
             if ($penjadwalan_sempro->pembimbingdua_nip != $request->pembimbingdua_nip) {
@@ -146,6 +133,7 @@ class PenjadwalanSemproController extends Controller
         $validated['dibuat_oleh'] = auth()->user()->username;
 
         $edit = PenjadwalanSempro::find($penjadwalan_sempro->id);
+        $edit->mahasiswa_nim = $validated['mahasiswa_nim'];
         $edit->pembimbingsatu_nip = $validated['pembimbingsatu_nip'];
 
         if ($request->pembimbingdua_nip) {
@@ -161,15 +149,7 @@ class PenjadwalanSemproController extends Controller
         $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
         $edit->pengujidua_nip = $validated['pengujidua_nip'];
         $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
-        $edit->prodi_id = $validated['prodi_id'];
-        $edit->konsentrasi_id = $validated['konsentrasi_id'];
-
-        if ($penjadwalan_sempro->nim != $request->nim) {
-            $edit->nim = $validated['nim'];
-        }
-        
-        $edit->nama = $validated['nama'];
-        $edit->angkatan = $validated['angkatan'];
+        $edit->prodi_id = $validated['prodi_id'];                
         $edit->judul_proposal = $validated['judul_proposal'];
         $edit->tanggal = $validated['tanggal'];
         $edit->waktu = $validated['waktu'];
@@ -302,6 +282,27 @@ class PenjadwalanSemproController extends Controller
         }
     }
 
+    public function nilaipembimbing($id, $pembimbing)
+    {
+        $penjadwalan = PenjadwalanSempro::find($id);
+        $penilaian = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->where('pembimbing_nip', $pembimbing)->first();
+        return view('penjadwalansempro.nilai-sempro', [
+            'penjadwalan' => $penjadwalan,
+            'penilaianpembimbing' => $penilaian,
+            'penilaianpenguji' => null,
+        ]);
+    }
+
+    public function nilaipenguji($id, $penguji)
+    {
+        $penjadwalan = PenjadwalanSempro::find($id);
+        $penilaianpenguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', $penguji)->first();
+        return view('penjadwalansempro.nilai-sempro', [
+            'penjadwalan' => $penjadwalan,            
+            'penilaianpenguji' => $penilaianpenguji,
+        ]);
+    }
+
     public function perbaikan($id)
     {
         $penjadwalan = PenjadwalanSempro::find($id);
@@ -312,4 +313,31 @@ class PenjadwalanSemproController extends Controller
             'penilaianpenguji' => $penilaianpenguji,
         ]);
     }
+
+    public function perbaikanpenguji($id, $penguji)
+    {
+        $penjadwalan = PenjadwalanSempro::find($id);
+        $penilaianpenguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', $penguji)->first();
+
+        return view('penjadwalansempro.perbaikan-sempro', [
+            'penjadwalan' => $penjadwalan,
+            'penilaianpenguji' => $penilaianpenguji,
+        ]);
+    }
+
+    public function revisi(Request $request, $id)
+    {    
+        $penjadwalan_sempro = PenjadwalanSempro::find($id);
+        $penjadwalan_sempro->revisi_naskah = $request->revisi_naskah;
+        $penjadwalan_sempro->update();
+        $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
+        if ($cari_penguji == 0) {
+            return redirect('/penilaian-sempro/create/' . $id)->with('message', 'Judul Berhasil Diupdate!');
+        } else {
+
+            return redirect('/penilaian-sempro/edit/' . $id)->with('message', 'Judul Berhasil Diupdate!');
+        }
+        
+    }
+
 }

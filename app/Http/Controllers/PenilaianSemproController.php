@@ -142,11 +142,11 @@ class PenilaianSemproController extends Controller
         }
         if ($request->revisi_naskah5) {
             $penilaian->revisi_naskah5 = $request->revisi_naskah5;
-        }
+        }            
 
         $penilaian->penguji_nip = auth()->user()->nip;
         $penilaian->penjadwalan_sempro_id = $id;
-        $penilaian->save();
+        $penilaian->save();        
 
         return redirect('/penilaian-sempro/edit/' . $id)->with('message', 'Nilai Berhasil Diinput!');
     }
@@ -205,9 +205,9 @@ class PenilaianSemproController extends Controller
             } else {
                 $nilaipembimbing2 = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
             }
-
+            $sempro = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
             return view('penilaiansempro.edit', [
-                'sempro' => PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->first(),
+                'sempro' => $sempro,
                 'pembimbing' => $pembimbing,
                 'pembimbingnilai' => $pembimbingnilai,
                 'penjadwalan' => $penjadwalan,

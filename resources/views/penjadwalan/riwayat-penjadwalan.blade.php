@@ -31,8 +31,10 @@
       <th scope="col">Waktu</th>
       <th scope="col">Lokasi</th>              
       <th scope="col">Pembimbing</th>
-      <th scope="col">Penguji</th>          
+      <th scope="col">Penguji</th>
+      @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)         
       <th scope="col">Aksi</th>
+      @endif
     </tr>
   </thead>
   <tbody>
@@ -51,10 +53,53 @@
           </td> 
           <td>
             <p>{{$kp->penguji->nama}}</p>            
-          </td>          
+          </td>
+          @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)      
           <td>                        
             <a href="/nilai-kp/{{$kp->id}}" class="badge bg-success">Berita Acara</a>                  
+          </td>
+          @endif                     
+        </tr>
+    @endforeach
+
+    @foreach ($penjadwalan_sempros as $sempro)
+        <tr>
+          <td>{{$sempro->mahasiswa->nim}}</td>
+          <td>{{$sempro->mahasiswa->nama}}</td>                     
+          <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
+          <td>{{$sempro->prodi->nama_prodi}}</td>          
+          <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td>{{$sempro->waktu}}</td>                   
+          <td>{{$sempro->lokasi}}</td>                   
+          <td>
+            <p>1. {{$sempro->pembimbingsatu->nama}}</p>
+            @if ($sempro->pembimbingdua == !null)
+            <p>2. {{$sempro->pembimbingdua->nama}}</p>                               
+            @endif
+          </td> 
+          <td>
+            <p>1. {{$sempro->pengujisatu->nama}}</p>
+            <p>2. {{$sempro->pengujidua->nama}}</p>
+            <p>3. {{$sempro->pengujitiga->nama}}</p>
+          </td>        
+          @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+          <td>              
+            <a href="/nilai-sempro-pembimbing/{{$sempro->id}}/{{ $sempro->pembimbingsatu->nip }}" class="badge bg-warning">Nilai Pembimbing 1</a>
+            @if ($sempro->pembimbingdua == !null)
+            <a href="/nilai-sempro-pembimbing/{{$sempro->id}}/{{ $sempro->pembimbingdua->nip }}" class="badge bg-danger">Nilai Pembimbing 2</a>                               
+            @endif
+            <a href="/nilai-sempro-penguji/{{$sempro->id}}/{{ $sempro->pengujisatu->nip }}" class="badge bg-secondary">Nilai Penguji 1</a>          
+            <a href="/nilai-sempro-penguji/{{$sempro->id}}/{{ $sempro->pengujidua->nip }}" class="badge bg-dark">Nilai Penguji 2</a>          
+            <a href="/nilai-sempro-penguji/{{$sempro->id}}/{{ $sempro->pengujitiga->nip }}" class="badge bg-blue">Nilai Penguji 3</a>
+            <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-secondary">Perbaikan Penguji 1</a>
+            <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark">Perbaikan Penguji 2</a>
+            <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
+            <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Berita Acara</a>
+            @if ($sempro->revisi_naskah == !null)
+            <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Revisi Judul</a>
+            @endif
           </td>                       
+          @endif
         </tr>
     @endforeach
     
@@ -77,38 +122,14 @@
             <p>1. {{$skripsi->pengujisatu->nama}}</p>
             <p>2. {{$skripsi->pengujidua->nama}}</p>
             <p>3. {{$skripsi->pengujitiga->nama}}</p>
-          </td>          
+          </td>
+          @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)        
           <td>                        
             <a href="/penilaian-skripsi/cek-nilai/{{$skripsi->id}}" class="badge bg-success">Berita Acara</a>                  
-          </td>                        
+          </td>
+          @endif                     
         </tr>
-    @endforeach
-
-    @foreach ($penjadwalan_sempros as $sempro)
-        <tr>
-          <td>{{$sempro->nim}}</td>                             
-          <td>{{$sempro->nama}}</td>                     
-          <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
-          <td>{{$sempro->prodi->nama_prodi}}</td>          
-          <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
-          <td>{{$sempro->waktu}}</td>                   
-          <td>{{$sempro->lokasi}}</td>                   
-          <td>
-            <p>1. {{$sempro->pembimbingsatu->nama}}</p>
-            @if ($sempro->pembimbingdua == !null)
-            <p>2. {{$sempro->pembimbingdua->nama}}</p>                               
-            @endif
-          </td> 
-          <td>
-            <p>1. {{$sempro->pengujisatu->nama}}</p>
-            <p>2. {{$sempro->pengujidua->nama}}</p>
-            <p>3. {{$sempro->pengujitiga->nama}}</p>
-          </td>          
-          <td>                        
-            <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Berita Acara</a>                  
-          </td>                       
-        </tr>
-    @endforeach
+    @endforeach    
   </tbody>
 </table>
     

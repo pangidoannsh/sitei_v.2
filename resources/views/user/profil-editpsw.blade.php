@@ -17,7 +17,7 @@
 @endif
 
 <div class="col-lg-5">
-    <form action="/profil-dosen/editpassworddsn" method="POST" enctype="multipart/form-data">
+    <form action="/profil-staff/editpasswordstaff" method="POST" enctype="multipart/form-data">
         @method('put')
         @csrf
 

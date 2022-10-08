@@ -61,8 +61,8 @@
 
     @foreach ($penjadwalan_sempros as $sempro)
         <tr>
-          <td>{{$sempro->nim}}</td>                             
-          <td>{{$sempro->nama}}</td>                     
+          <td>{{$sempro->mahasiswa->nim}}</td>
+          <td>{{$sempro->mahasiswa->nama}}</td>                    
           <td class="bg-success">{{$sempro->jenis_seminar}}</td>                                       
           <td>{{$sempro->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -82,7 +82,7 @@
           <td>            
             <a href="/nilai-sempro/{{$sempro->id}}" class="badge bg-success">Lihat Nilai</a>
             @if ($sempro->pengujisatu_nip == auth()->user()->nip || $sempro->pengujidua_nip == auth()->user()->nip || $sempro->pengujitiga_nip == auth()->user()->nip)
-              <a href="/perbaikan-sempro/{{$sempro->id}}" class="badge bg-primary">Perbaikan</a>
+            <a href="/perbaikan-sempro/{{$sempro->id}}" class="badge bg-primary">Perbaikan</a>
             @endif
             @if ($sempro->pengujisatu_nip == auth()->user()->nip)
               <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-primary">Berita Acara</a> 

@@ -37,7 +37,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Judul</div>
-            <span>{{$sempro->penjadwalan_sempro->judul_proposal}}</span>
+            <span>{{ $sempro->penjadwalan_sempro->revisi_naskah != null ? $sempro->penjadwalan_sempro->revisi_naskah : $sempro->penjadwalan_sempro->judul_proposal }}</span>
           </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -318,6 +318,11 @@
                 aria-selected="false">Saran Perbaikan</a>
             </li>
             @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pengujisatu_nip)
+            <li class="nav-item">
+              <a class="nav-link" id="custom-tabs-one-form-tab" data-toggle="pill"
+                href="#custom-tabs-one-form" role="tab" aria-controls="custom-tabs-one-form"
+                aria-selected="false">Revisi Judul</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" id="custom-tabs-one-setting-tab" data-toggle="pill"
                 href="#custom-tabs-one-setting" role="tab" aria-controls="custom-tabs-one-setting"
@@ -698,11 +703,31 @@
                   <label for="floatingTextarea2">Perbaikan 5</label>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary float-right">Update</button>    
+              <button type="submit" class="btn btn-primary float-right">Update</button>
+              </form>
             </div>
             
             
             @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pengujisatu_nip)
+
+            <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
+              aria-labelledby="custom-tabs-one-form-tab">
+
+              <form action="/revisi-naskah/create/{{$sempro->penjadwalan_sempro->id}}" method="POST">
+                @csrf
+                <div class="mb-3">
+                  <label class="form-label">Judul Lama</label>
+                  <input type="text" class="form-control" value="{{$sempro->penjadwalan_sempro->judul_proposal}}" readonly>  
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Judul Baru</label>
+                  <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->penjadwalan_sempro->revisi_naskah != null ? $sempro->penjadwalan_sempro->revisi_naskah : '' }}" {{ $sempro->penjadwalan_sempro->revisi_naskah != null ? 'readonly': '' }}>
+                </div>              
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+
+            </div>
+
             <div class="tab-pane fade" id="custom-tabs-one-setting" role="tabpanel"
               aria-labelledby="custom-tabs-one-setting-tab">
               <div>
@@ -1105,9 +1130,7 @@
                               </td>
                           </tr>
                       </tbody>
-                  </table>
-
-                  </form>
+                  </table>                
                   
                         @if ($penjadwalan->status_seminar == 0)
                         @if ($penjadwalan->cek($penjadwalan->id) == $penjadwalan->jmlpenilaian($penjadwalan->id))

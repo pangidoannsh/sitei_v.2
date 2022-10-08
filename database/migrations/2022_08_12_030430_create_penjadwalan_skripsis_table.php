@@ -27,6 +27,7 @@ class CreatePenjadwalanSkripsisTable extends Migration
             $table->string('angkatan');
             $table->string('jenis_seminar')->default('Sidang Skripsi');
             $table->string('judul_skripsi');
+            $table->string('revisi_naskah')->nullable();
             $table->date('tanggal');
             $table->time('waktu');
             $table->string('lokasi');
