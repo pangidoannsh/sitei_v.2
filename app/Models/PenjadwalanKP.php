@@ -20,6 +20,11 @@ class PenjadwalanKP extends Model
         return $this->belongsTo(Konsentrasi::class);
     }
 
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_nim', 'nim');
+    }
+
     public function pembimbing()
     {
         return $this->belongsTo(Dosen::class, 'pembimbing_nip', 'nip');

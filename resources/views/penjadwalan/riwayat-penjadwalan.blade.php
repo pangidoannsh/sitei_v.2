@@ -41,8 +41,8 @@
 
     @foreach ($penjadwalan_kps as $kp)
         <tr>
-          <td>{{$kp->nim}}</td>                             
-          <td>{{$kp->nama}}</td>                     
+          <td>{{$kp->mahasiswa->nim}}</td>                             
+          <td>{{$kp->mahasiswa->nama}}</td>                     
           <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
           <td>{{$kp->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -56,7 +56,8 @@
           </td>
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)      
           <td>                        
-            <a href="/nilai-kp/{{$kp->id}}" class="badge bg-success">Berita Acara</a>                  
+            <a href="/perbaikan-pengujikp/{{$kp->id}}/{{$kp->penguji->nip}}" class="badge bg-info p-2"style="border-radius:20px;">Perbaikan Penguji</a>           
+            <a href="/nilai-kp/{{$kp->id}}" class="badge bg-success mt-2 p-2"style="border-radius:20px;">Berita Acara</a>                  
           </td>
           @endif                     
         </tr>
@@ -96,7 +97,7 @@
             <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
             <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Berita Acara</a>
             @if ($sempro->revisi_naskah == !null)
-            <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Revisi Judul</a>
+            <a href="/penilaian-sempro/riwayat-judul/{{$sempro->id}}" class="badge bg-success">Revisi Judul</a>
             @endif
           </td>                       
           @endif

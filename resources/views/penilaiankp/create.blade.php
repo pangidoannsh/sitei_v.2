@@ -20,13 +20,13 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">NIM</div>
-          <span>{{$kp->nim}}</span>
+          <span>{{$kp->mahasiswa->nim}}</span>
         </div>        
       </li> 
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Nama</div>
-          <span>{{$kp->nama}}</span>
+          <span>{{$kp->mahasiswa->nama}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -255,7 +255,7 @@
                         <label for="floatingTextarea2">Perbaikan 5</label>
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-success float-right">Save</button>    
+                    <button type="submit" class="btn btn-success float-right">Simpan</button>    
                 </div>
 
             </div>
@@ -278,10 +278,10 @@
     var tanya_jawab = $('input[name="tanya_jawab"]').val(); 
     var tanya_jawab1 = parseFloat(tanya_jawab) * parseFloat(0.4);   
     var total = parseFloat(presentasi1) + parseFloat(materi1) + parseFloat(tanya_jawab1);
-    var total_angka = parseFloat(total) * parseFloat(0.3);
+    // var total_angka = parseFloat(total) * parseFloat(0.3);
 
-    if (!isNaN(total_angka)) {
-      $('input[name="total_nilai_seminar"]').val(Math.round(total_angka));      
+    if (!isNaN(total)) {
+      $('input[name="total_nilai_seminar"]').val(Math.round(total));      
     }
     else{
       $('input[name="total_nilai_seminar"]').val(0);
@@ -293,9 +293,9 @@
     var nilai_pembimbing_kp1 = parseFloat(nilai_pembimbing_kp) * parseFloat(0.3);
     var nilai_pembimbing_lapangan = $('input[name="nilai_pembimbing_lapangan"]').val();
     var nilai_pembimbing_lapangan1 = parseFloat(nilai_pembimbing_lapangan) * parseFloat(0.4);
-    var total_angka = $('input[name="total_nilai_seminar"]').val();
+    var total_angka = $('input[name="total_nilai_seminar"]').val();    
 
-    var total_akhir = parseFloat(total_angka) + parseFloat(nilai_pembimbing_kp1) + parseFloat(nilai_pembimbing_lapangan1);
+    var total_akhir = (parseFloat(total_angka) * parseFloat(0.3)) + parseFloat(nilai_pembimbing_kp1) + parseFloat(nilai_pembimbing_lapangan1);
 
     if (!isNaN(total_akhir)) {
       $('input[name="total_nilai_angka"]').val(Math.round(total_akhir));

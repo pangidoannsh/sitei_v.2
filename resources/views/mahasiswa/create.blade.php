@@ -84,7 +84,7 @@
             @enderror
         </div>
 
-        {{-- <div class="mb-3">
+        <div class="mb-3">
             <label class="form-label">Password</label>
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}">
             @error('password')
@@ -92,7 +92,7 @@
                   {{$message}}
               </div>
             @enderror
-        </div>  --}}
+        </div> 
 {{-- 
         <div class="mb-3">
             <label for="imgmhs" class="form-label">Foto Mahasiswa</label>

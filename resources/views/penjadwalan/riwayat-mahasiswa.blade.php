@@ -36,34 +36,55 @@
     </tr>
   </thead>
   <tbody>
+
+    @foreach ($penjadwalan_kps as $kp)
+        <tr>
+          <td>{{$kp->mahasiswa->nim}}</td>                             
+          <td>{{$kp->mahasiswa->nama}}</td>                     
+          <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
+          <td>{{$kp->prodi->nama_prodi}}</td>          
+          <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td>{{$kp->waktu}}</td>                   
+          <td>{{$kp->lokasi}}</td>                   
+          <td>
+            <p>{{$kp->pembimbing->nama}}</p>            
+          </td> 
+          <td>
+            <p>{{$kp->penguji->nama}}</p>            
+          </td>               
+          <td>                        
+            <a href="/perbaikan-pengujikp/{{$kp->id}}/{{$kp->penguji->nip}}" class="badge bg-info p-2"style="border-radius:20px;">Perbaikan Penguji</a>      
+          </td>        
+        </tr>
+    @endforeach
     
     @foreach ($penjadwalan_sempros as $sempro)
-    <tr>
-      <td>{{$sempro->mahasiswa->nim}}</td>                             
-      <td>{{$sempro->mahasiswa->nama}}</td>                     
-      <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
-      <td>{{$sempro->prodi->nama_prodi}}</td>          
-      <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
-      <td>{{$sempro->waktu}}</td>                   
-      <td>{{$sempro->lokasi}}</td>                   
-      <td>
-        <p>1. {{$sempro->pembimbingsatu->nama}}</p>
-        @if ($sempro->pembimbingdua == !null)
-        <p>2. {{$sempro->pembimbingdua->nama}}</p>                               
-        @endif
-      </td> 
-      <td>
-        <p>1. {{$sempro->pengujisatu->nama}}</p>
-        <p>2. {{$sempro->pengujidua->nama}}</p>
-        <p>3. {{$sempro->pengujitiga->nama}}</p>
-      </td>          
-      <td>        
-        <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-success">Perbaikan Penguji 1</a>
-        <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-primary">Perbaikan Penguji 2</a>
-        <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-warning">Perbaikan Penguji 3</a>                         
-      </td>                       
-    </tr>
-@endforeach
+      <tr>
+        <td>{{$sempro->mahasiswa->nim}}</td>                             
+        <td>{{$sempro->mahasiswa->nama}}</td>                     
+        <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
+        <td>{{$sempro->prodi->nama_prodi}}</td>          
+        <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+        <td>{{$sempro->waktu}}</td>                   
+        <td>{{$sempro->lokasi}}</td>                   
+        <td>
+          <p>1. {{$sempro->pembimbingsatu->nama}}</p>
+          @if ($sempro->pembimbingdua == !null)
+          <p>2. {{$sempro->pembimbingdua->nama}}</p>                               
+          @endif
+        </td> 
+        <td>
+          <p>1. {{$sempro->pengujisatu->nama}}</p>
+          <p>2. {{$sempro->pengujidua->nama}}</p>
+          <p>3. {{$sempro->pengujitiga->nama}}</p>
+        </td>          
+        <td>        
+          <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-success">Perbaikan Penguji 1</a>
+          <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-primary">Perbaikan Penguji 2</a>
+          <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-warning">Perbaikan Penguji 3</a>                         
+        </td>                       
+      </tr>
+    @endforeach
 
   </tbody>
 </table>

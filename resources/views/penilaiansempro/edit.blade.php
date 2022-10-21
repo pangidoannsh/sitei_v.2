@@ -291,7 +291,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-success float-right">Update</button>
+              <button type="submit" class="btn btn-success float-right">Perbarui</button>
           </form> 
         </div>    
       </div>
@@ -657,7 +657,7 @@
                 " readonly value="{{$sempro->total_nilai_huruf}}">
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary float-right">Update</button>    
+              <button type="submit" class="btn btn-primary float-right">Perbarui</button>    
 
             </div>
 
@@ -703,7 +703,7 @@
                   <label for="floatingTextarea2">Perbaikan 5</label>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary float-right">Update</button>
+              <button type="submit" class="btn btn-primary float-right">Perbarui</button>
               </form>
             </div>
             
@@ -721,9 +721,9 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Judul Baru</label>
-                  <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->penjadwalan_sempro->revisi_naskah != null ? $sempro->penjadwalan_sempro->revisi_naskah : '' }}" {{ $sempro->penjadwalan_sempro->revisi_naskah != null ? 'readonly': '' }}>
+                  <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->penjadwalan_sempro->revisi_naskah != null ? $sempro->penjadwalan_sempro->revisi_naskah : '' }}">
                 </div>              
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Perbarui</button>
               </form>
 
             </div>
@@ -1103,9 +1103,9 @@
                                             ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                             2 >=
                                             60)
-                                            LAYAK LULUS                                            
+                                            LULUS                                            
                                         @else
-                                            TIDAK LAYAK LULUS
+                                            TIDAK LULUS
                                         @endif
                                     @endif
                                 @endif

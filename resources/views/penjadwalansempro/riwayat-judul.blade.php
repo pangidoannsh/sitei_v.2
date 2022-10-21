@@ -4,20 +4,12 @@
     use Carbon\Carbon;
 @endphp
 
-@section('title')
-    Perbaikan KP | SIA ELEKTRO
-@endsection
-
-@section('sub-title')
-    Perbaikan Seminar KP
-@endsection
-
 @section('content')
 
 <div class="row mb-5">
 
     <div class="col-6">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
+        <ol class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -27,13 +19,13 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Nama</div> 
-            <span>{{$penjadwalan->mahasiswa->nama}}</span>            
+            <span>{{$penjadwalan->mahasiswa->nama}}</span>          
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->judul_kp}}</span>
+            <span>{{$penjadwalan->revisi_naskah != null ? $penjadwalan->revisi_naskah : $penjadwalan->judul_proposal }}</span>
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -52,11 +44,25 @@
     </div>
 
     <div class="col-6">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
+        <ol class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Pembimbing</div>
+                <span>1. {{$penjadwalan->pembimbingsatu->nama}}</span>
+                <br>
+                @if ($penjadwalan->pembimbingdua_nip != null)
+                <span>{{$penjadwalan->pembimbingdua->nama}}</span>
+                @endif                
+            </div>        
+        </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold mb-2">Penguji</div>
-                <span>{{$penilaianpenguji->penguji->nama}}</span>                
+                <span>1. {{$penjadwalan->pengujisatu->nama}}</span>
+                <br>
+                <span>2. {{$penjadwalan->pengujidua->nama}}</span>
+                <br>
+                <span>3. {{$penjadwalan->pengujitiga->nama}}</span>
             </div>        
         </li>     
         </ol>
@@ -64,37 +70,19 @@
 
 </div>
 
-<div>    
-    <table class="table table-bordered mb-5" style="background-color:white;">
-        <thead class="bg-success">
-            <tr>
-                <th style="width: 50px">#</th>
-                <th style="width: 700px">Saran dan Perbaikan</th>                     
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>{{$penilaianpenguji->revisi_naskah1}}</td>                
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>{{$penilaianpenguji->revisi_naskah2}}</td>                
-            </tr>  
-            <tr>
-                <td>3</td>
-                <td>{{$penilaianpenguji->revisi_naskah3}}</td>                
-            </tr>  
-            <tr>
-                <td>4</td>
-                <td>{{$penilaianpenguji->revisi_naskah4}}</td>                
-            </tr>  
-            <tr>
-                <td>5</td>
-                <td>{{$penilaianpenguji->revisi_naskah5}}</td>                
-            </tr>             
-        </tbody>
-    </table>    
-
+<div>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+        <div class="fw-bold mb-2">Judul Lama</div>
+        <span>{{$penjadwalan->judul_proposal}}</span>         
+        </div>        
+    </li> 
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+        <div class="fw-bold mb-2">Judul Baru</div> 
+        <span>{{$penjadwalan->revisi_naskah}}</span>          
+        </div>        
+    </li>    
 </div>
+<br>
 @endsection   

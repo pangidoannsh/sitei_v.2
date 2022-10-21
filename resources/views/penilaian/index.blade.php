@@ -51,8 +51,8 @@
     
     @foreach ($penjadwalan_kps as $kp)    
       <tr>                 
-        <td>{{$kp->nim}}</td>                             
-        <td>{{$kp->nama}}</td>                    
+        <td>{{$kp->mahasiswa->nim}}</td>                             
+        <td>{{$kp->mahasiswa->nama}}</td>                    
         <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
         <td>{{$kp->prodi->nama_prodi}}</td>          
         <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -76,8 +76,8 @@
 
     @foreach ($penjadwalan_sempros as $sempro)    
         <tr>                  
-          <td>{{$sempro->nim}}</td>                             
-          <td>{{$sempro->nama}}</td>                     
+          <td>{{$sempro->mahasiswa->nim}}</td>                             
+          <td>{{$sempro->mahasiswa->nama}}</td>                     
           <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
           <td>{{$sempro->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   

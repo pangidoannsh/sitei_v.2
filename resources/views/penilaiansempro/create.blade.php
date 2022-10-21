@@ -310,7 +310,7 @@
                 " readonly>
                 </div>
               </div>
-              <button type="submit" class="btn btn-success float-right">Save</button>
+              <button type="submit" class="btn btn-success float-right">Simpan</button>
           </form> 
         </div>    
       </div>
@@ -721,7 +721,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary float-right">Save</button>           
+            <button type="submit" class="btn btn-primary float-right">Simpan</button>           
           </div>
 
           <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -766,7 +766,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary float-right">Save</button>
+            <button type="submit" class="btn btn-primary float-right">Simpan</button>
             </form> 
           </div>
                             
@@ -783,9 +783,9 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Judul Baru</label>
-                <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->revisi_naskah != null ? $sempro->revisi_naskah : '' }}" {{ $sempro->revisi_naskah != null ? 'readonly': '' }}>
+                <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->revisi_naskah != null ? $sempro->revisi_naskah : '' }}">
               </div>              
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-primary">Perbarui</button>
             </form>
 
           </div>
@@ -1165,9 +1165,9 @@
                                             ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                             2 >=
                                             60)
-                                            LAYAK LULUS                                            
+                                            LULUS                                            
                                         @else
-                                            TIDAK LAYAK LULUS
+                                            TIDAK LULUS
                                         @endif
                                     @endif
                                 @endif
@@ -1213,7 +1213,8 @@
           
         @endif    
       </div>  
-    </div>  
+    </div> 
+
   </div>  
 
 @endif

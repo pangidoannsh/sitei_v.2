@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Persetujuan Berita Acara | SIA ELEKTRO
+    Riwayat Persetujuan | SIA ELEKTRO
 @endsection
 
 @section('sub-title')
-    Persetujuan Berita Acara
+    Riwayat Persetujuan
 @endsection
 
 @section('content')
@@ -36,8 +36,7 @@
       <th scope="col">Waktu</th>
       <th scope="col">Lokasi</th>              
       <th scope="col">Pembimbing</th>
-      <th scope="col">Penguji</th>          
-      <th scope="col">Aksi</th>
+      <th scope="col">Penguji</th>      
     </tr>
   </thead>
   <tbody>
@@ -56,10 +55,7 @@
           </td> 
           <td>
             <p>{{$kp->penguji->nama}}</p>            
-          </td>          
-          <td>                        
-            <a href="/nilai-kp/{{$kp->id}}" class="badge bg-success">Berita Acara</a>                  
-          </td>                       
+          </td>                                 
         </tr>
     @endforeach
     
@@ -82,10 +78,7 @@
             <p>1. {{$sempro->pengujisatu->nama}}</p>
             <p>2. {{$sempro->pengujidua->nama}}</p>
             <p>3. {{$sempro->pengujitiga->nama}}</p>
-          </td>          
-          <td>                        
-            <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Berita Acara</a>                  
-          </td>                       
+          </td>                             
         </tr>
     @endforeach
 
@@ -108,10 +101,7 @@
             <p>1. {{$skripsi->pengujisatu->nama}}</p>
             <p>2. {{$skripsi->pengujidua->nama}}</p>
             <p>3. {{$skripsi->pengujitiga->nama}}</p>
-          </td>          
-          <td>                        
-            <a href="/penilaian-skripsi/cek-nilai/{{$skripsi->id}}" class="badge bg-success">Berita Acara</a>                  
-          </td>                        
+          </td>                                 
         </tr>
     @endforeach
   </tbody>

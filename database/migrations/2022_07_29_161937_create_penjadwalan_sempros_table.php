@@ -21,7 +21,7 @@ class CreatePenjadwalanSemprosTable extends Migration
             $table->string('pengujisatu_nip');
             $table->string('pengujidua_nip');
             $table->string('pengujitiga_nip');
-            $table->foreignId('prodi_id');            
+            $table->foreignId('prodi_id');          
             $table->string('jenis_seminar')->default('Seminar Proposal');
             $table->string('judul_proposal');
             $table->string('revisi_naskah')->nullable();

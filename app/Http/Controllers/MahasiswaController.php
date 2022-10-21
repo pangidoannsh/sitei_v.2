@@ -14,9 +14,21 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        return view('mahasiswa.index', [
-            'mahasiswas' => Mahasiswa::all()
-        ]);
+        if (auth()->user()->role_id == 2) {            
+            return view('mahasiswa.index', [
+                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),                
+            ]);
+        }
+        if (auth()->user()->role_id == 3) {            
+            return view('mahasiswa.index', [
+                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),                
+            ]);
+        }
+        if (auth()->user()->role_id == 4) {            
+            return view('mahasiswa.index', [
+                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),                
+            ]);
+        }
     }
 
     public function create()
@@ -33,7 +45,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'prodi_id' => ['required'],
             'nim' => ['required', 'unique:mahasiswa'],
-            // 'password' => ['required', 'min:3', 'max:255'],
+            'password' => ['required', 'min:3', 'max:255'],
             // 'gambar' => ['image', 'file', 'max:1024'],
             'nama' => ['required'],
             'email' => ['required', 'unique:dosen', 'email'],
@@ -45,7 +57,7 @@ class MahasiswaController extends Controller
             'prodi_id' => $request->prodi_id,
             'konsentrasi_id' => $request->konsentrasi_id,
             'nim' => $request->nim,
-            // 'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password),
             // 'gambar' => $request->file('gambar')->store('gambar'),
             'nama' => $request->nama,
             'email' => $request->email,

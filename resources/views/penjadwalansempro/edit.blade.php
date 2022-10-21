@@ -20,7 +20,7 @@
             <select name="mahasiswa_nim" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
                 <option value="">-Pilih-</option>
                 @foreach ($mahasiswas as $mhs)
-                    <option value="{{$mhs->id}}" {{old('mahasiswa_nim', $sempro->mahasiswa_nim) == $mhs->id ? 'selected' : null}}>{{$mhs->nama}}</option>
+                    <option value="{{$mhs->nim}}" {{old('mahasiswa_nim', $sempro->mahasiswa_nim) == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
                 @endforeach
             </select>
             @error('mahasiswa_nim')
@@ -32,18 +32,23 @@
 
         <div class="mb-3">
             <label for="prodi_id" class="form-label">Program Studi</label>
-            <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">
-                <option value="">-Pilih-</option>
-                @foreach ($prodis as $prodi)
-                    <option value="{{$prodi->id}}" {{old('prodi_id', $sempro->prodi_id) == $prodi->id ? 'selected' : null}}>{{$prodi->nama_prodi}}</option>
-                @endforeach
+            <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
+            @if(auth()->user()->role_id == 2)                                                          
+                <option value="1">Teknik Elektro D3</option>                
+            @endif
+            @if(auth()->user()->role_id == 3)                                                          
+                <option value="2">Teknik Elektro S1</option>                
+            @endif
+            @if(auth()->user()->role_id == 4)                                                          
+                <option value="3">Teknik Informatika S1</option>                
+            @endif
             </select>
             @error('prodi_id')
             <div class="invalid-feedback">
                 {{$message}}
             </div>
             @enderror
-        </div>      
+        </div>        
 
         <div class="mb-3">
             <label class="form-label">Judul Proposal</label>
@@ -168,7 +173,7 @@
             </select>            
         </div>  --}}
 
-        <button type="submit" class="btn btn-outline-dark mb-5">Update</button>
+        <button type="submit" class="btn btn-outline-dark mb-5">Perbarui</button>
 
       </form>
 </div>

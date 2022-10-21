@@ -55,8 +55,8 @@
 
     @foreach ($penjadwalan_kps as $kp)
         <tr>                  
-            <td>{{$kp->nim}}</td>                             
-            <td>{{$kp->nama}}</td>                    
+            <td>{{$kp->mahasiswa->nim}}</td>                             
+            <td>{{$kp->mahasiswa->nama}}</td>                    
             <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
             <td>{{$kp->prodi->nama_prodi}}</td>          
             <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -64,16 +64,18 @@
             <td>{{$kp->lokasi}}</td>                   
           <td>{{$kp->pembimbing->nama}}</td>
           <td>{{$kp->penguji->nama}}</td>                    
+          @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
           <td>
             <a href="/form-kp/edit/{{$kp->id}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
           </td>
+          @endif
         </tr>
     @endforeach
 
     @foreach ($penjadwalan_sempros as $sempro)
         <tr>                 
-            <td>{{$sempro->nim}}</td>                             
-            <td>{{$sempro->nama}}</td>                     
+            <td>{{$sempro->mahasiswa->nim}}</td>                             
+            <td>{{$sempro->mahasiswa->nama}}</td>                     
             <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
             <td>{{$sempro->prodi->nama_prodi}}</td>          
             <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -98,8 +100,8 @@
 
     @foreach ($penjadwalan_skripsis as $skripsi)
         <tr>                   
-            <td>{{$skripsi->nim}}</td>                             
-            <td>{{$skripsi->nama}}</td>
+            <td>{{$skripsi->mahasiswa->nim}}</td>                             
+            <td>{{$skripsi->mahasiswa->nama}}</td>
             <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                                     
             <td>{{$skripsi->prodi->nama_prodi}}</td>          
             <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   

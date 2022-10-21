@@ -33,23 +33,36 @@ class PenjadwalanKPController extends Controller
 
     public function create()
     {
-        return view('penjadwalankp.create', [
-            'prodis' => Prodi::all(),
-            'konsentrasis' => Konsentrasi::all(),
-            'dosens' => Dosen::all(),
-        ]);
+        if (auth()->user()->role_id == 2) {            
+            return view('penjadwalankp.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
+        if (auth()->user()->role_id == 3) {            
+            return view('penjadwalankp.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
+        if (auth()->user()->role_id == 4) {            
+            return view('penjadwalankp.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'mahasiswa_nim' => 'required',
             'pembimbing_nip' => 'required',
             'penguji_nip' => 'required',
-            'prodi_id' => 'required',      
-            'konsentrasi_id' => 'required',      
-            'nim' => 'required|unique:penjadwalan_kp',            
-            'nama' => 'required',          
-            'angkatan' => 'required',            
+            'prodi_id' => 'required',                                                             
             'judul_kp' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
@@ -57,13 +70,10 @@ class PenjadwalanKPController extends Controller
         ]);
 
         PenjadwalanKP::create([
+            'mahasiswa_nim' => $request->mahasiswa_nim,
             'pembimbing_nip' => $request->pembimbing_nip,
             'penguji_nip' => $request->penguji_nip,                        
-            'prodi_id' => $request->prodi_id,                        
-            'konsentrasi_id' => $request->konsentrasi_id,                        
-            'nim' => $request->nim,                        
-            'nama' => $request->nama,                        
-            'angkatan' => $request->angkatan,                        
+            'prodi_id' => $request->prodi_id,            
             'judul_kp' => $request->judul_kp,
             'tanggal' => $request->tanggal,
             'waktu' => $request->waktu,
@@ -79,7 +89,7 @@ class PenjadwalanKPController extends Controller
         return view('penjadwalankp.edit', [
             'kp' => $penjadwalan_kp,
             'prodis' => Prodi::all(),
-            'konsentrasis' => Konsentrasi::all(),           
+            'mahasiswas' => Mahasiswa::all(),
             'dosens' => Dosen::all(),
         ]);
     }
@@ -87,22 +97,16 @@ class PenjadwalanKPController extends Controller
     public function update(Request $request, PenjadwalanKP $penjadwalan_kp)
     {
         $rules = [
+            'mahasiswa_nim' => 'required',
             'pembimbing_nip' => 'required',
             'penguji_nip' => 'required',
-            'prodi_id' => 'required',      
-            'konsentrasi_id' => 'required',                             
-            'nama' => 'required',          
-            'angkatan' => 'required',            
+            'prodi_id' => 'required',                        
             'judul_kp' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
             'lokasi' => 'required',
         ];
-
-        if ($penjadwalan_kp->nim != $request->nim) {
-            $rules['nim'] = 'required|unique:penjadwalan_kp';
-        }
-
+               
         $validated = $request->validate($rules);
 
         $validated['dibuat_oleh'] = auth()->user()->username;
@@ -172,6 +176,17 @@ class PenjadwalanKPController extends Controller
     {
         $penjadwalan = PenjadwalanKP::find($id);
         $penilaianpenguji = PenilaianKP::where('penjadwalan_kp_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
+
+        return view('penjadwalankp.perbaikan-kp', [
+            'penjadwalan' => $penjadwalan,
+            'penilaianpenguji' => $penilaianpenguji,
+        ]);
+    }
+
+    public function perbaikanpengujikp($id, $penguji)
+    {
+        $penjadwalan = PenjadwalanKP::find($id);
+        $penilaianpenguji = PenilaianKP::where('penjadwalan_kp_id', $id)->where('penguji_nip', $penguji)->first();
 
         return view('penjadwalankp.perbaikan-kp', [
             'penjadwalan' => $penjadwalan,

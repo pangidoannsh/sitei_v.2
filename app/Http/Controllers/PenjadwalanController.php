@@ -137,7 +137,58 @@ class PenjadwalanController extends Controller
     public function riwayat_mahasiswa()
     {       
         return view('penjadwalan.riwayat-mahasiswa', [
+            'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('mahasiswa_nim', Auth::user()->nim)->get(),
             'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('mahasiswa_nim', Auth::user()->nim)->get(),
         ]);
+    }
+
+    public function riwayat_koordinator()
+    {       
+        if (auth()->user()->role_id == 9) {            
+            return view('persetujuan.riwayat-koordinator', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 1)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 1)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 1)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 10) {            
+            return view('persetujuan.riwayat-koordinator', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 2)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 2)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 2)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 11) {            
+            return view('persetujuan.riwayat-koordinator', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 3)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 3)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 3)->get(),
+            ]);
+        }
+    }
+
+    public function riwayat_kaprodi()
+    {       
+        if (auth()->user()->role_id == 6) {            
+            return view('persetujuan.riwayat-kaprodi', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 1)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 1)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 1)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 7) {            
+            return view('persetujuan.riwayat-kaprodi', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 2)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 2)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 2)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 8) {            
+            return view('persetujuan.riwayat-kaprodi', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('prodi_id', 3)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('prodi_id', 3)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 3)->get(),
+            ]);
+        }
     }
 }

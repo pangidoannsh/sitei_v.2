@@ -14,6 +14,17 @@
 
 @section('content')
 
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{session('message')}}
+</div>
+@endif
+
+<ol class="breadcrumb col-lg-12">
+  <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/persetujuan-kaprodi">Persetujuan</a></li>
+  <li class="breadcrumb-item"><a href="/riwayat-kaprodi">Riwayat Persetujuan</a></li>  
+</ol>
+
 <table class="table table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
@@ -33,8 +44,8 @@
 
     @foreach ($penjadwalan_kps as $kp)
         <tr>
-          <td>{{$kp->nim}}</td>                             
-          <td>{{$kp->nama}}</td>                     
+          <td>{{$kp->mahasiswa->nim}}</td>                             
+          <td>{{$kp->mahasiswa->nama}}</td>                     
           <td class="bg-primary">{{$kp->jenis_seminar}}</td>                     
           <td>{{$kp->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -54,8 +65,8 @@
 
     @foreach ($penjadwalan_sempros as $sempro)
         <tr>
-          <td>{{$sempro->nim}}</td>                             
-          <td>{{$sempro->nama}}</td>                     
+          <td>{{$sempro->mahasiswa->nim}}</td>                             
+          <td>{{$sempro->mahasiswa->nama}}</td>                     
           <td class="bg-success">{{$sempro->jenis_seminar}}</td>                     
           <td>{{$sempro->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -80,8 +91,8 @@
 
     @foreach ($penjadwalan_skripsis as $skripsi)
         <tr>
-          <td>{{$skripsi->nim}}</td>                             
-          <td>{{$skripsi->nama}}</td>                     
+          <td>{{$skripsi->mahasiswa->nim}}</td>                             
+          <td>{{$skripsi->mahasiswa->nama}}</td>                     
           <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                     
           <td>{{$skripsi->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -107,3 +118,13 @@
 </table>
     
 @endsection
+
+@push('scripts')
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 2000);
+</script>
+@endpush()

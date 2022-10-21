@@ -159,6 +159,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/form-sempro/edit/{penjadwalan_sempro:id}', [PenjadwalanSemproController::class, 'edit']);
     Route::put('/form-sempro/edit/{penjadwalan_sempro:id}', [PenjadwalanSemproController::class, 'update']);
     Route::get('/riwayat-penjadwalan-sempro', [PenjadwalanSemproController::class, 'riwayat']);
+    Route::get('/penilaian-sempro/riwayat-judul/{id}', [PenjadwalanSemproController::class, 'riwayatjudul']);
 
     Route::get('/form-skripsi', [PenjadwalanSkripsiController::class, 'index']);
     Route::get('/form-skripsi/create', [PenjadwalanSkripsiController::class, 'create']);
@@ -170,6 +171,7 @@ Route::group(['middleware' => ['auth:web']], function () {
 
 Route::group(['middleware' => ['auth:web,dosen']], function(){
     Route::get('/nilai-kp/{id}', [PenjadwalanKPController::class, 'nilaikp']);
+    Route::get('/perbaikan-pengujikp/{id}/{penguji}', [PenjadwalanKPController::class, 'perbaikanpengujikp']);
     Route::get('/nilai-sempro-pembimbing/{id}/{pembimbing}', [PenjadwalanSemproController::class, 'nilaipembimbing']);
     Route::get('/nilai-sempro-penguji/{id}/{penguji}', [PenjadwalanSemproController::class, 'nilaipenguji']);
     Route::get('/perbaikan-penguji/{id}/{penguji}', [PenjadwalanSemproController::class, 'perbaikanpenguji']);
@@ -179,12 +181,14 @@ Route::group(['middleware' => ['auth:web,dosen']], function(){
 });
 
 Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){    
+    Route::get('/perbaikan-pengujikp/{id}/{penguji}', [PenjadwalanKPController::class, 'perbaikanpengujikp']);
     Route::get('/perbaikan-penguji/{id}/{penguji}', [PenjadwalanSemproController::class, 'perbaikanpenguji']);    
 
 });
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
+    Route::get('/riwayat-koordinator', [PenjadwalanController::class, 'riwayat_koordinator']);    
     Route::put('/persetujuankp-koordinator/approve/{id}', [PenjadwalanKPController::class, 'approve_koordinator']);
     Route::put('/persetujuankp-koordinator/tolak/{id}', [PenjadwalanKPController::class, 'tolak_koordinator']);
     Route::put('/persetujuansempro-koordinator/approve/{id}', [PenjadwalanSemproController::class, 'approve_koordinator']);
@@ -195,6 +199,7 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     Route::get('/persetujuan-kaprodi', [PenjadwalanController::class, 'persetujuan_kaprodi']);
+    Route::get('/riwayat-kaprodi', [PenjadwalanController::class, 'riwayat_kaprodi']);    
     Route::put('/persetujuankp-kaprodi/approve/{id}', [PenjadwalanKPController::class, 'approve_kaprodi']);
     Route::put('/persetujuankp-kaprodi/tolak/{id}', [PenjadwalanKPController::class, 'tolak_kaprodi']);
     Route::put('/persetujuansempro-kaprodi/approve/{id}', [PenjadwalanSemproController::class, 'approve_kaprodi']);

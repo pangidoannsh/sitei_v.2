@@ -35,11 +35,27 @@ class PenjadwalanSemproController extends Controller
 
     public function create()
     {
-        return view('penjadwalansempro.create', [
-            'prodis' => Prodi::all(),            
-            'dosens' => Dosen::all(),
-            'mahasiswas' => Mahasiswa::all(),
-        ]);
+        if (auth()->user()->role_id == 2) {            
+            return view('penjadwalansempro.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
+        if (auth()->user()->role_id == 3) {            
+            return view('penjadwalansempro.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
+        if (auth()->user()->role_id == 4) {            
+            return view('penjadwalansempro.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
     }
 
     public function store(Request $request)
@@ -338,6 +354,15 @@ class PenjadwalanSemproController extends Controller
             return redirect('/penilaian-sempro/edit/' . $id)->with('message', 'Judul Berhasil Diupdate!');
         }
         
+    }
+
+    public function riwayatjudul($id)
+    {
+        $penjadwalan = PenjadwalanSempro::find($id);        
+
+        return view('penjadwalansempro.riwayat-judul', [
+            'penjadwalan' => $penjadwalan,            
+        ]);
     }
 
 }

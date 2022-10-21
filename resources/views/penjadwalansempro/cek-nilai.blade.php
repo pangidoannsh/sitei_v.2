@@ -371,9 +371,9 @@
                                       ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                       2 >=
                                       60)
-                                      LAYAK LULUS                                            
+                                    LULUS                                            
                                   @else
-                                      TIDAK LAYAK LULUS
+                                      TIDAK LULUS
                                   @endif
                               @endif
                           @endif

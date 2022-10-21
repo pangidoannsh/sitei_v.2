@@ -25,8 +25,7 @@
       <th scope="col">NIM</th>
       <th scope="col">Nama</th>
       <th scope="col">Angkatan</th>
-      <th scope="col">Program Studi</th>
-      <th scope="col">Konsentrasi</th>
+      <th scope="col">Program Studi</th>      
       <th scope="col">Aksi</th>
     </tr>
   </thead>
@@ -37,8 +36,7 @@
           <td>{{$mhs->nim}}</td>
           <td>{{$mhs->nama}}</td>
           <td>{{$mhs->angkatan}}</td>
-          <td>{{$mhs->prodi->nama_prodi}}</td>
-          <td>{{$mhs->konsentrasi->nama_konsentrasi}}</td>
+          <td>{{$mhs->prodi->nama_prodi}}</td>          
           <td>        
             <a href="/mahasiswa/edit/{{$mhs->id}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
             <form action="/mahasiswa/{{$mhs->id}}" method="POST" class="d-inline">
