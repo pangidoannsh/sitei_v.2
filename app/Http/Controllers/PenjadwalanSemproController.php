@@ -330,7 +330,7 @@ class PenjadwalanSemproController extends Controller
         ]);
     }
 
-    public function perbaikanpenguji($id, $penguji)
+    public function perbaikanpengujisempro($id, $penguji)
     {
         $penjadwalan = PenjadwalanSempro::find($id);
         $penilaianpenguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', $penguji)->first();

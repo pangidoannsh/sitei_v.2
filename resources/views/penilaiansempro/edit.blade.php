@@ -25,13 +25,13 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
-            <span>{{$sempro->penjadwalan_sempro->nim}}</span>
+            <span>{{$sempro->penjadwalan_sempro->mahasiswa->nim}}</span>
           </div>        
         </li> 
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Nama</div>
-            <span>{{$sempro->penjadwalan_sempro->nama}}</span>
+            <span>{{$sempro->penjadwalan_sempro->mahasiswa->nama}}</span>
           </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -1117,9 +1117,9 @@
                                               @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                                                   ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                                   2 >= 60)
-                                                  LAYAK LULUS
+                                                  LULUS
                                               @else
-                                                  TIDAK LAYAK LULUS
+                                                  TIDAK LULUS
                                               @endif
                                           @endif
                                         @else

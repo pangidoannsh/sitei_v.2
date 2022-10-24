@@ -14,19 +14,25 @@
 
 @section('content')
 
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{session('message')}}
+</div>
+@endif
+
 <div class="row mb-5">
   <div class="col-6">
     <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">NIM</div>
-          <span>{{$sempro->nim}}</span>
+          <span>{{$sempro->mahasiswa->nim}}</span>
         </div>        
       </li> 
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Nama</div>
-          <span>{{$sempro->nama}}</span>
+          <span>{{$sempro->mahasiswa->nama}}</span>
         </div>        
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-start">

@@ -92,9 +92,9 @@
             <a href="/nilai-sempro-penguji/{{$sempro->id}}/{{ $sempro->pengujisatu->nip }}" class="badge bg-secondary">Nilai Penguji 1</a>          
             <a href="/nilai-sempro-penguji/{{$sempro->id}}/{{ $sempro->pengujidua->nip }}" class="badge bg-dark">Nilai Penguji 2</a>          
             <a href="/nilai-sempro-penguji/{{$sempro->id}}/{{ $sempro->pengujitiga->nip }}" class="badge bg-blue">Nilai Penguji 3</a>
-            <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-secondary">Perbaikan Penguji 1</a>
-            <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark">Perbaikan Penguji 2</a>
-            <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
+            <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-secondary">Perbaikan Penguji 1</a>
+            <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark">Perbaikan Penguji 2</a>
+            <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
             <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Berita Acara</a>
             @if ($sempro->revisi_naskah == !null)
             <a href="/penilaian-sempro/riwayat-judul/{{$sempro->id}}" class="badge bg-success">Revisi Judul</a>
@@ -106,8 +106,8 @@
     
     @foreach ($penjadwalan_skripsis as $skripsi)
         <tr>
-          <td>{{$skripsi->nim}}</td>                             
-          <td>{{$skripsi->nama}}</td>                     
+          <td>{{$skripsi->mahasiswa->nim}}</td>                             
+          <td>{{$skripsi->mahasiswa->nama}}</td>                     
           <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                     
           <td>{{$skripsi->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
@@ -124,11 +124,24 @@
             <p>2. {{$skripsi->pengujidua->nama}}</p>
             <p>3. {{$skripsi->pengujitiga->nama}}</p>
           </td>
-          @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)        
-          <td>                        
-            <a href="/penilaian-skripsi/cek-nilai/{{$skripsi->id}}" class="badge bg-success">Berita Acara</a>                  
-          </td>
-          @endif                     
+          @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+          <td>              
+            <a href="/nilai-skripsi-pembimbing/{{$skripsi->id}}/{{ $skripsi->pembimbingsatu->nip }}" class="badge bg-warning">Nilai Pembimbing 1</a>
+            @if ($skripsi->pembimbingdua == !null)
+            <a href="/nilai-skripsi-pembimbing/{{$skripsi->id}}/{{ $skripsi->pembimbingdua->nip }}" class="badge bg-danger">Nilai Pembimbing 2</a>                               
+            @endif
+            <a href="/nilai-skripsi-penguji/{{$skripsi->id}}/{{ $skripsi->pengujisatu->nip }}" class="badge bg-secondary">Nilai Penguji 1</a>          
+            <a href="/nilai-skripsi-penguji/{{$skripsi->id}}/{{ $skripsi->pengujidua->nip }}" class="badge bg-dark">Nilai Penguji 2</a>          
+            <a href="/nilai-skripsi-penguji/{{$skripsi->id}}/{{ $skripsi->pengujitiga->nip }}" class="badge bg-blue">Nilai Penguji 3</a>
+            <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujisatu->nip}}" class="badge bg-secondary">Perbaikan Penguji 1</a>
+            <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujidua->nip}}" class="badge bg-dark">Perbaikan Penguji 2</a>
+            <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
+            <a href="/penilaian-skripsi/cek-nilai/{{$skripsi->id}}" class="badge bg-success">Berita Acara</a>
+            @if ($skripsi->revisi_naskah == !null)
+            <a href="/penilaian-skripsi/riwayat-judul/{{$skripsi->id}}" class="badge bg-success">Revisi Judul</a>
+            @endif
+          </td>                       
+          @endif                    
         </tr>
     @endforeach    
   </tbody>

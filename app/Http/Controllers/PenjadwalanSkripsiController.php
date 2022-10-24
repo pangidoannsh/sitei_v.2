@@ -34,25 +34,38 @@ class PenjadwalanSkripsiController extends Controller
 
     public function create()
     {
-        return view('penjadwalanskripsi.create', [
-            'prodis' => Prodi::all(),
-            'konsentrasis' => Konsentrasi::all(),
-            'dosens' => Dosen::all(),
-        ]);
+        if (auth()->user()->role_id == 2) {            
+            return view('penjadwalanskripsi.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
+        if (auth()->user()->role_id == 3) {            
+            return view('penjadwalanskripsi.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
+        if (auth()->user()->role_id == 4) {            
+            return view('penjadwalanskripsi.create', [    
+                'prodis' => Prodi::all(),
+                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),
+                'dosens' => Dosen::all(),                
+            ]);
+        }        
     }
 
     public function store(Request $request)
     {
         $data = [
+            'mahasiswa_nim' => 'required',
             'pembimbingsatu_nip' => 'required',
             'pengujisatu_nip' => 'required',
             'pengujidua_nip' => 'required',
             'pengujitiga_nip' => 'required',
-            'prodi_id' => 'required',      
-            'konsentrasi_id' => 'required',      
-            'nim' => 'required|unique:penjadwalan_skripsi',            
-            'nama' => 'required',          
-            'angkatan' => 'required',          
+            'prodi_id' => 'required',                            
             'judul_skripsi' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
@@ -67,16 +80,13 @@ class PenjadwalanSkripsiController extends Controller
 
         if ($request->pembimbingdua_nip) {
             PenjadwalanSkripsi::create([
+                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],
                 'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],
                 'pembimbingdua_nip' => $validatedData['pembimbingdua_nip'],
                 'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
                 'pengujidua_nip' => $validatedData['pengujidua_nip'],
                 'pengujitiga_nip' => $validatedData['pengujitiga_nip'],
-                'prodi_id' => $validatedData['prodi_id'],
-                'konsentrasi_id' => $validatedData['konsentrasi_id'],
-                'nim' => $validatedData['nim'],
-                'nama' => $validatedData['nama'],
-                'angkatan' => $validatedData['angkatan'],                
+                'prodi_id' => $validatedData['prodi_id'],                
                 'judul_skripsi' => $validatedData['judul_skripsi'],
                 'tanggal' => $validatedData['tanggal'],
                 'waktu' => $validatedData['waktu'],
@@ -85,15 +95,12 @@ class PenjadwalanSkripsiController extends Controller
             ]);
         } else {
             PenjadwalanSkripsi::create([
+                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],                
                 'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],                
                 'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
                 'pengujidua_nip' => $validatedData['pengujidua_nip'],
                 'pengujitiga_nip' => $validatedData['pengujitiga_nip'],
-                'prodi_id' => $validatedData['prodi_id'],
-                'konsentrasi_id' => $validatedData['konsentrasi_id'],
-                'nim' => $validatedData['nim'],
-                'nama' => $validatedData['nama'],
-                'angkatan' => $validatedData['angkatan'],                
+                'prodi_id' => $validatedData['prodi_id'],                
                 'judul_skripsi' => $validatedData['judul_skripsi'],
                 'tanggal' => $validatedData['tanggal'],
                 'waktu' => $validatedData['waktu'],
@@ -110,7 +117,7 @@ class PenjadwalanSkripsiController extends Controller
         return view('penjadwalanskripsi.edit', [
             'skripsi' => $penjadwalan_skripsi,
             'prodis' => Prodi::all(),
-            'konsentrasis' => Konsentrasi::all(),           
+            'mahasiswas' => Mahasiswa::all(),
             'dosens' => Dosen::all(),
         ]);
     }
@@ -118,23 +125,17 @@ class PenjadwalanSkripsiController extends Controller
     public function update(Request $request, PenjadwalanSkripsi $penjadwalan_skripsi)
     {
         $rules = [
+            'mahasiswa_nim' => 'required',
             'pembimbingsatu_nip' => 'required',
             'pengujisatu_nip' => 'required',
             'pengujidua_nip' => 'required',
             'pengujitiga_nip' => 'required',
-            'prodi_id' => 'required',      
-            'konsentrasi_id' => 'required',                       
-            'nama' => 'required',          
-            'angkatan' => 'required',          
+            'prodi_id' => 'required',                           
             'judul_skripsi' => 'required',
             'tanggal' => 'required',
             'waktu' => 'required',
             'lokasi' => 'required',
-        ];
-
-        if ($penjadwalan_skripsi->nim != $request->nim) {
-            $rules['nim'] = 'required|unique:penjadwalan_sempro';
-        }
+        ];        
 
         if ($request->pembimbingdua_nip) {
             if ($penjadwalan_skripsi->pembimbingdua_nip != $request->pembimbingdua_nip) {
@@ -146,6 +147,7 @@ class PenjadwalanSkripsiController extends Controller
         $validated['dibuat_oleh'] = auth()->user()->username;
 
         $edit = PenjadwalanSkripsi::find($penjadwalan_skripsi->id);
+        $edit->mahasiswa_nim = $validated['mahasiswa_nim'];
         $edit->pembimbingsatu_nip = $validated['pembimbingsatu_nip'];
 
         if ($request->pembimbingdua_nip) {
@@ -161,15 +163,7 @@ class PenjadwalanSkripsiController extends Controller
         $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
         $edit->pengujidua_nip = $validated['pengujidua_nip'];
         $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
-        $edit->prodi_id = $validated['prodi_id'];
-        $edit->konsentrasi_id = $validated['konsentrasi_id'];
-
-        if ($penjadwalan_skripsi->nim != $request->nim) {
-            $edit->nim = $validated['nim'];
-        }
-
-        $edit->nama = $validated['nama'];
-        $edit->angkatan = $validated['angkatan'];
+        $edit->prodi_id = $validated['prodi_id'];                
         $edit->judul_skripsi = $validated['judul_skripsi'];
         $edit->tanggal = $validated['tanggal'];
         $edit->waktu = $validated['waktu'];
@@ -302,6 +296,27 @@ class PenjadwalanSkripsiController extends Controller
         }
     }
 
+    public function nilaipembimbing($id, $pembimbing)
+    {
+        $penjadwalan = PenjadwalanSkripsi::find($id);
+        $penilaian = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $pembimbing)->first();
+        return view('penjadwalanskripsi.nilai-skripsi', [
+            'penjadwalan' => $penjadwalan,
+            'penilaianpembimbing' => $penilaian,
+            'penilaianpenguji' => null,
+        ]);
+    }
+
+    public function nilaipenguji($id, $penguji)
+    {
+        $penjadwalan = PenjadwalanSkripsi::find($id);
+        $penilaianpenguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penguji)->first();
+        return view('penjadwalanskripsi.nilai-skripsi', [
+            'penjadwalan' => $penjadwalan,            
+            'penilaianpenguji' => $penilaianpenguji,
+        ]);
+    }
+
     public function perbaikan($id)
     {
         $penjadwalan = PenjadwalanSkripsi::find($id);
@@ -310,6 +325,41 @@ class PenjadwalanSkripsiController extends Controller
         return view('penjadwalanskripsi.perbaikan-skripsi', [
             'penjadwalan' => $penjadwalan,
             'penilaianpenguji' => $penilaianpenguji,
+        ]);
+    }
+
+    public function perbaikanpengujiskripsi($id, $penguji)
+    {
+        $penjadwalan = PenjadwalanSkripsi::find($id);
+        $penilaianpenguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penguji)->first();
+
+        return view('penjadwalanskripsi.perbaikan-skripsi', [
+            'penjadwalan' => $penjadwalan,
+            'penilaianpenguji' => $penilaianpenguji,
+        ]);
+    }
+
+    public function revisi(Request $request, $id)
+    {    
+        $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
+        $penjadwalan_skripsi->revisi_naskah = $request->revisi_naskah;
+        $penjadwalan_skripsi->update();
+        $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
+        if ($cari_penguji == 0) {
+            return redirect('/penilaian-skripsi/create/' . $id)->with('message', 'Judul Berhasil Diupdate!');
+        } else {
+
+            return redirect('/penilaian-skripsi/edit/' . $id)->with('message', 'Judul Berhasil Diupdate!');
+        }
+        
+    }
+
+    public function riwayatjudul($id)
+    {
+        $penjadwalan = PenjadwalanSkripsi::find($id);        
+
+        return view('penjadwalanskripsi.riwayat-judul', [
+            'penjadwalan' => $penjadwalan,            
         ]);
     }
 }

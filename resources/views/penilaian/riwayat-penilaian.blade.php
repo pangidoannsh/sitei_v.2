@@ -93,8 +93,8 @@
 
     @foreach ($penjadwalan_skripsis as $skripsi)    
         <tr>                  
-          <td>{{$skripsi->nim}}</td>                             
-          <td>{{$skripsi->nama}}</td>
+          <td>{{$skripsi->mahasiswa->nim}}</td>                             
+          <td>{{$skripsi->mahasiswa->nama}}</td>
           <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                                     
           <td>{{$skripsi->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   

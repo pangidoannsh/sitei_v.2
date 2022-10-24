@@ -139,6 +139,7 @@ class PenjadwalanController extends Controller
         return view('penjadwalan.riwayat-mahasiswa', [
             'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 3)->where('mahasiswa_nim', Auth::user()->nim)->get(),
             'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 3)->where('mahasiswa_nim', Auth::user()->nim)->get(),
+            'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->where('mahasiswa_nim', Auth::user()->nim)->get(),
         ]);
     }
 

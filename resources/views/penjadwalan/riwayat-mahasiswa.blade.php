@@ -79,9 +79,37 @@
           <p>3. {{$sempro->pengujitiga->nama}}</p>
         </td>          
         <td>        
-          <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-success">Perbaikan Penguji 1</a>
-          <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-primary">Perbaikan Penguji 2</a>
-          <a href="/perbaikan-penguji/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-warning">Perbaikan Penguji 3</a>                         
+          <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujisatu->nip}}" class="badge bg-success">Perbaikan Penguji 1</a>
+          <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-primary">Perbaikan Penguji 2</a>
+          <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-warning">Perbaikan Penguji 3</a>                         
+        </td>                       
+      </tr>
+    @endforeach
+
+    @foreach ($penjadwalan_skripsis as $skripsi)
+      <tr>
+        <td>{{$skripsi->mahasiswa->nim}}</td>                             
+        <td>{{$skripsi->mahasiswa->nama}}</td>                     
+        <td class="bg-warning">{{$skripsi->jenis_seminar}}</td>                     
+        <td>{{$skripsi->prodi->nama_prodi}}</td>          
+        <td>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+        <td>{{$skripsi->waktu}}</td>                   
+        <td>{{$skripsi->lokasi}}</td>                   
+        <td>
+          <p>1. {{$skripsi->pembimbingsatu->nama}}</p>
+          @if ($skripsi->pembimbingdua == !null)
+          <p>2. {{$skripsi->pembimbingdua->nama}}</p>                               
+          @endif
+        </td> 
+        <td>
+          <p>1. {{$skripsi->pengujisatu->nama}}</p>
+          <p>2. {{$skripsi->pengujidua->nama}}</p>
+          <p>3. {{$skripsi->pengujitiga->nama}}</p>
+        </td>          
+        <td>        
+          <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujisatu->nip}}" class="badge bg-success">Perbaikan Penguji 1</a>
+          <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujidua->nip}}" class="badge bg-primary">Perbaikan Penguji 2</a>
+          <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujitiga->nip}}" class="badge bg-warning">Perbaikan Penguji 3</a>                         
         </td>                       
       </tr>
     @endforeach

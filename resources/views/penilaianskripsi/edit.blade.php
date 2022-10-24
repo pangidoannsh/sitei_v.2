@@ -25,20 +25,19 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">NIM</div>
-                        <span>{{ $skripsi->penjadwalan_skripsi->nim }}</span>
+                        <span>{{ $skripsi->penjadwalan_skripsi->mahasiswa->nim }}</span>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">Nama</div>
-                        <span
-                           >{{ $skripsi->penjadwalan_skripsi->nama }}</span>
+                        <span>{{ $skripsi->penjadwalan_skripsi->mahasiswa->nama }}</span>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold mb-2">Judul</div>
-                        <span>{{ $skripsi->penjadwalan_skripsi->judul_skripsi }}</span>
+                        <span>{{ $skripsi->penjadwalan_skripsi->revisi_naskah != null ? $skripsi->penjadwalan_skripsi->revisi_naskah : $skripsi->penjadwalan_skripsi->judul_skripsi }}</span>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -373,11 +372,11 @@
                                     <input type="text" id="total_nilai_angka" class="form-control text-bold"
                                         name="total_nilai_angka"
                                         style="border-top-style: hidden;
-                  border-right-style: hidden;
-                  border-left-style: hidden;
-                  border-bottom-style: hidden;
-                  background-color: rgb(255, 255, 255);                                                
-                "
+                                        border-right-style: hidden;
+                                        border-left-style: hidden;
+                                        border-bottom-style: hidden;
+                                        background-color: rgb(255, 255, 255);                                                
+                                        "
                                         readonly value="{{ $skripsi->total_nilai_angka }}">
                                 </div>
                             </div>
@@ -392,16 +391,16 @@
                                     <input type="text" id="total_nilai_huruf" class="form-control text-bold"
                                         name="total_nilai_huruf"
                                         style="border-top-style: hidden;
-                  border-right-style: hidden;
-                  border-left-style: hidden;
-                  border-bottom-style: hidden;
-                  background-color: rgb(255, 255, 255);
-                "
+                                        border-right-style: hidden;
+                                        border-left-style: hidden;
+                                        border-bottom-style: hidden;
+                                        background-color: rgb(255, 255, 255);
+                                        "
                                         readonly value="{{ $skripsi->total_nilai_huruf }}">
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-success float-right">Update</button>
+                            <button type="submit" class="btn btn-success float-right">Perbarui</button>
                         </form>
                     </div>
                 </div>
@@ -430,11 +429,16 @@
                                 aria-selected="false">Saran Perbaikan</a>
                         </li>
                         @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujisatu_nip)
-                            <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link" id="custom-tabs-one-form-tab" data-toggle="pill"
+                              href="#custom-tabs-one-form" role="tab" aria-controls="custom-tabs-one-form"
+                              aria-selected="false">Revisi Judul</a>
+                        </li>
+                        <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-one-setting-tab" data-toggle="pill"
                                     href="#custom-tabs-one-setting" role="tab"
                                     aria-controls="custom-tabs-one-setting" aria-selected="false">Berita Acara</a>
-                            </li>
+                        </li>
                         @endif
                     </ul>
                 </div>
@@ -1116,7 +1120,8 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-success float-right">Update</button>
+                            <button type="submit" class="btn btn-success float-right">Perbarui</button>
+                        </form>
 
                         </div>
 
@@ -1167,10 +1172,27 @@
                                     <label for="floatingTextarea2">Perbaikan 5</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success float-right">Update</button>
+                            <button type="submit" class="btn btn-success float-right">Perbarui</button>
                         </div>
 
                         @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujisatu_nip)
+                        <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
+                            aria-labelledby="custom-tabs-one-form-tab">
+
+                            <form action="/revisi-naskah/create/{{$skripsi->penjadwalan_skripsi->id}}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                <label class="form-label">Judul Lama</label>
+                                <input type="text" class="form-control" value="{{$skripsi->penjadwalan_skripsi->judul_skripsi}}" readonly>  
+                                </div>
+                                <div class="mb-3">
+                                <label class="form-label">Judul Baru</label>
+                                <input type="text" name="revisi_naskah" class="form-control" value="{{ $skripsi->penjadwalan_skripsi->revisi_naskah != null ? $skripsi->penjadwalan_skripsi->revisi_naskah : '' }}">
+                                </div>              
+                                <button type="submit" class="btn btn-primary">Perbarui</button>
+                            </form>
+
+                        </div>
                             <div class="tab-pane fade" id="custom-tabs-one-setting" role="tabpanel"
                                 aria-labelledby="custom-tabs-one-setting-tab">
                                 <div>
@@ -1646,9 +1668,9 @@
                                                                       ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                                                       2 >=
                                                                       60)
-                                                                      LAYAK LULUS                                            
+                                                                      LULUS                                            
                                                                   @else
-                                                                      TIDAK LAYAK LULUS
+                                                                      TIDAK LULUS
                                                                   @endif
                                                               @endif
                                                           @endif
@@ -1660,9 +1682,9 @@
                                                                         @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                                                                             ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                                                             2 >= 60)
-                                                                            LAYAK LULUS
+                                                                            LULUS
                                                                         @else
-                                                                            TIDAK LAYAK LULUS
+                                                                            TIDAK LULUS
                                                                         @endif
                                                                     @endif
                                                                   @else
@@ -1674,7 +1696,7 @@
                                                       </tr>
                                                 </tbody>
                                             </table>
-        </form>
+        
 
         @if ($penjadwalan->status_seminar == 0)
             @if ($penjadwalan->cek($penjadwalan->id) == $penjadwalan->jmlpenilaian($penjadwalan->id))

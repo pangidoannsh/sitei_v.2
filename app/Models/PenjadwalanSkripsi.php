@@ -27,6 +27,11 @@ class PenjadwalanSkripsi extends Model
         }
     }
 
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_nim', 'nim');
+    }
+
     public function prodi()
     {
         return $this->belongsTo(Prodi::class);
