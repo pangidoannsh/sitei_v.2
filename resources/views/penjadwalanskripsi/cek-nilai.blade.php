@@ -66,7 +66,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->judul_skripsi}}</span>
+            <span>{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}</span>
             </div>        
         </li>   
         </ol>

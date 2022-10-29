@@ -24,7 +24,7 @@ class CreatePenjadwalanSkripsisTable extends Migration
             $table->foreignId('prodi_id');                        
             $table->string('jenis_seminar')->default('Sidang Skripsi');
             $table->string('judul_skripsi');
-            $table->string('revisi_naskah')->nullable();
+            $table->string('revisi_skripsi')->nullable();
             $table->date('tanggal');
             $table->time('waktu');
             $table->string('lokasi');

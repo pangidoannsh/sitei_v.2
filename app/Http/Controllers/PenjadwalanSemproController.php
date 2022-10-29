@@ -341,10 +341,10 @@ class PenjadwalanSemproController extends Controller
         ]);
     }
 
-    public function revisi(Request $request, $id)
+    public function revisiproposal(Request $request, $id)
     {    
         $penjadwalan_sempro = PenjadwalanSempro::find($id);
-        $penjadwalan_sempro->revisi_naskah = $request->revisi_naskah;
+        $penjadwalan_sempro->revisi_proposal = $request->revisi_proposal;
         $penjadwalan_sempro->update();
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
         if ($cari_penguji == 0) {

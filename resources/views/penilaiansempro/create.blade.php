@@ -72,7 +72,7 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Judul</div>
-          <span>{{ $sempro->revisi_naskah != null ? $sempro->revisi_naskah : $sempro->judul_proposal }}</span>
+          <span>{{ $sempro->revisi_proposal != null ? $sempro->revisi_proposal : $sempro->judul_proposal }}</span>
         </div>        
       </li>
     </ol>
@@ -730,7 +730,7 @@
           <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
             aria-labelledby="custom-tabs-one-form-tab">
 
-            <form action="/revisi-naskah/create/{{$sempro->id}}" method="POST">
+            <form action="/revisi-proposal/create/{{$sempro->id}}" method="POST">
               @csrf
               <div class="mb-3">
                 <label class="form-label">Judul Lama</label>
@@ -738,7 +738,7 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Judul Baru</label>
-                <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->revisi_naskah != null ? $sempro->revisi_naskah : '' }}">
+                <input type="text" name="revisi_proposal" class="form-control" value="{{ $sempro->revisi_proposal != null ? $sempro->revisi_proposal : '' }}">
               </div>              
               <button type="submit" class="btn btn-success float-right">Perbarui</button>
             </form>

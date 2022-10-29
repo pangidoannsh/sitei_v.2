@@ -72,7 +72,7 @@
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Judul</div>
-          <span>{{$skripsi->judul_skripsi}}</span>
+          <span>{{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : $skripsi->judul_skripsi }}</span>
         </div>        
       </li>   
     </ol>  
@@ -847,7 +847,7 @@
             <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
               aria-labelledby="custom-tabs-one-form-tab">
 
-              <form action="/revisi-naskah/create/{{$skripsi->id}}" method="POST">
+              <form action="/revisi-skripsi/create/{{$skripsi->id}}" method="POST">
                 @csrf
                 <div class="mb-3">
                   <label class="form-label">Judul Lama</label>
@@ -855,7 +855,7 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Judul Baru</label>
-                  <input type="text" name="revisi_naskah" class="form-control" value="{{ $skripsi->revisi_naskah != null ? $skripsi->revisi_naskah : '' }}">
+                  <input type="text" name="revisi_skripsi" class="form-control" value="{{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : '' }}">
                 </div>              
                 <button type="submit" class="btn btn-success float-right">Perbarui</button>
               </form>

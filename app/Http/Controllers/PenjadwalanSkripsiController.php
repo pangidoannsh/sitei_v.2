@@ -339,10 +339,10 @@ class PenjadwalanSkripsiController extends Controller
         ]);
     }
 
-    public function revisi(Request $request, $id)
+    public function revisiskripsi(Request $request, $id)
     {    
         $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
-        $penjadwalan_skripsi->revisi_naskah = $request->revisi_naskah;
+        $penjadwalan_skripsi->revisi_skripsi = $request->revisi_skripsi;
         $penjadwalan_skripsi->update();
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
         if ($cari_penguji == 0) {

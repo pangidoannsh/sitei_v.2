@@ -96,7 +96,7 @@
             <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark">Perbaikan Penguji 2</a>
             <a href="/perbaikan-pengujisempro/{{$sempro->id}}/{{$sempro->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
             <a href="/penilaian-sempro/cek-nilai/{{$sempro->id}}" class="badge bg-success">Berita Acara</a>
-            @if ($sempro->revisi_naskah == !null)
+            @if ($sempro->revisi_proposal == !null)
             <a href="/penilaian-sempro/riwayat-judul/{{$sempro->id}}" class="badge bg-success">Revisi Judul</a>
             @endif
           </td>                       
@@ -137,7 +137,7 @@
             <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujidua->nip}}" class="badge bg-dark">Perbaikan Penguji 2</a>
             <a href="/perbaikan-pengujiskripsi/{{$skripsi->id}}/{{$skripsi->pengujitiga->nip}}" class="badge bg-blue">Perbaikan Penguji 3</a>         
             <a href="/penilaian-skripsi/cek-nilai/{{$skripsi->id}}" class="badge bg-success">Berita Acara</a>
-            @if ($skripsi->revisi_naskah == !null)
+            @if ($skripsi->revisi_skripsi == !null)
             <a href="/penilaian-skripsi/riwayat-judul/{{$skripsi->id}}" class="badge bg-success">Revisi Judul</a>
             @endif
           </td>                       

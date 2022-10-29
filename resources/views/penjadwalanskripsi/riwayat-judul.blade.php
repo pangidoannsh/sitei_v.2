@@ -25,7 +25,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->revisi_naskah != null ? $penjadwalan->revisi_naskah : $penjadwalan->judul_proposal }}</span>
+            <span>{{$penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_proposal }}</span>
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -80,7 +80,7 @@
     <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
         <div class="fw-bold mb-2">Judul Baru</div> 
-        <span>{{$penjadwalan->revisi_naskah}}</span>          
+        <span>{{$penjadwalan->revisi_skripsi}}</span>          
         </div>        
     </li>    
 </div>
