@@ -14,10 +14,10 @@
 
 @section('content')
 
-<div class="row mb-5">
-
-    <div class="col-6">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
+<div>
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -30,29 +30,10 @@
             <span>{{$penjadwalan->mahasiswa->nama}}</span>            
             </div>        
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->judul_kp}}</span>
-            </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Jadwal</div>
-            <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
-            </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Lokasi</div>
-            <span>{{$penjadwalan->lokasi}}</span>    
-            </div>        
-        </li>   
         </ol>
-    </div>
-
-    <div class="col-6">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold mb-2">Pembimbing</div>
@@ -66,12 +47,54 @@
             </div>        
         </li>     
         </ol>
+        </div>
     </div>
-
 </div>
 
-<div>     
-    <table class="table table-bordered" style="background-color:white;">
+<div class="kol-judul mt-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Judul</div>
+            <span>{{$penjadwalan->judul_kp}}</span>
+            </div>        
+        </li>   
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="kol-jadwal mt-3 mb-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Jadwal</div>
+            <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
+            </div>        
+        </li>   
+        </ol>
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Lokasi</div>
+            <span>{{$penjadwalan->lokasi}}</span>    
+            </div>        
+        </li>   
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="card-body bg-white">
+    <div class="row">
+        <div class="col">
+        <table class="table table-bordered" style="background-color:white;">
         <thead class="bg-success">
             <tr>
                 <th style="width: 50px">#</th>
@@ -128,11 +151,10 @@
                 <td class="bg-secondary" colspan="2">Total Nilai Huruf</td>                               
                 <td class="bg-secondary">{{$penilaiankp->total_nilai_huruf}}</td>                        
             </tr>
-
         </tbody>
-    </table>
+    </table>    
 
-            @if ($penjadwalan->status_seminar == 1)
+    @if ($penjadwalan->status_seminar == 1)
                 <form action="/persetujuankp-koordinator/approve/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
@@ -157,6 +179,7 @@
                     <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
                 </form>
             @endif
-             
+        </div>
+    </div>
 </div>
 @endsection   

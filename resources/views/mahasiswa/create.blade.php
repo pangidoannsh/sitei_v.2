@@ -10,7 +10,104 @@
 
 @section('content')
 
-<div class="col-lg-5">
+<form action="{{url ('/mahasiswa/create')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+<div>
+    <div class="row">
+        <div class="col">
+        <div class="mb-3">
+            <label class="form-label">NIM</label>
+            <input type="text" name="nim" class="form-control @error('nim') is-invalid @enderror" value="{{ old('nim') }}">
+            @error('nim')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>  
+
+        <div class="mb-3">
+            <label class="form-label">Nama</label>
+            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+            @error('nama')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+            @error('email')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}">
+            @error('password')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+
+        </div>
+        <div class="col">
+        <div class="mb-3">
+            <label class="form-label">Angkatan</label>
+            <input type="number" name="angkatan" class="form-control @error('angkatan') is-invalid @enderror" value="{{ old('angkatan') }}">
+            @error('angkatan')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+        
+        <div class="mb-3">
+            <label for="prodi_id" class="form-label">Program Studi</label>
+            <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
+            @if(auth()->user()->role_id == 2)                                                          
+                <option value="1">Teknik Elektro D3</option>                
+            @endif
+            @if(auth()->user()->role_id == 3)                                                          
+                <option value="2">Teknik Elektro S1</option>                
+            @endif
+            @if(auth()->user()->role_id == 4)                                                          
+                <option value="3">Teknik Informatika S1</option>                
+            @endif
+            </select>
+            @error('prodi_id')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div> 
+
+        <div class="mb-3">
+            <label for="konsentrasi_id" class="form-label">Konsentrasi</label>
+            <select name="konsentrasi_id" class="form-select @error('konsentrasi_id') is-invalid @enderror">
+                <option value="">-Pilih-</option>
+                @foreach ($konsentrasis as $konsentrasi)
+                    <option value="{{$konsentrasi->id}}" {{old('konsentrasi_id') == $konsentrasi->id ? 'selected' : null}}>{{$konsentrasi->nama_konsentrasi}}</option>
+                @endforeach
+            </select>
+            @error('konsentrasi_id')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
+        <button type="submit" class="btn btn-success float-right mt-4">Submit</button>
+        </div>
+    </div>
+</div>
+</form>
+
+<!-- <div class="col-lg-5">
     <form action="{{url ('/mahasiswa/create')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -108,7 +205,7 @@
         <button type="submit" class="btn btn-success mb-5">Submit</button>
 
       </form>
-</div>
+</div> -->
 
 @endsection
 

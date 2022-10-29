@@ -4,12 +4,20 @@
     use Carbon\Carbon;
 @endphp
 
+@section('title')
+    Perbaikan Sidang | SIA ELEKTRO
+@endsection
+
+@section('sub-title')
+    Perbaikan Sidang Skripsi
+@endsection
+
 @section('content')
 
-<div class="row mb-5">
-
-    <div class="col-6">
-        <ol class="list-group">
+<div>
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -22,18 +30,64 @@
             <span>{{$penjadwalan->mahasiswa->nama}}</span>            
             </div>        
         </li>
+        </ol>
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Pembimbing</div>
+                <span>1. {{$penjadwalan->pembimbingsatu->nama}}</span>
+                <br>
+                @if ($penjadwalan->pembimbingdua_nip != null)
+                <span>2. {{$penjadwalan->pembimbingdua->nama}}</span>
+                @endif                
+            </div>        
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Penguji</div>
+                <span>1. {{$penjadwalan->pengujisatu->nama}}</span>
+                <br>
+                <span>2. {{$penjadwalan->pengujidua->nama}}</span>
+                <br>
+                <span>3. {{$penjadwalan->pengujitiga->nama}}</span>
+            </div>        
+        </li>     
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="kol-judul mt-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->revisi_naskah != null ? $penjadwalan->revisi_naskah : $penjadwalan->judul_skripsi }}</span>
+            <span>{{$penjadwalan->judul_skripsi}}</span>
             </div>        
-        </li>
+        </li>   
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="kol-jadwal mt-3 mb-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Jadwal</div>
             <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
             </div>        
-        </li>
+        </li>   
+        </ol>
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Lokasi</div>
@@ -41,24 +95,15 @@
             </div>        
         </li>   
         </ol>
+        </div>
     </div>
-
-    <div class="col-6">
-        <ol class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold mb-2">Penguji</div>
-                <span>{{$penilaianpenguji->penguji->nama}}</span>                
-            </div>        
-        </li>     
-        </ol>
-    </div>
-
 </div>
 
-<div>    
-    <table class="table table-bordered mb-5">
-        <thead>
+<div class="card-body bg-white">
+    <div class="row">
+        <div class="col">
+        <table class="table table-bordered">
+        <thead class="bg-success">
             <tr>
                 <th style="width: 50px">#</th>
                 <th style="width: 700px">Saran dan Perbaikan</th>                     
@@ -86,7 +131,9 @@
                 <td>{{$penilaianpenguji->revisi_naskah5}}</td>                
             </tr>             
         </tbody>
-    </table>    
-
+    </table>
+        </div>
+    </div>
 </div>
+
 @endsection   

@@ -10,10 +10,11 @@
 
 @section('content')
 
-<div class="col-lg-5">
-    <form action="{{url ('/dosen/create')}}" method="POST" enctype="multipart/form-data">
+<form action="{{url ('/dosen/create')}}" method="POST" enctype="multipart/form-data">
         @csrf
-
+<div>
+    <div class="row">
+        <div class="col">
         <div class="mb-3">
             <label class="form-label">NIP</label>
             <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" value="{{ old('nip') }}">
@@ -43,7 +44,8 @@
               </div>
             @enderror
         </div>
-        
+        </div>
+        <div class="col">
         <div class="mb-3">
             <label for="prodi_id" class="form-label">Program Studi</label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">
@@ -84,10 +86,11 @@
             @enderror
         </div>        
 
-        <button type="submit" class="btn btn-success mb-5">Submit</button>
-
-      </form>
+        <button type="submit" class="btn btn-success float-right mb-5">Submit</button>
+        </div>
+    </div>
 </div>
+</form>
 
 @endsection
 

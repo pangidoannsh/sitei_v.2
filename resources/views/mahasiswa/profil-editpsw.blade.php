@@ -16,7 +16,7 @@
 </div>
 @endif
 
-<div class="col-lg-5">
+<div class="col-lg-6">
     <form action="/profil-mhs/editpasswordmhs/{{$mahasiswa->id}}" method="POST" enctype="multipart/form-data">
         @method('put')
         @csrf

@@ -10,10 +10,11 @@
 
 @section('content')
 
-<div class="col-lg-5">
-    <form action="{{url ('/user/create')}}" method="POST">
+<form action="{{url ('/user/create')}}" method="POST">
         @csrf
-
+<div>
+    <div class="row">
+        <div class="col">
         <div class="mb-3">
             <label class="form-label">Username</label>
             <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
@@ -44,6 +45,8 @@
             @enderror
         </div>
 
+        </div>
+        <div class="col">
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
@@ -69,9 +72,10 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success mb-5">Submit</button>
-
-      </form>
+        <button type="submit" class="btn btn-success float-right mt-4">Submit</button>
+        </div>
+    </div>
 </div>
+</form>
 
 @endsection

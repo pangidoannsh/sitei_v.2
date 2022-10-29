@@ -59,7 +59,6 @@ class DosenController extends Controller
                     'prodi_id' => $request->prodi_id,
                     'nip' => $request->nip,
                     'password' => Hash::make($request->password),
-                    'gambar' => $request->file('gambar')->store('gambar'),
                     'nama' => $request->nama,
                     'email' => $request->email,
                 ]);

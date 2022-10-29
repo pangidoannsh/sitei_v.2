@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="col-lg-5">
+<div class="col-lg-6">
     <form action="/role/edit/{{$role->id}}" method="POST">
         @method('put')
         @csrf

@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="col-lg-5">
+<div class="col-lg-6">
     <form action="{{url ('/role/create')}}" method="POST">
         @csrf
 

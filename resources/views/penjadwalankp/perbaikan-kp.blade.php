@@ -14,10 +14,10 @@
 
 @section('content')
 
-<div class="row mb-5">
-
-    <div class="col-6">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
+<div>
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -29,19 +29,57 @@
             <div class="fw-bold mb-2">Nama</div> 
             <span>{{$penjadwalan->mahasiswa->nama}}</span>            
             </div>        
+        </li>   
+        </ol>
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Pembimbing</div>
+                <span>{{$penjadwalan->pembimbing->nama}}</span>                              
+            </div>        
         </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold mb-2">Penguji</div>
+                <span>{{$penjadwalan->penguji->nama}}</span>                            
+            </div>        
+        </li>     
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="kol-judul mt-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Judul</div>
             <span>{{$penjadwalan->judul_kp}}</span>
             </div>        
-        </li>
+        </li>   
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="kol-jadwal mt-3 mb-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Jadwal</div>
             <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
             </div>        
-        </li>
+        </li>   
+        </ol>
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Lokasi</div>
@@ -49,23 +87,14 @@
             </div>        
         </li>   
         </ol>
+        </div>
     </div>
-
-    <div class="col-6">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold mb-2">Penguji</div>
-                <span>{{$penilaianpenguji->penguji->nama}}</span>                
-            </div>        
-        </li>     
-        </ol>
-    </div>
-
 </div>
 
-<div>    
-    <table class="table table-bordered mb-5" style="background-color:white;">
+<div class="card-body bg-white mt-4">
+    <div class="row">
+        <div class="col">
+        <table class="table table-bordered" style="background-color:white;">
         <thead class="bg-success">
             <tr>
                 <th style="width: 50px">#</th>
@@ -94,7 +123,9 @@
                 <td>{{$penilaianpenguji->revisi_naskah5}}</td>                
             </tr>             
         </tbody>
-    </table>    
-
-</div>
+    </table>
+        </div>
+    </div>
+</div>    
+        
 @endsection   

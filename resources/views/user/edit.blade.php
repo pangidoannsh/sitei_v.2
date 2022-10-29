@@ -10,11 +10,12 @@
 
 @section('content')
 
-<div class="col-lg-5">
-    <form action="/user/edit/{{$user->id}}" method="POST">
+<form action="/user/edit/{{$user->id}}" method="POST">
         @method('put')
         @csrf
-
+<div>
+    <div class="row">
+        <div class="col">
         <div class="mb-3">
             <label class="form-label">Username</label>
             <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $user->username) }}">
@@ -34,7 +35,8 @@
               </div>
             @enderror
         </div>
-
+        </div>
+        <div class="col">
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
@@ -60,9 +62,10 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success mb-5">Update</button>
-
-      </form>
+        <button type="submit" class="btn btn-success float-right mb-5">Update</button>
+        </div>
+    </div>
 </div>
+</form>
 
 @endsection

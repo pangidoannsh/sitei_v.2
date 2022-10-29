@@ -4,12 +4,20 @@
     use Carbon\Carbon;
 @endphp
 
+@section('title')
+    Berita Acara Sempro | SIA ELEKTRO
+@endsection
+
+@section('sub-title')
+    Berita Acara Seminar Proposal
+@endsection
+
 @section('content')
 
-<div class="row mb-5">
-
-    <div class="col-6">
-        <ol class="list-group">
+<div>
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -19,39 +27,20 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Nama</div> 
-            <span>{{$penjadwalan->mahasiswa->nama}}</span>          
+            <span>{{$penjadwalan->mahasiswa->nama}}</span>            
             </div>        
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Judul</div>
-            <span>{{$penjadwalan->revisi_naskah != null ? $penjadwalan->revisi_naskah : $penjadwalan->judul_proposal }}</span>
-            </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Jadwal</div>
-            <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
-            </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Lokasi</div>
-            <span>{{$penjadwalan->lokasi}}</span>    
-            </div>        
-        </li>   
         </ol>
-    </div>
-
-    <div class="col-6">
-        <ol class="list-group">
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold mb-2">Pembimbing</div>
                 <span>1. {{$penjadwalan->pembimbingsatu->nama}}</span>
                 <br>
                 @if ($penjadwalan->pembimbingdua_nip != null)
-                <span>{{$penjadwalan->pembimbingdua->nama}}</span>
+                <span>2. {{$penjadwalan->pembimbingdua->nama}}</span>
                 @endif                
             </div>        
         </li>
@@ -66,11 +55,51 @@
             </div>        
         </li>     
         </ol>
+        </div>
     </div>
-
 </div>
 
-<div>
+<div class="kol-judul mt-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Judul</div>
+            <span>{{$penjadwalan->judul_proposal}}</span>
+            </div>        
+        </li>   
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="kol-jadwal mt-3 mb-3">
+    <div class="row">
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Jadwal</div>
+            <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
+            </div>        
+        </li>   
+        </ol>
+        </div>
+        <div class="col">
+        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Lokasi</div>
+            <span>{{$penjadwalan->lokasi}}</span>    
+            </div>        
+        </li>   
+        </ol>
+        </div>
+    </div>
+</div>
+
+<div class="card-body bg-white">
     <div class="row">
         <div class="col-lg-6">
             <table class="table table-bordered">
@@ -78,7 +107,7 @@
                     <tr>
                         <th>#</th>
                         <th style="width: 200px">Penilaian Penguji</th>
-                        <th class="bg-danger" style="width: 30px">B</th>
+                        <th class="bg-success text-center" style="width: 30px">B</th>
                         <th>Penguji 1</th>
                         <th>Penguji 2</th>
                         <th>Penguji 3</th>
@@ -88,88 +117,88 @@
                     <tr>
                         <td>1</td>  
                         <td>Presentasi</td>
-                        <td class="bg-secondary">2</td>
-                        <td>{{$nilaipenguji1->presentasi}}</td>                                           
-                        <td>{{$nilaipenguji2->presentasi}}</td>                                           
-                        <td>{{$nilaipenguji3->presentasi}}</td>                                           
+                        <td class="bg-secondary text-center">2</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->presentasi}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->presentasi}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->presentasi}}</td>                                           
                     </tr>
                     <tr>
                         <td>2</td> 
                         <td>Tingkat Penguasaan Materi</td>
-                        <td class="bg-secondary">3</td>
-                        <td>{{$nilaipenguji1->tingkat_penguasaan_materi}}</td>                                           
-                        <td>{{$nilaipenguji2->tingkat_penguasaan_materi}}</td>                                           
-                        <td>{{$nilaipenguji3->tingkat_penguasaan_materi}}</td>                       
+                        <td class="bg-secondary text-center">3</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->tingkat_penguasaan_materi}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->tingkat_penguasaan_materi}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->tingkat_penguasaan_materi}}</td>                       
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Keaslian</td>
-                        <td class="bg-secondary">2</td>
-                        <td>{{$nilaipenguji1->keaslian}}</td>                                           
-                        <td>{{$nilaipenguji2->keaslian}}</td>                                           
-                        <td>{{$nilaipenguji3->keaslian}}</td>                      
+                        <td class="bg-secondary text-center">2</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->keaslian}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->keaslian}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->keaslian}}</td>                      
                     </tr>
                     <tr>
                         <td>4</td> 
                         <td>Ketepatan Metodologi</td>
-                        <td class="bg-secondary">4</td>
-                        <td>{{$nilaipenguji1->ketepatan_metodologi}}</td>                                           
-                        <td>{{$nilaipenguji2->ketepatan_metodologi}}</td>                                           
-                        <td>{{$nilaipenguji3->ketepatan_metodologi}}</td>                       
+                        <td class="bg-secondary text-center">4</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->ketepatan_metodologi}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->ketepatan_metodologi}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->ketepatan_metodologi}}</td>                       
                     </tr>
                     <tr>
                         <td>5</td> 
                         <td>Penguasaan Dasar Teori</td>
-                        <td class="bg-secondary">4</td>
-                        <td>{{$nilaipenguji1->penguasaan_dasar_teori}}</td>                                           
-                        <td>{{$nilaipenguji2->penguasaan_dasar_teori}}</td>                                           
-                        <td>{{$nilaipenguji3->penguasaan_dasar_teori}}</td>                        
+                        <td class="bg-secondary text-center">4</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->penguasaan_dasar_teori}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->penguasaan_dasar_teori}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->penguasaan_dasar_teori}}</td>                        
                     </tr>
                     <tr>
                         <td>6</td>       
                         <td>Kecermatan Perumusan Masalah</td>
-                        <td class="bg-secondary">3</td>
-                        <td>{{$nilaipenguji1->kecermatan_perumusan_masalah}}</td>                                           
-                        <td>{{$nilaipenguji2->kecermatan_perumusan_masalah}}</td>                                           
-                        <td>{{$nilaipenguji3->kecermatan_perumusan_masalah}}</td>                   
+                        <td class="bg-secondary text-center">3</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->kecermatan_perumusan_masalah}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->kecermatan_perumusan_masalah}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->kecermatan_perumusan_masalah}}</td>                   
                     </tr>
                     <tr>
                         <td>7</td>        
                         <td>Tinjauan Pustaka</td>
-                        <td class="bg-secondary">3</td>
-                        <td>{{$nilaipenguji1->tinjauan_pustaka}}</td>                                           
-                        <td>{{$nilaipenguji2->tinjauan_pustaka}}</td>                                           
-                        <td>{{$nilaipenguji3->tinjauan_pustaka}}</td>                
+                        <td class="bg-secondary text-center">3</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->tinjauan_pustaka}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->tinjauan_pustaka}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->tinjauan_pustaka}}</td>                
                     </tr>
                     <tr>
                         <td>8</td>
                         <td>Tata Tulis</td>
-                        <td class="bg-secondary">2</td>
-                        <td>{{$nilaipenguji1->tata_tulis}}</td>                                           
-                        <td>{{$nilaipenguji2->tata_tulis}}</td>                                           
-                        <td>{{$nilaipenguji3->tata_tulis}}</td>                      
+                        <td class="bg-secondary text-center">2</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->tata_tulis}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->tata_tulis}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->tata_tulis}}</td>                      
                     </tr>                   
                     <tr>
                         <td>9</td>
                         <td>Sumbangan Pemikiran Terhadap Ilmu Pengetahuan dan Penerapannya</td>
-                        <td class="bg-secondary">3</td>
-                        <td>{{$nilaipenguji1->sumbangan_pemikiran}}</td>                                           
-                        <td>{{$nilaipenguji2->sumbangan_pemikiran}}</td>                                           
-                        <td>{{$nilaipenguji3->sumbangan_pemikiran}}</td> 
+                        <td class="bg-secondary text-center">3</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->sumbangan_pemikiran}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->sumbangan_pemikiran}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->sumbangan_pemikiran}}</td> 
                     </tr>
 
                     <tr>
                         <td colspan="2">Total Nilai Penguji</td>
-                        <td class="bg-danger">45</td>
-                        <td>{{$nilaipenguji1->total_nilai_angka}}</td>                                           
-                        <td>{{$nilaipenguji2->total_nilai_angka}}</td>                                           
-                        <td>{{$nilaipenguji3->total_nilai_angka}}</td> 
+                        <td class="bg-success text-center">45</td>
+                        <td class="nilai1 text-center">{{$nilaipenguji1->total_nilai_angka}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->total_nilai_angka}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->total_nilai_angka}}</td> 
                     </tr>
                     <tr>
                         <td colspan="3">Nilai Huruf Penguji</td>                        
-                        <td>{{$nilaipenguji1->total_nilai_huruf}}</td>                                           
-                        <td>{{$nilaipenguji2->total_nilai_huruf}}</td>                                           
-                        <td>{{$nilaipenguji3->total_nilai_huruf}}</td> 
+                        <td class="nilai1 text-center">{{$nilaipenguji1->total_nilai_huruf}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji2->total_nilai_huruf}}</td>                                           
+                        <td class="nilai1 text-center">{{$nilaipenguji3->total_nilai_huruf}}</td> 
                     </tr>
                     <tr>                        
                         <td colspan="3">Rata Rata Nilai Penguji</td>
@@ -189,92 +218,92 @@
                 <tr>
                     <th>#</th>
                     <th style="width: 230px">Penilaian Pembimbing</th>
-                    <th class="bg-danger">B</th>
-                    <th>Pembimbing 1</th>
-                    <th>Pembimbing 2</th>                    
+                    <th class="bg-success text-center">B</th>
+                    <th class="pb text-center">Pembimbing 1</th>
+                    <th class="pb text-center">Pembimbing 2</th>                    
                 </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>  
                         <td>Penguasaan Dasar Teori</td>
-                        <td class="bg-secondary">10</td>
+                        <td class="bg-secondary text-center">10</td>
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->penguasaan_dasar_teori}}</td>                                           
-                            <td>{{$nilaipembimbing2->penguasaan_dasar_teori}}</td>                                           
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->penguasaan_dasar_teori}}</td>                                           
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->penguasaan_dasar_teori}}</td>                                           
                         @else
-                            <td>{{$nilaipembimbing1->penguasaan_dasar_teori}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->penguasaan_dasar_teori}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                                              
                     </tr>
                     <tr>
                         <td>2</td> 
                         <td>Tingkat Penguasaan Materi</td>
-                        <td class="bg-secondary">10</td>
+                        <td class="bg-secondary text-center">10</td>
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->tingkat_penguasaan_materi}}</td>      
-                            <td>{{$nilaipembimbing2->tingkat_penguasaan_materi}}</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->tingkat_penguasaan_materi}}</td>      
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->tingkat_penguasaan_materi}}</td>
                         @else
-                            <td>{{$nilaipembimbing1->tingkat_penguasaan_materi}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->tingkat_penguasaan_materi}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                                             
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Tinjauan Pustaka</td>
-                        <td class="bg-secondary">9</td>
+                        <td class="bg-secondary text-center">9</td>
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->tinjauan_pustaka}}</td>      
-                            <td>{{$nilaipembimbing2->tinjauan_pustaka}}</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->tinjauan_pustaka}}</td>      
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->tinjauan_pustaka}}</td>
                         @else
-                            <td>{{$nilaipembimbing1->tinjauan_pustaka}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->tinjauan_pustaka}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                                            
                     </tr>
                     <tr>
                         <td>4</td> 
                         <td>Tata Tulis</td>
-                        <td class="bg-secondary">8</td>
+                        <td class="bg-secondary text-center">8</td>
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->tata_tulis}}</td>      
-                            <td>{{$nilaipembimbing2->tata_tulis}}</td> 
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->tata_tulis}}</td>      
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->tata_tulis}}</td> 
                         @else
-                            <td>{{$nilaipembimbing1->tata_tulis}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->tata_tulis}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                                            
                     </tr>                    
                     <tr>
                         <td>5</td> 
                         <td>Sikap dan Kepribadian Ketika Bimbingan</td>
-                        <td class="bg-secondary">8</td>
+                        <td class="bg-secondary text-center">8</td>
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->sikap_dan_kepribadian}}</td>      
-                            <td>{{$nilaipembimbing2->sikap_dan_kepribadian}}</td> 
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->sikap_dan_kepribadian}}</td>      
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->sikap_dan_kepribadian}}</td> 
                         @else
-                            <td>{{$nilaipembimbing1->sikap_dan_kepribadian}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->sikap_dan_kepribadian}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                                            
                     </tr>                    
 
                     <tr>
                         <td colspan="2">Total Nilai Pembimbing</td>
-                        <td class="bg-danger">55</td>
+                        <td class="bg-success text-center">55</td>
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->total_nilai_angka}}</td>      
-                            <td>{{$nilaipembimbing2->total_nilai_angka}}</td> 
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->total_nilai_angka}}</td>      
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->total_nilai_angka}}</td> 
                         @else
-                            <td>{{$nilaipembimbing1->total_nilai_angka}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->total_nilai_angka}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                         
                     </tr>
                     <tr>
                         <td colspan="3">Nilai Huruf Pembimbing</td>                        
                         @if ($pembimbing->count() > 1)
-                            <td>{{$nilaipembimbing1->total_nilai_huruf}}</td>      
-                            <td>{{$nilaipembimbing2->total_nilai_huruf}}</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->total_nilai_huruf}}</td>      
+                            <td class="nilai1 text-center">{{$nilaipembimbing2->total_nilai_huruf}}</td>
                         @else
-                            <td>{{$nilaipembimbing1->total_nilai_huruf}}</td>
-                            <td>-</td>
+                            <td class="nilai1 text-center">{{$nilaipembimbing1->total_nilai_huruf}}</td>
+                            <td class="nilai1 text-center">-</td>
                         @endif                         
                     </tr>
                     <tr>
@@ -297,7 +326,7 @@
                 <tbody>
                     <tr>                        
                         <td style="width: 250px">NILAI AKHIR</td>
-                        <td class="bg-danger text-center">
+                        <td class="bg-success text-center">
                             <h3 class="text-bold">
                                 @if ($pembimbing->count() > 1)                                
                                 {{ round(((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2) + (($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3)) / 2) }}  
@@ -309,7 +338,7 @@
                     </tr>
                     <tr>                        
                         <td style="width: 250px">NILAI HURUF</td>
-                        <td class="bg-danger text-center">
+                        <td class="bg-success text-center">
                             <h3 class="text-bold">
                                 @if ($pembimbing->count() > 1)                                
                                 @if (((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2) + (($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3)) / 2 >= 85 )                            
@@ -371,9 +400,9 @@
                                       ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                       2 >=
                                       60)
-                                    LULUS                                            
+                                      LAYAK LULUS                                            
                                   @else
-                                    TIDAK LULUS
+                                      TIDAK LAYAK LULUS
                                   @endif
                               @endif
                           @endif
@@ -385,9 +414,9 @@
                                         @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                                             ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                             2 >= 60)
-                                            LULUS
+                                            LAYAK LULUS
                                         @else
-                                            TIDAK LULUS
+                                            TIDAK LAYAK LULUS
                                         @endif
                                     @endif
                                   @else

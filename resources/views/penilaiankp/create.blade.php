@@ -14,10 +14,11 @@
 
 @section('content')
 
-<div class="row mb-5">
-  <div class="col-6">
-    <ol class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
+<div>
+  <div class="row">
+    <div class="col">
+    <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">NIM</div>
           <span>{{$kp->mahasiswa->nim}}</span>
@@ -28,30 +29,11 @@
           <div class="fw-bold mb-2">Nama</div>
           <span>{{$kp->mahasiswa->nama}}</span>
         </div>        
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold mb-2">Judul</div>
-          <span>{{$kp->judul_kp}}</span>
-        </div>        
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold mb-2">Jadwal</div>          
-          <span>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}, : {{$kp->waktu}}</span>             
-        </div>        
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold mb-2">Lokasi</div>
-          <span>{{$kp->lokasi}}</span>
-        </div>        
       </li>   
     </ol>
-  </div>
-  
-  <div class="col-6">
-    <ol class="list-group">
+    </div>
+    <div class="col">
+    <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold mb-2">Pembimbing</div>
@@ -65,10 +47,49 @@
         </div>        
       </li>     
     </ol>
+    </div>
   </div>
 </div>
 
+<div class="kol-judul mt-3">
+  <div class="row">
+    <div class="col">
+    <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold mb-2">Judul</div>
+          <span>{{$kp->judul_kp}}</span>
+        </div>        
+      </li>   
+    </ol>  
+    </div>
+  </div>
+</div>
 
+<div class="kol-jadwal mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+    <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+        <div class="fw-bold mb-2">Jadwal</div>          
+          <span>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}, : {{$kp->waktu}}</span>             
+        </div>        
+      </li>   
+    </ol>
+    </div>
+    <div class="col">
+    <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+        <div class="fw-bold mb-2">Lokasi</div>
+          <span>{{$kp->lokasi}}</span>
+        </div>        
+      </li>   
+    </ol>
+    </div>
+  </div>
+</div>
 
 <form action="/penilaian-kp/create/{{$kp->id}}" method="POST">
 @csrf
@@ -124,7 +145,7 @@
                     </div>
 
                     <div class="row g-3 align-items-center mb-3">
-                        <div class="col-auto">
+                        <div class="col col-auto">
                           <label for="tanya_jawab" class="col-form-label">Tanya Jawab</label>
                         </div>
 
@@ -219,7 +240,7 @@
                     <div class="input-group mb-3">
                     <span class="input-group-text">1</span>
                     <div class="form-floating">
-                        <textarea name="revisi_naskah1" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                        <textarea name="revisi_naskah1" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;"></textarea>
                         <label for="floatingTextarea2">Perbaikan 1</label>
                     </div>
                     </div>
@@ -227,7 +248,7 @@
                     <div class="input-group mb-3">
                     <span class="input-group-text">2</span>
                     <div class="form-floating">
-                        <textarea name="revisi_naskah2" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                        <textarea name="revisi_naskah2" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;"></textarea>
                         <label for="floatingTextarea2">Perbaikan 2</label>
                     </div>
                     </div>
@@ -235,7 +256,7 @@
                     <div class="input-group mb-3">
                     <span class="input-group-text">3</span>
                     <div class="form-floating">
-                        <textarea name="revisi_naskah3" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                        <textarea name="revisi_naskah3" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;"></textarea>
                         <label for="floatingTextarea2">Perbaikan 3</label>
                     </div>
                     </div>
@@ -243,7 +264,7 @@
                     <div class="input-group mb-3">
                     <span class="input-group-text">4</span>
                     <div class="form-floating">
-                        <textarea name="revisi_naskah4" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                        <textarea name="revisi_naskah4" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;"></textarea>
                         <label for="floatingTextarea2">Perbaikan 4</label>
                     </div>
                     </div>
@@ -251,7 +272,7 @@
                     <div class="input-group mb-3">
                     <span class="input-group-text">5</span>
                     <div class="form-floating">
-                        <textarea name="revisi_naskah5" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;"></textarea>
+                        <textarea name="revisi_naskah5" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;"></textarea>
                         <label for="floatingTextarea2">Perbaikan 5</label>
                     </div>
                     </div>

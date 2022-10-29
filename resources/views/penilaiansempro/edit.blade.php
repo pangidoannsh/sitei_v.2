@@ -19,9 +19,10 @@
 </div>
 @endif
 
-<div class="row mb-5">
-    <div class="col-6">
-      <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
+<div>
+  <div class="row">
+    <div class="col">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">NIM</div>
@@ -33,19 +34,65 @@
             <div class="fw-bold mb-2">Nama</div>
             <span>{{$sempro->penjadwalan_sempro->mahasiswa->nama}}</span>
           </div>        
+        </li>   
+      </ol>
+    </div>
+    <div class="col">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Pembimbing</div>
+            <span>1. {{$sempro->penjadwalan_sempro->pembimbingsatu->nama}}</span>                                      
+            @if ($sempro->penjadwalan_sempro->pembimbingdua != null)
+            <br>
+            <span>2. {{$sempro->penjadwalan_sempro->pembimbingdua->nama}}</span>                             
+            @endif
+          </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Judul</div>
-            <span>{{ $sempro->penjadwalan_sempro->revisi_naskah != null ? $sempro->penjadwalan_sempro->revisi_naskah : $sempro->penjadwalan_sempro->judul_proposal }}</span>
+            <div class="fw-bold mb-2">Penguji</div>
+            <span>1. {{$sempro->penjadwalan_sempro->pengujisatu->nama}}</span> 
+            <br>                   
+            <span>2. {{$sempro->penjadwalan_sempro->pengujidua->nama}}</span>
+            <br>                    
+            <span>3. {{$sempro->penjadwalan_sempro->pengujitiga->nama}}</span>                    
           </div>        
-        </li>
+        </li>     
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="kol-judul mt-3">
+  <div class="row">
+    <div class="col">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold mb-2">Judul</div>
+            <span>{{$sempro->penjadwalan_sempro->judul_proposal}}</span>
+          </div>        
+        </li>   
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="kol-jadwal mt-3 mb-3">
+  <div class="row">
+    <div class="col">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Jadwal</div>
             <span>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}, {{$sempro->waktu}}</span>
           </div>        
-        </li>
+        </li>   
+      </ol>
+    </div>
+    <div class="col">
+    <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <div class="fw-bold mb-2">Lokasi</div>
@@ -54,34 +101,7 @@
         </li>   
       </ol>
     </div>
-    
-    <div class="col-6">
-      <ol class="list-group"style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:20px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Pembimbing</div>
-            <span>{{$sempro->penjadwalan_sempro->pembimbingsatu->nama}}</span>                                      
-            @if ($sempro->penjadwalan_sempro->pembimbingdua != null)
-            <br>
-            <br>
-            <span>{{$sempro->penjadwalan_sempro->pembimbingdua->nama}}</span>                             
-            @endif
-          </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Penguji</div>
-            <span>{{$sempro->penjadwalan_sempro->pengujisatu->nama}}</span> 
-            <br>                   
-            <br>                   
-            <span>{{$sempro->penjadwalan_sempro->pengujidua->nama}}</span>
-            <br>                    
-            <br>                    
-            <span>{{$sempro->penjadwalan_sempro->pengujitiga->nama}}</span>                    
-          </div>        
-        </li>     
-      </ol>
-    </div>
+  </div>
 </div>
 
 @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingsatu_nip || auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingdua_nip)
@@ -104,30 +124,20 @@
                 <label for="penguasaan_dasar_teori" class="col-form-label">Penguasaan Dasar Teori</label>
                 <div class="radio1 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="1.8" onclick="hasil()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="1.8" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="3.6" onclick="hasil()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori2" value="3.6" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="penguasaan_dasar_teori2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="5.4" onclick="hasil()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '5.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="7.2" onclick="hasil()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '7.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori3" value="5.4" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '5.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="penguasaan_dasar_teori3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="9" onclick="hasil()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '9' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+                <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori4" value="7.2" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '7.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="penguasaan_dasar_teori4">Baik</label>
+
+                <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori5" value="9" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '9' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="penguasaan_dasar_teori5">Sangat Baik</label>
                    
                 </div>                                                         
               </div>
@@ -136,30 +146,21 @@
                 <label for="tingkat_penguasaan_materi" class="col-form-label">Tingkat Penguasaan Materi</label>
                 <div class="radio2 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="1.8" onclick="hasil()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="1.8" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="3.6" onclick="hasil()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi2" value="3.6" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="tingkat_penguasaan_materi2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="5.4" onclick="hasil()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '5.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi3" value="5.4" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '5.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="tingkat_penguasaan_materi3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="7.2" onclick="hasil()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '7.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi4" value="7.2" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '7.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="tingkat_penguasaan_materi4">Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="9" onclick="hasil()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '9' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                              
+                <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi5" value="9" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '9' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="tingkat_penguasaan_materi5">Sangat Baik</label>
+
                 </div>                                                         
               </div>
 
@@ -167,30 +168,20 @@
                 <label for="tinjauan_pustaka" class="col-form-label">Tinjauan Pustaka</label>
                 <div class="radio3 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="1.8" onclick="hasil()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                  <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.8" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="3.6" onclick="hasil()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka2" value="3.6" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="tinjauan_pustaka2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="5.4" onclick="hasil()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '5.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka3" value="5.4" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '5.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="tinjauan_pustaka3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="7.2" onclick="hasil()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '7.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka4" value="7.2" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '7.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="tinjauan_pustaka4">Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="9" onclick="hasil()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '9' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                           
+                <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka5" value="9" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '9' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="tinjauan_pustaka5">Sangat Baik</label>
                    
                 </div>                                                         
               </div>
@@ -199,30 +190,20 @@
                 <label for="penguasaan_dasar_teori" class="col-form-label">Tata Tulis</label>
                 <div class="radio4 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="1.8" onclick="hasil()" {{old('tata_tulis', $sempro->tata_tulis) == '1.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1.8" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '1.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="tata_tulis1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="3.6" onclick="hasil()" {{old('tata_tulis', $sempro->tata_tulis) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis2" value="3.6" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="tata_tulis2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="5.4" onclick="hasil()" {{old('tata_tulis', $sempro->tata_tulis) == '5.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis3" value="5.4" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '5.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="tata_tulis3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="7.2" onclick="hasil()" {{old('tata_tulis', $sempro->tata_tulis) == '7.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis4" value="7.2" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '7.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="tata_tulis4">Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="9" onclick="hasil()" {{old('tata_tulis', $sempro->tata_tulis) == '9' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                        
+                <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis5" value="9" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '9' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="tata_tulis5">Sangat Baik</label>
                    
                 </div>                                                         
               </div>             
@@ -231,30 +212,20 @@
                 <label for="hasil_dan_pembahasan" class="col-form-label">Sikap dan Kepribadian Ketika Bimbingan</label>
                 <div class="radio5 d-inline">
                   
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="1.8" onclick="hasil()" {{old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '1.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian1" value="1.8" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '1.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="sikap_dan_kepribadian1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="3.6" onclick="hasil()" {{old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian2" value="3.6" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="sikap_dan_kepribadian2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="5.4" onclick="hasil()" {{old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '5.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian3" value="5.4" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '5.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="sikap_dan_kepribadian3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="7.2" onclick="hasil()" {{old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '7.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian4" value="7.2" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '7.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="sikap_dan_kepribadian4">Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sikap_dan_kepribadian" value="9" onclick="hasil()" {{old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '9' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                            
+                <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian5" value="9" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '9' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="sikap_dan_kepribadian5">Sangat Baik</label>
                    
                 </div>                                                         
               </div>
@@ -342,30 +313,20 @@
                 <label for="presentasi" class="col-form-label">Presentasi</label>
                 <div class="radio6 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="presentasi" value="1" onclick="total()" {{old('presentasi', $sempro->presentasi) == '1' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="1" onclick="total()" {{ old('presentasi', $sempro->presentasi) == '1' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="presentasi1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="presentasi" value="2" onclick="total()" {{old('presentasi', $sempro->presentasi) == '2' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi2" value="2" onclick="total()" {{ old('presentasi', $sempro->presentasi) == '2' ? 'checked' : null }}>
+                <label class="btn tombol btn-warning " for="presentasi2">Kurang Baik</label>
+                
+              <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi3" value="3" onclick="total()" {{ old('presentasi', $sempro->presentasi) == '3' ? 'checked' : null }}>
+                <label class="btn tombol btn-secondary " for="presentasi3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="presentasi" value="3" onclick="total()" {{old('presentasi', $sempro->presentasi) == '3' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="presentasi" value="4" onclick="total()" {{old('presentasi', $sempro->presentasi) == '4' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi4" value="4" onclick="total()" {{ old('presentasi', $sempro->presentasi) == '4' ? 'checked' : null }}>
+                <label class="btn tombol btn-info " for="presentasi4">Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="presentasi" value="5" onclick="total()" {{old('presentasi', $sempro->presentasi) == '5' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi5" value="5" onclick="total()" {{ old('presentasi', $sempro->presentasi) == '5' ? 'checked' : null }}>
+                <label class="btn tombol btn-primary " for="presentasi5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -374,30 +335,20 @@
                 <label for="tingkat_penguasaan_materi" class="col-form-label">Tingkat Penguasaan Materi</label>
                 <div class="radio7 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="1.6" onclick="total()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="1.6" onclick="total()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="3.2" onclick="total()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '3.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi2" value="3.2" onclick="total()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '3.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="tingkat_penguasaan_materi2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="4.8" onclick="total()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '4.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="6.4" onclick="total()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '6.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi3" value="4.8" onclick="total()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '4.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="tingkat_penguasaan_materi3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tingkat_penguasaan_materi" value="8" onclick="total()" {{old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '8' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi4" value="6.4" onclick="total()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '6.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="tingkat_penguasaan_materi4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi5" value="8" onclick="total()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '8' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="tingkat_penguasaan_materi5">Sangat Baik</label>
                     
                 </div>                                                         
               </div>
@@ -406,30 +357,20 @@
                 <label for="keaslian" class="col-form-label">Keaslian</label>
                 <div class="radio8 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="keaslian" value="1" onclick="total()" {{old('keaslian', $sempro->keaslian) == '1' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian1" value="1" onclick="total()" {{ old('keaslian', $sempro->keaslian) == '1' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="keaslian1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="keaslian" value="2" onclick="total()" {{old('keaslian', $sempro->keaslian) == '2' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian2" value="2" onclick="total()" {{ old('keaslian', $sempro->keaslian) == '2' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="keaslian2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="keaslian" value="3" onclick="total()" {{old('keaslian', $sempro->keaslian) == '3' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="keaslian" value="4" onclick="total()" {{old('keaslian', $sempro->keaslian) == '4' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian3" value="3" onclick="total()" {{ old('keaslian', $sempro->keaslian) == '3' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="keaslian3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="keaslian" value="5" onclick="total()" {{old('keaslian', $sempro->keaslian) == '5' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian4" value="4" onclick="total()" {{ old('keaslian', $sempro->keaslian) == '4' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="keaslian4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian5" value="5" onclick="total()" {{ old('keaslian', $sempro->keaslian) == '5' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="keaslian5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -438,30 +379,20 @@
                 <label for="ketepatan_metodologi" class="col-form-label">Ketepatan Metodologi</label>
                 <div class="radio9 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ketepatan_metodologi" value="1.4" onclick="total()"  {{old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '1.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi1" value="1.4" onclick="total()" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '1.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="ketepatan_metodologi1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ketepatan_metodologi" value="2.8" onclick="total()" {{old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '2.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi2" value="2.8" onclick="total()" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '2.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="ketepatan_metodologi2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ketepatan_metodologi" value="4.2" onclick="total()" {{old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '4.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ketepatan_metodologi" value="5.6" onclick="total()" {{old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '5.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi3" value="4.2" onclick="total()" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '4.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="ketepatan_metodologi3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ketepatan_metodologi" value="7" onclick="total()" {{old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '7' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi4" value="5.6" onclick="total()" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '5.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="ketepatan_metodologi4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi5" value="7" onclick="total()" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '7' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="ketepatan_metodologi5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -470,30 +401,20 @@
                 <label for="penguasaan_dasar_teori" class="col-form-label">Penguasaan Dasar Teori</label>
                 <div class="radio10 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="1.2" onclick="total()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="1.2" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="2.4" onclick="total()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '2.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori2" value="2.4" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '2.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="penguasaan_dasar_teori2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="3.6" onclick="total()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="4.8" onclick="total()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '4.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori3" value="3.6" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="penguasaan_dasar_teori3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="penguasaan_dasar_teori" value="6" onclick="total()" {{old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '6' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori4" value="4.8" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '4.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="penguasaan_dasar_teori4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori5" value="6" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '6' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="penguasaan_dasar_teori5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -502,30 +423,20 @@
                 <label for="kecermatan_perumusan_masalah" class="col-form-label">Kecermatan Perumusan Masalah</label>
                 <div class="radio11 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="kecermatan_perumusan_masalah" value="1.2" onclick="total()" {{old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '1.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah1" value="1.2" onclick="total()" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '1.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="kecermatan_perumusan_masalah1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="kecermatan_perumusan_masalah" value="2.4" onclick="total()" {{old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '2.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah2" value="2.4" onclick="total()" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '2.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="kecermatan_perumusan_masalah2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="kecermatan_perumusan_masalah" value="3.6" onclick="total()" {{old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="kecermatan_perumusan_masalah" value="4.8" onclick="total()" {{old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '4.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah3" value="3.6" onclick="total()" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="kecermatan_perumusan_masalah3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="kecermatan_perumusan_masalah" value="6" onclick="total()" {{old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '6' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah4" value="4.8" onclick="total()" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '4.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="kecermatan_perumusan_masalah4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah5" value="6" onclick="total()" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '6' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="kecermatan_perumusan_masalah5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -534,30 +445,20 @@
                 <label for="tinjauan_pustaka" class="col-form-label">Tinjauan Pustaka</label>
                 <div class="radio12 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="1.4" onclick="total()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.4" onclick="total()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="2.8" onclick="total()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '2.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka2" value="2.8" onclick="total()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '2.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="tinjauan_pustaka2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="4.2" onclick="total()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '4.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="5.6" onclick="total()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '5.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka3" value="4.2" onclick="total()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '4.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="tinjauan_pustaka3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tinjauan_pustaka" value="7" onclick="total()" {{old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '7' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka4" value="5.6" onclick="total()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '5.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="tinjauan_pustaka4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka5" value="7" onclick="total()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '7' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="tinjauan_pustaka5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -566,30 +467,20 @@
                 <label for="tata_tulis" class="col-form-label">Tata Tulis</label>
                 <div class="radio13 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="1" onclick="total()" {{old('tata_tulis', $sempro->tata_tulis) == '1' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1" onclick="total()" {{ old('tata_tulis', $sempro->tata_tulis) == '1' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="tata_tulis1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="2" onclick="total()" {{old('tata_tulis', $sempro->tata_tulis) == '2' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis2" value="2" onclick="total()" {{ old('tata_tulis', $sempro->tata_tulis) == '2' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="tata_tulis2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="3" onclick="total()" {{old('tata_tulis', $sempro->tata_tulis) == '3' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="4" onclick="total()" {{old('tata_tulis', $sempro->tata_tulis) == '4' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis3" value="3" onclick="total()" {{ old('tata_tulis', $sempro->tata_tulis) == '3' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="tata_tulis3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tata_tulis" value="5" onclick="total()" {{old('tata_tulis', $sempro->tata_tulis) == '5' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis4" value="4" onclick="total()" {{ old('tata_tulis', $sempro->tata_tulis) == '4' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="tata_tulis4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis5" value="5" onclick="total()" {{ old('tata_tulis', $sempro->tata_tulis) == '5' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="tata_tulis5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>              
@@ -598,30 +489,20 @@
                 <label for="sumbangan_pemikiran" class="col-form-label">Sumbangan Pemikiran Terhadap Ilmu Pengetahuan</label>
                 <div class="radio14 d-inline">
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="1.2" onclick="total()" {{old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '1.2' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Kurang Baik</label>
-                  </div>
+                <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran1" value="1.2" onclick="total()" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '1.2' ? 'checked' : null }} >
+                <label class="btn tombol btn-danger " for="sumbangan_pemikiran1">Sangat Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="2.4" onclick="total()" {{old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '2.4' ? 'checked' : null}}>
-                    <label class="form-check-label">Kurang Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran2" value="2.4" onclick="total()" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '2.4' ? 'checked' : null }} >
+                <label class="btn tombol btn-warning " for="sumbangan_pemikiran2">Kurang Baik</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="3.6" onclick="total()" {{old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '3.6' ? 'checked' : null}}>
-                    <label class="form-check-label">Biasa</label>
-                  </div>  
-                  
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="4.8" onclick="total()" {{old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '4.8' ? 'checked' : null}}>
-                    <label class="form-check-label">Baik</label>
-                  </div>
+              <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran3" value="3.6" onclick="total()" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '3.6' ? 'checked' : null }} >
+                <label class="btn tombol btn-secondary " for="sumbangan_pemikiran3">Biasa</label>
 
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sumbangan_pemikiran" value="6" onclick="total()" {{old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '6' ? 'checked' : null}}>
-                    <label class="form-check-label">Sangat Baik</label>
-                  </div>                                                                   
+              <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran4" value="4.8" onclick="total()" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '4.8' ? 'checked' : null }} >
+                <label class="btn tombol btn-info " for="sumbangan_pemikiran4">Baik</label>
+
+              <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran5" value="6" onclick="total()" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '6' ? 'checked' : null }} >
+                <label class="btn tombol btn-primary " for="sumbangan_pemikiran5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -657,7 +538,7 @@
                 " readonly value="{{$sempro->total_nilai_huruf}}">
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary float-right">Perbarui</button>    
+              <button type="submit" class="btn btn-success float-right">Perbarui</button>    
 
             </div>
 
@@ -667,7 +548,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">1</span>
                 <div class="form-floating">
-                  <textarea name="revisi_naskah1" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;">{{$sempro->revisi_naskah1}}</textarea>
+                  <textarea name="revisi_naskah1" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;">{{$sempro->revisi_naskah1}}</textarea>
                   <label for="floatingTextarea2">Perbaikan 1</label>
                 </div>
               </div>
@@ -675,7 +556,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">2</span>
                 <div class="form-floating">
-                  <textarea name="revisi_naskah2" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;">{{$sempro->revisi_naskah2}}</textarea>
+                  <textarea name="revisi_naskah2" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;">{{$sempro->revisi_naskah2}}</textarea>
                   <label for="floatingTextarea2">Perbaikan 2</label>
                 </div>
               </div>
@@ -683,7 +564,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">3</span>
                 <div class="form-floating">
-                  <textarea name="revisi_naskah3" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;">{{$sempro->revisi_naskah3}}</textarea>
+                  <textarea name="revisi_naskah3" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;">{{$sempro->revisi_naskah3}}</textarea>
                   <label for="floatingTextarea2">Perbaikan 3</label>
                 </div>
               </div>
@@ -691,7 +572,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">4</span>
                 <div class="form-floating">
-                  <textarea name="revisi_naskah4" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;">{{$sempro->revisi_naskah4}}</textarea>
+                  <textarea name="revisi_naskah4" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;">{{$sempro->revisi_naskah4}}</textarea>
                   <label for="floatingTextarea2">Perbaikan 4</label>
                 </div>
               </div>
@@ -699,7 +580,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">5</span>
                 <div class="form-floating">
-                  <textarea name="revisi_naskah5" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:600px;">{{$sempro->revisi_naskah5}}</textarea>
+                  <textarea name="revisi_naskah5" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; width:1060px;">{{$sempro->revisi_naskah5}}</textarea>
                   <label for="floatingTextarea2">Perbaikan 5</label>
                 </div>
               </div>
@@ -723,7 +604,7 @@
                   <label class="form-label">Judul Baru</label>
                   <input type="text" name="revisi_naskah" class="form-control" value="{{ $sempro->penjadwalan_sempro->revisi_naskah != null ? $sempro->penjadwalan_sempro->revisi_naskah : '' }}">
                 </div>              
-                <button type="submit" class="btn btn-primary">Perbarui</button>
+                <button type="submit" class="btn btn-success float-right">Perbarui</button>
               </form>
 
             </div>
