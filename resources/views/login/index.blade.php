@@ -23,13 +23,13 @@
     <div class="container overflow-hidden text-center">
   <div class="masuk row gx-5">
     <div class="col-lg mt-5">
-     <div class="gambar p-3 mt-5">
+     <div class=" gambar p-3 mt-5">
       <img src="assets/dist/img/unri.png" alt="" width="250">
       <h2 class=" mt-5 fw-bold">Sistem Informasi <br>Teknik Elektro dan Informatika</h2>
      </div>
     </div>
-    <div class="col p-2 mt-5">
-      <div><main class="form-signin w-100 m-auto">
+    <div class="col mt-5">
+      <div class="kotak-masuk p-3 mt-5"><main class="form-signin w-100 m-auto">
       @if (session()->has('loginError'))
       <div class="alert alert-danger alert-dismissible fade show float-left" role="alert">
         {{session('loginError')}}
@@ -39,11 +39,8 @@
 
         <form class="form-login" action="/" method="POST" class="text-center mt-5">
           @csrf
-
-            <div>
-              <img src="assets/dist/img/unri.png" alt="" width="80">
-              <h4 class="mt-4 fw-bold">Sistem Informasi <br>Teknik Elektro dan Informatika</h4>
-           </div>
+          
+            <h1 class=" h3 mb-4 fw-bold">Selamat Datang!</h1>
 
             <div class="form-floating mt-5">
             <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" value="{{ old('username') }}" placeholder="username" autofocus required>
@@ -65,8 +62,13 @@
         <small class=" kecil d-block text-center mt-3">Belum Terdaftar? <b>Hubungi Staff Jurusan!</b></small>
     </main></div>
     </div>
+    <div class="footer-login mt-5">
+  <strong>Dikembangkan oleh Prodi Teknik Informatika UNRI</strong>
+</div>
   </div>  
 </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
