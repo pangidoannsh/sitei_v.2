@@ -31,8 +31,9 @@ class DosenController extends Controller
         $request->validate([
             'nip' => ['required', 'unique:dosen'],
             'password' => ['required', 'min:3', 'max:255'],
-            'gambar' => ['image', 'file', 'max:1024'],
+            // 'gambar' => ['image', 'file', 'max:1024'],
             'nama' => ['required'],
+            'nama_singkat' => ['required'],
             'email' => ['required', 'unique:dosen', 'email'],
             // 'role_id' => ['unique:dosen']
         ]);
@@ -43,8 +44,9 @@ class DosenController extends Controller
                 'prodi_id' => $request->prodi_id,
                 'nip' => $request->nip,
                 'password' => Hash::make($request->password),
-                'gambar' => $request->file('gambar')->store('gambar'),
+                // 'gambar' => $request->file('gambar')->store('gambar'),
                 'nama' => $request->nama,
+                'nama_singkat' => $request->nama_singkat,
                 'email' => $request->email,
             ]);
 
@@ -60,6 +62,7 @@ class DosenController extends Controller
                     'nip' => $request->nip,
                     'password' => Hash::make($request->password),
                     'nama' => $request->nama,
+                    'nama_singkat' => $request->nama_singkat,
                     'email' => $request->email,
                 ]);
 
@@ -81,6 +84,7 @@ class DosenController extends Controller
     {
         $rules = [
             'nama' => ['required'],
+            'nama_singkat' => ['required'],
             // 'password' => ['required', 'min:3', 'max:255'],
         ];
 
@@ -97,7 +101,7 @@ class DosenController extends Controller
         Dosen::where('id', $dosen->id)
             ->update($validated);
 
-        return redirect('/dosen')->with('message', 'Data Berhasil Diedit!');
+        return redirect('/dosen')->with('message', 'Data Berhasil Diubah!');
     }
 
     public function destroy(Dosen $dosen)

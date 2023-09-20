@@ -74,7 +74,7 @@ class UserController extends Controller
         User::where('id', $user->id)
             ->update($validated);
 
-        return redirect('/user')->with('message', 'Data Berhasil Diedit!');
+        return redirect('/user')->with('message', 'Data Berhasil Diubah!');
     }
 
     public function destroy(User $user)

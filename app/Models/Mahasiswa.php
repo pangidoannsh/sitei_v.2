@@ -2,7 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Role;
+use App\Models\Prodi;
+use App\Models\Mahasiswa;
+use App\Models\Konsentrasi;
+use App\Models\PendaftaranKP;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\PendaftaranSkripsi;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,6 +45,14 @@ class Mahasiswa extends Authenticatable
     {
         return $this->belongsTo(Konsentrasi::class);
     }
+    
+    public function pendaftarankp()
+    {
+        return $this->belongsTo(PendaftaranKP::class);
+    }
+ 
+
+    
 
     /**
      * The attributes that should be hidden for serialization.

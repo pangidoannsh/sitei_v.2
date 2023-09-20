@@ -20,6 +20,7 @@ class CreateDosensTable extends Migration
             $table->string('nip');
             $table->string('password');
             $table->string('nama');
+            $table->string('nama_singkat');
             $table->string('email');            
             $table->timestamps();
         });

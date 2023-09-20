@@ -15,16 +15,20 @@ class CreatePenjadwalanSemprosTable extends Migration
     {
         Schema::create('penjadwalan_sempro', function (Blueprint $table) {
             $table->id();
+            $table->string('pendaftaransempro_id')->nullable();
             $table->string('mahasiswa_nim');
             $table->string('pembimbingsatu_nip');
             $table->string('pembimbingdua_nip')->nullable();
             $table->string('pengujisatu_nip');
             $table->string('pengujidua_nip');
-            $table->string('pengujitiga_nip');
+            $table->string('pengujitiga_nip')->nullable();
             $table->foreignId('prodi_id');          
-            $table->string('jenis_seminar')->default('Seminar Proposal');
+            $table->string('jenis_seminar')->default('Proposal');
             $table->string('judul_proposal');
             $table->string('revisi_proposal')->nullable();
+            $table->string('catatan1')->nullable();
+            $table->string('catatan2')->nullable();
+            $table->string('catatan3')->nullable();
             $table->date('tanggal');
             $table->time('waktu');
             $table->string('lokasi');

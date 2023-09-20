@@ -48,9 +48,9 @@ class RoleController extends Controller
             Role::where('id', $role->id)
                 ->update($validated);
 
-            return redirect('/role')->with('message', 'Data Berhasil Diedit!');
+            return redirect('/role')->with('message', 'Data Berhasil Diubah!');
         } else {
-            return redirect('/role')->with('message', 'Data Berhasil Diedit!');
+            return redirect('/role')->with('message', 'Data Berhasil Diubah!');
         }
     }
 

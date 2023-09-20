@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\Dosen;
 use App\Models\Prodi;
@@ -9,6 +10,13 @@ use App\Models\Konsentrasi;
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
+use App\Models\PendaftaranKP;
+use \PDF;
+use App\Models\PenilaianKPPenguji;
+use Illuminate\Support\Facades\URL;
+use App\Models\PenilaianKPPembimbing;
+use Illuminate\Support\Facades\Crypt;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PenjadwalanKPController extends Controller
 {
@@ -36,29 +44,45 @@ class PenjadwalanKPController extends Controller
         if (auth()->user()->role_id == 2) {            
             return view('penjadwalankp.create', [    
                 'prodis' => Prodi::all(),
-                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),
-                'dosens' => Dosen::all(),                
+                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get()->sortBy('nama'),
+                'pendaftaran_kp' => PendaftaranKP::all(),
+                'dosens' => Dosen::all()->sortBy('nama'),
+                // 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', 1)->get(),                   
             ]);
         }        
         if (auth()->user()->role_id == 3) {            
             return view('penjadwalankp.create', [    
                 'prodis' => Prodi::all(),
-                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),
-                'dosens' => Dosen::all(),                
+                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get()->sortBy('nama'),
+                'dosens' => Dosen::all()->sortBy('nama'),
+                'pendaftaran_kp' => PendaftaranKP::all(),
+                // 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', 2)->get(),                   
             ]);
         }        
-        if (auth()->user()->role_id == 4) {            
+        if (auth()->user()->role_id == 4) {    
+            
             return view('penjadwalankp.create', [    
                 'prodis' => Prodi::all(),
-                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),
-                'dosens' => Dosen::all(),                
+                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
+                'dosens' => Dosen::all()->sortBy('nama'), 
+                'pendaftaran_kp' => PendaftaranKP::all(),     
+                // 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', 3)->get(),          
             ]);
         }        
+        // if (auth()->user()->nim > 0) {            
+        //     return view('penjadwalankp.create', [    
+        //         'prodis' => Prodi::all(),
+        //         'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
+        //         'dosens' => Dosen::all()->sortBy('nama'),     
+                       
+        //     ]);
+        // }        
     }
 
-    public function store(Request $request)
+    public function store(Request $request , PendaftaranKP $id)
     {
         $request->validate([
+            // 'pendaftarankp_id' => 'required',
             'mahasiswa_nim' => 'required',
             'pembimbing_nip' => 'required',
             'penguji_nip' => 'required',
@@ -67,9 +91,13 @@ class PenjadwalanKPController extends Controller
             'tanggal' => 'required',
             'waktu' => 'required',
             'lokasi' => 'required',
+            // 'status_kp' => 'required',
         ]);
+        
+    //    $pendaftarankp_id = PendaftaranKP::select('id')->where('mahasiswa_nim', $request->pendaftarankp_id)->get();
 
         PenjadwalanKP::create([
+            // 'pendaftarankp_id' =>$pendaftarankp_id, 
             'mahasiswa_nim' => $request->mahasiswa_nim,
             'pembimbing_nip' => $request->pembimbing_nip,
             'penguji_nip' => $request->penguji_nip,                        
@@ -80,17 +108,32 @@ class PenjadwalanKPController extends Controller
             'lokasi' => $request->lokasi,
             'dibuat_oleh' => auth()->user()->username,
         ]);
+        // PendaftaranKP::update([      
+        //     'status_kp' => $request->status_kp,
+        // ]);
+      
+        // $kp = PendaftaranKP::find($id);
+        // // $kp->jenis_usulan = 'Usulan Seminar Kerja Praktek';
+        // // $kp->tgl_created_semkp = Carbon::now()->isoFormat('D MMMM Y');
+        // $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
+        // // $kp->keterangan = 'Seminar Kerja Praktek dijadwal';
+        // $kp->update();
 
-        return redirect('/form')->with('message', 'Jadwal Berhasil Dibuat!');
+        Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
+        return redirect('/persetujuan/admin/index');
     }
 
-    public function edit(PenjadwalanKP $penjadwalan_kp)
+    public function edit($id)
     {
+        $decrypted = Crypt::decryptString($id);
+        $kps = PenjadwalanKP::findOrFail($decrypted);
+
         return view('penjadwalankp.edit', [
-            'kp' => $penjadwalan_kp,
+            'kp' => $kps,
             'prodis' => Prodi::all(),
-            'mahasiswas' => Mahasiswa::all(),
-            'dosens' => Dosen::all(),
+            'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
+            'dosens' => Dosen::all()->sortBy('nama'),
+            // 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('dosen_pembimbing_nip', Auth::user()->nip)->get(),
         ]);
     }
 
@@ -114,8 +157,37 @@ class PenjadwalanKPController extends Controller
         PenjadwalanKP::where('id', $penjadwalan_kp->id)
             ->update($validated);
 
-        return redirect('/form')->with('message', 'Jadwal Berhasil Diedit!');
+        return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }
+
+    public function destroy($id)
+    {   
+        $decrypted = Crypt::decryptString($id);
+        PenjadwalanKP::destroy($decrypted);
+        return redirect('/form')->with('message', 'Data Berhasil Dihapus!');
+    }
+
+    public function approve($id)
+    {
+        $jadwal = PenjadwalanKP::find($id);
+        $jadwal->status_seminar = 1;
+        $jadwal->update();
+
+        return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
+    }
+    //APPROVAL SELESAI SEMINAR
+    // public function approveselesaiseminarkp($id)
+    // {
+    //     $kp = PendaftaranKP::find($id);
+    //     $kp->status_kp = 'SEMINAR KP SELESAI';
+    //     $kp->keterangan = 'Seminar Kerja Praktek Selesai';
+    //     $kp->tgl_disetujui_kpti_10 = Carbon::now();
+    //     $kp->update();
+
+    //     return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
+    // }
+
+
 
     public function riwayat()
     {
@@ -160,37 +232,80 @@ class PenjadwalanKPController extends Controller
         return redirect('/persetujuan-kaprodi')->with('message', 'Berita Acara Ditolak!');
     }
 
+    public function ceknilaikp($id)
+    {
+        $decrypted = Crypt::decryptString($id);
+        $penjadwalan = PenjadwalanKP::findOrFail($decrypted);        
+        $nilaipenguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', $penjadwalan->penguji_nip)->first();
+
+        $nilaipembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', $penjadwalan->pembimbing_nip)->first();
+
+        return view('penjadwalankp.cek-nilai-kp', [
+            'penjadwalan' => $penjadwalan,
+            'nilaipembimbing' => $nilaipembimbing,
+            'nilaipenguji' => $nilaipenguji,
+        ]);
+    }
+
     public function nilaikp($id)
     {
+        $decrypted = Crypt::decryptString($id);
+        $penjadwalan = PenjadwalanKP::findOrFail($decrypted);        
+        $nilaipenguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', $penjadwalan->penguji_nip)->first();
 
-        $penjadwalan = PenjadwalanKP::find($id);
-        $penilaiankp = PenilaianKP::where('penjadwalan_kp_id', $id)->where('penguji_nip', $penjadwalan->penguji_nip)->first();
+        $nilaipembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', $penjadwalan->pembimbing_nip)->first();
 
-        return view('penjadwalankp.nilai-kp', [
-            'penjadwalan' => $penjadwalan,
-            'penilaiankp' => $penilaiankp,
-        ]);
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-kp').'/'. $penjadwalan->id));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        $pdf->loadView('penjadwalankp.nilai-kp',compact('penjadwalan','qrcode','nilaipenguji','nilaipembimbing', 'pdf'));
+        
+        return $pdf->stream('KPTI/TE-7 Form Nilai Penguji Seminar KP.pdf', array("Attachment" => false));
+        
+    }
+
+    public function beritaacarakp($id)
+    {
+        $decrypted = Crypt::decryptString($id);
+        $penjadwalan = PenjadwalanKP::findOrFail($decrypted);    
+
+        $nilaipenguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', $penjadwalan->penguji_nip)->first();
+
+        $nilaipembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', $penjadwalan->pembimbing_nip)->first();
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-kp').'/'. $penjadwalan->id));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        $pdf->loadView('penjadwalankp.beritaacara-kp',compact('penjadwalan','qrcode','nilaipenguji','nilaipembimbing', 'pdf'));
+        
+        return $pdf->stream('KPTI/TE-8 Berita Acara Seminar Kerja Praktek.pdf', array("Attachment" => false));
     }
 
     public function perbaikan($id)
     {
-        $penjadwalan = PenjadwalanKP::find($id);
-        $penilaianpenguji = PenilaianKP::where('penjadwalan_kp_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
+        $decrypted = Crypt::decryptString($id);
+        $penjadwalan = PenjadwalanKP::findOrFail($decrypted);         
+        $penilaianpenguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', auth()->user()->nip)->first();
 
-        return view('penjadwalankp.perbaikan-kp', [
-            'penjadwalan' => $penjadwalan,
-            'penilaianpenguji' => $penilaianpenguji,
-        ]);
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-kp').'/'. $penjadwalan->id));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        $pdf->loadView('penjadwalankp.perbaikan-kp',compact('penjadwalan','qrcode','penilaianpenguji', 'pdf'));
+        
+        return $pdf->stream('KPTI/TE-9 Lembar Perbaikan Seminar Kerja Praktek.pdf', array("Attachment" => false)); 
     }
 
     public function perbaikanpengujikp($id, $penguji)
     {
-        $penjadwalan = PenjadwalanKP::find($id);
-        $penilaianpenguji = PenilaianKP::where('penjadwalan_kp_id', $id)->where('penguji_nip', $penguji)->first();
+        $decrypted = Crypt::decryptString($id);
+        $penjadwalan = PenjadwalanKP::findOrFail($decrypted);        
+        $penilaianpenguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', $penguji)->first();
 
-        return view('penjadwalankp.perbaikan-kp', [
-            'penjadwalan' => $penjadwalan,
-            'penilaianpenguji' => $penilaianpenguji,
-        ]);
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-kp').'/'. $penjadwalan->id));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        $pdf->loadView('penjadwalankp.perbaikan-kp',compact('penjadwalan','qrcode','penilaianpenguji', 'pdf'));
+        
+        return $pdf->stream('KPTI/TE-9 Lembar Perbaikan Seminar Kerja Praktek.pdf', array("Attachment" => false));    
     }
 }

@@ -48,9 +48,9 @@ class KonsentrasiController extends Controller
             Konsentrasi::where('id', $konsentrasi->id)
                 ->update($validated);
 
-            return redirect('/konsentrasi')->with('message', 'Data Berhasil Diedit!');
+            return redirect('/konsentrasi')->with('message', 'Data Berhasil Diubah!');
         } else {
-            return redirect('/konsentrasi')->with('message', 'Data Berhasil Diedit!');
+            return redirect('/konsentrasi')->with('message', 'Data Berhasil Diubah!');
         }
     }
 

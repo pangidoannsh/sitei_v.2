@@ -23,16 +23,16 @@
 <table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">NIM</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Prodi</th>
-      <th scope="col">Tanggal</th>
-      <th scope="col">Waktu</th>
-      <th scope="col">Lokasi</th>              
-      <th scope="col">Pembimbing</th>
-      <th scope="col">Penguji</th>          
-      <th scope="col">Aksi</th>    
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">NIM</th>
+      <th class="text-center" scope="col">Nama</th>
+      <th class="text-center" scope="col">Prodi</th>
+      <th class="text-center" scope="col">Tanggal</th>
+      <th class="text-center" scope="col">Waktu</th>
+      <th class="text-center" scope="col">Lokasi</th>              
+      <th class="text-center" scope="col">Pembimbing</th>
+      <th class="text-center" scope="col">Penguji</th>          
+      <th class="text-center" scope="col">Aksi</th>    
     </tr>
   </thead>
   <tbody>    
@@ -46,15 +46,17 @@
           <td>{{$skripsi->waktu}}</td>                   
           <td>{{$skripsi->lokasi}}</td>                
           <td>
-            <p>{{$skripsi->pembimbingsatu->nama}}</p>
+            <p>1. {{$skripsi->pembimbingsatu->nama}}</p>
             @if ($skripsi->pembimbingdua == !null)
-            <p>{{$skripsi->pembimbingdua->nama}}</p>                               
+            <p>2. {{$skripsi->pembimbingdua->nama}}</p>                               
             @endif
           </td>         
           <td>
-            <p>{{$skripsi->pengujisatu->nama}}</p>
-            <p>{{$skripsi->pengujidua->nama}}</p>
-            <p>{{$skripsi->pengujitiga->nama}}</p>
+            <p>1. {{$skripsi->pengujisatu->nama}}</p>
+            <p>2. {{$skripsi->pengujidua->nama}}</p>
+            @if ($skripsi->pengujitiga == !null)
+            <p>3. {{$skripsi->pengujitiga->nama}}</p>
+            @endif
           </td>                    
           <td>            
             <a href="/nilai-skripsi/{{$skripsi->id}}" class="badge bg-success">Lihat Nilai</a>

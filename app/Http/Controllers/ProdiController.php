@@ -48,9 +48,9 @@ class ProdiController extends Controller
             Prodi::where('id', $prodi->id)
                 ->update($validated);
 
-            return redirect('/prodi')->with('message', 'Data Berhasil Diedit!');
+            return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
         } else {
-            return redirect('/prodi')->with('message', 'Data Berhasil Diedit!');
+            return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
         }
     }
 

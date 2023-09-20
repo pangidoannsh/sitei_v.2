@@ -14,7 +14,7 @@
     <form action="{{url ('/role/create')}}" method="POST">
         @csrf
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Hak Akses</label>
             <input type="text" name="role_akses" class="form-control @error('role_akses') is-invalid @enderror" value="{{ old('role_akses') }}">
             @error('role_akses')
@@ -24,7 +24,7 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success mb-5">Submit</button>
+        <button type="submit" class="btn submithakakses btn-success mb-5">Tambah</button>
 
       </form>
 </div>

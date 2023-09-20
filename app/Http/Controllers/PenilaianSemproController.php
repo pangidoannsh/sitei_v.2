@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PenjadwalanKP;
 use App\Models\PenjadwalanSempro;
+use App\Models\PenjadwalanSkripsi;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSemproPenguji;
 use App\Models\PenilaianSemproPembimbing;
-use App\Models\PenjadwalanKP;
-use App\Models\PenjadwalanSkripsi;
 
 class PenilaianSemproController extends Controller
 {
@@ -28,9 +29,10 @@ class PenilaianSemproController extends Controller
     }
 
     public function create($id)
-    {       
-        $pembimbing = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->get();
+    {    
+        $id = Crypt::decryptString($id);  
         $penjadwalan = PenjadwalanSempro::find($id);
+        $pembimbing = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->get();
         $ceknilaipenguji1 = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();            
         
         if ($ceknilaipenguji1 == null) {
@@ -110,7 +112,8 @@ class PenilaianSemproController extends Controller
             'penjadwalan_sempro_id' => $request['penjadwalan_sempro_id'] = $id,
         ]);
 
-        return redirect('/penilaian-sempro/edit/' . $id)->with('message', 'Nilai Berhasil Diinput!');
+        return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
+
     }
 
     public function store_penguji(Request $request, $id)
@@ -148,11 +151,13 @@ class PenilaianSemproController extends Controller
         $penilaian->penjadwalan_sempro_id = $id;
         $penilaian->save();        
 
-        return redirect('/penilaian-sempro/edit/' . $id)->with('message', 'Nilai Berhasil Diinput!');
+        return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
     }
 
     public function edit($id)
     {
+
+        $id = Crypt::decryptString($id);  
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
 
         if ($cari_penguji == 0) {
@@ -161,9 +166,8 @@ class PenilaianSemproController extends Controller
             ]);
         } else {
 
+            $penjadwalan = PenjadwalanSempro::find($id);            
             $pembimbing = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->get();
-
-            $penjadwalan = PenjadwalanSempro::find($id);
             $ceknilaipenguji1 = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
 
             if ($ceknilaipenguji1 == null) {
@@ -242,7 +246,7 @@ class PenilaianSemproController extends Controller
         $edit->total_nilai_huruf = $request->total_nilai_huruf;
         $edit->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
+        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diubah!');
     }
 
     public function update_penguji(Request $request, $id)
@@ -277,8 +281,7 @@ class PenilaianSemproController extends Controller
             $rules['revisi_naskah5'] = 'required';
         }
 
-        $validatedData = $request->validate($rules);
-
+        $validatedData = $request->validate($rules);        
         $penilaian = PenilaianSemproPenguji::where('id', $id)->where('penguji_nip', auth()->user()->nip)->first();
         $penilaian->presentasi = $validatedData['presentasi'];
         $penilaian->tingkat_penguasaan_materi = $validatedData['tingkat_penguasaan_materi'];
@@ -309,12 +312,7 @@ class PenilaianSemproController extends Controller
         }
         $penilaian->update();
 
-        $cari_penguji1 = PenjadwalanSempro::find($request->penjadwalan_sempro_id);
-        if ($cari_penguji1->pengujisatu_nip == auth()->user()->nip) {
-            return redirect('/penilaian-sempro/edit/' . $request->penjadwalan_sempro_id)->with('message', 'Nilai Berhasil Diedit!');
-        } else {
-            return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
-        }
+        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diubah!');
     }
 
     public function riwayat()

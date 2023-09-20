@@ -11,17 +11,15 @@
 @section('content')
 
 @if (session()->has('message'))
-<div class="alert alert-danger alert-dismissible fade show col-lg-5" role="alert">
-  {{session('message')}}
-</div>
-@endif
+<div class="swal" data-swal="{{session('message')}}"></div>
+@endif 
 
 <div class="col-lg-6">
     <form action="/profil-dosen/editpassworddsn" method="POST" enctype="multipart/form-data">
         @method('put')
         @csrf
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Password Lama</label>
             <input type="password" name="password_lama" class="form-control @error('password_lama') is-invalid @enderror">
             @error('password_lama')
@@ -31,7 +29,7 @@
             @enderror
         </div> 
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Password Baru</label>
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
             @error('password')
@@ -41,7 +39,7 @@
             @enderror
         </div> 
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Konfirmasi Password</label>
             <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
             @error('password_confirmation')
@@ -51,7 +49,7 @@
             @enderror
         </div> 
 
-        <button type="submit" class="btn btn-success mb-5">Update</button>
+        <button type="submit" class="btn editpw btn-success mb-5">Perbarui</button>
 
       </form>
 </div>

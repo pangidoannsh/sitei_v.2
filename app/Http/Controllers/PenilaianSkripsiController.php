@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanSkripsi;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSkripsiPenguji;
 use App\Models\PenilaianSkripsiPembimbing;
 
@@ -21,8 +22,10 @@ class PenilaianSkripsiController extends Controller
 
     public function create($id)
     {       
-        $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
+        
+        $id = Crypt::decryptString($id);  
         $penjadwalan = PenjadwalanSkripsi::find($id);
+        $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
         $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();            
         
         if ($ceknilaipenguji1 == null) {
@@ -104,7 +107,7 @@ class PenilaianSkripsiController extends Controller
             'penjadwalan_skripsi_id' => $request['penjadwalan_skripsi_id'] = $id,
         ]);
 
-        return redirect('/penilaian-skripsi/edit/' . $id)->with('message', 'Nilai Berhasil Diinput!');
+        return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
     }
 
     public function store_penguji(Request $request, $id)
@@ -148,11 +151,12 @@ class PenilaianSkripsiController extends Controller
         $penilaian->penjadwalan_skripsi_id = $id;
         $penilaian->save();
 
-        return redirect('/penilaian-skripsi/edit/' . $id)->with('message', 'Nilai Berhasil Diinput!');
+        return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
     }
 
     public function edit($id)
     {
+        $id = Crypt::decryptString($id);  
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
 
         if ($cari_penguji == 0) {
@@ -323,12 +327,7 @@ class PenilaianSkripsiController extends Controller
         }
         $penilaian->update();
 
-        $cari_penguji1 = PenjadwalanSkripsi::find($request->penjadwalan_skripsi_id);
-        if ($cari_penguji1->pengujisatu_nip == auth()->user()->nip) {
-            return redirect('/penilaian-skripsi/edit/' . $request->penjadwalan_skripsi_id)->with('message', 'Nilai Berhasil Diedit!');
-        } else {
-            return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
-        }
+        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
     }
 
     public function riwayat()

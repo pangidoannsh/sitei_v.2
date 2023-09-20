@@ -11,22 +11,20 @@
 @section('content')
 
 @if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{session('message')}}
-</div>
-@endif
+<div class="swal" data-swal="{{session('message')}}"></div>
+@endif 
 
-<a href="{{url ('/user/create')}}" class="btn btn-success mb-3">+ Staff</a>
+<a href="{{url ('/user/create')}}" class="btn staff btn-success mb-3">+ Staff</a>
 
-<table class="table text-center table-bordered table-striped" id="datatables">
+<table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Username</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Email</th>
-      <th scope="col">Jabatan</th>
-      <th scope="col">Aksi</th>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Username</th>
+      <th class="text-center" scope="col">Nama</th>
+      <th class="text-center" scope="col">Email</th>
+      <th class="text-center" scope="col">Jabatan</th>
+      <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>
@@ -39,15 +37,33 @@
           <td>{{$user->role->role_akses}}</td>
           <td>        
             <a href="/user/edit/{{$user->id}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
-            <form action="/user/{{$user->id}}" method="POST" class="d-inline">
-              @method('delete')
-              @csrf
-              <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')" type="submit">
-                <i class="fas fa-trash"></i>
-              </button>
-            </form>
+            <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
           </td>
         </tr>
+
+        <div class="modal fade" id="ModalDelete">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Apakah Anda Yakin?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Data Yang Dihapus Tidak Akan Kembali!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+        <form action="/user/{{$user->id}}" method="POST" class="d-inline">
+              @method('delete')
+              @csrf
+              <button type="submit" class="btn btn-success">Yakin</button>
+        </form>        
+      </div>
+    </div>
+  </div>
+</div>
     @endforeach
   </tbody>
 </table>
@@ -61,5 +77,19 @@
       $(this).remove(); 
     });
   }, 2000);
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+  const swal= $('.swal').data('swal');
+  if (swal) {
+    Swal.fire({
+      title : 'Berhasil',
+      text : swal,
+      confirmButtonColor: '#28A745',
+      icon : 'success'
+    })    
+  }
 </script>
 @endpush()

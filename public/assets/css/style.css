@@ -1,11 +1,286 @@
-@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 14px;
 }
 
-.atas ul li a{
+@keyframes zoomAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+/* .alert-info {
+    background-color: #78d5ef;
+    border: 0px;
+    color: #051f11;
+} */
+
+.panjang:hover {
+    /* box-shadow: 0px 0px 15px 2px #92c2ce; */
+    color: #035aa6;
+}
+
+.utama {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.zoom-image {
+    animation: zoomAnimation 3s ease-in-out infinite;
+}
+
+.sejarah {
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+/* .sejarah:hover span {
+    transform: scale(1.09);
+    color: #e4e4e4;
+    opacity: 1.5;
+} */
+
+.bg-blur {
+    /* The image used */
+    background-image: url("asset/img/h1.jpg");
+
+    /* Add the blur effect */
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+
+    /* Full height */
+    /* height: 100%; */
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-tek {
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
+.bs4-order-tracking {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #bababf;
+    padding-left: 0px;
+    margin-top: 30px;
+}
+.bs4-order-tracking li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: #bababf;
+    text-align: center;
+}
+
+.bs4-order-tracking li:first-child:before {
+    margin-left: 15px !important;
+    padding-left: 11px !important;
+    text-align: left !important;
+}
+.bs4-order-tracking li:last-child:before {
+    margin-right: 5px !important;
+    padding-right: 11px !important;
+    text-align: right !important;
+}
+.bs4-order-tracking li > div {
+    color: #fff;
+    width: 29px;
+    text-align: center;
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #bababf;
+    border-radius: 50%;
+    margin: auto;
+}
+.bs4-order-tracking li:after {
+    content: "";
+    width: 150%;
+    height: 2px;
+    background: #bababf;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1;
+}
+.bs4-order-tracking li:first-child:after {
+    left: 50%;
+}
+.bs4-order-tracking li:last-child:after {
+    left: 0% !important;
+    width: 0% !important;
+}
+.bs4-order-tracking li.active {
+    font-weight: bold;
+    color: #035aa6;
+}
+
+.bs4-order-tracking li.active {
+    font-weight: bold;
+    color: #035aa6;
+}
+
+.bs4-order-tracking li.aktip {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+.bs4-order-tracking li.active > div {
+    background: #035aa6;
+}
+.bs4-order-tracking li.aktip > div {
+    background: #dc3545;
+}
+.bs4-order-tracking li.active:after {
+    background: #035aa6;
+}
+.bs4-order-tracking li.aktip:after {
+    background: #dc3545;
+}
+
+.card-timeline {
+    background-color: #fff;
+    z-index: 0;
+}
+
+/* skripsi*/
+.bs4-order-skripsi {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #bababf;
+    padding-left: 0px;
+    margin-top: 30px;
+}
+.bs4-order-skripsi li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: #bababf;
+    text-align: center;
+}
+
+.bs4-order-skripsi li:first-child:before {
+    margin-left: 15px !important;
+    padding-left: 11px !important;
+    text-align: left !important;
+}
+.bs4-order-skripsi li:last-child:before {
+    margin-right: 5px !important;
+    padding-right: 11px !important;
+    text-align: right !important;
+}
+.bs4-order-skripsi li > div {
+    color: #fff;
+    width: 29px;
+    text-align: center;
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #bababf;
+    border-radius: 50%;
+    margin: auto;
+}
+.bs4-order-skripsi li:after {
+    content: "";
+    width: 150%;
+    height: 2px;
+    background: #bababf;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1;
+}
+.bs4-order-skripsi li:first-child:after {
+    left: 50%;
+}
+.bs4-order-skripsi li:last-child:after {
+    left: 0% !important;
+    width: 0% !important;
+}
+.bs4-order-skripsi li.active {
+    font-weight: bold;
+    color: #035aa6;
+}
+
+.bs4-order-skripsi li.active {
+    font-weight: bold;
+    color: #035aa6;
+}
+.bs4-order-skripsi li.aktip {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+.bs4-order-skripsi li.active > div {
+    background: #035aa6;
+}
+.bs4-order-skripsi li.aktip > div {
+    background: #dc3545;
+}
+.bs4-order-skripsi li.active:after {
+    background: #035aa6;
+}
+.bs4-order-skripsi li.aktip:after {
+    background: #dc3545;
+}
+
+.card-timeline {
+    background-color: #fff;
+    z-index: 0;
+}
+
+/* Timeline progress */
+
+.daftar a {
+    height: 200px;
+    margin: 4rem;
+    margin-top: 100px;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.daftarskripsi {
+    padding: 5.5rem;
+}
+
+.daftarkp {
+    padding: 5.5rem;
+}
+
+.atas ul li a {
     font-size: 14px;
     font-weight: bold;
     color: #192f59;
@@ -15,43 +290,67 @@
     padding-right: 15px;
 }
 
-.atas ul li a:hover{
+.atas ul li a:hover {
     color: #36c482;
 }
+/* .atas ul li a:focus{
+    color: #36c482;
+}
+.nav-link::after{
+    color: #36c482;
+}
+.active{
+    color: #CE8854;
+} */
 
-.page-item.active .page-link{
-    background-color:darkgrey;
-    border-color:darkgray;
+.kpindex:hover img {
+    transform: scale(1.01);
+    background-color: #e1ff00;
+    /* opacity: 1.5; */
+}
+.kpindex:hover {
+    box-shadow: 0px 0px 15px 2px #92c2ce;
+}
+.kpindex:hover h1 {
+    transform: scale(1.05);
+    color: #e4e4e4;
+    /* opacity: 1.5; */
 }
 
-.content-wrapper{
+.page-item.active .page-link {
+    background-color: darkgrey;
+    border-color: darkgray;
+}
+
+.content-wrapper {
     margin-top: 55px;
 }
 
-nav{
+nav {
     background-color: white;
 }
 
-.bayangan{
+.bayangan {
     box-shadow: 0px 0px 10px 1px #afafaf;
 }
 
 .btn {
-    background-color: #146c43;
+    width: auto;
 }
 
 .tombol {
     background-color: #f9fafb;
     border-color: #afafaf;
-    box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:10px;;
+    box-shadow: 1px 1px 1px 1px #dbdbdb;
+    border-radius: 10px;
     color: #212529;
 }
 
-.pp i{
+.pp i {
     margin-left: -17px;
 }
 
-span{
+span {
     font-weight: bold;
 }
 
@@ -59,25 +358,24 @@ span{
     display: block;
 }
 
-.baru ul li a:hover{
+.baru ul li a:hover {
     background: none;
 }
 
-.baru ul li a{
+.baru ul li a {
+    margin-right: 15px;
+}
+
+.dropdown-item {
+    color: #192f59;
+}
+
+.jarak2 ul li a {
     padding: 0;
-    margin-left: 23px;
-}
-
-.dropdown-item{
-    color:#192f59;
-}
-
-.jarak2 ul li a{
-    padding:0;
     margin-left: 25px;
 }
 
-.jarak2 ul li a:hover{
+.jarak2 ul li a:hover {
     background: none;
 }
 
@@ -87,26 +385,27 @@ span{
 }
 
 hr {
-     background-color:#192f59;
-     margin-bottom: 5px;
+    background-color: #192f59;
+    margin-top: 0px;
 }
 
 .breadcrumb li a {
     color: #192f59;
 }
 
-.breadcrumb li a:hover{
+.breadcrumb li a:hover {
     color: #36c482;
 }
 
-.judul a{
+.sia-jte a {
     font-weight: bold;
     font-size: 20px;
-    font-family: 'Viga', sans-serif;
+    font-family: "Viga", sans-serif;
 }
 
 .judul a img {
     margin-left: -5px;
+    margin-bottom: 6px;
 }
 
 .bd-placeholder-img {
@@ -117,18 +416,449 @@ hr {
     user-select: none;
 }
 
-@media (min-width: 768px) {
+table tbody tr td {
+    line-height: 16px;
+}
+table thead tr th {
+    line-height: 16px;
+}
+
+.biru span {
+    color: #035aa6;
+}
+.biru {
+    margin-top: -10px;
+}
+
+@media screen and (max-width: 768px) {
+    .anak-judul h4 {
+        font-size: 16px;
+    }
+    .alert-danger {
+        font-size: 10px;
+    }
+    .alert-info {
+        font-size: 10px;
+    }
+    .alert-info span {
+        font-size: 10px;
+    }
+    .alert-danger span {
+        font-size: 10px;
+    }
+
+    .biru {
+        margin-top: -35px;
+        line-height: 12px;
+    }
+    .biru strong {
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .scrollable-btn-group {
+        overflow-x: auto; /* Membuat konten melampaui lebar div dan menjadi scrollable */
+        white-space: nowrap; /* Mencegah pemisahan tombol menjadi baris baru */
+        -webkit-overflow-scrolling: touch; /* Mendukung scroll smooth di perangkat iOS */
+    }
+
+    /* Gaya untuk setiap tombol dalam btn-group */
+    .scrollable-btn-group a.btn {
+        display: inline-block;
+        white-space: normal; /* Mengatur kembali ke gaya white-space default */
+        margin: 0px; /* Spasi antar tombol (opsional) */
+    }
+
+    .dataTables_filter input[type="search"] {
+        font-size: 14px; /* Ubah ukuran font sesuai keinginan */
+        text-align: left;
+    }
+
+    /* .menu-dosen {
+        display: none;
+    } */
+
+    .menu-dosen a {
+        font-size: 12px;
+        line-height: 14px;
+        padding: -5px;
+    }
+    .menu-dosen a span {
+        font-size: 12px;
+        line-height: 14px;
+        padding: -5px;
+    }
+    .menu-dosen a span a span i {
+        color: #035aa6;
+    }
+    table tbody tr td {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    table thead tr th {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    ul li p {
+        font-size: 10px;
+    }
+    ul li span {
+        font-size: 10px;
+    }
+    /* p {
+        font-size: 10px;
+    } */
+    .biru div span {
+        font-size: 10px;
+    }
+
+    .persetu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Merapikan jarak horizontal antara kolom */
+    }
+
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
+    }
+
+    body {
+        /* text-align: center; */
+        padding-top: 0px;
+    }
+    .navbar-nav li a {
+        text-align: center;
+    }
+    .navbar-nav li button {
+        text-align: center;
+    }
+
+    .masuk {
+        margin-top: -40px;
+    }
+    .gambar img {
+        height: 70px;
+        width: 70px;
+        margin-bottom: -30px;
+    }
+
+    .gambar h2 {
+        font-size: x-large;
+        margin-bottom: -50px;
+    }
+
+    .kotak-masuk {
+        margin-bottom: -10px;
+        width: 350px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .form-login h1 {
+        margin-top: -10px;
+        margin-bottom: 100px;
+        font-size: large;
+    }
+
+    .form-login button {
+        font-size: small;
+    }
+
+    .kecil {
+        font-size: smaller;
+    }
+
+    .kecil b {
+        font-size: smaller;
+    }
+
+    .hr.clear {
+        clear: both;
+        border: 1px solid transparent;
+        height: 0px;
+    }
+
+    .anak-judul h4 {
+        text-align: left;
+    }
+
+    .sia-jte a {
+        text-align: center;
+    }
+
+    .sia-jte a img {
+        margin-left: 0px;
+    }
+
+    footer strong {
+        display: flex;
+    }
+
+    .dosen {
+        width: 81px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .field label {
+        float: left;
+    }
+
+    .editpw {
+        float: right;
+    }
+
+    .staff {
+        width: 70px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .role {
+        width: 109px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .submithakakses {
+        float: right;
+    }
+
+    .updatehakakses {
+        float: right;
+    }
+
+    .prodi {
+        width: 138px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .submitprodi {
+        float: right;
+    }
+
+    .updateprodi {
+        float: right;
+    }
+
+    .konsentrasi {
+        width: 120px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .submitkonsentrasi {
+        float: right;
+    }
+
+    .updatekonsentrasi {
+        float: right;
+    }
+
+    .mahasiswa {
+        width: 117px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .baru:hover .dropdown-menu {
+        display: inline-block;
+    }
+
+    .bipw {
+        margin-left: 13px;
+    }
+
+    .baru .dropdown-menu {
+        display: none;
+    }
+
+    .gridratakiri {
+        text-align: left;
+    }
+
+    .labelkp {
+        width: 100px;
+    }
+
+    .labelnilai {
+        width: 100px;
+        margin-left: 60px;
+    }
+
+    .labelnilai1 {
+        width: 100px;
+        margin-left: 54px;
+    }
+
+    .labelnilai2 {
+        width: 100px;
+        margin-left: 14px;
+    }
+
+    .nilaiangka {
+        margin-left: -500px;
+        margin-top: 50px;
+    }
+
+    .nilaihuruf {
+        margin-left: -500px;
+    }
+
+    .angkainput {
+        width: 60px;
+    }
+
+    .hurufinput {
+        width: 60px;
+    }
+
+    .btnsimpan {
+        margin-top: 20px;
+    }
+
+    .tombol {
+        margin-top: 5px;
+        background-color: #f9fafb;
+        border-color: #afafaf;
+        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        border-radius: 10px;
+        color: #212529;
+        font-size: x-small;
+        display: inline-block;
+    }
+
+    .radio1 {
+        margin-left: 10px;
+    }
+
+    .radio2 {
+        margin-left: 10px;
+    }
+
+    .radio3 {
+        margin-left: 10px;
+    }
+
+    .radio4 {
+        margin-left: 10px;
+    }
+
+    .radio5 {
+        margin-left: 10px;
+    }
+
+    .radio6 {
+        margin-left: 10px;
+    }
+
+    .radio7 {
+        margin-left: 10px;
+    }
+
+    .radio8 {
+        margin-left: 10px;
+    }
+
+    .radio9 {
+        margin-left: 10px;
+    }
+
+    .radio10 {
+        margin-left: 10px;
+    }
+
+    .radio11 {
+        margin-left: 10px;
+    }
+
+    .radio12 {
+        margin-left: 10px;
+    }
+
+    .radio13 {
+        margin-left: 10px;
+    }
+
+    .radio14 {
+        margin-left: 10px;
+    }
+
+    footer strong {
+        font-size: small;
+        font-weight: lighter;
+    }
+
+    hr {
+        background-color: #192f59;
+    }
+
+    .radio15 {
+        margin-left: 10px;
+    }
+
+    .radio16 {
+        margin-left: 10px;
+    }
+
+    .radio17 {
+        margin-left: 10px;
+    }
+
+    .radio18 {
+        margin-left: 10px;
+    }
+
+    .radio19 {
+        margin-left: 10px;
+    }
+
+    .radio20 {
+        margin-left: 10px;
+    }
+
+    .radio21 {
+        margin-left: 10px;
+    }
+
+    .radio22 {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 544px) {
+    .nav-link {
+        font-size: 12px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+
+    .tombol {
+        margin-top: 5px;
+        background-color: #f9fafb;
+        border-color: #afafaf;
+        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        border-radius: 10px;
+        color: #212529;
+        font-size: 12px;
+        display: block;
     }
 }
 
 .b-example-divider {
     height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid rgba(0, 0, 0, 0.15);
     border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+        inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
 }
 
 .b-example-vr {
@@ -138,7 +868,7 @@ hr {
 }
 
 .bi {
-    vertical-align: -.125em;
+    vertical-align: -0.125em;
     fill: currentColor;
 }
 
@@ -165,27 +895,27 @@ hr {
 }
 
 .radio1 {
-    margin-left: 150px;
+    margin-left: 168px;
 }
 
 .radio2 {
-    margin-left: 127px;
+    margin-left: 148px;
 }
 
 .radio3 {
-    margin-left: 201px;
+    margin-left: 220px;
 }
 
 .radio4 {
-    margin-left: 257px;
+    margin-left: 274px;
 }
 
 .radio5 {
-    margin-left: 30px;
+    margin-left: 52px;
 }
 
 .radio6 {
-    margin-left: 350px;
+    margin-left: 346px;
 }
 
 .radio7 {
@@ -193,15 +923,15 @@ hr {
 }
 
 .radio8 {
-    margin-left: 364px;
+    margin-left: 360px;
 }
 
 .radio9 {
-    margin-left: 266px;
+    margin-left: 264px;
 }
 
 .radio10 {
-    margin-left: 250px;
+    margin-left: 248px;
 }
 
 .radio11 {
@@ -209,19 +939,19 @@ hr {
 }
 
 .radio12 {
-    margin-left: 300px;
+    margin-left: 299px;
 }
 
 .radio13 {
-    margin-left: 355px;
+    margin-left: 353px;
 }
 
 .radio14 {
-    margin-left: 47px;
+    margin-left: 52px;
 }
 
 .radio15 {
-    margin-left: 160px;
+    margin-left: 177px;
 }
 
 .radio16 {
@@ -280,20 +1010,62 @@ hr {
     margin-left: 10px;
 }
 
-footer strong{
+footer {
+    margin-top: 20px;
+}
+
+footer strong {
+    font-size: small;
+    font-weight: lighter;
+}
+
+span {
     font-weight: normal;
 }
 
-span{
-    font-weight: normal;
-}
-
-.dropdown ul li a{
+.dropdown ul li a {
     font-weight: normal;
 }
 
 .form-check-input:checked {
     background-color: green;
     border-color: green;
+}
 
+@media (max-width: 383px) {
+    .nav-link {
+        font-size: x-small;
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .tombol {
+        margin-top: 5px;
+        background-color: #f9fafb;
+        border-color: #afafaf;
+        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        border-radius: 10px;
+        color: #212529;
+        font-size: x-small;
+        display: block;
+    }
+}
+
+@media (max-width: 348px) {
+    .nav-link {
+        font-size: x-small;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .tombol {
+        margin-top: 5px;
+        background-color: #f9fafb;
+        border-color: #afafaf;
+        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        border-radius: 10px;
+        color: #212529;
+        font-size: x-small;
+        display: block;
+    }
 }

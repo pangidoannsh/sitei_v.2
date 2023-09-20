@@ -16,27 +16,33 @@
 
 <div>
     <div class="row">
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <div class="col mb-3">
+        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">NIM</div>
+            <div class="ms-2 me-auto gridratakiri">
+            <div class="fw-bold ">NIM</div>
             <span>{{$penjadwalan->mahasiswa->nim}}</span>         
             </div>        
         </li> 
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Nama</div> 
+            <div class="ms-2 me-auto gridratakiri">
+            <div class="fw-bold ">Nama</div> 
             <span>{{$penjadwalan->mahasiswa->nama}}</span>            
+            </div>        
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto gridratakiri">
+            <div class="fw-bold ">Konsentrasi</div> 
+            <span>{{$penjadwalan->mahasiswa->konsentrasi->nama_konsentrasi}}</span>            
             </div>        
         </li>
         </ol>
         </div>
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <div class="col-md">
+        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold mb-2">Pembimbing</div>
+            <div class="ms-2 me-auto gridratakiri">
+                <div class="fw-bold ">Pembimbing</div>
                 <span>1. {{$penjadwalan->pembimbingsatu->nama}}</span>
                 <br>
                 @if ($penjadwalan->pembimbingdua_nip != null)
@@ -45,13 +51,15 @@
             </div>        
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold mb-2">Penguji</div>
+            <div class="ms-2 me-auto gridratakiri">
+                <div class="fw-bold ">Penguji</div>
                 <span>1. {{$penjadwalan->pengujisatu->nama}}</span>
                 <br>
                 <span>2. {{$penjadwalan->pengujidua->nama}}</span>
                 <br>
+                @if ($sempro->pengujitiga == !null)
                 <span>3. {{$penjadwalan->pengujitiga->nama}}</span>
+                @endif
             </div>        
         </li>     
         </ol>
@@ -62,10 +70,10 @@
 <div class="kol-judul mt-3">
     <div class="row">
         <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Judul</div>
+            <div class="ms-2 me-auto gridratakiri">
+            <div class="fw-bold ">Judul</div>
             <span>{{ $penjadwalan->revisi_proposal != null ? $penjadwalan->revisi_proposal : $penjadwalan->judul_proposal }}</span>
             </div>        
         </li>   
@@ -76,21 +84,21 @@
 
 <div class="kol-jadwal mt-3 mb-3">
     <div class="row">
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <div class="col mb-3 kol-jadwal">
+        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Jadwal</div>
+            <div class="ms-2 me-auto gridratakiri">
+            <div class="fw-bold ">Jadwal</div>
             <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
             </div>        
         </li>   
         </ol>
         </div>
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
+        <div class="col-md ">
+        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Lokasi</div>
+            <div class="ms-2 me-auto gridratakiri">
+            <div class="fw-bold ">Lokasi</div>
             <span>{{$penjadwalan->lokasi}}</span>    
             </div>        
         </li>   
@@ -99,10 +107,10 @@
     </div>
 </div>
 
-<div class="card-body bg-white">
+<div class="card-body bg-white mb-3" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
     <div class="row">
         <div class="col-lg-6">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-responsive-lg">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -213,11 +221,11 @@
         </div>
 
         <div class="col-lg-6">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-responsive-lg">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th style="width: 230px">Penilaian Pembimbing</th>
+                    <th style="width: 200px">Penilaian Pembimbing</th>
                     <th class="bg-success text-center">B</th>
                     <th class="pb text-center">Pembimbing 1</th>
                     <th class="pb text-center">Pembimbing 2</th>                    
@@ -400,9 +408,9 @@
                                       ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                       2 >=
                                       60)
-                                      LAYAK LULUS                                            
+                                      LULUS                                            
                                   @else
-                                      TIDAK LAYAK LULUS
+                                      TIDAK LULUS
                                   @endif
                               @endif
                           @endif
@@ -414,9 +422,9 @@
                                         @if ((($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                                             ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) / 3) /
                                             2 >= 60)
-                                            LAYAK LULUS
+                                            LULUS
                                         @else
-                                            TIDAK LAYAK LULUS
+                                            TIDAK LULUS
                                         @endif
                                     @endif
                                   @else
@@ -433,7 +441,7 @@
                 <form action="/penilaian-sempro/approve/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
-                    <button type="submit" class="btn btn-lg btn-success float-right"> Approve Penilaian</button>
+                    <button type="submit" class="btn btn-lg btn-danger float-right"> Selesai Seminar</button>
                 </form>
             @endif
 
@@ -441,12 +449,12 @@
                 <form action="/persetujuansempro-koordinator/approve/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
-                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">Setujui</button>
                 </form>
                 <form action="/persetujuansempro-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
-                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">Tolak</button>
                 </form>
             @endif
 
@@ -454,12 +462,12 @@
                 <form action="/persetujuansempro-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
-                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">SETUJUI</button>
+                    <button type="submit" class="btn-lg btn-success float-right border-0 ml-3">Setujui</button>
                 </form>
                 <form action="/persetujuansempro-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
-                    <button type="submit" class="btn-lg btn-danger float-right border-0">TOLAK</button>
+                    <button type="submit" class="btn-lg btn-danger float-right border-0">Tolak</button>
                 </form>
             @endif
 

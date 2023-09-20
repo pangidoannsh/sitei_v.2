@@ -49,4 +49,9 @@ class PenilaianSkripsiPembimbing extends Model
     {
         return $this->belongsTo(PenjadwalanSkripsi::class);
     }
+
+    public function pembimbing()
+    {
+        return $this->belongsTo(Dosen::class, 'pembimbing_nip', 'nip');
+    }
 }

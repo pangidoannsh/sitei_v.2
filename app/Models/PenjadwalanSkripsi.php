@@ -74,7 +74,7 @@ class PenjadwalanSkripsi extends Model
 
     public function cek($id)
     {
-        $penilaian = 4;
+        $penilaian = 0;
         $cekdata = PenjadwalanSkripsi::find($id);
 
         if ($cekdata->pembimbingdua_nip != null) {

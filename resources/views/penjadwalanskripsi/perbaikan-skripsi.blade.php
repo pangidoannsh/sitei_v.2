@@ -1,139 +1,275 @@
-@extends('layouts.main')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>STI-16 Lembar Kontrol Perbaikan Skripsi</title>
+    @php
+        use Carbon\Carbon;
+        use SimpleSoftwareIO\QrCode\Facades\QrCode;
+    @endphp
+    <style type="text/css">
+        table {
+            border-style: double;
+            border-width: 3px;
+            border-color: white;
+            margin: 1%;
+            /* border-collapse: collapse; */
+        }
 
-@php
-    use Carbon\Carbon;
-@endphp
+        /*design table 1*/
+        .table1 {
+            font-family: Arial, sans-serif;
+            font-size:13px;
+            color: #232323;
+            border-collapse: collapse;
+            border: 1px solid #999;
+            padding: 8px 20px;
+            margin-top:30px;
+            margin-left:auto;
+            margin-right:auto;
+        }
 
-@section('title')
-    Perbaikan Sidang | SIA ELEKTRO
-@endsection
+        table tr .text2 {
+            text-align: right;
+            font-size: 13pt;
+        }
 
-@section('sub-title')
-    Perbaikan Sidang Skripsi
-@endsection
+        table tr .text {
+            text-align: center;
+            font-size: 13px;
+        }
 
-@section('content')
+        table tr td {
+            font-size: 13px;
+        }
 
-<div>
-    <div class="row">
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">NIM</div>
-            <span>{{$penjadwalan->mahasiswa->nim}}</span>         
-            </div>        
-        </li> 
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Nama</div> 
-            <span>{{$penjadwalan->mahasiswa->nama}}</span>            
-            </div>        
-        </li>
-        </ol>
-        </div>
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold mb-2">Pembimbing</div>
-                <span>1. {{$penjadwalan->pembimbingsatu->nama}}</span>
-                <br>
-                @if ($penjadwalan->pembimbingdua_nip != null)
-                <span>2. {{$penjadwalan->pembimbingdua->nama}}</span>
-                @endif                
-            </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold mb-2">Penguji</div>
-                <span>1. {{$penjadwalan->pengujisatu->nama}}</span>
-                <br>
-                <span>2. {{$penjadwalan->pengujidua->nama}}</span>
-                <br>
-                <span>3. {{$penjadwalan->pengujitiga->nama}}</span>
-            </div>        
-        </li>     
-        </ol>
-        </div>
-    </div>
-</div>
+        table,
+        th,
+        td {
+            /* border: 1px solid black; */
+        }
 
-<div class="kol-judul mt-3">
-    <div class="row">
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Judul</div>
-            <span>{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}</span>
-            </div>        
-        </li>   
-        </ol>
-        </div>
-    </div>
-</div>
 
-<div class="kol-jadwal mt-3 mb-3">
-    <div class="row">
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Jadwal</div>
-            <span>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</span>             
-            </div>        
-        </li>   
-        </ol>
-        </div>
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 2px 2px 2px 2px #dbdbdb; border-radius:10px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-            <div class="fw-bold mb-2">Lokasi</div>
-            <span>{{$penjadwalan->lokasi}}</span>    
-            </div>        
-        </li>   
-        </ol>
-        </div>
-    </div>
-</div>
+        tr .tr2 {
+            border-bottom: 1pt solid black;
+        }
 
-<div class="card-body bg-white">
-    <div class="row">
-        <div class="col">
-        <table class="table table-bordered">
-        <thead class="bg-success">
+        @page {
+            size: A4 portrait;
+            margin: 1cm;
+            padding: 0; // you can set margin and padding 0 
+        }
+
+        body {
+            font-family: Times New Roman;
+            font-size: 33px;
+        }
+
+        body .isi {
+            margin: 0 1.5cm 0 1.5cm;
+        }
+
+        .container {
+            position: relative;
+            text-align: left;
+            color: black;
+        }
+
+        .ttd {
+            position: absolute;
+            margin: 0%;
+            left: 0%;
+        }
+
+        .logo {
+            position: absolute;
+            top: 7%;
+            right: 73%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="isi">
+
+        <table width="100%" style="margin-bottom: 0%">
             <tr>
-                <th style="width: 50px">#</th>
-                <th style="width: 700px">Saran dan Perbaikan</th>                     
+                <td>
+                    <div class="logo">
+                        <img id="img" src="https://live.staticflickr.com/65535/51644220143_f5dba04544_o_d.png"
+                            width="110" height="110">
+                    </div>
+                </td>
+                <td>
+                    <center>
+                        <font size="4">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN</font><br>
+                        <font size="4">RISET DAN TEKNOLOGI</font><br>
+                        <font size="3"><b>UNIVERSITAS RIAU - FAKULTAS TEKNIK</b></font><br>
+                        <font size="3"><b>JURUSAN TEKNIK ELEKTRO</b></font><br>
+                        @if ($penjadwalan->mahasiswa->prodi->id == 1)
+                            <font size="3"><b>PROGRAM STUDI TEKNIK ELEKTRO D3</b></font><br>
+                        @elseif ($penjadwalan->mahasiswa->prodi->id == 2)
+                            <font size="3"><b>PROGRAM STUDI TEKNIK ELEKTRO S1</b></font><br>
+                        @else
+                            <font size="3"><b>PROGRAM STUDI TEKNIK INFORMATIKA</b></font><br>
+                        @endif
+                        <font size="2">Kampus Bina Widya Km. 12,5 Simpang Baru Pekanbaru 28293</font><br>
+                        <font size="2">Telepon (0761) 66596 Faksimile (0761) 66595</font><br>
+                        @if ($penjadwalan->mahasiswa->prodi->id == 1)
+                            <font size="2">Laman: <u>http://elektrod3.ft.unri.ac.id</u></font>
+                        @elseif ($penjadwalan->mahasiswa->prodi->id == 2)
+                            <font size="2">Laman: <u>http://elektros1.ft.unri.ac.id</u></font>
+                        @else
+                            <font size="2">Laman: <u>http://informatika.ft.unri.ac.id</u></font>
+                        @endif
+                    </center>
+                </td>
             </tr>
-        </thead>
-        <tbody>
+
+            <table width="600px" style="text-align:center;">
+                <tr>
+                    <td>
+                        <hr style="margin: 1px; border: 2px solid black">
+                        <hr style="margin: 1px; border: 1px solid black">
+                    </td>
+                </tr>
+            </table>
+        </table>
+
+        <table width="100%" style="text-align:center; margin-top:0px;">
             <tr>
-                <td>1</td>
-                <td>{{$penilaianpenguji->revisi_naskah1}}</td>                
+                <td style="font-size:12pt; text-decoration: underline;">
+                    <strong>LEMBAR KONTROL PERBAIKAN SKRIPSI</strong> </td>
             </tr>
+        </table>
+
+        <table width="100%" style="text-align: right; margin-top:-40px;">
             <tr>
-                <td>2</td>
-                <td>{{$penilaianpenguji->revisi_naskah2}}</td>                
-            </tr>  
-            <tr>
-                <td>3</td>
-                <td>{{$penilaianpenguji->revisi_naskah3}}</td>                
-            </tr>  
-            <tr>
-                <td>4</td>
-                <td>{{$penilaianpenguji->revisi_naskah4}}</td>                
-            </tr>  
-            <tr>
-                <td>5</td>
-                <td>{{$penilaianpenguji->revisi_naskah5}}</td>                
-            </tr>             
-        </tbody>
+                <td style="font-size:12pt;">
+                    @if ($penjadwalan->mahasiswa->prodi->id == 1)
+                        <strong style="border:1px solid #000; padding:4px">STE-16</strong>
+                    @elseif ($penjadwalan->mahasiswa->prodi->id == 2)
+                        <strong style="border:1px solid #000; padding:4px">STE-16</strong>
+                    @else
+                        <strong style="border:1px solid #000; padding:4px">STI-16</strong>
+                    @endif
+                </td>
+            </tr>         
+        </table>
+
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:20px; line-height: 1.5">
+        <tr class="text2">
+            <td width="27%">Nama Mahasiswa</td>
+            <td>:</td>
+            <td width="70%">{{$penjadwalan->mahasiswa->nama}}</td>
+        </tr>
+        <tr>
+            <td width="27%">NIM</td>
+            <td>:</td>
+            <td width="70%">{{$penjadwalan->mahasiswa->nim}}</td>
+        </tr>
+
+        <tr>
+            <td width="27%">Judul Skripsi</td>
+            <td>:</td>
+            <td>{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}</td>
+        </tr>
+        <tr>
+            <td width="27%">Tanggal Sidang</td>
+            <td>:</td>
+            <td width="70%">{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}</td>
+        </tr>
     </table>
-        </div>
-    </div>
+
+    <table width="100%" style="font-family: Arial, sans-serif; ">
+        <tr>
+            <td width="27%">Dosen Penguji (1 / 2 / 3)*</td>
+            <td>:</td>
+            <td width="70%">{{$penilaianpenguji->penguji->nama}}</td>
+        </tr>
+    </table>
+
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
+        <tr class="text2">
+            <td width="70%" style="font-size:10px"><i>*coret yang tidak perlu</i></td>
+        </tr>
+    </table>
+
+    <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:0px;">
+        <tr>
+            <th class="table1" width="10px">No</th>
+            <th class="table1">Saran/Perbaikan</th>
+            <th class="table1" width="10px">Paraf Pembimbing</th>
+        </tr>
+        <tr>
+            <td class="table1">1</td>  
+            <td class="table1">{{$penilaianpenguji->revisi_naskah1}}</td>                
+            <td class="table1"></td>                        
+        </tr>
+        
+        <tr>
+            <td class="table1">2</td>  
+            <td class="table1">{{$penilaianpenguji->revisi_naskah2}}</td>              
+            <td class="table1"></td>   
+        </tr>
+        
+        <tr>
+            <td class="table1">3</td>  
+            <td class="table1">{{$penilaianpenguji->revisi_naskah3}}</td>                
+            <td class="table1"></td>                        
+        </tr>  
+
+        <tr>
+            <td class="table1">4</td>  
+            <td class="table1">{{$penilaianpenguji->revisi_naskah4}}</td>
+            <td class="table1"></td>                        
+        </tr>  
+
+        <tr>
+            <td class="table1">5</td>  
+            <td class="table1">{{$penilaianpenguji->revisi_naskah5}}</td>               
+            <td class="table1"></td>                        
+        </tr>           
+    </table>
+
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:100px;">
+        <tr>
+            <td width="60%" align="right">
+                <!-- Disini untuk perintah Qr code -->
+            </td>
+            <td class="text" style="text-align: left;">
+                <div class="container">
+                    <p>Pekanbaru, {{Carbon::parse($penjadwalan->tanggal)->translatedFormat('d F Y')}} </p>
+                    <p>Dosen Penguji</p>
+                    <div class="ttd">
+                        <img src="data:img/png;base64, {!! $qrcode !!}">
+                    </div>
+                    <br><br><br><br><br><br>
+                    <strong style="text-decoration: underline;">{{$penilaianpenguji->penguji->nama}}</strong><br>NIP. {{$penilaianpenguji->penguji->nip}}
+                </div>
+                <br>
+            </td>
+        </tr>
+    </table>
+
+    <!--<table width="100%">-->
+    <!--    <tr>-->
+    <!--        <td style="font-size:10px;"><i>*catatan:</i></td>  -->
+    <!--    </tr>-->
+        
+    <!--    <tr>-->
+    <!--    <td style="font-size:10px;"><i><b>Dosen penguji disarankan langsung membubuhkan tanda tangan pada lembar perbaikan</b></i></td>                -->
+    <!--    </tr>-->
+        
+    <!--    <tr>-->
+    <!--    <td style="font-size:10px;"><i>Lembar ini dapat diminta langsung oleh mahasiswa ke Admin Prodi pasca Sidang Skripsi</i></td>                        -->
+    <!--    </tr>   -->
+    <!--</table>-->
 </div>
 
-@endsection   
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+
+</html>

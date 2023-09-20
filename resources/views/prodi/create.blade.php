@@ -14,7 +14,7 @@
     <form action="{{url ('/prodi/create')}}" method="POST">
         @csrf
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Program Studi</label>
             <input type="text" name="nama_prodi" class="form-control @error('nama_prodi') is-invalid @enderror" value="{{ old('nama_prodi') }}">
             @error('nama_prodi')
@@ -24,7 +24,7 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success mb-5">Submit</button>
+        <button type="submit" class="btn submitprodi btn-success mb-5">Tambah</button>
 
       </form>
 </div>

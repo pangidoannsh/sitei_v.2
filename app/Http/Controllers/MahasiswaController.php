@@ -100,9 +100,9 @@ class MahasiswaController extends Controller
 
     public function destroy(Mahasiswa $mahasiswa)
     {
-        if ($mahasiswa->gambar) {
-            Storage::delete($mahasiswa->gambar);
-        }
+        // if ($mahasiswa->gambar) {
+        //     Storage::delete($mahasiswa->gambar);
+        // }
 
         Mahasiswa::destroy($mahasiswa->id);
         return redirect('/mahasiswa')->with('message', 'Data Berhasil Dihapus!');

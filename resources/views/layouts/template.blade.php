@@ -134,7 +134,6 @@
   <script src="{{asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
   <script src="{{asset('assets/dist/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @stack('scripts')
 </body>
 </html>

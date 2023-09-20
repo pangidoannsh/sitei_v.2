@@ -11,22 +11,20 @@
 @section('content')
 
 @if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{session('message')}}
-</div>
-@endif
+<div class="swal" data-swal="{{session('message')}}"></div>
+@endif 
 
-<a href="{{url ('/mahasiswa/create')}}" class="btn btn-success mb-3">+ Mahasiswa</a>
+<a href="{{url ('/mahasiswa/create')}}" class="btn mahasiswa btn-success mb-3">+ Mahasiswa</a>
 
-<table class="table text-center table-bordered table-striped" id="datatables">
+<table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>      
-      <th scope="col">NIM</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Angkatan</th>
-      <th scope="col">Program Studi</th>      
-      <th scope="col">Aksi</th>
+      <th class="text-center" scope="col">#</th>      
+      <th class="text-center" scope="col">NIM</th>
+      <th class="text-center" scope="col">Nama</th>
+      <th class="text-center" scope="col">Angkatan</th>
+      <th class="text-center" scope="col">Program Studi</th>      
+      <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>
@@ -37,17 +35,40 @@
           <td>{{$mhs->nama}}</td>
           <td>{{$mhs->angkatan}}</td>
           <td>{{$mhs->prodi->nama_prodi}}</td>          
-          <td>        
+          <td class="text-center">        
             <a href="/mahasiswa/edit/{{$mhs->id}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
-            <form action="/mahasiswa/{{$mhs->id}}" method="POST" class="d-inline">
-              @method('delete')
-              @csrf
-              <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')" type="submit">
-                <i class="fas fa-trash"></i>
-              </button>
-            </form>
+            <!-- <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a> -->
+            <form action="/mahasiswa/{{$mhs->id}}" class="delete_form" method="POST"> 
+    @method('DELETE')
+    @csrf
+    <button class="btn btn-dark fas fa-trash"></button>
+</form>
           </td>
         </tr>
+
+        <!-- <div class="modal fade" id="ModalDelete">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Apakah Anda Yakin?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Data Yang Dihapus Tidak Akan Kembali!</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                <form action="/mahasiswa/{{$mhs->id}}" method="POST" class="d-inline">
+                      @method('delete')
+                      @csrf
+                      <button type="submit" class="btn btn-success">Yakin</button>
+                </form>        
+              </div>
+            </div>
+          </div>
+        </div> -->
     @endforeach
   </tbody>
 </table>
@@ -61,5 +82,40 @@
       $(this).remove(); 
     });
   }, 2000);
+</script>
+@endpush()
+
+<!-- @push('scripts')
+<script>
+  const swal= $('.swal').data('swal');
+  if (swal) {
+    Swal.fire({
+      title : 'Berhasil',
+      text : swal,
+      confirmButtonColor: '#28A745',
+      icon : 'success'
+    })    
+  }
+</script>
+@endpush() -->
+
+@push('scripts')
+<script>
+$('.delete_form').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
 </script>
 @endpush()

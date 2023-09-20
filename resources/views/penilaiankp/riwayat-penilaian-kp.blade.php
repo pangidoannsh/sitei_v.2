@@ -19,16 +19,16 @@
 <table class="table text-center table-bordered table-striped" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">NIM</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Seminar</th>
-      <th scope="col">Tanggal</th>
-      <th scope="col">Waktu</th>
-      <th scope="col">Lokasi</th>              
-      <th scope="col">Pembimbing</th>
-      <th scope="col">Penguji</th>          
-      <th scope="col">Aksi</th>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">NIM</th>
+      <th class="text-center" scope="col">Nama</th>
+      <th class="text-center" scope="col">Seminar</th>
+      <th class="text-center" scope="col">Tanggal</th>
+      <th class="text-center" scope="col">Waktu</th>
+      <th class="text-center" scope="col">Lokasi</th>              
+      <th class="text-center" scope="col">Pembimbing</th>
+      <th class="text-center" scope="col">Penguji</th>          
+      <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>    

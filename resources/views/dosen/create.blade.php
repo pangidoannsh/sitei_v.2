@@ -15,7 +15,7 @@
 <div>
     <div class="row">
         <div class="col">
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">NIP</label>
             <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" value="{{ old('nip') }}">
             @error('nip')
@@ -25,7 +25,7 @@
             @enderror
         </div>  
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Nama</label>
             <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
             @error('nama')
@@ -35,7 +35,17 @@
             @enderror
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 field">
+            <label class="form-label">Alias</label>
+            <input type="text" name="nama_singkat" class="form-control @error('nama_singkat') is-invalid @enderror" value="{{ old('nama_singkat') }}">
+            @error('nama_singkat')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+
+        <div class="mb-3 field">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
             @error('email')
@@ -45,8 +55,8 @@
             @enderror
         </div>
         </div>
-        <div class="col">
-        <div class="mb-3">
+        <div class="col-md">
+        <div class="mb-3 field">
             <label for="prodi_id" class="form-label">Program Studi</label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -61,7 +71,7 @@
             @enderror
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label class="form-label">Password</label>
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}">
             @error('password')
@@ -71,7 +81,7 @@
             @enderror
         </div> 
 
-        <div class="mb-3">
+        <div class="mb-3 field">
             <label for="role_id" class="form-label">Status</label>
             <select name="role_id" class="form-select @error('role_id') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -86,7 +96,7 @@
             @enderror
         </div>        
 
-        <button type="submit" class="btn btn-success float-right mb-5">Submit</button>
+        <button type="submit" class="btn btn-success float-right mt-4">Tambah</button>
         </div>
     </div>
 </div>

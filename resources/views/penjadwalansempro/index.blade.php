@@ -15,10 +15,8 @@
 @section('content')
 
 @if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{session('message')}}
-</div>
-@endif
+<div class="swal" data-swal="{{session('message')}}"></div>
+@endif 
 
 <a href="{{url('/form-sempro/create')}}" class="btn btn-success mb-3">+ Jadwal Sempro</a>
 
@@ -27,19 +25,19 @@
   <li class="breadcrumb-item"><a href="/riwayat-penjadwalan-sempro">Riwayat Penjadwalan</a></li>  
 </ol>
 
-<table class="table table-bordered table-striped" id="datatables">
+<table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">NIM</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Prodi</th>
-      <th scope="col">Tanggal</th>
-      <th scope="col">Waktu</th>
-      <th scope="col">Lokasi</th>              
-      <th scope="col">Pembimbing</th>
-      <th scope="col">Penguji</th>          
-      <th scope="col">Aksi</th>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">NIM</th>
+      <th class="text-center" scope="col">Nama</th>
+      <th class="text-center" scope="col">Prodi</th>
+      <th class="text-center" scope="col">Tanggal</th>
+      <th class="text-center" scope="col">Waktu</th>
+      <th class="text-center" scope="col">Lokasi</th>              
+      <th class="text-center" scope="col">Pembimbing</th>
+      <th class="text-center" scope="col">Penguji</th>          
+      <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>
@@ -61,7 +59,9 @@
           <td>
             <p>1. {{$sempro->pengujisatu->nama}}</p>
             <p>2. {{$sempro->pengujidua->nama}}</p>
+            @if ($sempro->pengujitiga == !null)
             <p>3. {{$sempro->pengujitiga->nama}}</p>
+            @endif
           </td> 
           <td>            
             <a href="/form-sempro/edit/{{$sempro->id}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>            
