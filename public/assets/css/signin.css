@@ -6,9 +6,9 @@ body {
 
 body {
   display: flex;
+  justify-content: center;
+  height: 100vh;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
 }
 
 h2 {
@@ -17,8 +17,6 @@ h2 {
 }
 
 .form-signin {
-  box-shadow: 2px 2px 2px 2px #dbdbdb;
-  border-radius: 20px;
   max-width: 400px;
   padding: 35px;
 }
@@ -27,12 +25,14 @@ h2 {
   z-index: 2;
 }
 
-.form-signin input[type="text"] {
-  margin-bottom: 10px;
-  border-radius: 20px;
+.btn-login {
+  background-color:#00923F;
+  height: 45px;
+  color: white;
+  font-size: medium;
 }
 
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-radius: 20px;
+.btn-login:hover {
+  background-color: #00923F;
+  color: white;
 }

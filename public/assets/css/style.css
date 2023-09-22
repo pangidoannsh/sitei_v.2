@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"); */
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
 
 * {
-    font-family: "Poppins", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
 }
 
@@ -430,6 +432,11 @@ table thead tr th {
     margin-top: -10px;
 }
 
+.gambar h4 {
+    margin-top: 20px;
+}
+
+
 @media screen and (max-width: 768px) {
     .anak-judul h4 {
         font-size: 16px;
@@ -549,9 +556,12 @@ table thead tr th {
         margin-bottom: -50px;
     }
 
+    .gambar h4 {
+        margin-top: 50px;
+    }
+
     .kotak-masuk {
         margin-bottom: -10px;
-
         width: 350px;
         position: relative;
         display: inline-block;
