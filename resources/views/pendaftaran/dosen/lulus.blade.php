@@ -28,7 +28,7 @@ Mahasiswa Prodi Selesai Skripsi
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 
    <a href="/kp-skripsi/persetujuan-skripsi"  class="btn bg-light border  border-bottom-0"  style="border-top-left-radius: 15px;" >Persetujuan</a>
-   <a href="/kp-skripsi/seminar" class="btn bg-light border  border-bottom-0">Seminar</a>
+   <a href="/kp-skripsi/penilaian-skripsi" class="btn bg-light border  border-bottom-0">Seminar</a>
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
