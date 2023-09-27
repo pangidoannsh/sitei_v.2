@@ -31,6 +31,9 @@
 <div class="container px-md-5  " >
         
   <div class="row " >
+
+    @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
+              @if (Auth::guard('mahasiswa')->user())
     <div class="col-12 col-md-6 utama ">
     @if($pendaftaran_kp == null)
     
@@ -226,6 +229,47 @@
 
     @endif
   </div>
+  @endif
+  @endif 
+
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+   <div class="col-12 col-md-6 utama ">
+   <a href="/kp-skripsi/persetujuan-kp"><div class="card kpindex">
+      <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
+  <div class="card-body">
+    <div class="row">
+    <div class="col-sm-5 col-md-6"><h1><p class=" fs-3  text-bold text-dark" >KERJA PRAKTEK</p></h1></a></div>
+    <!-- <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 mt-0"><p class="card-text text-md-end status" ><span class="float-end badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">BELUM DAFTAR</span></p></div> -->
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm-12 mt-3 mt-md-0 "><p class="card-title text-secondary text-sm" >Keterangan</p>
+        <p class="card-text text-start text-dark" ><span>Belum melakukan Usulan KP</span></p></div>    
+  </div> -->
+  </div>
+</div>
+
+
+</div>
+  <div class="col-12 col-md-6 utama utama-skripsi">
+ <a href="/kp-skripsi/persetujuan-skripsi"><div class="card kpindex">
+      <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
+  <div class="card-body">
+  
+    <div class="row">
+    <div class="col-sm-5 col-md-6 "><h1><p class=" fs-3 text-bold text-dark" >SKRIPSI</p></h1></a></div>
+    <!-- <div  class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 mt-0"><p class="card-text text-md-end status" ><span class="float-end badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">BELUM DAFTAR</span></p></div> -->
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm-12 mt-3 mt-md-0 "><p class="card-title text-secondary text-sm" >Keterangan</p>
+        <p class="card-text text-start text-dark" ><span>Belum melakukan Usul Judul</span></p></div>    
+  </div> -->
+
+  </div>
+</div>
+
+</div>
+
+  @endif
 </div>
 </div>
 @endsection
