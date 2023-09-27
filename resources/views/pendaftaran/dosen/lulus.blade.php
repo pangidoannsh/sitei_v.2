@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-Skripsi Mahasiswa Bimbingan (Selesai)
+Mahasiswa Prodi Selesai Skripsi
 @endsection
 
 @section('content')
@@ -27,18 +27,10 @@ Skripsi Mahasiswa Bimbingan (Selesai)
 
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 
-   <a href="/kp-skripsi/persetujuan"  class="btn bg-light border  border-bottom-0"  style="border-top-left-radius: 15px;" >Persetujuan</a>
+   <a href="/kp-skripsi/persetujuan-skripsi"  class="btn bg-light border  border-bottom-0"  style="border-top-left-radius: 15px;" >Persetujuan</a>
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-  <a href="/kerja-praktek"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">KP Prodi</span>
-  <span class="badge-link">
-    <a href="/kerja-praktek/nilai-keluar" class="sejarah pt-2 bg-light ">  
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
   
           <a href="/skripsi" class="btn bg-light border  border-bottom-0 " >
    <span class="button-text">Skripsi Prodi</span>
@@ -50,14 +42,7 @@ Skripsi Mahasiswa Bimbingan (Selesai)
 </a>
   @endif
 @endif
-<a href="/pembimbing/kerja-praktek"  class="btn bg-light border  border-bottom-0 "  >
-  <span class="button-text">Bimbingan KP</span>
-  <span class="badge-link">
-    <a href="/kerja-praktek/pembimbing/nilai-keluar" class="sejarah pt-2 bg-light ">  
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
+
 <a href="/pembimbing/skripsi"  class="btn bg-light border  border-bottom-0 " >
   <span class="button-text">Bimbingan Skripsi</span>
   <span class="badge-link" >

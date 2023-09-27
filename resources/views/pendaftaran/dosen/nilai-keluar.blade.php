@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Pendaftaran Kerja Praktek
+    Mahasiswa Prodi Selesai Kerja Praktek
 @endsection
 
 @section('content')
@@ -30,10 +30,10 @@
 
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
  
-   <a href="/kp-skripsi/persetujuan"  class="btn bg-light border  border-bottom-0"  style="border-top-left-radius: 15px;" >Persetujuan</a>
+   <a href="/kp-skripsi/persetujuan-kp"  class="btn bg-light border  border-bottom-0"  style="border-top-left-radius: 15px;" >Persetujuan</a>
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          @if ( Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
   <a href="/kerja-praktek" class="btn bg-light border  border-bottom-0 ">
    <span class="button-text">KP Prodi</span>
   <span class="badge-link">
@@ -43,34 +43,20 @@
   </span>
 </a>
 
-  <a href="/skripsi"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Skripsi Prodi</span>
-  <span class="badge-link">
-    <a href="/skripsi/nilai-keluar" class="sejarah pt-2 bg-light ">
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
   @endif
 @endif
 <a href="/pembimbing/kerja-praktek"  class="btn bg-light border  border-bottom-0 "  >
   <span class="button-text">Bimbingan KP</span>
   <span class="badge-link">
-    <a href="/kerja-praktek/pembimbing/nilai-keluar" class="sejarah pt-2 bg-light ">
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
-<a href="/pembimbing/skripsi"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Bimbingan Skripsi</span>
-  <span class="badge-link" >
-    <a href="/skripsi/pembimbing/nilai-keluar" class="sejarah pt-2 bg-light " style="border-top-right-radius: 40%;">
+    <a href="/kerja-praktek/pembimbing/nilai-keluar" class="sejarah pt-2 bg-light " style="border-top-right-radius: 15px;">
       <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
     </a>
   </span>
 </a>
  
   @endif
+
+
 @if (Str::length(Auth::guard('web')->user()) > 0)
 
 @if (Str::length(Auth::guard('web')->user()) > 0)
