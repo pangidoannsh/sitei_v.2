@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth:dosen,web,mahasiswa']], function () {
 
 Route::group(['middleware' => ['auth:mahasiswa']], function () {
 
-    Route::get('/kp-skripsi', [PendaftaranKPController::class, 'index']);
+    // Route::get('/kp-skripsi', [PendaftaranKPController::class, 'index']);
     // Route::get('/daftar/kerja-praktek', [PendaftaranKPController::class, 'indexkp']);
     // Route::get('/daftar/skripsi', [PendaftaranSkripsiController::class, 'indexskripsi']);
 
@@ -237,7 +237,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/skripsi/pembimbing/nilai-keluar', [PendaftaranController::class, 'lulus_pembimbing']);
 
     Route::get('/skripsi', [PendaftaranController::class, 'pendaftaran_skripsi']);
-    Route::get('/kp-skripsi/persetujuan', [PendaftaranController::class, 'persetujuan_dosen']);
+    Route::get('/kp-skripsi/persetujuan-kp', [PendaftaranController::class, 'persetujuankp_dosen']);
+    Route::get('/kp-skripsi/persetujuan-skripsi', [PendaftaranController::class, 'persetujuanskripsi_dosen']);
     // Route::get('/kp-skripsi/persetujuan/usulankp/{id}', [PendaftaranKPController::class, 'detailpersetujuan_usulankp']);
     Route::get('/kp-skripsi/persetujuan/suratperusahaan/{id}', [PendaftaranKPController::class, 'detailpersetujuan_balasankp']);
     // Route::get('/kp-skripsi/persetujuan/semkp/{id}', [PendaftaranKPController::class, 'detailpersetujuan_semkp']);
@@ -554,11 +555,9 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
 
 });
 
-
-
-
 Route::group(['middleware' => ['auth:dosen,mahasiswa']], function () {
 
+    Route::get('/kp-skripsi', [PendaftaranKPController::class, 'index']);
     
     Route::get('/usulan/detail/{id}', [PendaftaranKPController::class, 'detailusulankp']);
 
