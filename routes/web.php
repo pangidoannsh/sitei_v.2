@@ -175,11 +175,6 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/sidang/admin/perpanjangan-1/detail/{id}', [PendaftaranController::class, 'detail_perpanjangan_1_admin']);
     Route::get('/sidang/admin/perpanjangan-2/detail/{id}', [PendaftaranController::class, 'detail_perpanjangan_2_admin']);
 
-    
-
-    
-    
-
     Route::get('/profil-staff/editpasswordstaff', [StaffProfilController::class, 'editpswstaff']);
     Route::put('/profil-staff/editpasswordstaff', [StaffProfilController::class, 'updatepswstaff']);
 
@@ -260,8 +255,6 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     
     Route::get('/pembimbing/skripsi', [PendaftaranController::class, 'pendaftaran_skripsi_pembimbing']);
 
-    // Route::get('/usulan/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailusulan_pembimbing']);
-
     Route::get('/permohonan-kp/detail/pembimbing/{id}', [PendaftaranController::class, 'detailpermohonankp_pembimbing']);
     
     Route::get('/daftar-semkp/detail/pembimbing/{id}', [PendaftaranController::class, 'detailusulan_semkp_pembimbing']);
@@ -269,10 +262,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/usulan-semkp/pembimbing/approve/{id}', [PendaftaranKPController::class, 'approveusulan_semkp_pemb']);
     Route::put('/usulan-semkp/pembimbing/tolak/{id}', [PendaftaranKPController::class, 'tolakusulan_semkp_pemb']);
 
-   
     Route::get('/usuljudul/detail/pembimbing2/{id}', [PendaftaranController::class, 'detailusuljudul_pembimbing2']);
-
-    
 
     Route::put('/usulankp/pembimbing/approve/{id}', [PendaftaranKPController::class, 'approveusulankp_pemb']);
     Route::put('/usulankp/pembimbing/tolak/{id}', [PendaftaranKPController::class, 'tolakusulankp_pemb']);
@@ -335,8 +325,11 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'editpswdsn']);
     Route::put('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'updatepswdsn']);
     
-    Route::get('/penilaian', [PenilaianController::class, 'index']);
-    Route::get('/riwayat-penilaian', [PenilaianController::class, 'riwayat']);
+
+    Route::get('/kp-skripsi/penilaian-kp', [PenilaianController::class, 'indexkp']);
+    Route::get('/kp-skripsi/penilaian-skripsi', [PenilaianController::class, 'indexskripsi']);
+    Route::get('/kp-skripsi/riwayat-penilaian-kp', [PenilaianController::class, 'riwayatkp']);
+    Route::get('/kp-skripsi/riwayat-penilaian-skripsi', [PenilaianController::class, 'riwayatskripsi']);
 
     Route::get('/penilaian-kp', [PenilaianKPController::class, 'index']);
     Route::get('/penilaian-kp/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'create']);
@@ -345,8 +338,6 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/penilaian-kp/edit/{penjadwalan_kp:id}', [PenilaianKPController::class, 'edit']);
     Route::put('/penilaian-kp-penguji/edit/{penilaian_kp_penguji:id}', [PenilaianKPController::class, 'update_penguji']);
     Route::put('/penilaian-kp-pembimbing/edit/{penilaian_kp_pembimbing:id}', [PenilaianKPController::class, 'update_pembimbing']);
-
-  
    
     Route::put('/penilaian-kp/approve/{id}', [PenjadwalanKPController::class, 'approve']);
     Route::get('/riwayat-penilaian-kp', [PenilaianKPController::class, 'riwayat']);
