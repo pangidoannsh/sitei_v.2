@@ -58,7 +58,7 @@
     <ul class="navbar-nav">
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           <li class="nav-item">
-            <a class="nav-link {{Request::is ('pendaftaran*') ? 'text-success' : '' }}{{Request::is ('kp-skripsi*') ? 'text-success' : '' }}{{Request::is ('kerja-praktek*') ? 'text-success' : '' }} {{Request::is ('skripsi*') ? 'text-success' : '' }} {{Request::is ('pembimbing*') ? 'text-success' : '' }}" aria-current="page" href="/kp-skripsi/persetujuan">Kerja Praktek / Skripsi</a>
+            <a class="nav-link {{Request::is ('pendaftaran*') ? 'text-success' : '' }}{{Request::is ('kp-skripsi*') ? 'text-success' : '' }}{{Request::is ('kerja-praktek*') ? 'text-success' : '' }} {{Request::is ('skripsi*') ? 'text-success' : '' }} {{Request::is ('pembimbing*') ? 'text-success' : '' }}" aria-current="page" href="/kp-skripsi">Kerja Praktek / Skripsi</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/penilaian">Seminar</a>
@@ -69,7 +69,7 @@
             <a class="nav-link {{Request::is ('kp-skripsi*') ? 'text-success' : '' }}  {{Request::is ('usulankp*') ? 'text-success' : '' }} {{Request::is ('permohonankp*') ? 'text-success' : '' }} {{Request::is ('balasankp*') ? 'text-success' : '' }} {{Request::is ('seminarkp*') ? 'text-success' : '' }} {{Request::is ('usulan-semkp*') ? 'text-success' : '' }} {{Request::is ('kpti10-kp*') ? 'text-success' : '' }} {{Request::is ('usuljudul*') ? 'text-success' : '' }} {{Request::is ('jadwal*') ? 'text-success' : '' }} " aria-current="page" href="/kp-skripsi">Kerja Praktek / Skripsi</a>
           </li>
           
-          <li class="nav-item dropdown baru">
+          <!-- <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle   {{Request::is ('kuota-bimbingan*') ? 'text-success' : '' }}">Ketersediaan Pembimbing</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
                 <li>                        
@@ -77,7 +77,7 @@
                 </li>
                 <li><a href="/kuota-bimbingan/skripsi" class="dropdown-item mb-1">Pembimbing Skripsi</a></li>
               </ul>
-          </li>
+          </li> -->
           
           
           <!-- <li class="nav-item">
