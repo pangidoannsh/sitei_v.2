@@ -58,15 +58,12 @@
     <ul class="navbar-nav">
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           <li class="nav-item">
-            <a class="nav-link {{Request::is ('pendaftaran*') ? 'text-success' : '' }}{{Request::is ('kp-skripsi*') ? 'text-success' : '' }}{{Request::is ('kerja-praktek*') ? 'text-success' : '' }} {{Request::is ('skripsi*') ? 'text-success' : '' }} {{Request::is ('pembimbing*') ? 'text-success' : '' }}" aria-current="page" href="/kp-skripsi">Kerja Praktek / Skripsi</a>
+            <a class="nav-link {{Request::is ('pendaftaran*') ? 'text-success' : '' }}{{Request::is ('kp-skripsi*') ? 'text-success' : '' }}{{Request::is ('kerja-praktek*') ? 'text-success' : '' }} {{Request::is ('skripsi*') ? 'text-success' : '' }} {{Request::is ('pembimbing*') ? 'text-success' : '' }}" aria-current="page" href="/kp-skripsi">KP/Skripsi</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/penilaian">Seminar</a>
-          </li>        
           @endif
           @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
           <li class="nav-item">
-            <a class="nav-link {{Request::is ('kp-skripsi*') ? 'text-success' : '' }}  {{Request::is ('usulankp*') ? 'text-success' : '' }} {{Request::is ('permohonankp*') ? 'text-success' : '' }} {{Request::is ('balasankp*') ? 'text-success' : '' }} {{Request::is ('seminarkp*') ? 'text-success' : '' }} {{Request::is ('usulan-semkp*') ? 'text-success' : '' }} {{Request::is ('kpti10-kp*') ? 'text-success' : '' }} {{Request::is ('usuljudul*') ? 'text-success' : '' }} {{Request::is ('jadwal*') ? 'text-success' : '' }} " aria-current="page" href="/kp-skripsi">Kerja Praktek / Skripsi</a>
+            <a class="nav-link {{Request::is ('kp-skripsi*') ? 'text-success' : '' }}  {{Request::is ('usulankp*') ? 'text-success' : '' }} {{Request::is ('permohonankp*') ? 'text-success' : '' }} {{Request::is ('balasankp*') ? 'text-success' : '' }} {{Request::is ('seminarkp*') ? 'text-success' : '' }} {{Request::is ('usulan-semkp*') ? 'text-success' : '' }} {{Request::is ('kpti10-kp*') ? 'text-success' : '' }} {{Request::is ('usuljudul*') ? 'text-success' : '' }} {{Request::is ('jadwal*') ? 'text-success' : '' }} " aria-current="page" href="/kp-skripsi">KP/Skripsi</a>
           </li>
           
           <!-- <li class="nav-item dropdown baru">
@@ -106,7 +103,7 @@
 
           @if (Str::length(Auth::guard('web')->user()) > 0)        
           <li class="nav-item">
-            <a class="nav-link {{Request::is ('kerja-praktek*') ? 'text-success' : '' }}{{Request::is ('sempro*') ? 'text-success' : '' }}{{Request::is ('sidang*') ? 'text-success' : '' }}{{Request::is ('daftar-sempro*') ? 'text-success' : '' }}{{Request::is ('persetujuan*') ? 'text-success' : '' }}{{Request::is ('skripsi*') ? 'text-success' : '' }}{{Request::is ('usulan*') ? 'text-success' : '' }}{{Request::is ('daftar-semkp*') ? 'text-success' : '' }}{{Request::is ('suratperusahaan*') ? 'text-success' : '' }}{{Request::is ('usuljudul*') ? 'text-success' : '' }}{{Request::is ('daftar-sidang*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan/admin/index">Kerja Praktek / Skripsi</a>
+            <a class="nav-link {{Request::is ('kerja-praktek*') ? 'text-success' : '' }}{{Request::is ('sempro*') ? 'text-success' : '' }}{{Request::is ('sidang*') ? 'text-success' : '' }}{{Request::is ('daftar-sempro*') ? 'text-success' : '' }}{{Request::is ('persetujuan*') ? 'text-success' : '' }}{{Request::is ('skripsi*') ? 'text-success' : '' }}{{Request::is ('usulan*') ? 'text-success' : '' }}{{Request::is ('daftar-semkp*') ? 'text-success' : '' }}{{Request::is ('suratperusahaan*') ? 'text-success' : '' }}{{Request::is ('usuljudul*') ? 'text-success' : '' }}{{Request::is ('daftar-sidang*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan/admin/index">KP/Skripsi</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/form">Jadwal</a>
@@ -272,7 +269,8 @@
 <script src="https://cdn.datatables.net/rowgroup/1.4.0/js/dataTables.rowGroup.min.js"></script>
 
 
-<script type="text/javascript">$(document).ready(function() {
+{{-- <script type="text/javascript">
+$(document).ready(function() {
     var table = $('#datatables').DataTable( {
         "lengthMenu": [ 50, 100, 150, 200, 250 ],
         buttons: [ 'copy', 'excel','print', 'pdf' ],
@@ -286,6 +284,33 @@
     table.buttons().container()
         .appendTo( '#datatables_wrapper .col-md-5:eq(0)' );
 } );
+</script> --}}
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var table = $('#datatables').DataTable( {
+      "lengthMenu": [ 50, 100, 150, 200, 250 ],
+      "language": {
+      "sProcessing": "Sedang memproses...",
+      "sLengthMenu": "Tampilkan _MENU_ entri",
+      "sZeroRecords": "Tidak ditemukan data yang sesuai",
+      "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+      "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+      "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+      "sInfoPostFix": "",
+      "sSearch": "Cari:",
+      "sUrl": "",
+      "oPaginate": {
+        "sFirst": "Pertama",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya",
+        "sLast": "Terakhir"
+        }
+      }
+    })
+} );
+
 </script>
 
 <!-- Bootstrap 4 -->
