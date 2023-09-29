@@ -11,71 +11,34 @@
 @section('sub-title')
     Jadwal
 @endsection
-
 @section('content')
 
 @if (session()->has('message'))
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif 
 
-<ol class="breadcrumb col-lg-12">   
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/form">Jadwal</a></li>       
-  <li class="breadcrumb-item"><a href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li>  
-</ol>
 
-@if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
-    
-<div>
-<a href="{{url ('/form-kp/create')}}" class="btn kp btn-success mb-3">+ KP</a>
-<a href="{{url('/form-sempro/create')}}" class="btn sempro btn-success mb-3">+ Sempro</a>
-<a href="{{url('/form-skripsi/create')}}" class="btn skripsi btn-success mb-3">+ Skripsi</a>
-<a href="#ModalClear" data-toggle="modal" class="btn skripsi btn-danger float-right mb-3"><span class="fa-solid fa-trash"></span></a>
-<a href="{{url('/jadwalkan?download=true')}}" class="btn skripsi btn-success float-right mb-3" style="margin-right:10px;"><span class="fa-solid fa-download"></span></a>
-<a href="{{url('/jadwalkan')}}" class="btn jadwalkan btn-success float-right mb-3" style="margin-right:10px;">JADWALKAN</a>
-</a>
-</div>
-
-<div class="modal fade" id="ModalClear">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Apakah Anda Yakin?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Semua Jadwal Akan Dihapus!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-        <form action="/clear" method="POST" class="d-inline">
-              @method('delete')
-              @csrf
-              <button type="submit" class="btn btn-success">Yakin</button>
-        </form>        
-      </div>
-    </div>
-  </div>
-</div>
-
-
-@endif
-
-<table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
+<a href="#" class="btn btn-jadwalkan btn-success mb-3">Cetak Jadwal</a>
+<style>
+  .dt-buttons {
+    display : none !important;
+  }
+</style>
+<table class="table table-responsive-lg table-bordered table-striped" width="100%" id="data-jadwal">
   <thead class="table-dark">
     <tr>      
         <th class="text-center" scope="col">NIM</th>
         <th class="text-center" scope="col">Nama</th>
         <th class="text-center" scope="col">Seminar</th>
         <th class="text-center" scope="col">Prodi</th>
+        <th class="text-center" scope="col">Hari</th>
         <th class="text-center" scope="col">Tanggal</th>
         <th class="text-center" scope="col">Waktu</th>
         <th class="text-center" scope="col">Lokasi</th>              
         <th class="text-center" scope="col">Pembimbing</th>
         <th class="text-center" scope="col">Penguji</th>
         @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
-        <th class="text-center" scope="col">Aksi</th>
+        <!-- <th class="text-center" scope="col">Aksi</th> -->
         @endif
     </tr>
   </thead>
@@ -88,18 +51,19 @@
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>                    
             <td class="bg-primary text-center">{{$kp->jenis_seminar}}</td>                     
             <td class="text-center">{{$kp->prodi->nama_prodi}}</td> 
-            {{-- <td class="text-center">
+            <td class="text-center">
               @if($kp->tanggal == null)
               <p> </p>
               @else
               {{Carbon::parse($kp->tanggal)->translatedFormat('l')}}
               </td>
-              @endif --}}
+              @endif
+
             <td class="text-center">
             @if($kp->tanggal == null)
             <p> </p>
             @else
-            {{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}
+            {{Carbon::parse($kp->tanggal)->translatedFormat('d F Y')}}
             </td>
             @endif
             
@@ -121,10 +85,10 @@
             <td class="text-center">{{$kp->pembimbing->nama_singkat}}</td>
             <td class="text-center">{{$kp->penguji->nama_singkat}}</td>                    
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
-          <td class="text-center">
+          <!-- <td class="text-center">
             <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning mb-2"><i class="fas fa-pen"></i></a>            
             <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
-          </td>
+          </td> -->
           @endif
         </tr>
 
@@ -159,18 +123,18 @@
             <td class="text-center">{{$sempro->mahasiswa->nama}}</td>                     
             <td class="bg-success text-center">{{$sempro->jenis_seminar}}</td>                     
             <td class="text-center">{{$sempro->prodi->nama_prodi}}</td>  
-            {{-- <td class="text-center">
+            <td class="text-center">
               @if($sempro->tanggal == null)
               <p> </p>
               @else
               {{Carbon::parse($sempro->tanggal)->translatedFormat('l')}}
               </td>
-              @endif  --}}
+              @endif
             <td class="text-center">
             @if($sempro->tanggal == null)
             <p> </p>
             @else
-            {{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}
+            {{Carbon::parse($sempro->tanggal)->translatedFormat('d F Y')}}
             </td>
             @endif      
             <td class="text-center">{{$sempro->waktu}}</td>                   
@@ -191,10 +155,10 @@
             @endif
           </td> 
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
-          <td class="text-center">            
+          <!-- <td class="text-center">            
             <a href="/form-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>            
             <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
-          </td>
+          </td> -->
           @endif                                
         </tr>
 
@@ -229,18 +193,18 @@
             <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
             <td class="bg-warning text-center">{{$skripsi->jenis_seminar}}</td>                                     
             <td class="text-center">{{$skripsi->prodi->nama_prodi}}</td>  
-            {{-- <td class="text-center">
+            <td class="text-center">
               @if($skripsi->tanggal == null)
               <p> </p>
               @else
               {{Carbon::parse($skripsi->tanggal)->translatedFormat('l')}}
               </td>
-              @endif  --}}
+              @endif
             <td class="text-center">
             @if($skripsi->tanggal == null)
             <p> </p>
             @else
-            {{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}
+            {{Carbon::parse($skripsi->tanggal)->translatedFormat('d F Y')}}
             </td>
             @endif           
             <td class="text-center">{{$skripsi->waktu}}</td>                   
@@ -260,10 +224,10 @@
             @endif
           </td> 
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
-          <td class="text-center">            
+          <!-- <td class="text-center">            
             <a href="/form-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>          
             <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
-          </td>    
+          </td>     -->
           @endif     
         </tr>
         <div class="modal fade" id="ModalDelete">
@@ -297,25 +261,46 @@
 @endsection
 
 @push('scripts')
-  <script>
-    window.setTimeout(function() {
-      $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-      });
-    }, 2000);
-  </script>
+
+<script>
+
+  const qs = new URLSearchParams(window.location.search);
+
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 2000);
+
+  $("#data-jadwal").DataTable({
+    dom: 'Bfrltip',
+    buttons: [
+        'pdf'
+    ]
+  });
+
+  if(qs.get("download")) {
+    $('#data-jadwal').DataTable().buttons(0,0).trigger();
+  }
+
+  window.location = "/form";
+
+  $(".btn-jadwalkan").click(e => {
+  })
+</script>
+
 @endpush()
 
 @push('scripts')
-  <script>
-    const swal= $('.swal').data('swal');
-    if (swal) {
-      Swal.fire({
-        title : 'Berhasil',
-        text : swal,
-        confirmButtonColor: '#28A745',
-        icon : 'success'
-      })    
-    }
-  </script>
+<script>
+  const swal= $('.swal').data('swal');
+  if (swal) {
+    Swal.fire({
+      title : 'Berhasil',
+      text : swal,
+      confirmButtonColor: '#28A745',
+      icon : 'success'
+    })    
+  }
+</script>
 @endpush()

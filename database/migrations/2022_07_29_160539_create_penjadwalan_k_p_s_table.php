@@ -15,16 +15,15 @@ class CreatePenjadwalanKPSTable extends Migration
     {
         Schema::create('penjadwalan_kp', function (Blueprint $table) {
             $table->id();
-            $table->string('pendaftarankp_id')->nullable();
             $table->string('mahasiswa_nim');
             $table->string('pembimbing_nip');
-            $table->string('penguji_nip');
+            $table->string('penguji_nip')->nullable();
             $table->foreignId('prodi_id');                       
             $table->string('jenis_seminar')->default('KP');
             $table->string('judul_kp');
-            $table->date('tanggal');
-            $table->time('waktu');
-            $table->string('lokasi');
+            $table->date('tanggal')->nullable();
+            $table->string('waktu')->nullable();
+            $table->foreignId('ruangan_id')->nullable();
             $table->string('status_seminar')->default(0);
             $table->string('dibuat_oleh');
             $table->timestamps();

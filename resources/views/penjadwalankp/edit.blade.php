@@ -14,7 +14,8 @@
         @method('put')
         @csrf
 
-    <div>
+        <div>
+        
         <div class="row">
             <div class="col">
             <div class="mb-3 field">
@@ -22,7 +23,7 @@
             <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
                 <option value="">-Pilih-</option>
                 @foreach ($mahasiswas as $mhs)
-                    <option value="{{$mhs->nim}}" {{old('mahasiswa_nim', $kp->mahasiswa_nim ) == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
+                    <option value="{{$mhs->nim}}" {{old('mahasiswa_nim', $kp->mahasiswa_nim) == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
                 @endforeach
             </select>
             @error('mahasiswa_nim')
@@ -30,8 +31,8 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
-
+        </div>        
+        
         <div class="mb-3 field">
             <label for="prodi_id" class="form-label">Program Studi</label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
@@ -50,7 +51,7 @@
                 {{$message}}
             </div>
             @enderror
-        </div>           
+        </div>
 
         <div class="mb-3 field">
             <label class="form-label">Judul Laporan Kerja Praktek</label>
@@ -61,19 +62,28 @@
             </div>
             @enderror           
         </div>
-
+        
         <div class="mb-3 field">
-            <label class="form-label">Lokasi</label>
-            <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $kp->lokasi) }}">  
+            <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
+            <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
+            <option value="">-Pilih-</option>
+                @foreach ($ruangans as $ruangan)
+                    <option value="{{$ruangan->nama_ruangan}}" {{old('lokasi', $kp->lokasi) == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
+                @endforeach
+            </select>
             @error('lokasi')
             <div class="invalid-feedback">
                 {{$message}}
             </div>
             @enderror            
-        </div>                
+        </div>
+        
+
+
             </div>
             <div class="col-md">
-            <div class="mb-3 field">
+
+        <div class="mb-3 field">
             <label for="pembimbing_nip" class="form-label">Pembimbing</label>
             <select name="pembimbing_nip" id="pembimbing" class="form-select @error('pembimbing_nip') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -87,7 +97,8 @@
             </div>
             @enderror
         </div>
-
+        
+        
         <div class="mb-3 field">
             <label for="penguji_nip" class="form-label">Penguji</label>
             <select name="penguji_nip" id="penguji" class="form-select @error('penguji_nip') is-invalid @enderror">
@@ -102,29 +113,88 @@
             </div>
             @enderror
         </div>
-
+    
         <div class="mb-3 field">
-            <label class="form-label">Tanggal</label>
-            <input type="date" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', $kp->tanggal) }}">
-            @error('tanggal')
-              <div class="invalid-feedback">
-                  {{$message}}
-              </div>
-            @enderror
+        <script>
+            function teshari()
+            {
+                const lambe = new Date($('#ciek').val());
+                var tod = lambe.getDay();
+                if (tod == 2)
+                {
+                    $("#waktudb2").show();
+                    $("#waktudb3").hide();
+                    $("#waktu4").hide();
+                }
+                else if (tod == 4)
+                {
+                    $("#waktudb2").hide();
+                    $("#waktudb3").show();
+                    $("#waktu4").hide();
+                }
+                else
+                {
+                    $("#waktudb2").hide();
+                    $("#waktudb3").hide();
+                    $("#waktu4").show();
+                }
+
+                $(`[name="waktu_selasa"]`).prop('selectedIndex',0);
+                $(`[name="waktu_kamis"]`).prop('selectedIndex',0);
+            }
+        </script>
+
+<div class="mb-3 field">
+            <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+            <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+            <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>       
+                <label class="form-label">Tanggal <input type="checkbox" id="cektanggal2"> (manual)</label>
+                <input id ="ciek" type="text" onchange="teshari()" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', $kp->tanggal) }}" disabled>
+                
+                <script type="text/javascript">
+                    $("#ciek").datepicker({
+                    dateFormat: "yy-mm-dd",
+                    beforeShowDay: function (tanggal) {
+                    var day = tanggal.getDay();
+                    return [day != 0 && day != 1 && day != 3 && day != 5 && day != 6];
+                }
+                });
+                </script>
+                
+                
+                @error('tanggal')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
         </div>
 
-        <div class="mb-3 field">
-            <label class="form-label">Waktu</label>
-            <input type="time" name="waktu" class="form-control @error('waktu') is-invalid @enderror" value="{{ old('waktu', $kp->waktu) }}">
+            <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
+            <select name="jam_id" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
+            <option value="">-Pilih-</option>
+            </select>
+            <select name="waktu_selasa" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
+            <option value="">-Pilih-</option>
+                @foreach ($jamkpsels as $jamkpsel)
+                    <option value="{{$jamkpsel->jam_tersedia}}" {{old('waktu', $kp->waktu) == $jamkpsel->jam_tersedia ? 'selected' : null}}>{{$jamkpsel->jam_tersedia}}</option>
+                @endforeach
+            </select>
+            <select name="waktu_kamis" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
+            <option value="">-Pilih-</option>
+                @foreach ($jamkpkams as $jamkpkam)
+                    <option value="{{$jamkpkam->jam_tersedia}}" {{old('waktu', $kp->waktu) == $jamkpkam->jam_tersedia ? 'selected' : null}}>{{$jamkpkam->jam_tersedia}}</option>
+                @endforeach
+            </select>
             @error('waktu')
-              <div class="invalid-feedback">
-                  {{$message}}
-              </div>
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success float-right mt-4">Perbarui</button>
-            </div>
+
+        <button type="submit" class="btn btn-success float-right mt-4">Edit</button>
+        </div>
         </div>
     </div>
 </form>
@@ -146,5 +216,25 @@
        $('#penguji').select2();
     });
 
+    document.getElementById('cekwaktu3').onchange = function() {
+        console.log("Test");
+        document.getElementById('waktu4').disabled = !this.checked;
+        document.getElementById('waktudb2').disabled = !this.checked;
+        document.getElementById('waktudb3').disabled = !this.checked;
+    };
+
+    document.getElementById('cektanggal2').onchange = function() {
+    document.getElementById('ciek').disabled = !this.checked;
+    };
+
+    document.getElementById('ceklokasi2').onchange = function() {
+    document.getElementById('lokasi2').disabled = !this.checked;
+    };
+
+    document.getElementById('cekwaktu3').onchange = function() {
+        document.getElementById('waktu4').disabled = !this.checked;
+        document.getElementById('waktudb2').disabled = !this.checked;
+        document.getElementById('waktudb3').disabled = !this.checked;
+    };
 </script>
 @endpush

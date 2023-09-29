@@ -43,7 +43,7 @@
     @foreach ($penjadwalan_kps as $kp)
         <tr>                  
           <td>{{$kp->nim}}</td>                             
-          <td>{{$kp->nama}}</td>
+          <td>{{$kp->nama}}</td>                                                                                     
           <td>{{$kp->prodi->nama_prodi}}</td>          
           <td>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>
           <td>{{$kp->waktu}}</td>                   

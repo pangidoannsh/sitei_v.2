@@ -25,15 +25,14 @@ use App\Http\Controllers\PenilaianSemproController;
 use App\Http\Controllers\PenilaianSkripsiController;
 use App\Http\Controllers\PenjadwalanSemproController;
 use App\Http\Controllers\PenjadwalanSkripsiController;
+use App\Models\PenjadwalanKP;
+//M.Seprinaldi
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PendaftaranKPController;
 use App\Http\Controllers\PendaftaranSkripsiController;
-use App\Http\Controllers\PersetujuanDaftarController;
-use App\Models\PenjadwalanKP;
-use App\Http\Controllers\PermohonanKPController;
-use App\Http\Controllers\BalasanKPController;
-use App\Http\Controllers\UsulanSemKPController;
-use App\Http\Controllers\UsulanKPController;
+//Murdillah
+use App\Http\Controllers\JadwalkanController;
+use App\Http\Controllers\RuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,6 +150,20 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
 
 
 Route::group(['middleware' => ['auth:web']], function () {
+
+    //Murdillah
+    Route::get('/ruangan', [RuanganController::class, 'index']);
+    Route::get('/ruangan/create', [RuanganController::class, 'create']);
+    Route::post('/ruangan/create', [RuanganController::class, 'store']);
+    Route::get('/ruangan/edit/{ruangan:id}', [RuanganController::class, 'edit']);
+    Route::put('/ruangan/edit/{ruangan:id}', [RuanganController::class, 'update']);
+    Route::delete('/ruangan/{ruangan:id}', [RuanganController::class, 'destroy']);
+    
+    Route::get('/jadwalkan', [JadwalkanController::class, 'index']);
+    Route::get('/jadwalkan/create', [JadwalkanController::class, 'create']);
+    Route::post('/jadwalkan/create', [JadwalkanController::class, 'store']);
+
+
     Route::get('/kp-skripsi/persetujuan/perpanjangan-revisi/{id}', [PendaftaranSkripsiController::class, 'detailpersetujuan_perpanjangan_revisi']);
 
     //APPROVAL ADMIN
@@ -311,7 +324,6 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
     Route::get('/pendaftaran/kp', [PendaftaranController::class, 'daftarkp_dosen']);
 
-    Route::get('/setujui-daftar', [PersetujuanDaftarController::class, 'index']);
 
     Route::put('/pendaftaran-kp/approve/{id}', [PendaftaranKPController::class, 'approve']);
     Route::get('/riwayatkp', [PendaftaranKPController::class, 'riwayat']);
@@ -382,8 +394,10 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
 
 Route::group(['middleware' => ['auth:web']], function () {
-    Route::get('/form', [PenjadwalanController::class, 'index']);
-    Route::get('/riwayat-penjadwalan', [PenjadwalanController::class, 'riwayat']);    
+
+    Route::get('/form', [PenjadwalanController::class, 'index'])->name('form');
+    Route::get('/riwayat-penjadwalan', [PenjadwalanController::class, 'riwayat']);
+    Route::delete('/clear', [PenjadwalanController::class, 'clear']);
 
     Route::get('/form-kp', [PenjadwalanKPController::class, 'index']);
     Route::get('/form-kp/create', [PenjadwalanKPController::class, 'create']);
@@ -392,6 +406,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::put('/form-kp/edit/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'update']);
     Route::delete('/form-kp/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'destroy']);
     Route::get('/riwayat-penjadwalan-kp', [PenjadwalanKPController::class, 'riwayat']);
+
 
     Route::get('/form-sempro', [PenjadwalanSemproController::class, 'index']);
     Route::get('/form-sempro/create', [PenjadwalanSemproController::class, 'create']);
@@ -410,6 +425,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::delete('/form-skripsi/{penjadwalan_skripsi:id}', [PenjadwalanSkripsiController::class, 'destroy']);
     Route::get('/riwayat-penjadwalan-skripsi', [PenjadwalanSkripsiController::class, 'riwayat']);
     Route::get('/penilaian-skripsi/riwayat-judul/{id}', [PenjadwalanSkripsiController::class, 'riwayatjudul']);
+
 });
 
 Route::group(['middleware' => ['auth:web,dosen']], function(){

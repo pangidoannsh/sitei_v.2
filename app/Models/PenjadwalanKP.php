@@ -2,15 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Dosen;
-use App\Models\Prodi;
-use App\Models\Mahasiswa;
-use App\Models\Konsentrasi;
-use App\Models\PendaftaranKP;
-use App\Models\PenilaianKPPenguji;
-use App\Models\PenilaianKPPembimbing;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class PenjadwalanKP extends Model
 {
@@ -34,6 +27,11 @@ class PenjadwalanKP extends Model
         }
     }
 
+    public function jam()
+    {
+        return $this->belongsTo(Jam::class);
+    }
+
     public function prodi()
     {
         return $this->belongsTo(Prodi::class);
@@ -47,6 +45,22 @@ class PenjadwalanKP extends Model
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_nim', 'nim');
+    }
+
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class);
+    }
+
+
+    public function jamkpsel()
+    {
+        return $this->belongsTo(JamKPSel::class);
+    }
+    
+    public function jamkpkam()
+    {
+        return $this->belongsTo(JamKPKam::class);
     }
 
     public function pembimbing()
@@ -63,16 +77,6 @@ class PenjadwalanKP extends Model
     {
         return $this->belongsTo(Dosen::class, 'dibuat_oleh', 'nip');
     }
-
-    public function pendaftaran_kp()
-    {
-        return $this->belongsTo(Pendaftaran::class, 'id', 'id');
-    }
-    public function dosen_pembimbing_kp()
-    {
-        return $this->belongsTo(Pendaftaran::class, 'dosen_pembimbing_nip', 'nip');
-    }
-
 
     public function cek()
     {

@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\Mahasiswa;
+use App\Models\Ruangan;
+use App\Models\JamKPSel;
+use App\Models\JamKPKam;
 use App\Models\Konsentrasi;
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
-use App\Models\PendaftaranKP;
 use \PDF;
 use App\Models\PenilaianKPPenguji;
 use Illuminate\Support\Facades\URL;
@@ -45,9 +46,10 @@ class PenjadwalanKPController extends Controller
             return view('penjadwalankp.create', [    
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get()->sortBy('nama'),
-                'pendaftaran_kp' => PendaftaranKP::all(),
                 'dosens' => Dosen::all()->sortBy('nama'),
-                // 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', 1)->get(),                   
+                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                'jamkpsels' => JamKPSel::all()->sortBy('id'),
+                'jamkpkams' => JamKPKam::all()->sortBy('id'),
             ]);
         }        
         if (auth()->user()->role_id == 3) {            
@@ -55,72 +57,47 @@ class PenjadwalanKPController extends Controller
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
-                'pendaftaran_kp' => PendaftaranKP::all(),
-                // 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', 2)->get(),                   
+                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                'jamkpsels' => JamKPSel::all()->sortBy('id'),
+                'jamkpkams' => JamKPKam::all()->sortBy('id'),           
             ]);
         }        
-        if (auth()->user()->role_id == 4) {    
-            
+        if (auth()->user()->role_id == 4) {            
             return view('penjadwalankp.create', [    
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'), 
-                'pendaftaran_kp' => PendaftaranKP::all(),     
-                // 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', 3)->get(),          
+                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                'jamkpsels' => JamKPSel::all()->sortBy('id'),
+                'jamkpkams' => JamKPKam::all()->sortBy('id'),           
             ]);
-        }        
-        // if (auth()->user()->nim > 0) {            
-        //     return view('penjadwalankp.create', [    
-        //         'prodis' => Prodi::all(),
-        //         'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
-        //         'dosens' => Dosen::all()->sortBy('nama'),     
-                       
-        //     ]);
-        // }        
+        }
+    
     }
 
-    public function store(Request $request , PendaftaranKP $id)
+    public function store(Request $request)
     {
         $request->validate([
-            // 'pendaftarankp_id' => 'required',
             'mahasiswa_nim' => 'required',
             'pembimbing_nip' => 'required',
-            'penguji_nip' => 'required',
             'prodi_id' => 'required',                                                             
             'judul_kp' => 'required',
-            'tanggal' => 'required',
-            'waktu' => 'required',
-            'lokasi' => 'required',
-            // 'status_kp' => 'required',
+            'penguji_nip' => 'required',
         ]);
-        
-    //    $pendaftarankp_id = PendaftaranKP::select('id')->where('mahasiswa_nim', $request->pendaftarankp_id)->get();
 
         PenjadwalanKP::create([
-            // 'pendaftarankp_id' =>$pendaftarankp_id, 
             'mahasiswa_nim' => $request->mahasiswa_nim,
-            'pembimbing_nip' => $request->pembimbing_nip,
-            'penguji_nip' => $request->penguji_nip,                        
+            'pembimbing_nip' => $request->pembimbing_nip,                      
             'prodi_id' => $request->prodi_id,            
             'judul_kp' => $request->judul_kp,
-            'tanggal' => $request->tanggal,
+            'penguji_nip' => $request->penguji_nip,  
+            'ruangan_id' => $request->ruangan_id,
             'waktu' => $request->waktu,
-            'lokasi' => $request->lokasi,
+            'tanggal' => $request->tanggal,
             'dibuat_oleh' => auth()->user()->username,
         ]);
-        // PendaftaranKP::update([      
-        //     'status_kp' => $request->status_kp,
-        // ]);
-      
-        // $kp = PendaftaranKP::find($id);
-        // // $kp->jenis_usulan = 'Usulan Seminar Kerja Praktek';
-        // // $kp->tgl_created_semkp = Carbon::now()->isoFormat('D MMMM Y');
-        // $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
-        // // $kp->keterangan = 'Seminar Kerja Praktek dijadwal';
-        // $kp->update();
 
-        Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
-        return redirect('/persetujuan/admin/index');
+        return redirect('/form')->with('message', 'Jadwal Berhasil Ditambahkan!');
     }
 
     public function edit($id)
@@ -128,12 +105,14 @@ class PenjadwalanKPController extends Controller
         $decrypted = Crypt::decryptString($id);
         $kps = PenjadwalanKP::findOrFail($decrypted);
 
-        return view('penjadwalankp.edit', [
+        return view('penjadwalankp.edit', [                      
             'kp' => $kps,
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
-            'dosens' => Dosen::all()->sortBy('nama'),
-            // 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('dosen_pembimbing_nip', Auth::user()->nip)->get(),
+            'dosens' => Dosen::all()->sortBy('nama'), 
+            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            'jamkpsels' => JamKPSel::all()->sortBy('id'),
+            'jamkpkams' => JamKPKam::all()->sortBy('id'),  
         ]);
     }
 
@@ -142,18 +121,29 @@ class PenjadwalanKPController extends Controller
         $rules = [
             'mahasiswa_nim' => 'required',
             'pembimbing_nip' => 'required',
-            'penguji_nip' => 'required',
             'prodi_id' => 'required',                        
             'judul_kp' => 'required',
-            'tanggal' => 'required',
-            'waktu' => 'required',
-            'lokasi' => 'required',
+            'lokasi' => 'max:255',
+            'waktu' => 'max:255',
         ];
                
         $validated = $request->validate($rules);
 
-        $validated['dibuat_oleh'] = auth()->user()->username;
+        if($request->waktu_selasa != null) {
+            $request->waktu = $request->waktu_selasa;
+        }
+        if($request->waktu_kamis != null) {
+            $request->waktu = $request->waktu_kamis;
+        }
+        if(isset($request->ruangan_id)) {
+            $validated["lokasi"]= $request->ruangan_id;
+        }
+        if(isset($request->tanggal)) {
+            $validated["tanggal"]= $request->tanggal;
+        }
 
+        $validated["waktu"] = $request->waktu;
+        $validated['dibuat_oleh'] = auth()->user()->username;
         PenjadwalanKP::where('id', $penjadwalan_kp->id)
             ->update($validated);
 
@@ -175,19 +165,6 @@ class PenjadwalanKPController extends Controller
 
         return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
     }
-    //APPROVAL SELESAI SEMINAR
-    // public function approveselesaiseminarkp($id)
-    // {
-    //     $kp = PendaftaranKP::find($id);
-    //     $kp->status_kp = 'SEMINAR KP SELESAI';
-    //     $kp->keterangan = 'Seminar Kerja Praktek Selesai';
-    //     $kp->tgl_disetujui_kpti_10 = Carbon::now();
-    //     $kp->update();
-
-    //     return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
-    // }
-
-
 
     public function riwayat()
     {

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use \PDF;
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\Mahasiswa;
+use App\Models\Ruangan;
+use App\Models\JamSel;
+use App\Models\JamKam;
 use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
+use \PDF;
 use App\Models\PenjadwalanSempro;
-use App\Models\PendaftaranSkripsi;
 use Illuminate\Support\Facades\URL;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSemproPenguji;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\PenilaianSemproPembimbing;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -46,8 +46,10 @@ class PenjadwalanSemproController extends Controller
             return view('penjadwalansempro.create', [    
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get()->sortBy('nama'),
-                'dosens' => Dosen::all(),                
-                'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', 1)->get(),  
+                'dosens' => Dosen::all(),
+                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                'jamsels' => JamSel::all()->sortBy('id'),
+                'jamkams' => JamKam::all()->sortBy('id'),                
             ]);
         }        
         if (auth()->user()->role_id == 3) {            
@@ -55,7 +57,9 @@ class PenjadwalanSemproController extends Controller
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
-                'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', 2)->get(),                  
+                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                'jamsels' => JamSel::all()->sortBy('id'),
+                'jamkams' => JamKam::all()->sortBy('id'),                       
             ]);
         }        
         if (auth()->user()->role_id == 4) {            
@@ -63,98 +67,40 @@ class PenjadwalanSemproController extends Controller
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
-                'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', 3)->get(),                  
+                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'), 
+                'jamsels' => JamSel::all()->sortBy('id'),
+                'jamkams' => JamKam::all()->sortBy('id'),                    
             ]);
         }        
     }
 
     public function store(Request $request)
     {
-        $data = [
+        $request->validate(
+            [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',
-            'pengujisatu_nip' => 'required',
-            'pengujidua_nip' => 'required',            
+            'pembimbingsatu_nip' => 'required',           
             'prodi_id' => 'required',                            
             'judul_proposal' => 'required',
-            'tanggal' => 'required',
-            'waktu' => 'required',
-            'lokasi' => 'required',
-        ];
+            'pengujisatu_nip' => 'required',
+            ]
+            );
 
-        if ($request->pembimbingdua_nip) {
-            $data['pembimbingdua_nip'] = 'required';            
-        }
-        
-        if ($request->pengujitiga_nip) {
-            $data['pengujitiga_nip'] = 'required';            
-        } 
+        PenjadwalanSempro::create([
+            'mahasiswa_nim' => $request['mahasiswa_nim'],
+            'pembimbingsatu_nip' => $request['pembimbingsatu_nip'],
+            'pembimbingdua_nip' => $request['pembimbingdua_nip'],
+            'pengujisatu_nip' => $request['pengujisatu_nip'],
+            'pengujidua_nip' => $request['pengujidua_nip'],
+            'pengujitiga_nip' => $request['pengujitiga_nip'],
+            'prodi_id' => $request['prodi_id'],                
+            'judul_proposal' => $request['judul_proposal'],
+            'tanggal' => $request['tanggal'],
+            'waktu' => $request['waktu'],
+            'lokasi' => $request['lokasi'],
+            'dibuat_oleh' => auth()->user()->username,
+        ]);
 
-        $validatedData = $request->validate($data);
-
-        if ($request->pembimbingdua_nip && $request->pengujitiga_nip) {
-            PenjadwalanSempro::create([
-                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],
-                'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],
-                'pembimbingdua_nip' => $validatedData['pembimbingdua_nip'],
-                'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
-                'pengujidua_nip' => $validatedData['pengujidua_nip'],
-                'pengujitiga_nip' => $validatedData['pengujitiga_nip'],
-                'prodi_id' => $validatedData['prodi_id'],                
-                'judul_proposal' => $validatedData['judul_proposal'],
-                'tanggal' => $validatedData['tanggal'],
-                'waktu' => $validatedData['waktu'],
-                'lokasi' => $validatedData['lokasi'],
-                'dibuat_oleh' => auth()->user()->username,
-            ]);
-        }
-        elseif ($request->pembimbingdua_nip == null && $request->pengujitiga_nip == null) {
-            PenjadwalanSempro::create([
-                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],                
-                'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],                
-                'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
-                'pengujidua_nip' => $validatedData['pengujidua_nip'],                
-                'prodi_id' => $validatedData['prodi_id'],                
-                'judul_proposal' => $validatedData['judul_proposal'],
-                'tanggal' => $validatedData['tanggal'],
-                'waktu' => $validatedData['waktu'],
-                'lokasi' => $validatedData['lokasi'],
-                'dibuat_oleh' => auth()->user()->username,
-            ]);
-        }        
-        elseif ($request->pembimbingdua_nip == null) {
-            PenjadwalanSempro::create([
-                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],                
-                'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],                
-                'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
-                'pengujidua_nip' => $validatedData['pengujidua_nip'],                
-                'pengujitiga_nip' => $validatedData['pengujitiga_nip'],
-                'prodi_id' => $validatedData['prodi_id'],                
-                'judul_proposal' => $validatedData['judul_proposal'],
-                'tanggal' => $validatedData['tanggal'],
-                'waktu' => $validatedData['waktu'],
-                'lokasi' => $validatedData['lokasi'],
-                'dibuat_oleh' => auth()->user()->username,
-            ]);
-        }
-        elseif ($request->pengujitiga_nip == null) {
-            PenjadwalanSempro::create([
-                'mahasiswa_nim' => $validatedData['mahasiswa_nim'],                
-                'pembimbingsatu_nip' => $validatedData['pembimbingsatu_nip'],                
-                'pembimbingdua_nip' => $validatedData['pembimbingdua_nip'],
-                'pengujisatu_nip' => $validatedData['pengujisatu_nip'],
-                'pengujidua_nip' => $validatedData['pengujidua_nip'],                
-                'prodi_id' => $validatedData['prodi_id'],                
-                'judul_proposal' => $validatedData['judul_proposal'],
-                'tanggal' => $validatedData['tanggal'],
-                'waktu' => $validatedData['waktu'],
-                'lokasi' => $validatedData['lokasi'],
-                'dibuat_oleh' => auth()->user()->username,
-            ]);
-        }
-
-        // Alert::success('Berhasil!', 'Jadwal Berhasil Ditambahkan')->showConfirmButton('Ok', '#28a745');
-        // return redirect('/persetujuan/admin/index');
         return redirect('/form')->with('message', 'Jadwal Berhasil Ditambahkan!');
     }
 
@@ -168,6 +114,9 @@ class PenjadwalanSemproController extends Controller
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),
+            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            'jamsels' => JamSel::all()->sortBy('id'),
+            'jamkams' => JamKam::all()->sortBy('id'),
         ]);
     }
 
@@ -175,14 +124,9 @@ class PenjadwalanSemproController extends Controller
     {
         $rules = [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',
-            'pengujisatu_nip' => 'required',
-            'pengujidua_nip' => 'required',            
+            'pembimbingsatu_nip' => 'required',            
             'prodi_id' => 'required',                           
             'judul_proposal' => 'required',
-            'tanggal' => 'required',
-            'waktu' => 'required',
-            'lokasi' => 'required',
         ];        
 
         if ($request->pembimbingdua_nip) {
@@ -214,27 +158,23 @@ class PenjadwalanSemproController extends Controller
             }
         }        
 
-        $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
-        $edit->pengujidua_nip = $validated['pengujidua_nip'];
-        
-        if ($request->pengujitiga_nip) {
-            if ($penjadwalan_sempro->pengujitiga_nip != $request->pengujitiga_nip) {
-                if ($request->pengujitiga_nip == 1) {
-                    $edit->pengujitiga_nip = null;
-                } else {
-                    $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
-                }
-            }
+        if($request->waktu_selasa != null) {
+            $request->waktu = $request->waktu_selasa;
         }
-        
+        if($request->waktu_kamis != null) {
+            $request->waktu = $request->waktu_kamis;
+        }
+        if(isset($request->lokasi)) {
+            $edit->lokasi = $request->lokasi;
+        }
+        if(isset($request->tanggal)) {
+            $edit->tanggal = $request->tanggal;
+        }
         $edit->prodi_id = $validated['prodi_id'];                
         $edit->judul_proposal = $validated['judul_proposal'];
-        $edit->tanggal = $validated['tanggal'];
-        $edit->waktu = $validated['waktu'];
-        $edit->lokasi = $validated['lokasi'];
         $edit->dibuat_oleh = $validated['dibuat_oleh'];
+        $edit->waktu = $request->waktu;
         $edit->update();
-
         return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }
 

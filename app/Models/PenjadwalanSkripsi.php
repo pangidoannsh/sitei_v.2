@@ -42,6 +42,11 @@ class PenjadwalanSkripsi extends Model
         return $this->belongsTo(Konsentrasi::class);
     }
 
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class, 'lokasi', 'id');
+    }
+
     public function pembimbingsatu()
     {
         return $this->belongsTo(Dosen::class, 'pembimbingsatu_nip', 'nip');
