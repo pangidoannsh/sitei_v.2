@@ -49,7 +49,7 @@
             @enderror
         </div> 
 
-        <button type="submit" class="btn editpw btn-success mb-5">Perbarui</button>
+        <button type="submit" class="btn editpw btn-success mb-5">Ubah</button>
 
       </form>
 </div>

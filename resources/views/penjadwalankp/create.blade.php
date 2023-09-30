@@ -18,9 +18,9 @@
         <div class="row">
             <div class="col">
             <div class="mb-3 field">
-            <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
+            <label for="mahasiswa_nim" class="form-label">Mahasiswa <span class="text-danger">*</span></label>
             <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($mahasiswas as $mhs)
                     <option value="{{$mhs->nim}}" {{old('mahasiswa_nim') == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
                 @endforeach
@@ -33,7 +33,7 @@
         </div>        
         
         <div class="mb-3 field">
-            <label for="prodi_id" class="form-label">Program Studi</label>
+            <label for="prodi_id" class="form-label">Program Studi <span class="text-danger">*</span></label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
             @if(auth()->user()->role_id == 2)                                                          
                 <option value="1">Teknik Elektro D3</option>                
@@ -53,7 +53,7 @@
         </div>
 
         <div class="mb-3 field">
-            <label class="form-label">Judul Laporan Kerja Praktek</label>
+            <label class="form-label">Judul Laporan Kerja Praktek <span class="text-danger">*</span></label>
             <input type="text" name="judul_kp" class="form-control @error('judul_kp') is-invalid @enderror" value="{{ old('judul_kp') }}"> 
             @error('judul_kp')
             <div class="invalid-feedback">
@@ -65,7 +65,7 @@
         <div class="mb-3 field">
             <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
             <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
-            <option value="">-Pilih-</option>
+            <option value="">-Belum Dipilih-</option>
                 @foreach ($ruangans as $ruangan)
                     <option value="{{$ruangan->id}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
                 @endforeach
@@ -83,9 +83,9 @@
             <div class="col-md">
 
         <div class="mb-3 field">
-            <label for="pembimbing_nip" class="form-label">Pembimbing</label>
+            <label for="pembimbing_nip" class="form-label">Pembimbing <span class="text-danger">*</span></label>
             <select name="pembimbing_nip" id="pembimbing" class="form-select @error('pembimbing_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pembimbing_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -99,9 +99,9 @@
         
         
         <div class="mb-3 field">
-            <label for="penguji_nip" class="form-label">Penguji</label>
+            <label for="penguji_nip" class="form-label">Penguji <span class="text-danger">*</span></label>
             <select name="penguji_nip" id="penguji" class="form-select @error('penguji_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('penguji_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -167,16 +167,16 @@
 
             <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
             <select name="jam_id" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Pilih-</option>
+            <option value="">-Belum Dipilih-</option>
             </select>
             <select name="waktu" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Pilih-</option>
+            <option value="">-Belum Dipilih-</option>
                 @foreach ($jamkpsels as $jamkpsel)
                     <option value="{{$jamkpsel->jam_tersedia}}" {{old('waktu') == $jamkpsel->jam_tersedia ? 'selected' : null}}>{{$jamkpsel->jam_tersedia}}</option>
                 @endforeach
             </select>
             <select name="waktu" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Pilih-</option>
+            <option value="">-Belum Dipilih-</option>
                 @foreach ($jamkpkams as $jamkpkam)
                     <option value="{{$jamkpkam->jam_tersedia}}" {{old('waktu') == $jamkpkam->jam_tersedia ? 'selected' : null}}>{{$jamkpkam->jam_tersedia}}</option>
                 @endforeach

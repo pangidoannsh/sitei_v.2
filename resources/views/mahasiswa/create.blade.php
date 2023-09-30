@@ -90,7 +90,7 @@
         <div class="mb-3 field">
             <label for="konsentrasi_id" class="form-label">Konsentrasi</label>
             <select name="konsentrasi_id" class="form-select @error('konsentrasi_id') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($konsentrasis as $konsentrasi)
                     <option value="{{$konsentrasi->id}}" {{old('konsentrasi_id') == $konsentrasi->id ? 'selected' : null}}>{{$konsentrasi->nama_konsentrasi}}</option>
                 @endforeach
@@ -105,7 +105,7 @@
         <div class="mb-3 field">
             <label for="role_id" class="form-label">Status</label>
             <select name="role_id" class="form-select @error('role_id') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($roles as $role)
                     <option value="{{$role->id}}" {{old('role_id') == $role->id ? 'selected' : null}}>{{$role->role_akses}}</option>
                 @endforeach

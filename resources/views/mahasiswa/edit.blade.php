@@ -60,7 +60,7 @@
         <div class="mb-3 field">
             <label for="prodi_id" class="form-label">Program Studi</label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($prodis as $prodi)
                     <option value="{{$prodi->id}}" {{old('prodi_id', $mahasiswa->prodi_id) == $prodi->id ? 'selected' : null}}>{{$prodi->nama_prodi}}</option>
                 @endforeach
@@ -75,7 +75,7 @@
         <div class="mb-3 field">
             <label for="konsentrasi_id" class="form-label">Konsentrasi</label>
             <select name="konsentrasi_id" class="form-select @error('konsentrasi_id') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($konsentrasis as $konsentrasi)
                     <option value="{{$konsentrasi->id}}" {{old('konsentrasi_id', $mahasiswa->konsentrasi_id) == $konsentrasi->id ? 'selected' : null}}>{{$konsentrasi->nama_konsentrasi}}</option>
                 @endforeach
@@ -87,7 +87,7 @@
             @enderror
         </div>     
                
-        <button type="submit" class="btn btn-success float-right mt-4">Perbarui</button>
+        <button type="submit" class="btn btn-success float-right mt-4">Ubah</button>
         </div>
     </div>
 </div>

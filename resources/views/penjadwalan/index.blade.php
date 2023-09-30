@@ -102,7 +102,6 @@
             {{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}
             </td>
             @endif
-            
 
             <td class="text-center">
               @if($kp->waktu == null)
@@ -123,34 +122,11 @@
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
           <td class="text-center">
             <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning mb-2"><i class="fas fa-pen"></i></a>            
-            <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
+            
           </td>
           @endif
         </tr>
 
-        <div class="modal fade" id="ModalDelete">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Apakah Anda Yakin?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>Data Yang Dihapus Tidak Akan Kembali!</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                <form action="/form-kp/{{Crypt::encryptString($kp->id)}}" method="POST" class="d-inline">
-                      @method('delete')
-                      @csrf
-                      <button type="submit" class="btn btn-success">Yakin</button>
-                </form>        
-              </div>
-            </div>
-          </div>
-        </div>
     @endforeach    
 
     @foreach ($penjadwalan_sempros as $sempro)
@@ -192,35 +168,10 @@
           </td> 
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
           <td class="text-center">            
-            <a href="/form-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>            
-            <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
+            <a href="/form-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
           </td>
           @endif                                
         </tr>
-
-        <div class="modal fade" id="ModalDelete">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Apakah Anda Yakin?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>Data Yang Dihapus Tidak Akan Kembali!</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                <form action="/form-sempro/{{Crypt::encryptString($sempro->id)}}" method="POST" class="d-inline">
-                      @method('delete')
-                      @csrf
-                      <button type="submit" class="btn btn-success">Yakin</button>
-                </form>        
-              </div>
-            </div>
-          </div>
-        </div>
     @endforeach
 
     @foreach ($penjadwalan_skripsis as $skripsi)
@@ -248,6 +199,7 @@
           <td class="text-center">
             <p>1. {{$skripsi->pembimbingsatu->nama_singkat}}</p>
             @if ($skripsi->pembimbingdua == !null)
+            <p>2. {{$skripsi->pembimbingdua->nama_singkat}}</p>
             @endif
           </td> 
           <td class="text-center">
@@ -261,34 +213,11 @@
           </td> 
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
           <td class="text-center">            
-            <a href="/form-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>          
-            <a href="#ModalDelete" data-toggle="modal" class="badge bg-danger"><i class="fas fa-trash"></i></a>
+            <a href="/form-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
+            
           </td>    
           @endif     
         </tr>
-        <div class="modal fade" id="ModalDelete">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Apakah Anda Yakin?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>Data Yang Dihapus Tidak Akan Kembali!</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                <form action="/form-skripsi/{{Crypt::encryptString($skripsi->id)}}" method="POST" class="d-inline">
-                      @method('delete')
-                      @csrf
-                      <button type="submit" class="btn btn-success">Yakin</button>
-                </form>        
-              </div>
-            </div>
-          </div>
-        </div>
     @endforeach
 
   </tbody>

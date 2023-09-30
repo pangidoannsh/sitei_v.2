@@ -16,9 +16,9 @@
         <div class="row">
             <div class="col">
             <div class="mb-3 field">
-            <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
+            <label for="mahasiswa_nim" class="form-label">Mahasiswa <span class="text-danger">*</span></label>
             <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($mahasiswas as $mhs)
                     <option value="{{$mhs->nim}}" {{old('mahasiswa_nim') == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
                 @endforeach
@@ -31,7 +31,7 @@
         </div>
 
         <div class="mb-3 field">
-            <label for="prodi_id" class="form-label">Program Studi</label>
+            <label for="prodi_id" class="form-label">Program Studi <span class="text-danger">*</span></label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
             @if(auth()->user()->role_id == 2)                                                          
                 <option value="1">Teknik Elektro D3</option>                
@@ -51,9 +51,9 @@
         </div>                
 
         <div class="mb-3 field">
-            <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
+            <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu <span class="text-danger">*</span></label>
             <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pembimbingsatu_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -64,7 +64,6 @@
             </div>
             @enderror
         </div>
-
 
         <div class="mb-3 field">
         <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
@@ -92,7 +91,7 @@
         </div>
         
         <div class="mb-3 field">
-            <label class="form-label">Judul skripsi</label>
+            <label class="form-label">Judul skripsi <span class="text-danger">*</span></label>
             <input type="text" name="judul_skripsi" class="form-control @error('judul_skripsi') is-invalid @enderror" value="{{ old('judul_skripsi') }}">
             @error('judul_skripsi')
               <div class="invalid-feedback">
@@ -100,6 +99,56 @@
               </div>
             @enderror
         </div>
+
+        <div class="mb-3 field">
+            <script>
+                function teshari()
+                {
+                    const lambe = new Date($('#ciek').val());
+                    var tod = lambe.getDay();
+                    if (tod == 2)
+                    {
+                        $("#waktudb2").show();
+                        $("#waktudb3").hide();
+                        $("#waktu4").hide();
+                    }
+                    else if (tod == 4)
+                    {
+                        $("#waktudb2").hide();
+                        $("#waktudb3").show();
+                        $("#waktu4").hide();
+                    }
+                    else
+                    {
+                        $("#waktudb2").hide();
+                        $("#waktudb3").hide();
+                        $("#waktu4").show();
+                    }
+                }
+            </script>
+    
+                <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
+                <select name="waktu" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
+                <option value="">-Belum Dipilih-</option>
+                </select>
+                <select name="waktu" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
+                <option value="">-Belum Dipilih-</option>
+                    @foreach ($jamsels as $jamsel)
+                        <option value="{{$jamsel->jam_tersedia}}" {{old('waktu') == $jamsel->jam_tersedia ? 'selected' : null}}>{{$jamsel->jam_tersedia}}</option>
+                    @endforeach
+                </select>
+                <select name="waktu" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
+                <option value="">-Belum Dipilih-</option>
+                    @foreach ($jamkams as $jamkam)
+                        <option value="{{$jamkam->jam_tersedia}}" {{old('waktu') == $jamkam->jam_tersedia ? 'selected' : null}}>{{$jamkam->jam_tersedia}}</option>
+                    @endforeach
+                </select>
+                @error('waktu')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
         
 
             </div>
@@ -109,7 +158,7 @@
         <div class="mb-3 field">
             <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
             <select type="text" name="lokasi" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
-            <option value="">-Pilih-</option>
+            <option value="">-Belum Dipilih-</option>
                 @foreach ($ruangans as $ruangan)
                     <option value="{{$ruangan->id}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
                 @endforeach
@@ -126,7 +175,7 @@
                 <!-- <input type="checkbox" id="cekpem2"> -->
             </label>
             <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pembimbingdua_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -140,9 +189,9 @@
 
         
         <div class="mb-3 field">
-            <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
+            <label for="pengujisatu_nip" class="form-label">Penguji Satu <span class="text-danger">*</span></label>
             <select name="pengujisatu_nip" id="penguji1" class="form-select @error('pengujisatu_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pengujisatu_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -157,11 +206,11 @@
 
         
         <div class="mb-3 field">
-            <label for="pengujidua_nip" class="form-label">Penguji Dua 
+            <label for="pengujidua_nip" class="form-label">Penguji Dua <span class="text-danger">*</span>
                 <!-- <input type="checkbox" id="cekpeng2"> -->
             </label>
             <select name="pengujidua_nip" id="penguji2" class="form-select @error('pengujidua_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pengujidua_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -180,7 +229,7 @@
                 <!-- <input type="checkbox" id="cekpeng3"> -->
             </label>
             <select name="pengujitiga_nip" id="penguji3" class="form-select @error('pengujitiga_nip') is-invalid @enderror">
-                <option value="">-Pilih-</option>
+                <option value="">-Belum Dipilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pengujitiga_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -190,60 +239,7 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
-        
-
-        
-        <div class="mb-3 field">
-        <script>
-            function teshari()
-            {
-                const lambe = new Date($('#ciek').val());
-                var tod = lambe.getDay();
-                if (tod == 2)
-                {
-                    $("#waktudb2").show();
-                    $("#waktudb3").hide();
-                    $("#waktu4").hide();
-                }
-                else if (tod == 4)
-                {
-                    $("#waktudb2").hide();
-                    $("#waktudb3").show();
-                    $("#waktu4").hide();
-                }
-                else
-                {
-                    $("#waktudb2").hide();
-                    $("#waktudb3").hide();
-                    $("#waktu4").show();
-                }
-            }
-        </script>
-
-            <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
-            <select name="waktu" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Pilih-</option>
-            </select>
-            <select name="waktu" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Pilih-</option>
-                @foreach ($jamsels as $jamsel)
-                    <option value="{{$jamsel->jam_tersedia}}" {{old('waktu') == $jamsel->jam_tersedia ? 'selected' : null}}>{{$jamsel->jam_tersedia}}</option>
-                @endforeach
-            </select>
-            <select name="waktu" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Pilih-</option>
-                @foreach ($jamkams as $jamkam)
-                    <option value="{{$jamkam->jam_tersedia}}" {{old('waktu') == $jamkam->jam_tersedia ? 'selected' : null}}>{{$jamkam->jam_tersedia}}</option>
-                @endforeach
-            </select>
-            @error('waktu')
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
-            @enderror
-        </div>
-         
+        </div> 
 
         <button type="submit" class="btn btn-success float-right mt-4">Tambah</button>
             </div>

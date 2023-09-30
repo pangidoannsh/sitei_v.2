@@ -62,7 +62,7 @@ Edit Staff Jurusan
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success float-right mt-4">Perbarui</button>
+        <button type="submit" class="btn btn-success float-right mt-4">Ubah</button>
         </div>
     </div>
 </div>
