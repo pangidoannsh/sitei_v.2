@@ -62,7 +62,6 @@ class PendaftaranKPController extends Controller
 
     public function createusulankp()
     {
-        
         return view('pendaftaran.kerja-praktek.usulan-kp.create', [
             'dosens' => Dosen::all(), 
             'pendaftaran_kp' => PendaftaranKP::all()->sortBy('created_at'),
@@ -75,8 +74,8 @@ class PendaftaranKPController extends Controller
     {
         
         $request->validate([                                           
-            'krs_berjalan' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'transkip_nilai' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'krs_berjalan' => 'required|mimes:pdf|max:200',
+            'transkip_nilai' => 'required|mimes:pdf|max:200',
             'dosen_pembimbing_nip' => 'required',
             'nama_perusahaan' => 'required',
             'alamat_perusahaan' => 'required',
@@ -140,8 +139,8 @@ class PendaftaranKPController extends Controller
     {
         
         $request->validate([                                           
-            'krs_berjalan' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'transkip_nilai' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'krs_berjalan' => 'required|mimes:pdf|max:200',
+            'transkip_nilai' => 'required|mimes:pdf|max:200',
             'dosen_pembimbing_nip' => 'required',
             'nama_perusahaan' => 'required',
             'alamat_perusahaan' => 'required',
@@ -516,7 +515,7 @@ class PendaftaranKPController extends Controller
     public function storebalasan(Request $request, $id)
     {
         $request->validate([                                           
-            'surat_balasan' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'surat_balasan' => 'required|mimes:pdf|max:200',
             'tanggal_mulai' => 'required',
         ]);
 
@@ -630,8 +629,8 @@ class PendaftaranKPController extends Controller
         $request->validate([                                           
             'judul_laporan' => 'required',
             'laporan_kp' => 'required|mimes:pdf|max:1024',
-            'kpti_11' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'sti_31' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'kpti_11' => 'required|mimes:pdf|max:200',
+            'sti_31' => 'required|mimes:pdf|max:200',
         ]);
 
         $kp = PendaftaranKP::find($id);
@@ -669,7 +668,7 @@ class PendaftaranKPController extends Controller
     {
 
         $request->validate([                                         
-            'kpti_10' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'kpti_10' => 'required|mimes:pdf|max:200',
             'laporan_akhir' => 'required|mimes:pdf|max:1024',
         ]);
 
