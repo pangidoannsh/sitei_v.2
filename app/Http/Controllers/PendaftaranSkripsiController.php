@@ -59,9 +59,9 @@ class PendaftaranSkripsiController extends Controller
     {  
         $request->validate([                   
             'judul_skripsi' => 'required',                                           
-            'krs_berjalan' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'khs' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'transkip_nilai' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'krs_berjalan' => 'required|mimes:pdf|max:200',
+            'khs' => 'required|mimes:pdf|max:200',
+            'transkip_nilai' => 'required|mimes:pdf|max:200',
             'pembimbing_1_nip' => 'required',             
         ]);
 
@@ -143,9 +143,9 @@ class PendaftaranSkripsiController extends Controller
     {  
         $request->validate([                   
             'judul_skripsi' => 'required',                                           
-            'krs_berjalan' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'khs' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'transkip_nilai' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'krs_berjalan' => 'required|mimes:pdf|max:200',
+            'khs' => 'required|mimes:pdf|max:200',
+            'transkip_nilai' => 'required|mimes:pdf|max:200',
             'pembimbing_1_nip' => 'required',             
         ]);
 
@@ -281,12 +281,12 @@ class PendaftaranSkripsiController extends Controller
     public function storesempro(Request $request, $id)
     {
         $request->validate([                                                          
-            'krs_berjalan_sempro' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'khs_kpti_10' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
+            'krs_berjalan_sempro' => 'required|mimes:pdf|max:200',
+            'khs_kpti_10' => 'required|mimes:pdf|max:200',
             'logbook' => 'required|mimes:pdf|max:200',
             'proposal' => 'required|mimes:pdf|max:1024',
-            'sti_30' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'sti_31_sempro' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
+            'sti_30' => 'required|mimes:pdf|max:200',
+            'sti_31_sempro' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -445,16 +445,16 @@ class PendaftaranSkripsiController extends Controller
     {
         $request->validate([        
             'skor_turnitin'=>'required',                                                  
-            'resume_turnitin' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            'sti_9' => 'required|mimes:pdf,jpeg,png,jpg|max:200',
-            // 'sti_11' => 'mimes:pdf,jpeg,png,jpg|max:200',
+            'resume_turnitin' => 'required|mimes:pdf|max:200',
+            'sti_9' => 'required|mimes:pdf|max:200',
+            // 'sti_11' => 'mimes:pdf|max:200',
             'naskah_skripsi' => 'required|mimes:pdf|max:10240',
             'dokumen_kelengkapan' => 'required|mimes:pdf|max:200',
-            'pasang_poster' => 'required|mimes:pdf,jpeg,png,jpg|max:200', 
-            'sti_10' => 'required|mimes:pdf,jpeg,png,jpg|max:200',  
+            'pasang_poster' => 'required|mimes:pdf|max:200', 
+            'sti_10' => 'required|mimes:pdf|max:200',  
             'url_poster'=>'required',          
-            'sti_30_skripsi' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
-            'sti_31_skripsi' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
+            'sti_30_skripsi' => 'required|mimes:pdf|max:200',           
+            'sti_31_skripsi' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -546,7 +546,7 @@ class PendaftaranSkripsiController extends Controller
     public function storeperpanjangan1_skripsi(Request $request, $id)
     {
         $request->validate([         
-            'sti_22_p1' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
+            'sti_22_p1' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -567,7 +567,7 @@ class PendaftaranSkripsiController extends Controller
     public function storeperpanjangan2_skripsi(Request $request, $id)
     {
         $request->validate([         
-            'sti_22_p2' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
+            'sti_22_p2' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -601,7 +601,7 @@ class PendaftaranSkripsiController extends Controller
     public function storeperpanjangan_revisi(Request $request, $id)
     {
         $request->validate([         
-            'sti_23' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
+            'sti_23' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -829,8 +829,8 @@ class PendaftaranSkripsiController extends Controller
     public function storebukti_buku_skripsi(Request $request, $id)
     {
         $request->validate([         
-            'sti_17' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
-            'sti_29' => 'required|mimes:pdf,jpeg,png,jpg|max:200',           
+            'sti_17' => 'required|mimes:pdf|max:200',           
+            'sti_29' => 'required|mimes:pdf|max:200',           
             'buku_skripsi_akhir' => 'required|mimes:pdf|max:200',           
         ]);
 
