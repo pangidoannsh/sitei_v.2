@@ -13,18 +13,22 @@ class LoginController extends Controller
     }
 
     public function postlogin(Request $request)
-    {
-        if (Auth::guard('dosen')->attempt(['nip' => $request->username, 'password' => $request->password])) {
-            return redirect('/kp-skripsi');
-        } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
+{
+    if (Auth::guard('dosen')->attempt(['nip' => $request->username, 'password' => $request->password])) {
+        return redirect('/kp-skripsi');
+    } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
+        $user = Auth::guard('web')->user();
+        if ($user->role_id == 1) {
+            return redirect('/form');
+        } else {
             return redirect('/persetujuan/admin/index');
-        } elseif (Auth::guard('mahasiswa')->attempt(['nim' => $request->username, 'password' => $request->password])) {
-            return redirect('/kp-skripsi');
         }
-        
-
-        return redirect('/')->with('loginError', 'Login Gagal!');
+    } elseif (Auth::guard('mahasiswa')->attempt(['nim' => $request->username, 'password' => $request->password])) {
+        return redirect('/kp-skripsi');
     }
+
+    return redirect('/')->with('loginError', 'Login Gagal!');
+}
 
     public function logout()
     {
