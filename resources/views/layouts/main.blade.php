@@ -107,9 +107,11 @@
           @endif
 
           @if (Str::length(Auth::guard('web')->user()) > 0)        
+          @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
           <li class="nav-item">
             <a class="nav-link {{Request::is ('kerja-praktek*') ? 'text-success' : '' }}{{Request::is ('sempro*') ? 'text-success' : '' }}{{Request::is ('sidang*') ? 'text-success' : '' }}{{Request::is ('daftar-sempro*') ? 'text-success' : '' }}{{Request::is ('persetujuan*') ? 'text-success' : '' }}{{Request::is ('skripsi*') ? 'text-success' : '' }}{{Request::is ('usulan*') ? 'text-success' : '' }}{{Request::is ('daftar-semkp*') ? 'text-success' : '' }}{{Request::is ('suratperusahaan*') ? 'text-success' : '' }}{{Request::is ('usuljudul*') ? 'text-success' : '' }}{{Request::is ('daftar-sidang*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan/admin/index">KP/Skripsi</a>
           </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/form">Jadwal</a>
           </li>
