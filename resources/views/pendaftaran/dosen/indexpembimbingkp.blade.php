@@ -29,7 +29,13 @@ Kerja Praktek Mahasiswa Bimbingan
 <div class="btn-group menu-dosen scrollable-btn-group col-md-12">
 
    <a href="/kp-skripsi/persetujuan-kp"  class="btn bg-light border  border-bottom-0"  style="border-top-left-radius: 15px;" >Persetujuan</a>
-<a href="/kp-skripsi/penilaian-kp" class="btn bg-light border  border-bottom-0">Seminar</a>
+    <a href="/kp-skripsi/penilaian-kp"  class="btn bg-light border  border-bottom-0 " >
+  <span class="button-text">Seminar</span>
+  <span class="badge-link">
+    <a href="/kp-skripsi/riwayat-penilaian-kp" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Seminar"><i class="fas fa-history"></i></i></span>
+    </a>
+  </span>
+</a>
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
@@ -67,9 +73,8 @@ Kerja Praktek Mahasiswa Bimbingan
         <th class="text-center px-0" scope="col">No.</th>
         <th class="text-center" scope="col">NIM</th>
         <th class="text-center" scope="col">Nama</th>
-        <!-- <th class="text-center" scope="col">Konsentrasi</th>   -->
-        <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status KP</th>
+         <th class="text-center" scope="col">Tanggal Penting</th>
         <th class="text-center" scope="col">Keterangan</th>   
         <th class="text-center" scope="col">Aksi</th>
     </tr>
@@ -82,8 +87,7 @@ Kerja Praktek Mahasiswa Bimbingan
             <td class="text-center">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</td>            -->
-            <td class="text-center">{{$kp->jenis_usulan}}</td>             
+
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'DAFTAR SEMINAR KP'|| $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
             @endif
@@ -98,6 +102,9 @@ Kerja Praktek Mahasiswa Bimbingan
             <td class="text-center bg-danger">{{$kp->status_kp}}</td>
             @endif
             
+            @if ($kp->status_kp == 'USULAN KP')           
+            <td class="text-center"> Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            @endif
             
             @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')           
              <td class="text-center text-danger">{{$kp->keterangan}}</td>

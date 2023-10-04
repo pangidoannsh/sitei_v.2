@@ -20,10 +20,17 @@
 <div class="btn-group menu-dosen scrollable-btn-group col-md-12">
 
    <a href="/kp-skripsi/persetujuan-kp" class="btn bg-light border  border-bottom-0 "   style="border-top-left-radius: 15px;" >Persetujuan</a>
-   <a href="/kp-skripsi/penilaian-kp" class="btn btn-outline-success border  border-bottom-0 active">Seminar</a>
+
+   <a href="/kp-skripsi/penilaian-kp"  class="btn bg-light border  border-bottom-0" >
+  <span class="button-text">Seminar</span>
+  <span class="badge-link">
+    <a href="/kp-skripsi/riwayat-penilaian-kp" class="sejarah pt-2 bg-success "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Seminar"><i class="fas fa-history"></i></i></span>
+    </a>
+  </span>
+</a>
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+         @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
   <a href="/kerja-praktek"  class="btn bg-light border  border-bottom-0 " >
   <span class="button-text">KP Prodi</span>
   <span class="badge-link">
@@ -46,10 +53,10 @@
 </div>
 </ol>
 
-<ol class="breadcrumb col-lg-12">
+<!-- <ol class="breadcrumb col-lg-12">
   <li class="breadcrumb-item"><a href="/kp-skripsi/penilaian-kp">Jadwal Seminar</a></li>  
   <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/kp-skripsi/riwayat-penilaian-kp">Riwayat Penilaian</a></li>  
-</ol>
+</ol> -->
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">

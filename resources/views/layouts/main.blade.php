@@ -126,6 +126,7 @@
                 </li>
                 <li><a href="/prodi" class="dropdown-item mb-1">Program Studi</a></li>                    
                 <li><a href="/konsentrasi" class="dropdown-item mb-1">Konsentrasi</a></li> 
+                <li><a href="/ruangan" class="dropdown-item mb-1">Ruangan</a></li>
               </ul>
           </li>
           @endif

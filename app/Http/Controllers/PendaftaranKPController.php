@@ -40,14 +40,18 @@ class PendaftaranKPController extends Controller
 
     public function indexkp()   
     {
+        //  $pendaftaran_kp = PendaftaranKP::all()->first();
+
         return view('pendaftaran.kerja-praktek.index', [
             'dosens' => Dosen::all(), 
             'prodi' => Prodi::all(),
             'konsentrasi' => Konsentrasi::all(),
             'mahasiswa' => Mahasiswa::where('nim', Auth::user()->nim)->get(),
             'pendaftaran_kp' => PendaftaranKP::all()->sortBy('update_at'),
+       
         ]);
     }
+
     public function indexusulankp()
     {
         $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first();

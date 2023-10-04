@@ -13,6 +13,7 @@
  
 @endsection
 <style>
+
   hr{
     display: none;
   }
@@ -20,9 +21,9 @@
     .utama-skripsi {
     margin-bottom: 50px;
 }
-   .main-footer{
+   /* .main-footer{
       display: none;
-    }
+    } */
 
   }
   </style>
@@ -30,7 +31,7 @@
 
 <div class="container px-md-5  " >
         
-  <div class="row " >
+  <div class="row" >
 
     @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
               @if (Auth::guard('mahasiswa')->user())
