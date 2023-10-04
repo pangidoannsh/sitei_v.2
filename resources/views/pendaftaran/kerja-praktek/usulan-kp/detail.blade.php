@@ -27,11 +27,11 @@
 
 <!-- <div> -->
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-  <a href="/kerja-praktek" class="badge bg-success p-2 mb-3 "> Kembali <a>
+  <a href="/kerja-praktek" class="badge bg-success p-2 mb-3 "> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
   @endif
 
 @if (Str::length(Auth::guard('web')->user()) > 0)
-  <a href="/kerja-praktek/admin/index" class="badge bg-success p-2 mb-3 "> Kembali <a>
+  <a href="/kerja-praktek/admin/index" class="badge bg-success p-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
   @endif
 
 
@@ -40,7 +40,7 @@
   @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
               @if (Auth::guard('mahasiswa')->user())
               <div class="container float-start">
-    <a href="/usulankp/index" class="badge bg-success p-2 mb-3 float-start"> Kembali <a>
+    <a href="/usulankp/index" class="badge bg-success p-2 mb-3 float-start"><i class="fas fa-arrow-left fa-xs"></i> Kembali<a>
   </div>
   @endif
   @endif 

@@ -54,12 +54,13 @@
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
     <tr>      
-        <th class="text-center" scope="col">No.</th>
+        <th class="text-center p-2" scope="col">No.</th>
         <th class="text-center" scope="col">NIM</th>
         <th class="text-center" scope="col">Nama</th>
-        <!-- <th class="text-center" scope="col">Konsentrasi</th>     -->
+        <!-- <th class="text-center" scope="col">Konsentrasi</th>-->
         <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status KP</th>
+        <th class="text-center" scope="col">Tanggal Usulan</th>
         <th class="text-center" scope="col">Keterangan</th> 
         <th class="text-center" scope="col">Aksi</th>
     </tr>
@@ -92,6 +93,9 @@
             <td class="text-center bg-danger">{{$kp->status_kp}}</td>
             @endif
             
+            @if ($kp->status_kp == 'USULAN KP')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            @endif
             
             @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')           
              <td class="text-center text-danger">{{$kp->keterangan}}</td>

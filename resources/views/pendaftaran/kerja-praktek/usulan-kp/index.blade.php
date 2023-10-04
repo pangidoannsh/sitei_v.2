@@ -357,6 +357,22 @@
    </ul>
 
     <!-- -------------BATAS---------------->
+
+    @if ($pendaftaran_kp->status_kp == 'USULAN KP')
+    <div class="row biru mb-4">
+    <div class="col">
+         <span class="mt-3 text-secondary"> Tanggal Diusulkan <br></span>
+        <span class="mt-3 text-secondary  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+    </div>
+    <div class="col">
+    </div>
+    <div class="col">
+       
+    </div>
+  </div>
+@endif
     @if ($pendaftaran_kp->status_kp == 'USULAN KP DITERIMA')
     <div class="row biru mb-4">
     <div class="col">
@@ -523,6 +539,7 @@
 
 <div class="card p-4">
 
+    @foreach($kp as $kp)
           <table class="table table-responsive-lg table-bordered table-striped" width="100%">
   <thead class="table-dark">
     <tr> 
@@ -539,7 +556,6 @@
 
 
 <div></div>
-@foreach($kp as $kp)
         <tr>                              
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>
@@ -557,6 +573,7 @@
             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
             <td class="text-center bg-success">{{$kp->status_kp}}</td>
             @endif
+
 
 
             @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG' || $kp->keterangan == 'Unggah Ulang Surat Balasan Perusahaan' || $kp->keterangan == 'Unggah Ulang KPTI-10/Bukti Penyerahan Laporan KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' )           

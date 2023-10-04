@@ -63,6 +63,7 @@
         <!-- <th class="text-center" scope="col">Konsentrasi</th>   -->
         <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status</th>
+        <th class="text-center" scope="col">Tanggal Usulan</th> 
         <th class="text-center" scope="col">Keterangan</th>   
         <th class="text-center" scope="col" style="padding-left: 50px; padding-right:50px;">Aksi</th>
     </tr>
@@ -86,7 +87,10 @@
             @if ( $kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
             <td class="text-center bg-success">{{$kp->status_kp}}</td>
             @endif
-       
+      
+            @if ($kp->status_kp == 'USULAN KP')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            @endif
                                
             <td class="text-center">{{$kp->keterangan}}</td>  
 

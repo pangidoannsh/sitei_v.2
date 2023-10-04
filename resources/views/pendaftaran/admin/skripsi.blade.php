@@ -61,6 +61,7 @@
         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
         <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status Skripsi</th>
+        <th class="text-center" scope="col">Tanggal Usulan</th>
         <th class="text-center" scope="col">Keterangan</th>     
         <th class="text-center" scope="col">Aksi</th>
     </tr>
@@ -73,7 +74,7 @@
             <td class="text-center">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
             <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$skripsi->konsentrasi->nama_konsentrasi}}</td>                    -->
+            <!-- <td class="text-center">{{$skripsi->konsentrasi->nama_konsentrasi}}</td> -->
             <td class="text-center">{{$skripsi->jenis_usulan}}</td>             
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO'|| $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
             <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
@@ -88,6 +89,9 @@
             <td class="text-center bg-danger">{{$skripsi->status_skripsi}}</td>
             @endif
 
+            @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
+            @endif
                                
              @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' )
             <td class="text-center text-danger">{{$skripsi->keterangan}}</td>

@@ -51,29 +51,28 @@
 </ol>
 
 <div class="container-fluid">
-
-          <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
-  <thead class="table-dark">
-    <tr>      
-        <!--<th class="text-center" scope="col">No.</th>-->
-        <th class="text-center" scope="col">NIM</th>
-        <th class="text-center" scope="col">Nama</th>
-        <!-- <th class="text-center" scope="col">Konsentrasi</th>     -->
-        <th class="text-center" scope="col">Jenis Usulan</th>
-        <th class="text-center" scope="col">Status </th>
-        <th class="text-center" scope="col">Keterangan</th> 
-        <th class="text-center" scope="col">Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    @foreach ($pendaftaran_kp as $kp)
-  <div></div>
-        <tr>        
-            <!--<td class="text-center">{{$loop->iteration}}</td>                             -->
+    
+    <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
+        <thead class="table-dark">
+            <tr>      
+                <!-- <th class="text-center p-2" scope="col">No.</th> -->
+                <th class="text-center" scope="col">NIM</th>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Jenis Usulan</th>
+                <th class="text-center" scope="col">Status </th>
+                <th class="text-center" scope="col">Tanggal Usulan</th>    
+                <th class="text-center" scope="col">Keterangan</th> 
+                <th class="text-center" scope="col">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <div></div>
+            @foreach ($pendaftaran_kp as $kp)
+            <tr>        
+            <!-- <td class="text-center">{{$loop->iteration}}</td> -->
             <td class="text-center">{{$kp->mahasiswa_nim}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$kp->konsentrasi->nama_konsentrasi}}</td>                    -->
                        
             <td class="text-center">{{$kp->jenis_usulan}}</td>      
             
@@ -88,6 +87,11 @@
             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
             <td class="text-center bg-success">{{$kp->status_kp}}</td>
             @endif
+            
+            @if ($kp->status_kp == 'USULAN KP')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            @endif
+
 
             <td class="text-center">{{$kp->keterangan}}</td> 
 
@@ -156,6 +160,9 @@
 
             <!-- ___________batas____________ -->
 
+            @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
+            @endif
                
             <td class="text-center">{{$skripsi->keterangan}}</td> 
 

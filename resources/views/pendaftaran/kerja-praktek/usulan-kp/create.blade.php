@@ -75,7 +75,7 @@
        <div class="mb-2 field">
             <label for="dosen_pembimbing_nip" class="form-label mb-2">Dosen Pembimbing<span class="text-danger">*</span></label>
             <select name="dosen_pembimbing_nip" id="pembimbing_nip" class="form-select @error('dosen_pembimbing_nip') is-invalid @enderror" required>
-                <option value="">-Pilih Pembimbing-</option>
+                <option value="">- Pilih Pembimbing -</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('dosen_pembimbing_nip') == $dosen->nama ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach

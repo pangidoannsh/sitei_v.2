@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"); */
 /* @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap");
 
 * {
     font-family: "Open Sans", sans-serif;
@@ -435,7 +435,6 @@ table thead tr th {
 .gambar h4 {
     margin-top: 20px;
 }
-
 
 @media screen and (max-width: 768px) {
     .anak-judul h4 {

@@ -91,6 +91,7 @@ class PendaftaranSkripsiController extends Controller
             ->where('status_skripsi', '!=', 'USULKAN JUDUL ULANG')
             ->where('keterangan', '!=', 'Nilai Skripsi Telah Keluar')->count();
             }
+            
         if ($pendaftaranSkripsiCount >= $maxMahasiswaPerDosen) {
            Alert::warning('<h4 class="text-bold mb-0">Pembimbing 1 Penuh!</h4> <h5 class="mt-3">Silahkan Usulkan Pembimbing Lain</h5>')
                     ->showConfirmButton('Kembali', 'grey')

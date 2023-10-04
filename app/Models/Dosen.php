@@ -44,6 +44,11 @@ class Dosen extends Authenticatable
 {
     return $this->hasMany(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip');
 }
+
+    public function pendaftarankp()
+{
+    return $this->belongsTo(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip');
+}
     public function pendaftaran_skripsi1()
 {
     return $this->hasMany(PendaftaranSkripsi::class, 'pembimbing_1_nip', 'nip');
@@ -63,10 +68,10 @@ public function mahasiswa()
 }
 
 
-public function pendaftaranKP()
-    {
-        return $this->hasOne(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip');
-    }
+// public function pendaftaranKP()
+//     {
+//         return $this->hasOne(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip');
+//     }
 
     public function pendaftaranSkripsi1()
     {
