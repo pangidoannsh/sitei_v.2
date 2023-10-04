@@ -15,7 +15,7 @@
     
     <div>
         
-        <div class="row">
+        
             <div class="col">
             <div class="mb-3 field">
             <label for="mahasiswa_nim" class="form-label">Mahasiswa <span class="text-danger">*</span></label>
@@ -189,11 +189,13 @@
         </div>
 
 
-        <button type="submit" class="btn btn-success float-right mt-4">Tambah</button>
+        <button type="submit" class="btn btn-success float-right mt-3">Tambah</button>
         </div>
         </div>
-    </div>
+    
 </form>
+
+<br><br><br>
 
 @endsection
 
