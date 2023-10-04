@@ -15,7 +15,11 @@
     
     <div>
         
+<<<<<<< HEAD
     
+=======
+        
+>>>>>>> 44a845e5dfa3fd97afbc3dc50dd22f1c5eae4cbf
             <div class="col">
             <div class="mb-3 field">
             <label for="mahasiswa_nim" class="form-label">Mahasiswa <span class="text-danger">*</span></label>
@@ -189,14 +193,20 @@
         </div>
 
 
-        <button type="submit" class="btn btn-success float-right mt-4">Tambah</button>
+        <button type="submit" class="btn btn-success float-right mt-3">Tambah</button>
         </div>
         </div>
+<<<<<<< HEAD
    
+=======
+    
+>>>>>>> 44a845e5dfa3fd97afbc3dc50dd22f1c5eae4cbf
 </form>
 <br>
 <br>
 <br>
+
+<br><br><br>
 
 @endsection
 
