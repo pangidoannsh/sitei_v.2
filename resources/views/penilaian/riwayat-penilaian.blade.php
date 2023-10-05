@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (waitingApprovalCount > 0) {
         Swal.fire({
             title: 'Ini adalah halaman Riwayat Seminar Kerja Paktek',
-            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa</strong> Selesai Seminar Kerja Praktek.`,
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> Selesai Seminar Kerja Praktek.`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,

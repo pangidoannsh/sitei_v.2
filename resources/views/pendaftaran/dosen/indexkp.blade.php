@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
       waitingApprovalElement.innerText = waitingApprovalCount;
         Swal.fire({
             title: 'Ini adalah halaman Kerja Praktek Program Studi',
-            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa</strong> Program Studi sedang melaksanakan Kerja Praktek.`,
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> Program Studi sedang melaksanakan Kerja Praktek.`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,

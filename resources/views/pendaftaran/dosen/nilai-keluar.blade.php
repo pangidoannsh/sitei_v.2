@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (waitingApprovalCount > 0) {
         Swal.fire({
             title: 'Ini adalah halaman Riwayat Kerja Praktek Mahasiswa Program Studi',
-            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa Program Studi</strong> telah selesai melaksanakan Kerja Praktek.`,
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa Program Studi</strong> telah selesai melaksanakan Kerja Praktek.`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,

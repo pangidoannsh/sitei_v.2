@@ -174,25 +174,40 @@ Kerja Praktek Mahasiswa Bimbingan
 
 @endsection
 
+
+
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
     const waitingApprovalElement = document.getElementById('waitingApprovalCount');
-    if (waitingApprovalCount > 0) {
+
+    const totalKuota = 10;
+    const sisaKuota = totalKuota - waitingApprovalCount;
+
+    if (waitingApprovalCount > 0 && waitingApprovalCount < totalKuota) {
       waitingApprovalElement.innerText = waitingApprovalCount;
         Swal.fire({
             title: 'Ini adalah halaman Bimbingan Kerja Praktek',
-            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa</strong> dibawah bimbingan Anda.`,
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> dibawah bimbingan Anda. <br>
+            Anda memiliki sisa <strong class="text-info">${sisaKuota} kuota </strong>Mahasiswa Bimbingan.`,
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 5000,
+        });
+    }else if(sisaKuota >= totalKuota){
+        Swal.fire({
+            title: 'Ini adalah halaman Bimbingan Kerja Praktek',
+            html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> dibawah bimbingan Anda. <br>
+            Kuota Mahasiswa Bimbingan Anda Sudah Penuh!`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,
         });
     } else {
-      waitingApprovalElement.innerText = '0';
         Swal.fire({
             title: 'Ini adalah halaman Bimbingan Kerja Praktek',
-            html: `Tidak ada mahasiswa dibawah bimbingan Anda.`,
+            html: `Tidak ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">10 kuota</strong> mahasiswa bimbingan`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,
@@ -201,6 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endpush()
+
 
 @push('scripts')
 <script>

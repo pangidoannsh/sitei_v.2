@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
       waitingApprovalElement.innerText = waitingApprovalCount;
         Swal.fire({
             title: 'Ini adalah halaman Seminar Kerja Paktek',
-            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa</strong> dijadwalkan Seminar.`,
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> dijadwalkan Seminar.`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,

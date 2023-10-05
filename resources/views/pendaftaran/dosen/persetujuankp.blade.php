@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', function() {
       waitingApprovalElement.innerText = waitingApprovalCount;
         Swal.fire({
             title: 'Ini adalah halaman Persetujuan Kerja Praktek',
-            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa</strong> sedang menunggu Persetujuan Anda.`,
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> sedang menunggu Persetujuan Anda.`,
             icon: 'info',
             showConfirmButton: false,
             timer: 5000,
