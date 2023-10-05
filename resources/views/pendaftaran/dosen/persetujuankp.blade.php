@@ -25,9 +25,9 @@
  
 <div class="btn-group menu-dosen scrollable-btn-group col-md-12">
 
-   <a href="/kp-skripsi/persetujuan-kp" class="btn btn-outline-success border  border-bottom-0 active"   style="border-top-left-radius: 15px;" >Persetujuan</a>
+   <a href="/kp-skripsi/persetujuan-kp" class="btn btn-outline-success border  border-bottom-0 active"   style="border-top-left-radius: 15px;" >Persetujuan (<strong id="waitingApprovalCount"></strong>)</a>
     <a href="/kp-skripsi/penilaian-kp"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Seminar</span>
+  <span class="button-text">Seminar (<strong id="seminarKPCount"></strong>)</span>
   <span class="badge-link">
     <a href="/kp-skripsi/riwayat-penilaian-kp" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Seminar"><i class="fas fa-history"></i></i></span>
     </a>
@@ -37,7 +37,7 @@
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
   <a href="/kerja-praktek"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">KP Prodi</span>
+  <span class="button-text">KP Prodi (<strong id="prodiKPCount"></strong>)</span>
   <span class="badge-link">
     <a href="/kerja-praktek/nilai-keluar" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
     </a>
@@ -47,7 +47,7 @@
 @endif
 
 <a href="/pembimbing/kerja-praktek"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Bimbingan KP</span>
+  <span class="button-text">Bimbingan KP (<strong id="bimbinganKPCount"></strong>)</span>
   <span class="badge-link" >
     <a href="/kerja-praktek/pembimbing/nilai-keluar" class="sejarah pt-2  bg-light " style="border-top-right-radius: 15px;">
       <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
@@ -769,4 +769,63 @@ $('.setujui-nilai-kp-keluar-koordinator').submit(function(event) {
 });
 </script>
 @endforeach
+@endpush()
+
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
+    const waitingApprovalElement = document.getElementById('waitingApprovalCount');
+    if (waitingApprovalCount > 0) {
+      waitingApprovalElement.innerText = waitingApprovalCount;
+        Swal.fire({
+            title: 'Ini adalah halaman Persetujuan Kerja Praktek',
+            html: `Ada <strong> ${waitingApprovalCount} Mahasiswa</strong> sedang menunggu Persetujuan Anda.`,
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 5000,
+        });
+    } else {
+      waitingApprovalElement.innerText = '0';
+        Swal.fire({
+            title: 'Ini adalah halaman Persetujuan Kerja Praktek',
+            html: `Tidak ada mahasiswa menunggu Persetujuan Anda.`,
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 5000,
+        });
+    }
+});
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
+    const prodiKPElement = document.getElementById('prodiKPCount');
+       prodiKPElement.innerText = prodiKPCount;
+});
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bimbinganKPCount = {!! json_encode($jml_bimbingankp->count()) !!};
+    const bimbinganKPElement = document.getElementById('bimbinganKPCount');
+       bimbinganKPElement.innerText = bimbinganKPCount;
+});
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const seminarKPCount = {!! json_encode($jml_seminarkp->count()) !!};
+    const seminarKPElement = document.getElementById('seminarKPCount');
+       seminarKPElement.innerText = seminarKPCount;
+});
+</script>
 @endpush()
