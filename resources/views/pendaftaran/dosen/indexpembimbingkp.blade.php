@@ -94,7 +94,7 @@ Kerja Praktek Mahasiswa Bimbingan
 @php
   $waktuTersisa = strtotime($tanggalSaatIni) - strtotime($tanggalDisetujui);
   $selisihHari = floor($waktuTersisa / (60 * 60 * 24));
-  $selisihHari30 = 31;
+  $selisihHari30 = 30;
   $waktuMuncul = $selisihHari + $selisihHari30;
 @endphp
 
@@ -170,8 +170,6 @@ Kerja Praktek Mahasiswa Bimbingan
 </table>
 </div>
 </div>
-
-
 @endsection
 
 
@@ -195,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showConfirmButton: false,
             timer: 5000,
         });
-    }else if(sisaKuota >= totalKuota){
+    }else if(waitingApprovalCount >= 10){
         Swal.fire({
             title: 'Ini adalah halaman Bimbingan Kerja Praktek',
             html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> dibawah bimbingan Anda. <br>
@@ -205,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             timer: 5000,
         });
     } else {
+    waitingApprovalElement.innerText = '0';
         Swal.fire({
             title: 'Ini adalah halaman Bimbingan Kerja Praktek',
             html: `Tidak ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">10 kuota</strong> mahasiswa bimbingan`,
