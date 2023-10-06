@@ -396,6 +396,8 @@
         <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
+        <span class="mt-3 text-secondary"> Tanggal Diusulkan <br></span>
+        <span class="mt-3 text-secondary  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
     </div>

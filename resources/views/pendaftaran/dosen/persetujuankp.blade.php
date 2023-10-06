@@ -93,6 +93,9 @@
             @if ($kp->status_kp == 'USULAN KP')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
             @endif
+            @if ($kp->status_kp == 'SURAT PERUSAHAAN')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
+            @endif
                                
             <td class="text-center">{{$kp->keterangan}}</td>  
 
@@ -360,7 +363,7 @@ $('.setujui-usulankp-pembimbing').submit(function(event) {
         cancelButtonText: 'Batal',
         confirmButtonColor: '#28a745',
         cancelButtonColor: 'grey',
-        confirmButtonText: 'Setuju'
+        confirmButtonText: 'Setuju',
     }).then((result) => {
         if (result.isConfirmed) {
             event.currentTarget.submit();
@@ -777,25 +780,7 @@ $('.setujui-nilai-kp-keluar-koordinator').submit(function(event) {
 document.addEventListener('DOMContentLoaded', function() {
     const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
     const waitingApprovalElement = document.getElementById('waitingApprovalCount');
-    if (waitingApprovalCount > 0) {
-      waitingApprovalElement.innerText = waitingApprovalCount;
-        Swal.fire({
-            title: 'Ini adalah halaman Persetujuan Kerja Praktek',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> sedang menunggu Persetujuan Anda.`,
-            icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
-        });
-    } else {
-      waitingApprovalElement.innerText = '0';
-        Swal.fire({
-            title: 'Ini adalah halaman Persetujuan Kerja Praktek',
-            html: `Tidak ada mahasiswa menunggu Persetujuan Anda.`,
-            icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
-        });
-    }
+    waitingApprovalElement.innerText = waitingApprovalCount;
 });
 </script>
 @endpush()

@@ -21,7 +21,7 @@
     <div class="col-12">
 
     <div class="mb-3">
-            <label for="formFile" class="form-label">Surat Balasan Perusahaan  <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+            <label for="formFile" class="form-label">Surat Balasan Perusahaan<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
             <input name="surat_balasan" class="form-control @error ('surat_balasan') is-invalid @enderror" value="{{ old('surat_balasan') }}" type="file" id="formFile" required autofocus>
 
             @error('surat_balasan')
@@ -32,7 +32,7 @@
     </div>
                 
         <div class="mb-3 field">
-            <label class="form-label">Tanggal Mulai KP</label>
+            <label class="form-label">Tanggal Mulai KP<span class="text-danger">*</span></label>
             <input type="date" name="tanggal_mulai" class="form-control @error('tanggal_mulai') is-invalid @enderror" value="{{ old('tanggal_mulai') }}" required>
             @error('tanggal_mulai')
               <div class="invalid-feedback">
