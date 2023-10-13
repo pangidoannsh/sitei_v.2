@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\Dosen;
 use App\Models\Prodi;
@@ -163,7 +164,10 @@ class PenjadwalanKPController extends Controller
         $jadwal->status_seminar = 1;
         $jadwal->update();
 
-        return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
+        // return redirect('/kp-skripsi/riwayat-penilaian-kp')->with('message', 'Seminar Telah Selesai!');
+
+        Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+        return redirect('/kp-skripsi/riwayat-penilaian-kp');
     }
 
     public function riwayat()

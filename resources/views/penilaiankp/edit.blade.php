@@ -20,42 +20,7 @@
 
 <div>  
 
-  <a href="/penilaian" class="btn btn-success mb-3"> <- Kembali <a>
-    
-      <!-- @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN' )
-        <button type="button"
-                class="btn btn-success badge p-2  fas fa-check"
-                data-toggle="modal"
-                data-target="#GFG">
-            Tandai Selesai Seminar KP
-        </button>
-        <div class="modal fade" id="GFG">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                <div class="modal-header bg-success ">
-                        <h5 class="modal-title fas fa-check">
-                            Tandai Terjadwal
-                        </h5>
-                    </div>
-                    <div class="modal-body">
-                        Apakah Anda yakin?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"  class="btn " style="border-radius:5px;"
-                                data-dismiss="modal">
-                            Batal
-                        </button>
-                        <form action="/selesai-semkp/pembimbing/approve/{{$kp->id}}" method="POST">
-                    @method('put')
-                    @csrf
-                    <button type="submit" class="btn " style="border-radius:5px;">  Ya</button>
-                </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-  @endif -->
+  <a href="/kp-skripsi/penilaian-kp" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
   <div class="row">
     <div class="col mb-3">
@@ -649,6 +614,9 @@
                     @if ($penjadwalan->status_seminar == 0)                
                     @if ($penjadwalan->cek($penjadwalan->id) == $penjadwalan->jmlpenilaian($penjadwalan->id))
                     <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>                                    
+                    @else
+                    <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                                    
+                
                     @endif
                     @endif
 
@@ -656,8 +624,7 @@
             </div>            
         </div>              
     </div>
-    
-    
+
     <div class="modal fade"id="ModalApprove">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -672,7 +639,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-        <form action="/penilaian-kp/approve/{{($penjadwalan->id)}}" method="POST">
+        <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
           @method('put')
           @csrf
           <button type="submit" class="btn btn-success"> Selesai</button>
@@ -680,9 +647,7 @@
       </div>
     </div>
   </div>
-</div>
-
-
+    </div>
     @endif
 
 @endsection

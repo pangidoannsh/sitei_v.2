@@ -1010,7 +1010,22 @@
                                     
                                     @endif
 
-                                    <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>
+
+                                    @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
+                                    <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                                      
+                    @elseif($nilaipenguji2 == null)
+                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                    @elseif($nilaipenguji3 == null)
+                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                    @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
+                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                    @elseif($total_nilai <= 60)
+                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                    @else
+                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>                          
+                   
+                    @endif
+
             
                     </div>         
             

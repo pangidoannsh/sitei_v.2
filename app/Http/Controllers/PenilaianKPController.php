@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
@@ -56,12 +57,28 @@ class PenilaianKPController extends Controller
     {
 
         $penilaian = new PenilaianKPPembimbing;
+
         $penilaian->presentasi = $request->presentasi;       
         $penilaian->materi = $request->materi;
         $penilaian->tanya_jawab = $request->tanya_jawab;
         $penilaian->total_nilai_angka = $request->total_nilai_angka;
         $penilaian->total_nilai_huruf = $request->total_nilai_huruf;        
 
+        // if ($request->presentasi) {
+        //     $penilaian->presentasi = $request->presentasi;
+        // }
+        // if ($request->materi) {
+        //     $penilaian->materi = $request->materi;
+        // }
+        // if ($request->tanya_jawab) {
+        //     $penilaian->tanya_jawab = $request->tanya_jawab;
+        // }
+        // if ($request->total_nilai_angka) {
+        //     $penilaian->total_nilai_angka = $request->total_nilai_angka;
+        // }
+        // if ($request->total_nilai_huruf) {
+        //     $penilaian->total_nilai_huruf = $request->total_nilai_huruf;
+        // }
         if ($request->nilai_pembimbing_lapangan) {
             $penilaian->nilai_pembimbing_lapangan = $request->nilai_pembimbing_lapangan;
         }
@@ -80,7 +97,8 @@ class PenilaianKPController extends Controller
         $penilaian->penjadwalan_kp_id = $id;
         $penilaian->save();        
 
-        return redirect('/penilaian-kp/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');    
+        return redirect('/penilaian-kp/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');   
+
     }
 
     public function store_penguji(Request $request, $id)
@@ -218,18 +236,20 @@ class PenilaianKPController extends Controller
         
         $penilaian->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');    
+        Alert::success('Berhasil', 'Nilai berhasil diedit!')->showConfirmButton('Ok', '#28a745');
+        
+        return  back();    
 
     }
 
     public function update_pembimbing(Request $request, $id)
     {
         $rules = [
-            'presentasi' => 'required',
-            'materi' => 'required',
-            'tanya_jawab' => 'required',            
-            'total_nilai_angka' => 'required',
-            'total_nilai_huruf' => 'required',            
+            // 'presentasi' => 'required',
+            // 'materi' => 'required',
+            // 'tanya_jawab' => 'required',            
+            // 'total_nilai_angka' => 'required',
+            // 'total_nilai_huruf' => 'required',            
         ];
 
         if ($request->nilai_pembimbing_lapangan) {
@@ -246,31 +266,33 @@ class PenilaianKPController extends Controller
             $rules['catatan3'] = 'required';
         }
 
-        $validatedData = $request->validate($rules);
+        // $validatedData = $request->validate($rules);
         $edit = PenilaianKPPembimbing::where('id', $id)->where('pembimbing_nip', auth()->user()->nip)->first();
-        $edit->presentasi = $validatedData['presentasi'];
-        $edit->materi = $validatedData['materi'];
-        $edit->tanya_jawab = $validatedData['tanya_jawab'];                
-        $edit->total_nilai_angka = $validatedData['total_nilai_angka'];
-        $edit->total_nilai_huruf = $validatedData['total_nilai_huruf']; 
+        $edit->presentasi = $request['presentasi'];
+        $edit->materi = $request['materi'];
+        $edit->tanya_jawab = $request['tanya_jawab'];                
+        $edit->total_nilai_angka = $request['total_nilai_angka'];
+        $edit->total_nilai_huruf = $request['total_nilai_huruf']; 
 
         if ($request->nilai_pembimbing_lapangan) {
-            $edit->nilai_pembimbing_lapangan = $validatedData['nilai_pembimbing_lapangan'];
+            $edit->nilai_pembimbing_lapangan = $request['nilai_pembimbing_lapangan'];
         }
 
         if ($request->catatan1) {
-            $edit->catatan1 = $validatedData['catatan1'];
+            $edit->catatan1 = $request['catatan1'];
         }
         if ($request->catatan2) {
-            $edit->catatan2 = $validatedData['catatan2'];
+            $edit->catatan2 = $request['catatan2'];
         }
         if ($request->catatan3) {
-            $edit->catatan3 = $validatedData['catatan3'];
+            $edit->catatan3 = $request['catatan3'];
         }
 
         $edit->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');    
+        Alert::success('Berhasil', 'Nilai berhasil diedit!')->showConfirmButton('Ok', '#28a745');
+        
+        return  back();   
     }
 
     public function riwayat()

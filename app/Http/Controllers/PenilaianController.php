@@ -137,7 +137,7 @@ class PenilaianController extends Controller
         
          // DOSEN PEMBIMBING
         if (auth()->user()->nip > 0) {  
-            return view('pendaftaran.dosen.persetujuankp', [
+            return view('penilaian.index', [
                 'jml_prodikp' => PendaftaranKP::where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('status_kp', 'desc')->get(),
 
                 'jml_persetujuankp' =>  PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')

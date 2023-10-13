@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Penilaian
+    Jadwal Seminar Kerja Praktek
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
 
    <a href="/kp-skripsi/persetujuan-kp" class="btn bg-light border  border-bottom-0 "   style="border-top-left-radius: 15px;" >Persetujuan (<strong id="persetujuanKPCount"></strong>)</a>
 <a href="/kp-skripsi/penilaian-kp"  class="btn btn-outline-success border  border-bottom-0 active" >
-  <span class="button-text">Seminar (<strong id="waitingApprovalCount"></strong>)</span>
+  <span class="button-text">Seminar KP (<strong id="waitingApprovalCount"></strong>)</span>
   <span class="badge-link">
     <a href="/kp-skripsi/riwayat-penilaian-kp" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Seminar"><i class="fas fa-history"></i></i></span>
     </a>
@@ -70,7 +70,7 @@
     <tr>      
       <th class="text-center" scope="col">NIM</th>
       <th class="text-center" scope="col">Nama</th>
-      <th class="text-center" scope="col">Seminar</th>
+      <th class="text-center" scope="col">Seminar KP</th>
       <th class="text-center" scope="col">Prodi</th>
       <th class="text-center" scope="col">Tanggal</th>
       <th class="text-center" scope="col">Waktu</th>

@@ -109,30 +109,7 @@
 @endsection
 
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($penjadwalan_kps->count()) !!};
-    if (waitingApprovalCount > 0) {
-        Swal.fire({
-            title: 'Ini adalah halaman Riwayat Seminar Kerja Paktek',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> Selesai Seminar Kerja Praktek.`,
-            icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
-        });
-    } else {
-        Swal.fire({
-            title: 'Ini adalah halaman Riwayat Seminar Kerja Paktek',
-            html: `Tidak ada mahasiswa selesai Seminar Kerja Praktek.`,
-            icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
-        });
-    }
-});
-</script>
-@endpush()
+
 
 @push('scripts')
 <script>

@@ -541,27 +541,25 @@
 
 <div class="card p-4">
 
-    @foreach($kp as $kp)
-          <table class="table table-responsive-lg table-bordered table-striped" width="100%">
-  <thead class="table-dark">
-    <tr> 
-        <th class="text-center" scope="col">NIM</th>
-        <th class="text-center" scope="col">Nama</th>
-        <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
-        <th class="text-center" scope="col">Jenis Usulan</th>
-        <th class="text-center" scope="col">Status KP</th>
-        <th class="text-center" scope="col">Keterangan</th>     
-        <th class="text-center px-5" scope="col">Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-
-
-<div></div>
+    <table class="table table-responsive-lg table-bordered table-striped" width="100%">
+        <thead class="table-dark">
+            <tr> 
+                <th class="text-center" scope="col">NIM</th>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Jenis Usulan</th>
+                <th class="text-center" scope="col">Status KP</th>
+                <th class="text-center" scope="col">Keterangan</th>     
+                <th class="text-center px-5" scope="col">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <div></div>
+            @foreach($kps as $kp)
         <tr>                              
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</td>                              -->
             <td class="text-center">{{$kp->jenis_usulan}}</td>             
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN'|| $kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
@@ -594,7 +592,6 @@
 
                 @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG'  )
                 <a href="/usulankp/create" class="badge " data-bs-toggle="tooltip" title="Daftar KP Ulang"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>
-                <!-- <a href="/usulankp-ulang/create/{{$kp->id}}" class="badge " data-bs-toggle="tooltip" title="Daftar KP Ulang"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a> -->
                 @endif
                 @if ($kp->status_kp == 'USULAN KP DITERIMA' )
                 <a href="/balasankp/create/{{$kp->id}}" class="badge  " data-bs-toggle="tooltip" title="Unggah Surat Balasan Perusahaan"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>

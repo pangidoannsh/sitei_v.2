@@ -60,7 +60,7 @@ class PendaftaranKPController extends Controller
 
         return view('pendaftaran.kerja-praktek.usulan-kp.index', [
             'pendaftaran_kp' => $pendaftaran_kp,
-            'kp' => $kp,
+            'kps' => $kp,
         ]);
     }
 
