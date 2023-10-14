@@ -22,7 +22,7 @@
 
 <div>
 
-  <a href="/penilaian" class="btn btn-success mb-3"> <- Kembali <a>
+  <a href="/kp-skripsi/penilaian-skripsi" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
   <div class="row">
     <div class="col mb-3">

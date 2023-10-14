@@ -51,46 +51,6 @@
             </div>
 
             <div class="mb-3 field">
-                <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu <span class="text-danger">*</span></label>
-                <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
-                    <option value="">-Belum Dipilih-</option>
-                    @foreach ($dosens as $dosen)
-                        <option value="{{$dosen->nip}}" {{old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
-                    @endforeach
-                </select>
-                @error('pembimbingsatu_nip')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-                @enderror
-            </div>
-
-            <div class="mb-3 field">
-                <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-                <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-                <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>       
-                    <label class="form-label">Tanggal <input type="checkbox" id="cektanggal2"> (manual)</label>
-                    <input id ="ciek" type="text" onchange="teshari()" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', $sempro->tanggal) }}" disabled>
-                    
-                    <script type="text/javascript">
-                        $("#ciek").datepicker({
-                        dateFormat: "yy-mm-dd",
-                        beforeShowDay: function (tanggal) {
-                        var day = tanggal.getDay();
-                        return [day != 0 && day != 1 && day != 3 && day != 5 && day != 6];
-                    }
-                    });
-                    </script>
-                    
-                    
-                    @error('tanggal')
-                      <div class="invalid-feedback">
-                          {{$message}}
-                      </div>
-                    @enderror
-            </div>
-
-            <div class="mb-3 field">
                 <label class="form-label">Judul Proposal <span class="text-danger">*</span></label>
                 <input type="text" name="judul_proposal" class="form-control @error('judul_proposal') is-invalid @enderror" value="{{ old('judul_proposal', $sempro->judul_proposal) }}">
                 @error('judul_proposal')
@@ -100,68 +60,15 @@
                 @enderror
             </div>
 
-            <script>
-                function teshari()
-                {
-                    const lambe = new Date($('#ciek').val());
-                    var tod = lambe.getDay();
-                    if (tod == 2)
-                    {
-                        $("#waktudb2").show();
-                        $("#waktudb3").hide();
-                        $("#waktu4").hide();
-                    }
-                    else if (tod == 4)
-                    {
-                        $("#waktudb2").hide();
-                        $("#waktudb3").show();
-                        $("#waktu4").hide();
-                    }
-                    else
-                    {
-                        $("#waktudb2").hide();
-                        $("#waktudb3").hide();
-                        $("#waktu4").show();
-                    }
-    
-                    $(`[name="waktu_selasa"]`).prop('selectedIndex',0);
-                    $(`[name="waktu_kamis"]`).prop('selectedIndex',0);
-                }
-            </script>
-
             <div class="mb-3 field">
-                <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
-                <select name="waktu" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
-                <option value="">-Belum Dipilih-</option>
-                </select>
-                <select name="waktu_selasa" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-                <option value="">-Belum Dipilih-</option>
-                    @foreach ($jamsels as $jamsel)
-                        <option value="{{$jamsel->jam_tersedia}}" {{old('waktu', $sempro->waktu) == $jamsel->jam_tersedia ? 'selected' : null}}>{{$jamsel->jam_tersedia}}</option>
+                <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu <span class="text-danger">*</span></label>
+                <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
+                    <option value="">-Belum Dipilih-</option>
+                    @foreach ($dosens as $dosen)
+                        <option value="{{$dosen->nip}}" {{old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                     @endforeach
                 </select>
-                <select name="waktu_kamis" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-                <option value="">-Belum Dipilih-</option>
-                    @foreach ($jamkams as $jamkam)
-                        <option value="{{$jamkam->jam_tersedia}}" {{old('waktu', $sempro->waktu) == $jamkam->jam_tersedia ? 'selected' : null}}>{{$jamkam->jam_tersedia}}</option>
-                    @endforeach
-                </select>
-                @error('waktu')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-                @enderror
-            </div>
-
-            <div class="mb-3 field">
-                <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
-                <select type="text" name="lokasi" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $sempro->lokasi) }}" disabled>
-                <option value="">-Belum Dipilih-</option>
-                    @foreach ($ruangans as $ruangan)
-                        <option value="{{$ruangan->nama_ruangan}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
-                    @endforeach
-                </select>
-                @error('lokasi')
+                @error('pembimbingsatu_nip')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>
@@ -228,6 +135,99 @@
                     @endforeach
                 </select>
                 @error('pengujitiga_nip')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+
+            <div class="mb-3 field">
+                <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+                <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+                <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>       
+                    <label class="form-label">Tanggal <input type="checkbox" id="cektanggal2"> (manual)</label>
+                    <input id ="ciek" type="text" onchange="teshari()" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', $sempro->tanggal) }}" disabled>
+                    
+                    <script type="text/javascript">
+                        $("#ciek").datepicker({
+                        dateFormat: "yy-mm-dd",
+                        beforeShowDay: function (tanggal) {
+                        var day = tanggal.getDay();
+                        return [day != 0 && day != 1 && day != 3 && day != 5 && day != 6];
+                    }
+                    });
+                    </script>
+                    
+                    
+                    @error('tanggal')
+                      <div class="invalid-feedback">
+                          {{$message}}
+                      </div>
+                    @enderror
+            </div>
+
+            <script>
+                function teshari()
+                {
+                    const lambe = new Date($('#ciek').val());
+                    var tod = lambe.getDay();
+                    if (tod == 2)
+                    {
+                        $("#waktudb2").show();
+                        $("#waktudb3").hide();
+                        $("#waktu4").hide();
+                    }
+                    else if (tod == 4)
+                    {
+                        $("#waktudb2").hide();
+                        $("#waktudb3").show();
+                        $("#waktu4").hide();
+                    }
+                    else
+                    {
+                        $("#waktudb2").hide();
+                        $("#waktudb3").hide();
+                        $("#waktu4").show();
+                    }
+    
+                    $(`[name="waktu_selasa"]`).prop('selectedIndex',0);
+                    $(`[name="waktu_kamis"]`).prop('selectedIndex',0);
+                }
+            </script>
+
+            <div class="mb-3 field">
+                <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
+                <select name="waktu" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
+                <option value="">-Belum Dipilih-</option>
+                </select>
+                <select name="waktu_selasa" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
+                <option value="">-Belum Dipilih-</option>
+                    @foreach ($jamsels as $jamsel)
+                        <option value="{{$jamsel->jam_tersedia}}" {{old('waktu', $sempro->waktu) == $jamsel->jam_tersedia ? 'selected' : null}}>{{$jamsel->jam_tersedia}}</option>
+                    @endforeach
+                </select>
+                <select name="waktu_kamis" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
+                <option value="">-Belum Dipilih-</option>
+                    @foreach ($jamkams as $jamkam)
+                        <option value="{{$jamkam->jam_tersedia}}" {{old('waktu', $sempro->waktu) == $jamkam->jam_tersedia ? 'selected' : null}}>{{$jamkam->jam_tersedia}}</option>
+                    @endforeach
+                </select>
+                @error('waktu')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+
+            <div class="mb-3 field">
+                <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
+                <select type="text" name="lokasi" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $sempro->lokasi) }}" disabled>
+                <option value="">-Belum Dipilih-</option>
+                    @foreach ($ruangans as $ruangan)
+                        <option value="{{$ruangan->nama_ruangan}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
+                    @endforeach
+                </select>
+                @error('lokasi')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>

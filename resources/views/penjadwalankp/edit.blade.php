@@ -51,28 +51,13 @@
             </div>
 
             <div class="mb-3 field">
-                <label class="form-label">Judul Laporan Kerja Praktek <span class="text-danger">*</span></label>
+                <label class="form-label">Judul Laporan Kerja Praktek<span class="text-danger">*</span></label>
                 <input type="text" name="judul_kp" class="form-control @error('judul_kp') is-invalid @enderror" value="{{ old('judul_kp', $kp->judul_kp) }}"> 
                 @error('judul_kp')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>
                 @enderror           
-            </div>
-
-            <div class="mb-3 field">
-                <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
-                <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
-                <option value="">-Belum Dipilih-</option>
-                    @foreach ($ruangans as $ruangan)
-                        <option value="{{$ruangan->nama_ruangan}}" {{old('lokasi', $kp->lokasi) == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
-                    @endforeach
-                </select>
-                @error('lokasi')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-                @enderror            
             </div>
 
             <div class="mb-3 field">
@@ -181,6 +166,21 @@
                     {{$message}}
                 </div>
                 @enderror
+            </div>
+
+            <div class="mb-3 field">
+                <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
+                <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
+                <option value="">-Belum Dipilih-</option>
+                    @foreach ($ruangans as $ruangan)
+                        <option value="{{$ruangan->nama_ruangan}}" {{old('lokasi', $kp->lokasi) == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
+                    @endforeach
+                </select>
+                @error('lokasi')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror            
             </div>
 
                 <button type="submit" class="btn btn-success float-end mt-4">Ubah</button>

@@ -61,26 +61,6 @@
             </div>
             @enderror           
         </div>
-        
-        <div class="mb-3 field">
-            <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
-            <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
-            <option value="">-Belum Dipilih-</option>
-                @foreach ($ruangans as $ruangan)
-                    <option value="{{$ruangan->id}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
-                @endforeach
-            </select>
-            @error('lokasi')
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
-            @enderror            
-        </div>
-        
-
-
-            </div>
-            <div class="col-md">
 
         <div class="mb-3 field">
             <label for="pembimbing_nip" class="form-label">Pembimbing <span class="text-danger">*</span></label>
@@ -96,8 +76,7 @@
             </div>
             @enderror
         </div>
-        
-        
+
         <div class="mb-3 field">
             <label for="penguji_nip" class="form-label">Penguji <span class="text-danger">*</span></label>
             <select name="penguji_nip" id="penguji" class="form-select @error('penguji_nip') is-invalid @enderror">
@@ -112,7 +91,7 @@
             </div>
             @enderror
         </div>
-    
+
         <div class="mb-3 field">
         <script>
             function teshari()
@@ -186,6 +165,21 @@
                 {{$message}}
             </div>
             @enderror
+        </div>
+
+        <div class="mb-3 field">
+            <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
+            <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
+            <option value="">-Belum Dipilih-</option>
+                @foreach ($ruangans as $ruangan)
+                    <option value="{{$ruangan->id}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
+                @endforeach
+            </select>
+            @error('lokasi')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror            
         </div>
 
 

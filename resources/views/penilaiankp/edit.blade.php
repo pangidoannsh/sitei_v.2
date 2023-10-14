@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Penilaian Seminar KP
+    Edit Penilaian Seminar KP
 @endsection
 
 @section('content')
