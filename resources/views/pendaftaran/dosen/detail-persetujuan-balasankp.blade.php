@@ -29,7 +29,7 @@
 
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 |Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-  <a href="/kp-skripsi/persetujuan" class="badge bg-success p-2 mb-3"> Kembali <a>
+  <a href="/kp-skripsi/persetujuan-kp" class="badge bg-success p-2 mb-3"> Kembali <a>
 
   @endif
   @endif

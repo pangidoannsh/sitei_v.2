@@ -169,6 +169,8 @@ Route::group(['middleware' => ['auth:web']], function () {
     //APPROVAL ADMIN
     Route::put('/usulankp/admin/approve/{id}', [PendaftaranKPController::class, 'approveusulankp_admin']);
     Route::put('/usulankp/admin/tolak/{id}', [PendaftaranKPController::class, 'tolakusulankp_admin']);
+    Route::put('/semkp/admin/approve/{id}', [PendaftaranKPController::class, 'approvesemkp_admin']);
+    Route::put('/semkp/admin/tolak/{id}', [PendaftaranKPController::class, 'tolaksemkp_admin']);
     
     
     Route::put('/usuljudul/admin/approve/{id}', [PendaftaranSkripsiController::class, 'approveusuljudul_admin']);
@@ -530,8 +532,10 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     //APPROVAL USULAN KP
     Route::put('/usulankp/kaprodi/approve/{id}', [PendaftaranKPController::class, 'approveusulankp_kaprodi']);
     Route::put('/usulankp/kaprodi/tolak/{id}', [PendaftaranKPController::class, 'tolakusulan_kaprodi']);
- 
 
+    Route::put('/usulan-semkp/kaprodi/approve/{id}', [PendaftaranKPController::class, 'approveusulan_semkp_kaprodi']);
+    Route::put('/usulan-semkp/kaprodi/tolak/{id}', [PendaftaranKPController::class, 'tolak_semkp_kaprodi']);
+ 
     Route::put('/perpanjangan1/kaprodi/approve/{id}', [PendaftaranSkripsiController::class, 'approveperpanjangan1_kaprodi']);
     Route::put('/perpanjangan1/kaprodi/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakperpanjangan1_kaprodi']);
     Route::put('/perpanjangan2/kaprodi/approve/{id}', [PendaftaranSkripsiController::class, 'approveperpanjangan2_kaprodi']);
@@ -579,8 +583,6 @@ Route::group(['middleware' => ['auth:dosen,mahasiswa']], function () {
     
     Route::get('/balasan-kp/detail/{id}', [PendaftaranKPController::class, 'detailbalasankp']);
     // Route::get('/usulan-semkp/detail/{id}', [PendaftaranKPController::class, 'detailusulansemkp']);
-
-   
 
 
     Route::get('/balasan-kp/index', [PendaftaranKPController::class, 'indexbalasan']);

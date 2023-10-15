@@ -646,7 +646,7 @@ class PendaftaranKPController extends Controller
         $kp->jenis_usulan = 'Daftar Seminar Kerja Praktek';
         $kp->tgl_created_semkp = Carbon::now();
         $kp->status_kp = 'DAFTAR SEMINAR KP';
-        $kp->keterangan = 'Menunggu persetujuan Pembimbing';
+        $kp->keterangan = 'Menunggu persetujuan Admin Prodi';
         $kp->update();
 
         Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
@@ -904,11 +904,40 @@ class PendaftaranKPController extends Controller
     }
 
 
+//APPROVAL SEMINAR KP Admin      
+    public function approvesemkp_admin($id)
+    {
+        $kp = PendaftaranKP::find($id);
+        $kp->keterangan = 'Menunggu persetujuan Pembimbing';
+        // $kp->tgl_disetujui_semkp = Carbon::now();
+        $kp->update();
+
+        Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
+        return  back();
+    }
+
+    public function tolaksemkp_admin(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $kp = PendaftaranKP::find($id);   
+        $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
+        $kp->keterangan = 'Ditolak Admin Prodi';
+        $kp->alasan = $request->alasan;
+        $kp->update();
+
+
+        Alert::error('Ditolak', 'Seminar KP berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
+        return  back();
+    }
+
 //APPROVAL SEMINAR KP PEMBIMBING      
     public function approveusulan_semkp_pemb($id)
     {
         $kp = PendaftaranKP::find($id);
-        $kp->keterangan = 'Menunggu Jadwal Seminar KP';
+        $kp->keterangan = 'Menunggu persetujuan Koordinator KP';
         // $kp->tgl_disetujui_semkp = Carbon::now();
         $kp->update();
 
@@ -924,7 +953,7 @@ class PendaftaranKPController extends Controller
 
         $kp = PendaftaranKP::find($id);   
         $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
-        $kp->keterangan = 'Ditolak Calon Dosen Pembimbing';
+        $kp->keterangan = 'Ditolak Dosen Pembimbing';
         $kp->alasan = $request->alasan;
         $kp->update();
 
@@ -937,6 +966,59 @@ class PendaftaranKPController extends Controller
     public function approveusulan_semkp_koordinator($id)
     {
         $kp = PendaftaranKP::find($id);
+        $kp->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
+        // $kp->tgl_dijadwalkan = Carbon::now();
+        $kp->update();
+
+        Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
+        return  back();
+    }
+     public function tolak_semkp_koordinator(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $kp = PendaftaranKP::find($id);   
+        $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
+        $kp->keterangan = 'Ditolak Koordinator KP';
+        $kp->alasan = $request->alasan;
+        $kp->update();
+
+        Alert::error('Ditolak', 'Seminar KP berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
+        return  back();
+    }
+    //APPROVAL SEMINAR KP KOORDINATOR
+    public function approveusulan_semkp_kaprodi($id)
+    {
+        $kp = PendaftaranKP::find($id);
+        $kp->status_kp = 'DAFTAR SEMINAR KP DISETUJUI';
+        $kp->keterangan = 'Menunggu Jadwal Seminar KP';
+        $kp->tgl_dijadwalkan = Carbon::now();
+        $kp->update();
+
+        Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
+        return  back();
+    }
+     public function tolak_semkp_kaprodi(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $kp = PendaftaranKP::find($id);   
+        $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
+        $kp->keterangan = 'Ditolak Koordinator Program Studi';
+        $kp->alasan = $request->alasan;
+        $kp->update();
+
+        Alert::error('Ditolak', 'Seminar KP berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
+        return  back();
+    }
+    //APPROVAL SEMINAR KP
+    public function approveusulan_semkp_jadwal($id)
+    {
+        $kp = PendaftaranKP::find($id);
         $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
         $kp->keterangan = 'Seminar KP Dijadwalkan';
         $kp->tgl_dijadwalkan = Carbon::now();
@@ -945,7 +1027,7 @@ class PendaftaranKPController extends Controller
         Alert::success('Disetujui', 'Seminar KP dijadwalkan!')->showConfirmButton('Ok', '#28a745');
         return  back();
     }
-     public function tolak_semkp_koordinator(Request $request, $id)
+     public function tolak_semkp_jadwal(Request $request, $id)
     {
         $request->validate([                                           
             'alasan' => 'required',

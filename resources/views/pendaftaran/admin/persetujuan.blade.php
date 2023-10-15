@@ -58,7 +58,7 @@
                 <!-- <th class="text-center p-2" scope="col">No.</th> -->
                 <th class="text-center" scope="col">NIM</th>
                 <th class="text-center" scope="col">Nama</th>
-                <th class="text-center" scope="col">Jenis Usulan</th>
+                <!-- <th class="text-center" scope="col">Jenis Usulan</th> -->
                 <th class="text-center" scope="col">Status </th>
                 <th class="text-center" scope="col">Tanggal Usulan</th>    
                 <th class="text-center" scope="col">Keterangan</th> 
@@ -74,7 +74,7 @@
             <td class="text-center">{{$kp->mahasiswa_nim}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>
                        
-            <td class="text-center">{{$kp->jenis_usulan}}</td>      
+            <!-- <td class="text-center">{{$kp->jenis_usulan}}</td>       -->
             
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'DAFTAR SEMINAR KP'|| $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
@@ -90,6 +90,9 @@
             
             @if ($kp->status_kp == 'USULAN KP')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
 
@@ -116,25 +119,68 @@
 </form>
     </div>
   </div>
-            
-
              @endif
     @endif
     @endif
-
             </td>
             @endif
 
-            @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'KP DISETUJUI' )
+
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP')
             <td class="text-center">
-            <a href="/suratperusahaan/detail/pembimbingprodi/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+  @if (Str::length(Auth::guard('web')->user()) > 0)
+  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+    @if ($kp->keterangan == 'Menunggu persetujuan Admin Prodi' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
+    <div class="row">
+    
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+        <button onclick="tolakSemKPAdmin({{$kp->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
+    </div>
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+      <a href="/kp-skripsi/persetujuan/semkp/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+    </div>
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+        <form action="/semkp/admin/approve/{{$kp->id}}" class="setujui-semkp-admin" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success badge p-1 "><i class="fas fa-check-circle"></i></button>
+</form>
+    </div>
+  </div>
+             @endif
+    @endif
+    @endif
+            </td>
+            @endif
+
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')
+            <td class="text-center">
+  @if (Str::length(Auth::guard('web')->user()) > 0)
+  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+    @if ($kp->keterangan == 'Menunggu Jadwal Seminar KP' && $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' )
+    <div class="row">
+    
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+        <button onclick="tolakSemKPAdmin({{$kp->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
+    </div>
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+      <a href="/kp-skripsi/persetujuan/semkp/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+    </div>
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+        <form action="/semkp/admin/approve/{{$kp->id}}" class="setujui-semkp-admin" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success badge p-1 "><i class="fas fa-check-circle"></i></button>
+</form>
+    </div>
+  </div>
+             @endif
+    @endif
+    @endif
             </td>
             @endif
 
         
-
-
-
         </tr>
 
     @endforeach
@@ -145,7 +191,7 @@
             <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
             <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
             <!-- <td class="text-center">{{$skripsi->konsentrasi->nama_konsentrasi}}</td> -->
-            <td class="text-center">{{$skripsi->jenis_usulan}}</td>         
+            <!-- <td class="text-center">{{$skripsi->jenis_usulan}}</td>          -->
             <!-- USUL JUDUL  -->
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
             <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
@@ -283,6 +329,55 @@ $('.setujui-usulankp-admin').submit(function(event) {
                     title: 'Tolak Usulan KP',
                     html: `
                         <form id="reasonForm" action="/usulankp/admin/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+$('.setujui-semkp-admin').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Daftar Seminar KP!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+ function tolakUsulanKPAdmin(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Daftar Seminar KP',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Daftar Seminar KP',
+                    html: `
+                        <form id="reasonForm" action="/semkp/admin/tolak/${id}" method="POST">
                         @method('put')
                             @csrf
                             <label for="alasan">Alasan Penolakan :</label>

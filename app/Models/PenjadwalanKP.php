@@ -77,6 +77,11 @@ class PenjadwalanKP extends Model
     {
         return $this->belongsTo(Dosen::class, 'dibuat_oleh', 'nip');
     }
+    
+    public function pendaftarankp()
+    {
+        return $this->belongsTo(PendaftaranKP::class, 'mahasiswa_nim', 'mahasiswa_nim')->latest();
+    }
 
     public function cek()
     {

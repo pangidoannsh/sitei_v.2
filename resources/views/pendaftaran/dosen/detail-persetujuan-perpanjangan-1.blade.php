@@ -27,7 +27,7 @@
 <div>
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 
-  <a href="/kp-skripsi/persetujuan" class="badge bg-success p-2 mb-3 "> Kembali <a>
+  <a href="/kp-skripsi/persetujuan-skripsi" class="badge bg-success p-2 mb-3 "> Kembali <a>
 
  
   @endif

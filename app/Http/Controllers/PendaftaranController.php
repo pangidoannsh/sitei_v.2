@@ -529,14 +529,17 @@ class PendaftaranController extends Controller
         // }Menunggu Jadwal Seminar KP
         if (auth()->user()->role_id == 2) {            
             return view('pendaftaran.admin.persetujuan', [
-                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')->get()->sortBy('update_at'),
+                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
+                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '1')
+                ->get()->sortBy('update_at'),
 
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')->get()->sortBy('update_at'),
             ]);
         }
         if (auth()->user()->role_id == 3) {            
             return view('pendaftaran.admin.persetujuan', [
-                'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', 'Menunggu persetujuan Admin Prodi')->get()->sortBy('update_at'),
+                'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', 'Menunggu persetujuan Admin Prodi')
+                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '2')->get()->sortBy('update_at'),
 
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '2')->get()->sortBy('update_at'),
             ]);
@@ -544,7 +547,8 @@ class PendaftaranController extends Controller
 
         if (auth()->user()->role_id == 4) {            
             return view('pendaftaran.admin.persetujuan', [
-                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')->get()->sortBy('update_at'),
+                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')
+                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '3')->get()->sortBy('update_at'),
 
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')->get()->sortBy('update_at'),
             ]);

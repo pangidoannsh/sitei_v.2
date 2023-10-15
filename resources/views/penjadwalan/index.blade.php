@@ -81,7 +81,7 @@
   </thead>
   <tbody>
 
-
+ 
     @foreach ($penjadwalan_kps as $kp)
         <tr>                  
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             

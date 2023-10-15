@@ -68,6 +68,21 @@
   <tbody>
 
     @foreach ($pendaftaran_kp as $kp)
+
+        @php
+  $tanggalDisetujui = $kp->tgl_disetujui_usulankp;
+@endphp
+@php
+  $tanggalSaatIni = date('Y-m-d');
+@endphp
+
+<!-- Menghitung selisih hari -->
+@php
+  $waktuTersisa = strtotime($tanggalSaatIni) - strtotime($tanggalDisetujui);
+  $selisihHari = floor($waktuTersisa / (60 * 60 * 24));
+  $selisihHari30 = 30;
+  $waktuMuncul = $selisihHari + $selisihHari30;
+@endphp
   <div></div>
         <tr>        
             <td class="text-center">{{$loop->iteration}}</td>                             
@@ -95,6 +110,28 @@
             
             @if ($kp->status_kp == 'USULAN KP')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            @endif
+
+              @if ($kp->status_kp == 'USULAN KP DITERIMA')           
+            <td class="text-center"> Batas Unggah Surat Balasan: <br>
+@if ($waktuMuncul >= 0)
+    <span class="text-danger"> {{ $waktuMuncul }}  hari lagi</span> ({{Carbon::parse($kp->tgl_disetujui_usulankp)->translatedFormat('l, d F Y')}})
+  @else
+    Batas Waktu Unggah Surat Balasan telah habis
+  @endif
+</td>
+            @endif
+
+             @if ($kp->status_kp == 'SURAT PERUSAHAAN')           
+            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
+            @endif
+
+            @if ($kp->status_kp == 'KP DISETUJUI')           
+            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</td>
+            @endif
+
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
             
             @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')           

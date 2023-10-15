@@ -237,7 +237,31 @@
     @endif
    
 
-    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP' || $pendaftaran_kp->status_kp == 'SEMINAR KP DIJADWALKAN' )
+    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP' )
+         <li class="step active"> 
+            <div>
+                <i class="fas fa-check"></i>
+        </div> 
+        <p class="mt-3"> USULAN KP</p> 
+        </li> 
+        <li class="step active"> 
+            <div><i class="fas fa-check"></i>
+        </div> <p class="mt-3"> SURAT PERUSAHAAN </p>
+     </li>
+        <li class="step active"> 
+            <div><i class="fas "></i>
+        </div> <p class="mt-3"> SEMINAR KP </p>
+     </li>
+         <li class="step"> 
+            <div><i class="fas fa-truc"></i>
+        </div><p class="mt-3"> PENYERAHAN LAPORAN</p>
+     </li> 
+        <!-- <li class="step "> 
+            <div><i class="fas "></i>
+        </div><p class="mt-3"> KP SELESAI </p>
+     </li>  -->
+    @endif
+    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $pendaftaran_kp->status_kp == 'SEMINAR KP DIJADWALKAN' )
          <li class="step active"> 
             <div>
                 <i class="fas fa-check"></i>
@@ -424,7 +448,7 @@
     </div>
   </div>
 @endif
-    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP' || $pendaftaran_kp->status_kp == 'SEMINAR KP DIJADWALKAN')
+    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP')
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
@@ -435,6 +459,27 @@
         <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
+        <span class="mt-3 text-secondary"> Tanggal Diusulkan <br></span>
+        <span class="mt-3 text-secondary  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        
+    </div>
+  </div>
+@endif
+    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $pendaftaran_kp->status_kp == 'SEMINAR KP DIJADWALKAN')
+    <div class="row biru mb-4">
+    <div class="col">
+         <span class="mt-3 "> Tanggal Diterima <br></span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+         <span class="mt-3  "> Tanggal Disetujui <br></span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-3 "> Tanggal Disetujui <br></span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
         
@@ -567,7 +612,7 @@
              @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG'  || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' )           
             <td class="text-center bg-danger">{{$kp->status_kp}}</td>
             @endif
-            @if ($kp->status_kp == 'USULAN KP DITERIMA' ||$kp->status_kp == 'KP DISETUJUI' ||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'KP SELESAI' )           
+            @if ($kp->status_kp == 'USULAN KP DITERIMA' ||$kp->status_kp == 'KP DISETUJUI' ||$kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI'||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'KP SELESAI' )           
             <td class="text-center bg-info">{{$kp->status_kp}}</td>
             @endif
             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
@@ -597,7 +642,6 @@
                 <a href="/balasankp/create/{{$kp->id}}" class="badge  " data-bs-toggle="tooltip" title="Unggah Surat Balasan Perusahaan"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>
                 @endif
 
-          
             </td>
             @endif
             
@@ -619,7 +663,7 @@
             </td>
             @endif
 
-            @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' ||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK')
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' ||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK')
             <td class="text-center">
 
              <a href="/daftar-semkp/detail/ {{($kp->id)}}" class="badge btn btn-info " data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>

@@ -27,7 +27,7 @@
 
 @if (Str::length(Auth::guard('dosen')->user()) > 0)       
 
-  <a href="/kp-skripsi/persetujuan" class="badge bg-success p-2 mb-3 "> Kembali <a>
+  <a href="/kp-skripsi/persetujuan-kp" class="badge bg-success p-2 mb-3 "> Kembali <a>
   @endif
   
   @if (Str::length(Auth::guard('web')->user()) > 0)       
@@ -128,6 +128,28 @@
 
       </div>
     </div>
+
+    @if (Str::length(Auth::guard('web')->user()) > 0)
+    @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+    
+    @if ($kp->status_kp == 'DAFTAR SEMINAR KP' && $kp->keterangan == 'Menunggu persetujuan Admin Prodi')
+   <div class="mb-5 mt-3 float-right">
+        <div class="row row-cols-2">
+    <div class="col">
+        <button onclick="tolakSemKPAdmin()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+</div>
+    <div class="col">
+        <form action="/semkp/admin/approve/{{$kp->id}}" class="setujui-semkp-admin" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+</form>
+    </div>
+  </div>
+        @endif
+  @endif
+  @endif
+
         @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
       @if ($kp->status_kp == 'DAFTAR SEMINAR KP' && $kp->keterangan == 'Menunggu persetujuan Pembimbing' )
   <div class="mb-5 mt-3 float-right">
@@ -169,7 +191,7 @@
             <!-- APPROVAL KOORDINATOR KP  -->
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
   @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-     @if ($kp->status_kp == 'DAFTAR SEMINAR KP' && $kp->keterangan == 'Menunggu Jadwal Seminar KP')
+     @if ($kp->status_kp == 'DAFTAR SEMINAR KP' && $kp->keterangan == 'Menunggu persetujuan Koordinator KP')
 <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
@@ -177,6 +199,25 @@
 </div>
     <div class="col">
         <form action="/usulan-semkp/koordinator/approve/{{$kp->id}}" class="setujui-semkp-koordinator" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+</form>
+    </div>
+  </div>
+    @endif
+    @endif
+    @endif
+  @if (Str::length(Auth::guard('dosen')->user()) > 0)
+  @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+     @if ($kp->status_kp == 'DAFTAR SEMINAR KP' && $kp->keterangan == 'Menunggu persetujuan Koordinator Program Studi')
+<div class="mb-5 mt-3 float-right">
+        <div class="row row-cols-2">
+    <div class="col">
+        <button onclick="tolakSemKPKaprodi()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+</div>
+    <div class="col">
+        <form action="/usulan-semkp/kaprodi/approve/{{$kp->id}}" class="setujui-semkp-kaprodi" method="POST"> 
     @method('put')
     @csrf
     <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
@@ -201,6 +242,56 @@
 @push('scripts')
 @foreach ($pendaftaran_kp as $kp)
 <script>
+   $('.setujui-semkp-admin').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Daftar Seminar KP!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+ function tolakSemKPAdmin() {
+     Swal.fire({
+            title: 'Tolak Usulan Daftar Seminar KP',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Daftar Seminar KP',
+                    html: `
+                        <form id="reasonForm" action="/semkp/admin/tolak/{{$kp->id}}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
 
 $('.setujui-semkp-pembimbing').submit(function(event) {
     event.preventDefault();
@@ -285,6 +376,55 @@ function tolakSemKPPemb() {
                     title: 'Tolak Usulan Seminar KP',
                     html: `
                         <form id="reasonForm" action="/usulan-semkp/koordinator/tolak/{{$kp->id}}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+//APPROVAL
+    $('.setujui-semkp-kaprodi').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Seminar KP!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+ function tolakSemKPKaprodi() {
+     Swal.fire({
+            title: 'Tolak Usulan Seminar KP',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Seminar KP',
+                    html: `
+                        <form id="reasonForm" action="/usulan-semkp/kaprodi/tolak/{{$kp->id}}" method="POST">
                         @method('put')
                             @csrf
                             <label for="alasan">Alasan Penolakan :</label>
