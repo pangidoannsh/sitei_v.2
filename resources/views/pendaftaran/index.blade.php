@@ -106,6 +106,7 @@
 </div>
     @elseif($pendaftaran_kp->status_kp == 'USULAN KP DITERIMA' 
     || $pendaftaran_kp->status_kp == 'KP DISETUJUI' 
+    || $pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' 
     || $pendaftaran_kp->status_kp == 'SEMINAR KP SELESAI' 
     || $pendaftaran_kp->status_kp == 'KP SELESAI' )
   <a href="/usulankp/index"><div class="card kpindex">
