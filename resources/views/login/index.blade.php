@@ -27,6 +27,11 @@
   .sejajar{
     margin-top: 70px;
   }
+
+  .vl {
+    border-left: 2px solid green;
+    height: 90px;
+  }
   
   /* .dpn{
     margin-top: -50px ;
@@ -46,7 +51,19 @@
 .dpn a{
   line-height: 1.1;
  }
+
+ .vl {
+    border-left: 2px solid green;
+    height: 70px;
+    margin-top: 20px;
+    padding-left: 10px;
   }
+
+  .caption h4 {
+    font-size: 16px;
+  }
+
+}
   </style>
 
   <body>
@@ -108,10 +125,15 @@
         <form class="form-login" action="/" method="POST" class="text-center mt-5">
           @csrf
 
-            <div class="gambar">
-              <img src="assets/dist/img/unri.png" alt="logo_unri" width="105" height="106">
-              <h4>Sistem Informasi <br>Teknik Elektro dan Informatika</h4>
-           </div>
+          <div class="d-flex">  
+          <div class="gambar p-3">
+              <img src="assets/dist/img/unri.png" alt="logo_unri" width="95" height="95">
+          </div>
+          <div class="vl mt-3"></div>
+          <div class="mt-4 caption">
+            <h4>Sistem Informasi Teknik Elektro <br> dan Informatika</h4>
+          </div>
+          </div>
 
             <div class="form-floating mt-5">
               <input type="text" class="form-control rounded-1 @error('username') is-invalid @enderror" name="username" id="username" value="{{ old('username') }}" placeholder="username" autofocus required>
@@ -133,7 +155,7 @@
         <small class="kecil d-block text-center mt-4">Belum memiliki akun? <br>Silahkan hubungi Admin Prodi<br></small>
     </main></div>
     </div>
-       <div class="col-lg-6 dpn  justify-content-center align-items-center">
+       <div class="col-lg-6 dpn justify-content-center align-items-center">
        <div class="row justify-content-center sejajar">
     <div class="col-4">
       <div class="text-center my-3"><a class="btn btn-success p-2 tinggi pt-md-4 p-lg-0 w-100 fs-6 text-white rounded-1" href="fahrilhadi.com">Portal Jurusan Elektro <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ms-1 mb-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg></a></div>
