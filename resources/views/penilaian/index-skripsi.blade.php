@@ -61,8 +61,9 @@
 </ol>
 
 <ol class="breadcrumb col-lg-12">
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/kp-skripsi/penilaian-skripsi">Jadwal Seminar</a></li>      
-  <li class="breadcrumb-item"><a href="/kp-skripsi/riwayat-penilaian-skripsi">Riwayat Penilaian</a></li>  
+  <li><a class="breadcrumb-item active fw-bold text-black" href="/kp-skripsi/penilaian-skripsi">Jadwal Seminar</a></li>
+  <span class="px-2">|</span>      
+  <li><a href="/kp-skripsi/riwayat-penilaian-skripsi">Riwayat Penilaian</a></li>  
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">

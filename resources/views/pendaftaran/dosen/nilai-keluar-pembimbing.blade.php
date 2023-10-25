@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Mahasiswa Bimbingan Selesai Kerja Praktek
+    Riwayat Bimbingan Kerja Praktek
 @endsection
 
 @section('content')
@@ -21,42 +21,39 @@
 @endif
 
 <div class="container card p-4">
-  
+
 <ol class="breadcrumb col-lg-12">
  
-<div class="btn-group menu-dosen scrollable-btn-group col-md-12">
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
- <a href="/kp-skripsi/persetujuan-kp"  class="btn bg-light border  border-bottom-0" style="border-top-left-radius: 15px;" >Persetujuan (<strong id="persetujuanKPCount"></strong>)</a>
-     <a href="/kp-skripsi/penilaian-kp"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Seminar (<strong id="seminarKPCount"></strong>)</span>
-  <span class="badge-link">
-    <a href="/kp-skripsi/riwayat-penilaian-kp" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Seminar"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
+
+  <li><a href="/kp-skripsi/persetujuan-kp" class="px-1">Persetujuan</a></li>
+  (<span id="waitingApprovalCount"></span>)
+  <span class="px-2">|</span>      
+  <li><a href="/kp-skripsi/penilaian-kp" class="px-1">Seminar</a></li>
+  (<span id="seminarKPCount"></span>)  
+  <span class="px-2">|</span>
+  <li><a href="/kp-skripsi/riwayat-penilaian-kp" class="px-1">Riwayat Seminar</a></li>
+  (<span id=""></span>)
+  <span class="px-2">|</span>
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-  <a href="/kerja-praktek" class="btn bg-light border  border-bottom-0 ">
-   <span class="button-text">KP Prodi (<strong id="prodiKPCount"></strong>)</span>
-  <span class="badge-link">
-    <a href="/kerja-praktek/nilai-keluar" class="sejarah pt-2 bg-light ">
-       <span class=" p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
 
-  @endif
-@endif
-<a href="/pembimbing/kerja-praktek"  class="btn bg-light border  border-bottom-0 "  >
-  <span class="button-text">Bimbingan KP (<strong id="bimbinganKPCount"></strong>)</span>
-  <span class="badge-link">
-    <a href="/kerja-praktek/pembimbing/nilai-keluar" class="sejarah pt-2 bg-success " style="border-top-right-radius: 15px;">
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
+      <li><a href="/kerja-praktek" class="px-1">Data KP</a></li>
+      (<span id="prodiKPCount"></span>)
+      <span class="px-2">|</span>
+      <li><a href="/kerja-praktek/nilai-keluar" class="px-1">Riwayat KP</a></li>
+      (<span id=""></span>)
+      <span class="px-2">|</span>
 
+      @endif
+    @endif
+    
+    <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP</a></li>
+    (<span id="bimbinganKPCount"></span>)
+    <span class="px-2">|</span>
+    <li><a href="/kerja-praktek/pembimbing/nilai-keluar" class="breadcrumb-item active fw-bold text-black px-1">Riwayat Bimbingan KP</a></li>
+    (<span id=""></span>)
  
   @endif
 
@@ -84,10 +81,6 @@
   </span>
 </a>
   @endif
-
-
-
-</div>
 
 </ol>
 
@@ -144,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
     if (waitingApprovalCount > 0) {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Kerja Praktek Mahasiswa Bimbingan',
+            title: 'Ini adalah halaman Riwayat Bimbingan Kerja Praktek',
             html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda telah selesai melaksanakan Kerja Praktek.`,
             icon: 'info',
             showConfirmButton: false,
@@ -152,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Kerja Praktek Mahasiswa Bimbingan',
+            title: 'Ini adalah halaman Riwayat Bimbingan Kerja Praktek',
             html: `Belum ada mahasiswa bimbingan Anda selesai Kerja Praktek.`,
             icon: 'info',
             showConfirmButton: false,

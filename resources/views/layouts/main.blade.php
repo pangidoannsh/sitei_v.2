@@ -61,6 +61,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav">
+
+          {{-- Menu Persetujuan --}}
+
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/persetujuan-koordinator">Persetujuan</a>
+          </li>
+          @endif
+          @endif
+
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/persetujuan-kaprodi">Persetujuan</a>
+          </li>
+          @endif
+          @endif
+
+          {{-- Menu KP/Skripsi --}}
+
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           <li class="nav-item">
             <a class="nav-link {{Request::is ('pendaftaran*') ? 'text-success' : '' }}{{Request::is ('kp-skripsi*') ? 'text-success' : '' }}{{Request::is ('kerja-praktek*') ? 'text-success' : '' }} {{Request::is ('skripsi*') ? 'text-success' : '' }} {{Request::is ('pembimbing*') ? 'text-success' : '' }}" aria-current="page" href="/kp-skripsi">KP/Skripsi</a>
@@ -90,10 +111,12 @@
           
           @endif
 
+          {{-- Menu Statistik --}}
+
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/persetujuan-koordinator">Persetujuan</a>
+            <a class="nav-link" aria-current="page" href="/statistik-koordinator">Statistik</a>
           </li>
           @endif
           @endif
@@ -101,7 +124,7 @@
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/persetujuan-kaprodi">Persetujuan</a>
+            <a class="nav-link" aria-current="page" href="/statistik-kaprodi">Statistik</a>
           </li>
           @endif
           @endif

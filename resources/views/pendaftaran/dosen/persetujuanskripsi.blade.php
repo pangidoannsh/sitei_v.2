@@ -33,7 +33,7 @@
           @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
   
 <a href="/skripsi"  class="btn bg-light border  border-bottom-0 "  >
-  <span class="button-text">Skripsi Prodi</span>
+  <span class="button-text">Data Skripsi</span>
   <span class="badge-link">
     <a href="/skripsi/nilai-keluar" class="sejarah pt-2  bg-light ">      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Skripsi"><i class="fas fa-history"></i></i></span>
     </a>
