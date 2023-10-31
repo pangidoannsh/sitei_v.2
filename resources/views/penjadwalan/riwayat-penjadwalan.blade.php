@@ -9,14 +9,20 @@
 @endsection
 
 @section('sub-title')
-    Riwayat Jadwal
+    Riwayat Penjadwalan Seminar
 @endsection
 
 @section('content')
 
 <ol class="breadcrumb col-lg-12">   
-  <li class="breadcrumb-item"><a href="/form">Jadwal</a></li>        
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li>  
+  {{-- <li class="breadcrumb-item"><a href="/form">Jadwal</a></li>        
+  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li>   --}}
+
+  <li><a href="/form" class="px-1">Jadwal</a></li>
+  (<span id=""></span>)
+  <span class="px-2">|</span>      
+  <li><a href="/riwayat-penjadwalan" class="breadcrumb-item active fw-bold text-black px-1">Riwayat Penjadwalan</a></li>
+  (<span id=""></span>)
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
