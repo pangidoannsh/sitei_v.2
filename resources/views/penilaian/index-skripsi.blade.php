@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Penilaian
+    Jadwal Seminar Skripsi
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
 @endif
 
 <div class="container card  p-4">
-<ol class="breadcrumb col-lg-12" >
+{{-- <ol class="breadcrumb col-lg-12" >
  
 <div class="btn-group menu-dosen scrollable-btn-group col-md-12">
 
@@ -64,6 +64,38 @@
   <li><a class="breadcrumb-item active fw-bold text-black" href="/kp-skripsi/penilaian-skripsi">Jadwal Seminar</a></li>
   <span class="px-2">|</span>      
   <li><a href="/kp-skripsi/riwayat-penilaian-skripsi">Riwayat Penilaian</a></li>  
+</ol> --}}
+
+<ol class="breadcrumb col-lg-12">
+  <li><a href="/kp-skripsi/persetujuan-skripsi" class="px-1">Persetujuan</a></li>
+  (<span id="waitingApprovalCount"></span>)
+  <span class="px-2">|</span>      
+  <li><a href="/kp-skripsi/penilaian-skripsi" class="breadcrumb-item active fw-bold text-black px-1">Seminar</a></li>
+  (<span id="seminarKPCount"></span>)  
+  <span class="px-2">|</span>
+  <li><a href="/kp-skripsi/riwayat-penilaian-skripsi" class="px-1">Riwayat Seminar</a></li>
+  (<span id=""></span>)
+  <span class="px-2">|</span>
+
+  @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+
+        <li><a href="/skripsi" class="px-1">Data Skripsi</a></li>
+        (<span id="prodiKPCount"></span>)
+        <span class="px-2">|</span>
+        <li><a href="/skripsi/nilai-keluar" class="px-1">Riwayat Skripsi</a></li>
+        (<span id=""></span>)
+        <span class="px-2">|</span>
+
+      @endif
+  @endif
+
+        <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi</a></li>
+        (<span id="bimbinganKPCount"></span>)
+        <span class="px-2">|</span>
+        <li><a href="/skripsi/pembimbing/nilai-keluar" class="px-1">Riwayat Bimbingan Skripsi</a></li>
+        (<span id=""></span>)
+  
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">

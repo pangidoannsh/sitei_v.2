@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Pendaftaran Kerja Praktek
+    Persetujuan Kerja Praktek dan Skripsi
 @endsection
 
 @section('content')

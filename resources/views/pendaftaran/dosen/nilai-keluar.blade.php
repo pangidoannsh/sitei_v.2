@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @endpush()
 
-@push('scripts')
+{{-- @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const persetujuanKPCount = {!! json_encode($jml_persetujuankp->count()) !!};
@@ -190,5 +190,5 @@ document.addEventListener('DOMContentLoaded', function() {
        bimbinganKPElement.innerText = bimbinganKPCount;
 });
 </script>
-@endpush()
+@endpush() --}}
 
