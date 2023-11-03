@@ -61,10 +61,13 @@
 
 @if (Str::length(Auth::guard('web')->user()) > 0)
  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-  <a href="/persetujuan/admin/index" class="btn bg-light border  border-bottom-0" style="border-top-left-radius: 15px;">Persetujuan</a>
+  {{-- <a href="/persetujuan/admin/index" class="btn bg-light border  border-bottom-0" style="border-top-left-radius: 15px;">Persetujuan</a> --}}
+  <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan</a></li>
+  (<span id="waitingApprovalCount"></span>)
+  <span class="px-2">|</span> 
 @endif
 @endif
-    <a href="/kerja-praktek/admin/index"  class="btn bg-light border  border-bottom-0 " >
+    {{-- <a href="/kerja-praktek/admin/index"  class="btn bg-light border  border-bottom-0 " >
   <span class="button-text">Kerja Praktek</span>
   <span class="badge-link">
     <a href="/kerja-praktek/nilai-keluar" class="sejarah pt-2 bg-success ">  
@@ -79,7 +82,19 @@
       <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
     </a>
   </span>
-</a>
+</a> --}}
+
+<li><a href="/kerja-praktek/admin/index" class="px-1">Data KP</a></li>
+  (<span id="seminarKPCount"></span>)  
+  <span class="px-2">|</span>
+  <li><a href="/kerja-praktek/nilai-keluar" class="breadcrumb-item active fw-bold text-black px-1">Riwayat KP</a></li>
+  (<span id=""></span>)
+  <span class="px-2">|</span>
+  <li><a href="/sidang/admin/index" class="px-1">Data Skripsi</a></li>
+  (<span id="seminarKPCount"></span>)  
+  <span class="px-2">|</span>
+  <li><a href="/skripsi/nilai-keluar" class="px-1">Riwayat Skripsi</a></li>
+  (<span id=""></span>)
   @endif
 
 </ol>

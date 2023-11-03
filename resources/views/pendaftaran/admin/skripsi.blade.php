@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Pendaftaran Skripsi
+    Data Skripsi Mahasiswa
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
 @endif
 
 <div class="container card p-4">
-<ol class="breadcrumb col-lg-12">
+{{-- <ol class="breadcrumb col-lg-12">
  
 <div class="btn-group menu-dosen scrollable-btn-group col-lg-12">
   @if (Str::length(Auth::guard('web')->user()) > 0)
@@ -48,6 +48,29 @@
 
 </div>
 
+</ol> --}}
+
+<ol class="breadcrumb col-lg-12">
+
+  @if (Str::length(Auth::guard('web')->user()) > 0)
+  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+  <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan</a></li>
+  (<span id="waitingApprovalCount"></span>)
+  <span class="px-2">|</span> 
+  @endif
+  @endif
+  <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP</a></li>
+  (<span id="seminarKPCount"></span>)  
+  <span class="px-2">|</span>
+  <li><a href="/kerja-praktek/nilai-keluar" class="px-1">Riwayat KP</a></li>
+  (<span id=""></span>)
+  <span class="px-2">|</span>
+  <li><a href="/sidang/admin/index" class="breadcrumb-item active fw-bold text-black px-1">Data Skripsi</a></li>
+  (<span id="seminarKPCount"></span>)  
+  <span class="px-2">|</span>
+  <li><a href="/skripsi/nilai-keluar" class="px-1">Riwayat Skripsi</a></li>
+  (<span id=""></span>)
+  
 </ol>
 
 <div class="container-fluid">
