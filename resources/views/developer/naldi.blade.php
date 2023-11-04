@@ -25,13 +25,18 @@
  .container{
   padding-top: 200px;
  }
+ /* .card{
+  height: 300px;
+ } */
 
   @media screen and (min-width: 769px){
 
   }
   @media screen and (max-width: 768px){
 
-
+.container{
+  padding-top: 1200px;
+ }
 }
   </style>
 
@@ -45,9 +50,9 @@
     <h1 class="fw-bold mt-5 p-3">Tentang Developer</h1>
     </div>
   <div class="row">
-    <div class="col-4 text-center">
+    <div class="col-lg-4 text-center">
         <div class="mb-5">
-        <img src="/assets/img/Gelap.jpg" alt="" width="100%">
+        <img src="/assets/img/naldi.jpg" alt="" width="100%">
         </div>
 
   <div class="btn-group">
@@ -57,40 +62,40 @@
 </div>
 
 <div class="row mt-5 mb-5">
-  <div class="col-sm-6">
-    <div class="card">
+  <div class="col-lg-6 col-md-2 p-2">
+    <div class="card h-100">
       <div class="card-body">
-        <h5 class="card-title">Pembimbing 1</h5>
+        <h5 class="card-title mb-4">Pembimbing 1</h5>
         <img class="bg-light rounded-circle" src="/assets/img/pakedi.jpg" alt="" width="100%">
-        <h6 class="mt-2">Edi Susilo, S.Pd., M.Kom., M.Eng.</h6>
+        <h6 class="mt-4">Edi Susilo, S.Pd., M.Kom., M.Eng.</h6>
       </div>
     </div>
   </div>
-  <div class="col-sm-6">
-    <div class="card">
+  <div class="col-lg-6 col-md-2 p-2">
+    <div class="card h-100">
       <div class="card-body">
-        <h5 class="card-title">Pembimbing 2</h5>
+        <h5 class="card-title mb-4">Pembimbing 2</h5>
         <img class="bg-light rounded-circle" src="/assets/img/pakanhar.jpg" alt="" width="100%">
-        <h6 class="mt-2">Anhar, S.T., M.T., Ph.D.</h6>
+        <h6 class="mt-4">Anhar, S.T., M.T., Ph.D.</h6>
       </div>
     </div>
   </div>
 </div>
 
     </div>
-    <div class="col-8">
+    <div class="col-lg-8">
         <h3 class="fw-bold">M. Seprinaldi, ST</h3>
-        <h4 class="fw-bold">Full Stack Developer pada Pendaftaran Kerja Praktek dan Skripsi</h4>
+        <h4 class="">Lahir di Kuantan Singingi, 06 September 1999</h4>
+        <h4>seprinaldimuhammad@gmail.com</h4>
+        <!-- <h4>Lahir di Siak, 24 Agustus 2000</h4> -->
+        <hr>
+        <h3 class="fw-bold">Peran</h3>
+        <h4 class="">Full Stack Developer pada Pendaftaran Kerja Praktek dan Skripsi</h4>
         <h4>fahrilhadi@gmail.com</h4>
         <h4>Lahir di Siak, 24 Agustus 2000</h4>
         <hr>
-        <h3 class="fw-bold">Fahril Hadi, ST</h3>
-        <h4 class="fw-bold">Front End Developer Penilaian Seminar Akademik</h4>
-        <h4>fahrilhadi@gmail.com</h4>
-        <h4>Lahir di Siak, 24 Agustus 2000</h4>
-        <hr>
-        <h3 class="fw-bold">Fahril Hadi, ST</h3>
-        <h4 class="fw-bold">Front End Developer Penilaian Seminar Akademik</h4>
+        <h3 class="fw-bold">Keahlian</h3>
+        <h4 class="">Front End Developer Penilaian Seminar Akademik</h4>
         <h4>fahrilhadi@gmail.com</h4>
         <h4>Lahir di Siak, 24 Agustus 2000</h4>
         <hr>
