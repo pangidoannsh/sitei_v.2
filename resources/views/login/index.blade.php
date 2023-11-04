@@ -32,6 +32,9 @@
     border-left: 2px solid green;
     height: 90px;
   }
+  h6 a:hover{
+    color:grey;
+  }
   
   /* .dpn{
     margin-top: -50px ;
@@ -197,6 +200,9 @@
       </div> 
     <div class="mt-5">
       <h6>Dikembangkan oleh Prodi Teknik Informatika</h6>
+      <h6><a class="text-dark" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi</a> & <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti</a></h6>
+      <h6><a class="text-dark" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">M. Seprinaldi</a></h6>
+    
     </div>
   </div>  
 </div>

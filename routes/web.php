@@ -33,6 +33,7 @@ use App\Http\Controllers\PendaftaranSkripsiController;
 //Murdillah
 use App\Http\Controllers\JadwalkanController;
 use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\DeveloperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,10 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);
 Route::get('/detail-sempro/{id}', [QRController::class, 'detailsempro']);
 Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
+
+Route::get('/developer/fahril-hadi', [DeveloperController::class, 'fahril']);
+Route::get('/developer/m-seprinaldi', [DeveloperController::class, 'naldi']);
+Route::get('/developer/rahul-ilsa-tajri-mukhti', [DeveloperController::class, 'rahul']);
 
 Route::group(['middleware' => ['guest:web,dosen,mahasiswa']], function () {
     Route::get('/', [LoginController::class, 'index']);
