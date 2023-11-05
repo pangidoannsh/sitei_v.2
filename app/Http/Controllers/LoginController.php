@@ -15,7 +15,26 @@ class LoginController extends Controller
     public function postlogin(Request $request)
 {
     if (Auth::guard('dosen')->attempt(['nip' => $request->username, 'password' => $request->password])) {
-        return redirect('/kp-skripsi');
+         $user = Auth::guard('dosen')->user();
+        if ($user->role_id == 5) {
+            return redirect('/kp-skripsi');
+        }elseif ($user->role_id == 6) {
+            return redirect('/kp-skripsi');
+        }elseif ($user->role_id == 7) {
+            return redirect('/kp-skripsi');
+        }elseif ($user->role_id == 8) {
+            return redirect('/kp-skripsi');
+        }elseif ($user->role_id == 9) {
+            return redirect('/kp-skripsi');
+        }elseif ($user->role_id == 10) {
+            return redirect('/kp-skripsi');
+        }elseif ($user->role_id == 11) {
+            return redirect('/kp-skripsi');
+        }
+         else {
+            return redirect('/persetujuan/admin/index');
+        }
+        
     } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
         $user = Auth::guard('web')->user();
         if ($user->role_id == 1) {
