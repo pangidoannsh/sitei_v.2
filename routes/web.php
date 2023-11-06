@@ -345,8 +345,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'updatepswdsn']);
     
 
-    Route::get('/kp-skripsi/seminar', [PenilaianController::class, 'indexkp']);
-    Route::get('/kp-skripsi/penilaian-skripsi', [PenilaianController::class, 'indexskripsi']);
+    Route::get('/kp-skripsi/seminar', [PenilaianController::class, 'index']);
+    Route::get('/kp-skripsi/seminar-pembimbing-penguji', [PenilaianController::class, 'indexpembimbing']);
     Route::get('/kp-skripsi/riwayat-penilaian-seminar', [PenilaianController::class, 'riwayatkp']);
     Route::get('/kp-skripsi/riwayat-penilaian-skripsi', [PenilaianController::class, 'riwayatskripsi']);
 

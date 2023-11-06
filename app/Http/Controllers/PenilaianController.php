@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PenilaianController extends Controller
 {
-    public function indexkp()
+    public function index()
     {        
         
         // $dosen = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
@@ -153,7 +153,7 @@ class PenilaianController extends Controller
 
     }
 
-    public function indexskripsi()
+    public function indexpembimbing()
     {        
         
         $dosen = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
@@ -171,7 +171,7 @@ class PenilaianController extends Controller
         // $dosenss = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->
         // orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
 
-        return view('penilaian.index-skripsi', [
+        return view('penilaian.index-pembimbing', [
             'penjadwalan_sempros' => $dosen,
             'penjadwalan_skripsis' => $dosens,
             // 'penjadwalan_kps' => $dosenss,

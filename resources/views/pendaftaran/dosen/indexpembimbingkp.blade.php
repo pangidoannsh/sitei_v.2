@@ -20,42 +20,21 @@ Daftar Bimbingan Kerja Praktek
 </div>
 @endif
 
-
-
-
 <div class="container card p-4">
 
 <ol class="breadcrumb col-lg-12">
- 
-  <li><a href="/kp-skripsi/persetujuan-kp" class="px-1">Persetujuan</a></li>
-  (<span id="waitingApprovalCount"></span>)
-  <span class="px-2">|</span>      
-  <li><a href="/kp-skripsi/penilaian-kp" class="px-1">Seminar</a></li>
-  (<span id="seminarKPCount"></span>)  
-  <span class="px-2">|</span>
-  <li><a href="/kp-skripsi/riwayat-penilaian-kp" class="px-1">Riwayat Seminar</a></li>
-  (<span id=""></span>)
+     
+  <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span id="seminarKPCount"></span>) </a></li>
+   
+
   <span class="px-2">|</span>
 
-  @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-
-          <li><a href="/kerja-praktek" class="px-1">Data KP</a></li>
-          (<span id="prodiKPCount"></span>)
+          <li><a href="/pembimbing/kerja-praktek" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan KP (<span id="bimbinganKPCount"></span>)</a></li>
+          
           <span class="px-2">|</span>
-          <li><a href="/kerja-praktek/nilai-keluar" class="px-1">Riwayat KP</a></li>
-          (<span id=""></span>)
+          <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
           <span class="px-2">|</span>
-  
-
-  @endif
-@endif
-
-          <li><a href="/pembimbing/kerja-praktek" class="breadcrumb-item active fw-bold text-black px-1">Bimbingan KP</a></li>
-          (<span id="bimbinganKPCount"></span>)
-          <span class="px-2">|</span>
-          <li><a href="/kerja-praktek/pembimbing/nilai-keluar" class="px-1">Riwayat Bimbingan KP</a></li>
-          (<span id=""></span>)
+          <li><a href="/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
 
 </ol>
 

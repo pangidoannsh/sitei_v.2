@@ -250,7 +250,7 @@
 
 </div>
   <div class="col-12 col-md-6 utama utama-skripsi">
- <a href="/kp-skripsi/persetujuan-skripsi"><div class="card kpindex">
+ <a href="/kp-skripsi/seminar-pembimbing-penguji"><div class="card kpindex">
       <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
   <div class="card-body">
   
@@ -278,7 +278,7 @@
 
 </div>
   <div class="col-12 col-md-6 utama utama-skripsi">
- <a href="/kp-skripsi/persetujuan-skripsi"><div class="card kpindex">
+ <a href="/kp-skripsi/seminar-pembimbing-penguji"><div class="card kpindex">
       <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
   <div class="card-body">
   
@@ -296,7 +296,7 @@
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
    <div class="col-12 col-md-6 utama ">
-   <a href="/kp-skripsi/persetujuan-kp"><div class="card kpindex">
+   <a href="/kp-skripsi/seminar"><div class="card kpindex">
       <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
   <div class="card-body">
     <div class="row">
@@ -307,7 +307,7 @@
 
 </div>
   <div class="col-12 col-md-6 utama utama-skripsi">
- <a href="/kp-skripsi/persetujuan-skripsi"><div class="card kpindex">
+ <a href="/kp-skripsi/seminar-pembimbing-penguji"><div class="card kpindex">
       <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
   <div class="card-body">
   

@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Data Program Studi
+    Jadwal Seminar
 @endsection
 
 @section('content')
@@ -29,30 +29,20 @@
 <ol class="breadcrumb col-lg-12">
 
   <li><a href="/kp-skripsi/seminar" class="breadcrumb-item active fw-bold text-success px-1">Seminar  (<span id="waitingApprovalCount"></span>) </a></li>
-  
-  <!-- <span class="px-2">|</span>
-  <li><a href="/kp-skripsi/riwayat-penilaian-kp" class="px-1">Riwayat Seminar</a></li>
-  (<span id=""></span>)
-  <span class="px-2">|</span> -->
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
         @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
         <span class="px-2">|</span>
-        <li><a href="/kerja-praktek" class="px-1">Data KP Prodi (<span id="prodiKPCount"></span>)</a></li>
+        <li><a href="/kerja-praktek" class="px-1">Kerja Praktek (<span id="prodiKPCount"></span>)</a></li>
         
         <span class="px-2">|</span>
-        <li><a href="/skripsi" class="px-1">Data Skripsi Prodi (<span id=""></span>)</a></li>
-        
-        <span class="px-2">|</span>
+        <li><a href="/skripsi" class="px-1">Skripsi (<span id=""></span>)</a></li>
 
       @endif
   @endif
-
-        <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP</a></li>
-        (<span id="bimbinganKPCount"></span>)
         <span class="px-2">|</span>
-        <li><a href="/kerja-praktek/pembimbing/nilai-keluar" class="px-1">Riwayat Bimbingan KP</a></li>
-        (<span id=""></span>)
+        <li><a href="/riwayat" class="px-1">Riwayat (<span id="bimbinganKPCount"></span>)</a></li>
+        
   
 </ol>
 
