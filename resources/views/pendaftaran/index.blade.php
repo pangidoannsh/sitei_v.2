@@ -228,7 +228,6 @@
 <div class="col-sm-12 mt-3 mt-md-0 "><p class="card-title text-secondary text-sm" >Keterangan</p>
     <p class="card-text text-start text-dark" ><span>{{$pendaftaran_skripsi->keterangan}}</span></p></div>    
 </div>
-
 </div>
 </div>
 
@@ -240,11 +239,11 @@
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 @if (Auth::guard('dosen')->user()->role_id == 5 )
    <div class="col-12 col-md-6 utama ">
-   <a href="/kp-skripsi/persetujuan-kp"><div class="card kpindex">
+   <a href="/kp-skripsi/seminar"><div class="card kpindex">
       <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
   <div class="card-body">
     <div class="row">
-    <div class="col-sm-5 col-md-6"><h1><p class=" fs-3  text-bold text-dark" >KETUA JURUSAN</p></h1></a></div>
+   <h1><p class=" fs-4 text-bold text-dark" >KETUA JURUSAN</p></h1></a>
   </div>
   </div>
 </div>
@@ -256,7 +255,7 @@
   <div class="card-body">
   
     <div class="row">
-    <div class="col-sm-5 col-md-6 "><h1><p class=" fs-3 text-bold text-dark" >PEMBIMBING/PENGUJI</p></h1></a></div>
+   <h1><p class=" fs-4 text-bold text-dark" >PEMBIMBING/PENGUJI</p></h1></a>
 
   </div>
   </div>
@@ -268,7 +267,7 @@
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
    <div class="col-12 col-md-6 utama ">
-   <a href="/kp-skripsi/persetujuan-kp"><div class="card kpindex">
+   <a href="/kp-skripsi/seminar"><div class="card kpindex">
       <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
   <div class="card-body">
     <div class="row">

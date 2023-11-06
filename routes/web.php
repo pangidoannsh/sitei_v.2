@@ -252,7 +252,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/skripsi/pembimbing/nilai-keluar', [PendaftaranController::class, 'lulus_pembimbing']);
 
     Route::get('/skripsi', [PendaftaranController::class, 'pendaftaran_skripsi']);
-    Route::get('/kp-skripsi/persetujuan-kp', [PendaftaranController::class, 'persetujuankp_dosen']);
+    Route::get('/persetujuan-kp-skripsi', [PendaftaranController::class, 'persetujuankpskripsi_dosen']);
     Route::get('/kp-skripsi/persetujuan-skripsi', [PendaftaranController::class, 'persetujuanskripsi_dosen']);
     // Route::get('/kp-skripsi/persetujuan/usulankp/{id}', [PendaftaranKPController::class, 'detailpersetujuan_usulankp']);
     Route::get('/kp-skripsi/persetujuan/suratperusahaan/{id}', [PendaftaranKPController::class, 'detailpersetujuan_balasankp']);
@@ -345,9 +345,9 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'updatepswdsn']);
     
 
-    Route::get('/kp-skripsi/penilaian-kp', [PenilaianController::class, 'indexkp']);
+    Route::get('/kp-skripsi/seminar', [PenilaianController::class, 'indexkp']);
     Route::get('/kp-skripsi/penilaian-skripsi', [PenilaianController::class, 'indexskripsi']);
-    Route::get('/kp-skripsi/riwayat-penilaian-kp', [PenilaianController::class, 'riwayatkp']);
+    Route::get('/kp-skripsi/riwayat-penilaian-seminar', [PenilaianController::class, 'riwayatkp']);
     Route::get('/kp-skripsi/riwayat-penilaian-skripsi', [PenilaianController::class, 'riwayatskripsi']);
 
     Route::get('/penilaian-kp', [PenilaianKPController::class, 'index']);

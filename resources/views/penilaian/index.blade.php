@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Jadwal Seminar Kerja Praktek
+    Data Program Studi
 @endsection
 
 @section('content')
@@ -24,66 +24,25 @@
       </div>
 @endif
 <div class="container card  p-4">
-{{-- <ol class="breadcrumb col-lg-12" >
- 
-<div class="btn-group menu-dosen scrollable-btn-group col-md-12">
 
-   <a href="/kp-skripsi/persetujuan-kp" class="btn bg-light border  border-bottom-0 "   style="border-top-left-radius: 15px;" >Persetujuan KP (<strong id="persetujuanKPCount"></strong>)</a>
-<a href="/kp-skripsi/penilaian-kp"  class="btn btn-outline-success border  border-bottom-0 active" >
-  <span class="button-text">Seminar KP (<strong id="waitingApprovalCount"></strong>)</span>
-  <span class="badge-link">
-    <a href="/kp-skripsi/riwayat-penilaian-kp" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Seminar"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
-  @if (Str::length(Auth::guard('dosen')->user()) > 0)
-         @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-  <a href="/kerja-praktek"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Data KP (<strong id="prodiKPCount"></strong>)</span>
-  <span class="badge-link">
-    <a href="/kerja-praktek/nilai-keluar" class="sejarah pt-2 bg-light "> <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
-  @endif
-@endif
-
-<a href="/pembimbing/kerja-praktek"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Bimbingan KP (<strong id="bimbinganKPCount"></strong>)</span>
-  <span class="badge-link" >
-    <a href="/kerja-praktek/pembimbing/nilai-keluar" class="sejarah pt-2  bg-light " style="border-top-right-radius: 15px;">
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
-
-</div>
-</ol> --}}
-
-<!-- <ol class="breadcrumb col-lg-12">
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/kp-skripsi/penilaian-kp">Jadwal Seminar</a></li>      
-  <li class="breadcrumb-item"><a href="/kp-skripsi/riwayat-penilaian-kp">Riwayat Penilaian</a></li>  
-</ol> -->
 
 <ol class="breadcrumb col-lg-12">
-  <li><a href="/kp-skripsi/persetujuan-kp" class="px-1">Persetujuan</a></li>
-  (<span id="waitingApprovalCount"></span>)
-  <span class="px-2">|</span>      
-  <li><a href="/kp-skripsi/penilaian-kp" class="breadcrumb-item active fw-bold text-black px-1">Seminar</a></li>
-  (<span id="seminarKPCount"></span>)  
-  <span class="px-2">|</span>
+
+  <li><a href="/kp-skripsi/seminar" class="breadcrumb-item active fw-bold text-success px-1">Seminar  (<span id="waitingApprovalCount"></span>) </a></li>
+  
+  <!-- <span class="px-2">|</span>
   <li><a href="/kp-skripsi/riwayat-penilaian-kp" class="px-1">Riwayat Seminar</a></li>
   (<span id=""></span>)
-  <span class="px-2">|</span>
+  <span class="px-2">|</span> -->
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
         @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-
-        <li><a href="/kerja-praktek" class="px-1">Data KP</a></li>
-        (<span id="prodiKPCount"></span>)
         <span class="px-2">|</span>
-        <li><a href="/kerja-praktek/nilai-keluar" class="px-1">Riwayat KP</a></li>
-        (<span id=""></span>)
+        <li><a href="/kerja-praktek" class="px-1">Data KP Prodi (<span id="prodiKPCount"></span>)</a></li>
+        
+        <span class="px-2">|</span>
+        <li><a href="/skripsi" class="px-1">Data Skripsi Prodi (<span id=""></span>)</a></li>
+        
         <span class="px-2">|</span>
 
       @endif

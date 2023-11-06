@@ -19,20 +19,20 @@ class LoginController extends Controller
         if ($user->role_id == 5) {
             return redirect('/kp-skripsi');
         }elseif ($user->role_id == 6) {
-            return redirect('/kp-skripsi');
+            return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 7) {
-            return redirect('/kp-skripsi');
+            return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 8) {
-            return redirect('/kp-skripsi');
+            return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 9) {
-            return redirect('/kp-skripsi');
+            return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 10) {
-            return redirect('/kp-skripsi');
+            return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 11) {
-            return redirect('/kp-skripsi');
+            return redirect('persetujuan-kp-skripsi');
         }
          else {
-            return redirect('/persetujuan/admin/index');
+            return redirect('/kp-skripsi/seminar');
         }
         
     } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {

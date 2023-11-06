@@ -20,9 +20,13 @@
 </div>
 @endif
 
+<div class="container card p-4">
 <ol class="breadcrumb col-lg-12">
-  <li class="breadcrumb-item"><a class="breadcrumb-item active" href="/persetujuan-koordinator">Persetujuan</a></li>
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/riwayat-koordinator">Riwayat Persetujuan</a></li>  
+  <li class="breadcrumb-item"><a class="breadcrumb-item" href="/persetujuan-kp-skripsi">Persetujuan KP & Skripsi</a></li>
+  <span class="px-2">|</span>
+  <li class="breadcrumb-item"><a class="breadcrumb-item" href="/persetujuan-koordinator">Persetujuan Seminar</a></li>
+  <span class="px-2">|</span>
+  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-success" href="/riwayat-koordinator">Riwayat Persetujuan</a></li>  
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
@@ -68,6 +72,8 @@
     
   </tbody>
 </table>
+
+</div>
     
 @endsection
 

@@ -67,7 +67,7 @@
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/persetujuan-koordinator">Persetujuan</a>
+            <a class="nav-link {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-koordinator*') ? 'text-success' : '' }}{{Request::is ('riwayat-koordinator*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
           </li>
           @endif
           @endif
@@ -75,7 +75,7 @@
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/persetujuan-kaprodi">Persetujuan</a>
+            <a class="nav-link {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-kaprodi*') ? 'text-success' : '' }} {{Request::is ('riwayat-kaprodi*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
           </li>
           @endif
           @endif
