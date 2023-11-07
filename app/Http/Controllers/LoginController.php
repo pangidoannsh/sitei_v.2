@@ -32,7 +32,7 @@ class LoginController extends Controller
             return redirect('persetujuan-kp-skripsi');
         }
          else {
-            return redirect('/kp-skripsi/seminar');
+            return redirect('/kp-skripsi/seminar-pembimbing-penguji');
         }
         
     } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {

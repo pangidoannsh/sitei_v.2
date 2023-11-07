@@ -34,7 +34,7 @@ Daftar Bimbingan Kerja Praktek
           <span class="px-2">|</span>
           <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
           <span class="px-2">|</span>
-          <li><a href="/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
+          <li><a href="/kp-skripsi/pembimbing-penguji/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
 
 </ol>
 

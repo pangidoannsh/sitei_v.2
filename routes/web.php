@@ -253,8 +253,9 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/kerja-praktek', [PendaftaranController::class, 'pendaftaran_kp']);
 
 
-    Route::get('/kerja-praktek/pembimbing/nilai-keluar', [PendaftaranController::class, 'nilai_keluar_pembimbing']);
-    Route::get('/skripsi/pembimbing/nilai-keluar', [PendaftaranController::class, 'lulus_pembimbing']);
+    Route::get('/kp-skripsi/pembimbing-penguji/riwayat', [PendaftaranController::class, 'riwayat_pembimbing_penguji']);
+
+    Route::get('/kp-skripsi/prodi/riwayat', [PendaftaranController::class, 'riwayat_prodi']);
 
     Route::get('/skripsi', [PendaftaranController::class, 'pendaftaran_skripsi']);
     Route::get('/persetujuan-kp-skripsi', [PendaftaranController::class, 'persetujuankpskripsi_dosen']);

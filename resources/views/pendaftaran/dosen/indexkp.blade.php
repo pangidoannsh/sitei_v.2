@@ -40,7 +40,7 @@
       @endif
   @endif
         <span class="px-2">|</span>
-        <li><a href="/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
+        <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
         
   
 </ol>

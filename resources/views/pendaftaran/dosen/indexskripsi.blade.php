@@ -23,22 +23,22 @@ Data Skripsi Mahasiswa
 <div class="container card p-4">
 
 <ol class="breadcrumb col-lg-12">   
-<li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span id="seminarKPCount"></span>)</a></li> 
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-
+<li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span id="seminarKPCount"></span>)</a></li> 
         <span class="px-2">|</span>
         <li><a href="/kerja-praktek" class=" px-1">Kerja Praktek (<span id="prodiKPCount"></span>)</a></li>
         
         <span class="px-2">|</span>
         <li><a href="/skripsi" class="breadcrumb-item active fw-bold text-success px-1">Skripsi (<span id="waitingApprovalCount"></span>)</a></li>
         
-      @endif
-  @endif
+
 
        <span class="px-2">|</span>
-        <li><a href="/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
+        <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
+              @endif
+  @endif
   
 </ol>
 

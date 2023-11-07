@@ -37,7 +37,7 @@
         
         <span class="px-2">|</span>
 
-        <li><a href="/riwayat-pembimbing-penguji" class="px-1">Riwayat</a></li>
+        <li><a href="/kp-skripsi/pembimbing-penguji/riwayat" class="px-1">Riwayat</a></li>
         (<span id="bimbinganKPCount"></span>)
   
 </ol>
