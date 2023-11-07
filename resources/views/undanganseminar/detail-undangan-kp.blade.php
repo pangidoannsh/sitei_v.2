@@ -44,24 +44,11 @@
                             <div class="card-title">Pengecekan QR CODE SITEI</div>
                             Nama Mahasiswa : <strong>{{$penjadwalan->mahasiswa->nama}}</strong><br>
                             Nomor Induk Mahasiswa : <strong>{{$penjadwalan->mahasiswa->nim}}</strong><br>
-                            <span style="margin-top:10px; display: inline-block;">Judul Skripsi  :</span> <br>
-                             <strong style="max-width: 450px; margin-bottom:10px; display: inline-block;">{{$penjadwalan->judul_skripsi }}</strong><br>
-                            Pembimbing 1 : <strong>{{$penjadwalan->pembimbingsatu->nama}}</strong><br>
-                            Pembimbing 2 :
-                            @if ($penjadwalan->pembimbingdua_nip != null) 
-                            <strong>{{$penjadwalan->pembimbingdua->nama}}</strong><br>
-                            @else
-                            <strong>-</strong><br>
-                            @endif
-                            Penguji 1 : <strong>{{$penjadwalan->pengujisatu->nama}}</strong><br>
-                            Penguji 2 : <strong>{{$penjadwalan->pengujidua->nama}}</strong><br>
-                            Penguji 3 :
-                            @if ($penjadwalan->pengujitiga_nip != null) 
-                            <strong>{{$penjadwalan->pengujitiga->nama}}</strong><br>
-                            @else
-                            <strong>-</strong><br>
-                            @endif
-                            Seminar : <strong>Sidang Skripsi</strong><br>
+                            <span style="margin-top:10px; display: inline-block;">Judul Laporan  :</span> <br>
+                             <strong style="max-width: 450px; margin-bottom:10px; display: inline-block;">{{$penjadwalan->judul_kp }}</strong><br>
+                            Pembimbing : <strong>{{$penjadwalan->pembimbing->nama}}</strong><br>
+                            Penguji : <strong>{{$penjadwalan->penguji->nama}}</strong><br>
+                            Seminar : <strong>Seminar KP</strong><br>
                             Hari/Tanggal Seminar : <strong>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}</strong><br>
                             Pukul : <strong>{{$penjadwalan->waktu}}</strong><br>
                              Tempat : <strong>{{$penjadwalan->lokasi}}</strong><br>

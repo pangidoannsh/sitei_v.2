@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>STI-4 Undangan Seminar Kerja Praktek</title>
+    <title>KPTI-6 Undangan Seminar Kerja Praktek</title>
     @php
         use Carbon\Carbon;
         use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -351,7 +351,7 @@
         <tr>
             <td width="27%">Lampiran</td>
             <td>:</td>
-            <td width="70%">Nama Mahasiswa yang akan mengikuti Seminar Proposal Skripsi</td>
+            <td width="70%">Peserta Seminar Kerja Praktek Program Studi Teknik Informatika</td>
         </tr>
 
         <tr>

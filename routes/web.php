@@ -55,9 +55,9 @@ Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);
 Route::get('/detail-sempro/{id}', [QRController::class, 'detailsempro']);
 Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
 
-Route::get('/detail-undangan-kp/{id}', [QRController::class, 'detail_kp_skripsi']);
-Route::get('/detail-undangan-sempro/{id}', [QRController::class, 'detail_sempro_skripsi']);
-Route::get('/detail-undangan-sidang/{id}', [QRController::class, 'detail_sidang_skripsi']);
+Route::get('/detail-undangan-kp/{id}', [QRController::class, 'detail_undangan_kp']);
+Route::get('/detail-undangan-sempro/{id}', [QRController::class, 'detail_undangan_sempro']);
+Route::get('/detail-undangan-sidang/{id}', [QRController::class, 'detail_undangan_sidang']);
 
 Route::get('/developer/fahril-hadi', [DeveloperController::class, 'fahril']);
 Route::get('/developer/m-seprinaldi', [DeveloperController::class, 'naldi']);

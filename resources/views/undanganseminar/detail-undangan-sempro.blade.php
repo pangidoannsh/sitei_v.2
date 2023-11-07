@@ -44,8 +44,8 @@
                             <div class="card-title">Pengecekan QR CODE SITEI</div>
                             Nama Mahasiswa : <strong>{{$penjadwalan->mahasiswa->nama}}</strong><br>
                             Nomor Induk Mahasiswa : <strong>{{$penjadwalan->mahasiswa->nim}}</strong><br>
-                            <span style="margin-top:10px; display: inline-block;">Judul Skripsi  :</span> <br>
-                             <strong style="max-width: 450px; margin-bottom:10px; display: inline-block;">{{$penjadwalan->judul_skripsi }}</strong><br>
+                            <span style="margin-top:10px; display: inline-block;">Judul Proposal Skripsi  :</span> <br>
+                             <strong style="max-width: 450px; margin-bottom:10px; display: inline-block;">{{$penjadwalan->judul_proposal }}</strong><br>
                             Pembimbing 1 : <strong>{{$penjadwalan->pembimbingsatu->nama}}</strong><br>
                             Pembimbing 2 :
                             @if ($penjadwalan->pembimbingdua_nip != null) 
@@ -61,7 +61,7 @@
                             @else
                             <strong>-</strong><br>
                             @endif
-                            Seminar : <strong>Sidang Skripsi</strong><br>
+                            Seminar : <strong>Seminar Proposal</strong><br>
                             Hari/Tanggal Seminar : <strong>{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}</strong><br>
                             Pukul : <strong>{{$penjadwalan->waktu}}</strong><br>
                              Tempat : <strong>{{$penjadwalan->lokasi}}</strong><br>
