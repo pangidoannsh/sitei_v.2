@@ -389,6 +389,8 @@ class PenjadwalanSkripsiController extends Controller
         return $pdf->stream('STI/TE-14 Form Nilai Penguji Sidang Skripsi.pdf', array("Attachment" => false)); 
     }
 
+
+    //PERBAIKAN
     public function perbaikan($id)
     {   
         $id = Crypt::decryptString($id);

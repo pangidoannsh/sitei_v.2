@@ -87,7 +87,9 @@
             @endif
           @else
             <a href="/penilaian-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
-          @endif              
+          @endif      
+          
+          
         </td>                                
       </tr>               
     @endforeach

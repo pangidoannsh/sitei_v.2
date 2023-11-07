@@ -152,7 +152,7 @@
                     dateFormat: "yy-mm-dd",
                     beforeShowDay: function (tanggal) {
                     var day = tanggal.getDay();
-                    return [day != 0 && day != 1 && day != 3 && day != 5 && day != 6];
+                    return [day != 0 ];
                 }
                 });
                 </script>
@@ -214,7 +214,6 @@
                 </div>
                 @enderror
         </div>
-        
         <div class="mb-3 field">
             <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
             <select type="text" name="lokasi" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>

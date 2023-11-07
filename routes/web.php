@@ -34,6 +34,7 @@ use App\Http\Controllers\PendaftaranSkripsiController;
 use App\Http\Controllers\JadwalkanController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\UndanganSeminarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,10 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);
 Route::get('/detail-sempro/{id}', [QRController::class, 'detailsempro']);
 Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
+
+Route::get('/detail-undangan-kp/{id}', [QRController::class, 'detail_kp_skripsi']);
+Route::get('/detail-undangan-sempro/{id}', [QRController::class, 'detail_sempro_skripsi']);
+Route::get('/detail-undangan-sidang/{id}', [QRController::class, 'detail_sidang_skripsi']);
 
 Route::get('/developer/fahril-hadi', [DeveloperController::class, 'fahril']);
 Route::get('/developer/m-seprinaldi', [DeveloperController::class, 'naldi']);
@@ -362,6 +367,10 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/riwayat-penilaian-kp', [PenilaianKPController::class, 'riwayat']);
     Route::get('/nilai-kp/{id}', [PenjadwalanKPController::class, 'nilaikp']);
     Route::get('/perbaikan-kp/{id}', [PenjadwalanKPController::class, 'perbaikan']);
+
+    Route::get('/undangan-kp/{id}', [UndanganSeminarController::class, 'undangan_kp']);
+    Route::get('/undangan-sempro/{id}', [UndanganSeminarController::class, 'undangan_sempro']);
+    Route::get('/undangan-sidang/{id}', [UndanganSeminarController::class, 'undangan_sidang']);
 
     Route::get('/penilaian-sempro', [PenilaianSemproController::class, 'index']);
     Route::get('/penilaian-sempro/create/{penjadwalan_sempro:id}', [PenilaianSemproController::class, 'create']);

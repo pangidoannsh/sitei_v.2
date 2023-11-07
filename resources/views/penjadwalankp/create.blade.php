@@ -131,7 +131,7 @@
                     dateFormat: "yy-mm-dd",
                     beforeShowDay: function (tanggal) {
                     var day = tanggal.getDay();
-                    return [day != 0 && day != 1 && day != 3 && day != 5 && day != 6];
+                    return [day != 0];
                 }
                 });
                 </script>

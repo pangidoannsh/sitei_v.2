@@ -58,6 +58,38 @@
     </tr>
   </thead>
   <tbody> 
+
+      @foreach ($penjadwalan_kps as $kp)    
+      <tr>                 
+        <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
+        <td class="text-center">{{$kp->mahasiswa->nama}}</td>                    
+        <td class="bg-primary text-center">{{$kp->jenis_seminar}}</td>                     
+        <td class="text-center">{{$kp->prodi->nama_prodi}}</td>          
+        <td class="text-center">{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+        <td class="text-center">{{$kp->waktu}}</td>                   
+        <td class="text-center">{{$kp->lokasi}}</td>             
+        <td class="text-center">
+          <p>{{$kp->pembimbing->nama_singkat}}</p>           
+        </td>         
+        <td class="text-center">
+          <p>{{$kp->penguji->nama_singkat}}</p>           
+        </td>
+        <td class="text-center">
+          @if ($kp->penilaian(Auth::user()->nip, $kp->id) == false)
+            @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
+            <a href="/penilaian-kp/create/{{Crypt::encryptString($kp->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
+            @else
+            <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+            <a formtarget="_blank" target="_blank" href="/undangan-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
+            @endif
+          @else
+            <a href="/penilaian-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
+          @endif      
+          
+          
+        </td>                                
+      </tr>               
+    @endforeach
     
 
     @foreach ($penjadwalan_sempros as $sempro)    
@@ -88,6 +120,7 @@
               <a href="/penilaian-sempro/create/{{Crypt::encryptString($sempro->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+              <a formtarget="_blank" target="_blank" href="/undangan-sempro/{{Crypt::encryptString($sempro->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
               @endif
             @else
               <a href="/penilaian-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
@@ -124,10 +157,12 @@
               <a href="/penilaian-skripsi/create/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+              <a formtarget="_blank" target="_blank" href="/undangan-sidang/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
               @endif
             @else
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
-            @endif              
+            @endif    
+
           </td>                        
         </tr>               
     @endforeach

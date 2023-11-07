@@ -121,4 +121,98 @@ class QRController extends Controller
             ]);
         }
     }
+    
+    
+    public function detail_sidang_skripsi($id)
+    {        
+        $penjadwalan = PenjadwalanSkripsi::find($id);
+        $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
+
+        $nilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
+
+        $nilaipenguji2 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujidua_nip)->first();
+
+        $nilaipenguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujitiga_nip)->first();
+
+        if ($pembimbing->count() > 1) {
+            $pembimbingnilai = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
+        } else {
+            $pembimbingnilai = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan->id)->first();
+        }
+
+        $nilaipembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingsatu_nip)->first();
+
+        if ($penjadwalan->pembimbingdua_nip == null) {
+            return view('penjadwalanskripsi.detaildata-skripsi', [
+                'pembimbing' => $pembimbing,
+                'pembimbingnilai' => $pembimbingnilai,
+                'penjadwalan' => $penjadwalan,
+                'nilaipenguji1' => $nilaipenguji1,
+                'nilaipenguji2' => $nilaipenguji2,
+                'nilaipenguji3' => $nilaipenguji3,
+                'nilaipembimbing1' => $nilaipembimbing1,
+            ]);
+        } else {
+            $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
+
+            return view('penjadwalanskripsi.detaildata-skripsi', [
+                'pembimbing' => $pembimbing,
+                'pembimbingnilai' => $pembimbingnilai,
+                'penjadwalan' => $penjadwalan,
+                'nilaipenguji1' => $nilaipenguji1,
+                'nilaipenguji2' => $nilaipenguji2,
+                'nilaipenguji3' => $nilaipenguji3,
+                'nilaipembimbing1' => $nilaipembimbing1,
+                'nilaipembimbing2' => $nilaipembimbing2,
+            ]);
+        }
+    }
+   
+   
+//    DETAIL UNDANGAN SIDANG
+   
+    public function detail_undangan_sidang($id)
+    {        
+        $penjadwalan = PenjadwalanSkripsi::find($id);
+        $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
+
+        $nilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
+
+        $nilaipenguji2 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujidua_nip)->first();
+
+        $nilaipenguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujitiga_nip)->first();
+
+        if ($pembimbing->count() > 1) {
+            $pembimbingnilai = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
+        } else {
+            $pembimbingnilai = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan->id)->first();
+        }
+
+        $nilaipembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingsatu_nip)->first();
+
+        if ($penjadwalan->pembimbingdua_nip == null) {
+            return view('penjadwalanskripsi.detaildata-skripsi', [
+                'pembimbing' => $pembimbing,
+                'pembimbingnilai' => $pembimbingnilai,
+                'penjadwalan' => $penjadwalan,
+                'nilaipenguji1' => $nilaipenguji1,
+                'nilaipenguji2' => $nilaipenguji2,
+                'nilaipenguji3' => $nilaipenguji3,
+                'nilaipembimbing1' => $nilaipembimbing1,
+            ]);
+        } else {
+            $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
+
+            return view('penjadwalanskripsi.detaildata-skripsi', [
+                'pembimbing' => $pembimbing,
+                'pembimbingnilai' => $pembimbingnilai,
+                'penjadwalan' => $penjadwalan,
+                'nilaipenguji1' => $nilaipenguji1,
+                'nilaipenguji2' => $nilaipenguji2,
+                'nilaipenguji3' => $nilaipenguji3,
+                'nilaipembimbing1' => $nilaipembimbing1,
+                'nilaipembimbing2' => $nilaipembimbing2,
+            ]);
+        }
+    }
 }
