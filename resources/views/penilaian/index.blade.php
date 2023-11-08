@@ -43,6 +43,8 @@
         
         @endif
   @endif
+
+
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
@@ -122,7 +124,6 @@
               <a href="/penilaian-sempro/create/{{Crypt::encryptString($sempro->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
-              <a formtarget="_blank" target="_blank" href="/undangan-sempro/{{Crypt::encryptString($sempro->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
               @endif
             @else
               <a href="/penilaian-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
@@ -159,7 +160,6 @@
               <a href="/penilaian-skripsi/create/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
-              <a formtarget="_blank" target="_blank" href="/undangan-sidang/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
               @endif
             @else
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              

@@ -40,11 +40,32 @@
               @endif
   @endif
 
+        @if (Str::length(Auth::guard('web')->user()) > 0)
+    @if (Auth::guard('web')->user()->role_id == 1 || Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+
+
+    @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+    <li><a href="/persetujuan/admin/index" class="breadcrumb-item active fw-bold text-black px-1">Persetujuan</a></li>
+    (<span id="waitingApprovalCount"></span>)
+    <span class="px-2">|</span> 
+    @endif
+    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP</a></li>
+    (<span id="seminarKPCount"></span>)  
+    <span class="px-2">|</span>
+    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi</a></li>
+    (<span id="seminarKPCount"></span>)  
+    <span class="px-2">|</span>
+    <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat</a></li>
+    (<span id=""></span>)
+    
+    @endif
+    @endif
+
 </ol>
 
 <div class="container-fluid">
 
-<div class="p-2 rounded">
+<div class="pt-2 pl-2  mb-2 bg-light rounded">
             <h5 class="">Riwayat KP dan Skripsi </h5>
             <hr>
             </div>
@@ -118,7 +139,7 @@
 </table>
 <hr class="pt-1 mt-2 bg-dark">
 
-<div class="p-2 rounded mt-4">
+<div class="pt-2 pl-2 mb-2 bg light rounded mt-4">
             <h5 class="">Riwayat Seminar</h5>
             <hr>
             </div>

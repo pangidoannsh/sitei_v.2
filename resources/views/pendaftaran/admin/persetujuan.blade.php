@@ -21,56 +21,25 @@
 @endif
 
 <div class="container card p-4">
-{{-- <ol class="breadcrumb col-lg-12">
- 
-<div class="btn-group menu-dosen scrollable-btn-group col-lg-12">
-@if (Str::length(Auth::guard('web')->user()) > 0)
- @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-  <a href="/persetujuan/admin/index" class="btn btn-outline-success  border  border-bottom-0  active" style="border-top-left-radius: 15px;">Persetujuan</a>
-@endif
-@endif
-    <a href="/kerja-praktek/admin/index"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Kerja Praktek</span>
-  <span class="badge-link">
-    <a href="/kerja-praktek/nilai-keluar" class="sejarah pt-2 bg-light ">  
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat KP"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
-    <a href="/sidang/admin/index"  class="btn bg-light border  border-bottom-0 " >
-  <span class="button-text">Skripsi</span>
-  <span class="badge-link">
-    <a href="/skripsi/nilai-keluar" class="sejarah pt-2 bg-light " style="border-top-right-radius: 15px;">  
-      <span class="p-1" data-bs-toggle="tooltip" title="Riwayat Skripsi"><i class="fas fa-history"></i></i></span>
-    </a>
-  </span>
-</a>
-
-</div>
-
-</ol> --}}
 
 <ol class="breadcrumb col-lg-12">
 
     @if (Str::length(Auth::guard('web')->user()) > 0)
     @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-    <li><a href="/persetujuan/admin/index" class="breadcrumb-item active fw-bold text-black px-1">Persetujuan</a></li>
+    <li><a href="/persetujuan/admin/index" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan</a></li>
     (<span id="waitingApprovalCount"></span>)
     <span class="px-2">|</span> 
-    @endif
-    @endif
     <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP</a></li>
     (<span id="seminarKPCount"></span>)  
-    <span class="px-2">|</span>
-    <li><a href="/kerja-praktek/nilai-keluar" class="px-1">Riwayat KP</a></li>
-    (<span id=""></span>)
     <span class="px-2">|</span>
     <li><a href="/sidang/admin/index" class="px-1">Data Skripsi</a></li>
     (<span id="seminarKPCount"></span>)  
     <span class="px-2">|</span>
-    <li><a href="/skripsi/nilai-keluar" class="px-1">Riwayat Skripsi</a></li>
+    <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat</a></li>
     (<span id=""></span>)
     
+    @endif
+    @endif
 </ol>
 
 <div class="container-fluid">

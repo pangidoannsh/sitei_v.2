@@ -45,7 +45,10 @@ class PendaftaranKP extends Model
         return $this->belongsTo(Konsentrasi::class, 'konsentrasi_id', 'id');
     
     }
-
+    public function pembimbing()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_pembimbing_nip', 'nip');
+    }
   
 
 

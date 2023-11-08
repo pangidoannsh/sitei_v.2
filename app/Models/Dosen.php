@@ -45,9 +45,10 @@ class Dosen extends Authenticatable
     return $this->hasMany(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip');
 }
 
+
     public function pendaftarankp()
 {
-    return $this->belongsTo(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip');
+    return $this->belongsTo(PendaftaranKP::class, 'nip', 'dosen_pembimbing_nip');
 }
     public function pendaftaran_skripsi1()
 {
@@ -93,7 +94,31 @@ public function mahasiswa()
     {
         return $this->hasMany(PendaftaranSkripsi::class, 'pembimbing_2_nip', 'nip');
     }
-   
+
+
+public function pembimbingkp()
+{
+    return $this->hasMany(PendaftaranKP::class, 'dosen_pembimbing_nip', 'nip')
+        ->where('status_kp', '<>', 'USULAN KP DITOLAK')
+        ->where('status_kp', '<>', 'USULKAN KP ULANG')
+        ->where('keterangan', '<>', 'Nilai KP Telah Keluar');
+}
+public function pembimbing1skripsi()
+{
+    return $this->hasMany(PendaftaranSkripsi::class, 'pembimbing_1_nip', 'nip')
+       ->where('status_skripsi','<>', 'USULAN JUDUL DITOLAK')
+       ->where('status_skripsi','<>', 'LULUS')
+       ->where('status_skripsi','<>', 'USULKAN JUDUL ULANG')
+       ->orderBy('status_skripsi', 'desc');
+}
+public function pembimbing2skripsi()
+{
+    return $this->hasMany(PendaftaranSkripsi::class, 'pembimbing_2_nip', 'nip')
+       ->where('status_skripsi','<>', 'USULAN JUDUL DITOLAK')
+       ->where('status_skripsi','<>', 'LULUS')
+       ->where('status_skripsi','<>', 'USULKAN JUDUL ULANG')
+       ->orderBy('status_skripsi', 'desc');
+}
 
     /**
      * The attributes that should be hidden for serialization.

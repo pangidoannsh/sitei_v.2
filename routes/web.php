@@ -255,7 +255,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
     Route::get('/kp-skripsi/pembimbing-penguji/riwayat', [PendaftaranController::class, 'riwayat_pembimbing_penguji']);
 
-    Route::get('/kp-skripsi/prodi/riwayat', [PendaftaranController::class, 'riwayat_prodi']);
+    
 
     Route::get('/skripsi', [PendaftaranController::class, 'pendaftaran_skripsi']);
     Route::get('/persetujuan-kp-skripsi', [PendaftaranController::class, 'persetujuankpskripsi_dosen']);
@@ -474,8 +474,13 @@ Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){
     Route::get('/perpanjangan-2/detail/{id}', [PendaftaranSkripsiController::class, 'detailperpanjangan_2']);
     Route::get('/bukti-buku-skripsi/detail/{id}', [PendaftaranSkripsiController::class, 'detailbukti_buku_skripsi']);
 
+    Route::get('/statistik/kuota-bimbingan', [PendaftaranController::class, 'kuotabimbingan']);
+    Route::get('/detail/kuota-bimbingan/kp/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_kp']);
+    Route::get('/detail/kuota-bimbingan/skripsi/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_skripsi']);
     Route::get('/kuota-bimbingan/kp', [PendaftaranController::class, 'kuotabimbingan_kp']);
     Route::get('/kuota-bimbingan/skripsi', [PendaftaranController::class, 'kuotabimbingan_skripsi']);
+
+
     Route::get('/daftar-semkp/detail/{id}', [PendaftaranKPController::class, 'detailusulansemkp']);
     Route::get('/daftar-sempro/detail/{id}', [PendaftaranSkripsiController::class, 'detailsempro']);
     Route::get('/daftar-sidang/detail/{id}', [PendaftaranSkripsiController::class, 'detailsidang']);
@@ -611,7 +616,9 @@ Route::group(['middleware' => ['auth:dosen,web']], function () {
     Route::get('/suratperusahaan/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailbalasan_pembimbing']);
     Route::get('/kpti10/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailkpti10_pembimbing']);
 
-        Route::get('/kerja-praktek/nilai-keluar', [PendaftaranController::class, 'nilai_keluar']);
+    Route::get('/kp-skripsi/prodi/riwayat', [PendaftaranController::class, 'riwayat_prodi']);
+
+    Route::get('/kerja-praktek/nilai-keluar', [PendaftaranController::class, 'nilai_keluar']);
     
     Route::get('/skripsi/nilai-keluar', [PendaftaranController::class, 'lulus']);
 

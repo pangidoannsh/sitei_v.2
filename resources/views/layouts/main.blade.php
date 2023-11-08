@@ -116,7 +116,7 @@
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/statistik-koordinator">Statistik</a>
+            <a class="nav-link" aria-current="page" href="/statistik/kuota-bimbingan">Statistik</a>
           </li>
           @endif
           @endif
@@ -124,7 +124,7 @@
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/statistik-kaprodi">Statistik</a>
+            <a class="nav-link" aria-current="page" href="/statistik/kuota-bimbingan">Statistik</a>
           </li>
           @endif
           @endif
