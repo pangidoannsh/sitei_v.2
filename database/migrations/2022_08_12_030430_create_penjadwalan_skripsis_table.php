@@ -23,7 +23,10 @@ class CreatePenjadwalanSkripsisTable extends Migration
             $table->string('pengujitiga_nip')->nullable();
             $table->foreignId('prodi_id');                        
             $table->string('jenis_seminar')->default('Skripsi');
-            $table->string('judul_skripsi');
+            $table->string('judul_skripsi')->nullable();
+            $table->string('indeksasi_jurnal')->nullable();
+            $table->string('judul_jurnal')->nullable();
+            $table->string('status_publikasi_jurnal')->nullable();
             $table->string('revisi_skripsi')->nullable();
             $table->string('catatan')->nullable();
             $table->date('tanggal')->nullable();

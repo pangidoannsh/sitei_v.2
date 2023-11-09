@@ -22,64 +22,125 @@ Edit Penilaian Sidang Skripsi
 
     <a href="/kp-skripsi/penilaian-skripsi" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
+
     <div class="row">
         <div class="col mb-3">
-        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">NIM</div>
-                    <span>{{ $skripsi->penjadwalan_skripsi->mahasiswa->nim }}</span>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Nama</div>
-                    <span>{{ $skripsi->penjadwalan_skripsi->mahasiswa->nama }}</span>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Konsentrasi</div>
-                    <span>{{ $skripsi->penjadwalan_skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</span>
-                </div>
-            </li>
-        </ol>
-        </div>
-        <div class="col-md">
-        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Pembimbing</div>
-                    <span
-                        >1. {{ $skripsi->penjadwalan_skripsi->pembimbingsatu->nama }}</span>
-                    @if ($skripsi->penjadwalan_skripsi->pembimbingdua != null)
-                        <br>
-                        <span
-                            >2. {{ $skripsi->penjadwalan_skripsi->pembimbingdua->nama }}</span>
-                    @endif
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Penguji</div>
-                    <span
-                        >1. {{ $skripsi->penjadwalan_skripsi->pengujisatu->nama }}</span>
-                    <br>
-                    <span
-                        >2. {{ $skripsi->penjadwalan_skripsi->pengujidua->nama }}</span>
-                    <br>
-                    @if ($skripsi->penjadwalan_skripsi->pengujitiga != null)
-                    <span
-                        >3. {{ $skripsi->penjadwalan_skripsi->pengujitiga->nama }}</span>
-                    @endif
-                </div>
-            </li>
-        </ol>
+         <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+      <h5 class="text-bold">Mahasiswa</h5>
+      <hr>
+        <p class="card-title text-secondary text-sm " >Nama</p>
+        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->mahasiswa->nama }}</p>
+        <p class="card-title text-secondary text-sm " >NIM</p>
+        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->mahasiswa->nim }}</p>
+        <p class="card-title text-secondary text-sm " >Program Studi</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->mahasiswa->prodi->nama_prodi}}</p>
+        <p class="card-title text-secondary text-sm " >Konsentrasi</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="text-bold">Judul Skripsi</h5>
+        <hr>
+
+        <p class="card-title text-secondary text-sm" >Judul</p>
+        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : $skripsi->penjadwalan_skripsi->judul_skripsi }}</p>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="text-bold">Dosen Pembimbing</h5>
+        <hr>
+        @if ($skripsi->penjadwalan_skripsi->pembimbingdua_nip == null )
+        <p class="card-title text-secondary text-sm" >Nama</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pembimbingsatu->nama}}</p>
+
+
+        @elseif($skripsi->penjadwalan_skripsi->pembimbingdua_nip !== null)
+        <p class="card-title text-secondary text-sm" >Nama Pembimbing 1</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pembimbingsatu->nama}}</p>
+
+        <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pembimbingdua->nama}}</p>
+        @endif
+        
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="text-bold">Dosen Penguji</h5>
+        <hr>
+
+        <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pengujisatu->nama}}</p>
+
+
+        
+        <p class="card-title text-secondary text-sm" >Nama Penguji 2</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pengujidua->nama}}</p>
+@if ($skripsi->penjadwalan_skripsi->pengujitiga == !null)
+        <p class="card-title text-secondary text-sm" >Nama Penguji 3</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pengujitiga->nama}}</p>
+        @endif
+        
+      </div>
+    </div>
+  </div>
+</div>
         </div>
     </div>
 </div>
 
-<div class="kol-judul mt-3">
+<div class="row">
+    <div class="col mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
+        <hr>
+
+        <p class="card-title text-secondary text-sm" >Tanggal</p>
+        <p class="card-text text-start" >{{Carbon::parse($skripsi->penjadwalan_skripsi->tanggal)->translatedFormat('l, d F Y')}}</p>
+        <p class="card-title text-secondary text-sm" >Pukul</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->waktu}}</p>
+        <p class="card-title text-secondary text-sm" >Lokasi</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->lokasi}}</p>
+
+      </div>
+    </div>
+
+    </div>
+    <div class="col-md">
+       <div class="card">
+      <div class="card-body">
+        <h5 class="text-bold">Publikasi Jurnal</h5>
+        <hr>
+
+        <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->indeksasi_jurnal}}</p>
+        @if ($skripsi->penjadwalan_skripsi->indeksasi_jurnal !== 'Tanpa Jurnal')
+        <p class="card-title text-secondary text-sm" >Judul Jurnal</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->judul_jurnal}}</p>
+        <p class="card-title text-secondary text-sm" >Status Publikasi Jurnal</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->status_publikasi_jurnal}}</p>
+@endif
+      </div>
+    </div>
+    
+  
+    </div>
+  </div>
+
+<!-- <div class="kol-judul mt-3">
     <div class="row">
         <div class="col">
         <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
@@ -117,7 +178,7 @@ Edit Penilaian Sidang Skripsi
         </ol>
         </div>
     </div>
-</div>
+</div> -->
 
 @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingsatu_nip ||
     auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingdua_nip)
@@ -1274,17 +1335,65 @@ Edit Penilaian Sidang Skripsi
                         @endif
 
                         @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
-                                    <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                                      
-                        @elseif($nilaipenguji2 == null)
-                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
-                        @elseif($nilaipenguji3 == null)
-                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                                                       <div class="container">
+  <div class="row row-cols-2 mt-5">
+    <div class="col-6"></div>
+    <div class="col-6 "><a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a> </div>
+    <div class="col-2"></div>
+    <div class="col-10 "><span class="text-danger p-1 mt-2 rounded float-right"><i class="fas fa-exclamation-triangle mx-2"></i>Pembimbing 1 dan Pembimbing 2 belum melakukan input nilai! </span> </div>
+  </div>
+</div>               
                         @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
-                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                                 <div class="row row-cols-2 mt-5">
+    <div class="col-6"></div>
+    <div class="col-6 "><a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a> </div>
+    <div class="col-2"></div>
+    <div class="col-10"><span class="text-danger p-1 mt-2 rounded float-right"><i class="fas fa-exclamation-triangle mx-2"></i>Penguji 2 dan Penguji 3 belum melakukan input nilai! </span> </div>
+  </div>
+</div>  
+
+                        @elseif($nilaipenguji2 == null)
+ <div class="row row-cols-2 mt-5">
+    <div class="col-6"></div>
+    <div class="col-6 "><a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a> </div>
+    <div class="col-2"></div>
+    <div class="col-10 "><span class="text-danger p-1 mt-2 rounded float-right"><i class="fas fa-exclamation-triangle mx-2"></i>Penguji 2 belum melakukan input nilai! </span> </div>
+  </div>
+</div>                           
+                        @elseif($nilaipenguji3 == null)
+                               <div class="row row-cols-2 mt-5">
+    <div class="col-6"></div>
+    <div class="col-6 "><a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a> </div>
+    <div class="col-2"></div>
+    <div class="col-10 "><span class="text-danger p-1 mt-2 rounded float-right"><i class="fas fa-exclamation-triangle mx-2"></i>Penguji 3 belum melakukan input nilai! </span> </div>
+  </div>
+</div>                        
+                        
                         @elseif($total_nilai <= 60)
-                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a>                          
+                        @elseif($skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Sinta 3' &&  $total_nilai < 80 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Sinta 4' &&  $total_nilai < 80 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'IEEE' &&  $total_nilai < 80 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'IOP' &&  $total_nilai < 80 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'SCOPUS' &&  $total_nilai < 80 )
+                                                <div class="container">
+  <div class="row row-cols-2 mt-5">
+    <div class="col-6"></div>
+    <div class="col- "><a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a> </div>
+    <div class="col-2"></div>
+    <div class="col-10"><span class="text-danger p-1 mt-2 rounded float-right"><i class="fas fa-exclamation-triangle mx-2"></i>Nilai harus mencapai A-! </span> </div>
+  </div>
+</div>
+
+                        @elseif($skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Sinta 1' &&  $total_nilai < 85 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Sinta 2' &&  $total_nilai < 85 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Q1' &&  $total_nilai < 85 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Q2' &&  $total_nilai < 85 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Q3' &&  $total_nilai < 85 || $skripsi->penjadwalan_skripsi->indeksasi_jurnal == 'Q4' &&  $total_nilai < 85)
+                        <div class="container">
+  <div class="row row-cols-2 mt-5">
+    <div class="col-6"></div>
+    <div class="col-6 "><a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger disabled float-right">Selesai Seminar</a> </div>
+    <div class="col-2"></div>
+    <div class="col-10"><span class="text-langer p-1 mt-2 rounded float-right"><i class="fas fa-exclamation-triangle mx-2"></i>Nilai harus mencapai A! </span> </div>
+  </div>
+</div>
+            
+                                                      
                         @else
-                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>                          
+                                  <a href="#ModalApprove"  data-toggle="modal" class="btn btn-md btn-danger float-right">Selesai Seminar</a>                          
                       
                         @endif
 

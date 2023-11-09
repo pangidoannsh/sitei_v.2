@@ -84,6 +84,9 @@ class PenjadwalanSkripsiController extends Controller
             'prodi_id' => 'required',                            
             'judul_skripsi' => 'required',
             'pengujisatu_nip' => 'required',
+            // 'indeksasi_jurnal' => 'required',
+            // 'judul_jurnal' => 'required',
+            // 'status_publikasi_jurnal' => 'required',
             ]
             );
 
@@ -96,6 +99,9 @@ class PenjadwalanSkripsiController extends Controller
             'pengujitiga_nip' => $request['pengujitiga_nip'],
             'prodi_id' => $request['prodi_id'],                
             'judul_skripsi' => $request['judul_skripsi'],
+            'indeksasi_jurnal' => $request['indeksasi_jurnal'],
+            'judul_jurnal' => $request['judul_jurnal'],
+            'status_publikasi_jurnal' => $request['status_publikasi_jurnal'],
             'tanggal' => $request['tanggal'],
             'waktu' => $request['waktu'],
             'lokasi' => $request['lokasi'],

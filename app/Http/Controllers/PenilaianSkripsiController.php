@@ -325,6 +325,7 @@ class PenilaianSkripsiController extends Controller
         if ($request->revisi_naskah5) {
             $penilaian->revisi_naskah5 = $validatedData['revisi_naskah5'];
         }
+        
         $penilaian->update();
 
         return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');

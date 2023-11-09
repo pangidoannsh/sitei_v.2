@@ -345,8 +345,8 @@ nav {
 .tombol {
     background-color: #f9fafb;
     border-color: #afafaf;
-    box-shadow: 1px 1px 1px 1px #dbdbdb;
-    border-radius: 10px;
+    /* box-shadow: 1px 1px 1px 1px #dbdbdb; */
+    border-radius: 7px;
     color: #212529;
 }
 
@@ -436,8 +436,7 @@ table thead tr th {
 
 .gambar h4 {
     margin-top: 20px;
-}  
-
+}
 
 @media screen and (max-width: 768px) {
     .anak-judul h4 {
@@ -737,7 +736,7 @@ table thead tr th {
         margin-top: 5px;
         background-color: #f9fafb;
         border-color: #afafaf;
-        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        /* box-shadow: 1px 1px 1px 1px #dbdbdb; */
         border-radius: 10px;
         color: #212529;
         font-size: x-small;
@@ -857,7 +856,7 @@ table thead tr th {
         margin-top: 5px;
         background-color: #f9fafb;
         border-color: #afafaf;
-        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        /* box-shadow: 1px 1px 1px 1px #dbdbdb; */
         border-radius: 10px;
         color: #212529;
         font-size: 12px;
@@ -1056,7 +1055,7 @@ span {
         margin-top: 5px;
         background-color: #f9fafb;
         border-color: #afafaf;
-        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        /* box-shadow: 1px 1px 1px 1px #dbdbdb; */
         border-radius: 10px;
         color: #212529;
         font-size: x-small;
@@ -1075,7 +1074,7 @@ span {
         margin-top: 5px;
         background-color: #f9fafb;
         border-color: #afafaf;
-        box-shadow: 1px 1px 1px 1px #dbdbdb;
+        /* box-shadow: 1px 1px 1px 1px #dbdbdb; */
         border-radius: 10px;
         color: #212529;
         font-size: x-small;

@@ -70,7 +70,60 @@
             @enderror
         </div>
 
-        <div class="row">
+                <div class="mb-3 field">
+            <label for="indeksasi_jurnal" class="form-label">Indeksasi Jurnal</label>
+            <select name="indeksasi_jurnal" class="form-select @error('indeksasi_jurnal') is-invalid @enderror">                                                                        
+                <option value="Tanpa Jurnal">Tanpa Jurnal</option>                                    
+                <option value="Q1">Q1</option>                
+                <option value="Q2">Q2</option>                
+                <option value="Q3">Q3</option>                
+                <option value="Q4">Q4</option>                                         
+                <option value="Sinta 1">Sinta 1</option>                
+                <option value="Sinta 2">Sinta 2</option>                
+                <option value="Sinta 3">Sinta 3</option>                
+                <option value="Sinta 4">Sinta 4</option>                
+                <option value="IEEE">IEEE</option>                
+                <option value="IOP">IOP</option>                
+                <option value="SCOPUS">SCOPUS</option>                
+            </select>
+            @error('indeksasi_jurnal')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
+
+                <div class="mb-3 field">
+            <label class="form-label">Judul Jurnal</label>
+            <input type="text" name="judul_jurnal" class="form-control @error('judul_jurnal') is-invalid @enderror" value="{{ old('judul_jurnal') }}">
+            @error('judul_jurnal')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+
+                        <div class="mb-3 field">
+            <label for="status_publikasi_jurnal" class="form-label">Status Publikasi Jurnal</label>
+            <select name="status_publikasi_jurnal" class="form-select @error('status_publikasi_jurnal') is-invalid @enderror">                                                                        
+                <option class="fw-bold" value="">-Pilih Status Publikasi-</option>                                    
+                <option value="Diterima">Diterima</option>                                    
+                <option value="Sudah Dipublikasikan">Sudah Dipublikasikan</option>                
+                <option value="Sudah Dipresentasikan">Sudah Dipresentasikan</option>               
+               
+            </select>
+            @error('status_publikasi_jurnal')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
+
+
+            </div>
+            <div class="col-md">
+
+                    <div class="row">
     <div class="col">
       <div class="mb-3 field">
             <label class="form-label">Tanggal</label>
@@ -82,6 +135,7 @@
             @enderror
         </div>
     </div>
+
     <div class="col">
       <div class="mb-3 field">
             <label class="form-label">Waktu</label>
@@ -93,9 +147,8 @@
             @enderror
         </div>
     </div>
-  </div>
-
-        <div class="mb-3 field">
+    <div class="col">
+              <div class="mb-3 field">
             <label class="form-label">Lokasi</label>
             <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}">
             @error('lokasi')
@@ -104,8 +157,10 @@
               </div>
             @enderror
         </div>
-            </div>
-            <div class="col-md">
+    </div>
+  </div>
+
+
             <div class="mb-3 field">
             <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
             <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
