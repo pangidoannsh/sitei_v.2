@@ -1,23 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
+use \PDF;
 
 use App\Models\Dosen;
 use App\Models\Prodi;
-use App\Models\Mahasiswa;
 use App\Models\Ruangan;
-use App\Models\JamKPSel;
 use App\Models\JamKPKam;
+use App\Models\JamKPSel;
+use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
-use \PDF;
 use App\Models\PenilaianKPPenguji;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\PenilaianKPPembimbing;
 use Illuminate\Support\Facades\Crypt;
+use RealRashid\SweetAlert\Facades\Alert;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PenjadwalanKPController extends Controller
@@ -116,6 +118,22 @@ class PenjadwalanKPController extends Controller
             'jamkpkams' => JamKPKam::all()->sortBy('id'),  
         ]);
     }
+    public function edit_koordinator($id)
+    {
+        $decrypted = Crypt::decryptString($id);
+        $kps = PenjadwalanKP::findOrFail($decrypted);
+
+        return view('penjadwalankp.edit', [                      
+            'kp' => $kps,
+            'prodis' => Prodi::all(),
+            'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
+            'dosens' => Dosen::all()->sortBy('nama'), 
+            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            'jamkpsels' => JamKPSel::all()->sortBy('id'),
+            'jamkpkams' => JamKPKam::all()->sortBy('id'),  
+        ]);
+    }
+    
 
     public function update(Request $request, PenjadwalanKP $penjadwalan_kp)
     {
@@ -142,11 +160,19 @@ class PenjadwalanKPController extends Controller
         if(isset($request->tanggal)) {
             $validated["tanggal"]= $request->tanggal;
         }
-
+        
+        if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4){
         $validated["waktu"] = $request->waktu;
         $validated['dibuat_oleh'] = auth()->user()->username;
         PenjadwalanKP::where('id', $penjadwalan_kp->id)
             ->update($validated);
+        }
+        if(auth()->user()->role_id == 9 || auth()->user()->role_id == 10 || auth()->user()->role_id == 11 ){
+        $validated["waktu"] = $request->waktu;
+        $validated['dibuat_oleh'] = auth()->user()->nip;
+        PenjadwalanKP::where('id', $penjadwalan_kp->id)
+            ->update($validated);
+        }
 
         return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }

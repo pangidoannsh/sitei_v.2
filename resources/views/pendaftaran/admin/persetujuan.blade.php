@@ -20,6 +20,8 @@
 </div>
 @endif
 
+
+
 <div class="container card p-4">
 
 <ol class="breadcrumb col-lg-12">
@@ -53,6 +55,7 @@
                 <!-- <th class="text-center" scope="col">Jenis Usulan</th> -->
                 <th class="text-center" scope="col">Status </th>
                 <th class="text-center" scope="col">Tanggal Usulan</th>    
+                <th class="text-center" scope="col">Batas Persetujuan</th>    
                 <th class="text-center" scope="col">Keterangan</th> 
                 <th class="text-center" scope="col">Aksi</th>
             </tr>
@@ -61,6 +64,27 @@
             
             <div></div>
             @foreach ($pendaftaran_kp as $kp)
+            
+<!-- TIMER USULAN KP -->
+
+@php
+  $tanggalSaatIni = date('Y-m-d');
+@endphp
+
+@php
+  $tanggalUsulankp = $kp->tgl_created_usulankp;
+@endphp
+
+<!-- Menghitung selisih hari -->
+@php
+  $waktuTersisa = strtotime($tanggalSaatIni) - strtotime($tanggalUsulankp);
+  $selisihHari = floor($waktuTersisa / (60 * 60 * 24));
+  $selisihHariAdmin = 4;
+  $waktuUsulanKPadmin = $selisihHari + $selisihHariAdmin;
+@endphp
+
+<!-- BATAS -->
+
             <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td> -->
             <td class="text-center">{{$kp->mahasiswa_nim}}</td>                             
@@ -87,6 +111,15 @@
             <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
+             @if ($kp->status_kp == 'USULAN KP')           
+            <td class="text-center" >
+                @if ($waktuUsulanKPadmin >= 0)
+                    <span class="text-danger"> {{ $waktuUsulanKPadmin }}  hari lagi</span>
+                @else
+                    Batas Waktu Unggah Surat Balasan telah habis
+                @endif
+            </td>
+            @endif
 
             <td class="text-center">{{$kp->keterangan}}</td> 
 
@@ -284,6 +317,7 @@
 
 
 @endsection
+
 
 @push('scripts')
 @foreach ($pendaftaran_kp as $kp)

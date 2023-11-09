@@ -769,6 +769,7 @@ class PendaftaranKPController extends Controller
     {
         $kp = PendaftaranKP::find($id);
         $kp->keterangan = 'Menunggu persetujuan Koordinator KP';
+        $kp->tgl_disetujui_usulankp_pembimbing = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Usulan KP disetujui!')->showConfirmButton('Ok', '#28a745');
@@ -796,6 +797,7 @@ class PendaftaranKPController extends Controller
     {
         $kp = PendaftaranKP::find($id);
         $kp->keterangan = 'Menunggu persetujuan Pembimbing';
+        $kp->tgl_disetujui_usulankp_admin = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Usulan KP disetujui!')->showConfirmButton('Ok', '#28a745');

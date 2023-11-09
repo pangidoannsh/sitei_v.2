@@ -159,6 +159,18 @@ class Kernel extends ConsoleKernel
         ]);
         })->monthly();
 
+
+        //BATAS PERSETUJUAN
+
+       $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_usulankp_admin')
+        ->where('tgl_created_usulankp', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN KP ULANG',
+            'alasan' => 'Usulan Anda belum disetujui Admin Prodi',
+        ]);
+        })->daily();
+
     }
 
     /**

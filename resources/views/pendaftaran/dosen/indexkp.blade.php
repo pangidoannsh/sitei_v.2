@@ -29,7 +29,7 @@
    
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-        @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+        @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
         <span class="px-2">|</span>
         <li><a href="/kerja-praktek" class="breadcrumb-item active fw-bold text-success px-1">Kerja Praktek (<span id="waitingApprovalCount"></span>)</a></li>
         
@@ -55,6 +55,7 @@
         <th class="text-center" scope="col">Nama</th>
         <th class="text-center" scope="col">Status KP</th>
         <th class="text-center" scope="col">Tanggal Penting</th>
+        <!-- <th class="text-center" scope="col">Batas Waktu</th> -->
         <th class="text-center" scope="col">Keterangan</th>   
         <th class="text-center" scope="col">Aksi</th>
     </tr>
@@ -96,28 +97,28 @@
             @endif
             
             @if ($kp->status_kp == 'USULAN KP')           
-            <td class="text-center"> Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</b></td>
             @endif
             @if ($kp->status_kp == 'USULAN KP DITERIMA')           
-            <td class="text-center"> Batas Unggah Surat Balasan: <br>
-@if ($waktuMuncul >= 0)
-    <span class="text-danger"> {{ $waktuMuncul }}  hari lagi</span> ({{Carbon::parse($kp->tgl_disetujui_usulankp)->translatedFormat('l, d F Y')}})
-  @else
-    Batas Waktu Unggah Surat Balasan telah habis
-  @endif
-</td>
+            <td class="text-center"> Batas Unggah Surat Balasan: <br><b>
+                  @if ($waktuMuncul >= 0)
+                      <span class="text-danger"> {{ $waktuMuncul }}  hari lagi</span> ({{Carbon::parse($kp->tgl_disetujui_usulankp)->translatedFormat('l, d F Y')}})</b>
+                    @else
+                      Batas Waktu Unggah Surat Balasan telah habis
+                    @endif
+                  </td>
             @endif
 
              @if ($kp->status_kp == 'SURAT PERUSAHAAN')           
-            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</b></td>
             @endif
 
              @if ($kp->status_kp == 'KP DISETUJUI')           
-            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center">Tanggal Disetujui: <br><b>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</b></td>
             @endif
 
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
-            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</b></td>
             @endif
 
 
@@ -167,6 +168,7 @@
 
 
 @endsection
+
 
 @push('scripts')
 <script>

@@ -71,6 +71,10 @@ Daftar Bimbingan Kerja Praktek
   $waktuMuncul = $selisihHari + $selisihHari30;
 @endphp
 
+
+
+
+
 <div></div>
         <tr>        
             <td class="text-center">{{$loop->iteration}}</td>                             
@@ -92,7 +96,7 @@ Daftar Bimbingan Kerja Praktek
             @endif
             
             @if ($kp->status_kp == 'USULAN KP')           
-            <td class="text-center"> Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center"> Tanggal Usulan: <br><b> {{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</b></td>
             @endif
              @if ($kp->status_kp == 'USULAN KP DITERIMA')           
             <td class="text-center"> Batas Unggah Surat Balasan: <br>
@@ -104,15 +108,15 @@ Daftar Bimbingan Kerja Praktek
 </td>
             @endif
              @if ($kp->status_kp == 'SURAT PERUSAHAAN')           
-            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</b></td>
             @endif
 
             @if ($kp->status_kp == 'KP DISETUJUI')           
-            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</b></td>
             @endif
 
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
-            <td class="text-center">Tanggal Usulan: <br>{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</b></td>
             @endif
             
             @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')           

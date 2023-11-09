@@ -25,7 +25,7 @@ Data Skripsi Mahasiswa
 <ol class="breadcrumb col-lg-12">   
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 <li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span id="seminarKPCount"></span>)</a></li> 
         <span class="px-2">|</span>
         <li><a href="/kerja-praktek" class=" px-1">Kerja Praktek (<span id="prodiKPCount"></span>)</a></li>

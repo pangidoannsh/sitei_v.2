@@ -25,15 +25,13 @@
 <ol class="breadcrumb col-lg-12">
  
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if ( Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          @if (Auth::guard('dosen')->user()->role_id == 5 ||  Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 <li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span id="seminarKPCount"></span>)</a></li> 
         <span class="px-2">|</span>
         <li><a href="/kerja-praktek" class=" px-1">Kerja Praktek (<span id="prodiKPCount"></span>)</a></li>
         
         <span class="px-2">|</span>
         <li><a href="/skripsi" class="px-1">Skripsi (<span id="waitingApprovalCount"></span>)</a></li>
-        
-
 
        <span class="px-2">|</span>
         <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span id=""></span>)</a></li>
@@ -45,7 +43,7 @@
 
 
     @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-    <li><a href="/persetujuan/admin/index" class="breadcrumb-item active fw-bold text-black px-1">Persetujuan</a></li>
+    <li><a href="/persetujuan/admin/index" class=" px-1">Persetujuan</a></li>
     (<span id="waitingApprovalCount"></span>)
     <span class="px-2">|</span> 
     @endif
@@ -55,7 +53,7 @@
     <li><a href="/sidang/admin/index" class="px-1">Data Skripsi</a></li>
     (<span id="seminarKPCount"></span>)  
     <span class="px-2">|</span>
-    <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat</a></li>
+    <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat</a></li>
     (<span id=""></span>)
     
     @endif
@@ -65,7 +63,7 @@
 
 <div class="container-fluid">
 
-<div class="pt-2 pl-2  mb-2 bg-light rounded">
+<div class="pt-2 pl-2 mb-2 bg-light rounded">
             <h5 class="">Riwayat KP dan Skripsi </h5>
             <hr>
             </div>
@@ -137,9 +135,14 @@
 
 
 </table>
-<hr class="pt-1 mt-2 bg-dark">
+</div>
+</div>
 
-<div class="pt-2 pl-2 mb-2 bg light rounded mt-4">
+<div class="container card p-4">
+<div class="container-fluid">
+<!-- <hr class="pt-1 mt-2 bg-dark"> -->
+
+<div class="pt-2 pl-2 mb-2 bg-light rounded">
             <h5 class="">Riwayat Seminar</h5>
             <hr>
             </div>
@@ -156,10 +159,45 @@
       <th class="text-center" scope="col">Lokasi</th>              
       <th class="text-center" scope="col">Pembimbing</th>
       <th class="text-center" scope="col">Penguji</th>          
+      <th class="text-center" scope="col">Hasil</th>          
       <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
-  <tbody>    
+  <tbody>   
+    
+   @foreach ($penjadwalan_kps as $kp)    
+        <tr>
+          <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
+          <td class="text-center">{{$kp->mahasiswa->nama}}</td>                     
+          <td class="bg-primary text-center">{{$kp->jenis_seminar}}</td>                  
+          <td class="text-center">{{$kp->prodi->nama_prodi}}</td>          
+          <td class="text-center">{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td class="text-center">{{$kp->waktu}}</td>                   
+          <td class="text-center">{{$kp->lokasi}}</td>              
+          <td class="text-center">
+            <p>{{$kp->pembimbing->nama_singkat}}</p>            
+          </td>         
+          <td class="text-center">
+            <p>{{$kp->penguji->nama_singkat}}</p>            
+          </td>          
+           @if ($kp->status_seminar == 1)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Tidak Lulus</td>
+         @endif
+         
+          <td class="text-center">
+            @if ($kp->penguji_nip == auth()->user()->nip)                    
+              <a formtarget="_blank" target="_blank" href="/perbaikan-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-info p-2"style="border-radius:20px;">Perbaikan</a>
+              <a formtarget="_blank" target="_blank" href="/nilai-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-success mt-2 p-2"style="border-radius:20px;">Form Nilai</a>
+            @endif
+            @if ($kp->pembimbing_nip == auth()->user()->nip)   
+              <a formtarget="_blank" target="_blank" href="/perbaikan-pengujikp/{{Crypt::encryptString($kp->id)}}/{{$kp->penguji->nip}}" class="badge bg-info p-2"style="border-radius:20px;">Perbaikan Penguji</a>                               
+              <a formtarget="_blank" target="_blank" href="/beritaacara-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-danger mt-2 p-2"style="border-radius:20px;">Berita Acara</a>
+            @endif
+          </td>                        
+        </tr>               
+    @endforeach
 
     @foreach ($penjadwalan_sempros as $sempro)
         <tr>
@@ -182,7 +220,13 @@
             @if ($sempro->pengujitiga == !null)
             <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
             @endif
-          </td>                    
+          </td> 
+           @if ($sempro->status_seminar == 1)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Tidak Lulus</td>
+         @endif
+
           <td class="text-center">            
             <a formtarget="_blank" target="_blank" href="/nilai-sempro/{{Crypt::encryptString($sempro->id)}}" class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a>
 
@@ -197,6 +241,8 @@
             <a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujitiga->nip}}" class="badge bg-success p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji 3</a>
             @endif
             @endif
+
+
 
             @if ($sempro->pengujisatu_nip == auth()->user()->nip)
               <a formtarget="_blank" target="_blank" href="/penilaian-sempro/beritaacara-sempro/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning p-2" style="border-radius:20px;">Berita Acara</a> 
@@ -227,7 +273,14 @@
             @if ($skripsi->pengujitiga == !null)
             <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
             @endif
-          </td>                    
+          </td>     
+          
+          @if ($skripsi->status_seminar == 3)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Tidak Lulus</td>
+         @endif
+
           <td class="text-center">            
             <a formtarget="_blank" target="_blank" href="/nilai-skripsi/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a>
             @if ($skripsi->pengujisatu_nip == auth()->user()->nip || $skripsi->pengujidua_nip == auth()->user()->nip || $skripsi->pengujitiga_nip == auth()->user()->nip)
@@ -270,7 +323,12 @@
             @if ($skripsi->pengujitiga == !null)
             <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
             @endif
-          </td>                    
+          </td>   
+                    @if ($skripsi->status_seminar == 3)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Tidak Lulus</td>
+         @endif                 
           <td class="text-center">                                    
             <a href="/penilaian-skripsi/draft-ba/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Draft BA</a>
           </td>                        
@@ -298,7 +356,12 @@
             @if ($skripsi->pengujitiga == !null)
             <p>{{$skripsi->pengujitiga->nama_singkat}}</p>
             @endif
-          </td>                    
+          </td>     
+          @if ($skripsi->status_seminar == 3)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Tidak Lulus</td>
+         @endif               
           <td class="text-center">                                    
             <a href="/penilaian-skripsi/draft-ba/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Draft BA</a>
           </td>                        

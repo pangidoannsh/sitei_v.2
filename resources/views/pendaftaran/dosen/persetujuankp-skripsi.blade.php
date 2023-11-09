@@ -23,21 +23,17 @@
 <div class="container card  p-4">
 
 <ol class="breadcrumb col-lg-12">
-    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan KP & Skripsi</a></li>
-    (<span id="waitingApprovalCount"></span>)
-     
+    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan KP & Skripsi (<span id="waitingApprovalCount"></span>)</a></li>
     
-
+     
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           <span class="px-2">|</span>      
-            <li><a href="/persetujuan-kaprodi" class="px-1">Persetujuan Seminar</a></li>
-            (<span id="seminarKPCount"></span>)
+            <li><a href="/persetujuan-kaprodi" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li>
 
           <span class="px-2">|</span>
-            <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan</a></li>
-            (<span id=""></span>)
-
+            <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan (<span id=""></span>)</a></li>
+            
         @endif
     @endif
 
@@ -68,6 +64,7 @@
         <th class="text-center" scope="col">Nama</th>
         <th class="text-center" scope="col">Status</th>
         <th class="text-center" scope="col">Tanggal Usulan</th> 
+        <th class="text-center" scope="col">Batas Persetujuan</th> 
         <th class="text-center" scope="col">Keterangan</th>   
         <th class="text-center" scope="col" style="padding-left: 50px; padding-right:50px;">Aksi</th>
     </tr>
@@ -76,8 +73,30 @@
 
       <div></div>
       @foreach ($pendaftaran_kp as $kp)
+
+
+      <!-- TIMER USULAN KP -->
+
+@php
+  $tanggalSaatIni = date('Y-m-d');
+@endphp
+
+@php
+  $tanggalUsulankpPembimbing = $kp->tgl_disetujui_usulankp_admin;
+@endphp
+
+<!-- Menghitung selisih hari -->
+@php
+  $waktuTersisaUsulanKPPembimbing = strtotime($tanggalSaatIni) - strtotime($tanggalUsulankpPembimbing);
+  $selisihHari = floor($waktuTersisaUsulanKPPembimbing / (60 * 60 * 24));
+  $selisihHariUsulanKPPembimbing = 4;
+  $waktuUsulanKPPembimbing = $selisihHari + $selisihHariUsulanKPPembimbing;
+@endphp
+
+<!-- BATAS -->
+
         <tr>        
-            <!-- <td class="text-center">{{$loop->iteration}}</td>                              -->
+            <!-- <td class="text-center">{{$loop->iteration}}</td>-->
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nama}}</td>            
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN'|| $kp->status_kp == 'DAFTAR SEMINAR KP' ||$kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )           
@@ -100,7 +119,15 @@
             <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
-            
+             @if ($kp->status_kp == 'USULAN KP')           
+            <td class="text-center" >
+                @if ($waktuUsulanKPPembimbing >= 0)
+                    <span class="text-danger"> {{ $waktuUsulanKPPembimbing }}  hari lagi</span>
+                @else
+                    Batas Waktu Unggah Surat Balasan telah habis
+                @endif
+            </td>
+            @endif
                                
             <td class="text-center">{{$kp->keterangan}}</td>  
 

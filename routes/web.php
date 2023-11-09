@@ -48,9 +48,6 @@ use App\Http\Controllers\UndanganSeminarController;
 */
 
 Route::group(['middleware' => 'prevent-back-history'],function(){
-
-
-
 Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);
 Route::get('/detail-sempro/{id}', [QRController::class, 'detailsempro']);
 Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
@@ -419,8 +416,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/form-kp', [PenjadwalanKPController::class, 'index']);
     Route::get('/form-kp/create', [PenjadwalanKPController::class, 'create']);
     Route::post('/form-kp/create', [PenjadwalanKPController::class, 'store']);
-    Route::get('/form-kp/edit/{id}', [PenjadwalanKPController::class, 'edit']);
-    Route::put('/form-kp/edit/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'update']);
+
     Route::delete('/form-kp/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'destroy']);
     Route::get('/riwayat-penjadwalan-kp', [PenjadwalanKPController::class, 'riwayat']);
 
@@ -492,6 +488,19 @@ Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){
     Route::get('/surat-permohonankp/{id}', [PendaftaranKPController::class, 'kpti_1']);    
 });
 
+//ADMIN DAN KOORDINATOR
+
+Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11'] ], function(){
+    Route::get('/form-kp/edit/{id}', [PenjadwalanKPController::class, 'edit']);
+    Route::put('/form-kp/edit/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'update']);
+});
+Route::group(['middleware' =>  ['auth:web']], function(){
+    Route::get('/form-kp/edit/{id}', [PenjadwalanKPController::class, 'edit']);
+    Route::put('/form-kp/edit/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'update']);
+});
+
+// BATAS
+
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
     Route::get('/riwayat-koordinator', [PenjadwalanController::class, 'riwayat_koordinator']);    
@@ -513,8 +522,10 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
 
     Route::put('/daftarsempro/koordinator/approve/{id}', [PendaftaranSkripsiController::class, 'approvedaftarsempro_koordinator']);
     Route::put('/daftarsempro/koordinator/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakdaftarsempro_koordinator']);
+
+
     
-    
+
     
     Route::put('/perpanjangan2/koordinator/approve/{id}', [PendaftaranSkripsiController::class, 'approveperpanjangan2_koordinator']);
     Route::put('/perpanjangan2/koordinator/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakperpanjangan2_koordinator']);

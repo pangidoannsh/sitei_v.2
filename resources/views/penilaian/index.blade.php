@@ -28,7 +28,7 @@
 
 <ol class="breadcrumb col-lg-12">
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-        @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+        @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
   <li><a href="/kp-skripsi/seminar" class="breadcrumb-item active fw-bold text-success px-1">Seminar  (<span id="waitingApprovalCount"></span>) </a></li>
 
         <span class="px-2">|</span>
@@ -84,7 +84,13 @@
             @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
             <a href="/penilaian-kp/create/{{Crypt::encryptString($kp->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
             @else
-            <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+            <span class="badge bg-danger" style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+         @if (Str::length(Auth::guard('dosen')->user()) > 0)
+        @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+               <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning mt-2" style="border-radius:20px; padding:7px;">Edit Jadwal</a>
+              @endif
+              @endif
+
             @endif
           @else
             <a href="/penilaian-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
@@ -160,6 +166,7 @@
               <a href="/penilaian-skripsi/create/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
+
               @endif
             @else
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              

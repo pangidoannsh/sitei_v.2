@@ -35,6 +35,9 @@
 @endphp
 
 
+
+
+
 <div class="container-fluid">
 
 @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
@@ -582,7 +585,54 @@
 </div>
 
 @endif
+<!-- <div class="container">
+    <a  type="button"  data-toggle="modal" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail" data-target="#GFG"><i class="fas fa-info-circle"></i></a>
+  
+        <div class="modal fade" id="GFG">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content ">
+                <div class="modal-header bg-secondary justify-content-center">
+                        <h5 class="modal-title ">
+                            Pesan
+                        </h5>
+  
+                    </div>
+                    <div class="modal-body ">
+                        <form action="/perpanjangan1-skripsi/create/{{$pendaftaran_kp->id}}" method="POST" enctype="multipart/form-data">
+                            @method('put')
+                                    @csrf
+                                <div>
+                                <div class="row">
+                                <div class="col">
+                                 <div class="mb-3">
+                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
 
+                                        @error('sti_22_p1')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                        @enderror
+                                </div>
+
+                                    
+                                    <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
+
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                    <div class="modal-footer ">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div> -->
 
 <div class="card p-4">
 

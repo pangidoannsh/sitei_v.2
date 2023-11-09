@@ -326,7 +326,7 @@ class PenilaianController extends Controller
 
             ]);
         }  
-        
+
          // DOSEN PEMBIMBING
         if (auth()->user()->nip > 0) {  
             return view('penilaian.riwayat-penilaian', [

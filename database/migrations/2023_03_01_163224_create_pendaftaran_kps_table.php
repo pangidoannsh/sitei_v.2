@@ -28,7 +28,10 @@ class CreatePendaftaranKPSTable extends Migration
             $table->string('bidang_usaha');
             $table->string('tanggal_rencana');
             $table->string('tgl_created_usulankp')->nullable();
-            $table->string('tgl_disetujui_usulankp')->nullable();
+            $table->string('tgl_disetujui_usulankp_admin')->nullable();
+            $table->string('tgl_disetujui_usulankp_pembimbing')->nullable();
+            $table->string('tgl_disetujui_usulankp_koordinator')->nullable();
+            $table->string('tgl_disetujui_usulankp_kaprodi')->nullable();
             // surat balasan kp
             $table->string('surat_balasan')->nullable();
             $table->string('tanggal_mulai')->nullable();
@@ -40,6 +43,10 @@ class CreatePendaftaranKPSTable extends Migration
             $table->string('kpti_11')->nullable();
             $table->string('sti_31')->nullable();
             $table->string('tgl_created_semkp')->nullable();
+            $table->string('tgl_disetujui_semkp_admin')->nullable();
+            $table->string('tgl_disetujui_semkp_pembimbing')->nullable();
+            $table->string('tgl_disetujui_semkp_koordinator')->nullable();
+            $table->string('tgl_disetujui_semkp_kaprodi')->nullable();
             //kp dijadwalkan
             $table->string('tgl_dijadwalkan')->nullable();
             //kp selesai
@@ -47,13 +54,17 @@ class CreatePendaftaranKPSTable extends Migration
             //LAPORAN/KPTI-10
             $table->string('kpti_10')->nullable();
             $table->string('laporan_akhir')->nullable();
-            $table->string('tgl_disetujui_kpti_10')->nullable();
+            $table->string('tgl_disetujui_kpti_10_admin')->nullable();
+            $table->string('tgl_disetujui_kpti_10_pembimbing')->nullable();
+            $table->string('tgl_disetujui_kpti_10_koordinator')->nullable();
+            $table->string('tgl_disetujui_kpti_10_kaprodi')->nullable();
             //Alasan ditolak
             $table->string('alasan')->nullable();
+            $table->string('pesan')->nullable();
 
             $table->string('jenis_usulan')->default('Usulan Kerja Praktek');
             $table->string('status_kp')->default('USULAN KP');
-            $table->string('keterangan')->default('Menunggu persetujuan Pembimbing');
+            $table->string('keterangan')->default('Menunggu persetujuan Admin Prodi');
             // $table->string('persetujuan')->default('Menunggu persetujuan Koordinator KP');
             $table->timestamps();
         });

@@ -1043,6 +1043,7 @@ class PendaftaranController extends Controller
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '3')->where('keterangan', 'Nilai Skripsi Telah Keluar')->orderBy('updated_at', 'desc')->get(),
 
                  'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 1)->get(),
+                 
                'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 1)->get(),
                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 3)->get(),
 

@@ -51,7 +51,7 @@
           <td>{{$kp->pembimbing->nama}}</td>
           <td>{{$kp->penguji->nama}}</td>                    
           <td>
-            <a href="/form-kp/edit/{{$kp->id}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
+            <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
           </td>
         </tr>
     @endforeach

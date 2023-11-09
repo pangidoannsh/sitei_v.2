@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 
 @section('title')
@@ -12,15 +13,13 @@
 
 <form action="{{url ('/form-kp/create')}}" method="POST">
         @csrf
-    
     <div>
-        
-        
+        <div class="row">
             <div class="col">
             <div class="mb-3 field">
-            <label for="mahasiswa_nim" class="form-label">Mahasiswa <span class="text-danger">*</span></label>
+            <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
             <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
-                <option value="">-Belum Dipilih-</option>
+                <option value="">-Pilih-</option>
                 @foreach ($mahasiswas as $mhs)
                     <option value="{{$mhs->nim}}" {{old('mahasiswa_nim') == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
                 @endforeach
@@ -33,7 +32,7 @@
         </div>        
         
         <div class="mb-3 field">
-            <label for="prodi_id" class="form-label">Program Studi <span class="text-danger">*</span></label>
+            <label for="prodi_id" class="form-label">Program Studi</label>
             <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
             @if(auth()->user()->role_id == 2)                                                          
                 <option value="1">Teknik Elektro D3</option>                
@@ -50,10 +49,10 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
+        </div>              
 
         <div class="mb-3 field">
-            <label class="form-label">Judul Laporan Kerja Praktek <span class="text-danger">*</span></label>
+            <label class="form-label">Judul Laporan Kerja Praktek</label>
             <input type="text" name="judul_kp" class="form-control @error('judul_kp') is-invalid @enderror" value="{{ old('judul_kp') }}"> 
             @error('judul_kp')
             <div class="invalid-feedback">
@@ -63,9 +62,21 @@
         </div>
 
         <div class="mb-3 field">
-            <label for="pembimbing_nip" class="form-label">Pembimbing <span class="text-danger">*</span></label>
+            <label class="form-label">Lokasi</label>
+            <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}">  
+            @error('lokasi')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror            
+        </div>           
+            </div>
+            <div class="col-md">
+        
+        <div class="mb-3 field">
+            <label for="pembimbing_nip" class="form-label">Pembimbing</label>
             <select name="pembimbing_nip" id="pembimbing" class="form-select @error('pembimbing_nip') is-invalid @enderror">
-                <option value="">-Belum Dipilih-</option>
+                <option value="">-Pilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pembimbing_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -78,9 +89,9 @@
         </div>
 
         <div class="mb-3 field">
-            <label for="penguji_nip" class="form-label">Penguji <span class="text-danger">*</span></label>
+            <label for="penguji_nip" class="form-label">Penguji</label>
             <select name="penguji_nip" id="penguji" class="form-select @error('penguji_nip') is-invalid @enderror">
-                <option value="">-Belum Dipilih-</option>
+                <option value="">-Pilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('penguji_nip') == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -90,108 +101,47 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
+        </div> 
 
         <div class="mb-3 field">
-        <script>
-            function teshari()
-            {
-                const lambe = new Date($('#ciek').val());
-                var tod = lambe.getDay();
-                if (tod == 2)
-                {
-                    $("#waktudb2").show();
-                    $("#waktudb3").hide();
-                    $("#waktu4").hide();
-                }
-                else if (tod == 4)
-                {
-                    $("#waktudb2").hide();
-                    $("#waktudb3").show();
-                    $("#waktu4").hide();
-                }
-                else
-                {
-                    $("#waktudb2").hide();
-                    $("#waktudb3").hide();
-                    $("#waktu4").show();
-                }
-            }
-        </script>
-
-<div class="mb-3 field">
-            <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-            <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-            <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>       
-                <label class="form-label">Tanggal <input type="checkbox" id="cektanggal2"> (manual)</label>
-                <input id ="ciek" type="text" onchange="teshari()" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" disabled>
-                
-                <script type="text/javascript">
-                    $("#ciek").datepicker({
-                    dateFormat: "yy-mm-dd",
-                    beforeShowDay: function (tanggal) {
-                    var day = tanggal.getDay();
-                    return [day != 0];
-                }
-                });
-                </script>
-                
-                
-                @error('tanggal')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-                @enderror
-        </div>
-
-            <label for="waktu"class="form-label">Waktu <input type="checkbox" id="cekwaktu3"> (manual)</label>
-            <select name="jam_id" id="waktu4" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Belum Dipilih-</option>
-            </select>
-            <select name="waktu" id="waktudb2" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Belum Dipilih-</option>
-                @foreach ($jamkpsels as $jamkpsel)
-                    <option value="{{$jamkpsel->jam_tersedia}}" {{old('waktu') == $jamkpsel->jam_tersedia ? 'selected' : null}}>{{$jamkpsel->jam_tersedia}}</option>
-                @endforeach
-            </select>
-            <select name="waktu" id="waktudb3" style="display:none" class="form-control @error('waktu') is-invalid @enderror" disabled>
-            <option value="">-Belum Dipilih-</option>
-                @foreach ($jamkpkams as $jamkpkam)
-                    <option value="{{$jamkpkam->jam_tersedia}}" {{old('waktu') == $jamkpkam->jam_tersedia ? 'selected' : null}}>{{$jamkpkam->jam_tersedia}}</option>
-                @endforeach
-            </select>
-            @error('waktu')
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
+            <label class="form-label">Tanggal</label>
+            <input type="date" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}">
+            @error('tanggal')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
             @enderror
         </div>
 
         <div class="mb-3 field">
-            <label class="form-label">Lokasi <input type="checkbox" id="ceklokasi2"/> (manual)</label>
-            <select type="text" name="ruangan_id" id="lokasi2" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" disabled>
-            <option value="">-Belum Dipilih-</option>
-                @foreach ($ruangans as $ruangan)
-                    <option value="{{$ruangan->id}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
-                @endforeach
-            </select>
-            @error('lokasi')
+            <label class="form-label">Waktu</label>
+            <input type="time" name="waktu" class="form-control @error('waktu') is-invalid @enderror" value="{{ old('waktu') }}">
+            @error('waktu')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+        </div>
+        <!-- <div class="mb-3 field">
+            <label class="form-label">Status Kerja Praktek</label>
+            <input type="text" name="status_kp" class="form-control @error('status_kp') is-invalid @enderror" value="{{ old('status_kp') }}"> 
+            @error('status_kp')
             <div class="invalid-feedback">
                 {{$message}}
             </div>
-            @enderror            
-        </div>
+            @enderror           
+        </div> -->
 
-
-        <button type="submit" class="btn btn-success float-right mt-3">Tambah</button>
+        <button type="submit" class="btn btn-success float-right mt-4">Tambah</button>
         </div>
         </div>
-    
+    </div>
 </form>
 
-<br><br><br>
 
 @endsection
+
+
 
 @push('scripts')
 <script>
@@ -207,23 +157,6 @@
     $(document).ready(function() {
        $('#penguji').select2();
     });
-    
-    document.getElementById('cektanggal2').onchange = function() {
-    document.getElementById('ciek').disabled = !this.checked;
-    };
-
-    document.getElementById('ceklokasi2').onchange = function() {
-    document.getElementById('lokasi2').disabled = !this.checked;
-    };
-
-
-    document.getElementById('cekwaktu3').onchange = function() {
-    document.getElementById('waktu4').disabled = !this.checked;
-    document.getElementById('waktudb2').disabled = !this.checked;
-    document.getElementById('waktudb3').disabled = !this.checked;
-    };
-
-    
 
 </script>
 @endpush
