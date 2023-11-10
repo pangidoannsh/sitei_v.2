@@ -200,8 +200,8 @@
       </div> 
     <div class="mt-5">
       <h6>Dikembangkan oleh Prodi Teknik Informatika</h6>
-      <h6><a class="text-dark" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi</a> & <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti</a></h6>
-      <h6><a class="text-dark" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">M. Seprinaldi</a></h6>
+      <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi</a> | <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti</a> |
+      <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">M. Seprinaldi</a>
     
     </div>
   </div>  
