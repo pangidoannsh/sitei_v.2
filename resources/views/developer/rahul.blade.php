@@ -53,7 +53,7 @@
     <div class="col-lg-4 shadow text-center rounded-start bg-success">
       <div class="row text-white p-4 pt-4 row-cols-1">
     <div class="col">
-      <img src="/assets/img/fahril.jpeg" class="rounded-circle" alt="rahul" width="100">
+      <img src="/assets/img/rahul2.jpg" class="rounded-circle" alt="rahul" width="100">
       <h6 class="mt-2 ">Rahul Ilsa Tajri Mukhti, S.T</h6>
       <small>Backend Developer</small>
       <hr class="border border-1">
@@ -88,7 +88,7 @@
             <p class="text-muted">fahrilhadi77@gmail.com</p></div>
   </div>
   <div class="col float-center pt-3">
-      <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="https://www.instagram.com//naldy.muhammad507"><i class="fab fa-instagram"></i></a>
+      <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="https://www.instagram.com/rahulilsa"><i class="fab fa-instagram"></i></a>
         <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
         <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="#"><i class="fab fa-whatsapp"></i></a>
     </div>
@@ -102,7 +102,7 @@
             <p class="text-muted">Sistem Penilaian Seminar Akademik Jurusan Teknik Elektro</p>
           </div>
     <div class="col-lg-6 col-md-12"><h6 class="fw-bold">Deskripsi Peran</h6>
-            <p class="text-muted">Merancang UI/UX dan Mengembangkan Frontend Website Sistem Penilaian Seminar Akademik</p></div>
+            <p class="text-muted">Merancang dan Mengembangkan Backend Website Sistem Penilaian Seminar Akademik</p></div>
   </div>
     </div>
     

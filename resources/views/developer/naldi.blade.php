@@ -272,7 +272,7 @@
             <p class="text-muted">seprinaldimuhammad@gmail.com</p></div>
   </div>
   <div class="col float-center pt-3">
-      <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="https://www.instagram.com//naldy.muhammad507"><i class="fab fa-instagram"></i></a>
+      <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="https://www.instagram.com/naldy.muhammad507"><i class="fab fa-instagram"></i></a>
         <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
         <a class="bg-success text-white p-2 rounded-circle fs-5" formtarget="_blank" target="_blank" href="#"><i class="fab fa-whatsapp"></i></a>
     </div>
