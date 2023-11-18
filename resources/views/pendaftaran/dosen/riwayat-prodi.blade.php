@@ -379,7 +379,7 @@
 @endsection
 
 
-@push('scripts')
+{{-- @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endpush()
+@endpush() --}}
 
 @push('scripts')
 <script>
