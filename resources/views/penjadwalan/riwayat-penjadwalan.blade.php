@@ -21,7 +21,7 @@
   <li><a href="/form" class="px-1">Jadwal</a></li>
   (<span id=""></span>)
   <span class="px-2">|</span>      
-  <li><a href="/riwayat-penjadwalan" class="breadcrumb-item active fw-bold text-black px-1">Riwayat Penjadwalan</a></li>
+  <li><a href="/riwayat-penjadwalan" class="breadcrumb-item active fw-bold text-success px-1">Riwayat Penjadwalan</a></li>
   (<span id=""></span>)
 </ol>
 

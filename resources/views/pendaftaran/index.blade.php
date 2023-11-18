@@ -236,7 +236,7 @@
   @endif
   @endif 
 
-@if (Str::length(Auth::guard('dosen')->user()) > 0)
+{{-- @if (Str::length(Auth::guard('dosen')->user()) > 0)
 @if (Auth::guard('dosen')->user()->role_id == 5 )
    <div class="col-12 col-md-6 utama ">
    <a href="/kp-skripsi/seminar"><div class="card kpindex">
@@ -320,7 +320,7 @@
 </div>
 
   @endif
-  @endif
+  @endif --}}
 
 
 </div>

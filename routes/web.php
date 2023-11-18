@@ -250,7 +250,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/kerja-praktek', [PendaftaranController::class, 'pendaftaran_kp']);
 
 
-    Route::get('/kp-skripsi/pembimbing-penguji/riwayat', [PendaftaranController::class, 'riwayat_pembimbing_penguji']);
+    Route::get('/kp-skripsi/pembimbing-penguji/riwayat-seminar', [PendaftaranController::class, 'riwayat_seminar_pembimbing_penguji']);
+    Route::get('/kp-skripsi/pembimbing-penguji/riwayat-bimbingan', [PendaftaranController::class, 'riwayat_bimbingan_pembimbing_penguji']);
 
     
 
@@ -470,7 +471,7 @@ Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){
     Route::get('/perpanjangan-2/detail/{id}', [PendaftaranSkripsiController::class, 'detailperpanjangan_2']);
     Route::get('/bukti-buku-skripsi/detail/{id}', [PendaftaranSkripsiController::class, 'detailbukti_buku_skripsi']);
 
-    Route::get('/statistik/kuota-bimbingan', [PendaftaranController::class, 'kuotabimbingan']);
+    Route::get('/statistik', [PendaftaranController::class, 'kuotabimbingan']);
     Route::get('/detail/kuota-bimbingan/kp/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_kp']);
     Route::get('/detail/kuota-bimbingan/skripsi/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_skripsi']);
     Route::get('/kuota-bimbingan/kp', [PendaftaranController::class, 'kuotabimbingan_kp']);

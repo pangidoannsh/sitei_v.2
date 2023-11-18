@@ -27,18 +27,21 @@
 <div class="container card  p-4">
 
 <ol class="breadcrumb col-lg-12">  
-  <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span id="seminarKPCount"></span>) </a></li> 
+  <li>
+    <a href="/kp-skripsi/seminar-pembimbing-penguji" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span id="seminarKPCount"></span>) </a>
+  </li> 
 
-        <span class="px-2">|</span>
+        {{-- <span class="px-2">|</span>
         <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span id="prodiKPCount"></span>)</a></li>
         
         <span class="px-2">|</span>
-        <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
+        <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li> --}}
         
-        <span class="px-2">|</span>
+  <span class="px-2">|</span>
 
-        <li><a href="/kp-skripsi/pembimbing-penguji/riwayat" class="px-1">Riwayat</a></li>
-        (<span id="bimbinganKPCount"></span>)
+  <li>
+    <a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="px-1">Riwayat (<span id=""></span>)</a>
+  </li>
   
 </ol>
 

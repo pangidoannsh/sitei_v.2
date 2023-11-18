@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Riwayat
+    Riwayat Seminar Mahasiswa Bimbingan
 @endsection
 
 @section('content')
@@ -26,14 +26,9 @@
  
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
      
-  <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span id="seminarKPCount"></span>) </a></li>
+  <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span id=""></span>) </a></li>
   <span class="px-2">|</span>
-          <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span id="bimbinganKPCount"></span>)</a></li>
-          
-          <span class="px-2">|</span>
-          <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
-          <span class="px-2">|</span>
-    <li><a href="/kp-skripsi/pembimbing-penguji/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span id=""></span>)</a></li>
+  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span id=""></span>)</a></li>
     
  
   @endif
@@ -66,85 +61,6 @@
 </ol>
 
 <div class="container-fluid">
-
-<div class="p-2 rounded">
-            <h5 class="">Riwayat Bimbingan </h5>
-            <hr>
-            </div>
-
-          <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
-  <thead class="table-dark">
-    <tr>      
-        <!-- <th class="text-center" scope="col">No.</th> -->
-        <th class="text-center" scope="col">NIM</th>
-        <th class="text-center" scope="col">Nama</th>
-        <!-- <th class="text-center" scope="col">Konsentrasi</th>   -->
-        <!-- <th class="text-center" scope="col">Jenis Usulan</th> -->
-        <th class="text-center" scope="col">Status</th>
-        <th class="text-center" scope="col">Keterangan</th>   
-        <th class="text-center" scope="col">Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    @foreach ($pendaftaran_kp as $kp)
-<div></div>
-        <tr>        
-            <!-- <td class="text-center">{{$loop->iteration}}</td>                              -->
-            <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$kp->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</td>            -->
-            <!-- <td class="text-center">{{$kp->jenis_usulan}}</td>                       -->
-            <td class="text-center bg-info">{{$kp->status_kp}}</td>
-                               
-            <td class="text-center">{{$kp->keterangan}}</td>  
-
-            <td class="text-center">
-            <a href="/kpti10-kp/detail/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
-            </td>
-
-        </tr>
-
-    @endforeach
-
-     @foreach ($pendaftaran_skripsi as $skripsi)
-<div></div>
-        <tr>        
-            <!-- <td class="text-center">{{$loop->iteration}}</td>-->
-            <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$skripsi->konsentrasi->nama_konsentrasi}}</td>-->
-                        
-            <!-- <td class="text-center">{{$skripsi->jenis_usulan}}</td>    -->
-            <!-- USUL JUDUL  -->
-  
-            @if ($skripsi->status_skripsi == 'SKRIPSI SELESAI')           
-            <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
-            @endif
-            <!-- ___________batas____________ -->
-
-            <td class="text-center">{{$skripsi->keterangan}}</td> 
-            <!-- USUL JUDUL  -->
-              @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $skripsi->status_skripsi == 'SKRIPSI SELESAI' ) 
-
-           <td class="text-center">
-          <a href="/bukti-buku-skripsi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
-            </td>
-          @endif
-        </tr>
-
-    @endforeach
-
-  </tbody>
-
-
-</table>
-<hr class="pt-1 mt-2 bg-dark">
-
-<div class="p-2 rounded mt-4">
-            <h5 class="">Riwayat Penilaian Seminar</h5>
-            <hr>
-            </div>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables2">
   <thead class="table-dark">

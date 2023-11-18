@@ -20,11 +20,11 @@
 
 <div class="container card p-4">
 <ol class="breadcrumb col-lg-12">
-  <li class="breadcrumb-item"><a class="breadcrumb-item" href="/persetujuan-kp-skripsi">Persetujuan KP & Skripsi</a></li>
+  <li class="breadcrumb-item"><a class="breadcrumb-item" href="/persetujuan-kp-skripsi">Persetujuan KP & Skripsi (<span id=""></span>)</a></li>
   <span class="px-2">|</span>
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-success" href="/persetujuan-kaprodi">Persetujuan Seminar</a></li>
+  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-success" href="/persetujuan-kaprodi">Persetujuan Seminar (<span id=""></span>)</a></li>
   <span class="px-2">|</span>
-  <li class="breadcrumb-item"><a href="/riwayat-kaprodi">Riwayat Persetujuan</a></li>  
+  <li class="breadcrumb-item"><a href="/riwayat-kaprodi">Riwayat Persetujuan (<span id=""></span>)</a></li>  
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">

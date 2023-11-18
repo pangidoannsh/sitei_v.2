@@ -355,7 +355,7 @@ class DatabaseSeeder extends Seeder
             'nip' => 198312032019031006,
             'password' => bcrypt('123456'),
             'nama' => 'Rahmat Rizal Andhi, S.T., M.T.',
-            'nama_singkat' => 'ED',
+            'nama_singkat' => 'RR',
             'email' => 'edisusilo.lecturer@unri.ac.id',
         ]);
         Dosen::create([
