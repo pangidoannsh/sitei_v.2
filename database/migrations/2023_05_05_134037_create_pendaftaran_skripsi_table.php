@@ -95,7 +95,7 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('tgl_disetujui_revisi_kaprodi')->nullable();
              //Alasan ditolak
             $table->string('alasan')->nullable();
-            $table->string('pesan')->nullable();     
+            $table->string('pesan')->nullable();    
              
              $table->string('jenis_usulan')->default('Usulan Judul Skripsi');
              $table->string('status_skripsi')->default('USULAN JUDUL');

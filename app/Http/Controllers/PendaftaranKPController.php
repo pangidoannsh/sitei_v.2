@@ -12,6 +12,7 @@ use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\StatusKP;
 use App\Models\Konsentrasi;
+use App\Models\KapasitasBimbingan;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,8 +72,7 @@ class PendaftaranKPController extends Controller
             'pendaftaran_kp' => PendaftaranKP::all()->sortBy('created_at'),
             
         ]);
-    }
-    
+    }    
 
     public function storeusulankp(Request $request)
     {
@@ -91,7 +91,7 @@ class PendaftaranKPController extends Controller
   
         $dosen = Dosen::where('nip', $request->dosen_pembimbing_nip)->first();
 
-        $kapasitasBimbingan = 10; 
+        $kapasitasBimbingan = KapasitasBimbingan::where('key', 'kapasitas_kp')->value('value') ?? 10;
 
         $jumlahBimbinganSaatIni = $dosen->pendaftaran_kp()
             ->where('status_kp', '!=', 'USULAN KP DITOLAK')
@@ -125,10 +125,46 @@ class PendaftaranKPController extends Controller
 
         ]);
 
-        Alert::success('Berhasil!', 'KP Diusulkan')->showConfirmButton('Ok', '#28a745');
+        Alert::success('Berhasil!', 'Berhasil disimpan')->showConfirmButton('Ok', '#28a745');
 
         return redirect('/usulankp/index');
     }
+
+    public function kapasitas_index()
+    {
+        return view('settings.kapasitas-index', [
+            'dosens' => Dosen::all(),
+            'kapasitas_bimbingan' => KapasitasBimbingan::all(),
+            
+        ]);
+    }
+
+    public function kapasitas_bimbingan_edit(Request $request, $id)
+    {
+        $kp = KapasitasBimbingan::find($id); 
+
+        return view('settings.kapasitas-bimbingan', [
+            'dosens' => Dosen::all(),
+            'kp' => $kp,
+            // 'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->get(),
+            
+        ]);
+    }
+
+public function kapasitasbimbingan_store(Request $request, $id)
+{
+   
+        $kp = KapasitasBimbingan::find($id);
+        $kp->kapasitas_kp = $request->kapasitas_kp;
+        $kp->kapasitas_skripsi = $request->kapasitas_skripsi;
+        $kp->update();
+
+       Alert::success('Berhasil', 'Data berhasil disimpan')->showConfirmButton('Ok', '#28a745');
+        return  back();
+}
+
+
+
     public function createusulankp_ulang()
     {
         return view('pendaftaran.kerja-praktek.usulan-kp.create-ulang', [

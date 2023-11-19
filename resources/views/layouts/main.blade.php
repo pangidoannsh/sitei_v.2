@@ -99,6 +99,18 @@
               <li><a href="/statistik" class="dropdown-item mb-1 {{Request::is ('statistik*') ? 'text-success' : '' }}">Statistik</a></li>
             </ul>
           </li>
+@if ( Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11)  
+          <li class="nav-item dropdown baru">
+            <a id="dropdownSubMenu1" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pengaturan</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
+              <li>                        
+                <a href="/kapasitas-bimbingan/index" class="dropdown-item mb-1 {{Request::is ('kp-skripsi*') ? 'text-success' : '' }} ">Kapasitas Bimbingan</a>
+              </li>
+              <li><a href="#" class="dropdown-item mb-1 {{Request::is ('pembimbing*') ? 'text-success' : '' }}">Dll</a></li> 
+   
+            </ul>
+          </li>
+           @endif
 
           @endif
 

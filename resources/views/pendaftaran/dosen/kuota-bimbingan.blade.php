@@ -34,7 +34,7 @@ Beban Bimbingan Dosen
         <th class="text-center" scope="col">No.</th>
         <th class="text-center" scope="col">Kode Dosen</th>
         <th class="text-center" scope="col">Nama Dosen</th>
-        <th class="text-center" scope="col">Total Bimbingan KP</th>
+        <th class="text-center" scope="col">Total Bimbingan</th>
         <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
@@ -72,9 +72,9 @@ Beban Bimbingan Dosen
         <th class="text-center" scope="col">Kode Dosen</th>
         <th class="text-center" scope="col">Nama Dosen</th>
 
-        <th class="text-center" scope="col">Sebagai Pembimbing 1</th>
-        <th class="text-center" scope="col">Sebagai Pembimbing 2</th>
-        <th class="text-center" scope="col">Total Bimbingan Skripsi</th>
+        <th class="text-center" scope="col">Pembimbing 1</th>
+        <th class="text-center" scope="col">Pembimbing 2</th>
+        <th class="text-center" scope="col">Total Bimbingan</th>
         <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>

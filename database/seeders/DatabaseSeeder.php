@@ -6,6 +6,7 @@ use App\Models\StatusKP;
 use App\Models\Dosen;
 use App\Models\Konsentrasi;
 use App\Models\Mahasiswa;
+use App\Models\KapasitasBimbingan;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Prodi;
@@ -680,6 +681,12 @@ class DatabaseSeeder extends Seeder
             'jam_tersedia' => '11.00-12.00'
         ]
         );
+
+        KapasitasBimbingan::create([
+            'kapasitas_kp' => '10',
+            'kapasitas_skripsi' => '10',
+
+        ]);
 
 
               

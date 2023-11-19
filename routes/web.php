@@ -524,10 +524,11 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
     Route::put('/daftarsempro/koordinator/approve/{id}', [PendaftaranSkripsiController::class, 'approvedaftarsempro_koordinator']);
     Route::put('/daftarsempro/koordinator/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakdaftarsempro_koordinator']);
 
-
+    Route::get('/kapasitas-bimbingan/index', [PendaftaranKPController::class, 'kapasitas_index']);
+    Route::get('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitas_bimbingan_edit']);
+    Route::post('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitasbimbingan_store']);
     
 
-    
     Route::put('/perpanjangan2/koordinator/approve/{id}', [PendaftaranSkripsiController::class, 'approveperpanjangan2_koordinator']);
     Route::put('/perpanjangan2/koordinator/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakperpanjangan2_koordinator']);
     
