@@ -91,8 +91,8 @@ class PendaftaranKPController extends Controller
   
         $dosen = Dosen::where('nip', $request->dosen_pembimbing_nip)->first();
 
-        $kapasitasBimbingan = KapasitasBimbingan::where('key', 'kapasitas_kp')->value('value') ?? 10;
-
+        $kapasitasBimbingan = KapasitasBimbingan::value('kapasitas_kp');
+        
         $jumlahBimbinganSaatIni = $dosen->pendaftaran_kp()
             ->where('status_kp', '!=', 'USULAN KP DITOLAK')
             ->where('status_kp', '!=', 'USULKAN KP ULANG')

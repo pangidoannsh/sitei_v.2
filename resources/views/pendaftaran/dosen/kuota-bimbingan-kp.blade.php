@@ -41,19 +41,17 @@ Beban Bimbingan KP Dosen
             <td class="text-center">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$dosen->nama_singkat}}</td>                             
             <td >{{$dosen->nama}}</td>                             
-            <td class="text-center @if(($dosen->pendaftaran_k_p_count) >= 10) bg-danger @endif bg-info">{{ $dosen->pendaftaran_k_p_count }}</td>
+            <td class="text-center @if(($dosen->pendaftaran_k_p_count) >= ($kapasitas->kapasitas_skripsi)) bg-danger @endif bg-info">{{ $dosen->pendaftaran_k_p_count }}</td>
 
     @endforeach
   </tbody>
 </table>
 
 </div>
-
-
 <div class="card pb-5">
   <div class="card-body">
     <h5 class="card-title fw-bold mb-1">Keterangan :</h5>
-    <p class="card-text">Kuota maksimal bimbingan KP adalah <b> 10 Orang.</p>
+    <p class="card-text">Kuota maksimal bimbingan KP adalah <b> {{$kapasitas->kapasitas_kp}} Orang.</p>
   </div>
 </div>
 

@@ -13,6 +13,7 @@ use App\Models\PendaftaranKP;
 use App\Models\PenjadwalanSempro;
 use App\Models\PenjadwalanKP;
 use App\Models\PendaftaranSkripsi;
+use App\Models\KapasitasBimbingan;
 
 use App\Models\PenjadwalanSkripsi;
 use App\Http\Controllers\Controller;
@@ -1882,7 +1883,6 @@ class PendaftaranController extends Controller
 
     public function kuotabimbingan()
     {       
-
         $dosens = Dosen::withCount(['pendaftaranKP', 'pendaftaranSkripsi1', 'pendaftaranSkripsi2'])->get();
         
         $dosens = Dosen::withCount([
@@ -1907,6 +1907,7 @@ class PendaftaranController extends Controller
         return view('pendaftaran.dosen.kuota-bimbingan', [
             'dosen' => $dosens,
             'dosenn' => $dosens,
+            'kapasitas' =>KapasitasBimbingan::first(),
             // 'pendaftaran_kp' => PendaftaranKP::where('dosen_pembimbing_nip', $pembimbing)
             //      ->orderBy('updated_at', 'desc')->get(),
         ]);
@@ -1938,6 +1939,7 @@ class PendaftaranController extends Controller
 
         return view('pendaftaran.dosen.kuota-bimbingan-kp', [
             'dosen' => $dosens,
+             'kapasitas' =>KapasitasBimbingan::first(),
         ]);
     }
 
@@ -1967,6 +1969,7 @@ class PendaftaranController extends Controller
 
         return view('pendaftaran.dosen.kuota-bimbingan-skripsi', [
             'dosen' => $dosens,
+             'kapasitas' =>KapasitasBimbingan::first(),
         ]);
     }
 

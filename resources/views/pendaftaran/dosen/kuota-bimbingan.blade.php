@@ -46,7 +46,7 @@ Beban Bimbingan Dosen
             <td class="text-center">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$dosen->nama_singkat}}</td>                             
             <td >{{$dosen->nama}}</td>                             
-            <td class="text-center @if(($dosen->pendaftaran_k_p_count) >= 10) bg-danger @endif bg-info">{{ $dosen->pendaftaran_k_p_count }}</td>
+            <td class="text-center @if(($dosen->pendaftaran_k_p_count) >= ($kapasitas->kapasitas_kp)) bg-danger @endif bg-info">{{ $dosen->pendaftaran_k_p_count }}</td>
 
             <td class="text-center" > 
                 <a href="/detail/kuota-bimbingan/kp/{{($dosen->nip)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
@@ -90,7 +90,7 @@ Beban Bimbingan Dosen
                 <td class="text-center">{{ $dosen->pendaftaran_skripsi1_count }}</td>  
                 <td class="text-center">{{ $dosen->pendaftaran_skripsi2_count }}</td>  
 
-                <td class="text-center @if(($dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count) >= 10) bg-danger @endif bg-info">{{ $dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count }}</td>
+                <td class="text-center @if(($dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count) >= ($kapasitas->kapasitas_skripsi)) bg-danger @endif bg-info">{{ $dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count }}</td>
                 <td class="text-center">
                     <a href="/detail/kuota-bimbingan/skripsi/{{($dosen->nip)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                 </td>
@@ -103,8 +103,9 @@ Beban Bimbingan Dosen
 
 <div class="card pb-5">
   <div class="card-body">
-    <h5 class="card-title fw-bold mb-1">Keterangan :</h5>
-    <p class="card-text">Kuota maksimal bimbingan KP ataupun Skripsi masing-masing adalah <b> 10 Orang.</p>
+    <h5 class="card-title fw-bold ">Keterangan :</h5> <br>
+    <span class="card-text">Kuota maksimal bimbingan KP adalah <b> {{$kapasitas->kapasitas_kp}} Orang. </b> </span> <br>
+    <span class="card-text">Kuota maksimal bimbingan Skripsi adalah <b> {{$kapasitas->kapasitas_skripsi}} Orang.</span>
   </div>
 </div>
 

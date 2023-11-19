@@ -48,7 +48,7 @@ Beban Bimbingan Skripsi Dosen
                 <td class="text-center">{{ $dosen->pendaftaran_skripsi1_count }}</td>  
                 <td class="text-center">{{ $dosen->pendaftaran_skripsi2_count }}</td>  
 
-                <td class="text-center @if(($dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count) >= 10) bg-danger @endif bg-info">{{ $dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count }}</td>
+                <td class="text-center @if(($dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count) >= ($kapasitas->kapasitas_skripsi)) bg-danger @endif bg-info">{{ $dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count }}</td>
     @endforeach
   </tbody>
 </table>
@@ -59,7 +59,7 @@ Beban Bimbingan Skripsi Dosen
 <div class="card pb-5">
   <div class="card-body">
     <h5 class="card-title fw-bold mb-1">Keterangan :</h5>
-    <p class="card-text">Kuota maksimal Bimbingan Skripsi adalah <b>10 Orang.</b></p>
+    <p class="card-text">Kuota maksimal Bimbingan Skripsi adalah <b>{{$kapasitas->kapasitas_skripsi}} Orang.</b></p>
   </div>
 </div>
 

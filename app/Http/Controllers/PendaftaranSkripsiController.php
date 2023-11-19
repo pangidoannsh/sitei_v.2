@@ -13,6 +13,7 @@ use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
 use App\Models\PendaftaranSkripsi;
+use App\Models\KapasitasBimbingan;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -71,7 +72,7 @@ class PendaftaranSkripsiController extends Controller
         $dosen = Dosen::where('nip', $pembimbing1_nip)->first();
         $dosen2 = Dosen::where('nip', $pembimbing2_nip)->first();
 
-        $maxMahasiswaPerDosen = 10; // Jumlah maksimum mahasiswa per dosen
+        $maxMahasiswaPerDosen = KapasitasBimbingan::value('kapasitas_skripsi');
         
         $pendaftaranSkripsiCount = $dosen->pendaftaranSkripsiPembimbing1()
          ->where('status_skripsi', '!=', 'USULAN JUDUL DITOLAK')
