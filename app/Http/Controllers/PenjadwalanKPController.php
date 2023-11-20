@@ -94,7 +94,7 @@ class PenjadwalanKPController extends Controller
             'prodi_id' => $request->prodi_id,            
             'judul_kp' => $request->judul_kp,
             'penguji_nip' => $request->penguji_nip,  
-            'ruangan_id' => $request->ruangan_id,
+            'lokasi' => $request->lokasi,
             'waktu' => $request->waktu,
             'tanggal' => $request->tanggal,
             'dibuat_oleh' => auth()->user()->username,
@@ -140,6 +140,7 @@ class PenjadwalanKPController extends Controller
         $rules = [
             'mahasiswa_nim' => 'required',
             'pembimbing_nip' => 'required',
+            'penguji_nip' => 'required',
             'prodi_id' => 'required',                        
             'judul_kp' => 'required',
             'lokasi' => 'max:255',

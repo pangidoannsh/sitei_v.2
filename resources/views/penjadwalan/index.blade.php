@@ -112,20 +112,9 @@
             </td>
             @endif
 
-            <td class="text-center">
-              @if($kp->waktu == null)
-              <p> </p>
-              @else
-              {{$kp->waktu}}
-            </td>
-            @endif
+            <td class="text-center">{{$kp->waktu}}</td>                   
+            <td class="text-center">{{$kp->lokasi}}</td>
 
-            <td class="text-center">
-            @if ($kp->lokasi == null)<p> </p>
-            @else
-            {{$kp->lokasi}}
-            </td>
-            @endif                             
             <td class="text-center">{{$kp->pembimbing->nama_singkat}}</td>
             <td class="text-center">{{$kp->penguji->nama_singkat}}</td>                    
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       

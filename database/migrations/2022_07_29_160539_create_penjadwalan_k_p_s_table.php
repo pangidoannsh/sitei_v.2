@@ -23,7 +23,7 @@ class CreatePenjadwalanKPSTable extends Migration
             $table->string('judul_kp');
             $table->date('tanggal')->nullable();
             $table->string('waktu')->nullable();
-            $table->foreignId('ruangan_id')->nullable();
+            $table->string('lokasi')->nullable();
             $table->string('status_seminar')->default(0);
             $table->string('dibuat_oleh');
             $table->timestamps();
