@@ -59,7 +59,7 @@
       <th class="text-center" scope="col">Lokasi</th>              
       <th class="text-center" scope="col">Pembimbing</th>
       <th class="text-center" scope="col">Penguji</th>          
-      <th class="text-center"scope="col">Aksi</th>
+      {{-- <th class="text-center"scope="col">Aksi</th> --}}
     </tr>
   </thead>
   <tbody> 
@@ -79,7 +79,7 @@
         <td class="text-center">
           <p>{{$kp->penguji->nama_singkat}}</p>           
         </td>
-        <td class="text-center">
+        {{-- <td class="text-center">
           @if ($kp->penilaian(Auth::user()->nip, $kp->id) == false)
             @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
             <a href="/penilaian-kp/create/{{Crypt::encryptString($kp->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
@@ -97,7 +97,7 @@
           @endif      
           
           
-        </td>                                
+        </td>                                 --}}
       </tr>               
     @endforeach
 

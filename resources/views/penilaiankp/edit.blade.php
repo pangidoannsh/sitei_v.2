@@ -20,11 +20,11 @@
 
 <div>  
 
-  <a href="/kp-skripsi/penilaian-kp" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin? Data tidak akan tersimpan!')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
   <div class="row">
-    <div class="col mb-3">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <div class="col col-lg-6 col-md-6 col-sm-12 mt-3">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
     <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold  gridratakiri">NIM</div>
@@ -39,8 +39,8 @@
       </li>   
     </ol>
     </div>
-    <div class="col-md">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold ">Pembimbing</div>
@@ -61,7 +61,7 @@
 <div class="kol-judul mt-3">
   <div class="row">
     <div class="col">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold ">Judul</div>
@@ -76,7 +76,7 @@
 <div class="kol-jadwal mt-3 mb-3">
   <div class="row">
     <div class="col-md mb-3">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
         <div class="fw-bold  ">Jadwal</div>          
@@ -86,7 +86,7 @@
     </ol>
     </div>
     <div class="col-md">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
         <div class="fw-bold ">Lokasi</div>
@@ -210,8 +210,8 @@
                   <div class="col-lg-6 mt-5 ml-auto mr-auto">
                       <table class="table table-bordered bg-success">
                         <tbody>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (ANGKA)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.5rem; font-weight:bold;">TOTAL NILAI (ANGKA)</td>
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_angka" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_angka" style=" width: 50px;
                   background-color: rgb(255, 255, 255);                                                
@@ -219,8 +219,8 @@
                                     </h3>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (HURUF)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.3rem; font-weight:bold;">TOTAL NILAI (HURUF)</td>
 
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_huruf" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_huruf" style=" width: 50px;
@@ -233,7 +233,7 @@
                       </table>
             </div>
 
-                  <button type="submit" class="btn btnsimpan btn-success float-right">Perbarui</button>    
+                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -263,11 +263,10 @@
                     <div class="fw-bold mb-2">Perbaikan 5</div>
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kp->revisi_naskah5 != null ? $kp->revisi_naskah5 : '' }}">
                     </div>
-                    <button type="submit" class="btn btn-success float-right">Perbarui</button>    
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>    
                   </form>
                 </div>
-
-            </div>                      
+                   
         </div>    
     </div>
 </form>
@@ -395,8 +394,8 @@
                   <div class="col-lg-6 mt-5 ml-auto mr-auto">
                       <table class="table table-bordered bg-success">
                         <tbody>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (ANGKA)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.5rem; font-weight:bold;">TOTAL NILAI (ANGKA)</td>
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_angka" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_angka" style=" width: 50px;
                   background-color: rgb(255, 255, 255);                                                
@@ -404,8 +403,8 @@
                                     </h3>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (HURUF)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.3rem; font-weight:bold;">TOTAL NILAI (HURUF)</td>
 
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_huruf" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_huruf" style=" width: 50px;
@@ -418,7 +417,7 @@
                       </table>
             </div>
                                 
-                  <button type="submit" class="btn btnsimpan btn-success float-right">Perbarui</button>    
+                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -427,7 +426,7 @@
                     <div class="mb-3 gridratakiri">                      
                       <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
                     </div>
-                    <button type="submit" class="btn btn-success float-right">Perbarui</button>
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
@@ -448,7 +447,7 @@
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
                     
-                    <button type="submit" class="btn btn-success float-right">Perbarui</button>
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
                   </form>
                 </div>
 
@@ -619,8 +618,7 @@
                 
                     @endif
                     @endif
-
-                </div>                
+           
             </div>            
         </div>              
     </div>
