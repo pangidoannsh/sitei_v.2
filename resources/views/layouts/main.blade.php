@@ -275,7 +275,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+    <div class="content pb-5">
       <div class="container">
         @yield('content')
       </div><!-- /.container-fluid -->
@@ -286,15 +286,13 @@
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  <footer class="main-footer bg-dark">
-  <div class="container kaki-bawah">
-  <strong>Dikembangkan oleh Prodi Teknik Informatika UNRI</strong>
-  </div>
-    <!-- Default to the left -->
-    <!-- <strong>Copyright &copy; Jurusan Teknik Elektro</strong> -->
-  </footer>
+      <div class="footer bg-dark">
+        <div class="container">
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI</p>
+        </div>
+      </div>
   
-  </div>
+
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->

@@ -438,6 +438,16 @@ table thead tr th {
     margin-top: 20px;
 }
 
+.footer{
+    padding: 10px 0 10px 0;
+
+}
+
+.developer{
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .anak-judul h4 {
         font-size: 16px;
