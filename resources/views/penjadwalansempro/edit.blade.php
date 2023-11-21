@@ -173,10 +173,10 @@
             @enderror
         </div> 
 
-        
+        <button type="submit" class="btn btn-success float-right mt-4">Perbarui</button>
             </div>
-            <div class="col-12 d-flex justify-content-md-evenly">
-      <button type="submit" class="btn btn-success mt-4">Perbarui</button>
+            
+      
     </div>   
         </div>
     </div>

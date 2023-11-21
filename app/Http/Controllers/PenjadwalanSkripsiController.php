@@ -130,7 +130,10 @@ class PenjadwalanSkripsiController extends Controller
     {
         $rules = [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',
+            'pembimbingsatu_nip' => 'required',   
+            'pengujisatu_nip' => 'required',         
+            'pengujidua_nip' => 'required',         
+            'pengujitiga_nip' => 'required',  
             'prodi_id' => 'required',                           
             'judul_skripsi' => 'required',
         ];        
@@ -163,6 +166,10 @@ class PenjadwalanSkripsiController extends Controller
                 }
             }
         }
+
+        $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
+        $edit->pengujidua_nip = $validated['pengujidua_nip'];
+        $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
         
         if($request->waktu_selasa != null) {
             $request->waktu = $request->waktu_selasa;

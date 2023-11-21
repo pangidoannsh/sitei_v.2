@@ -22,11 +22,106 @@
 
 <div>
 
-  <a href="/kp-skripsi/penilaian-skripsi" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin?')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
-<div class="row">
-    <div class="col mb-3">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <div class="row mt-4">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+          <h5 class="text-bold">Mahasiswa</h5>
+          <hr>
+            <p class="card-title text-secondary text-sm " >Nama</p>
+            <p class="card-text text-start" >{{$sempro->mahasiswa->nama}}</p>
+            <p class="card-title text-secondary text-sm " >NIM</p>
+            <p class="card-text text-start" >{{$sempro->mahasiswa->nim}}</p>
+            <p class="card-title text-secondary text-sm " >Program Studi</p>
+            <p class="card-text text-start" >{{$sempro->mahasiswa->prodi->nama_prodi}}</p>
+            <p class="card-title text-secondary text-sm " >Konsentrasi</p>
+            <p class="card-text text-start" >{{$sempro->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
+          </div>
+        </div>
+    
+    
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-bold">Judul Proposal</h5>
+            <hr>
+    
+            <p class="card-title text-secondary text-sm" >Judul</p>
+            <p class="card-text text-start" >{{ $sempro->revisi_proposal != null ? $sempro->revisi_proposal : $sempro->judul_proposal }}</p>
+    
+          </div>
+        </div>
+    
+    
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-bold">Dosen Pembimbing</h5>
+            <hr>
+            @if ($sempro->pembimbingdua_nip == null )
+            <p class="card-title text-secondary text-sm" >Nama</p>
+            <p class="card-text text-start" >{{$sempro->pembimbingsatu->nama}}</p>
+    
+    
+            @elseif($sempro->pembimbingdua_nip !== null)
+            <p class="card-title text-secondary text-sm" >Nama Pembimbing 1</p>
+            <p class="card-text text-start" >{{$sempro->pembimbingsatu->nama}}</p>
+    
+            <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
+            <p class="card-text text-start" >{{$sempro->pembimbingdua->nama}}</p>
+            @endif
+            
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-bold">Dosen Penguji</h5>
+            <hr>
+    
+            <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
+            <p class="card-text text-start" >{{$sempro->pengujisatu->nama}}</p>
+    
+    
+            
+            <p class="card-title text-secondary text-sm" >Nama Penguji 2</p>
+            <p class="card-text text-start" >{{$sempro->pengujidua->nama}}</p>
+    @if ($sempro->pengujitiga == !null)
+            <p class="card-title text-secondary text-sm" >Nama Penguji 3</p>
+            <p class="card-text text-start" >{{$sempro->pengujitiga->nama}}</p>
+            @endif
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="row mb-4">
+        <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-bold">Jadwal Seminar Proposal</h5>
+            <hr>
+    
+            <p class="card-title text-secondary text-sm" >Tanggal</p>
+            <p class="card-text text-start" >{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</p>
+            <p class="card-title text-secondary text-sm" >Pukul</p>
+            <p class="card-text text-start" >{{$sempro->waktu}}</p>
+            <p class="card-title text-secondary text-sm" >Lokasi</p>
+            <p class="card-text text-start" >{{$sempro->lokasi}}</p>
+    
+          </div>
+        </div>
+    
+        </div>
+        
+      </div>
+
+{{-- <div class="row">
+    <div class="col col-lg-6 col-md-6 col-sm-12 mt-3">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
     <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold">NIM</div>
@@ -47,8 +142,8 @@
       </li>
     </ol>
     </div>
-    <div class="col-md lh-md">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold">Pembimbing</div>
@@ -79,7 +174,7 @@
 <div class="kol-judul mt-3">
 <div class="row">
     <div class="col">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold">Judul</div>
@@ -97,7 +192,7 @@
 <div class="kol-jadwal mt-3 mb-3">
 <div class="row">
     <div class="col mb-3 kol-jadwal">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold ">Jadwal</div>          
@@ -107,7 +202,7 @@
     </ol>
   </div>
     <div class="col-md kol-lokasi">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto gridratakiri">
           <div class="fw-bold ">Lokasi</div>
@@ -116,7 +211,7 @@
       </li>   
     </ol>
     </div>
-  </div>
+  </div> --}}
 </div>
 
 @if (auth()->user()->nip == $sempro->pembimbingsatu_nip || auth()->user()->nip == $sempro->pembimbingdua_nip)
@@ -278,8 +373,8 @@
               <div class="col-lg-6 mt-5 ml-auto mr-auto">
                       <table class="table table-bordered bg-success">
                         <tbody>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (ANGKA)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.5rem; font-weight:bold;">TOTAL NILAI (ANGKA)</td>
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_angka" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_angka" style=" width: 50px;
                   background-color: rgb(255, 255, 255);                                                
@@ -287,8 +382,8 @@
                                     </h3>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (HURUF)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.3rem; font-weight:bold;">TOTAL NILAI (HURUF)</td>
 
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_huruf" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_huruf" style=" width: 50px;
@@ -301,7 +396,7 @@
                       </table>
             </div>
               
-              <button type="submit" class="btn btnsimpan btn-success float-right">Simpan</button>
+              <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>
           </form> 
         </div>    
       </div>
@@ -602,8 +697,8 @@
             <div class="col-lg-6 mt-5 ml-auto mr-auto">
                       <table class="table table-bordered bg-success">
                         <tbody>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (ANGKA)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.5rem; font-weight:bold;">TOTAL NILAI (ANGKA)</td>
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_angka" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_angka" style=" width: 50px;
                   background-color: rgb(255, 255, 255);                                                
@@ -611,8 +706,8 @@
                                     </h3>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 250px">TOTAL NILAI (HURUF)</td>
+                            <tr class="text-center">
+                                <td style="width: 250px; padding-top:1.5rem; font-weight:bold;">TOTAL NILAI (HURUF)</td>
 
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_huruf" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_huruf" style=" width: 50px;
@@ -625,7 +720,7 @@
                       </table>
             </div>
 
-            <button type="submit" class="btn btnsimpan btn-success float-right">Simpan</button>           
+            <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>           
           </div>
 
           <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -655,7 +750,7 @@
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $sempro->revisi_naskah5 != null ? $sempro->revisi_naskah5 : '' }}">
                     </div>
 
-            <button type="submit" class="btn btn-success float-right">Simpan</button>
+            <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>
             </form> 
           </div>
                             
@@ -674,7 +769,7 @@
                 <label class="form-label">Judul Baru</label>
                 <input type="text" name="revisi_proposal" class="form-control" value="{{ $sempro->revisi_proposal != null ? $sempro->revisi_proposal : '' }}">
               </div>              
-              <button type="submit" class="btn btn-success float-right">Perbarui</button>
+              <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
             </form>
 
           </div>

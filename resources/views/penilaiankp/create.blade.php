@@ -23,7 +23,56 @@
   
   <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin? Data tidak akan tersimpan!')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
-  <div class="row">
+  <div class="row mt-3">
+    <div class="col col-lg-6 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="text-bold">Mahasiswa</h5>
+          <hr>
+          <p class="card-title text-secondary text-sm " >Nama</p>
+          <p class="card-text text-start" >{{$kp->mahasiswa->nama}}</p>
+          <p class="card-title text-secondary text-sm " >NIM</p>
+          <p class="card-text text-start" >{{$kp->mahasiswa->nim}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="text-bold">Dosen</h5>
+          <hr>
+          <p class="card-title text-secondary text-sm" >Nama Pembimbing</p>
+          <p class="card-text text-start" >{{$kp->pembimbing->nama}}</p>
+          <p class="card-title text-secondary text-sm" >Nama Penguji</p>
+          <p class="card-text text-start" >{{$kp->penguji->nama}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="text-bold">Judul Kerja Praktek</h5>
+      <hr>
+      <p class="card-title text-secondary text-sm" >Judul</p>
+      <p class="card-text text-start" >{{$kp->judul_kp}}</p>
+    </div>
+  </div>
+
+  <div class="card mb-5">
+    <div class="card-body">
+      <h5 class="text-bold">Jadwal Seminar Kerja Praktek</h5>
+      <hr>
+      <p class="card-title text-secondary text-sm" >Tanggal</p>
+      <p class="card-text text-start" >{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</p>
+      <p class="card-title text-secondary text-sm" >Pukul</p>
+      <p class="card-text text-start" >{{$kp->waktu}}</p>
+      <p class="card-title text-secondary text-sm" >Ruangan</p>
+      <p class="card-text text-start" >{{$kp->lokasi}}</p>
+    </div>
+  </div>
+
+  {{-- <div class="row">
     <div class="col col-lg-6 col-md-6 col-sm-12 mt-3">
     <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
     <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -96,7 +145,7 @@
       </li>   
     </ol>
     </div>
-  </div>
+  </div> --}}
 </div>
 
 @if (auth()->user()->nip == $kp->penguji_nip)

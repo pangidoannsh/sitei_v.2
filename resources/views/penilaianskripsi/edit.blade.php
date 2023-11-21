@@ -23,8 +23,8 @@ Edit Penilaian Sidang Skripsi
     <a href="/kp-skripsi/penilaian-skripsi" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
 
-    <div class="row">
-        <div class="col mb-3">
+    <div class="row mt-4">
+        <div class="col">
          <div class="row">
   <div class="col-sm-6">
     <div class="card">
@@ -101,8 +101,8 @@ Edit Penilaian Sidang Skripsi
     </div>
 </div>
 
-<div class="row">
-    <div class="col mb-3">
+<div class="row mb-4">
+    <div class="col">
     <div class="card">
       <div class="card-body">
         <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
