@@ -16,6 +16,8 @@
 
 <a href="{{url ('/mahasiswa/create')}}" class="btn mahasiswa btn-success mb-3">+ Mahasiswa</a>
 
+<div class="container card p-4">
+
 <table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">
     <tr>
@@ -43,6 +45,8 @@
     @endforeach
   </tbody>
 </table>
+
+</div>
     
 @endsection
 

@@ -57,6 +57,8 @@
 
 @endif
 
+<div class="container card p-4">
+
 <ol class="breadcrumb col-lg-12">   
   {{-- <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/form">Jadwal</a></li>       
   <li class="breadcrumb-item"><a href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li> --}}
@@ -220,6 +222,7 @@
 
   </tbody>
 </table>
+</div>
     
 @endsection
 

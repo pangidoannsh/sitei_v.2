@@ -13,11 +13,12 @@
  Kapasitas Bimbingan
 @endsection
 @section('content')
-<a href="/kapasitas-bimbingan/index" class="badge bg-success p-2 mb-4 "> Kembali <a>
+
+    <a href="/kapasitas-bimbingan/index" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
 <form action="/kapasitas-bimbingan/edit/{{$kp->id}}" method="POST" enctype="multipart/form-data">
     @csrf
-     <div class="row">
+     <div class="row mt-3">
     <div class="col">
 <div class="mb-3 field">
             <label class="form-label">Kapasitas Bimbingan KP</label>

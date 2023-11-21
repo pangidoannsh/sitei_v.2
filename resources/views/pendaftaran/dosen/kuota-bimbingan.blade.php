@@ -23,10 +23,12 @@ Beban Bimbingan Dosen
 <div class="container pb-4 ">
 
 <div class="container-fluid card p-4">
-<div class="pt-2 pl-2 mb-2 rounded bg-light">
-            <h5 class="">Beban Bimbingan KP</h5>
-            <hr>
-            </div>
+<div class="mb-4 rounded bg-light">
+  <div class="p-2 pt-3">
+    <h5 class="">Beban Bimbingan KP</h5>
+  <hr>
+  </div>
+</div>
 
           <table class="table table-responsive-lg rounded table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
@@ -59,11 +61,13 @@ Beban Bimbingan Dosen
 </div>
 
 
-<div class="container-fluid card p-4">
-    <div class="pt-2 pl-2 mb-2 rounded bg-light">
-            <h5 class="">Beban Bimbingan Skripsi</h5>
-            <hr>
-            </div>
+<div class="container-fluid card p-4 mt-5">
+  <div class="mb-4 rounded bg-light">
+    <div class="p-2 pt-3">
+      <h5 class="">Beban Bimbingan Skripsi</h5>
+    <hr>
+    </div>
+  </div>
 
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables2">
   <thead class="table-dark">
@@ -101,7 +105,7 @@ Beban Bimbingan Dosen
 </div>
 
 
-<div class="card pb-5">
+<div class="card pt-2 mt-5">
   <div class="card-body">
     <h5 class="card-title fw-bold ">Keterangan :</h5> <br>
     <span class="card-text">Kuota maksimal bimbingan KP adalah <b> {{$kapasitas->kapasitas_kp}} Orang. </b> </span> <br>

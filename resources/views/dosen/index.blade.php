@@ -14,7 +14,9 @@
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif 
 
-<a href="{{url ('/dosen/create')}}" class="btn dosen btn-success mb-3">+ Dosen</a>
+<a href="{{url ('/dosen/create')}}" class="btn dosen btn-success mb-4">+ Dosen</a>
+
+<div class="container card p-4">
 
 <table class="table table-responsive-lg table-bordered table-striped text-center" style="width:100%" id="datatables">
   <thead class="table-dark">
@@ -49,6 +51,8 @@
     @endforeach
   </tbody>
 </table>
+
+</div>
     
 @endsection
 

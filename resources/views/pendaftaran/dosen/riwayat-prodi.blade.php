@@ -63,10 +63,12 @@
 
 <div class="container-fluid">
 
-<div class="pt-2 pl-2 mb-2 bg-light rounded">
-            <h5 class="">Riwayat KP dan Skripsi </h5>
-            <hr>
-            </div>
+  <div class="mb-4 rounded bg-light">
+    <div class="p-2 pt-3">
+      <h5 class="">Riwayat KP dan Skripsi</h5>
+    <hr>
+    </div>
+  </div>
 
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
@@ -138,14 +140,16 @@
 </div>
 </div>
 
-<div class="container card p-4">
+<div class="container card p-4 mt-5">
 <div class="container-fluid">
 <!-- <hr class="pt-1 mt-2 bg-dark"> -->
 
-<div class="pt-2 pl-2 mb-2 bg-light rounded">
-            <h5 class="">Riwayat Seminar</h5>
-            <hr>
-            </div>
+<div class="mb-4 rounded bg-light">
+  <div class="p-2 pt-3">
+    <h5 class="">Riwayat Seminar</h5>
+  <hr>
+  </div>
+</div>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables2">
   <thead class="table-dark">

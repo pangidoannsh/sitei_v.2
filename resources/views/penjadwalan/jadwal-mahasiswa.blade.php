@@ -26,6 +26,7 @@
     <li class="breadcrumb-item"><a href="/seminar">Riwayat</a></li>  
 </ol> -->
 
+<div class="container card p-4">
 <table class="table table-responsive-lg table-bordered table-striped" width="100%" >
   <thead class="table-dark">
     <tr>      
@@ -108,6 +109,7 @@
 
   </tbody>
 </table>
+</div>
     
 @endsection
 

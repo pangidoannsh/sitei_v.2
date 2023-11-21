@@ -14,7 +14,9 @@
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif 
 
-<a href="{{url ('/role/create')}}" class="btn role btn-success mb-3">+ Hak Akses</a>
+<a href="{{url ('/role/create')}}" class="btn role btn-success mb-4">+ Hak Akses</a>
+
+<div class="container card p-4">
 
 <table class="table text-center table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">
@@ -36,6 +38,8 @@
     @endforeach
   </tbody>
 </table>
+
+</div>
     
 @endsection
 

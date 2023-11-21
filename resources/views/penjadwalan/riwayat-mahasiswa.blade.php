@@ -25,6 +25,7 @@
   <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/seminar">Riwayat</a></li>  
 </ol> -->
 
+<div class="container card p-4">
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
   <thead class="table-dark">
     <tr>
@@ -127,6 +128,7 @@
 
   </tbody>
 </table>
+</div>
     
 @endsection
 

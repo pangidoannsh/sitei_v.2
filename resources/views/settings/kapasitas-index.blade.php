@@ -18,6 +18,7 @@
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif 
 
+<div class="container card p-4">
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="">
   <thead class="table-dark">
     <tr>      
@@ -41,6 +42,7 @@
     @endforeach
   </tbody>
 </table>
+</div>
     
 @endsection
 

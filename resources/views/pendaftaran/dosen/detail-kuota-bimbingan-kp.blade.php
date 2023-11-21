@@ -24,7 +24,7 @@ Daftar Bimbingan Kerja Praktek
 
 <ol class="breadcrumb col-lg-12">
      
-<h5 class="">Data Bimbingan <span class="fw-bold fs-5">{{$dosen->nama}}  </span></h5>
+<h5 class="pt-2">Data Bimbingan <span class="fw-bold fs-5">{{$dosen->nama}}  </span></h5>
 
 </ol>
 
