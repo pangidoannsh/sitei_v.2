@@ -134,6 +134,25 @@ class PenjadwalanController extends Controller
         }
     }
 
+    public function detail_persetujuan_koordinator($id)
+    {       
+        if (auth()->user()->role_id == 9) {            
+            return view('persetujuan.detail-persetujuan-koordinator', [                    
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('id', $id)->where('status_seminar', 1)->where('prodi_id', 1)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 10) {            
+            return view('persetujuan.detail-persetujuan-koordinator', [                
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('id', $id)->where('status_seminar', 1)->where('prodi_id', 2)->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 11) {            
+            return view('persetujuan.detail-persetujuan-koordinator', [                
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('id', $id)->where('status_seminar', 1)->where('prodi_id', 3)->get(),
+            ]);
+        }
+    }
+
     public function persetujuan_kaprodi()
     {       
         if (auth()->user()->role_id == 6) {            

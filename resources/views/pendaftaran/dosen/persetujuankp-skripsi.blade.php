@@ -23,7 +23,7 @@
 <div class="container card  p-4">
 
 <ol class="breadcrumb col-lg-12">
-    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan KP & Skripsi (<span id="waitingApprovalCount"></span>)</a></li>
+    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan(<span id="waitingApprovalCount"></span>)</a></li>
     
      
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
@@ -873,6 +873,43 @@
 @endif
 
     @endforeach
+
+
+
+     @foreach ($penjadwalan_skripsis as $skripsi)
+        <tr>
+          <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
+          <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>                     
+          <td class="bg-warning text-center">Seminar {{$skripsi->jenis_seminar}}</td>                     
+          <!-- <td class="text-center">{{$skripsi->prodi->nama_prodi}}</td>           -->
+          <td class="text-center">{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td class="text-center">-</td>                   
+          <td class="text-center">{{$skripsi->lokasi}}</td>                     
+          <!-- <td class="text-center">
+            <p>1. {{$skripsi->pembimbingsatu->nama_singkat}}</p>
+            @if ($skripsi->pembimbingdua == !null)
+            <p>2. {{$skripsi->pembimbingdua->nama_singkat}}</p>                               
+            @endif
+          </td> 
+          <td class="text-center">
+            <p>1. {{$skripsi->pengujisatu->nama_singkat}}</p>
+            <p>2. {{$skripsi->pengujidua->nama_singkat}}</p>
+            @if ($skripsi->pengujitiga == !null)
+            <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
+            @endif
+          </td>           -->
+          <!-- <td class="text-center">                        
+            <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Berita Acara</a>                  
+          </td>                         -->
+          <td class="text-center">
+            <div class="col-12 py-2 py-md-0 col-lg-12">
+                <a href="/persetujuan-koordinator/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+                 </div>
+          </td>
+        </tr>
+    @endforeach
+
+
 
   </tbody>
 

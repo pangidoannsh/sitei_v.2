@@ -1611,6 +1611,8 @@ class PendaftaranController extends Controller
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Seminar Proposal Dijadwalkan')
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Sidang Skripsi Dijadwalkan')
                 ->orderBy('status_skripsi', 'desc')->get(),
+
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->get(),
             ]);
         }
         if (auth()->user()->role_id == 7) {            
@@ -1632,6 +1634,8 @@ class PendaftaranController extends Controller
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Seminar Proposal Dijadwalkan')
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Sidang Skripsi Dijadwalkan')
                 ->orderBy('status_skripsi', 'desc')->get(),
+
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 2)->get(),
 
             ]);
         }
@@ -1655,6 +1659,8 @@ class PendaftaranController extends Controller
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Seminar Proposal Dijadwalkan')
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Sidang Skripsi Dijadwalkan')
                 ->orderBy('status_skripsi', 'desc')->get(),
+
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 2)->get(),
             ]);
         }  
         //KOORDINATOR KP SKRIPSI
@@ -1684,6 +1690,7 @@ class PendaftaranController extends Controller
                 ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '1')
                 ->orderBy('status_skripsi', 'desc')->get(),
 
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 1)->get(),
 
             ]);
         }
@@ -1713,6 +1720,9 @@ class PendaftaranController extends Controller
                 ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '2')
                 ->orderBy('status_skripsi', 'desc')->get(),
 
+
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 2)->get(),
+
             ]);
         }
         if (auth()->user()->role_id == 11) {  
@@ -1741,6 +1751,8 @@ class PendaftaranController extends Controller
                 ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '3')
                 ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '3')
                 ->orderBy('status_skripsi', 'desc')->get(),
+
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 3)->get(),
 
             ]);
         }  

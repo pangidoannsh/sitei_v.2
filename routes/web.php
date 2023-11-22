@@ -504,6 +504,7 @@ Route::group(['middleware' =>  ['auth:web']], function(){
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
+    Route::get('/persetujuan-koordinator/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_koordinator']);    
     Route::get('/riwayat-koordinator', [PenjadwalanController::class, 'riwayat_koordinator']);    
     Route::put('/persetujuankp-koordinator/approve/{id}', [PenjadwalanKPController::class, 'approve_koordinator']);
     Route::put('/persetujuankp-koordinator/tolak/{id}', [PenjadwalanKPController::class, 'tolak_koordinator']);
