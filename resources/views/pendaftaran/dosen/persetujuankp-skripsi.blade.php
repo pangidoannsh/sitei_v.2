@@ -900,12 +900,29 @@
           </td>           -->
           <!-- <td class="text-center">                        
             <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Berita Acara</a>                  
-          </td>                         -->
+          </td> -->
+
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+      @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <td class="text-center">
             <div class="col-12 py-2 py-md-0 col-lg-12">
                 <a href="/persetujuan-koordinator/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                  </div>
           </td>
+    @endif
+    @endif
+
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+      @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+          <td class="text-center">
+            <div class="col-12 py-2 py-md-0 col-lg-12">
+                <a href="/persetujuan-kaprodi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+                 </div>
+          </td>
+
+ @endif
+    @endif
+
         </tr>
     @endforeach
 

@@ -36,7 +36,6 @@
   @endif
 
 
-  
 
   @foreach ($penjadwalan_skripsis as $skripsi)
 
@@ -127,48 +126,6 @@
     </div>
   </div>
 </div>
-
-
-
-<!-- <div class="card">
-      <div class="card-body">
-      <h5 class="text-bold">Data Seminar</h5>
-      <hr>
-      <p class="card-title text-secondary text-sm" >Judul diusulkan</p>
-        <p class="card-text text-start" >{{$skripsi->judul_skripsi}}</p>
-        <p class="card-title text-secondary text-sm " >KRS Semester Berjalan</p>
-        <p class="card-text text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->krs_berjalan )}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></p>
-        <p class="card-title text-secondary text-sm " >Kartu Hasil Studi</p>
-        <p class="card-text text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->khs )}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></p>
-        <p class="card-title text-secondary text-sm " >Transkip Nilai</p>
-        <p class="card-text text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->transkip_nilai )}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></p>
-
-        
-        
-      </div>
-    </div> -->
-
-    <!-- <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Keterangan Pendaftaran</h5>
-        <hr>
-        <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
-        <p class="card-text text-start" ><span >{{$skripsi->jenis_usulan}}</span></p>
-        @if ($skripsi->status_skripsi == 'USULAN JUDUL'||$skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI KOORDINATOR SKRIPSI' || $skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI PEMBIMBING' || $skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI PEMBIMBING 1' || $skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI PEMBIMBING 2' )
-        <p class="card-title text-secondary text-sm" >Status Skripsi</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
-        @endif
-        @if ($skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI' )
-        <p class="card-title text-secondary text-sm " >Status KP</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
-        @endif
-        <p class="card-title text-secondary text-sm" >Keterangan</p>
-        <p class="card-text text-start" ><span>{{$skripsi->keterangan}}</span></p>
-
-      </div>
-    </div> -->
-    
-
 
 
   @endforeach

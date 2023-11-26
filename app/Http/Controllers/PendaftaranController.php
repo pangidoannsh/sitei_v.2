@@ -1660,7 +1660,7 @@ class PendaftaranController extends Controller
                 ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Sidang Skripsi Dijadwalkan')
                 ->orderBy('status_skripsi', 'desc')->get(),
 
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 2)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 3)->get(),
             ]);
         }  
         //KOORDINATOR KP SKRIPSI

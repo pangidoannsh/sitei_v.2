@@ -505,6 +505,7 @@ Route::group(['middleware' =>  ['auth:web']], function(){
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
     Route::get('/persetujuan-koordinator/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_koordinator']);    
+   
     Route::get('/riwayat-koordinator', [PenjadwalanController::class, 'riwayat_koordinator']);    
     Route::put('/persetujuankp-koordinator/approve/{id}', [PenjadwalanKPController::class, 'approve_koordinator']);
     Route::put('/persetujuankp-koordinator/tolak/{id}', [PenjadwalanKPController::class, 'tolak_koordinator']);
@@ -566,6 +567,8 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     //APPROVAL USULAN KP
     Route::put('/usulankp/kaprodi/approve/{id}', [PendaftaranKPController::class, 'approveusulankp_kaprodi']);
     Route::put('/usulankp/kaprodi/tolak/{id}', [PendaftaranKPController::class, 'tolakusulan_kaprodi']);
+
+        Route::get('/persetujuan-kaprodi/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_kaprodi']); 
 
     Route::put('/usulan-semkp/kaprodi/approve/{id}', [PendaftaranKPController::class, 'approveusulan_semkp_kaprodi']);
     Route::put('/usulan-semkp/kaprodi/tolak/{id}', [PendaftaranKPController::class, 'tolak_semkp_kaprodi']);
