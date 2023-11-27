@@ -23,7 +23,7 @@
 
 <!-- __ BATAS WAKTU TOMBOL MUNCUL__ -->
  @php
-  $tanggalDisetujuiUsulanKP = $pendaftaran_kp->tgl_disetujui_usulankp;
+  $tanggalDisetujuiUsulanKP = $pendaftaran_kp->tgl_disetujui_usulankp_kaprodi;
 @endphp
 
  @php

@@ -670,7 +670,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
             'judul_laporan' => 'required',
             'laporan_kp' => 'required|mimes:pdf|max:1024',
             'kpti_11' => 'required|mimes:pdf|max:200',
-            'sti_31' => 'required|mimes:pdf|max:200',
+            // 'sti_31' => 'required|mimes:pdf|max:200',
         ]);
 
         $kp = PendaftaranKP::find($id);
@@ -861,6 +861,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         $kp = PendaftaranKP::find($id);
         $kp->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
+        $kp->tgl_disetujui_usulankp_koordinator = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Usulan KP disetujui!')->showConfirmButton('Ok', '#28a745');
@@ -889,7 +890,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
             $kp = PendaftaranKP::find($id);
             $kp->status_kp = 'USULAN KP DITERIMA';
             $kp->keterangan = 'Usulan Kerja Praktek diterima';
-            $kp->tgl_disetujui_usulankp = Carbon::now();
+            $kp->tgl_disetujui_usulankp_kaprodi = Carbon::now();
             $kp->update();
     
             Alert::success('Disetujui', 'Usulan KP disetujui!')->showConfirmButton('Ok', '#28a745');

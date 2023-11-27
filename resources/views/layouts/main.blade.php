@@ -117,11 +117,17 @@
           {{-- Menu KP/TA Mahasiswa --}}
 
           @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link {{Request::is ('kp-skripsi*') ? 'text-success' : '' }}  {{Request::is ('usulankp*') ? 'text-success' : '' }} {{Request::is ('permohonankp*') ? 'text-success' : '' }} {{Request::is ('balasankp*') ? 'text-success' : '' }} {{Request::is ('seminarkp*') ? 'text-success' : '' }} {{Request::is ('usulan-semkp*') ? 'text-success' : '' }} {{Request::is ('kpti10-kp*') ? 'text-success' : '' }} {{Request::is ('usuljudul*') ? 'text-success' : '' }} {{Request::is ('jadwal*') ? 'text-success' : '' }} " aria-current="page" href="/kp-skripsi">KP/TA</a>
-          </li> --}}
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }} " aria-current="page" href="/inventaris/peminjamanmhs">Inventaris</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is ('statistik*') ? 'text-success' : '' }} " aria-current="page" href="/statistik">Statistik</a>
+          </li>
           
-          <li class="nav-item dropdown baru">
+          <!-- <li class="nav-item dropdown baru">
             <a id="dropdownSubMenu1" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/TA</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
               <li>                        
@@ -130,7 +136,7 @@
               <li><a href="/usuljudul/create" class="dropdown-item mb-1 {{Request::is ('usuljudul*') ? 'text-success' : '' }}">Skripsi</a></li>                    
               <li><a href="/statistik" class="dropdown-item mb-1 {{Request::is ('statistik*') ? 'text-success' : '' }}">Statistik</a></li>
             </ul>
-          </li>
+          </li> -->
 
           @endif
 

@@ -77,8 +77,9 @@
 
       <!-- TIMER USULAN KP -->
 
+      <!-- PEMBIMBING -->
 @php
-  $tanggalSaatIni = date('Y-m-d');
+  $tanggalSaatIniUsulanKPPembimbing = date('Y-m-d');
 @endphp
 
 @php
@@ -87,10 +88,62 @@
 
 <!-- Menghitung selisih hari -->
 @php
-  $waktuTersisaUsulanKPPembimbing = strtotime($tanggalSaatIni) - strtotime($tanggalUsulankpPembimbing);
-  $selisihHari = floor($waktuTersisaUsulanKPPembimbing / (60 * 60 * 24));
-  $selisihHariUsulanKPPembimbing = 4;
-  $waktuUsulanKPPembimbing = $selisihHari + $selisihHariUsulanKPPembimbing;
+  $waktuTersisaUsulanKPPembimbing = strtotime($tanggalSaatIniUsulanKPPembimbing) - strtotime($tanggalUsulankpPembimbing);
+  $selisihHariUsulanKPPembimbing = floor($waktuTersisaUsulanKPPembimbing / (60 * 60 * 24));
+  $jumlahselisihHariUsulanKPPembimbing = 4;
+  $waktuUsulanKPPembimbing = $selisihHariUsulanKPPembimbing + $jumlahselisihHariUsulanKPPembimbing;
+@endphp
+
+<!-- BATAS -->
+
+<!-- KOORDINATOR -->
+@php
+  $tanggalSaatIniUsulanKPKoordinator = date('Y-m-d');
+@endphp
+@php
+  $tanggalUsulanKPKoordinator = $kp->tgl_disetujui_usulankp_pembimbing;
+@endphp
+<!-- Menghitung selisih hari -->
+@php
+  $waktuTersisaUsulanKPKoordinator = strtotime($tanggalSaatIniUsulanKPKoordinator) - strtotime($tanggalUsulanKPKoordinator);
+  $selisihHariUsulanKPKoordinator = floor($waktuTersisaUsulanKPKoordinator / (60 * 60 * 24));
+  $jumlahselisihHariUsulanKPKoordinator = 4;
+  $waktuUsulanKPKoordinator = $selisihHariUsulanKPKoordinator + $jumlahselisihHariUsulanKPKoordinator;
+@endphp
+
+<!-- BATAS -->
+
+
+<!-- KAPRODI -->
+@php
+  $tanggalSaatIniUsulanKPKaprodi = date('Y-m-d');
+@endphp
+@php
+  $tanggalUsulanKPKaprodi = $kp->tgl_disetujui_usulankp_koordinator;
+@endphp
+<!-- Menghitung selisih hari -->
+@php
+  $waktuTersisaUsulanKPKaprodi = strtotime($tanggalSaatIniUsulanKPKaprodi) - strtotime($tanggalUsulanKPKaprodi);
+  $selisihHariUsulanKPKaprodi = floor($waktuTersisaUsulanKPKaprodi / (60 * 60 * 24));
+  $jumlahselisihHariUsulanKPKaprodi = 4;
+  $waktuUsulanKPKaprodi = $selisihHariUsulanKPKaprodi + $jumlahselisihHariUsulanKPKaprodi;
+@endphp
+
+<!-- BATAS -->
+
+<!-- KOORDINATOR SURAT BALASAN -->
+@php
+  $tanggalSaatIniBalasanKoordinator = date('Y-m-d');
+@endphp
+@php
+  $tanggalBalasanKoordinator = $kp->tgl_created_balasan;
+@endphp
+<!-- Menghitung selisih hari -->
+@php
+  $waktuTersisaBalasanKoordinator = strtotime($tanggalSaatIniBalasanKoordinator) - strtotime($tanggalBalasanKoordinator);
+  $selisihHariBalasanKoordinator = floor($waktuTersisaBalasanKoordinator / (60 * 60 * 24));
+  $jumlahselisihHariBalasanKoordinator = 4;
+  $waktuBalasanKoordinator = $selisihHariBalasanKoordinator + $jumlahselisihHariBalasanKoordinator;
 @endphp
 
 <!-- BATAS -->
@@ -119,14 +172,78 @@
             <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
-             @if ($kp->status_kp == 'USULAN KP')           
+            <!-- MULAI -->
+             @if ($kp->status_kp == 'USULAN KP')   
+
+             <!-- PEMBIMBING -->
+                @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
+                @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'USULAN KP')
             <td class="text-center" >
                 @if ($waktuUsulanKPPembimbing >= 0)
                     <span class="text-danger"> {{ $waktuUsulanKPPembimbing }}  hari lagi</span>
-                @else
+                @elseif($waktuUsulanKPPembimbing > 3)
                     Batas Waktu Unggah Surat Balasan telah habis
                 @endif
             </td>
+            @endif
+            @endif
+                
+            <!-- KOORDINATOR -->
+            
+           @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+
+          @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'USULAN KP' )
+            <td class="text-center" >
+                @if ($waktuUsulanKPKoordinator >= 0)
+                    <span class="text-danger"> {{ $waktuUsulanKPKoordinator }}  hari lagi</span>
+                @elseif($waktuUsulanKPKoordinator > 3)
+                    Batas waktu telah habis
+                @endif
+            </td>
+            @endif
+
+            @endif
+            @endif
+           
+            <!-- KAPRODI -->
+            
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+          @if ($kp->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $kp->status_kp == 'USULAN KP' )
+            <td class="text-center" >
+                @if ($waktuUsulanKPKaprodi >= 0)
+                    <span class="text-danger"> {{ $waktuUsulanKPKaprodi }}  hari lagi</span>
+                @elseif($waktuUsulanKPKaprodi > 3)
+                    Batas waktu telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+
+
+            @endif
+
+            <!-- BATAS -->
+
+
+             <!-- BALASAN KP KOORDINATOR -->
+            
+           @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          
+            @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'SURAT PERUSAHAAN' )
+            <td class="text-center" >
+                @if ($waktuBalasanKoordinator >= 0)
+                    <span class="text-danger"> {{ $waktuBalasanKoordinator }}  hari lagi</span>
+                @elseif($waktuBalasanKoordinator > 3)
+                    Batas waktu telah habis
+                @endif
+            </td>
+            @endif
+
+            @endif
             @endif
                                
             <td class="text-center">{{$kp->keterangan}}</td>  

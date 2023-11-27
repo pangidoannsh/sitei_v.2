@@ -20,8 +20,6 @@
 </div>
 @endif
 
-
-
 <div class="container card p-4">
 
 <ol class="breadcrumb col-lg-12">

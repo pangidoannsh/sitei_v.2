@@ -160,7 +160,7 @@ class Kernel extends ConsoleKernel
         })->monthly();
 
 
-        //BATAS PERSETUJUAN
+        // PERSETUJUAN KP
 
        $schedule->call(function () {
         \App\Models\PendaftaranKP::whereNull('tgl_disetujui_usulankp_admin')
@@ -170,6 +170,46 @@ class Kernel extends ConsoleKernel
             'alasan' => 'Usulan Anda belum disetujui Admin Prodi',
         ]);
         })->daily();
+       
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_usulankp_pembimbing')
+        ->where('tgl_disetujui_usulankp_admin', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN KP ULANG',
+            'alasan' => 'Usulan Anda belum disetujui Pembimbing',
+        ]);
+        })->daily();
+
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_usulankp_koordinator')
+        ->where('tgl_disetujui_usulankp_pembimbing', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN KP ULANG',
+            'alasan' => 'Usulan Anda belum disetujui Koordinator',
+        ]);
+        })->daily();
+
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_usulankp_kaprodi')
+        ->where('tgl_disetujui_usulankp_koordinator', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN KP ULANG',
+            'alasan' => 'Usulan Anda belum disetujui Kaprodi',
+        ]);
+        })->daily();
+       
+    //    BALASAN KP 
+       
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_balasan')
+        ->where('tgl_created_balasan', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULAN KP',
+            'keterangan' => 'Usulan Kerja Praktek Diterima',
+            'alasan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP, Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+        ]);
+        })->daily();
+
 
     }
 

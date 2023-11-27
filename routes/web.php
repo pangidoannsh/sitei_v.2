@@ -1,6 +1,7 @@
 <?php
 
 use GuzzleHttp\Middleware;
+use App\Models\PenjadwalanKP;
 use App\Http\Middleware\CekRole;
 use App\Models\PenjadwalanSempro;
 use Illuminate\Auth\Events\Login;
@@ -11,30 +12,36 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\UsulanController;
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\JadwalkanController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\DosenProfilController;
 use App\Http\Controllers\KonsentrasiController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PenilaianKPController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\StaffProfilController;
+//M.Seprinaldi
+use App\Http\Controllers\PendaftaranKPController;
 use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\CountdownTimerController;
+//Murdillah
 use App\Http\Controllers\MahasiswaProfilController;
 use App\Http\Controllers\PenilaianSemproController;
+use App\Http\Controllers\UndanganSeminarController;
 use App\Http\Controllers\PenilaianSkripsiController;
 use App\Http\Controllers\PenjadwalanSemproController;
-use App\Http\Controllers\PenjadwalanSkripsiController;
-use App\Models\PenjadwalanKP;
-//M.Seprinaldi
-use App\Http\Controllers\PendaftaranController;
-use App\Http\Controllers\PendaftaranKPController;
 use App\Http\Controllers\PendaftaranSkripsiController;
-//Murdillah
-use App\Http\Controllers\JadwalkanController;
-use App\Http\Controllers\RuanganController;
-use App\Http\Controllers\DeveloperController;
-use App\Http\Controllers\UndanganSeminarController;
+use App\Http\Controllers\PenjadwalanSkripsiController;
+
+// INVENTARIS
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PeminjamanMahasiswaController;
+use App\Http\Controllers\PeminjamanAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,7 +157,15 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
     Route::post('/status-kp/create', [PendaftaranKPController::class, 'store']);
 
 
-   
+//    INVENTARIS
+ Route::get('/inventaris/peminjamanmhs', [PeminjamanMahasiswaController::class, 'index'])->name('peminjaman');
+    Route::get('/inventaris/riwayatmhs', [RiwayatController::class, 'riwayatmhs'])->name('riwayatmhs');
+    Route::delete('/inventaris/delete/{id}', [PeminjamanMahasiswaController::class, 'destroy'])->name('hapus');
+    Route::get('/inventaris/edit/{id}', [PeminjamanMahasiswaController::class, 'edit'])->name('edit');
+    Route::put('/inventaris/update/{id}', [PeminjamanMahasiswaController::class, 'update'])->name('edit');
+
+    Route::get('/inventaris/formpinjam', [UsulanController::class, 'index'])->name('formusulan');
+    Route::post('/inventaris/usulan', [UsulanController::class, 'create']);
 
 });
 
@@ -439,6 +454,20 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::delete('/form-skripsi/{penjadwalan_skripsi:id}', [PenjadwalanSkripsiController::class, 'destroy']);
     Route::get('/riwayat-penjadwalan-skripsi', [PenjadwalanSkripsiController::class, 'riwayat']);
     Route::get('/penilaian-skripsi/riwayat-judul/{id}', [PenjadwalanSkripsiController::class, 'riwayatjudul']);
+
+
+    // INVENTARIS
+    Route::get('/inventaris/peminjamanadm', [PeminjamanAdminController::class, 'index'])->name('peminjamanadm');
+    Route::post('/inventaris/setuju/{id}', [PeminjamanAdminController::class, 'setuju'])->name('setuju');
+    Route::post('/inventaris/tolak/{id}', [PeminjamanAdminController::class, 'ditolak']);
+    Route::post('/inventaris/kembali/{id}', [PeminjamanAdminController::class, 'kembali']);
+    Route::get('/inventaris/riwayatadm', [RiwayatController::class, 'riwayat'])->name('riwayatadm');
+    Route::get('/inventaris/stok', [BarangController::class, 'index'])->name('stok');
+    Route::post('/inventaris/stokbaru', [BarangController::class, 'create'])->name('stokbaru');
+    Route::post('/inventaris/tambahbarang', [BarangController::class, 'addbarang'])->name('tambahbarang');
+    Route::delete('/inventaris/deletebarang/{id}', [BarangController::class, 'destroy'])->name('deletebarang');
+    Route::get('/inventaris/editbarang/{id}', [BarangController::class, 'edit'])->name('editbarang');
+    Route::put('/inventaris/updatebarang/{id}', [BarangController::class, 'update'])->name('updatebarang');
 
 });
 
