@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Persetujuan Kerja Praktek
+    Persetujuan Kerja Praktek & Skripsi
 @endsection
 
 @section('content')
@@ -23,7 +23,7 @@
 <div class="container card  p-4">
 
 <ol class="breadcrumb col-lg-12">
-    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan(<span id="waitingApprovalCount"></span>)</a></li>
+    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan (<span id="waitingApprovalCount"></span>)</a></li>
     
      
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
@@ -41,12 +41,10 @@
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 
           <span class="px-2">|</span>      
-            <li><a href="persetujuan-koordinator" class="px-1">Persetujuan Seminar</a></li>
-            (<span id="seminarKPCount"></span>)
+            <li><a href="persetujuan-koordinator" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li>
 
           <span class="px-2">|</span>
-            <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan</a></li>
-            (<span id=""></span>)
+            <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan (<span id=""></span>)</a></li>
 
         @endif
     @endif

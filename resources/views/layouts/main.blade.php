@@ -61,7 +61,7 @@
 
           {{-- Menu Persetujuan --}}
 
-          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          {{-- @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <li class="nav-item">
             <a class="nav-link {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-koordinator*') ? 'text-success' : '' }}{{Request::is ('riwayat-koordinator*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
@@ -75,7 +75,7 @@
             <a class="nav-link {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-kaprodi*') ? 'text-success' : '' }} {{Request::is ('riwayat-kaprodi*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
           </li>
           @endif
-          @endif
+          @endif --}}
 
           {{-- Menu KP/TA Dosen --}}
 
@@ -87,6 +87,21 @@
           <li class="nav-item dropdown baru">
             <a id="dropdownSubMenu1" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/TA</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
+              @if (Str::length(Auth::guard('dosen')->user()) > 0)
+              @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+              <li class="nav-item">
+                <a class="nav-link setuju {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-koordinator*') ? 'text-success' : '' }}{{Request::is ('riwayat-koordinator*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
+              </li>
+              @endif
+              @endif
+
+              @if (Str::length(Auth::guard('dosen')->user()) > 0)
+              @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+              <li class="nav-item">
+                <a class="nav-link setuju {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-kaprodi*') ? 'text-success' : '' }} {{Request::is ('riwayat-kaprodi*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
+              </li>
+              @endif
+              @endif
               <li>                        
                 <a href="/kp-skripsi/seminar-pembimbing-penguji" class="dropdown-item mb-1 {{Request::is ('kp-skripsi*') ? 'text-success' : '' }} ">Seminar</a>
               </li>

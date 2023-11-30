@@ -38,6 +38,10 @@
     padding-top: 20px;
 }
 
+a.setuju{
+    padding-left: 30px !important;
+}
+
 .zoom-image {
     animation: zoomAnimation 3s ease-in-out infinite;
 }
