@@ -75,76 +75,69 @@
 
       <!-- TIMER USULAN KP -->
 
-      <!-- PEMBIMBING -->
+<!-- PEMBIMBING -->
 @php
-  $tanggalSaatIniUsulanKPPembimbing = date('Y-m-d');
+    $countDownDateUsulanKPPembimbing = strtotime($kp->tgl_disetujui_usulankp_admin) + (4 * 24 * 60 * 60);
+    $nowUsulanKPPembimbing = time();
+    $distanceUsulanKPPembimbing = $countDownDateUsulanKPPembimbing - $nowUsulanKPPembimbing;
+    $daysUsulanKPPembimbing = floor($distanceUsulanKPPembimbing / (60 * 60 * 24));
 @endphp
-
-@php
-  $tanggalUsulankpPembimbing = $kp->tgl_disetujui_usulankp_admin;
-@endphp
-
-<!-- Menghitung selisih hari -->
-@php
-  $waktuTersisaUsulanKPPembimbing = strtotime($tanggalSaatIniUsulanKPPembimbing) - strtotime($tanggalUsulankpPembimbing);
-  $selisihHariUsulanKPPembimbing = floor($waktuTersisaUsulanKPPembimbing / (60 * 60 * 24));
-  $jumlahselisihHariUsulanKPPembimbing = 4;
-  $waktuUsulanKPPembimbing = $selisihHariUsulanKPPembimbing + $jumlahselisihHariUsulanKPPembimbing;
-@endphp
-
 <!-- BATAS -->
 
 <!-- KOORDINATOR -->
 @php
-  $tanggalSaatIniUsulanKPKoordinator = date('Y-m-d');
+    $countDownDateUsulanKPKoordinator = strtotime($kp->tgl_disetujui_usulankp_pembimbing) + (4 * 24 * 60 * 60);
+    $nowUsulanKPKoordinator = time();
+    $distanceUsulanKPKoordinator = $countDownDateUsulanKPKoordinator - $nowUsulanKPKoordinator;
+    $daysUsulanKPKoordinator = floor($distanceUsulanKPKoordinator / (60 * 60 * 24));
 @endphp
-@php
-  $tanggalUsulanKPKoordinator = $kp->tgl_disetujui_usulankp_pembimbing;
-@endphp
-<!-- Menghitung selisih hari -->
-@php
-  $waktuTersisaUsulanKPKoordinator = strtotime($tanggalSaatIniUsulanKPKoordinator) - strtotime($tanggalUsulanKPKoordinator);
-  $selisihHariUsulanKPKoordinator = floor($waktuTersisaUsulanKPKoordinator / (60 * 60 * 24));
-  $jumlahselisihHariUsulanKPKoordinator = 4;
-  $waktuUsulanKPKoordinator = $selisihHariUsulanKPKoordinator + $jumlahselisihHariUsulanKPKoordinator;
-@endphp
-
 <!-- BATAS -->
 
 
 <!-- KAPRODI -->
 @php
-  $tanggalSaatIniUsulanKPKaprodi = date('Y-m-d');
+    $countDownDateUsulanKPKaprodi = strtotime($kp->tgl_disetujui_usulankp_koordinator) + (4 * 24 * 60 * 60);
+    $nowUsulanKPKaprodi = time();
+    $distanceUsulanKPKaprodi = $countDownDateUsulanKPKaprodi - $nowUsulanKPKaprodi;
+    $daysUsulanKPKaprodi = floor($distanceUsulanKPKaprodi / (60 * 60 * 24));
 @endphp
-@php
-  $tanggalUsulanKPKaprodi = $kp->tgl_disetujui_usulankp_koordinator;
-@endphp
-<!-- Menghitung selisih hari -->
-@php
-  $waktuTersisaUsulanKPKaprodi = strtotime($tanggalSaatIniUsulanKPKaprodi) - strtotime($tanggalUsulanKPKaprodi);
-  $selisihHariUsulanKPKaprodi = floor($waktuTersisaUsulanKPKaprodi / (60 * 60 * 24));
-  $jumlahselisihHariUsulanKPKaprodi = 4;
-  $waktuUsulanKPKaprodi = $selisihHariUsulanKPKaprodi + $jumlahselisihHariUsulanKPKaprodi;
-@endphp
-
 <!-- BATAS -->
 
 <!-- KOORDINATOR SURAT BALASAN -->
 @php
-  $tanggalSaatIniBalasanKoordinator = date('Y-m-d');
+    $countDownDateBalasanKoordinator = strtotime($kp->tgl_created_balasan) + (4 * 24 * 60 * 60);
+    $nowBalasanKoordinator = time();
+    $distanceBalasanKoordinator = $countDownDateBalasanKoordinator - $nowBalasanKoordinator;
+    $daysBalasanKoordinator = floor($distanceBalasanKoordinator / (60 * 60 * 24));
 @endphp
-@php
-  $tanggalBalasanKoordinator = $kp->tgl_created_balasan;
-@endphp
-<!-- Menghitung selisih hari -->
-@php
-  $waktuTersisaBalasanKoordinator = strtotime($tanggalSaatIniBalasanKoordinator) - strtotime($tanggalBalasanKoordinator);
-  $selisihHariBalasanKoordinator = floor($waktuTersisaBalasanKoordinator / (60 * 60 * 24));
-  $jumlahselisihHariBalasanKoordinator = 4;
-  $waktuBalasanKoordinator = $selisihHariBalasanKoordinator + $jumlahselisihHariBalasanKoordinator;
-@endphp
-
 <!-- BATAS -->
+<!-- SEMINAR KP PEMB -->
+@php
+    $countDownDateSeminarKPPemb = strtotime($kp->tgl_disetujui_semkp_admin) + (4 * 24 * 60 * 60);
+    $nowSeminarKPPemb = time();
+    $distanceSeminarKPPemb = $countDownDateSeminarKPPemb - $nowSeminarKPPemb;
+    $daysSeminarKPPemb = floor($distanceSeminarKPPemb / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- SEMINAR KP KOORDINATOR -->
+@php
+    $countDownDateSeminarKPKoordinator = strtotime($kp->tgl_disetujui_semkp_pembimbing) + (4 * 24 * 60 * 60);
+    $nowSeminarKPKoordinator = time();
+    $distanceSeminarKPKoordinator = $countDownDateSeminarKPKoordinator - $nowSeminarKPKoordinator;
+    $daysSeminarKPKoordinator = floor($distanceSeminarKPKoordinator / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- SEMINAR KP KAPRODI -->
+@php
+    $countDownDateSeminarKPKaprodi = strtotime($kp->tgl_disetujui_semkp_pembimbing) + (4 * 24 * 60 * 60);
+    $nowSeminarKPKaprodi = time();
+    $distanceSeminarKPKaprodi = $countDownDateSeminarKPKaprodi - $nowSeminarKPKaprodi;
+    $daysSeminarKPKaprodi = floor($distanceSeminarKPKaprodi / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
 
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>-->
@@ -177,9 +170,9 @@
                 @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
                 @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'USULAN KP')
             <td class="text-center" >
-                @if ($waktuUsulanKPPembimbing >= 0)
-                    <span class="text-danger"> {{ $waktuUsulanKPPembimbing }}  hari lagi</span>
-                @elseif($waktuUsulanKPPembimbing > 3)
+                @if ($daysUsulanKPPembimbing > 0)
+                    <span class="text-danger"> {{ $daysUsulanKPPembimbing }}  hari lagi</span>
+                @elseif($daysUsulanKPPembimbing <= 0)
                     Batas Waktu Unggah Surat Balasan telah habis
                 @endif
             </td>
@@ -193,9 +186,9 @@
 
           @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'USULAN KP' )
             <td class="text-center" >
-                @if ($waktuUsulanKPKoordinator >= 0)
-                    <span class="text-danger"> {{ $waktuUsulanKPKoordinator }}  hari lagi</span>
-                @elseif($waktuUsulanKPKoordinator > 3)
+                @if ($daysUsulanKPKoordinator >= 0)
+                    <span class="text-danger"> {{ $daysUsulanKPKoordinator }}  hari lagi</span>
+                @elseif($daysUsulanKPKoordinator <= 0)
                     Batas waktu telah habis
                 @endif
             </td>
@@ -210,9 +203,9 @@
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           @if ($kp->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $kp->status_kp == 'USULAN KP' )
             <td class="text-center" >
-                @if ($waktuUsulanKPKaprodi >= 0)
-                    <span class="text-danger"> {{ $waktuUsulanKPKaprodi }}  hari lagi</span>
-                @elseif($waktuUsulanKPKaprodi > 3)
+                @if ($daysUsulanKPKaprodi >= 0)
+                    <span class="text-danger"> {{ $daysUsulanKPKaprodi }}  hari lagi</span>
+                @elseif($daysUsulanKPKaprodi <= 0)
                     Batas waktu telah habis
                 @endif
             </td>
@@ -233,15 +226,66 @@
           
             @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'SURAT PERUSAHAAN' )
             <td class="text-center" >
-                @if ($waktuBalasanKoordinator >= 0)
-                    <span class="text-danger"> {{ $waktuBalasanKoordinator }}  hari lagi</span>
-                @elseif($waktuBalasanKoordinator > 3)
+                @if ($daysBalasanKoordinator >= 0)
+                    <span class="text-danger"> {{ $daysBalasanKoordinator }}  hari lagi</span>
+                @elseif($daysBalasanKoordinator <= 0)
                     Batas waktu telah habis
                 @endif
             </td>
             @endif
 
             @endif
+            @endif
+
+              @if ($kp->status_kp == 'DAFTAR SEMINAR KP')   
+
+             <!-- PEMBIMBING -->
+                @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
+                @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'DAFTAR SEMINAR KP')
+            <td class="text-center" >
+                @if ($daysSeminarKPPemb > 0)
+                    <span class="text-danger"> {{ $daysSeminarKPPemb }}  hari lagi</span>
+                @elseif($daysSeminarKPPemb <= 0)
+                    Batas Waktu Unggah Surat Balasan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+            <!-- KOORDINATOR -->
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          
+            @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
+            <td class="text-center" >
+                @if ($daysSeminarKPKoordinator > 0)
+                    <span class="text-danger"> {{ $daysSeminarKPKoordinator }}  hari lagi</span>
+                @elseif($daysSeminarKPKoordinator <= 0)
+                    Batas Waktu Unggah Surat Balasan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+
+            <!-- KAPRODI -->
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+          
+            @if ($kp->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
+            <td class="text-center" >
+                @if ($daysSeminarKPKaprodi > 0)
+                    <span class="text-danger"> {{ $daysSeminarKPKaprodi }}  hari lagi</span>
+                @elseif($daysSeminarKPKaprodi <= 0)
+                    Batas Waktu Unggah Surat Balasan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+
+
+
             @endif
                                
             <td class="text-center">{{$kp->keterangan}}</td>  

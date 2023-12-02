@@ -16,6 +16,10 @@
     <link href="{{asset('/assets/css/signin.css')}}" rel="stylesheet">
     <link href="{{asset('/assets/css/style.css')}}" rel="stylesheet">
 
+     <link rel="stylesheet" href="{{asset('/assets/plugins/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+
   </head>
 <style>
   hr{
@@ -35,6 +39,9 @@
   h6 a:hover{
     color:grey;
   }
+  .pointer {
+        cursor: pointer;
+    }
   
   /* .dpn{
     margin-top: -50px ;
@@ -148,12 +155,19 @@
             @enderror
             </div>
             
-            <div class="form-floating mt-3">
+        <div class="form-floating mt-3 position-relative">
             <input type="password" class="form-control rounded-1" name="password" id="password" placeholder="Password" required>
             <label for="password">Password <span class="text-danger">*</span></label>
+            <div class="position-absolute end-0 top-50 translate-middle-y">
+                <span class="px-3">
+                    <i class="fas fa-eye-slash pointer" id="togglePassword"></i>
+                </span>
             </div>
+        </div>
             
-            <button class="w-100 btn btn-lg btn-login mt-4 rounded-1" type="submit">Masuk</button>
+            
+            
+            <button class="w-100 btn btn-lg btn-success btn-login mt-4 rounded-1" type="submit">Masuk</button>
         </form>
         <small class="kecil d-block text-center mt-4">Belum memiliki akun? <br>Silahkan hubungi Admin Prodi<br></small>
     </main></div>
@@ -208,8 +222,16 @@
 </div>
 
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+
+<script>
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        var passwordInput = document.getElementById("password");
+        var type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+        this.className = type === "password" ? "fas fa-eye-slash pointer" : "fas fa-eye pointer";
+    });
+</script>
   </body>
 </html>

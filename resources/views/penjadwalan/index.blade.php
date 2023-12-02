@@ -106,6 +106,7 @@
               {{Carbon::parse($kp->tanggal)->translatedFormat('l')}}
               </td>
               @endif --}}
+
             <td class="text-center">
             @if($kp->tanggal == null)
             <p> </p>
@@ -118,7 +119,12 @@
             <td class="text-center">{{$kp->lokasi}}</td>
 
             <td class="text-center">{{$kp->pembimbing->nama_singkat}}</td>
-            <td class="text-center">{{$kp->penguji->nama_singkat}}</td>                    
+            @if($kp->penguji ==! null)
+            <td class="text-center">{{$kp->penguji->nama_singkat}}</td> 
+            @else
+              <td class="text-center"></td> 
+            @endif     
+
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
           <td class="text-center">
             <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning mb-2"><i class="fas fa-pen"></i></a>            

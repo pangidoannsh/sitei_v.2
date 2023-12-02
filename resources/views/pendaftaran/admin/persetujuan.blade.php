@@ -63,24 +63,23 @@
             <div></div>
             @foreach ($pendaftaran_kp as $kp)
             
-<!-- TIMER USULAN KP -->
 
+<!-- USULAN KP -->
 @php
-  $tanggalSaatIni = date('Y-m-d');
+    $countDownDateUsulanKPAdmin = strtotime($kp->tgl_created_usulankp) + (4 * 24 * 60 * 60);
+    $nowUsulanKPAdmin = time();
+    $distanceUsulanKPAdmin = $countDownDateUsulanKPAdmin - $nowUsulanKPAdmin;
+    $daysUsulanKPAdmin = floor($distanceUsulanKPAdmin / (60 * 60 * 24));
 @endphp
+<!-- BATAS -->
 
+<!-- SEMINAR KP -->
 @php
-  $tanggalUsulankp = $kp->tgl_created_usulankp;
+    $countDownDateSeminarKPAdmin = strtotime($kp->tgl_created_semkp) + (4 * 24 * 60 * 60);
+    $nowSeminarKPAdmin = time();
+    $distanceSeminarKPAdmin = $countDownDateSeminarKPAdmin - $nowSeminarKPAdmin;
+    $daysSeminarKPAdmin = floor($distanceSeminarKPAdmin / (60 * 60 * 24));
 @endphp
-
-<!-- Menghitung selisih hari -->
-@php
-  $waktuTersisa = strtotime($tanggalSaatIni) - strtotime($tanggalUsulankp);
-  $selisihHari = floor($waktuTersisa / (60 * 60 * 24));
-  $selisihHariAdmin = 4;
-  $waktuUsulanKPadmin = $selisihHari + $selisihHariAdmin;
-@endphp
-
 <!-- BATAS -->
 
             <tr>        
@@ -111,9 +110,19 @@
 
              @if ($kp->status_kp == 'USULAN KP')           
             <td class="text-center" >
-                @if ($waktuUsulanKPadmin >= 0)
-                    <span class="text-danger"> {{ $waktuUsulanKPadmin }}  hari lagi</span>
-                @else
+                @if ($daysUsulanKPAdmin > 0)
+                    <span class="text-danger"> {{ $daysUsulanKPAdmin }}  hari lagi</span>
+                @elseif($daysUsulanKPAdmin <= 0)
+                    Batas Waktu Unggah Surat Balasan telah habis
+                @endif
+            </td>
+            @endif
+             
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
+            <td class="text-center" >
+                @if ($daysSeminarKPAdmin >= 0)
+                    <span class="text-danger"> {{ $daysSeminarKPAdmin }}  hari lagi</span>
+                @elseif($daysSeminarKPAdmin <= 0)
                     Batas Waktu Unggah Surat Balasan telah habis
                 @endif
             </td>

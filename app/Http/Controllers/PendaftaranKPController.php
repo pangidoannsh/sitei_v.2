@@ -685,6 +685,15 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->keterangan = 'Menunggu persetujuan Admin Prodi';
         $kp->update();
 
+    // Menambah data ke tabel penjadwalan KP
+    $penjadwalanKP = new PenjadwalanKP();
+    $penjadwalanKP->mahasiswa_nim = $kp->mahasiswa_nim;
+    $penjadwalanKP->prodi_id = $kp->prodi_id;
+    $penjadwalanKP->pembimbing_nip = $kp->dosen_pembimbing_nip;
+    $penjadwalanKP->penguji_nip = $kp->dosen_pembimbing_nip;
+    $penjadwalanKP->judul_kp = $kp->judul_laporan;
+    $penjadwalanKP->save();
+
         Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
         return redirect('/usulankp/index');
     }
@@ -948,7 +957,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         $kp = PendaftaranKP::find($id);
         $kp->keterangan = 'Menunggu persetujuan Pembimbing';
-        // $kp->tgl_disetujui_semkp = Carbon::now();
+        $kp->tgl_disetujui_semkp_admin = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
@@ -977,7 +986,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         $kp = PendaftaranKP::find($id);
         $kp->keterangan = 'Menunggu persetujuan Koordinator KP';
-        // $kp->tgl_disetujui_semkp = Carbon::now();
+        $kp->tgl_disetujui_semkp_pembimbing = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
@@ -1006,7 +1015,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         $kp = PendaftaranKP::find($id);
         $kp->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
-        // $kp->tgl_dijadwalkan = Carbon::now();
+        $kp->tgl_disetujui_semkp_koordinator = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
@@ -1031,8 +1040,8 @@ public function kapasitasbimbingan_store(Request $request, $id)
     public function approveusulan_semkp_kaprodi($id)
     {
         $kp = PendaftaranKP::find($id);
-        $kp->status_kp = 'DAFTAR SEMINAR KP DISETUJUI';
-        $kp->keterangan = 'Menunggu Jadwal Seminar KP';
+        $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
+        $kp->keterangan = 'Seminar Kerja Praktek Dijadwalkan';
         $kp->tgl_dijadwalkan = Carbon::now();
         $kp->update();
 

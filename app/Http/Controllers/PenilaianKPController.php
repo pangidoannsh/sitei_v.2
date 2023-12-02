@@ -93,6 +93,30 @@ class PenilaianKPController extends Controller
             $penilaian->catatan3 = $request['catatan3'];
         }
 
+        $pembimbing_nip = PenjadwalanKP::where('pembimbing_nip', auth()->user()->nip);
+        $penguji_nip = PenjadwalanKP::where('penguji_nip', auth()->user()->nip);
+
+        if (auth()->user()->nip = $pembimbing_nip && auth()->user()->nip != $penguji_nip) {
+            $penilaian->pembimbing_nip = auth()->user()->nip;
+            $penilaian->penjadwalan_kp_id = $id;
+            $penilaian->save();  
+
+            $penilaianPenguji = new PenilaianKPPenguji;
+            $penilaianPenguji->Penguji_nip = auth()->user()->nip;
+            $penilaianPenguji->penjadwalan_kp_id = $id;
+            $penilaianPenguji->save();
+        }
+        if (auth()->user()->nip = $penguji_nip && auth()->user()->nip != $pembimbing_nip) {
+            $penilaian->pembimbing_nip = auth()->user()->nip;
+            $penilaian->penjadwalan_kp_id = $id;
+            $penilaian->save();   
+        } 
+        if (auth()->user()->nip = $pembimbing_nip && auth()->user()->nip != $penguji_nip) {
+            $penilaian->pembimbing_nip = auth()->user()->nip;
+            $penilaian->penjadwalan_kp_id = $id;
+            $penilaian->save();  
+        } 
+
         $penilaian->pembimbing_nip = auth()->user()->nip;
         $penilaian->penjadwalan_kp_id = $id;
         $penilaian->save();        
@@ -125,11 +149,31 @@ class PenilaianKPController extends Controller
         }
         if ($request->revisi_naskah5) {
             $penilaian->revisi_naskah5 = $request->revisi_naskah5;
-        }        
+        }   
+             
+        $pembimbing_nip = PenjadwalanKP::where('pembimbing_nip', auth()->user()->nip);
+        $penguji_nip = PenjadwalanKP::where('penguji_nip', auth()->user()->nip);
 
-        $penilaian->penguji_nip = auth()->user()->nip;
-        $penilaian->penjadwalan_kp_id = $id;
-        $penilaian->save();        
+        if (auth()->user()->nip == $pembimbing_nip && auth()->user()->nip == $penguji_nip) {
+            $penilaian->penguji_nip = auth()->user()->nip;
+            $penilaian->penjadwalan_kp_id = $id;
+            $penilaian->save();  
+
+            $penilaianPembimbing = new PenilaianKPPembimbing();
+            $penilaianPembimbing->pembimbing_nip = auth()->user()->nip;
+            $penilaianPembimbing->penjadwalan_kp_id = $penilaian->penjadwalan_kp_id;
+            $penilaianPembimbing->save();
+        }
+        else{
+            $penilaian->penguji_nip = auth()->user()->nip;
+            $penilaian->penjadwalan_kp_id = $id;
+            $penilaian->save();  
+        } 
+
+
+        // $penilaian->penguji_nip = auth()->user()->nip;
+        // $penilaian->penjadwalan_kp_id = $id;
+        // $penilaian->save();        
 
         return redirect('/penilaian-kp/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');    
     }

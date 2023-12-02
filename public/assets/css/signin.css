@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
 html,
 body {
-  font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
 }
 
 h2 {
-  font-family: 'Viga', sans-serif;
-  font-size: 35px;
+    font-family: "Viga", sans-serif;
+    font-size: 35px;
 }
 
 .form-signin {
-  max-width: 400px;
-  padding: 35px;
+    max-width: 400px;
+    padding: 35px;
 }
 
 .form-signin .form-floating:focus-within {
-  z-index: 2;
+    z-index: 2;
 }
 
 .btn-login {
-  background-color:#00923F;
-  height: 45px;
-  color: white;
-  font-size: medium;
+    /* background-color: #00923f; */
+    height: 45px;
+    color: white;
+    font-size: medium;
 }
 
 .btn-login:hover {
-  background-color: #00923F;
-  color: white;
+    /* background-color: #047334; */
+    color: white;
 }
