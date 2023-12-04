@@ -609,6 +609,74 @@
 @endphp
 <!-- BATAS -->
 
+<!-- DAFTAR PERPANJANGAN 1 WAKTU SKRIPSI PEMB 1 -->
+@php
+    $countDownDatePerpanjangan1Pemb1 = strtotime($skripsi->tgl_created_perpanjangan1) + (4 * 24 * 60 * 60);
+    $nowPerpanjangan1Pemb1 = time();
+    $distancePerpanjangan1Pemb1 = $countDownDatePerpanjangan1Pemb1 - $nowPerpanjangan1Pemb1;
+    $daysPerpanjangan1Pemb1 = floor($distancePerpanjangan1Pemb1 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- DAFTAR PERPANJANGAN 1 WAKTU SKRIPSI KAPRODI -->
+@php
+    $countDownDatePerpanjangan1Kaprodi = strtotime($skripsi->tgl_disetujui_perpanjangan1_pemb1) + (4 * 24 * 60 * 60);
+    $nowPerpanjangan1Kaprodi = time();
+    $distancePerpanjangan1Kaprodi = $countDownDatePerpanjangan1Kaprodi - $nowPerpanjangan1Kaprodi;
+    $daysPerpanjangan1Kaprodi = floor($distancePerpanjangan1Kaprodi / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- DAFTAR PERPANJANGAN 2 WAKTU SKRIPSI PEMB 1 -->
+@php
+    $countDownDatePerpanjangan2Pemb1 = strtotime($skripsi->tgl_created_perpanjangan2) + (4 * 24 * 60 * 60);
+    $nowPerpanjangan2Pemb1 = time();
+    $distancePerpanjangan2Pemb1 = $countDownDatePerpanjangan2Pemb1 - $nowPerpanjangan2Pemb1;
+    $daysPerpanjangan2Pemb1 = floor($distancePerpanjangan2Pemb1 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- DAFTAR PERPANJANGAN 2 WAKTU SKRIPSI KAPRODI -->
+@php
+    $countDownDatePerpanjangan2Kaprodi = strtotime($skripsi->tgl_disetujui_perpanjangan2_pemb1) + (4 * 24 * 60 * 60);
+    $nowPerpanjangan2Kaprodi = time();
+    $distancePerpanjangan2Kaprodi = $countDownDatePerpanjangan2Kaprodi - $nowPerpanjangan2Kaprodi;
+    $daysPerpanjangan2Kaprodi = floor($distancePerpanjangan2Kaprodi / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- DAFTAR SIDANG PEMB 1 -->
+@php
+    $countDownDateDaftarSidangPemb1 = strtotime($skripsi->tgl_created_sidang) + (4 * 24 * 60 * 60);
+    $nowDaftarSidangPemb1 = time();
+    $distanceDaftarSidangPemb1 = $countDownDateDaftarSidangPemb1 - $nowDaftarSidangPemb1;
+    $daysDaftarSidangPemb1 = floor($distanceDaftarSidangPemb1 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- DAFTAR SIDANG PEMB 2 -->
+@php
+    $countDownDateDaftarSidangPemb2 = strtotime($skripsi->tgl_disetujui_sidang_pemb1) + (4 * 24 * 60 * 60);
+    $nowDaftarSidangPemb2 = time();
+    $distanceDaftarSidangPemb2 = $countDownDateDaftarSidangPemb2 - $nowDaftarSidangPemb2;
+    $daysDaftarSidangPemb2 = floor($distanceDaftarSidangPemb2 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- DAFTAR SIDANG KOORDINATOR -->
+@php
+    $countDownDateDaftarSidangKoordinator = strtotime($skripsi->tgl_disetujui_sidang_pemb2) + (4 * 24 * 60 * 60);
+    $nowDaftarSidangKoordinator = time();
+    $distanceDaftarSidangKoordinator = $countDownDateDaftarSidangKoordinator - $nowDaftarSidangKoordinator;
+    $daysDaftarSidangKoordinator = floor($distanceDaftarSidangKoordinator / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- DAFTAR SIDANG KAPRODI -->
+@php
+    $countDownDateDaftarSidangKaprodi = strtotime($skripsi->tgl_disetujui_sidang_koordinator) + (4 * 24 * 60 * 60);
+    $nowDaftarSidangKaprodi = time();
+    $distanceDaftarSidangKaprodi = $countDownDateDaftarSidangKaprodi - $nowDaftarSidangKaprodi;
+    $daysDaftarSidangKaprodi = floor($distanceDaftarSidangKaprodi / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
 <div></div>
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>                              -->
@@ -635,6 +703,15 @@
             
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
             <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             <!-- BATAS PERSETUJUAN -->
@@ -721,6 +798,128 @@
             @endif
             @endif
             
+            
+            @endif
+            
+            <!-- PERPANJANGAN 1 -->
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1') 
+
+            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'PERPANJANGAN 1' )
+            <td class="text-center" >
+                @if ($daysPerpanjangan1Pemb1 > 0)
+                    <span class="text-danger"> {{ $daysPerpanjangan1Pemb1 }}  hari lagi</span>
+                @elseif($daysPerpanjangan1Pemb1 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+             @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN 1' )
+            <td class="text-center" >
+                @if ($daysPerpanjangan1Kaprodi > 0)
+                    <span class="text-danger"> {{ $daysPerpanjangan1Kaprodi }}  hari lagi</span>
+                @elseif($daysPerpanjangan1Kaprodi <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+            
+            
+            @endif
+        
+            <!-- PERPANJANGAN 2 -->
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2') 
+
+            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'PERPANJANGAN 2' )
+            <td class="text-center" >
+                @if ($daysPerpanjangan2Pemb1 > 0)
+                    <span class="text-danger"> {{ $daysPerpanjangan2Pemb1 }}  hari lagi</span>
+                @elseif($daysPerpanjangan2Pemb1 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+             @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN 2' )
+            <td class="text-center" >
+                @if ($daysPerpanjangan2Kaprodi > 0)
+                    <span class="text-danger"> {{ $daysPerpanjangan2Kaprodi }}  hari lagi</span>
+                @elseif($daysPerpanjangan2Kaprodi <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+            
+            
+            @endif
+
+            <!-- DAFTAR SIDANG -->
+
+             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG') 
+
+            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
+            <td class="text-center" >
+                @if ($daysDaftarSidangPemb1 > 0)
+                    <span class="text-danger"> {{ $daysDaftarSidangPemb1 }}  hari lagi</span>
+                @elseif($daysDaftarSidangPemb1 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+            @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
+            <td class="text-center" >
+                @if ($daysDaftarSidangPemb2 > 0)
+                    <span class="text-danger"> {{ $daysDaftarSidangPemb2 }}  hari lagi</span>
+                @elseif($daysDaftarSidangPemb2 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+
+             @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
+           <td class="text-center" >
+                @if ($daysDaftarSidangKoordinator > 0)
+                    <span class="text-danger"> {{ $daysDaftarSidangKoordinator }}  hari lagi</span>
+                @elseif($daysDaftarSidangKoordinator <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+             
+            @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
+           <td class="text-center" >
+                @if ($daysDaftarSidangKaprodi > 0)
+                    <span class="text-danger"> {{ $daysDaftarSidangKaprodi }}  hari lagi</span>
+                @elseif($daysDaftarSidangKaprodi <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
             
             @endif
 
@@ -1151,7 +1350,7 @@
 
      @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu Jadwal Sidang Skripsi' )
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' )
              <td class="text-center">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
@@ -1162,6 +1361,31 @@
                  </div>
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <form action="/daftar-sidang/koordinator/approve/{{$skripsi->id}}" class="setujui-sidang-koordinator" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success badge p-1 " data-bs-toggle="tooltip" title="Setujui"><i class="fas fa-check-circle"></i></button>
+</form>
+
+    </div>
+</tr>
+@endif
+@endif
+@endif
+
+
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+      @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' )
+             <td class="text-center">
+                <div class="row persetu">
+    <div class="col-4 py-2 py-md-0 col-lg-4">
+       <button onclick="tolakSidangKaprodi({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
+    </div>
+    <div class="col-4 py-2 py-md-0 col-lg-4">
+                <a href="/kp-skripsi/persetujuan/sidang/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+                 </div>
+    <div class="col-4 py-2 py-md-0 col-lg-4">
+        <form action="/daftar-sidang/kaprodi/approve/{{$skripsi->id}}" class="setujui-sidang-kaprodi" method="POST"> 
     @method('put')
     @csrf
     <button class="btn btn-success badge p-1 " data-bs-toggle="tooltip" title="Setujui"><i class="fas fa-check-circle"></i></button>
@@ -1716,6 +1940,1101 @@ $('.setujui-nilai-kp-keluar-koordinator').submit(function(event) {
 </script>
 @endforeach
 @endpush()
+
+
+<!-- PENDAFTARAN SKRIPSI -->
+@push('scripts')
+@foreach ($pendaftaran_skripsi as $skripsi)
+<script>
+
+//APROVAL SKRIPSI
+$('.setujui-usuljudul-pemb1').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Judul Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakUsulJudulPemb1(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Judul Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Judul Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/usuljudul/pembimbing1/tolak/${id}" method="POST">
+                        @method('put')
+                          @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+    
+$('.setujui-usuljudul-pemb2').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Judul Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakUsulJudulPemb2(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Judul Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Judul Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/usuljudul/pembimbing2/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+$('.setujui-usuljudul-koordinator').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Judul Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakUsulJudulKoordinator(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Judul Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Judul Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/usuljudul/koordinator/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+$('.setujui-usuljudul-kaprodi').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Usulan Judul Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakUsulJudulKaprodi(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Judul Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Judul Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/usuljudul/kaprodi/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+//SEMPRO
+$('.setujui-sempro-pemb1').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sempro!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSemproPemb1(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Seminar Proposal',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Seminar Proposal',
+                    html: `
+                        <form id="reasonForm" action="/daftarsempro/pembimbing1/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+$('.setujui-sempro-pemb2').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sempro!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSemproPemb2(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Seminar Proposal',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Seminar Proposal',
+                    html: `
+                        <form id="reasonForm" action="/daftarsempro/pembimbing2/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+    $('.setujui-sempro-koordinator').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sempro!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSemproKoordinator() {
+     Swal.fire({
+            title: 'Tolak Usulan Seminar Proposal',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Seminar Proposal',
+                    html: `
+                        <form id="reasonForm" action="/daftar-sempro/koordinator/tolak/{{$skripsi->id}}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+$('.setujui-selesai-sempro-pemb1').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Selesai Seminar Proposal!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Selesai'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSelesaiSempro(id) {
+     Swal.fire({
+            title: 'Gagal Seminar Proposal',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Gagal',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Gagal Seminar Proposal',
+                    html: `
+                        <form id="reasonForm" action="/selesaisempro/pembimbing/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+$('.setujui-perpanjangan1-pembimbing').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Perpanjangan 1 Waktu Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakPerpanjangan1Pembimbing(id) {
+     Swal.fire({
+            title: 'Tolak Perpanjangan 1 Waktu Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Perpanjangan 1 Waktu Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/perpanjangan1/pembimbing/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+$('.setujui-perpanjangan1-kaprodi').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Perpanjangan 1 Waktu Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakPerpanjangan1Kaprodi(id) {
+     Swal.fire({
+            title: 'Tolak Perpanjangan 1 Waktu Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Perpanjangan 1 Waktu Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/perpanjangan1/kaprodi/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+$('.setujui-perpanjangan2-pembimbing').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Perpanjangan 2 Waktu Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakPerpanjangan2Pembimbing(id) {
+     Swal.fire({
+            title: 'Tolak Perpanjangan 2 Waktu Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Perpanjangan 2 Waktu Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/perpanjangan2/pembimbing/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+$('.setujui-perpanjangan2-kaprodi').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Perpanjangan 2 Waktu Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakPerpanjangan2Kaprodi(id) {
+     Swal.fire({
+            title: 'Tolak Perpanjangan 2 Waktu Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Perpanjangan 2 Waktu Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/perpanjangan2/kaprodi/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+
+  // DAFTAR SIDANG PEMBIMBING 1
+$('.setujui-sidang-pemb1').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sidang!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSidangPemb1(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Sidang Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Sidang Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/daftarsidang/pembimbing1/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+  //DAFTAR SIDANG PEMBIMBING 2
+$('.setujui-sidang-pemb2').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sidang!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSidangPemb2(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Sidang Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Sidang Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/daftarsidang/pembimbing2/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+$('.setujui-sidang-koordinator').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sidang!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSidangKoordinator(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Sidang Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Sidang Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/daftar-sidang/koordinator/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+$('.setujui-sidang-kaprodi').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Daftar Sidang!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSidangKaprodi(id) {
+     Swal.fire({
+            title: 'Tolak Usulan Sidang Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Usulan Sidang Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/daftar-sidang/kaprodi/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+$('.setujui-selesai-sidang-pemb1').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Selesai Sidang Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Selesai'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakSelesaiSidang(id) {
+     Swal.fire({
+            title: 'Gagal Sidang Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Gagal',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Gagal Sidang Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/selesaisidang/pembimbing/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+//PERPANJANGAN REVISI
+
+$('.setujui-perpanjangan-revisi-pembimbing').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Perpanjangan Revisi Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakPerpanjanganRevisiPembimbing(id) {
+     Swal.fire({
+            title: 'Tolak Perpanjangan Revisi Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Perpanjangan Revisi Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/perpanjangan-revisi/pembimbing/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+$('.setujui-perpanjangan-revisi-kaprodi').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Perpanjangan Revisi Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakPerpanjanganRevisiKaprodi(id) {
+     Swal.fire({
+            title: 'Tolak Perpanjangan Revisi Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Perpanjangan Revisi Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/perpanjangan-revisi/kaprodi/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+
+
+$('.setujui-buku-skripsi-koordinator').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Setujui Bukti Penyerahan Buku Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakBukuSkripsiKoordinator(id) {
+     Swal.fire({
+            title: 'Tolak Bukti Penyerahan Buku Skripsi!',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Bukti Penyerahan Buku Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/buku-skripsi/koordinator/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+$('.setujui-lulus-koordinator').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Lulus Skripsi!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+
+
+
+//  $('.setujui-perpanjangan-revisi-pemb1').submit(function(event) {
+//     event.preventDefault();
+//     Swal.fire({
+//         title: 'Setujui Perpanjangan Revisi Skripsi!',
+//         text: "Apakah Anda Yakin?",
+//         icon: 'question',
+//         showCancelButton: true,
+//         cancelButtonText: 'Batal',
+//         confirmButtonColor: '#28a745',
+//         cancelButtonColor: 'grey',
+//         confirmButtonText: 'Setuju'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             event.currentTarget.submit();
+//         }
+//     })
+// });
+
+// $('.tolak-perpanjangan-revisi-pemb1').submit(function(event) {
+//     event.preventDefault();
+//     Swal.fire({
+//         title: 'Tolak Perpanjangan Revisi Skripsi!',
+//         text: "Apakah Anda Yakin?",
+//         icon: 'question',
+//         showCancelButton: true,
+//         cancelButtonText: 'Batal',
+//         confirmButtonColor: '#dc3545',
+//         cancelButtonColor: 'grey',
+//         confirmButtonText: 'Tolak'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             event.currentTarget.submit();
+//         }
+//     })
+// });
+//   //PEMBIMBING 2
+// $('.setujui-perpanjangan-revisi-pemb2').submit(function(event) {
+//     event.preventDefault();
+//     Swal.fire({
+//         title: 'Setujui Perpanjangan Revisi Skripsi!',
+//         text: "Apakah Anda Yakin?",
+//         icon: 'question',
+//         showCancelButton: true,
+//         cancelButtonText: 'Batal',
+//         confirmButtonColor: '#28a745',
+//         cancelButtonColor: 'grey',
+//         confirmButtonText: 'Setuju'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             event.currentTarget.submit();
+//         }
+//     })
+// });
+
+// $('.tolak-perpanjangan-revisi-pemb2').submit(function(event) {
+//     event.preventDefault();
+//     Swal.fire({
+//         title: 'Tolak Perpanjangan Revisi Skripsi!',
+//         text: "Apakah Anda Yakin?",
+//         icon: 'question',
+//         showCancelButton: true,
+//         cancelButtonText: 'Batal',
+//         confirmButtonColor: '#dc3545',
+//         cancelButtonColor: 'grey',
+//         confirmButtonText: 'Tolak'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             event.currentTarget.submit();
+//         }
+//     })
+// });
+
+</script>
+@endforeach
+@endpush()
+
+
+
 
 
 @push('scripts')

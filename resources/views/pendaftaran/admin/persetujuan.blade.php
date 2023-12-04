@@ -237,6 +237,24 @@
 @endphp
 <!-- BATAS -->
 
+<!-- USULAN DAFTAR SIDANG -->
+@php
+    $countDownDateDaftarSidangAdmin = strtotime($skripsi->tgl_disetujui_sidang_pemb2) + (4 * 24 * 60 * 60);
+    $nowDaftarSidangAdmin = time();
+    $distanceDaftarSidangAdmin = $countDownDateDaftarSidangAdmin - $nowDaftarSidangAdmin;
+    $daysDaftarSidangAdmin = floor($distanceDaftarSidangAdmin / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- USULAN DAFTAR SIDANG -->
+@php
+    $countDownDateMenungguSidangAdmin = strtotime($skripsi->tgl_disetujui_sidang_kaprodi) + (4 * 24 * 60 * 60);
+    $nowMenungguSidangAdmin = time();
+    $distanceMenungguSidangAdmin = $countDownDateMenungguSidangAdmin - $nowMenungguSidangAdmin;
+    $daysMenungguSidangAdmin = floor($distanceMenungguSidangAdmin / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
 
 <div></div>
         <tr>        
@@ -249,7 +267,7 @@
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
             <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
             @endif
-            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SIDANG SELESAI')           
+            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
             <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
            
@@ -264,6 +282,9 @@
             @endif
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
             <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG'|| $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             <!-- BATAS PERSETUJUAN -->
@@ -283,6 +304,28 @@
                 @if ($daysDaftarSemproAdmin >= 0)
                     <span class="text-danger"> {{ $daysDaftarSemproAdmin }}  hari lagi</span>
                 @elseif($daysDaftarSemproAdmin <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+           
+            <!-- DAFTAR SIDANG -->
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center" >
+                @if ($daysDaftarSidangAdmin >= 0)
+                    <span class="text-danger"> {{ $daysDaftarSidangAdmin }}  hari lagi</span>
+                @elseif($daysDaftarSidangAdmin <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            
+            <!-- DAFTAR MENUNGGU JADWAL SIDANG -->
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
+            <td class="text-center" >
+                @if ($daysMenungguSidangAdmin >= 0)
+                    <span class="text-danger"> {{ $daysMenungguSidangAdmin }}  hari lagi</span>
+                @elseif($daysMenungguSidangAdmin <= 0)
                     Batas Waktu Persetujuan telah habis
                 @endif
             </td>
@@ -338,7 +381,7 @@
             @endif
             
             <!-- DAFTAR SIDANG -->
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG SELESAI') 
+             @if ($skripsi->keterangan == 'Menunggu persetujuan Admin Prodi' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
              <td class="text-center">
                  <div class="row">
     <div class="col-12 py-2 py-md-0 col-lg-4">
@@ -349,6 +392,26 @@
                  </div>
     <div class="col-12 py-2 py-md-0 col-lg-4">
         <form action="/daftar-sidang/admin/approve/{{$skripsi->id}}" class="setujui-sidang-admin"  data-bs-toggle="tooltip" title="Setujui & Tandai Terjadwal" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success badge p-1 "><i class="fas fa-check-circle"></i></button>
+</form>
+    </div>
+            </td>
+             @endif
+           
+             <!-- MENUNGGU JADWAL SIDANG -->
+            @if ($skripsi->keterangan == 'Menunggu Jadwal Sidang Skripsi' && $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI' )
+             <td class="text-center">
+                 <div class="row">
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+        <button onclick="tolakTungguSidangAdmin({{$skripsi->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
+    </div>
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+                <a href="/persetujuan/admin/detail/sidang/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+                 </div>
+    <div class="col-12 py-2 py-md-0 col-lg-4">
+        <form action="/daftar-tunggu-sidang/admin/approve/{{$skripsi->id}}" class="setujui-tunggu-sidang-admin"  data-bs-toggle="tooltip" title="Setujui & Tandai Terjadwal" method="POST"> 
     @method('put')
     @csrf
     <button class="btn btn-success badge p-1 "><i class="fas fa-check-circle"></i></button>
@@ -621,6 +684,56 @@ function tolakSidangAdmin(id) {
                     title: 'Tolak Daftar Sidang Skripsi',
                     html: `
                         <form id="reasonForm" action="/daftar-sidang/admin/tolak/${id}" method="POST">
+                        @method('put')
+                            @csrf
+                            <label for="alasan">Alasan Penolakan :</label>
+                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                    `,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+        });
+    }
+
+//MENUNGGU JADWAL SIDANG
+$('.setujui-tunggu-sidang-admin').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Sidang Skripsi Dijadwalkan!',
+        text: "Apakah Anda Yakin?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Setuju'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+
+function tolakTungguSidangAdmin(id) {
+     Swal.fire({
+            title: 'Tolak Daftar Sidang Skripsi',
+            text: 'Apakah Anda Yakin?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Tolak',
+            confirmButtonColor: '#dc3545'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Tolak Daftar Sidang Skripsi',
+                    html: `
+                        <form id="reasonForm" action="/daftar-tunggu-sidang/admin/tolak/${id}" method="POST">
                         @method('put')
                             @csrf
                             <label for="alasan">Alasan Penolakan :</label>

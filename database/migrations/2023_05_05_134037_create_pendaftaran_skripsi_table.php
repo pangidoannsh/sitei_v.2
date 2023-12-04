@@ -34,8 +34,7 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('tgl_disetujui_usuljudul_kaprodi')->nullable();
              // daftar sempro
             //  $table->string('krs_berjalan_sempro')->nullable();  
-            //  $table->string('khs_kpti_10')->nullable();  
-             $table->string('sti_3')->nullable();  
+            //  $table->string('khs_kpti_10')->nullable();   
              $table->string('logbook')->nullable();  
              $table->string('naskah')->nullable();  
              $table->string('sti_30')->nullable();  
@@ -44,14 +43,14 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('tgl_disetujui_sempro_pemb1')->nullable();
              $table->string('tgl_disetujui_sempro_pemb2')->nullable();
              $table->string('tgl_disetujui_sempro_admin')->nullable();
-             $table->string('tgl_disetujui_sempro_koordinator')->nullable();
+            //  $table->string('tgl_disetujui_sempro_koordinator')->nullable();
             //  $table->string('tgl_disetujui_sempro_kaprodi')->nullable();
              //jadwal sempro
              $table->string('tgl_disetujui_jadwalsempro')->nullable();
              //sempro selesai
              $table->string('tgl_semproselesai')->nullable();
              //perpanjangan skripsi 1
-             $table->string('sti_22_p1')->nullable(); 
+             $table->string('sti_22')->nullable(); 
              $table->string('tgl_created_perpanjangan1')->nullable();
              $table->string('tgl_disetujui_perpanjangan1_pemb1')->nullable();
              $table->string('tgl_disetujui_perpanjangan1_kaprodi')->nullable();
@@ -78,6 +77,8 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('tgl_disetujui_sidang_pemb2')->nullable();
              $table->string('tgl_disetujui_sidang_koordinator')->nullable();
              $table->string('tgl_disetujui_sidang_kaprodi')->nullable();
+             //JADWAL SIDANG
+             $table->string('tgl_disetujui_jadwal_sidang')->nullable();
              //STI-17 / PENYERAHAN BUKU SKRIPSI
              $table->string('sti_17')->nullable();
              $table->string('sti_29')->nullable();
@@ -94,8 +95,7 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('tgl_disetujui_revisi_pemb1')->nullable();
              $table->string('tgl_disetujui_revisi_kaprodi')->nullable();
              //Alasan ditolak
-            $table->string('alasan')->nullable();
-            $table->string('pesan')->nullable();    
+            $table->string('alasan')->nullable();  
              
              $table->string('jenis_usulan')->default('Usulan Judul Skripsi');
              $table->string('status_skripsi')->default('USULAN JUDUL');

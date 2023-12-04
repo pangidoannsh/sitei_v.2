@@ -217,7 +217,9 @@
             <p>2. {{$skripsi->pembimbingdua->nama_singkat}}</p>
             @endif
           </td> 
-          <td class="text-center">
+
+          @if($skripsi->pengujisatu ==! null || $skripsi->pengujisatu ==! null || $skripsi->pengujitiga ==! null)
+                      <td class="text-center">
             <p>1. {{$skripsi->pengujisatu->nama_singkat}}</p>
             @if ($skripsi->pengujidua == !null)
             <p>2. {{$skripsi->pengujidua->nama_singkat}}</p>
@@ -226,6 +228,11 @@
             <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
             @endif
           </td> 
+            @else
+                <td class="text-center"></td> 
+            @endif 
+
+
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
           <td class="text-center">            
             <a href="/form-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>

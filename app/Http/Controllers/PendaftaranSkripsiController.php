@@ -15,6 +15,7 @@ use App\Models\PendaftaranKP;
 use App\Models\PendaftaranSkripsi;
 use App\Models\KapasitasBimbingan;
 use App\Models\PenjadwalanSempro;
+use App\Models\PenjadwalanSkripsi;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -289,6 +290,7 @@ class PendaftaranSkripsiController extends Controller
             'logbook' => 'required|mimes:pdf|max:200',
             'naskah' => 'required|mimes:pdf|max:1024',
             'sti_30' => 'required|mimes:pdf|max:200',          
+            'sti_31' => 'nullable|mimes:pdf|max:200',          
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -297,7 +299,10 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->logbook = $request->file('logbook')->store('file');
         $skripsi->naskah = $request->file('naskah')->store('file');
         $skripsi->sti_30 = $request->file('sti_30')->store('file');
+
+        if ($request->hasFile('sti_31')) {
         $skripsi->sti_31 = $request->file('sti_31')->store('file');
+        }
         
         $skripsi->jenis_usulan = 'Daftar Seminar Proposal';
         $skripsi->tgl_created_sempro = Carbon::now();
@@ -450,13 +455,13 @@ class PendaftaranSkripsiController extends Controller
             'resume_turnitin' => 'required|mimes:pdf|max:200',
             'sti_9' => 'required|mimes:pdf|max:200',
             // 'sti_11' => 'mimes:pdf|max:200',
-            'naskah_skripsi' => 'required|mimes:pdf|max:10240',
+            'naskah' => 'required|mimes:pdf|max:10240',
             'dokumen_kelengkapan' => 'required|mimes:pdf|max:200',
             'pasang_poster' => 'required|mimes:pdf|max:200', 
             'sti_10' => 'required|mimes:pdf|max:200',  
             'url_poster'=>'required',          
-            'sti_30_skripsi' => 'required|mimes:pdf|max:200',           
-            'sti_31_skripsi' => 'required|mimes:pdf|max:200',           
+            'sti_30' => 'required|mimes:pdf|max:200',           
+            'sti_31' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -465,13 +470,13 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->resume_turnitin = $request->file('resume_turnitin')->store('file');
         $skripsi->sti_9 = $request->file('sti_9')->store('file');
         // $skripsi->sti_11 = $request->file('sti_11')->store('file');
-        $skripsi->naskah_skripsi = $request->file('naskah_skripsi')->store('file');
+        $skripsi->naskah = $request->file('naskah')->store('file');
         $skripsi->dokumen_kelengkapan = $request->file('dokumen_kelengkapan')->store('file');
         $skripsi->pasang_poster = $request->file('pasang_poster')->store('file');
         $skripsi->sti_10 = $request->file('sti_10')->store('file');
         $skripsi->url_poster = $request->url_poster;
-        $skripsi->sti_30_skripsi = $request->file('sti_30_skripsi')->store('file');
-        $skripsi->sti_31_skripsi = $request->file('sti_31_skripsi')->store('file');
+        $skripsi->sti_30 = $request->file('sti_30')->store('file');
+        $skripsi->sti_31 = $request->file('sti_31')->store('file');
        
         
         $skripsi->jenis_usulan = 'Daftar Sidang Skripsi';
@@ -569,12 +574,12 @@ class PendaftaranSkripsiController extends Controller
     public function storeperpanjangan2_skripsi(Request $request, $id)
     {
         $request->validate([         
-            'sti_22_p2' => 'required|mimes:pdf|max:200',           
+            'sti_22_p1' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_22_p2 = $request->file('sti_22_p2')->store('file');
+        $skripsi->sti_22_p1 = $request->file('sti_22_p1')->store('file');
        
         $skripsi->jenis_usulan = 'Permohonan Perpanjangan 2 Waktu Skripsi';
         $skripsi->tgl_created_perpanjangan2 = Carbon::now();
@@ -1155,7 +1160,7 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
         $skripsi->jenis_usulan = 'Seminar Proposal';
         $skripsi->keterangan = 'Seminar Proposal Dijadwalkan';
-        $skripsi->tgl_disetujui_jadwalsempro = Carbon::now();
+        $skripsi->tgl_disetujui_sempro_admin = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Daftar Sempro Disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1213,34 +1218,34 @@ class PendaftaranSkripsiController extends Controller
     // }
 
     //APPROVAL SEMPRO SELESAI PEMBIMBING
-    public function approveselesaisempro_pemb($id)
-    {
-        $skripsi = PendaftaranSkripsi::find($id);
+    // public function approveselesaisempro_pemb($id)
+    // {
+    //     $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->status_skripsi = 'SEMPRO SELESAI';
-        $skripsi->keterangan = 'Seminar Proposal Selesai';
-        $skripsi->tgl_semproselesai = Carbon::now();
-        $skripsi->update();
+    //     $skripsi->status_skripsi = 'SEMPRO SELESAI';
+    //     $skripsi->keterangan = 'Seminar Proposal Selesai';
+    //     $skripsi->tgl_semproselesai = Carbon::now();
+    //     $skripsi->update();
 
-        Alert::success('Selesai', 'Seminar Proposal Selesai!')->showConfirmButton('Ok', '#28a745');;
-        return  back();
-    }
-    public function tolakselesaisempro_pemb(Request $request, $id)
-    {
-         $request->validate([                                           
-            'alasan' => 'required',
-        ]);
+    //     Alert::success('Selesai', 'Seminar Proposal Selesai!')->showConfirmButton('Ok', '#28a745');;
+    //     return  back();
+    // }
+    // public function tolakselesaisempro_pemb(Request $request, $id)
+    // {
+    //      $request->validate([                                           
+    //         'alasan' => 'required',
+    //     ]);
 
-        $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
-        $skripsi->keterangan = 'Tidak Lulus Seminar Proposal';
-        $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sempro = null;
-        $skripsi->update();
+    //     $skripsi = PendaftaranSkripsi::find($id);        
+    //     $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
+    //     $skripsi->keterangan = 'Tidak Lulus Seminar Proposal';
+    //     $skripsi->alasan = $request->alasan;
+    //     $skripsi->tgl_created_sempro = null;
+    //     $skripsi->update();
 
-        Alert::error('Tidak Lulus', 'Tidak Lulus Seminar Proposal!')->showConfirmButton('Ok', '#dc3545');
-        return  back();
-    }
+    //     Alert::error('Tidak Lulus', 'Tidak Lulus Seminar Proposal!')->showConfirmButton('Ok', '#dc3545');
+    //     return  back();
+    // }
 
 
      //DAFTAR SIDANG
@@ -1249,7 +1254,8 @@ class PendaftaranSkripsiController extends Controller
          $skripsi = PendaftaranSkripsi::find($id);
  
          if ($skripsi->pembimbing_2_nip == null) {
-         $skripsi->keterangan = 'Menunggu Jadwal Sidang Skripsi';
+         $skripsi->keterangan = 'Menunggu persetujuan Admin Prodi';
+         $skripsi->tgl_disetujui_sidang_pemb1 = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Daftar sidang disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1257,6 +1263,7 @@ class PendaftaranSkripsiController extends Controller
          }else {
  
          $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 2';
+         $skripsi->tgl_disetujui_sidang_pemb1 = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Daftar Sidang Disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1284,7 +1291,8 @@ class PendaftaranSkripsiController extends Controller
      public function approvedaftarsidang_pembimbing2(Request $request, $id)
     {
         $skripsi = PendaftaranSkripsi::find($id);
-        $skripsi->keterangan = 'Menunggu Jadwal Sidang Skripsi';
+        $skripsi->keterangan = 'Menunggu persetujuan Admin Prodi';
+        $skripsi->tgl_disetujui_sidang_pemb2 = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Daftar sidang disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1301,6 +1309,7 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->keterangan = 'Ditolak Pembimbing 2';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang = null;
+        $skripsi->tgl_disetujui_sidang_pemb1 = null;
         $skripsi->update();
 
         Alert::error('Ditolak', 'Daftar Sidang Skripsi Ditolak!!')->showConfirmButton('Ok', '#dc3545');
@@ -1310,9 +1319,10 @@ class PendaftaranSkripsiController extends Controller
     {
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
-        $skripsi->jenis_usulan = 'Sidang Skripsi';
-        $skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
+        // $skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
+        // $skripsi->jenis_usulan = 'Sidang Skripsi';
+        $skripsi->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
+        $skripsi->tgl_disetujui_sidang_koordinator = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Daftar Sidang Skripsi Disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1329,13 +1339,122 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
         $skripsi->keterangan = 'Ditolak Admin Koordinator Skripsi';
         $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sidang = null;
+        $skripsi->tgl_created_sidang_pemb1 = null;
+        $skripsi->tgl_created_sidang_pemb2 = null;
+        $skripsi->tgl_created_sidang_admin = null;
         $skripsi->update();
 
         Alert::error('Ditolak!', 'Daftar Sidang Skripsi ditolak')->showConfirmButton('Ok', '#dc3545');
         return back();
         
     }
+   
+    public function approve_sidang_kaprodi(Request $request, $id)
+    {
+        $skripsi = PendaftaranSkripsi::find($id);
+
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DISETUJUI';
+        $skripsi->jenis_usulan = 'Sidang Skripsi';
+        $skripsi->keterangan = 'Menunggu Jadwal Sidang Skripsi';
+        $skripsi->tgl_disetujui_sidang_kaprodi = Carbon::now();
+        $skripsi->update();
+
+        $penjadwalanSkripsi = new PenjadwalanSkripsi();
+        $penjadwalanSkripsi->mahasiswa_nim = $skripsi->mahasiswa_nim;
+        $penjadwalanSkripsi->prodi_id = $skripsi->prodi_id;
+        $penjadwalanSkripsi->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
+        $penjadwalanSkripsi->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
+        $penjadwalanSkripsi->judul_skripsi = $skripsi->judul_skripsi;
+        $penjadwalanSkripsi->save();
+
+        Alert::success('Disetujui!', 'Daftar Sidang Skripsi Disetujui')->showConfirmButton('Ok', '#28a745');
+        return back();
+
+    }
+    public function tolak_sidang_kaprodi(Request $request, $id)
+    {
+       $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $skripsi = PendaftaranSkripsi::find($id);        
+        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->keterangan = 'Ditolak Admin Koordinator Program Studi';
+        $skripsi->alasan = $request->alasan;
+        $skripsi->tgl_created_sidang_pemb1 = null;
+        $skripsi->tgl_created_sidang_pemb2 = null;
+        $skripsi->tgl_created_sidang_admin = null;
+        $skripsi->tgl_created_sidang_koordinator = null;
+        $skripsi->update();
+
+        Alert::error('Ditolak!', 'Daftar Sidang Skripsi ditolak')->showConfirmButton('Ok', '#dc3545');
+        return back();
+        
+    }
+
+    public function approvesidang_admin(Request $request, $id)
+    {
+        $skripsi = PendaftaranSkripsi::find($id);
+
+        $skripsi->keterangan = 'Menunggu persetujuan Koordinator Skripsi';
+        $skripsi->tgl_disetujui_sidang_admin = Carbon::now();
+        $skripsi->update();
+
+        Alert::success('Disetujui!', 'Daftar Sidang Disetujui')->showConfirmButton('Ok', '#28a745');
+        return back();
+
+    }
+
+    public function tolaksidang_admin(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $skripsi = PendaftaranSkripsi::find($id);        
+        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->keterangan = 'Ditolak Admin prodi';
+        $skripsi->alasan = $request->alasan;
+        $skripsi->tgl_created_sidang = null;
+        $skripsi->update();
+
+        Alert::error('Ditolak!', 'Daftar Sidang Ditolak')->showConfirmButton('Ok', '#dc3545');
+        return back();
+    
+    }
+    
+    public function approvetunggu_sidang_admin(Request $request, $id)
+    {
+        $skripsi = PendaftaranSkripsi::find($id);
+
+        $skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
+        $skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
+        $skripsi->tgl_jadwal_sidang_admin = Carbon::now();
+        $skripsi->update();
+
+        Alert::success('Disetujui!', 'Daftar Sidang Disetujui')->showConfirmButton('Ok', '#28a745');
+        return back();
+
+    }
+
+    public function tolaktunggu_sidang_admin(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $skripsi = PendaftaranSkripsi::find($id);        
+        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->keterangan = 'Ditolak Admin prodi';
+        $skripsi->alasan = $request->alasan;
+        $skripsi->tgl_created_sidang = null;
+        $skripsi->update();
+
+        Alert::error('Ditolak!', 'Daftar Sidang Ditolak')->showConfirmButton('Ok', '#dc3545');
+        return back();
+    
+    }
+
     //APPROVAL SIDANG SELESAI PEMBIMBING
     public function approveselesaisidang_pemb($id)
     {
@@ -1374,7 +1493,7 @@ class PendaftaranSkripsiController extends Controller
  
         //  $skripsi->status_skripsi = 'PERPANJANGAN 1 DISETUJUI';
          $skripsi->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
-         $skripsi->tgl_disetujui_perpanjangan1 = Carbon::now();
+         $skripsi->tgl_disetujui_perpanjangan1_pemb1 = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Perpanjangan 1 Waktu Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1393,6 +1512,7 @@ class PendaftaranSkripsiController extends Controller
          $skripsi->status_skripsi = 'PERPANJANGAN 1 DITOLAK';
          $skripsi->keterangan = 'Ditolak Dosen Pembimbing';
          $skripsi->tgl_created_perpanjangan1 = null;
+         $skripsi->tgl_disetujui_perpanjangan1_pemb1 = null;
          $skripsi->alasan = $request->alasan;
          $skripsi->update();
  
@@ -1406,7 +1526,7 @@ class PendaftaranSkripsiController extends Controller
  
          $skripsi->status_skripsi = 'PERPANJANGAN 1 DISETUJUI';
          $skripsi->keterangan = 'Perpanjangan 1 Waktu Skripsi Disetujui';
-         $skripsi->tgl_disetujui_perpanjangan1 = Carbon::now();
+         $skripsi->tgl_disetujui_perpanjangan1_kaprodi = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Perpanjangan 1 Waktu Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1425,6 +1545,8 @@ class PendaftaranSkripsiController extends Controller
          $skripsi->status_skripsi = 'PERPANJANGAN 1 DITOLAK';
          $skripsi->keterangan = 'Ditolak Koordinator Program Studi';
          $skripsi->tgl_created_perpanjangan1 = null;
+         $skripsi->tgl_disetujui_perpanjangan1_pemb1 = null;
+         $skripsi->tgl_disetujui_perpanjangan1_koordinator = null;
          $skripsi->alasan = $request->alasan;
          $skripsi->update();
  
@@ -1440,7 +1562,7 @@ class PendaftaranSkripsiController extends Controller
  
         //  $skripsi->status_skripsi = 'PERPANJANGAN 2 DISETUJUI';
          $skripsi->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
-         $skripsi->tgl_disetujui_perpanjangan2 = Carbon::now();
+         $skripsi->tgl_disetujui_perpanjangan2_pemb1 = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Perpanjangan 2 Waktu Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1459,6 +1581,7 @@ class PendaftaranSkripsiController extends Controller
          $skripsi->status_skripsi = 'PERPANJANGAN 2 DITOLAK';
          $skripsi->keterangan = 'Ditolak Dosen Pembimbing';
          $skripsi->tgl_created_perpanjangan2 = null;
+         $skripsi->tgl_disetujui_perpanjangan2_pemb1 = null;
          $skripsi->alasan = $request->alasan;
          $skripsi->update();
  
@@ -1471,7 +1594,7 @@ class PendaftaranSkripsiController extends Controller
  
          $skripsi->status_skripsi = 'PERPANJANGAN 2 DISETUJUI';
          $skripsi->keterangan = 'Perpanjangan 1 Waktu Skripsi Disetujui';
-         $skripsi->tgl_disetujui_perpanjangan2 = Carbon::now();
+         $skripsi->tgl_disetujui_perpanjangan2_kaprodi = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Perpanjangan 2 Waktu Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1490,6 +1613,8 @@ class PendaftaranSkripsiController extends Controller
          $skripsi->status_skripsi = 'PERPANJANGAN 2 DITOLAK';
          $skripsi->keterangan = 'Ditolak Koordinator Program Studi';
          $skripsi->tgl_created_perpanjangan2 = null;
+         $skripsi->tgl_disetujui_perpanjangan2_pemb1 = null;
+         $skripsi->tgl_disetujui_perpanjangan2_koordinator = null;
          $skripsi->alasan = $request->alasan;
          $skripsi->update();
  

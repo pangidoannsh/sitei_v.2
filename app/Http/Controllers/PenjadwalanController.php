@@ -17,7 +17,7 @@ class PenjadwalanController extends Controller
 {
     public function index()
     {
-        $pendaftaran_kp = PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->latest('created_at')->first();
+        
 
         if (auth()->user()->role_id == 1) {            
             return view('penjadwalan.index', [
@@ -33,7 +33,7 @@ class PenjadwalanController extends Controller
                 'penjadwalan_kps' => PenjadwalanKP::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
-                'pendaftaran_kp' => $pendaftaran_kp,
+                
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
@@ -49,7 +49,7 @@ class PenjadwalanController extends Controller
                 'penjadwalan_kps' => PenjadwalanKP::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
-                'pendaftaran_kp' => $pendaftaran_kp,
+                
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
@@ -60,14 +60,14 @@ class PenjadwalanController extends Controller
             ]);
         }
         if (auth()->user()->role_id == 4) {   
-            $pendaftaran_kp = PendaftaranKP::where('keterangan', 'Menunggu Jadwal Seminar KP')->latest('created_at')->first();         
+        
             return view('penjadwalan.index', [
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
 
-                'pendaftaran_kp' => $pendaftaran_kp,
+                
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);

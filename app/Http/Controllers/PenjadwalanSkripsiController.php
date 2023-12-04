@@ -13,12 +13,13 @@ use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
 use \PDF;
 use App\Models\PenjadwalanSkripsi;
+use App\Models\PendaftaranSkripsi;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSkripsiPenguji;
 use App\Models\PenilaianSkripsiPembimbing;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
+use Carbon\Carbon;
 
 class PenjadwalanSkripsiController extends Controller
 {
@@ -188,6 +189,15 @@ class PenjadwalanSkripsiController extends Controller
         $edit->judul_skripsi = $validated['judul_skripsi'];
         $edit->dibuat_oleh = $validated['dibuat_oleh'];
         $edit->update();
+
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $edit->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
+        $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
+        $pendaftaran_skripsi->tgl_disetujui_jadwal_sidang = Carbon::now();
+        $pendaftaran_skripsi->update();
+
+
 
         return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }

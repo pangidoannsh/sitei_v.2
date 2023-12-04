@@ -196,6 +196,8 @@ Route::group(['middleware' => ['auth:web']], function () {
     
     Route::put('/daftar-sempro/admin/approve/{id}', [PendaftaranSkripsiController::class, 'approvesempro_admin']);
     Route::put('/daftar-sempro/admin/tolak/{id}', [PendaftaranSkripsiController::class, 'tolaksempro_admin']);
+    Route::put('/daftar-sidang/admin/approve/{id}', [PendaftaranSkripsiController::class, 'approvesidang_admin']);
+    Route::put('/daftar-sidang/admin/tolak/{id}', [PendaftaranSkripsiController::class, 'tolaksidang_admin']);
     
     
     Route::put('/usuljudul/admin/approve/{id}', [PendaftaranSkripsiController::class, 'approveusuljudul_admin']);
@@ -369,7 +371,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
     Route::get('/kp-skripsi/seminar', [PenilaianController::class, 'index']);
     Route::get('/kp-skripsi/seminar-pembimbing-penguji', [PenilaianController::class, 'indexpembimbing']);
-    Route::get('/kp-skripsi/riwayat-penilaian-seminar', [PenilaianController::class, 'riwayatkp']);
+    Route::get('/kp-skripsi/riwayat-penilaian-seminar', [PenilaianController::class, 'riwayat']);
     Route::get('/kp-skripsi/riwayat-penilaian-skripsi', [PenilaianController::class, 'riwayatskripsi']);
 
     Route::get('/penilaian-kp', [PenilaianKPController::class, 'index']);
@@ -620,8 +622,9 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     Route::put('/daftarsempro/kaprodi/approve/{id}', [PendaftaranSkripsiController::class, 'approvedaftarsempro_kaprodi']);
     Route::put('/daftarsempro/kaprodi/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakdaftarsempro_kaprodi']);
     
-    Route::put('/daftarsidang/kaprodi/approve/{id}', [PendaftaranSkripsiController::class, 'approvedaftarsidang_kaprodi']);
-    Route::put('/daftarsidang/kaprodi/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakdaftarsidang_kaprodi']);
+
+    Route::put('/daftar-sidang/kaprodi/tolak/{id}', [PendaftaranSkripsiController::class, 'tolak_sidang_kaprodi']);
+    Route::put('/daftar-sidang/kaprodi/approve/{id}', [PendaftaranSkripsiController::class, 'approve_sidang_kaprodi']);
 
     Route::get('/persetujuan-kaprodi', [PenjadwalanController::class, 'persetujuan_kaprodi']);
     Route::get('/riwayat-kaprodi', [PenjadwalanController::class, 'riwayat_kaprodi']);    

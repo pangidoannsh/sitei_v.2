@@ -57,4 +57,9 @@ class PendaftaranSkripsi extends Model
     }
 
 
+    public function penjadwalan_sempro()
+    {
+        return $this->belongsTo(PenjadwalanSempro::class);
+    }
+
 }

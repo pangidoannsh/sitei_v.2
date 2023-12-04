@@ -23,7 +23,7 @@
     <div class="col">
     
     <div class="mb-3">
-            <label for="formFile" class="form-label">STI-23/Surat Pernyataan Perpanjangan Revisi Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+            <label for="formFile" class="form-label">STI-23/Surat Pernyataan Perpanjangan Revisi Skripsi <small class="text-secondary">( Format .pdf| Maks. 200 KB ) </small></label>
             <input name="sti_23" class="form-control @error ('sti_23') is-invalid @enderror" value="{{ old('sti_23') }}" type="file" id="formFile" autofocus required>
 
             @error('sti_23')

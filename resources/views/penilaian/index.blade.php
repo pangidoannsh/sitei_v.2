@@ -171,6 +171,7 @@
             @else
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
             @endif    
+            
 
           </td>                        
         </tr>               

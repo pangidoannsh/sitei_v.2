@@ -1116,6 +1116,8 @@
                               <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
                     @elseif($total_nilai <= 60)
                               <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                    @elseif($sempro->penjadwalan_sempro->status_seminar > 0)
+                              <a href=""  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Seminar telah Selesai</a>                          
                     @else
                               <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>                          
                    

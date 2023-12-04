@@ -20,6 +20,7 @@ use App\Models\PenilaianSemproPembimbing;
 use App\Models\PendaftaranSkripsi;
 use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenjadwalanSemproController extends Controller
 {
@@ -106,6 +107,7 @@ class PenjadwalanSemproController extends Controller
         return redirect('/form')->with('message', 'Jadwal Berhasil Ditambahkan!');
     }
 
+
     public function edit($id)
     {
         $decrypted = Crypt::decryptString($id);
@@ -122,7 +124,7 @@ class PenjadwalanSemproController extends Controller
         ]);
     }
 
-    public function update(Request $request, PenjadwalanSempro $penjadwalan_sempro, PendaftaranSkripsi $id)
+    public function update(Request $request, PenjadwalanSempro $penjadwalan_sempro, PendaftaranSkripsi $pendaftaranid)
     {
         $rules = [
             'mahasiswa_nim' => 'required',
@@ -186,13 +188,13 @@ class PenjadwalanSemproController extends Controller
         $edit->update();
 
         
-        // $skripsi = PendaftaranSkripsi::find($id);
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $edit->mahasiswa_nim )->latest('created_at')->first();
 
-        // $skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
-        // $skripsi->jenis_usulan = 'Seminar Proposal';
-        // $skripsi->keterangan = 'Seminar Proposal Dijadwalkan';
-        // $skripsi->tgl_disetujui_jadwalsempro = Carbon::now();
-        // $skripsi->update();
+        $pendaftaran_skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
+        $pendaftaran_skripsi->jenis_usulan = 'Seminar Proposal';
+        $pendaftaran_skripsi->keterangan = 'Seminar Proposal Dijadwalkan';
+        $pendaftaran_skripsi->tgl_disetujui_jadwalsempro = Carbon::now();
+        $pendaftaran_skripsi->update();
 
         return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }
@@ -250,14 +252,26 @@ class PenjadwalanSemproController extends Controller
         }
     }
 
-    public function approve($id)
-    {
-        $jadwal = PenjadwalanSempro::find($id);
-        $jadwal->status_seminar = 1;
-        $jadwal->update();
+  public function approve($id, PendaftaranSkripsi $pendaftaranid)
+{
+    $jadwal = PenjadwalanSempro::find($id);
 
-        return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
-    }
+    $jadwal->status_seminar = 1;
+    $jadwal->save();
+
+    // $pendaftaran_skripsi = PendaftaranSkripsi::whereNotNull('mahasiswa_nim',  PenjadwalanSempro::find($mahasiswa_nim) )->latest('created_at')->first();
+    
+    $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+    $pendaftaran_skripsi->status_skripsi = 'SEMPRO SELESAI';
+    $pendaftaran_skripsi->keterangan = 'Seminar Proposal Selesai';
+    $pendaftaran_skripsi->tgl_semproselesai = Carbon::now();
+    $pendaftaran_skripsi->save();
+
+    Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+        return back();
+}
+
 
     public function approve_koordinator($id)
     {

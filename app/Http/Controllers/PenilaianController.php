@@ -193,17 +193,17 @@ class PenilaianController extends Controller
     }
 
 
-    public function riwayatkp()
+    public function riwayat()
     {
-        // $riwayat = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 1)->get();        
+        $riwayat = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 1)->get();        
 
-        // $riwayatt = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->get();
+        $riwayatt = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->get();
 
-        // $draf = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
+        $draf = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
 
-        // $draff = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 2)->get();
+        $draff = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 2)->get();
 
-        // $riwayattt = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
+        $riwayattt = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
 
 
 
@@ -219,7 +219,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
             ]);
         }
         if (auth()->user()->role_id == 6) {            
@@ -235,7 +239,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
             ]);
         }
         if (auth()->user()->role_id == 7) {            
@@ -251,7 +259,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
             ]);
         }
         if (auth()->user()->role_id == 8) {            
@@ -267,7 +279,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
             ]);
         }  
 
@@ -286,7 +302,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
             ]);
         }
         if (auth()->user()->role_id == 10) {            
@@ -304,7 +324,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
             ]);
         }
         if (auth()->user()->role_id == 11) {            
@@ -322,7 +346,11 @@ class PenilaianController extends Controller
 
                 'jml_seminarkp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get(),
 
-               'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_sempros' => $riwayat,
+            'penjadwalan_skripsis' => $riwayatt,
+            'penjadwalan_skripsis_draf' => $draf,
+            'penjadwalan_skripsis_draff' => $draff,
+            'penjadwalan_kps' => $riwayattt,
 
             ]);
         }  
@@ -348,24 +376,24 @@ class PenilaianController extends Controller
 
     }
 
-    public function riwayatskripsi()
-    {
-        $riwayat = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 1)->get();        
+    // public function riwayatskripsi()
+    // {
+    //     $riwayat = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 1)->get();        
 
-        $riwayatt = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->get();
+    //     $riwayatt = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->get();
 
-        $draf = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
+    //     $draf = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
 
-        $draff = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 2)->get();
+    //     $draff = PenjadwalanSkripsi::where('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 2)->get();
 
-        // $riwayattt = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
+    //     // $riwayattt = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get();
 
-        return view('penilaian.riwayat-penilaian-skripsi', [
-            'penjadwalan_sempros' => $riwayat,
-            'penjadwalan_skripsis' => $riwayatt,
-            'penjadwalan_skripsis_draf' => $draf,
-            'penjadwalan_skripsis_draff' => $draff,
-            // 'penjadwalan_kps' => $riwayattt,
-        ]);
-    }
+    //     return view('penilaian.riwayat-penilaian-skripsi', [
+    //         'penjadwalan_sempros' => $riwayat,
+    //         'penjadwalan_skripsis' => $riwayatt,
+    //         'penjadwalan_skripsis_draf' => $draf,
+    //         'penjadwalan_skripsis_draff' => $draff,
+    //         // 'penjadwalan_kps' => $riwayattt,
+    //     ]);
+    // }
 }

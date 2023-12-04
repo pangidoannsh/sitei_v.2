@@ -273,7 +273,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
         </div><p class="mt-2"> PENYERAHAN BUKU SKRIPSI </p>
      </li> 
       @endif
-    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' )
+    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
          <li class="step active"> 
             <div><i class="fas fa-check"></i>
         </div> 
@@ -477,7 +477,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
   </div>
 @endif
-    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG')
+    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG')
     <div class="row biru mb-4">
     <div class="col">
         <span class="mt-0 "> Tanggal disetujui <br></span>
@@ -646,7 +646,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO'|| $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
             <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
             @endif
-            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI'||$skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SKRIPSI SELESAI'  || $skripsi->status_skripsi == 'LULUS')           
+            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI'||$skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SKRIPSI SELESAI'  || $skripsi->status_skripsi == 'LULUS' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
             <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
@@ -708,7 +708,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="row">
                                 <div class="col">
                                  <div class="mb-3">
-                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
                                         <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
 
                                         @error('sti_22_p1')
@@ -777,7 +777,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="row">
                                 <div class="col">
                                  <div class="mb-3">
-                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
                                         <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
 
                                         @error('sti_22_p1')
@@ -832,10 +832,10 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="row">
                                 <div class="col">
                                  <div class="mb-3">
-                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
-                                        <input name="sti_22_p2" class="form-control @error ('sti_22_p2') is-invalid @enderror" value="{{ old('sti_22_p2') }}" type="file" id="formFile" required autofocus>
+                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
+                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
 
-                                        @error('sti_22_p2')
+                                        @error('sti_22_p1')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
@@ -894,10 +894,10 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="row">
                                 <div class="col">
                                  <div class="mb-3">
-                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
-                                        <input name="sti_22_p2" class="form-control @error ('sti_22_p2') is-invalid @enderror" value="{{ old('sti_22_p2') }}" type="file" id="formFile" required autofocus>
+                                        <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
+                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
 
-                                        @error('sti_22_p2')
+                                        @error('sti_22_p1')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
@@ -943,7 +943,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 
             @endif
 
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG SELESAI' )
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
             <td class="text-center">
 
              <a href="/daftar-sidang/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
@@ -979,7 +979,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="row">
                                 <div class="col">
                                  <div class="mb-3">
-                                        <label for="formFile" class="form-label float-start">STI-23/Surat Perpanjangan Waktu Revisi Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+                                        <label for="formFile" class="form-label float-start">STI-23/Surat Perpanjangan Waktu Revisi Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
                                         <input name="sti_23" class="form-control @error ('sti_23') is-invalid @enderror" value="{{ old('sti_23') }}" type="file" id="formFile" required autofocus>
 
                                         @error('sti_23')
@@ -1044,7 +1044,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="row">
                                 <div class="col">
                                  <div class="mb-3">
-                                        <label for="formFile" class="form-label float-start">STI-23/Surat Perpanjangan Waktu Revisi Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
+                                        <label for="formFile" class="form-label float-start">STI-23/Surat Perpanjangan Waktu Revisi Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
                                         <input name="sti_23" class="form-control @error ('sti_23') is-invalid @enderror" value="{{ old('sti_23') }}" type="file" id="formFile" required autofocus>
 
                                         @error('sti_23')
