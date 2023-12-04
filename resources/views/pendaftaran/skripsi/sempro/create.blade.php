@@ -27,10 +27,10 @@
     <div class="col">
 
         <div class="mb-3">
-            <label for="formFile" class="form-label">Naskah Proposal <small class="text-secondary">( Format .pdf | Maks. 1 MB ) </small> </label>
-            <input name="proposal" class="form-control @error ('proposal') is-invalid @enderror" value="{{ old('proposal') }}" type="file" id="formFile" required autofocus>
+            <label for="formFile" class="form-label">Naskah Proposal<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 1 MB ) </small> </label>
+            <input name="naskah" class="form-control @error ('naskah') is-invalid @enderror" value="{{ old('naskah') }}" type="file" id="formFile" required autofocus>
 
-            @error('proposal')
+            @error('naskah')
               <div class="invalid-feedback">
                   {{$message}}
               </div>
@@ -38,21 +38,10 @@
     </div>
 
     <div class="mb-3">
-            <label for="formFile" class="form-label">KRS Berjalan <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small> </label>
-            <input name="krs_berjalan_sempro" class="form-control @error ('krs_berjalan_sempro') is-invalid @enderror" value="{{ old('krs_berjalan_sempro') }}" type="file" id="formFile" required >
+            <label for="formFile" class="form-label">KRS Berjalan<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small> </label>
+            <input name="krs_berjalan" class="form-control @error ('krs_berjalan') is-invalid @enderror" value="{{ old('krs_berjalan') }}" type="file" id="formFile" required >
 
-            @error('krs_berjalan_sempro')
-              <div class="invalid-feedback">
-                  {{$message}}
-              </div>
-            @enderror
-    </div>
-    
-    <div class="mb-3">
-            <label for="formFile" class="form-label">Kartu Hasil Studi/KPTI-10 <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
-            <input name="khs_kpti_10" class="form-control @error ('khs_kpti_10') is-invalid @enderror" value="{{ old('khs_kpti_10') }}" type="file" id="formFile" required>
-
-            @error('khs_kpti_10')
+            @error('krs_berjalan')
               <div class="invalid-feedback">
                   {{$message}}
               </div>
@@ -60,7 +49,18 @@
     </div>
     
     <div class="mb-3">
-            <label for="formFile" class="form-label">Logbook <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
+            <label for="formFile" class="form-label">Kartu Hasil Studi/KPTI-10<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
+            <input name="khs" class="form-control @error ('khs') is-invalid @enderror" value="{{ old('khs') }}" type="file" id="formFile" required>
+
+            @error('khs')
+              <div class="invalid-feedback">
+                  {{$message}}
+              </div>
+            @enderror
+    </div>
+    
+    <div class="mb-3">
+            <label for="formFile" class="form-label">Logbook<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
             <input name="logbook" class="form-control @error ('logbook') is-invalid @enderror" value="{{ old('logbook') }}" type="file" id="formFile" required>
 
             @error('logbook')
@@ -73,7 +73,7 @@
 
     
     <div class="mb-3">
-            <label for="formFile" class="form-label">STI-30/Bukti Mengumpulkan Syarat Pendaftaran Seminar Proposal <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small> </label>
+            <label for="formFile" class="form-label">STI-30/Bukti Mengumpulkan Syarat Pendaftaran Seminar Proposal<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small> </label>
             <input name="sti_30" class="form-control @error ('sti_30') is-invalid @enderror" value="{{ old('sti_30') }}" type="file" id="formFile" required>
 
             @error('sti_30')
@@ -84,10 +84,10 @@
     </div>
     
     <div class="mb-3">
-            <label for="formFile" class="form-label">STI-31/Surat Persetujuan Sertifikat Pendamping <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
-            <input name="sti_31_sempro" class="form-control @error ('sti_31_sempro') is-invalid @enderror" value="{{ old('sti_31_sempro') }}" type="file" id="formFile" required>
+            <label for="formFile" class="form-label">STI-31/Surat Persetujuan Sertifikat Pendamping <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
+            <input name="sti_31" class="form-control @error ('sti_31') is-invalid @enderror" value="{{ old('sti_31') }}" type="file" id="formFile">
 
-            @error('sti_31_sempro')
+            @error('sti_31')
               <div class="invalid-feedback">
                   {{$message}}
               </div>

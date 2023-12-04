@@ -156,22 +156,31 @@
             </td>
             @endif      
             <td class="text-center">{{$sempro->waktu}}</td>                   
-            <td class="text-center">{{$sempro->lokasi}}</td>                   
-          <td class="text-center">
-            <p>1. {{$sempro->pembimbingsatu->nama_singkat}}</p>
-            @if ($sempro->pembimbingdua == !null)
-            <p>2. {{$sempro->pembimbingdua->nama_singkat}}</p>
-            @endif
-          </td> 
-          <td class="text-center">
-            <p>1. {{$sempro->pengujisatu->nama_singkat}}</p>
-            @if ($sempro->pengujidua == !null)
-            <p>2. {{$sempro->pengujidua->nama_singkat}}</p>            
-            @endif
-            @if ($sempro->pengujitiga == !null)
-            <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
-            @endif
-          </td> 
+            <td class="text-center">{{$sempro->lokasi}}</td>
+            <td class="text-center">
+                        <p>1. {{$sempro->pembimbingsatu->nama_singkat}}</p>
+                        @if ($sempro->pembimbingdua == !null)
+                        <p>2. {{$sempro->pembimbingdua->nama_singkat}}</p>
+                        @endif
+            </td> 
+
+            @if($sempro->pengujisatu ==! null || $sempro->pengujisatu ==! null || $sempro->pengujitiga ==! null)
+                      <td class="text-center">
+                        <p>1. {{$sempro->pengujisatu->nama_singkat}}</p>
+                        @if ($sempro->pengujidua == !null)
+                        <p>2. {{$sempro->pengujidua->nama_singkat}}</p>            
+                        @endif
+                        @if ($sempro->pengujitiga == !null)
+                        <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
+                        @endif
+                      </td> 
+            @else
+                <td class="text-center"></td> 
+            @endif 
+
+            
+         
+
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
           <td class="text-center">            
             <a href="/form-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>

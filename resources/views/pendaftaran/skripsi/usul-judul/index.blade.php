@@ -21,7 +21,7 @@
 @endif
 
  @php
-  $tanggalDisetujuiUsulJudul = $pendaftaran_skripsi->tgl_disetujui_usuljudul;
+  $tanggalDisetujuiUsulJudul = $pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi;
 @endphp
 
 @php

@@ -557,6 +557,58 @@
 
 
      @foreach ($pendaftaran_skripsi as $skripsi)
+
+<!-- USULAN JUDUL PEMBIMBING 1 -->
+@php
+    $countDownDateUsulJudulPemb1 = strtotime($skripsi->tgl_disetujui_usuljudul_admin) + (4 * 24 * 60 * 60);
+    $nowUsulJudulPemb1 = time();
+    $distanceUsulJudulPemb1 = $countDownDateUsulJudulPemb1 - $nowUsulJudulPemb1;
+    $daysUsulJudulPemb1 = floor($distanceUsulJudulPemb1 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- USULAN JUDUL PEMBIMBING 2 -->
+@php
+    $countDownDateUsulJudulPemb2 = strtotime($skripsi->tgl_disetujui_usuljudul_pemb1) + (4 * 24 * 60 * 60);
+    $nowUsulJudulPemb2 = time();
+    $distanceUsulJudulPemb2 = $countDownDateUsulJudulPemb2 - $nowUsulJudulPemb2;
+    $daysUsulJudulPemb2 = floor($distanceUsulJudulPemb2 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- USULAN JUDUL KOORDINATOR -->
+@php
+    $countDownDateUsulJudulKoordinator = strtotime($skripsi->tgl_disetujui_usuljudul_pemb2) + (4 * 24 * 60 * 60);
+    $nowUsulJudulKoordinator = time();
+    $distanceUsulJudulKoordinator = $countDownDateUsulJudulKoordinator - $nowUsulJudulKoordinator;
+    $daysUsulJudulKoordinator = floor($distanceUsulJudulKoordinator / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- USULAN JUDUL KAPRODI -->
+@php
+    $countDownDateUsulJudulKaprodi = strtotime($skripsi->tgl_disetujui_usuljudul_koordinator) + (4 * 24 * 60 * 60);
+    $nowUsulJudulKaprodi = time();
+    $distanceUsulJudulKaprodi = $countDownDateUsulJudulKaprodi - $nowUsulJudulKaprodi;
+    $daysUsulJudulKaprodi = floor($distanceUsulJudulKaprodi / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+
+<!-- DAFTAR SEMPRO PEMB 1 -->
+@php
+    $countDownDateDaftarSemproPemb1 = strtotime($skripsi->tgl_created_sempro) + (4 * 24 * 60 * 60);
+    $nowDaftarSemproPemb1 = time();
+    $distanceDaftarSemproPemb1 = $countDownDateDaftarSemproPemb1 - $nowDaftarSemproPemb1;
+    $daysDaftarSemproPemb1 = floor($distanceDaftarSemproPemb1 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+<!-- DAFTAR SEMPRO PEMB 2 -->
+@php
+    $countDownDateDaftarSemproPemb2 = strtotime($skripsi->tgl_disetujui_sempro_pemb1) + (4 * 24 * 60 * 60);
+    $nowDaftarSemproPemb2 = time();
+    $distanceDaftarSemproPemb2 = $countDownDateDaftarSemproPemb2 - $nowDaftarSemproPemb2;
+    $daysDaftarSemproPemb2 = floor($distanceDaftarSemproPemb2 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
 <div></div>
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>                              -->
@@ -580,8 +632,98 @@
             @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
             <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
             @endif
+            
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
+            @endif
 
-               
+            <!-- BATAS PERSETUJUAN -->
+            @if ($skripsi->status_skripsi == 'USULAN JUDUL') 
+
+            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'USULAN JUDUL' )
+            <td class="text-center" >
+                @if ($daysUsulJudulPemb1 > 0)
+                    <span class="text-danger"> {{ $daysUsulJudulPemb1 }}  hari lagi</span>
+                @elseif($daysUsulJudulPemb1 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+            @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' && $skripsi->status_skripsi == 'USULAN JUDUL' )
+            <td class="text-center" >
+                @if ($daysUsulJudulPemb2 > 0)
+                    <span class="text-danger"> {{ $daysUsulJudulPemb2 }}  hari lagi</span>
+                @elseif($daysUsulJudulPemb2 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+             @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'USULAN JUDUL' )
+            <td class="text-center" >
+                @if ($daysUsulJudulKoordinator > 0)
+                    <span class="text-danger"> {{ $daysUsulJudulKoordinator }}  hari lagi</span>
+                @elseif($daysUsulJudulKoordinator <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+            
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'USULAN JUDUL' )
+            <td class="text-center" >
+                @if ($daysUsulJudulKaprodi > 0)
+                    <span class="text-danger"> {{ $daysUsulJudulKaprodi }}  hari lagi</span>
+                @elseif($daysUsulJudulKaprodi <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            @endif
+            
+            @endif
+
+            <!-- DAFTAR SEMPRO -->
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO') 
+
+            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'DAFTAR SEMPRO' )
+            <td class="text-center" >
+                @if ($daysDaftarSemproPemb1 > 0)
+                    <span class="text-danger"> {{ $daysDaftarSemproPemb1 }}  hari lagi</span>
+                @elseif($daysDaftarSemproPemb1 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+            @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' && $skripsi->status_skripsi == 'DAFTAR SEMPRO' )
+            <td class="text-center" >
+                @if ($daysDaftarSemproPemb2 > 0)
+                    <span class="text-danger"> {{ $daysDaftarSemproPemb2 }}  hari lagi</span>
+                @elseif($daysDaftarSemproPemb2 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+            
+            
+            @endif
+
             <td class="text-center">{{$skripsi->keterangan}}</td> 
 
 
@@ -1034,6 +1176,8 @@
     @endforeach
 
 
+      @if (Str::length(Auth::guard('dosen')->user()) > 0)
+    @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 
      @foreach ($penjadwalan_skripsis as $skripsi)
         <tr>
@@ -1081,9 +1225,11 @@
 
  @endif
     @endif
-
-        </tr>
-    @endforeach
+    
+</tr>
+@endforeach
+@endif
+@endif
 
 
 

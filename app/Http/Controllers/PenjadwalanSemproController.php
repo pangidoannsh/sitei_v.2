@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSemproPenguji;
 use App\Models\PenilaianSemproPembimbing;
+use App\Models\PendaftaranSkripsi;
+use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PenjadwalanSemproController extends Controller
@@ -120,7 +122,7 @@ class PenjadwalanSemproController extends Controller
         ]);
     }
 
-    public function update(Request $request, PenjadwalanSempro $penjadwalan_sempro)
+    public function update(Request $request, PenjadwalanSempro $penjadwalan_sempro, PendaftaranSkripsi $id)
     {
         $rules = [
             'mahasiswa_nim' => 'required',
@@ -182,6 +184,16 @@ class PenjadwalanSemproController extends Controller
         $edit->dibuat_oleh = $validated['dibuat_oleh'];
         $edit->waktu = $request->waktu;
         $edit->update();
+
+        
+        // $skripsi = PendaftaranSkripsi::find($id);
+
+        // $skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
+        // $skripsi->jenis_usulan = 'Seminar Proposal';
+        // $skripsi->keterangan = 'Seminar Proposal Dijadwalkan';
+        // $skripsi->tgl_disetujui_jadwalsempro = Carbon::now();
+        // $skripsi->update();
+
         return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }
 

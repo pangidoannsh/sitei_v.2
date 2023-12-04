@@ -147,7 +147,7 @@
   </div> --}}
 </div>
 
-@if (auth()->user()->nip == $kp->penguji_nip && auth()->user()->nip !== $kp->pembimbing_nip)
+@if (auth()->user()->nip == $kp->penjadwalan_kp->penguji_nip && auth()->user()->nip !== $kp->penjadwalan_kp->pembimbing_nip)
 <form action="/penilaian-kp-penguji/edit/{{$kp->id}}" method="POST">
     @method('put')
     @csrf
@@ -321,7 +321,7 @@
 </form>
 @endif
 
-@if (auth()->user()->nip == $kp->pembimbing_nip && auth()->user()->nip !== $kp->penguji_nip)
+@if (auth()->user()->nip == $kp->penjadwalan_kp->pembimbing_nip && auth()->user()->nip !== $kp->penjadwalan_kp->penguji_nip)
 <form action="/penilaian-kp-pembimbing/edit/{{$kp->id}}" method="POST">
     @method('put')
     @csrf
@@ -699,7 +699,7 @@
 
 
 
-@if (auth()->user()->nip == $kp->penguji_nip && auth()->user()->nip == $kp->pembimbing_nip)
+@if (auth()->user()->nip == $kp->penjadwalan_kp->penguji_nip && auth()->user()->nip == $kp->penjadwalan_kp->pembimbing_nip)
 <div class="bg-white pb-5 rounded">
 <ul class="nav nav-tabs navbar-success" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
@@ -723,94 +723,94 @@
 </ul>
 <div class="tab-content p-5" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-  <form action="/penilaian-kp-pembimbing/edit/{{$kp->id}}" method="POST">
+ <form action="/penilaian-kp-penguji/edit/{{$kp->id}}" method="POST">
     @method('put')
     @csrf
     <div class="mb-3 gridratakiri ">
-                      <label for="presentasi" class="col-form-label">1). Presentasi</label>
-                      <div class="radio1 d-inline">
-                        <hr>
-      
-                      <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
-                      <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi2" value="4" onclick="hasil()" {{ old('presentasi') == '4' ? 'checked' : null }} >
-                      <label class="btn tombol btn-warning fw-normal " for="presentasi2">Kurang Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi3" value="6" onclick="hasil()" {{ old('presentasi') == '6' ? 'checked' : null }} >
-                      <label class="btn tombol btn-info fw-normal " for="presentasi3">Biasa</label>
-      
-                      <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi4" value="8" onclick="hasil()" {{ old('presentasi') == '8' ? 'checked' : null }} >
-                      <label class="btn tombol btn-primary fw-normal " for="presentasi4">Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi5" value="10" onclick="hasil()" {{ old('presentasi') == '10' ? 'checked' : null }} >
-                      <label class="btn tombol btn-success fw-normal " for="presentasi5">Sangat Baik</label>
-      
-                      </div>                                                         
-                    </div>
-                    @error('presentasi')
-                      <div class="invalid-feedback">
-                        Error
-                      </div>
-                    @enderror
+                    <label for="presentasi" class="col-form-label">1). Presentasi</label>
+                    <div class="radio1 d-inline">
+                      <hr>
 
-                    <div class="mb-3 gridratakiri ">
-                      <label for="materi" class="col-form-label">2). Materi</label>
-                      <div class="radio1 d-inline">
-                        <hr>
-      
-                      <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
-                      <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi2" value="4" onclick="hasil()" {{ old('materi') == '4' ? 'checked' : null }} >
-                      <label class="btn tombol btn-warning fw-normal " for="materi2">Kurang Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi3" value="6" onclick="hasil()" {{ old('materi') == '6' ? 'checked' : null }} >
-                      <label class="btn tombol btn-info fw-normal " for="materi3">Biasa</label>
-      
-                      <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi4" value="8" onclick="hasil()" {{ old('materi') == '8' ? 'checked' : null }} >
-                      <label class="btn tombol btn-primary fw-normal " for="materi4">Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi5" value="10" onclick="hasil()" {{ old('materi') == '10' ? 'checked' : null }} >
-                      <label class="btn tombol btn-success fw-normal " for="materi5">Sangat Baik</label>
-      
-                      </div>                                                         
-                    </div>
-                    @error('materi')
-                      <div class="invalid-feedback">
-                        Error
-                      </div>
-                    @enderror
+                    <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi', $kpp->presentasi) == '2' ? 'checked' : null }} >
+                    <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
 
-                    <div class="mb-3 gridratakiri ">
-                      <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
-                      <div class="radio1 d-inline">
-                        <hr>
-      
-                      <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
-                      <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab2" value="4" onclick="hasil()" {{ old('tanya_jawab') == '4' ? 'checked' : null }} >
-                      <label class="btn tombol btn-warning fw-normal " for="tanya_jawab2">Kurang Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab3" value="6" onclick="hasil()" {{ old('tanya_jawab') == '6' ? 'checked' : null }} >
-                      <label class="btn tombol btn-info fw-normal " for="tanya_jawab3">Biasa</label>
-      
-                      <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab4" value="8" onclick="hasil()" {{ old('tanya_jawab') == '8' ? 'checked' : null }} >
-                      <label class="btn tombol btn-primary fw-normal " for="tanya_jawab4">Baik</label>
-      
-                      <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab5" value="10" onclick="hasil()" {{ old('tanya_jawab') == '10' ? 'checked' : null }} >
-                      <label class="btn tombol btn-success fw-normal " for="tanya_jawab5">Sangat Baik</label>
-      
-                      </div>                                                         
-                    </div>
-                    @error('tanya_jawab')
-                      <div class="invalid-feedback">
-                        Error
-                      </div>
-                    @enderror
+                    <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi2" value="4" onclick="hasil()" {{ old('presentasi', $kpp->presentasi) == '4' ? 'checked' : null }} >
+                    <label class="btn tombol btn-warning fw-normal " for="presentasi2">Kurang Baik</label>
 
-                    <div class="col-lg-6 mt-5 ml-auto mr-auto">
+                    <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi3" value="6" onclick="hasil()" {{ old('presentasi', $kpp->presentasi) == '6' ? 'checked' : null }} >
+                    <label class="btn tombol btn-info fw-normal " for="presentasi3">Biasa</label>
+
+                    <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi4" value="8" onclick="hasil()" {{ old('presentasi', $kpp->presentasi) == '8' ? 'checked' : null }} >
+                    <label class="btn tombol btn-primary fw-normal " for="presentasi4">Baik</label>
+
+                    <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi5" value="10" onclick="hasil()" {{ old('presentasi', $kpp->presentasi) == '10' ? 'checked' : null }} >
+                    <label class="btn tombol btn-success fw-normal " for="presentasi5">Sangat Baik</label>
+
+                    </div>                                                         
+                  </div>
+                  @error('presentasi')
+                    <div class="invalid-feedback">
+                      Error
+                    </div>
+                  @enderror
+
+                  <div class="mb-3 gridratakiri ">
+                    <label for="materi" class="col-form-label">2). Materi</label>
+                    <div class="radio1 d-inline">
+                      <hr>
+
+                    <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi', $kpp->materi) == '2' ? 'checked' : null }} >
+                    <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
+
+                    <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi2" value="4" onclick="hasil()" {{ old('materi', $kpp->materi) == '4' ? 'checked' : null }} >
+                    <label class="btn tombol btn-warning fw-normal " for="materi2">Kurang Baik</label>
+
+                    <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi3" value="6" onclick="hasil()" {{ old('materi', $kpp->materi) == '6' ? 'checked' : null }} >
+                    <label class="btn tombol btn-info fw-normal " for="materi3">Biasa</label>
+
+                    <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi4" value="8" onclick="hasil()" {{ old('materi', $kpp->materi) == '8' ? 'checked' : null }} >
+                    <label class="btn tombol btn-primary fw-normal " for="materi4">Baik</label>
+
+                    <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi5" value="10" onclick="hasil()" {{ old('materi', $kpp->materi) == '10' ? 'checked' : null }} >
+                    <label class="btn tombol btn-success fw-normal " for="materi5">Sangat Baik</label>
+
+                    </div>                                                         
+                  </div>
+                  @error('materi')
+                    <div class="invalid-feedback">
+                      Error
+                    </div>
+                  @enderror
+
+                  <div class="mb-3 gridratakiri ">
+                    <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
+                    <div class="radio1 d-inline">
+                      <hr>
+
+                    <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab', $kpp->tanya_jawab) == '2' ? 'checked' : null }} >
+                    <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
+
+                    <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab2" value="4" onclick="hasil()" {{ old('tanya_jawab', $kpp->tanya_jawab) == '4' ? 'checked' : null }} >
+                    <label class="btn tombol btn-warning fw-normal " for="tanya_jawab2">Kurang Baik</label>
+
+                    <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab3" value="6" onclick="hasil()" {{ old('tanya_jawab', $kpp->tanya_jawab) == '6' ? 'checked' : null }} >
+                    <label class="btn tombol btn-info fw-normal " for="tanya_jawab3">Biasa</label>
+
+                    <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab4" value="8" onclick="hasil()" {{ old('tanya_jawab', $kpp->tanya_jawab) == '8' ? 'checked' : null }} >
+                    <label class="btn tombol btn-primary fw-normal " for="tanya_jawab4">Baik</label>
+
+                    <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab5" value="10" onclick="hasil()" {{ old('tanya_jawab', $kpp->tanya_jawab) == '10' ? 'checked' : null }} >
+                    <label class="btn tombol btn-success fw-normal " for="tanya_jawab5">Sangat Baik</label>
+
+                    </div>                                                         
+                  </div>
+                  @error('tanya_jawab')
+                    <div class="invalid-feedback">
+                      Error
+                    </div>
+                  @enderror
+
+                  <div class="col-lg-6 mt-5 ml-auto mr-auto">
                       <table class="table table-bordered bg-success">
                         <tbody>
                             <tr class="text-center">
@@ -818,7 +818,7 @@
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_angka" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_angka" style=" width: 50px;
                   background-color: rgb(255, 255, 255);                                                
-                " readonly>
+                " readonly value="{{$kpp->total_nilai_angka}}">
                                     </h3>
                                 </td>
                             </tr>
@@ -828,54 +828,53 @@
                                 <td class="bg-success text-center">
                                     <input type="text" id="total_nilai_huruf" class="form-control text-bold text-center ml-auto mr-auto" name="total_nilai_huruf" style=" width: 50px;
                   background-color: rgb(255, 255, 255);
-                " readonly>
+                " readonly value="{{$kpp->total_nilai_huruf}}">
                                     </h3>
                                 </td>
                             </tr>
                         </tbody>
                       </table>
             </div>
-                    
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
+
+                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>       
            
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <div class="mb-3 gridratakiri">                      
                     <div class="fw-bold mb-2">Perbaikan 1</div>
-                      <input type="text" name="revisi_naskah1" class="form-control" value="{{ $kp->revisi_naskah1 != null ? $kp->revisi_naskah1 : '' }}">
+                      <input type="text" name="revisi_naskah1" class="form-control" value="{{ $kpp->revisi_naskah1 != null ? $kpp->revisi_naskah1 : '' }}">
                     </div>
                     
                     <div class="mb-3 gridratakiri">                      
                     <div class="fw-bold mb-2">Perbaikan 2</div>
-                      <input type="text" name="revisi_naskah2" class="form-control" value="{{ $kp->revisi_naskah2 != null ? $kp->revisi_naskah2 : '' }}">
+                      <input type="text" name="revisi_naskah2" class="form-control" value="{{ $kpp->revisi_naskah2 != null ? $kpp->revisi_naskah2 : '' }}">
                     </div>
 
                     <div class="mb-3 gridratakiri">                      
                     <div class="fw-bold mb-2">Perbaikan 3</div>
-                      <input type="text" name="revisi_naskah3" class="form-control" value="{{ $kp->revisi_naskah3 != null ? $kp->revisi_naskah3 : '' }}">
+                      <input type="text" name="revisi_naskah3" class="form-control" value="{{ $kpp->revisi_naskah3 != null ? $kpp->revisi_naskah3 : '' }}">
                     </div>
 
                     <div class="mb-3 gridratakiri">                      
                     <div class="fw-bold mb-2">Perbaikan 4</div>
-                      <input type="text" name="revisi_naskah4" class="form-control" value="{{ $kp->revisi_naskah4 != null ? $kp->revisi_naskah4 : '' }}">
+                      <input type="text" name="revisi_naskah4" class="form-control" value="{{ $kpp->revisi_naskah4 != null ? $kpp->revisi_naskah4 : '' }}">
                     </div>
 
                     <div class="mb-3 gridratakiri">                      
                     <div class="fw-bold mb-2">Perbaikan 5</div>
-                      <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kp->revisi_naskah5 != null ? $kp->revisi_naskah5 : '' }}">
+                      <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kpp->revisi_naskah5 != null ? $kpp->revisi_naskah5 : '' }}">
                     </div>
-
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button> 
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button> 
                     </form>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <form action="/penilaian-kp-pembimbing/create/{{$kp->id}}" method="POST">
-                 @csrf
-                 <div class="mb-3 gridratakiri">    
-                    <div class="fw-bold mb-2">Input Nilai :</div>                  
+    <form action="/penilaian-kp-pembimbing/edit/{{$kp->id}}" method="POST">
+    @method('put')
+    @csrf
+                <div class="mb-3 gridratakiri">                      
                       <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
-                    </div>                                        
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>
+                    </div>
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
   </div>
   <div class="tab-pane fade" id="empat" role="tabpanel" aria-labelledby="empat-tab">
      <div class="mb-3 gridratakiri">                      
@@ -893,7 +892,7 @@
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
                     
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>    
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>    
                   </form>
   
   </div>

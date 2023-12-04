@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
 use App\Models\PendaftaranSkripsi;
 use App\Models\KapasitasBimbingan;
+use App\Models\PenjadwalanSempro;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -283,21 +284,20 @@ class PendaftaranSkripsiController extends Controller
     public function storesempro(Request $request, $id)
     {
         $request->validate([                                                          
-            'krs_berjalan_sempro' => 'required|mimes:pdf|max:200',
-            'khs_kpti_10' => 'required|mimes:pdf|max:200',
+            'krs_berjalan' => 'required|mimes:pdf|max:200',
+            'khs' => 'required|mimes:pdf|max:200',
             'logbook' => 'required|mimes:pdf|max:200',
-            'proposal' => 'required|mimes:pdf|max:1024',
-            'sti_30' => 'required|mimes:pdf|max:200',
-            'sti_31_sempro' => 'required|mimes:pdf|max:200',           
+            'naskah' => 'required|mimes:pdf|max:1024',
+            'sti_30' => 'required|mimes:pdf|max:200',          
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
-        $skripsi->krs_berjalan_sempro = $request->file('krs_berjalan_sempro')->store('file');
-        $skripsi->khs_kpti_10 = $request->file('khs_kpti_10')->store('file');
+        $skripsi->krs_berjalan = $request->file('krs_berjalan')->store('file');
+        $skripsi->khs = $request->file('khs')->store('file');
         $skripsi->logbook = $request->file('logbook')->store('file');
-        $skripsi->proposal = $request->file('proposal')->store('file');
+        $skripsi->naskah = $request->file('naskah')->store('file');
         $skripsi->sti_30 = $request->file('sti_30')->store('file');
-        $skripsi->sti_31_sempro = $request->file('sti_31_sempro')->store('file');
+        $skripsi->sti_31 = $request->file('sti_31')->store('file');
         
         $skripsi->jenis_usulan = 'Daftar Seminar Proposal';
         $skripsi->tgl_created_sempro = Carbon::now();
@@ -881,6 +881,37 @@ class PendaftaranSkripsiController extends Controller
         //
     }
 
+
+    // APPROVAL ADMIN
+        public function approveusuljudul_admin(Request $request, $id)
+    {
+        $skripsi = PendaftaranSkripsi::find($id);
+        $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 1';
+        $skripsi->tgl_disetujui_usuljudul_admin = Carbon::now();
+        $skripsi->update();
+
+        Alert::success('Disetujui!', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
+        return back();
+    }
+
+    public function tolakusuljudul_admin(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $skripsi = PendaftaranSkripsi::find($id);        
+        $skripsi->status_skripsi = 'USULAN JUDUL DITOLAK';
+        $skripsi->keterangan = 'Ditolak Admin Prodi';
+        $skripsi->alasan = $request->alasan;
+        $skripsi->update();
+
+        Alert::error('Ditolak', 'Usulan judul berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
+        return  back();
+        
+    }
+
+
     //APPROVAL PEMBIMBING
 
     public function approveusuljudul_pembimbing(Request $request, $id)
@@ -889,6 +920,7 @@ class PendaftaranSkripsiController extends Controller
 
         if ($skripsi->pembimbing_2_nip == null) {
         $skripsi->keterangan = 'Menunggu persetujuan Koordinator Skripsi';
+        $skripsi->tgl_disetujui_usuljudul_pemb1 = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
@@ -896,6 +928,7 @@ class PendaftaranSkripsiController extends Controller
         }else {
 
         $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 2';
+        $skripsi->tgl_disetujui_usuljudul_pemb1 = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
@@ -926,6 +959,7 @@ class PendaftaranSkripsiController extends Controller
     {
         $skripsi = PendaftaranSkripsi::find($id);
         $skripsi->keterangan = 'Menunggu persetujuan Koordinator Skripsi';
+        $skripsi->tgl_disetujui_usuljudul_pemb2 = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
@@ -947,39 +981,14 @@ class PendaftaranSkripsiController extends Controller
         Alert::error('Ditolak', 'Usulan judul berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
         return  back();
     }
-    public function approveusuljudul_admin(Request $request, $id)
-    {
-        $skripsi = PendaftaranSkripsi::find($id);
-        $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 1';
-        $skripsi->update();
 
-        Alert::success('Disetujui!', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
-        return back();
-    }
-
-    public function tolakusuljudul_admin(Request $request, $id)
-    {
-        $request->validate([                                           
-            'alasan' => 'required',
-        ]);
-
-        $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'USULAN JUDUL DITOLAK';
-        $skripsi->keterangan = 'Ditolak Admin Prodi';
-        $skripsi->alasan = $request->alasan;
-        $skripsi->update();
-
-        Alert::error('Ditolak', 'Usulan judul berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
-        return  back();
-        
-    }
 
     // APPROVAL KOORDINATOR
     public function approveusuljudul(Request $request, $id)
     {
         $skripsi = PendaftaranSkripsi::find($id);
         $skripsi->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
-        // $skripsi->tgl_disetujui_usuljudul = Carbon::now()->isoFormat('D MMMM Y');
+        $skripsi->tgl_disetujui_usuljudul_koordinator = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1009,7 +1018,7 @@ class PendaftaranSkripsiController extends Controller
         $skripsi = PendaftaranSkripsi::find($id);
         $skripsi->status_skripsi = 'JUDUL DISETUJUI';
         $skripsi->keterangan = 'Usulan Judul Skripsi Disetujui';
-        $skripsi->tgl_disetujui_usuljudul = Carbon::now();
+        $skripsi->tgl_disetujui_usuljudul_kaprodi = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Usulan judul disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1034,18 +1043,51 @@ class PendaftaranSkripsiController extends Controller
 
 
     //DAFTAR-SEMPRO
+
+    public function approve_sempro_admin(Request $request, $id)
+    {
+        $skripsi = PendaftaranSkripsi::find($id);
+
+        $skripsi->keterangan = 'Menunggu Jadwal Seminar Proposal';
+        $skripsi->tgl_disetujui_jadwalsempro = Carbon::now();
+        $skripsi->update();
+
+        Alert::success('Disetujui!', 'Daftar Sempro Disetujui')->showConfirmButton('Ok', '#28a745');
+        return back();
+
+    }
+    public function tolak_sempro_admin(Request $request, $id)
+    {
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $skripsi = PendaftaranSkripsi::find($id);        
+        $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+        $skripsi->keterangan = 'Ditolak Koordinator Skripsi';
+        $skripsi->alasan = $request->alasan;
+        $skripsi->tgl_created_sempro = null;
+        $skripsi->update();
+
+        Alert::error('Ditolak!', 'Daftar Sempro Ditolak')->showConfirmButton('Ok', '#dc3545');
+        return back();
+    
+    }
+
     public function approvedaftarsempro_pembimbing(Request $request, $id)
     {
         $skripsi = PendaftaranSkripsi::find($id);
 
         if ($skripsi->pembimbing_2_nip == null) {
         $skripsi->keterangan = 'Menunggu Jadwal Seminar Proposal';
+        $skripsi->tgl_disetujui_sempro_pemb1 = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Daftar Sempro disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
         }else {
         $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 2';
+        $skripsi->tgl_disetujui_sempro_pemb1 = Carbon::now();
         $skripsi->update();
 
         Alert::success('Disetujui!', 'Daftar Sempro disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1074,7 +1116,16 @@ class PendaftaranSkripsiController extends Controller
         $skripsi = PendaftaranSkripsi::find($id);
 
         $skripsi->keterangan = 'Menunggu Jadwal Seminar Proposal';
+        $skripsi->tgl_disetujui_sempro_pemb2 = Carbon::now();
         $skripsi->update();
+
+        $penjadwalanSempro = new PenjadwalanSempro();
+        $penjadwalanSempro->mahasiswa_nim = $skripsi->mahasiswa_nim;
+        $penjadwalanSempro->prodi_id = $skripsi->prodi_id;
+        $penjadwalanSempro->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
+        $penjadwalanSempro->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
+        $penjadwalanSempro->judul_proposal = $skripsi->judul_skripsi;
+        $penjadwalanSempro->save();
 
         Alert::success('Disetujui!', 'Daftar sempro disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
@@ -1097,7 +1148,7 @@ class PendaftaranSkripsiController extends Controller
         return  back();
     }
 
-    public function approve_sempro_koordinator(Request $request, $id)
+    public function approvesempro_admin(Request $request, $id)
     {
         $skripsi = PendaftaranSkripsi::find($id);
 
@@ -1111,7 +1162,7 @@ class PendaftaranSkripsiController extends Controller
         return back();
 
     }
-    public function tolak_sempro_koordinator(Request $request, $id)
+    public function tolaksempro_admin(Request $request, $id)
     {
         $request->validate([                                           
             'alasan' => 'required',
@@ -1119,7 +1170,7 @@ class PendaftaranSkripsiController extends Controller
 
         $skripsi = PendaftaranSkripsi::find($id);        
         $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
-        $skripsi->keterangan = 'Ditolak Koordinator Skripsi';
+        $skripsi->keterangan = 'Ditolak Admin prodi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sempro = null;
         $skripsi->update();
@@ -1128,6 +1179,38 @@ class PendaftaranSkripsiController extends Controller
         return back();
     
     }
+
+    // public function approve_sempro_koordinator(Request $request, $id)
+    // {
+    //     $skripsi = PendaftaranSkripsi::find($id);
+
+    //     $skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
+    //     $skripsi->jenis_usulan = 'Seminar Proposal';
+    //     $skripsi->keterangan = 'Seminar Proposal Dijadwalkan';
+    //     $skripsi->tgl_disetujui_jadwalsempro = Carbon::now();
+    //     $skripsi->update();
+
+    //     Alert::success('Disetujui!', 'Daftar Sempro Disetujui')->showConfirmButton('Ok', '#28a745');
+    //     return back();
+
+    // }
+    // public function tolak_sempro_koordinator(Request $request, $id)
+    // {
+    //     $request->validate([                                           
+    //         'alasan' => 'required',
+    //     ]);
+
+    //     $skripsi = PendaftaranSkripsi::find($id);        
+    //     $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+    //     $skripsi->keterangan = 'Ditolak Koordinator Skripsi';
+    //     $skripsi->alasan = $request->alasan;
+    //     $skripsi->tgl_created_sempro = null;
+    //     $skripsi->update();
+
+    //     Alert::error('Ditolak!', 'Daftar Sempro Ditolak')->showConfirmButton('Ok', '#dc3545');
+    //     return back();
+    
+    // }
 
     //APPROVAL SEMPRO SELESAI PEMBIMBING
     public function approveselesaisempro_pemb($id)

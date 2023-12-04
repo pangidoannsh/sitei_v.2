@@ -194,6 +194,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::put('/semkp/admin/approve/{id}', [PendaftaranKPController::class, 'approvesemkp_admin']);
     Route::put('/semkp/admin/tolak/{id}', [PendaftaranKPController::class, 'tolaksemkp_admin']);
     
+    Route::put('/daftar-sempro/admin/approve/{id}', [PendaftaranSkripsiController::class, 'approvesempro_admin']);
+    Route::put('/daftar-sempro/admin/tolak/{id}', [PendaftaranSkripsiController::class, 'tolaksempro_admin']);
+    
     
     Route::put('/usuljudul/admin/approve/{id}', [PendaftaranSkripsiController::class, 'approveusuljudul_admin']);
     Route::put('/usuljudul/admin/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakusuljudul_admin']);

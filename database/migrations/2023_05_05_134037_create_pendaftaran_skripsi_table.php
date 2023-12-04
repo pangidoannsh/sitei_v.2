@@ -41,11 +41,11 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('sti_30')->nullable();  
              $table->string('sti_31')->nullable(); 
              $table->string('tgl_created_sempro')->nullable();
-             $table->string('tgl_disetujui_sempro_admin')->nullable();
              $table->string('tgl_disetujui_sempro_pemb1')->nullable();
              $table->string('tgl_disetujui_sempro_pemb2')->nullable();
+             $table->string('tgl_disetujui_sempro_admin')->nullable();
              $table->string('tgl_disetujui_sempro_koordinator')->nullable();
-             $table->string('tgl_disetujui_sempro_kaprodi')->nullable();
+            //  $table->string('tgl_disetujui_sempro_kaprodi')->nullable();
              //jadwal sempro
              $table->string('tgl_disetujui_jadwalsempro')->nullable();
              //sempro selesai

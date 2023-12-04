@@ -216,7 +216,28 @@
         </tr>
 
     @endforeach
+
  @foreach ($pendaftaran_skripsi as $skripsi)
+
+<!-- USULAN JUDUL -->
+@php
+    $countDownDateUsulJudulAdmin = strtotime($skripsi->tgl_created_usuljudul) + (4 * 24 * 60 * 60);
+    $nowUsulJudulAdmin = time();
+    $distanceUsulJudulAdmin = $countDownDateUsulJudulAdmin - $nowUsulJudulAdmin;
+    $daysUsulJudulAdmin = floor($distanceUsulJudulAdmin / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- USULAN DAFTAR SEMPRO -->
+@php
+    $countDownDateDaftarSemproAdmin = strtotime($skripsi->tgl_disetujui_sempro_pemb2) + (4 * 24 * 60 * 60);
+    $nowDaftarSemproAdmin = time();
+    $distanceDaftarSemproAdmin = $countDownDateDaftarSemproAdmin - $nowDaftarSemproAdmin;
+    $daysDaftarSemproAdmin = floor($distanceDaftarSemproAdmin / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+
 <div></div>
         <tr>        
             <!--<td class="text-center">{{$loop->iteration}}</td>                             -->
@@ -240,6 +261,31 @@
 
             @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
             <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
+            @endif
+
+            <!-- BATAS PERSETUJUAN -->
+            @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
+            <td class="text-center" >
+                @if ($daysUsulJudulAdmin >= 0)
+                    <span class="text-danger"> {{ $daysUsulJudulAdmin }}  hari lagi</span>
+                @elseif($daysUsulJudulAdmin <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            
+            <!-- DAFTAR SEMPRO -->
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
+            <td class="text-center" >
+                @if ($daysDaftarSemproAdmin >= 0)
+                    <span class="text-danger"> {{ $daysDaftarSemproAdmin }}  hari lagi</span>
+                @elseif($daysDaftarSemproAdmin <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
             @endif
                
             <td class="text-center">{{$skripsi->keterangan}}</td> 
@@ -494,14 +540,14 @@ function tolakUsulJudulAdmin(id) {
 $('.setujui-sempro-admin').submit(function(event) {
     event.preventDefault();
     Swal.fire({
-        title: 'Setujui Daftar Sempro!',
-        text: "Apakah Anda Yakin?",
+        title: 'Sempro Dijadwalkan!',
+        text: "Apakah Anda yakin sudah menjadwalkannya?",
         icon: 'question',
         showCancelButton: true,
         cancelButtonText: 'Batal',
         confirmButtonColor: '#28a745',
         cancelButtonColor: 'grey',
-        confirmButtonText: 'Setuju'
+        confirmButtonText: 'Ya'
     }).then((result) => {
         if (result.isConfirmed) {
             event.currentTarget.submit();

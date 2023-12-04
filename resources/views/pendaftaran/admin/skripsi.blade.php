@@ -57,7 +57,7 @@
         <th class="text-center" scope="col">Nama</th>
         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
         <th class="text-center" scope="col">Jenis Usulan</th>
-        <th class="text-center" scope="col">Status Skripsi</th>
+        <th class="text-center" scope="col">Status</th>
         <th class="text-center" scope="col">Tanggal Usulan</th>
         <th class="text-center" scope="col">Keterangan</th>     
         <th class="text-center" scope="col">Aksi</th>
