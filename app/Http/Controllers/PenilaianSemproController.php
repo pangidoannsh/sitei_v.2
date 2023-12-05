@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSemproPenguji;
 use App\Models\PenilaianSemproPembimbing;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenilaianSemproController extends Controller
 {
@@ -246,7 +247,9 @@ class PenilaianSemproController extends Controller
         $edit->total_nilai_huruf = $request->total_nilai_huruf;
         $edit->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diubah!');
+        Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        
+        return  back();
     }
 
     public function update_penguji(Request $request, $id)
@@ -312,7 +315,11 @@ class PenilaianSemproController extends Controller
         }
         $penilaian->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diubah!');
+        // return redirect('/penilaian')->with('message', 'Nilai Berhasil Diubah!');
+
+        Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        
+        return  back(); 
     }
 
     public function riwayat()

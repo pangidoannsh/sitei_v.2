@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanSkripsi;
+use App\Models\PenjadwalanSempro;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSkripsiPenguji;
 use App\Models\PenilaianSkripsiPembimbing;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenilaianSkripsiController extends Controller
 {
@@ -26,7 +28,8 @@ class PenilaianSkripsiController extends Controller
         $id = Crypt::decryptString($id);  
         $penjadwalan = PenjadwalanSkripsi::find($id);
         $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
-        $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();            
+        $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();   
+                 
         
         if ($ceknilaipenguji1 == null) {
             $nilaipenguji1 = '';
@@ -66,10 +69,13 @@ class PenilaianSkripsiController extends Controller
             $nilaipembimbing2 = '';
         } else {
             $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
-        }            
+        }   
+
+
 
         return view('penilaianskripsi.create', [
             'skripsi' => PenjadwalanSkripsi::find($id),
+            'sempro' => PenjadwalanSempro::find($id),
             'pembimbing' => $pembimbing,
             'pembimbingnilai' => $pembimbingnilai,
             'penjadwalan' => $penjadwalan,
@@ -248,7 +254,10 @@ class PenilaianSkripsiController extends Controller
         $edit->total_nilai_huruf = $request->total_nilai_huruf;
         $edit->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
+        // return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
+        Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        
+        return  back();
     }
 
     public function update_penguji(Request $request, $id)
@@ -328,7 +337,10 @@ class PenilaianSkripsiController extends Controller
         
         $penilaian->update();
 
-        return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
+        // return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
+        Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        
+        return  back();
     }
 
     public function riwayat()

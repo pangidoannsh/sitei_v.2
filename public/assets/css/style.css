@@ -38,7 +38,7 @@
     padding-top: 20px;
 }
 
-a.setuju{
+a.setuju {
     padding-left: 30px !important;
 }
 
@@ -71,6 +71,26 @@ a.setuju{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* TITLE TOOLTIP */
+.custom-tooltip {
+    display: none; /* Sembunyikan tooltip secara default */
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    width: max-content;
+    margin-top: 25px;
+}
+
+/* Tampilkan tooltip saat elemen di-hover */
+a:hover .custom-tooltip {
+    display: inline-block;
 }
 
 /* Position text in the middle of the page/image */
@@ -442,21 +462,20 @@ table thead tr th {
     margin-top: 20px;
 }
 
-.footer{
+.footer {
     padding: 10px 0 10px 0;
-
 }
 
-.developer{
-    font-family: 'Open Sans', sans-serif;
+.developer {
+    font-family: "Open Sans", sans-serif;
     padding-top: 10px;
 }
 
-.page-link{
+.page-link {
     color: #212529 !important;
 }
 
-.page-link:hover{
+.page-link:hover {
     color: #070707 !important;
 }
 

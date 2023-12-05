@@ -685,14 +685,14 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->keterangan = 'Menunggu persetujuan Admin Prodi';
         $kp->update();
 
-    // Menambah data ke tabel penjadwalan KP
-    $penjadwalanKP = new PenjadwalanKP();
-    $penjadwalanKP->mahasiswa_nim = $kp->mahasiswa_nim;
-    $penjadwalanKP->prodi_id = $kp->prodi_id;
-    $penjadwalanKP->pembimbing_nip = $kp->dosen_pembimbing_nip;
-    $penjadwalanKP->penguji_nip = $kp->dosen_pembimbing_nip;
-    $penjadwalanKP->judul_kp = $kp->judul_laporan;
-    $penjadwalanKP->save();
+        // Menambah data ke tabel penjadwalan KP
+        $penjadwalanKP = new PenjadwalanKP();
+        $penjadwalanKP->mahasiswa_nim = $kp->mahasiswa_nim;
+        $penjadwalanKP->prodi_id = $kp->prodi_id;
+        $penjadwalanKP->pembimbing_nip = $kp->dosen_pembimbing_nip;
+        $penjadwalanKP->penguji_nip = $kp->dosen_pembimbing_nip;
+        $penjadwalanKP->judul_kp = $kp->judul_laporan;
+        $penjadwalanKP->save();
 
         Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
         return redirect('/usulankp/index');

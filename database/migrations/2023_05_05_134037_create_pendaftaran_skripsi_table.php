@@ -79,6 +79,7 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('tgl_disetujui_sidang_kaprodi')->nullable();
              //JADWAL SIDANG
              $table->string('tgl_disetujui_jadwal_sidang')->nullable();
+             $table->string('tgl_selesai_sidang')->nullable();
              //STI-17 / PENYERAHAN BUKU SKRIPSI
              $table->string('sti_17')->nullable();
              $table->string('sti_29')->nullable();

@@ -1099,7 +1099,7 @@
                                 <label class="form-label">Catatan 3</label>
                                 <input type="text" name="catatan3" class="form-control" value="{{ $sempro->penjadwalan_sempro->catatan3 != null ? $sempro->penjadwalan_sempro->catatan3 : '' }}">
                               </div>              
-                              <button type="submit" class="btn btn-success float-left">+ Catatan</button>
+                              <button type="submit" class="btn btn-success mb-5 float-left">+ Catatan</button>
                         </form>
                                     @else
                                     
@@ -1107,19 +1107,134 @@
 
 
                                     @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
-                                    <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                                      
+                                    <a href="#ModalApprove1"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>  
+                                  <div class="modal fade"id="ModalApprove1">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container p-5 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Pembimbing</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                        
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>    
+                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
+                              <a href="#ModalApprove2"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
+                              <div class="modal fade"id="ModalApprove2">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji 2 & 3</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                                 
                     @elseif($nilaipenguji2 == null)
-                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                              <a href="#ModalApprove3"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
+                              <div class="modal fade"id="ModalApprove3">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji 2</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div> 
+                                              
                     @elseif($nilaipenguji3 == null)
-                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
-                    @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
-                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
-                    @elseif($total_nilai <= 60)
-                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                          
+                              <a href="#ModalApprove4"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
+                              <div class="modal fade"id="ModalApprove4">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji 3</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                        
+                    
+                    @elseif($total_nilai <= 55)
+                              <a href="#ModalApprove5"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
+                              <div class="modal fade"id="ModalApprove5">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5 >Nilai Seminar Belum Mencukupi</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                          
                     @elseif($sempro->penjadwalan_sempro->status_seminar > 0)
-                              <a href=""  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Seminar telah Selesai</a>                          
+                              <a href="#ModalApprove6"  data-toggle="modal" class="btn mt-5 btn-lg btn-success float-right">Seminar telah Selesai <i class="fas fa-check fa-lg"></i> </a>
+                              <div class="modal fade"id="ModalApprove6">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
+                                        <h5 >Seminar telah disetujui</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+
                     @else
-                              <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>                          
+                              <a href="#ModalApprove7"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a> 
+                              
+                              <div class="modal fade"id="ModalApprove7">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                         <div class="row text-center">
+                                              <div class="col-4">
+                                              </div>
+                                              <div class="col-2">
+                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-2">
+                                               <form action="/penilaian-sempro/approve/{{$penjadwalan->id}}" method="POST">
+                                          @method('put')
+                                          @csrf
+                                          <button type="submit" class="btn btn-success"> Selesai</button>
+                                        </form>
+                                              </div>
+                                              <div class="col-4">
+                                              </div>
+                                            </div>
+                                        
+                                         
+                                        </div>
+                                      </div>
+                                        
+                                    
+                                    </div>
+                                  </div>
+                                    </div>
                    
                     @endif
 
@@ -1137,29 +1252,7 @@
         <!-- /.card -->
       </div>
       
-      <div class="modal fade"id="ModalApprove">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Apakah Anda Yakin?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Data Tidak Bisa Dikembalikan!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-        <form action="/penilaian-sempro/approve/{{$penjadwalan->id}}" method="POST">
-          @method('put')
-          @csrf
-          <button type="submit" class="btn btn-success"> Selesai</button>
-        </form>        
-      </div>
-    </div>
-  </div>
-    </div>
+      
 
 @endif
 

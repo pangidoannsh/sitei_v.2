@@ -99,7 +99,7 @@
 </div>
 
 
-  <div class="row mb-4">
+  <div class="row ">
     <div class="col">
     <div class="card">
       <div class="card-body">
@@ -138,6 +138,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <!-- <div class="kol-judul mt-3">
   <div class="row">

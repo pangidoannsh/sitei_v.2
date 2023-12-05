@@ -681,14 +681,15 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
             
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' )
             <td class="text-center">
-            <a href="/daftar-sempro/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+            <a href="/daftar-sempro/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" ><i class="fas fa-info-circle"></i> <span class="custom-tooltip">Lihat Detail</span></a>
+            
                 @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' )
                 <a href="/jadwal" class="badge p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Jadwal"><img height="25" width="25" src="/assets/img/calendar.png"  alt="..." class="zoom-image"></a>
                 @endif
                 @if ($skripsi->status_skripsi == 'SEMPRO SELESAI' )
-                <a href="/seminar" class="badge btn btn-dark p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Riwayat Seminar"><i class="fas fa-history"></i></a>
-        <a type="button"  data-toggle="modal" title="Permohonan Perpanjangan 1 Waktu Skripsi"  data-target="#GFG">
-           <img height="25" width="25" src="/assets/img/clockplus.png"  alt="..." class=""> </a>
+                <a href="/seminar" class="badge btn btn-dark p-1 mb-1" data-bs-toggle="tooltip" ><i class="fas fa-history"></i> <span class="custom-tooltip">Riwayat Seminar</span></a>
+        <a type="button"  data-toggle="modal"  data-target="#GFG">
+           <img height="25" width="25" src="/assets/img/clockplus.png"  alt="..." class=""> <span class="custom-tooltip">Permohonan Perpanjangan 1 Waktu Skripsi</span></a>
   
   
         <div class="modal fade" id="GFG">
@@ -736,7 +737,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
         </div>
 
                 
-                <a href="/daftar-sidang/create/{{$skripsi->id}}" class="mb-1" data-bs-toggle="tooltip" title="Daftar Sidang skripsi"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>
+                <a href="/daftar-sidang/create/{{$skripsi->id}}" class="mb-1" data-bs-toggle="tooltip"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"> <span class="custom-tooltip">Daftar Sidang skripsi</span></a>
                 
                 @endif
                 
@@ -946,7 +947,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
             <td class="text-center">
 
-             <a href="/daftar-sidang/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+             <a href="/daftar-sidang/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip"><i class="fas fa-info-circle"></i> <span class="custom-tooltip">Lihat Detail</span></a>
              
 
                 @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN')

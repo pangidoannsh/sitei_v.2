@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use \PDF;
+use Carbon\Carbon;
 use App\Models\Dosen;
 use App\Models\Prodi;
-use App\Models\Mahasiswa;
-use App\Models\Ruangan;
-use App\Models\JamSel;
 use App\Models\JamKam;
+use App\Models\JamSel;
+use App\Models\Ruangan;
+use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
-use \PDF;
-use App\Models\PenjadwalanSkripsi;
+use App\Models\PenjadwalanSempro;
 use App\Models\PendaftaranSkripsi;
+use App\Models\PenjadwalanSkripsi;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSkripsiPenguji;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\PenilaianSkripsiPembimbing;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Carbon\Carbon;
 
 class PenjadwalanSkripsiController extends Controller
 {
@@ -168,6 +171,7 @@ class PenjadwalanSkripsiController extends Controller
             }
         }
 
+
         $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
         $edit->pengujidua_nip = $validated['pengujidua_nip'];
         $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
@@ -191,6 +195,7 @@ class PenjadwalanSkripsiController extends Controller
         $edit->update();
 
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $edit->mahasiswa_nim )->latest('created_at')->first();
+        // $pendaftaran_skripsi = PendaftaranSkripsi::whereNotNull('mahasiswa_nim',  PenjadwalanSempro::find($mahasiswa_nim) )->latest('created_at')->first();
 
         $pendaftaran_skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
         $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
@@ -309,7 +314,15 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 1;
         $jadwal->update();
 
-        return redirect('/penilaian')->with('message', 'Seminar Telah Selesai!');
+         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->status_skripsi = 'SIDANG SELESAI';
+        $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Selesai';
+        $pendaftaran_skripsi->tgl_selesai_sidang = Carbon::now();
+        $pendaftaran_skripsi->update();
+
+        Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+        return back();
     }
 
     public function approve_koordinator($id)

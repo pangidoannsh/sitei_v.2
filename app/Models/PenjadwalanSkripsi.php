@@ -71,6 +71,7 @@ class PenjadwalanSkripsi extends Model
     {
         return $this->belongsTo(Dosen::class, 'pengujitiga_nip', 'nip');
     }
+    
 
     public function dosen()
     {

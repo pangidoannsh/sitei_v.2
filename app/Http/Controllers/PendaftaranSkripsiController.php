@@ -17,6 +17,7 @@ use App\Models\KapasitasBimbingan;
 use App\Models\PenjadwalanSempro;
 use App\Models\PenjadwalanSkripsi;
 
+
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -1358,12 +1359,20 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->keterangan = 'Menunggu Jadwal Sidang Skripsi';
         $skripsi->tgl_disetujui_sidang_kaprodi = Carbon::now();
         $skripsi->update();
+        
+        
+        $penjadwalan_sempro = PenjadwalanSempro::where('mahasiswa_nim', $skripsi->mahasiswa_nim )->latest('created_at')->first();
 
         $penjadwalanSkripsi = new PenjadwalanSkripsi();
         $penjadwalanSkripsi->mahasiswa_nim = $skripsi->mahasiswa_nim;
         $penjadwalanSkripsi->prodi_id = $skripsi->prodi_id;
         $penjadwalanSkripsi->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
         $penjadwalanSkripsi->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
+
+        $penjadwalanSkripsi->pengujisatu_nip = $penjadwalan_sempro->pengujisatu_nip;
+        $penjadwalanSkripsi->pengujidua_nip = $penjadwalan_sempro->pengujidua_nip;
+        $penjadwalanSkripsi->pengujitiga_nip = $penjadwalan_sempro->pengujitiga_nip;
+        
         $penjadwalanSkripsi->judul_skripsi = $skripsi->judul_skripsi;
         $penjadwalanSkripsi->save();
 

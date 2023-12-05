@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\JamKam;
+use App\Models\JamSel;
+use App\Models\Ruangan;
+use App\Models\JamKPKam;
+use App\Models\JamKPSel;
 use App\Models\Jadwalkan;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
 use App\Models\PenjadwalanSempro;
+use App\Models\PendaftaranSkripsi;
 use App\Models\PenjadwalanSkripsi;
-use App\Models\Ruangan;
-use App\Models\JamKPSel;
-use App\Models\JamKPKam;
-use App\Models\JamSel;
-use App\Models\JamKam;
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalkanController extends Controller
 {
@@ -283,8 +285,18 @@ class JadwalkanController extends Controller
     //     ];
     // }
 
-    public function index()
+    public function index(Request $request, PenjadwalanSkripsi $penjadwalan_skripsi)
     {
+
+        // $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
+        
+        // $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan_skripsi->mahasiswa_nim )->latest('created_at')->first();
+
+        // $pendaftaran_skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
+        // $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
+        // $pendaftaran_skripsi->tgl_disetujui_jadwal_sidang = Carbon::now();
+        // $pendaftaran_skripsi->update();
+
         $now = Carbon::now();
         $weekStartDate = Carbon::now()->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
@@ -335,6 +347,8 @@ class JadwalkanController extends Controller
             $addWeek,
             "KP"
         );
+
+        
 
         return redirect()->route('form');
         // $now = Carbon::now();

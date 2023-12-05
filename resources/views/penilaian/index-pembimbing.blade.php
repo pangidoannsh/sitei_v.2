@@ -162,11 +162,12 @@
               <a href="/penilaian-skripsi/create/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
-              <a formtarget="_blank" target="_blank" href="/undangan-sidang/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
+              
               @endif
             @else
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
-            @endif    
+            @endif 
+            <a formtarget="_blank" target="_blank" href="/undangan-sidang/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>   
 
           </td>                        
         </tr>               
