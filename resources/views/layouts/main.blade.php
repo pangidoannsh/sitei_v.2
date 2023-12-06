@@ -31,6 +31,7 @@
    <!-- <script type="text/javascript">
         function mousedwn(e){try{if(event.button==2||event.button==3)return false}catch(e){if(e.which==3)return false}}document.oncontextmenu=function(){return false};document.ondragstart=function(){return false};document.onmousedown=mousedwn
         </script> -->
+
   
 </head>
 <body class="hold-transition layout-top-nav">
@@ -417,5 +418,6 @@ $(document).ready(function() {
 
 <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 @stack('scripts')
+
 </body>
 </html>

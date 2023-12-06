@@ -74,6 +74,15 @@
   }
 
 }
+
+  .pengembang{
+    color: #212529;
+  }
+
+  .pengembang:hover{
+    color: #212529;
+  }
+
   </style>
 
   <body>
@@ -212,11 +221,22 @@
     </div>
   </div>
       </div> 
-    <div class="mt-5">
-      <h6>Dikembangkan oleh Prodi Teknik Informatika</h6>
+    {{-- <div class="mt-5">
+      <h6>Dikembangkan oleh <a class="pengembang" href="#">Prodi Teknik Informatika</a></h6>
       <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi</a> | <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti</a> |
       <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">M. Seprinaldi</a>
     
+    </div> --}}
+    <div class="row mt-5">
+      <div class="col-12 text-center">
+        <div>
+          Dikembangkan Oleh
+          <a class="pengembang" href="/developer" target="_blank">Prodi Teknik Informatika</a>
+        </div>
+        <div class="mt-3">
+          <p> Copyright &copy; 2022-<script>document.write(new Date().getFullYear())</script> SITEI All Rights Reserved</p>
+        </div>
+      </div>
     </div>
   </div>  
 </div>
