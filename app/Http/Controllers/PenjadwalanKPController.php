@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use \PDF;
+use Carbon\Carbon;
 
 use App\Models\Dosen;
 use App\Models\Prodi;
@@ -13,6 +14,7 @@ use App\Models\Konsentrasi;
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
+use App\Models\PendaftaranKP;
 use App\Models\PenilaianKPPenguji;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
@@ -174,6 +176,13 @@ class PenjadwalanKPController extends Controller
         PenjadwalanKP::where('id', $penjadwalan_kp->id)
             ->update($validated);
         }
+
+        $kp = PendaftaranKP::where('mahasiswa_nim', $penjadwalan_kp->mahasiswa_nim )->latest('created_at')->first();
+
+        $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
+        $kp->keterangan = 'Seminar KP Dijadwalkan';
+        $kp->tgl_dijadwalkan = Carbon::now();
+        $kp->update();
 
         return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
     }

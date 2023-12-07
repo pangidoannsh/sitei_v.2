@@ -19,12 +19,15 @@
             <div class="col">
             <div class="mb-3 field">
             <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
-            <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
+           <input type="hidden" class="form-control" name="mahasiswa_nim" value="{{ old('mahasiswa_nim', $kp->mahasiswa->nim ?? '') }}" readonly>
+            <span class="form-control" readonly>{{ old('mahasiswa_nama', $kp->mahasiswa->nama ?? '') }}</span>
+           
+            <!-- <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
                 <option value="">-Pilih-</option>
                 @foreach ($mahasiswas as $mhs)
                     <option value="{{$mhs->nim}}" {{old('mahasiswa_nim', $kp->mahasiswa_nim ) == $mhs->nim ? 'selected' : null}}>{{$mhs->nama}}</option>
                 @endforeach
-            </select>
+            </select> -->
             @error('mahasiswa_nim')
             <div class="invalid-feedback">
                 {{$message}}
@@ -35,7 +38,10 @@
         @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 ) 
         <div class="mb-3 field">
             <label for="prodi_id" class="form-label">Program Studi</label>
-            <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
+             <input type="hidden" name="prodi_id" class="form-control" value="{{old('prodi_id', $kp->prodi_id ?? '')}}" readonly>
+            <span class="form-control" readonly>{{ old('nama_prodi', $kp->prodi->nama_prodi ?? '') }}</span>
+            
+            <!-- <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
             @if(auth()->user()->role_id == 2)                                                          
                 <option value="1">Teknik Elektro D3</option>                
             @endif
@@ -45,7 +51,7 @@
             @if(auth()->user()->role_id == 4)                                                          
                 <option value="3">Teknik Informatika S1</option>                
             @endif
-            </select>
+            </select> -->
             @error('prodi_id')
             <div class="invalid-feedback">
                 {{$message}}
@@ -82,7 +88,7 @@
 
         <div class="mb-3 field">
             <label class="form-label">Judul Laporan Kerja Praktek</label>
-            <input type="text" name="judul_kp" class="form-control @error('judul_kp') is-invalid @enderror" value="{{ old('judul_kp', $kp->judul_kp) }}"> 
+            <input type="text" name="judul_kp" class="form-control @error('judul_kp') is-invalid @enderror" value="{{ old('judul_kp', $kp->judul_kp) }}" readonly> 
             @error('judul_kp')
             <div class="invalid-feedback">
                 {{$message}}
@@ -92,7 +98,16 @@
 
         <div class="mb-3 field">
             <label class="form-label">Lokasi</label>
-            <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $kp->lokasi) }}">  
+            <!-- <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $kp->lokasi) }}">   -->
+
+            <select type="text" name="lokasi" id="lokasi2" class="form-select @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $kp->lokasi) }}">
+
+            <option value="">-Pilih-</option>
+                @foreach ($ruangans as $ruangan)
+                    <option value="{{$ruangan->nama_ruangan}}" {{old('lokasi') == $ruangan->id ? 'selected' : null}}>{{$ruangan->nama_ruangan}}</option>
+                @endforeach
+            </select>
+
             @error('lokasi')
             <div class="invalid-feedback">
                 {{$message}}
@@ -103,12 +118,15 @@
             <div class="col-md">
             <div class="mb-3 field">
             <label for="pembimbing_nip" class="form-label">Pembimbing</label>
-            <select name="pembimbing_nip" id="pembimbing" class="form-select @error('pembimbing_nip') is-invalid @enderror">
+            <input type="hidden" name="pembimbing_nip" class="form-control" value="{{old('pembimbing_nip', $kp->pembimbing_nip ?? '')}}" readonly>
+            <span class="form-control" readonly>{{ old('nama', $kp->pembimbing->nama ?? '') }}</span>
+            
+            <!-- <select name="pembimbing_nip" id="pembimbing" class="form-select @error('pembimbing_nip') is-invalid @enderror">
                 <option value="">-Pilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pembimbing_nip', $kp->pembimbing_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
-            </select>
+            </select> -->
             @error('pembimbing_nip')
             <div class="invalid-feedback">
                 {{$message}}

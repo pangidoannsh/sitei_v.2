@@ -17,7 +17,7 @@ class LoginController extends Controller
     if (Auth::guard('dosen')->attempt(['nip' => $request->username, 'password' => $request->password])) {
          $user = Auth::guard('dosen')->user();
         if ($user->role_id == 5) {
-            return redirect('/kp-skripsi/seminar-pembimbing-penguji');
+            return redirect('/persetujuan-kp-skripsi');
         }elseif ($user->role_id == 6) {
             return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 7) {
@@ -32,7 +32,7 @@ class LoginController extends Controller
             return redirect('persetujuan-kp-skripsi');
         }
          else {
-            return redirect('/kp-skripsi/seminar-pembimbing-penguji');
+            return redirect('/persetujuan-kp-skripsi');
         }
         
     } elseif (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {

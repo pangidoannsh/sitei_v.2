@@ -1,27 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-use RealRashid\SweetAlert\Facades\Alert;
+use \PDF;
 
 
-use App\Models\PermohonanKP;
-use App\Models\PendaftaranKP;
-use App\Models\PenjadwalanKP;
-use App\Models\PendaftaranSkripsi;
+use Carbon\Carbon;
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\StatusKP;
-use App\Models\Konsentrasi;
-use App\Models\KapasitasBimbingan;
 use App\Models\Mahasiswa;
+use App\Models\Konsentrasi;
+use App\Models\PermohonanKP;
 use Illuminate\Http\Request;
+use App\Models\PendaftaranKP;
+use App\Models\PenjadwalanKP;
+use App\Models\KapasitasBimbingan;
+use App\Models\PendaftaranSkripsi;
+use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\URL;
-use \PDF;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PendaftaranKPController extends Controller
 {
@@ -108,8 +109,7 @@ class PendaftaranKPController extends Controller
         }
 
         PendaftaranKP::create([
-            'mahasiswa_nim' => auth()->user()->nim, 
-            'mahasiswa_nama' =>auth()->user()->nama,               
+            'mahasiswa_nim' => auth()->user()->nim,               
             'prodi_id' => auth()->user()->prodi_id,   
             'konsentrasi_id' => auth()->user()->konsentrasi_id,              
             'krs_berjalan' =>$request->file('krs_berjalan')->store('file'),                        
@@ -670,14 +670,17 @@ public function kapasitasbimbingan_store(Request $request, $id)
             'judul_laporan' => 'required',
             'laporan_kp' => 'required|mimes:pdf|max:1024',
             'kpti_11' => 'required|mimes:pdf|max:200',
-            // 'sti_31' => 'required|mimes:pdf|max:200',
+            'sti_31' => 'nullable|mimes:pdf|max:200',
         ]);
 
         $kp = PendaftaranKP::find($id);
         $kp->judul_laporan = $request->judul_laporan;
         $kp->laporan_kp = $request->file('laporan_kp')->store('file');
-        $kp->kpti_11 = $request->file('kpti_11')->store('file');
+        $kp->kpti_11 = $request->file('kpti_11')->store('file');  
+
+        if ($request->hasFile('sti_31')) {
         $kp->sti_31 = $request->file('sti_31')->store('file');
+        }
 
         $kp->jenis_usulan = 'Daftar Seminar Kerja Praktek';
         $kp->tgl_created_semkp = Carbon::now();
@@ -685,14 +688,6 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->keterangan = 'Menunggu persetujuan Admin Prodi';
         $kp->update();
 
-        // Menambah data ke tabel penjadwalan KP
-        $penjadwalanKP = new PenjadwalanKP();
-        $penjadwalanKP->mahasiswa_nim = $kp->mahasiswa_nim;
-        $penjadwalanKP->prodi_id = $kp->prodi_id;
-        $penjadwalanKP->pembimbing_nip = $kp->dosen_pembimbing_nip;
-        $penjadwalanKP->penguji_nip = $kp->dosen_pembimbing_nip;
-        $penjadwalanKP->judul_kp = $kp->judul_laporan;
-        $penjadwalanKP->save();
 
         Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
         return redirect('/usulankp/index');
@@ -1040,10 +1035,18 @@ public function kapasitasbimbingan_store(Request $request, $id)
     public function approveusulan_semkp_kaprodi($id)
     {
         $kp = PendaftaranKP::find($id);
-        $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
-        $kp->keterangan = 'Seminar Kerja Praktek Dijadwalkan';
-        $kp->tgl_dijadwalkan = Carbon::now();
+        $kp->status_kp = 'DAFTAR SEMINAR KP DISETUJUI';
+        $kp->keterangan = 'Menunggu Jadwal Seminar KP';
+        $kp->tgl_disetujui_semkp_kaprodi = Carbon::now();
         $kp->update();
+
+            $penjadwalanKP = new PenjadwalanKP();
+            $penjadwalanKP->mahasiswa_nim = $kp->mahasiswa_nim;
+            $penjadwalanKP->prodi_id = $kp->prodi_id;
+            $penjadwalanKP->pembimbing_nip = $kp->dosen_pembimbing_nip;
+            $penjadwalanKP->penguji_nip = $kp->dosen_pembimbing_nip;
+            $penjadwalanKP->judul_kp = $kp->judul_laporan;
+            $penjadwalanKP->save();
 
         Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');
         return  back();

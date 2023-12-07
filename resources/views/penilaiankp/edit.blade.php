@@ -1005,7 +1005,7 @@
                           <tr>
                               <td>2</td>  
                               <td>Nilai Pembimbing Lapangan (40%)</td> 
-                              <td>{{$nilaipembimbing != '' ? $nilaipembimbing->nilai_pembimbing_kp : '-' }}</
+                              <td>{{$nilaipembimbing != '' ? $nilaipembimbing->nilai_pembimbing_lapangan : '-' }}</
                           </tr>
                           
                           <tr>

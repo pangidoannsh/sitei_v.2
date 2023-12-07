@@ -44,7 +44,7 @@ Daftar Bimbingan Skripsi
     <tr>      
         <th class="text-center px-0" scope="col">No.</th>
         <th class="text-center" scope="col">NIM</th>
-        <th class="text-center" scope="col">Nama</th>
+        <th class="text-center fw-bold" scope="col">Nama</th>
         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
         <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status Skripsi</th>

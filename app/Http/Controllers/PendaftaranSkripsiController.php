@@ -586,7 +586,7 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->tgl_created_perpanjangan2 = Carbon::now();
         $skripsi->status_skripsi = 'PERPANJANGAN 2';
         $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 1';
-        // $skripsi->update();
+        $skripsi->update();
 
         
        if ($skripsi->update()) {

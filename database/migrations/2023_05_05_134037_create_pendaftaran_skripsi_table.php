@@ -16,7 +16,7 @@ class CreatePendaftaranSkripsiTable extends Migration
         Schema::create('pendaftaran_skripsi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mahasiswa_nim');
-            $table->string('mahasiswa_nama');
+            // $table->string('mahasiswa_nama');
             $table->foreignId('prodi_id');
             $table->foreignId('konsentrasi_id');
              //usul judul

@@ -73,7 +73,7 @@ Daftar Bimbingan Kerja Praktek
         <tr>        
             <td class="text-center">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$kp->mahasiswa->nama}}</td>
+            <td class="text-center fw-bold">{{$kp->mahasiswa->nama}}</td>
 
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'DAFTAR SEMINAR KP'|| $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>

@@ -63,6 +63,7 @@ Route::get('/detail-undangan-kp/{id}', [QRController::class, 'detail_undangan_kp
 Route::get('/detail-undangan-sempro/{id}', [QRController::class, 'detail_undangan_sempro']);
 Route::get('/detail-undangan-sidang/{id}', [QRController::class, 'detail_undangan_sidang']);
 
+Route::get('/developer', [DeveloperController::class, 'index']);
 Route::get('/developer/fahril-hadi', [DeveloperController::class, 'fahril']);
 Route::get('/developer/m-seprinaldi', [DeveloperController::class, 'naldi']);
 Route::get('/developer/rahul-ilsa-tajri-mukhti', [DeveloperController::class, 'rahul']);

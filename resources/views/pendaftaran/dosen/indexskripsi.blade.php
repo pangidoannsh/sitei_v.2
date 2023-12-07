@@ -64,7 +64,7 @@ Data Skripsi Mahasiswa
         <tr>        
             <td class="text-center ">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
+            <td class="text-center fw-bold">{{$skripsi->mahasiswa->nama}}</td>
             <td class="text-center">{{$skripsi->jenis_usulan}}</td>             
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO'|| $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
             <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>

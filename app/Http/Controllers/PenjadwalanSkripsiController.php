@@ -322,7 +322,7 @@ class PenjadwalanSkripsiController extends Controller
         $pendaftaran_skripsi->update();
 
         Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
-        return back();
+        return redirect('/persetujuan-kp-skripsi    ');
     }
 
     public function approve_koordinator($id)

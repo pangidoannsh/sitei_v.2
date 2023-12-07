@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans&display=swap");
 
 * {
     margin: 0;
@@ -10,6 +10,19 @@
 
 body {
     background-color: #f3f3f3;
+}
+
+.social {
+    color: #353c4e;
+}
+
+.social:hover {
+    color: #616162;
+}
+
+.profil {
+    background: #353c4e;
+    color: #e0e0e0;
 }
 
 .wrapper {

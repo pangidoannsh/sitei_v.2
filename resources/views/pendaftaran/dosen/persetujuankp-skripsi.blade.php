@@ -138,11 +138,10 @@
 @endphp
 <!-- BATAS -->
 
-
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>-->
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$kp->mahasiswa->nama}}</td>            
+            <td class="text-center fw-bold  ">{{$kp->mahasiswa->nama}}</td>            
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN'|| $kp->status_kp == 'DAFTAR SEMINAR KP' ||$kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
             @endif
@@ -1411,7 +1410,18 @@
           <!-- <td class="text-center">{{$skripsi->prodi->nama_prodi}}</td>           -->
           <td class="text-center">{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
           <td class="text-center">-</td>                   
-          <td class="text-center">{{$skripsi->lokasi}}</td>                     
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+      @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          <td class="text-center">Menunggu Persetujuan Seminar Koordinator Skripsi</td> 
+    @endif
+    @endif
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+      @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+          <td class="text-center">Menunggu Persetujuan Seminar Koordinator Program Studi</td> 
+    @endif
+    @endif
+                 
+          <!-- <td class="text-center">{{$skripsi->lokasi}}</td>-->
           <!-- <td class="text-center">
             <p>1. {{$skripsi->pembimbingsatu->nama_singkat}}</p>
             @if ($skripsi->pembimbingdua == !null)
@@ -1433,7 +1443,7 @@
       @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           <td class="text-center">
             <div class="col-12 py-2 py-md-0 col-lg-12">
-                <a href="/persetujuan-koordinator/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+                <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                  </div>
           </td>
     @endif
@@ -1443,7 +1453,7 @@
       @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           <td class="text-center">
             <div class="col-12 py-2 py-md-0 col-lg-12">
-                <a href="/persetujuan-kaprodi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+                <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                  </div>
           </td>
 

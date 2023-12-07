@@ -82,17 +82,26 @@
 @endphp
 <!-- BATAS -->
 
+<!-- SEMINAR KP DISETUJUI-->
+@php
+    $countDownDateSeminarKPDisetujui = strtotime($kp->tgl_disetujui_semkp_kaprodi) + (4 * 24 * 60 * 60);
+    $nowSeminarKPDisetujui = time();
+    $distanceSeminarKPDisetujui = $countDownDateSeminarKPDisetujui - $nowSeminarKPDisetujui;
+    $daysSeminarKPDisetujui = floor($distanceSeminarKPDisetujui / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
             <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td> -->
             <td class="text-center">{{$kp->mahasiswa_nim}}</td>                             
-            <td class="text-center">{{$kp->mahasiswa->nama}}</td>
+            <td class="text-center fw-bold">{{$kp->mahasiswa->nama}}</td>
                        
             <!-- <td class="text-center">{{$kp->jenis_usulan}}</td>       -->
             
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'DAFTAR SEMINAR KP'|| $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
             @endif
-            @if ($kp->status_kp == 'USULAN KP DITERIMA' || $kp->status_kp == 'KP DISETUJUI'|| $kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'KP SELESAI')           
+            @if ($kp->status_kp == 'USULAN KP DITERIMA' || $kp->status_kp == 'KP DISETUJUI'|| $kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'KP SELESAI')           
             <td class="text-center bg-info">{{$kp->status_kp}}</td>
             @endif
             
@@ -104,7 +113,7 @@
             @if ($kp->status_kp == 'USULAN KP')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
             @endif
-            @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
@@ -113,7 +122,7 @@
                 @if ($daysUsulanKPAdmin > 0)
                     <span class="text-danger"> {{ $daysUsulanKPAdmin }}  hari lagi</span>
                 @elseif($daysUsulanKPAdmin <= 0)
-                    Batas Waktu Unggah Surat Balasan telah habis
+                    Batas Waktu persetujuan telah habis
                 @endif
             </td>
             @endif
@@ -123,7 +132,16 @@
                 @if ($daysSeminarKPAdmin >= 0)
                     <span class="text-danger"> {{ $daysSeminarKPAdmin }}  hari lagi</span>
                 @elseif($daysSeminarKPAdmin <= 0)
-                    Batas Waktu Unggah Surat Balasan telah habis
+                    Batas Waktu persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
+            <td class="text-center" >
+                @if ($daysSeminarKPDisetujui >= 0)
+                    <span class="text-danger"> {{ $daysSeminarKPDisetujui }}  hari lagi</span>
+                @elseif($daysSeminarKPDisetujui <= 0)
+                    Batas Waktu persetujuan telah habis
                 @endif
             </td>
             @endif

@@ -13,8 +13,87 @@
 @endsection
 
 @section('content')
+<div class="container pb-3">
+  <a href="/persetujuan-kp-skripsi" class="bg-success p-2 rounded-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali</a>
+</div>
 
-<div>
+<div class="container ">
+  <div class="row">
+    <div class="bg-white col-lg-4 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+      <h5 class="text-bold">Mahasiswa</h5>
+      <hr>
+        <p class="card-title text-secondary text-sm " >Nama</p>
+        <p class="card-text text-start" >{{$penjadwalan->mahasiswa->nama}}</p>
+        <p class="card-title text-secondary text-sm " >NIM</p>
+        <p class="card-text text-start" >{{$penjadwalan->mahasiswa->nim}}</p>
+        <p class="card-title text-secondary text-sm " >Program Studi</p>
+        <p class="card-text text-start" >{{$penjadwalan->mahasiswa->prodi->nama_prodi}}</p>
+        <p class="card-title text-secondary text-sm " >Konsentrasi</p>
+        <p class="card-text text-start" >{{$penjadwalan->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
+    </div>
+    <div class="bg-white col-lg-4 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+        <h5 class="text-bold">Dosen Pembimbing</h5>
+        <hr>
+        @if ($penjadwalan->pembimbingdua == null )
+        <p class="card-title text-secondary text-sm" >Nama</p>
+        <p class="card-text text-start" >{{$penjadwalan->pembimbingsatu->nama}}</p>
+
+
+        @elseif($penjadwalan->pembimbingdua !== null)
+        <p class="card-title text-secondary text-sm" >Nama Pembimbing 1</p>
+        <p class="card-text text-start" >{{$penjadwalan->pembimbingsatu->nama}}</p>
+
+        <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
+        <p class="card-text text-start" >{{$penjadwalan->pembimbingdua->nama}}</p>
+
+        @endif
+    </div>
+    <div class="bg-white col-lg-4 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+        <h5 class="text-bold">Dosen Penguji</h5>
+        <hr>
+        @if ($penjadwalan->pengujitiga == null )
+        <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
+        <p class="card-text text-start" >{{$penjadwalan->pengujisatu->nama}}</p>
+        <p class="card-title text-secondary text-sm" >Nama Penguji 2</p>
+        <p class="card-text text-start" >{{$penjadwalan->pengujidua->nama}}</p>
+
+
+        @elseif($penjadwalan->pengujitiga !== null)
+        <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
+        <p class="card-text text-start" >{{$penjadwalan->pengujisatu->nama}}</p>
+        <p class="card-title text-secondary text-sm" >Nama Penguji 2</p>
+        <p class="card-text text-start" >{{$penjadwalan->pengujidua->nama}}</p>
+        <p class="card-title text-secondary text-sm" >Nama Penguji 3</p>
+        <p class="card-text text-start" >{{$penjadwalan->pengujitiga->nama}}</p>
+
+        @endif
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="bg-white col-lg-6 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+      <h5 class="text-bold">Judul Skripsi</h5>
+      <hr>
+        <p class="card-title text-secondary text-sm " >Judul</p>
+        <p class="card-text text-start" >{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}</p>
+    </div>
+    <div class="bg-white col-lg-6 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+      <h5 class="text-bold">Jadwal Seminar</h5>
+      <hr>
+        <p class="card-title text-secondary text-sm " >Hari/Tanggal</p>
+        <p class="card-text text-start" >{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</p>
+        <p class="card-title text-secondary text-sm " >Pukul</p>
+        <p class="card-text text-start" >{{$penjadwalan->waktu}}</p>
+        <p class="card-title text-secondary text-sm " >Lokasi</p>
+        <p class="card-text text-start" >{{$penjadwalan->lokasi}}</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div>
     <div class="row">
         <div class="col mb-3">
         <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
@@ -105,9 +184,9 @@
         </ol>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="card-body bg-white" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
+<div class="card-body bg-white rounded-3 shadow-sm">
     <div class="row">
         <div class="col-lg-6">
             <table class="table table-bordered table-responsive-lg">
@@ -591,24 +670,35 @@
                 </tbody>
             </table>
 
-            @if ($penjadwalan->status_seminar == 0)
+
+            @if ($penjadwalan->pengujitiga == Auth::user()->nip)
+            @if ($penjadwalan->status_seminar == 0 )
                 <form action="/penilaian-skripsi/approve/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
                     <button type="submit" class="btn btn-lg btn-danger float-right"> Selesai Sidang</button>
                 </form>
             @endif
+            @endif
 
+            @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
             @if ($penjadwalan->status_seminar == 1)
             <a href="#ModalApproveKPTA"  data-toggle="modal" class="btn-lg btn-success float-right border-0 ml-3 mt-5">Setujui</a>
             <a href="#ModalTolakKPTA"  data-toggle="modal" class="btn-lg btn-danger float-right border-0 mt-5">Tolak</a>
         
             @endif
+            @endif
+            @endif
 
+            @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
             @if ($penjadwalan->status_seminar == 2)
             <a href="#ModalApproveKoprodi"  data-toggle="modal" class="btn-lg btn-success float-right border-0 ml-3 mt-5">Setujui</a>
             <a href="#ModalTolakKoprodi"  data-toggle="modal" class="btn-lg btn-danger float-right border-0 mt-5">Tolak</a>
             
+            @endif
+            @endif
             @endif
 
         </div>         
@@ -617,23 +707,37 @@
     <div class="modal fade"id="ModalApproveKPTA">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h5 class="modal-title">Apakah Anda Yakin?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> -->
       <div class="modal-body">
+        <div class="container text-center px-5 pt-5 pb-3">
+        <h4>Apakah Anda Yakin?</h4>
         <p>Data Tidak Bisa Dikembalikan!</p>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-3"><button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button></div>
+          <div class="col-3"><form action="/persetujuanskripsi-koordinator/approve/{{$penjadwalan->id}}" method="POST">
+            @method('put')
+            @csrf
+            <button type="submit" class="btn btn-success">Setujui</button>
+        </form></div>
+        <div class="col-3"></div>
+        </div>
+        
       </div>
-      <div class="modal-footer">
+      </div>
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
         <form action="/persetujuanskripsi-koordinator/approve/{{$penjadwalan->id}}" method="POST">
             @method('put')
             @csrf
             <button type="submit" class="btn btn-success">Setujui</button>
         </form>
-      </div>
+      </div> -->
     </div>
   </div>
     </div>
@@ -641,23 +745,37 @@
     <div class="modal fade"id="ModalTolakKPTA">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h5 class="modal-title">Apakah Anda Yakin?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> -->
       <div class="modal-body">
+        <div class="container text-center px-5 pt-5 pb-3">
+        <h4>Apakah Anda Yakin?</h4>
         <p>Data Akan Dikembalikan Kepada Ketua Penguji!</p>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-3"><button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button></div>
+          <div class="col-3"><form action="/persetujuanskripsi-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Tolak</button>
+                </form></div>
+        <div class="col-3"></div>
+        </div>
+        
       </div>
-      <div class="modal-footer">
+      </div>
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
         <form action="/persetujuanskripsi-koordinator/tolak/{{$penjadwalan->id}}" method="POST">
                     @method('put')
                     @csrf
                     <button type="submit" class="btn btn-danger">Tolak</button>
                 </form>
-      </div>
+      </div> -->
     </div>
   </div>
     </div>
@@ -665,16 +783,30 @@
     <div class="modal fade"id="ModalApproveKoprodi">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h5 class="modal-title">Apakah Anda Yakin?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> -->
       <div class="modal-body">
+        <div class="container text-center px-5 pt-5 pb-3">
+        <h4>Apakah Anda Yakin?</h4>
         <p>Data Tidak Bisa Dikembalikan!</p>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-3"><button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button></div>
+          <div class="col-3"><form action="/persetujuanskripsi-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
+            @method('put')
+            @csrf
+            <button type="submit" class="btn btn-success">Setujui</button>
+        </form></div>
+        <div class="col-3"></div>
+        </div>
+        
       </div>
-      <div class="modal-footer">
+      </div>
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
         <form action="/persetujuanskripsi-kaprodi/approve/{{$penjadwalan->id}}" method="POST">
                     @method('put')
@@ -682,7 +814,7 @@
                     <button type="submit" class="btn btn-success">Setujui</button>
                 </form>
         </form>
-      </div>
+      </div> -->
     </div>
   </div>
     </div>
@@ -690,16 +822,30 @@
     <div class="modal fade"id="ModalTolakKoprodi">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h5 class="modal-title">Apakah Anda Yakin?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> -->
       <div class="modal-body">
-      <p>Data Akan Dikembalikan Kepada Ketua Penguji!</p>
+      <div class="container text-center px-5 pt-5 pb-3">
+        <h4>Apakah Anda Yakin?</h4>
+        <p>Data Akan Dikembalikan Kepada Ketua Penguji!</p>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-3"><button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button></div>
+          <div class="col-3"><form action="/persetujuanskripsi-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
+                    @method('put')
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Tolak</button>
+                </form></div>
+        <div class="col-3"></div>
+        </div>
+        
       </div>
-      <div class="modal-footer">
+      </div>
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
         <form action="/persetujuanskripsi-kaprodi/tolak/{{$penjadwalan->id}}" method="POST">
                     @method('put')
@@ -707,7 +853,7 @@
                     <button type="submit" class="btn btn-danger">Tolak</button>
         </form>
         </form>
-      </div>
+      </div> -->
     </div>
   </div>
     </div>

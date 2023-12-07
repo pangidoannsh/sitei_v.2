@@ -93,6 +93,9 @@ class PenilaianKPController extends Controller
             $penilaian->catatan3 = $request['catatan3'];
         }
 
+        // $pembimbing_nip = PenjadwalanKP::whereNotNull('pembimbing_nip')->first();
+        // $penguji_nip = PenjadwalanKP::whereNotNull('penguji_nip')->first();
+        
         $pembimbing_nip = PenjadwalanKP::whereNotNull('pembimbing_nip')->first();
         $penguji_nip = PenjadwalanKP::whereNotNull('penguji_nip')->first();
 
@@ -123,11 +126,6 @@ class PenilaianKPController extends Controller
     public function store_penguji(Request $request, $id)
     {
           
-        $pembimbing_nip = PenjadwalanKP::whereNotNull('pembimbing_nip')->first();
-        $penguji_nip = PenjadwalanKP::whereNotNull('penguji_nip')->first();
-
-        
-    if ($pembimbing_nip->pembimbing_nip == $penguji_nip->penguji_nip) {
 
         $penilaian = new PenilaianKPPenguji;
         $penilaian->presentasi = $request->presentasi;       
@@ -151,6 +149,11 @@ class PenilaianKPController extends Controller
         if ($request->revisi_naskah5) {
             $penilaian->revisi_naskah5 = $request->revisi_naskah5;
         } 
+
+        $pembimbing_nip = PenjadwalanKP::whereNotNull('pembimbing_nip')->first();
+        $penguji_nip = PenjadwalanKP::whereNotNull('penguji_nip')->first();
+        
+    if ($pembimbing_nip->pembimbing_nip == $penguji_nip->penguji_nip) {
 
         $penilaian->penguji_nip = auth()->user()->nip;
         $penilaian->penjadwalan_kp_id = $id;
@@ -167,42 +170,13 @@ class PenilaianKPController extends Controller
         $penilaianPembimbing->total_nilai_huruf = $penilaian->total_nilai_huruf;
 
         $penilaianPembimbing->save();
-    } 
-    if($pembimbing_nip->pembimbing_nip !== $penguji_nip->penguji_nip) {
+    } else{
 
-        $penilaian = new PenilaianKPPenguji;
-        $penilaian->presentasi = $request->presentasi;       
-        $penilaian->materi = $request->materi;
-        $penilaian->tanya_jawab = $request->tanya_jawab;
-        $penilaian->total_nilai_angka = $request->total_nilai_angka;
-        $penilaian->total_nilai_huruf = $request->total_nilai_huruf;
+    $penilaian->penguji_nip = auth()->user()->nip;
+    $penilaian->penjadwalan_kp_id = $id;
+    $penilaian->save();
 
-        if ($request->revisi_naskah1) {
-            $penilaian->revisi_naskah1 = $request->revisi_naskah1;
-        }
-        if ($request->revisi_naskah2) {
-            $penilaian->revisi_naskah2 = $request->revisi_naskah2;
-        }
-        if ($request->revisi_naskah3) {
-            $penilaian->revisi_naskah3 = $request->revisi_naskah3;
-        }
-        if ($request->revisi_naskah4) {
-            $penilaian->revisi_naskah4 = $request->revisi_naskah4;
-        }
-        if ($request->revisi_naskah5) {
-            $penilaian->revisi_naskah5 = $request->revisi_naskah5;
-        } 
-
-        $penilaian->penguji_nip = auth()->user()->nip;
-        $penilaian->penjadwalan_kp_id = $id;
-        $penilaian->save();
     }
-
-
-
-        // $penilaian->penguji_nip = auth()->user()->nip;
-        // $penilaian->penjadwalan_kp_id = $id;
-        // $penilaian->save();        
 
         return redirect('/penilaian-kp/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');    
     }
@@ -254,16 +228,17 @@ class PenilaianKPController extends Controller
         }
     }
 
-    public function update_penguji(Request $request, $id)
+    public function update_penguji(Request $request, $id , PenjadwalanKP $penjadwalan_kp)
     {
-
+        
+    
         $pembimbing_nip = PenjadwalanKP::whereNotNull('pembimbing_nip')->first();
         $penguji_nip = PenjadwalanKP::whereNotNull('penguji_nip')->first();
 
         
     if ($pembimbing_nip->pembimbing_nip == $penguji_nip->penguji_nip) {
 
-         $rules = [
+          $rules = [
             'presentasi' => 'required',
             'materi' => 'required',
             'tanya_jawab' => 'required',            
@@ -311,22 +286,25 @@ class PenilaianKPController extends Controller
         if ($request->revisi_naskah5) {
             $penilaian->revisi_naskah5 = $validatedData['revisi_naskah5'];
         }
-        
+
         $penilaian->update();
 
-        $penilaianPembimbing = PenilaianKPPembimbing::firstOrNew(['id' => $penilaian->penjadwalan_kp_id]);
+       
+        // $penilaianPembimbing = PenilaianKPPembimbing::firstOrNew(['id' => $penilaian->penjadwalan_kp_id]);
+
+        $penilaianPembimbing = PenilaianKPPembimbing::where('id',$id)->where('pembimbing_nip' , auth()->user()->nip)->first();
         $penilaianPembimbing->presentasi = $penilaian->presentasi;
         $penilaianPembimbing->materi = $penilaian->materi;
         $penilaianPembimbing->tanya_jawab = $penilaian->tanya_jawab;                
         $penilaianPembimbing->total_nilai_angka = $penilaian->total_nilai_angka;
         $penilaianPembimbing->total_nilai_huruf = $penilaian->total_nilai_huruf; 
-
+  
         $penilaianPembimbing->update();
         
     }
     else{
-
-         $rules = [
+        
+          $rules = [
             'presentasi' => 'required',
             'materi' => 'required',
             'tanya_jawab' => 'required',            
@@ -374,7 +352,7 @@ class PenilaianKPController extends Controller
         if ($request->revisi_naskah5) {
             $penilaian->revisi_naskah5 = $validatedData['revisi_naskah5'];
         }
-        
+
         $penilaian->update();
 
     }
@@ -387,7 +365,76 @@ class PenilaianKPController extends Controller
 
     public function update_pembimbing(Request $request, $id)
     {
-        $rules = [
+       
+        $pembimbing_nip = PenjadwalanKP::whereNotNull('pembimbing_nip')->first();
+        $penguji_nip = PenjadwalanKP::whereNotNull('penguji_nip')->first();
+
+        
+    if ($pembimbing_nip->pembimbing_nip == $penguji_nip->penguji_nip) {
+
+         $rules = [
+            // 'presentasi' => 'required',
+            // 'materi' => 'required',
+            // 'tanya_jawab' => 'required',            
+            // 'total_nilai_angka' => 'required',
+            // 'total_nilai_huruf' => 'required',            
+        ];
+
+        if ($request->nilai_pembimbing_lapangan) {
+            $rules['nilai_pembimbing_lapangan'] = 'required';
+        }
+
+        if ($request->catatan1) {
+            $rules['catatan1'] = 'required';
+        }
+        if ($request->catatan2) {
+            $rules['catatan2'] = 'required';
+        }
+        if ($request->catatan3) {
+            $rules['catatan3'] = 'required';
+        }
+
+        $penilaianPenguji = PenilaianKPPenguji::where('penguji_nip', auth()->user()->nip)->first();
+
+        // $penilaianPenguji->presentasi == $edit->presentasi;
+        // $penilaianPenguji->materi == $edit->materi;
+        // $penilaianPenguji->tanya_jawab == $edit->tanya_jawab;
+        // $penilaianPenguji->total_nilai_angka == $edit->total_nilai_angka;
+        // $penilaianPenguji->total_nilai_huruf == $edit->total_nilai_huruf;
+
+        // $penilaianPenguji->update();
+
+        // $validatedData = $request->validate($rules);
+        $edit = PenilaianKPPembimbing::where('id', $id)->where('pembimbing_nip', auth()->user()->nip)->first();
+        if($penilaianPenguji->presentasi == !null){
+        $edit->presentasi = $penilaianPenguji->presentasi;
+        $edit->materi = $penilaianPenguji->materi;
+        $edit->tanya_jawab = $penilaianPenguji->tanya_jawab;                
+        $edit->total_nilai_angka = $penilaianPenguji->total_nilai_angka;
+        $edit->total_nilai_huruf = $penilaianPenguji->total_nilai_huruf; 
+        }
+
+        if ($request->nilai_pembimbing_lapangan) {
+            $edit->nilai_pembimbing_lapangan = $request['nilai_pembimbing_lapangan'];
+        }
+
+        if ($request->catatan1) {
+            $edit->catatan1 = $request['catatan1'];
+        }
+        if ($request->catatan2) {
+            $edit->catatan2 = $request['catatan2'];
+        }
+        if ($request->catatan3) {
+            $edit->catatan3 = $request['catatan3'];
+        }
+
+        $edit->update();
+
+        
+
+    }else{
+
+         $rules = [
             // 'presentasi' => 'required',
             // 'materi' => 'required',
             // 'tanya_jawab' => 'required',            
@@ -432,6 +479,9 @@ class PenilaianKPController extends Controller
         }
 
         $edit->update();
+
+    }
+
 
         Alert::success('Berhasil', 'Nilai berhasil diedit!')->showConfirmButton('Ok', '#28a745');
         

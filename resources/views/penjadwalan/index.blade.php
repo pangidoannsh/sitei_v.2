@@ -21,9 +21,9 @@
 @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
     
 <div>
-<a href="{{url ('/form-kp/create')}}" class="btn kp btn-success mb-4">+ KP</a>
+<!-- <a href="{{url ('/form-kp/create')}}" class="btn kp btn-success mb-4">+ KP</a>
 <a href="{{url('/form-sempro/create')}}" class="btn sempro btn-success mb-4">+ Sempro</a>
-<a href="{{url('/form-skripsi/create')}}" class="btn skripsi btn-success mb-4">+ Skripsi</a>
+<a href="{{url('/form-skripsi/create')}}" class="btn skripsi btn-success mb-4">+ Skripsi</a> -->
 <a href="#ModalClear" data-toggle="modal" class="btn skripsi btn-danger float-right mb-4"><span class="fa-solid fa-trash"></span></a>
 <a href="{{url('/jadwalkan?download=true')}}" class="btn skripsi btn-success float-right mb-4" style="margin-right:10px;"><span class="fa-solid fa-download"></span></a>
 <a href="{{url('/jadwalkan')}}" class="btn jadwalkan btn-success float-right mb-4" style="margin-right:10px;">JADWALKAN</a>

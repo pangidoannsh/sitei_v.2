@@ -422,9 +422,6 @@ class PendaftaranController extends Controller
         } 
     }
 
-
-
-
     public function detailpermohonankp_pembimbing($id)
     
     {
