@@ -54,8 +54,9 @@ class CreatePendaftaranKPSTable extends Migration
             //LAPORAN/KPTI-10
             $table->string('kpti_10')->nullable();
             $table->string('laporan_akhir')->nullable();
-            $table->string('tgl_disetujui_kpti_10_admin')->nullable();
-            $table->string('tgl_disetujui_kpti_10_pembimbing')->nullable();
+            $table->string('tgl_created_kpti10')->nullable();
+            // $table->string('tgl_disetujui_kpti_10_admin')->nullable();
+            // $table->string('tgl_disetujui_kpti_10_pembimbing')->nullable();
             $table->string('tgl_disetujui_kpti_10_koordinator')->nullable();
             $table->string('tgl_disetujui_kpti_10_kaprodi')->nullable();
             //Alasan ditolak

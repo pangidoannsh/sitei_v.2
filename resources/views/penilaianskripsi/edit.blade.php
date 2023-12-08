@@ -1510,12 +1510,10 @@ Edit Penilaian Sidang Skripsi
                                               <div class="col-4">
                                               </div>
                                             </div>
-                                        
-                                         
+                                      
                                         </div>
                                       </div>
-                                        
-                                    
+ 
                                     </div>
                                   </div>
                                     </div>                          

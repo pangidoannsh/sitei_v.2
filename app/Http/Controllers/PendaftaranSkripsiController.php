@@ -117,8 +117,7 @@ class PendaftaranSkripsiController extends Controller
     
 
         PendaftaranSkripsi::create([
-            'mahasiswa_nim' => auth()->user()->nim, 
-            'mahasiswa_nama' =>auth()->user()->nama,               
+            'mahasiswa_nim' => auth()->user()->nim,                
             'prodi_id' => auth()->user()->prodi_id,   
             'konsentrasi_id' => auth()->user()->konsentrasi_id,                          
             'judul_skripsi' =>$request->judul_skripsi,                       

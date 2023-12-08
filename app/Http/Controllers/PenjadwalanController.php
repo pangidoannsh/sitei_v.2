@@ -30,9 +30,14 @@ class PenjadwalanController extends Controller
         if (auth()->user()->role_id == 2) {            
             return view('penjadwalan.index', [
                 'role' => Role::all(),
+                
                 'penjadwalan_kps' => PenjadwalanKP::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
+
+                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
+                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '1')
+                ->get()->sortBy('update_at'),
                 
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
@@ -46,9 +51,14 @@ class PenjadwalanController extends Controller
         if (auth()->user()->role_id == 3) {            
             return view('penjadwalan.index', [
                 'role' => Role::all(),
+                
                 'penjadwalan_kps' => PenjadwalanKP::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
+
+                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
+                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '2')
+                ->get()->sortBy('update_at'),
                 
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
@@ -63,9 +73,14 @@ class PenjadwalanController extends Controller
         
             return view('penjadwalan.index', [
                 'role' => Role::all(),
+                
                 'penjadwalan_kps' => PenjadwalanKP::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
+
+                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
+                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '3')
+                ->get()->sortBy('update_at'),
 
                 
 

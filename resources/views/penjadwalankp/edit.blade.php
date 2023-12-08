@@ -10,6 +10,11 @@
 
 @section('content')
 
+<div class="container">
+    <a href="/form" class="btn btn-success mb-4"><i class="fas fa-arrow-left fa-xs"></i> Kembali</a>
+</div>
+
+<div class="container">
 <form action="/form-kp/edit/{{$kp->id}}" method="POST">
         @method('put')
         @csrf
@@ -20,7 +25,9 @@
             <div class="mb-3 field">
             <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
            <input type="hidden" class="form-control" name="mahasiswa_nim" value="{{ old('mahasiswa_nim', $kp->mahasiswa->nim ?? '') }}" readonly>
-            <span class="form-control" readonly>{{ old('mahasiswa_nama', $kp->mahasiswa->nama ?? '') }}</span>
+           <input class="form-control disable"  value="{{  $kp->mahasiswa->nama }}" readonly>
+
+            <!-- <span class="form-control" readonly>{{ old('mahasiswa_nama', $kp->mahasiswa->nama ?? '') }}</span> -->
            
             <!-- <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -39,7 +46,8 @@
         <div class="mb-3 field">
             <label for="prodi_id" class="form-label">Program Studi</label>
              <input type="hidden" name="prodi_id" class="form-control" value="{{old('prodi_id', $kp->prodi_id ?? '')}}" readonly>
-            <span class="form-control" readonly>{{ old('nama_prodi', $kp->prodi->nama_prodi ?? '') }}</span>
+             <input class="form-control disable"  value="{{  $kp->prodi->nama_prodi }}" readonly>
+
             
             <!-- <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
             @if(auth()->user()->role_id == 2)                                                          
@@ -119,7 +127,7 @@
             <div class="mb-3 field">
             <label for="pembimbing_nip" class="form-label">Pembimbing</label>
             <input type="hidden" name="pembimbing_nip" class="form-control" value="{{old('pembimbing_nip', $kp->pembimbing_nip ?? '')}}" readonly>
-            <span class="form-control" readonly>{{ old('nama', $kp->pembimbing->nama ?? '') }}</span>
+            <input class="form-control disable"  value="{{  $kp->pembimbing->nama }}" readonly>
             
             <!-- <select name="pembimbing_nip" id="pembimbing" class="form-select @error('pembimbing_nip') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -169,11 +177,40 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success float-right mt-4">Perbarui</button>
+        @if($kpp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')
+         <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Perbarui</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Status Mahasiswa akan di Jadwalkan Seminar KP.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="submit" class="btn p-2 px-3 btn-success float-right">Perbarui</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div> 
+        @else
+        <button type="submit" class="btn btn-lg btn-success float-right mt-4">Perbarui</button>
+        @endif
             </div>
         </div>
     </div>
 </form>
+</div>
 
 @endsection
 

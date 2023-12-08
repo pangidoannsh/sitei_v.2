@@ -835,8 +835,9 @@
                         </tbody>
                       </table>
             </div>
-
-                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>       
+@if($penjadwalan->status_seminar == '0')
+                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+@endif       
            
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -864,7 +865,9 @@
                     <div class="fw-bold mb-2">Perbaikan 5</div>
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kpp->revisi_naskah5 != null ? $kpp->revisi_naskah5 : '' }}">
                     </div>
+                    @if($penjadwalan->status_seminar == '0')
                     <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button> 
+                    @endif
                     </form>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -874,7 +877,9 @@
                 <div class="mb-3 gridratakiri">                      
                       <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
                     </div>
+                    @if($penjadwalan->status_seminar == '0')
                     <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
+                    @endif
   </div>
   <div class="tab-pane fade" id="empat" role="tabpanel" aria-labelledby="empat-tab">
      <div class="mb-3 gridratakiri">                      
@@ -891,8 +896,9 @@
                     <div class="fw-bold mb-2">Catatan 3</div>
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
-                    
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>    
+                    @if($penjadwalan->status_seminar == '0')
+                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>  
+                    @endif
                   </form>
   
   </div>
@@ -990,52 +996,122 @@
                     <table class="table table-bordered" style="background-color:white;">
                       <thead class="bg-success">
                           <tr>
-                              <th style="width: 50px">#</th>
+                              <th class="text-center" style="width: 50px">#</th>
                               <th style="width: 600px">Nilai</th>                
                               <th>Total Nilai</th>                        
                           </tr>
                       </thead>
                       <tbody class="gridratakiri">
                           <tr>
-                              <td>1</td>  
-                              <td>Nilai Seminar (30%)</td>                
+                              <td class="text-center">1</td>  
+                              <td>Nilai Seminar</td>                
                               <td>{{$nilaipenguji != '' ? $nilaipenguji->total_nilai_angka : '-' }}</td>                        
                           </tr>
                           
                           <tr>
-                              <td>2</td>  
-                              <td>Nilai Pembimbing Lapangan (40%)</td> 
+                              <td class="text-center">2</td>  
+                              <td>Nilai Pembimbing Lapangan</td> 
                               <td>{{$nilaipembimbing != '' ? $nilaipembimbing->nilai_pembimbing_lapangan : '-' }}</
                           </tr>
                           
                           <tr>
-                              <td>3</td>  
-                              <td>Nilai Pembimbing KP (30%)</td>                
+                              <td class="text-center">3</td>  
+                              <td>Nilai Pembimbing KP</td>                
                               <td>{{$nilaipembimbing != '' ? $nilaipembimbing->total_nilai_angka : '-' }}</td>                        
                           </tr>  
               
                           <tr>
-                              <td colspan="2">Total Akhir</td>
-                              <td></td>                     
+                              <td colspan="2">Total Angka</td>
+                              <td class="text-bold">
+                                @if ($nilaipembimbing == '' || $nilaipenguji == '')
+                                    -
+                                @else
+                                    {{round(($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3) }}</td>
+                                @endif
                           </tr>
+
+                          <tr>
+                            <td colspan="2">Total Huruf</td>
+                            <td class="text-bold">
+                                @if ($nilaipembimbing == '' || $nilaipenguji == '')
+                                    -
+                                @else
+                                    @if (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 85)
+                                    A
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 80)
+                                        A-
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 75)
+                                        B+
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 70)
+                                        B
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 65)
+                                        B-
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 60)
+                                        C+
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 55)
+                                        C
+                                    @elseif (($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 >= 40)
+                                        D
+                                    @else
+                                        E
+                                    @endif
+                                @endif
+                            </td>                     
+                        </tr>
 
                       </tbody>
                     </table> 
 
-                    <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
+                                        <!-- <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
+                                              @method('put')
+                                              @csrf
+                                              <button type="submit" class="btn p-2 px-3 btn-success float-right">Selesai Seminar</button>
+                                            </form> -->
+
+                   @if($penjadwalan->status_seminar == '0')
+                    <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" class="selesai-semkp-admin" method="POST"> 
                         @method('put')
                         @csrf
-                        <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-danger float-right">Selesai Seminar</button>
-                      </form>
+                        <button type="submit" class="btn-lg btn py-2 px-3 btn-danger float-right">Selesai Seminar</button>
+                    </form>
+                    @endif
+
+
+                     
   </div>
   </div>
   </div>
   <!-- <div class="tab-pane fade" id="enam" role="tabpanel" aria-labelledby="enam-tab">6</div>
 </div> -->
 </div>
+
+                     
 @endif
 
 @endsection
+
+@push('scripts')
+<script>
+$('.selesai-semkp-admin').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Apakah Anda Yakin?',
+        text: "Data tidak bisa dikembalikan",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#dc3545',
+        // confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Selesai'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+</script>
+@endpush()
 
 
 @push('scripts')

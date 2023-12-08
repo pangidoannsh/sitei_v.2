@@ -528,7 +528,6 @@ class PendaftaranController extends Controller
         if (auth()->user()->role_id == 2) {            
             return view('pendaftaran.admin.persetujuan', [
                 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
-                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '1')
                 ->get()->sortBy('update_at'),
 
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
@@ -540,7 +539,7 @@ class PendaftaranController extends Controller
         if (auth()->user()->role_id == 3) {            
             return view('pendaftaran.admin.persetujuan', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', 'Menunggu persetujuan Admin Prodi')
-                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '2')->get()->sortBy('update_at'),
+                ->get()->sortBy('update_at'),
 
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '2')
                 ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '2')
@@ -552,7 +551,7 @@ class PendaftaranController extends Controller
         if (auth()->user()->role_id == 4) {            
             return view('pendaftaran.admin.persetujuan', [
                 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')
-                ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '3')->get()->sortBy('update_at'),
+                ->get()->sortBy('update_at'),
 
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')
                 ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '3')
@@ -1601,7 +1600,7 @@ class PendaftaranController extends Controller
             // KP
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')
+                
                 ->orderBy('status_kp', 'desc')->get(),
 
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('status_kp', 'desc')->get(),
@@ -1623,7 +1622,7 @@ class PendaftaranController extends Controller
         if (auth()->user()->role_id == 7) {            
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')
+                
                 ->orderBy('status_kp', 'desc')->get(),
 
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('status_kp', 'desc')->get(),
@@ -1647,7 +1646,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')
+                
                 ->orderBy('status_kp', 'desc')->get(),
 
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('status_kp', 'desc')->get(),
@@ -1671,7 +1670,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan', 'Menunggu persetujuan Koordinator KP')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')
+                
                 ->orWhere('prodi_id', '1')->where('keterangan', 'Proses Kerja Praktek Selesai')
                 ->orWhere('prodi_id', '1')->where('status_kp', 'DAFTAR SEMINAR KP')->where('keterangan', 'Menunggu Jadwal Seminar KP')
                 ->orderBy('status_kp', 'desc')->get(),
@@ -1700,7 +1699,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', 'Menunggu persetujuan Koordinator KP')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')
+                
                 ->orWhere('prodi_id', '2')->where('keterangan', 'Proses Kerja Praktek Selesai')
                 ->orWhere('prodi_id', '2')->where('status_kp', 'DAFTAR SEMINAR KP')->where('keterangan', 'Menunggu Jadwal Seminar KP')
                 ->orderBy('status_kp', 'desc')->get(),
@@ -1730,7 +1729,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan', 'Menunggu persetujuan Koordinator KP')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')
+                
                 ->orWhere('prodi_id', '3')->where('keterangan', 'Proses Kerja Praktek Selesai')
                 ->orWhere('prodi_id', '3')->where('status_kp', 'DAFTAR SEMINAR KP')->where('keterangan', 'Menunggu Jadwal Seminar KP')
                 ->orderBy('status_kp', 'desc')->get(),
@@ -1760,7 +1759,7 @@ class PendaftaranController extends Controller
         if (auth()->user()->nip > 0) {  
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')->orderBy('created_at', 'desc')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Seminar KP Dijadwalkan')->orderBy('updated_at', 'desc')
+                ->orderBy('updated_at', 'desc')
                 ->orderBy('updated_at', 'desc')->get(),
 
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('status_kp', 'desc')->get(),

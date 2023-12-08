@@ -34,103 +34,92 @@
 
   @foreach ($pendaftaran_skripsi as $skripsi)
 
-  <div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-      <h5 class="text-bold">Mahasiswa</h5>
+  <div class="container">
+  <div class="row rounded shadow-sm">
+    <div class="col-lg-6 col-md-12 bg-white px-4 py-3 mb-2 rounded-start">
+       <h5 class="text-bold">Mahasiswa</h5>
       <hr>
         <p class="card-title text-secondary text-sm " >Nama</p>
-        <p class="card-text text-start" >{{$skripsi->mahasiswa->nama}}</p>
+        <p class="card-text lh-1 text-start" >{{$skripsi->mahasiswa->nama}}</p>
         <p class="card-title text-secondary text-sm " >NIM</p>
-        <p class="card-text text-start" >{{$skripsi->mahasiswa->nim}}</p>
+        <p class="card-text lh-1 text-start" >{{$skripsi->mahasiswa->nim}}</p>
          <p class="card-title text-secondary text-sm " >Program Studi</p>
-        <p class="card-text text-start" >{{$skripsi->mahasiswa->prodi->nama_prodi}}</p>
+        <p class="card-text lh-1 text-start" >{{$skripsi->mahasiswa->prodi->nama_prodi}}</p>
         <p class="card-title text-secondary text-sm " >Konsentrasi</p>
-        <p class="card-text text-start" >{{$skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-        
-      </div>
+        <p class="card-text lh-1 text-start" >{{$skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Dosen Pembimbing</h5>
+    <div class="col-lg-6 col-md-12 bg-white px-4 py-3 mb-2 rounded-end">
+      <h5 class="text-bold">Dosen Pembimbing</h5>
         <hr>
         @if ($skripsi->pembimbing_2_nip == null )
         <p class="card-title text-secondary text-sm" >Nama</p>
-        <p class="card-text text-start" >{{$skripsi->dosen_pembimbing1->nama}}</p>
+        <p class="card-text lh-1 text-start" >{{$skripsi->dosen_pembimbing1->nama}}</p>
         <!-- <p class="card-title text-secondary text-sm" >NIP</p>
-        <p class="card-text text-start" >{{$skripsi->dosen_pembimbing1->nip}}</p> -->
+        <p class="card-text lh-1 text-start" >{{$skripsi->dosen_pembimbing1->nip}}</p> -->
 
         @elseif($skripsi->pembimbing_2_nip !== null)
         <p class="card-title text-secondary text-sm" >Nama Pembimbing 1</p>
-        <p class="card-text text-start" >{{$skripsi->dosen_pembimbing1->nama}}</p>
+        <p class="card-text lh-1 text-start" >{{$skripsi->dosen_pembimbing1->nama}}</p>
         <!-- <p class="card-title text-secondary text-sm" >NIP</p>
-        <p class="card-text text-start" >{{$skripsi->dosen_pembimbing1->nip}}</p> -->
+        <p class="card-text lh-1 text-start" >{{$skripsi->dosen_pembimbing1->nip}}</p> -->
         <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
-        <p class="card-text text-start" >{{$skripsi->dosen_pembimbing2->nama}}</p>
+        <p class="card-text lh-1 text-start" >{{$skripsi->dosen_pembimbing2->nama}}</p>
         <!-- <p class="card-title text-secondary text-sm" >NIP</p>
-        <p class="card-text text-start" >{{$skripsi->dosen_pembimbing2->nip}}</p> -->
+        <p class="card-text lh-1 text-start" >{{$skripsi->dosen_pembimbing2->nip}}</p> -->
         @endif
-      </div>
     </div>
   </div>
 </div>
 
 
-  <div class="card">
-      <div class="card-body">
+
+<div class="container">
+  <div class="row rounded shadow-sm ">
+    <div class="col-lg-6 col-md-12 bg-white mb-2 px-4 py-3 rounded-start">
       <h5 class="text-bold">Data Usulan</h5>
       <hr>
       <div class="row">
-    <div class="col">
-        <p class="card-title text-secondary text-sm " >KRS Semester Berjalan</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->krs_berjalan_sempro )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <div class="col-6">
+           <p class="card-title text-secondary text-sm " >KRS Semester Berjalan</p>
+        <p class="card-text lh-1 text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->krs_berjalan_sempro )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >Kartu Hasil Studi</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->khs_kpti_10 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text lh-1 text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->khs_kpti_10 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >Log Book</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->logbook )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text lh-1 text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->logbook )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         </div>
-        <div class="col">
-        <p class="card-title text-secondary text-sm " >Proposal</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->proposal )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <div class="col-6">
+          <p class="card-title text-secondary text-sm " >Proposal</p>
+        <p class="card-text lh-1 text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->proposal )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >STI-30</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_30 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text lh-1 text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_30 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >STI-31</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_31_sempro )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p> 
-        </div>
+        <p class="card-text lh-1 text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_31_sempro )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         </div>
       </div>
+     
     </div>
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Keterangan Pendaftaran</h5>
+    <div class="col-lg-6 col-md-12 bg-white mb-2 px-4 py-3  rounded-end">
+     <h5 class="text-bold">Keterangan Pendaftaran</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
-        <p class="card-text text-start" ><span >{{$skripsi->jenis_usulan}}</span></p>
+        <p class="card-text lh-1 text-start" ><span >{{$skripsi->jenis_usulan}}</span></p>
         @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')
         <p class="card-title text-secondary text-sm" >Status Skripsi</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
-        @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')
-        <p class="card-title text-secondary text-sm" >Status Skripsi</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
-        @endif
-        @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' )
+        @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')
         <p class="card-title text-secondary text-sm " >Status KP</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-success text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-success text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
-        @if ($skripsi->status_skripsi == 'SEMPRO SELESAI' )
+        @if ($skripsi->status_skripsi == 'SEMPRO SELESAI')
         <p class="card-title text-secondary text-sm " >Status KP</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
         <p class="card-title text-secondary text-sm" >Keterangan</p>
-        <p class="card-text text-start" ><span>{{$skripsi->keterangan}}</span></p>
-
-      </div>
+        <p class="card-text lh-1 text-start" ><span>{{$skripsi->keterangan}}</span></p>
     </div>
+  </div>
+</div>
 
         <!-- APPROVAL PEMBIMBING 1 -->
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )

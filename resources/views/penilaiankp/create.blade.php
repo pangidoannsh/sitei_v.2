@@ -19,9 +19,9 @@
 </div>
 @endif
 
-<div>
+
   
-  <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin? Data tidak akan tersimpan!')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
   <div class="row mt-3">
     <div class="col col-lg-6 col-md-6 col-sm-12">
@@ -146,7 +146,7 @@
     </ol>
     </div>
   </div> --}}
-</div>
+
 
 @if (auth()->user()->nip == $kp->penguji_nip && auth()->user()->nip !== $kp->pembimbing_nip)
   <form action="/penilaian-kp-penguji/create/{{$kp->id}}" method="POST">
@@ -980,7 +980,7 @@
   </div>
   <!-- <div class="tab-pane fade" id="enam" role="tabpanel" aria-labelledby="enam-tab">6</div>
 </div> -->
-</div>
+
 @endif
 
 

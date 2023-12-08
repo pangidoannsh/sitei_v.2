@@ -607,9 +607,9 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 </div>
     @endif
 
-@if ($pendaftaran_skripsi->status_skripsi == 'JUDUL DISETUJUI' && $pendaftaran_skripsi->keterangan == 'Usulan Judul Skripsi Disetujui' )
+<!-- @if ($pendaftaran_skripsi->status_skripsi == 'JUDUL DISETUJUI' && $pendaftaran_skripsi->keterangan == 'Usulan Judul Skripsi Disetujui' )
 @if ($pendaftaran_skripsi->status_skripsi == 'JUDUL DISETUJUI')
-<!-- Menampilkan timer -->
+
 <div class="container">
 <div class="alert alert-info" role="alert">
     <img height="25" width="25" src="/assets/img/wink.png"  alt="..." class="bg-light rounded-pill"> <span class="px-2">Silahkan Daftar Seminar Proposal. </span> 
@@ -617,7 +617,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 </div>
 </div>
 @endif
-@endif
+@endif -->
 
 
 <div class="card p-4">

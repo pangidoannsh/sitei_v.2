@@ -16,9 +16,11 @@ use App\Models\PendaftaranKP;
 use App\Models\PenjadwalanKP;
 use App\Models\KapasitasBimbingan;
 use App\Models\PendaftaranSkripsi;
+use App\Models\PenilaianKPPenguji;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PenilaianKPPembimbing;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -730,6 +732,13 @@ public function kapasitasbimbingan_store(Request $request, $id)
     }
     public function detailkpti_10($id)
     {
+        $pendaftaran_kp = PendaftaranKP::find($id);
+
+        $penjadwalan_kp = PenjadwalanKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim)->latest('created_at')->first();
+        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        $nilai_penguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+
+
         //ADMIN
         if (auth()->user()->role_id == 1) {     
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
@@ -794,7 +803,9 @@ public function kapasitasbimbingan_store(Request $request, $id)
         } 
         if (auth()->user()->nim > 0) {     
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
-                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('mahasiswa_nim', Auth::user()->nim)->get(),          
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('mahasiswa_nim', Auth::user()->nim)->get(),      
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji,    
             ]);
         } 
     }

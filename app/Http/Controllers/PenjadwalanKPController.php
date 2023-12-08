@@ -112,6 +112,7 @@ class PenjadwalanKPController extends Controller
 
         return view('penjadwalankp.edit', [                      
             'kp' => $kps,
+            'kpp' => PendaftaranKP::where('mahasiswa_nim', $kps->mahasiswa_nim )->latest('created_at')->first(),
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'), 
@@ -200,10 +201,16 @@ class PenjadwalanKPController extends Controller
         $jadwal->status_seminar = 1;
         $jadwal->update();
 
-        // return redirect('/kp-skripsi/riwayat-penilaian-kp')->with('message', 'Seminar Telah Selesai!');
+        $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_kp->status_kp = 'SEMINAR KP SELESAI';
+        $pendaftaran_kp->keterangan = 'Seminar KP Selesai';
+        $pendaftaran_kp->tgl_selesai_semkp = Carbon::now();
+        $pendaftaran_kp->update();
 
         Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
-        return redirect('/kp-skripsi/riwayat-penilaian-kp');
+        // return redirect('/kp-skripsi/riwayat-penilaian-kp');
+        return back();
     }
 
     public function riwayat()

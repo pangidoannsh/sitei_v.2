@@ -138,6 +138,15 @@
 @endphp
 <!-- BATAS -->
 
+<!-- PENYERAHAN LAPORAN KP KOORDINATOR -->
+@php
+    $countDownDateKPTI10Koordinator = strtotime($kp->tgl_created_kpti10) + (4 * 24 * 60 * 60);
+    $nowKPTI10Koordinator = time();
+    $distanceKPTI10Koordinator = $countDownDateKPTI10Koordinator - $nowKPTI10Koordinator;
+    $daysKPTI10Koordinator = floor($distanceKPTI10Koordinator / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>-->
             <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
@@ -159,6 +168,9 @@
             <td class="text-center">{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
@@ -245,7 +257,7 @@
                 @if ($daysSeminarKPPemb > 0)
                     <span class="text-danger"> {{ $daysSeminarKPPemb }}  hari lagi</span>
                 @elseif($daysSeminarKPPemb <= 0)
-                    Batas Waktu Unggah Surat Balasan telah habis
+                    Batas Waktu Persetujuan telah habis
                 @endif
             </td>
             @endif
@@ -260,7 +272,7 @@
                 @if ($daysSeminarKPKoordinator > 0)
                     <span class="text-danger"> {{ $daysSeminarKPKoordinator }}  hari lagi</span>
                 @elseif($daysSeminarKPKoordinator <= 0)
-                    Batas Waktu Unggah Surat Balasan telah habis
+                    Batas Waktu Persetujuan telah habis
                 @endif
             </td>
             @endif
@@ -276,15 +288,29 @@
                 @if ($daysSeminarKPKaprodi > 0)
                     <span class="text-danger"> {{ $daysSeminarKPKaprodi }}  hari lagi</span>
                 @elseif($daysSeminarKPKaprodi <= 0)
-                    Batas Waktu Unggah Surat Balasan telah habis
+                    Batas Waktu Persetujuan telah habis
                 @endif
             </td>
             @endif
             @endif
             @endif
 
+            @endif
 
-
+                <!-- PENYERAHAN LAPORAN KOORDINATOR -->
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+          
+            @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )
+            <td class="text-center" >
+                @if ($daysKPTI10Koordinator > 0)
+                    <span class="text-danger"> {{ $daysKPTI10Koordinator }}  hari lagi</span>
+                @elseif($daysKPTI10Koordinator <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
             @endif
                                
             <td class="text-center">{{$kp->keterangan}}</td>  
