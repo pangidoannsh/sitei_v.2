@@ -640,7 +640,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @foreach($skripsi as $skripsi)
         <tr>                            
             <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
+            <td class="text-center fw-bold">{{$skripsi->mahasiswa->nama}}</td>
             <!-- <td class="text-center">{{$skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</td>                              -->
             <td class="text-center">{{$skripsi->jenis_usulan}}</td>             
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO'|| $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           

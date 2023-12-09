@@ -106,7 +106,7 @@
     </div>
 </div>
 
-
+<div class="container">
     <!-- APPROVAL PEMBIMBING 1 -->
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
       
@@ -193,8 +193,8 @@
     @endif
     @endif
     @endif
-
-@endforeach
+</div>
+    @endforeach
 
 
 

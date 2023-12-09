@@ -127,7 +127,7 @@
 
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)       
           <td class="text-center">
-            <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge btn btn-warning p-1"><i class="fas fa-pen"></i></a>            
+            <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>            
 
           </td>
           @endif
@@ -183,7 +183,7 @@
 
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
           <td class="text-center">            
-            <a href="/form-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
+            <a href="/form-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>
           </td>
           @endif                                
         </tr>
@@ -232,10 +232,9 @@
                 <td class="text-center"></td> 
             @endif 
 
-
           @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
           <td class="text-center">            
-            <a href="/form-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning"><i class="fas fa-pen"></i></a>
+            <a href="/form-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>
             
           </td>    
           @endif     

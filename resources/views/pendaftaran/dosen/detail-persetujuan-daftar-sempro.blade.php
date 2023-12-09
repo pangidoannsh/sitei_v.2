@@ -20,16 +20,12 @@
 </div>
 @endif
 
-
-<div class="container-fluid">
-
-<div>
-
-
+<div class="container">
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          <a href="/kp-skripsi/persetujuan-skripsi" class="badge bg-success p-2 mb-3"> Kembali <a>  
+          <a href="/persetujuan-kp-skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>  
  
   @endif
+</div>
 
 
   @foreach ($pendaftaran_skripsi as $skripsi)
@@ -121,21 +117,23 @@
   </div>
 </div>
 
+<div class="container">
         <!-- APPROVAL PEMBIMBING 1 -->
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
       @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
       <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemproPemb1()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+        <button onclick="tolakSemproPemb1()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
 </div>
     <div class="col">
         <form action="/daftarsempro/pembimbing1/approve/{{$skripsi->id}}" class="setujui-sempro-pemb1" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
          
 @endif
@@ -146,15 +144,16 @@
       <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSelesaiSempro()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Gagal Sempro" >Gagal</button>
+        <button onclick="tolakSelesaiSempro()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Gagal Sempro" >Gagal</button>
 </div>
     <div class="col">
         <form action="/selesaisempro/pembimbing/approve/{{$skripsi->id}}" class="setujui-selesai-sempro-pemb1" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3" data-bs-toggle="tooltip" title="Selesai Sempro">Selesai</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Selesai Sempro">Selesai</i></button>
 </form>
     </div>
+  </div>
   </div>
             @endif
         @endif
@@ -165,15 +164,16 @@
     <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemproPemb2()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+        <button onclick="tolakSemproPemb2()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
 </div>
     <div class="col">
         <form action="/daftarsempro/pembimbing2/approve/{{$skripsi->id}}" class="setujui-sempro-pemb2" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
         @endif
         @endif
@@ -186,28 +186,26 @@
      <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemproKoordinator()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+        <button onclick="tolakSemproKoordinator()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
 </div>
     <div class="col">
         <form action="/daftar-sempro/koordinator/approve/{{$skripsi->id}}" class="setujui-sempro-koordinator" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
   </div>
-    
-    @endif
-    @endif
-    @endif
-
-    
-    </div>   
   </div>
+    
+    @endif
+    @endif
+    @endif
+</div>
+    
+
   
   @endforeach
-<!-- </div>
-</div> -->
 
 
 <br>

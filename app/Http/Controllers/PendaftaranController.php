@@ -531,8 +531,8 @@ class PendaftaranController extends Controller
                 ->get()->sortBy('update_at'),
 
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
-                ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '1')
-                ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '1')
+                // ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '1')
+                // ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '1')
                 ->get()->sortBy('update_at'),
                 ]);
         }
@@ -542,8 +542,8 @@ class PendaftaranController extends Controller
                 ->get()->sortBy('update_at'),
 
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '2')
-                ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '2')
-                ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '2')
+                // ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '2')
+                // ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '2')
                 ->get()->sortBy('update_at'),
                 ]);
         }  
@@ -554,8 +554,8 @@ class PendaftaranController extends Controller
                 ->get()->sortBy('update_at'),
 
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')
-                ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '3')
-                ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '3')
+                // ->orWhere('keterangan', 'Menunggu Jadwal Seminar Proposal')->where('prodi_id', '3')
+                // ->orWhere('keterangan', 'Menunggu Jadwal Sidang Skripsi')->where('prodi_id', '3')
                 ->get()->sortBy('update_at'),
             ]);
         } 

@@ -130,6 +130,9 @@
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
             <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
+            @if ($kp->status_kp == 'KP SELESAI')           
+            <td class="text-center">{{Carbon::parse($kp->tgl_created_kpti10)->translatedFormat('l, d F Y')}}</td>
+            @endif
             
             @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')           
              <td class="text-center text-danger">{{$kp->keterangan}}</td>
