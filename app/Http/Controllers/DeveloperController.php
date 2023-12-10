@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\developer;
+use App\Models\Role;
+use App\Models\Dosen;
+use App\Models\Prodi;
+use App\Models\Developer;
 use Illuminate\Http\Request;
+use App\Models\PendaftaranKP;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class DeveloperController extends Controller
 {
@@ -26,7 +34,9 @@ class DeveloperController extends Controller
     }
 
     public function index(){
-        return view('developer.index');
+        return view('developer.index', [
+            'developer' => Developer::all(),
+        ]);
     }
 
     /**
@@ -36,7 +46,11 @@ class DeveloperController extends Controller
      */
     public function create()
     {
-        //
+        return view('developer.create', [
+            'prodis' => Prodi::all(),
+            'roles' => Role::all(),
+            'dosen' => Dosen::all(),
+        ]);
     }
 
     /**
@@ -47,7 +61,30 @@ class DeveloperController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nim' => 'required',
+            'email' => 'required',
+            'nama_aplikasi' => 'required',
+            'deskripsi_peran' => 'required',
+            'peran' => 'required',
+            'foto' => 'required|mimes:jpeg,png,jpeg|max:200',
+                         
+        ]);
+
+         Developer::create([
+            'nama' => $request->nama,              
+            'nim' => $request->nim,                        
+            'email' => $request->email,                        
+            'nama_aplikasi' => $request->nama_aplikasi,                        
+            'deskripsi_peran' => $request->deskripsi_peran,                        
+            'peran' => $request->peran,                        
+            'foto' =>$request->file('foto')->store('gambar'),                       
+        ]);
+
+        
+        return redirect('/developer');
+        Alert::success('Berhasil!', 'Data Berhasil disimpan')->showConfirmButton('Ok', '#28a745');
     }
 
     /**

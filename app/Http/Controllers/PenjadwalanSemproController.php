@@ -115,6 +115,7 @@ class PenjadwalanSemproController extends Controller
 
         return view('penjadwalansempro.edit', [
             'sempro' => $sempro,
+        'semprop' => PendaftaranSkripsi::where('mahasiswa_nim', $sempro->mahasiswa_nim )->latest('created_at')->first(),
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),

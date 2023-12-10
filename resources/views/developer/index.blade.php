@@ -35,14 +35,19 @@
                 </div>
             </div>
             <h3 class="text-center p-2 mb-3 rounded-top profil fw-bold">Profil Pengembang</h3>
+
+  @foreach ($developer as $dev)
+
+
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
                       <div class="card-body text-center">
-                        <img src="/assets/img/fahril.jpeg" alt="fahril"
+                      
+                        <img src="{{asset('storage/' .$dev->foto )}}" alt="fahril"
                           class="rounded-circle img-fluid" style="width: 143px;">
-                        <h5 class="my-3">Fahril Hadi</h5>
-                        <p class="text-muted mb-3">Front End Developer</p>
+                        <h5 class="my-3">{{ $dev->nama }}</h5>
+                        <p class="text-muted mb-3">{{ $dev->peran }}</p>
                         <div class="d-flex justify-content-center mb-2">
                             <div class="px-2">
                                 <a href=""><svg class="social" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
@@ -58,6 +63,7 @@
                       </div>
                     </div>
                 </div>
+
                 <div class="col-lg-8">
                     <div class="card mb-4">
                       <div class="card-body">
@@ -66,7 +72,7 @@
                             <p class="mb-0">Nama Lengkap</p>
                           </div>
                           <div class="col-sm-9">
-                            <p class="text-muted mb-0">Fahril Hadi</p>
+                            <p class="text-muted mb-0">{{ $dev->nama }}</p>
                           </div>
                         </div>
                         <hr>
@@ -75,7 +81,7 @@
                             <p class="mb-0">Nim</p>
                           </div>
                           <div class="col-sm-9">
-                            <p class="text-muted mb-0">1807111442</p>
+                            <p class="text-muted mb-0">{{ $dev->nim }}</p>
                           </div>
                         </div>
                         <hr>
@@ -84,7 +90,7 @@
                             <p class="mb-0">Email</p>
                           </div>
                           <div class="col-sm-9">
-                            <p class="text-muted mb-0">fahrilhadi77@gmail.com</p>
+                            <p class="text-muted mb-0">{{ $dev->email }}</p>
                           </div>
                         </div>
                         <hr>
@@ -93,7 +99,7 @@
                             <p class="mb-0">Nama Aplikasi</p>
                           </div>
                           <div class="col-sm-9">
-                            <p class="text-muted mb-0">Sistem Penilaian Seminar Akademik Jurusan Teknik Elektro</p>
+                            <p class="text-muted mb-0">{{ $dev->nama_aplikasi }}</p>
                           </div>
                         </div>
                         <hr>
@@ -102,14 +108,16 @@
                             <p class="mb-0">Deskripsi Peran</p>
                           </div>
                           <div class="col-sm-9">
-                            <p class="text-muted mb-0">Merancang UI/UX dan Mengembangkan Frontend Website Sistem Penilaian Seminar Akademik</p>
+                            <p class="text-muted mb-0">{{ $dev->deskripsi_peran }}</p>
                           </div>
                         </div>
                       </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            @endforeach
+            
+            <!-- <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
                       <div class="card-body text-center">
@@ -257,7 +265,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
 </body>
 </html>

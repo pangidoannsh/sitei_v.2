@@ -113,7 +113,7 @@
               <li>                        
                 <a href="/kapasitas-bimbingan/index" class="dropdown-item mb-1 {{Request::is ('kp-skripsi*') ? 'text-success' : '' }} ">Kapasitas Bimbingan</a>
               </li>
-              <li><a href="#" class="dropdown-item mb-1 {{Request::is ('pembimbing*') ? 'text-success' : '' }}">Dll</a></li> 
+              <li><a href="/developer/create" class="dropdown-item mb-1 {{Request::is ('developer*') ? 'text-success' : '' }}">Developer</a></li> 
    
             </ul>
           </li>

@@ -345,6 +345,10 @@ a:hover .custom-tooltip {
     /* opacity: 1.5; */
 }
 
+.footer-daftar {
+    margin-top: 60px;
+}
+
 .page-item.active .page-link {
     background-color: darkgrey;
     border-color: darkgray;

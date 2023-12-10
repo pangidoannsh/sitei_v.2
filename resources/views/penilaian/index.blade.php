@@ -59,7 +59,7 @@
       <th class="text-center" scope="col">Lokasi</th>              
       <th class="text-center" scope="col">Pembimbing</th>
       <th class="text-center" scope="col">Penguji</th>          
-      {{-- <th class="text-center"scope="col">Aksi</th> --}}
+     <th class="text-center"scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody> 
@@ -116,14 +116,21 @@
             @if ($sempro->pembimbingdua == !null)
             <p>2. {{$sempro->pembimbingdua->nama_singkat}}</p>                               
             @endif
-          </td>         
-          <td class="text-center">
-            <p>1. {{$sempro->pengujisatu->nama_singkat}}</p>
-            <p>2. {{$sempro->pengujidua->nama_singkat}}</p>
-            @if ($sempro->pengujitiga == !null)
-            <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
-            @endif
-          </td>                    
+          </td>       
+            @if($sempro->pengujisatu ==! null || $sempro->pengujisatu ==! null || $sempro->pengujitiga ==! null)
+                      <td class="text-center">
+                        <p>1. {{$sempro->pengujisatu->nama_singkat}}</p>
+                        @if ($sempro->pengujidua == !null)
+                        <p>2. {{$sempro->pengujidua->nama_singkat}}</p>            
+                        @endif
+                        @if ($sempro->pengujitiga == !null)
+                        <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
+                        @endif
+                      </td> 
+            @else
+                <td class="text-center"></td> 
+            @endif 
+                      
           <td class="text-center">
             @if ($sempro->penilaian(Auth::user()->nip, $sempro->id) == false)
               @if (Carbon::now() >= $sempro->tanggal && Carbon::now()->format('H:i:m') >= $sempro->waktu)
@@ -152,14 +159,21 @@
             @if ($skripsi->pembimbingdua == !null)
             <p>2. {{$skripsi->pembimbingdua->nama_singkat}}</p>                               
             @endif
-          </td>         
-          <td class="text-center">
-            <p>1. {{$skripsi->pengujisatu->nama_singkat}}</p>
-            <p>2. {{$skripsi->pengujidua->nama_singkat}}</p>
-            @if ($skripsi->pengujitiga == !null)
-            <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
-            @endif
-          </td>                    
+          </td>   
+          @if($skripsi->pengujisatu ==! null || $skripsi->pengujisatu ==! null || $skripsi->pengujitiga ==! null)
+                      <td class="text-center">
+                        <p>1. {{$skripsi->pengujisatu->nama_singkat}}</p>
+                        @if ($skripsi->pengujidua == !null)
+                        <p>2. {{$skripsi->pengujidua->nama_singkat}}</p>            
+                        @endif
+                        @if ($skripsi->pengujitiga == !null)
+                        <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>                               
+                        @endif
+                      </td> 
+            @else
+                <td class="text-center"></td> 
+            @endif 
+                             
           <td class="text-center">
             @if ($skripsi->penilaian(Auth::user()->nip, $skripsi->id) == false)
               @if (Carbon::now() >= $skripsi->tanggal && Carbon::now()->format('H:i:m') >= $skripsi->waktu)

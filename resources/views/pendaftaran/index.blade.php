@@ -17,6 +17,9 @@
   hr{
     display: none;
   }
+  .footer{
+    display : none;
+  }
   @media screen and (max-width: 768px){
     .utama-skripsi {
     margin-bottom: 50px;
@@ -31,6 +34,32 @@
   }
   </style>
 @section('content')
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card">
+        <a href="" class="kpindex">
+          <img  src="/assets/img/il3.png" class="" width="100%" alt="Kerja Praktek">
+          <div class="row p-4">
+          <div class="col-6 text-dark"><h3 class="fw-bold">KERJA PRAKTEK</h3></div>
+          <div class="col-6"><span class="">BELUM DAFTAR</span></div>
+          </div>
+        </a>
+        <div class="col p-4">
+          <p>Keterangan</p>
+          <span>Belum melakukan Usulan KP</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card">
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
 
 <div class="container px-md-5  " >
         
@@ -236,93 +265,19 @@
   @endif
   @endif 
 
-{{-- @if (Str::length(Auth::guard('dosen')->user()) > 0)
-@if (Auth::guard('dosen')->user()->role_id == 5 )
-   <div class="col-12 col-md-6 utama ">
-   <a href="/kp-skripsi/seminar"><div class="card kpindex">
-      <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
-  <div class="card-body">
-    <div class="row">
-   <h1><p class=" fs-4 text-bold text-dark" >KETUA JURUSAN</p></h1></a>
-  </div>
-  </div>
-</div>
-
-</div>
-  <div class="col-12 col-md-6 utama utama-skripsi">
- <a href="/kp-skripsi/seminar-pembimbing-penguji"><div class="card kpindex">
-      <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
-  <div class="card-body">
-  
-    <div class="row">
-   <h1><p class=" fs-4 text-bold text-dark" >PEMBIMBING/PENGUJI</p></h1></a>
-
-  </div>
-  </div>
-</div>
-</div>
-
-  @endif
-  @endif
-@if (Str::length(Auth::guard('dosen')->user()) > 0)
-@if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
-   <div class="col-12 col-md-6 utama ">
-   <a href="/kp-skripsi/seminar"><div class="card kpindex">
-      <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
-  <div class="card-body">
-    <div class="row">
-   <h1><p class=" fs-4 text-bold text-dark" >KOORDINATOR PROGRAM STUDI</p></h1></a>
-  </div>
-  </div>
-</div>
-
-</div>
-  <div class="col-12 col-md-6 utama utama-skripsi">
- <a href="/kp-skripsi/seminar-pembimbing-penguji"><div class="card kpindex">
-      <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
-  <div class="card-body">
-  
-    <div class="row">
-    <h1><p class=" fs-4 text-bold text-dark" >PEMBIMBING/PENGUJI</p></h1></a>
-
-  </div>
-  </div>
-</div>
-</div>
-
-  @endif
-  @endif
-
-@if (Str::length(Auth::guard('dosen')->user()) > 0)
-@if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-   <div class="col-12 col-md-6 utama ">
-   <a href="/kp-skripsi/seminar"><div class="card kpindex">
-      <img  src="/assets/img/il3.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="Kerja Praktek"> 
-  <div class="card-body">
-    <div class="row">
-    <h1><p class=" fs-4  text-bold text-dark" >KOORDINATOR KP/SKRIPSI</p></h1></a>
-  </div>
-  </div>
-</div>
-
-</div>
-  <div class="col-12 col-md-6 utama utama-skripsi">
- <a href="/kp-skripsi/seminar-pembimbing-penguji"><div class="card kpindex">
-      <img  src="/assets/img/il8.png" class="rounded mx-auto d-block card-img-top shadow-lg p-3 bg-body rounded" alt="..."> 
-  <div class="card-body">
-  
-    <div class="row">
-    <h1><p class=" fs-4 text-bold text-dark" >PEMBIMBING/PENGUJI</p></h1></a>
-
-  </div>
-  </div>
-</div>
-</div>
-
-  @endif
-  @endif --}}
 
 
 </div>
 </div>
+
+     
+
+
+<div class="footer-daftar text-center pt-5">
+        <div class="container">
+          <p class="developer text-sm">Dikembangkan oleh Prodi Teknik Informatika UNRI <br> <a href="/developer/m-seprinaldi" class="text-dark text-sm fw-bold text-decoration-underline" target="_blank">(M. Seprinaldi)</a>  <br>Copyright © 2022-2023 SITEI All Rights Reserved</p>
+        </div>
+      </div>
+
 @endsection
+

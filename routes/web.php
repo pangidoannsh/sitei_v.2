@@ -538,6 +538,10 @@ Route::group(['middleware' =>  ['auth:web']], function(){
 // BATAS
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
+
+    Route::get('/developer/create', [DeveloperController::class, 'create']);
+    Route::post('/developer/create', [DeveloperController::class, 'store']);
+
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
     Route::get('/persetujuan-koordinator/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_koordinator']);    
    
