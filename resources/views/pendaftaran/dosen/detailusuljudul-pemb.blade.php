@@ -151,6 +151,7 @@
 @endif         
 @endif    
 
+<div class="container">
     @if (Str::length(Auth::guard('web')->user()) > 0)
       @if ($skripsi->status_skripsi == 'USULAN JUDUL' && $skripsi->keterangan == 'Menunggu persetujuan Admin Prodi'  )
       <div class="mb-5 mt-3 float-right">
@@ -172,7 +173,7 @@
 @endif
 
   @endforeach
-
+</div>
 
 
 <br>

@@ -193,8 +193,8 @@
     @endif
     @endif
     @endif
-</div>
     @endforeach
+</div>
 
 
 

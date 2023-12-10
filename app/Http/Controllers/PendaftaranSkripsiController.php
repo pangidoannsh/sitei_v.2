@@ -1120,17 +1120,9 @@ class PendaftaranSkripsiController extends Controller
     {
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->keterangan = 'Menunggu Jadwal Seminar Proposal';
+        $skripsi->keterangan = 'Menunggu persetujuan Admin Prodi';
         $skripsi->tgl_disetujui_sempro_pemb2 = Carbon::now();
         $skripsi->update();
-
-        $penjadwalanSempro = new PenjadwalanSempro();
-        $penjadwalanSempro->mahasiswa_nim = $skripsi->mahasiswa_nim;
-        $penjadwalanSempro->prodi_id = $skripsi->prodi_id;
-        $penjadwalanSempro->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
-        $penjadwalanSempro->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
-        $penjadwalanSempro->judul_proposal = $skripsi->judul_skripsi;
-        $penjadwalanSempro->save();
 
         Alert::success('Disetujui!', 'Daftar sempro disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
@@ -1157,11 +1149,18 @@ class PendaftaranSkripsiController extends Controller
     {
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
-        $skripsi->jenis_usulan = 'Seminar Proposal';
-        $skripsi->keterangan = 'Seminar Proposal Dijadwalkan';
+        $skripsi->status_skripsi = 'DAFTAR SEMPRO DISETUJUI';
+        $skripsi->keterangan = 'Menunggu Jadwal Seminar Proposal';
         $skripsi->tgl_disetujui_sempro_admin = Carbon::now();
         $skripsi->update();
+
+        $penjadwalanSempro = new PenjadwalanSempro();
+        $penjadwalanSempro->mahasiswa_nim = $skripsi->mahasiswa_nim;
+        $penjadwalanSempro->prodi_id = $skripsi->prodi_id;
+        $penjadwalanSempro->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
+        $penjadwalanSempro->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
+        $penjadwalanSempro->judul_proposal = $skripsi->judul_skripsi;
+        $penjadwalanSempro->save();
 
         Alert::success('Disetujui!', 'Daftar Sempro Disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
@@ -1178,6 +1177,9 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->keterangan = 'Ditolak Admin prodi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sempro = null;
+        $skripsi->tgl_disetujui_sempro_pemb1 = null;
+        $skripsi->tgl_disetujui_sempro_pemb2 = null;
+        $skripsi->tgl_disetujui_sempro_admin = null;
         $skripsi->update();
 
         Alert::error('Ditolak!', 'Daftar Sempro Ditolak')->showConfirmButton('Ok', '#dc3545');

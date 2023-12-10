@@ -7,6 +7,7 @@ use App\Models\PenjadwalanKP;
 use App\Models\PendaftaranKP;
 use App\Models\PenjadwalanSempro;
 use App\Models\PenjadwalanSkripsi;
+use App\Models\PendaftaranSkripsi;
 use Illuminate\Support\Facades\Auth;
 
 class PenilaianController extends Controller
@@ -28,6 +29,7 @@ class PenilaianController extends Controller
 
         // $dosenss = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->
         // orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
+        
 
             if (auth()->user()->role_id == 5 ) {            
             return view('penilaian.index', [

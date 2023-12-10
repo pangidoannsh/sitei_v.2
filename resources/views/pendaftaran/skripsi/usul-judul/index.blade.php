@@ -120,7 +120,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
         </div><p class="mt-2"> PENYERAHAN BUKU SKRIPSI </p>
      </li> 
       @endif
-    @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO' || $pendaftaran_skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')
+    @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO' || $pendaftaran_skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
          <li class="step active"> 
             <div><i class="fas fa-check"></i>
         </div> 
@@ -413,6 +413,25 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
   </div>
 @endif
 
+@if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro_admin)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+@endif
+
   @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' || $pendaftaran_skripsi->status_skripsi == 'JUDUL DISETUJUI')
     <div class="row biru mb-4">
     <div class="col">
@@ -646,7 +665,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO'|| $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
             <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
             @endif
-            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI'||$skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SKRIPSI SELESAI'  || $skripsi->status_skripsi == 'LULUS' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
+            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI'||$skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SKRIPSI SELESAI'  || $skripsi->status_skripsi == 'LULUS' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI' )           
             <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
@@ -679,7 +698,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
             </td>
             @endif
             
-            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' )
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
             <td class="text-center">
             <a href="/daftar-sempro/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" ><i class="fas fa-info-circle"></i> <span class="custom-tooltip">Lihat Detail</span></a>
             

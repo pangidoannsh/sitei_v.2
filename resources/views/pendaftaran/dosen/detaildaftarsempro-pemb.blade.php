@@ -113,7 +113,7 @@
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-success text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
-        @if ($skripsi->status_skripsi == 'SEMPRO SELESAI')
+        @if ($skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
@@ -123,6 +123,7 @@
   </div>
 </div>
 
+<div class="container">
        <!-- APPROVAL PEMBIMBING 1 -->
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
       @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
@@ -183,9 +184,25 @@
         @endif
         @endif
 
+         @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Admin Prodi') 
+         <div class="mb-5 mt-3 float-right">
+        <div class="row row-cols-2">
+    <div class="col">
+        <button onclick="tolakSemproAdmin()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+</div>
+    <div class="col">
+        <form action="/daftar-sempro/admin/approve/{{$skripsi->id}}" class="setujui-sempro-admin" method="POST"> 
+    @method('put')
+    @csrf
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
+</form>
+    </div>
+  </div>
+            @endif
+
 
   @endforeach
-
+</div>
 
 <br>
 <br>
@@ -346,10 +363,11 @@ function tolakSelesaiSempro() {
         });
     }
 
-    $('.setujui-sempro-admin').submit(function(event) {
+     //ADMIN
+$('.setujui-sempro-admin').submit(function(event) {
     event.preventDefault();
     Swal.fire({
-        title: 'Setujui Daftar Sempro!',
+        title: 'Setujui Daftar Seminar Proposal!',
         text: "Apakah Anda Yakin?",
         icon: 'question',
         showCancelButton: true,

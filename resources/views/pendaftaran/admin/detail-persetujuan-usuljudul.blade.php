@@ -107,7 +107,7 @@
 
 
 
-      
+<div class="container">
       @if ($skripsi->status_skripsi == 'USULAN JUDUL' && $skripsi->keterangan == 'Menunggu persetujuan Admin Prodi'  )
       <div class="mb-5 mt-3 float-right">
        <div class="row row-cols-2">
@@ -125,7 +125,7 @@
     </div>
 
 @endif
-    
+  </div>  
 
     
   @endforeach

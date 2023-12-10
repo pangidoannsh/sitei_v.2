@@ -621,8 +621,8 @@ function tolakUsulJudulAdmin(id) {
 $('.setujui-sempro-admin').submit(function(event) {
     event.preventDefault();
     Swal.fire({
-        title: 'Sempro Dijadwalkan!',
-        text: "Apakah Anda yakin sudah menjadwalkannya?",
+        title: 'Setujui Daftar Seminar Proposal!',
+        text: "Apakah Anda yakin?",
         icon: 'question',
         showCancelButton: true,
         cancelButtonText: 'Batal',

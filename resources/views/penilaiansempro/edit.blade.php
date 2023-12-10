@@ -18,15 +18,15 @@
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif
 
-<div>
+<div class="container">
+    <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success py-1 px-2 mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali<a>
+</div>
 
-  <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin?')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-
-    <div class="row mt-4">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-          <h5 class="text-bold">Mahasiswa</h5>
+<div class="container">
+  <div class="row rounded shadow-sm">
+    <div class="col-lg-4 col-md-12 bg-white rounded-start px-4 py-3 mb-2">
+     
+       <h5 class="text-bold">Mahasiswa</h5>
           <hr>
             <p class="card-title text-secondary text-sm " >Nama</p>
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->mahasiswa->nama}}</p>
@@ -36,27 +36,11 @@
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->mahasiswa->prodi->nama_prodi}}</p>
             <p class="card-title text-secondary text-sm " >Konsentrasi</p>
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-          </div>
-        </div>
-    
-    
-        <div class="card">
-          <div class="card-body">
-            <h5 class="text-bold">Judul Proposal</h5>
-            <hr>
-    
-            <p class="card-title text-secondary text-sm" >Judul</p>
-            <p class="card-text text-start" >{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : $sempro->penjadwalan_sempro->judul_proposal }}</p>
-    
-          </div>
-        </div>
-    
-    
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="text-bold">Dosen Pembimbing</h5>
+     
+    </div>
+    <div class="col-lg-4 col-md-12 bg-white  px-4 py-3 mb-2">
+     
+    <h5 class="text-bold">Dosen Pembimbing</h5>
             <hr>
             @if ($sempro->penjadwalan_sempro->pembimbingdua_nip == null )
             <p class="card-title text-secondary text-sm" >Nama</p>
@@ -70,12 +54,11 @@
             <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->pembimbingdua->nama}}</p>
             @endif
-            
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="text-bold">Dosen Penguji</h5>
+     
+    </div>
+    <div class="col-lg-4 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
+     
+      <h5 class="text-bold">Dosen Penguji</h5>
             <hr>
     
             <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
@@ -89,125 +72,36 @@
             <p class="card-title text-secondary text-sm" >Nama Penguji 3</p>
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->pengujitiga->nama}}</p>
             @endif
-            
-          </div>
-        </div>
-      </div>
+      
     </div>
-    
-    
-      <div class="row mb-4">
-        <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="text-bold">Jadwal Seminar Proposal</h5>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row rounded shadow-sm">
+    <div class="col-lg-6 col-md-12 bg-white rounded-start px-4 py-3 mb-2">
+      <h5 class="text-bold">Judul Proposal</h5>
             <hr>
     
-            <p class="card-title text-secondary text-sm" >Tanggal</p>
+            <p class="card-title text-secondary text-sm" >Judul</p>
+            <p class="card-text text-start" >{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : $sempro->penjadwalan_sempro->judul_proposal }}</p>
+    </div>
+    <div class="col-lg-6 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
+      <h5 class="text-bold">Jadwal Seminar Proposal</h5>
+            <hr>
+    
+            <p class="card-title text-secondary text-sm" >Hari/Tanggal</p>
             <p class="card-text text-start" >{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</p>
             <p class="card-title text-secondary text-sm" >Pukul</p>
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->waktu}}</p>
             <p class="card-title text-secondary text-sm" >Ruangan</p>
             <p class="card-text text-start" >{{$sempro->penjadwalan_sempro->lokasi}}</p>
-    
-          </div>
-        </div>
-    
-        </div>
-        
-      </div>
-
-  {{-- <div class="row">
-    <div class="col col-lg-6 col-md-6 col-sm-12 mt-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold ">NIM</div>
-            <span>{{$sempro->penjadwalan_sempro->mahasiswa->nim}}</span>
-          </div>        
-        </li> 
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold  ">Nama</div>
-            <span>{{$sempro->penjadwalan_sempro->mahasiswa->nama}}</span>
-          </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold  ">Konsentrasi</div>
-            <span>{{$sempro->penjadwalan_sempro->mahasiswa->konsentrasi->nama_konsentrasi}}</span>
-          </div>        
-        </li>      
-      </ol>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold ">Pembimbing</div>
-            <span>1. {{$sempro->penjadwalan_sempro->pembimbingsatu->nama}}</span>                                      
-            @if ($sempro->penjadwalan_sempro->pembimbingdua != null)
-            <br>
-            <span>2. {{$sempro->penjadwalan_sempro->pembimbingdua->nama}}</span>                             
-            @endif
-          </div>        
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold ">Penguji</div>
-            <span>1. {{$sempro->penjadwalan_sempro->pengujisatu->nama}}</span> 
-            <br>                   
-            <span>2. {{$sempro->penjadwalan_sempro->pengujidua->nama}}</span>
-            @if ($sempro->penjadwalan_sempro->pengujitiga != null)
-            <br>
-            <span>3. {{$sempro->penjadwalan_sempro->pengujitiga->nama}}</span>                             
-            @endif                             
-          </div>        
-        </li>     
-      </ol>
     </div>
   </div>
 </div>
 
-<div class="kol-judul mt-3">
-  <div class="row">
-    <div class="col">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold  ">Judul</div>
-            <span>{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : $sempro->penjadwalan_sempro->judul_proposal }}</span>
-          </div>        
-        </li>   
-      </ol>
-    </div>
-  </div>
-</div>
 
-<div class="kol-jadwal mt-3 mb-3">
-  <div class="row">
-    <div class="col mb-3 kol-jadwal">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold  ">Jadwal</div>
-            <span>{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}, {{$sempro->penjadwalan_sempro->waktu}}</span>
-          </div>        
-        </li>   
-      </ol>
-    </div>
-    <div class="col-md">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto gridratakiri">
-            <div class="fw-bold  ">Lokasi</div>
-            <span>{{$sempro->penjadwalan_sempro->lokasi}}</span>
-          </div>        
-        </li>   
-      </ol>
-    </div>
-  </div> --}}
-</div>
+
 
 @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingsatu_nip || auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingdua_nip)
   <div class="card card-success card-tabs">
@@ -365,8 +259,9 @@
                         </tbody>
                       </table>
             </div>
-
-              <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+               
+              <button type="submit"  class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+         
           </form> 
         </div>    
       </div>
@@ -646,7 +541,11 @@
                       </table>
             </div>
               
-              <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
+             @if($penjadwalan->status_seminar == '0')
+              <button type="submit"  class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+              @endif
+              
+              
 
             </div>
 
@@ -677,7 +576,11 @@
                     <div class="fw-bold mb-2">Perbaikan 5</div>
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $sempro->revisi_naskah5 != null ? $sempro->revisi_naskah5 : '' }}">
                     </div>
-              <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
+      
+
+              @if($penjadwalan->status_seminar == '0')
+              <button type="submit"  class="btn btn-lg btn-success float-right">Perbarui</button>
+              @endif
               </form>
             </div>
             
@@ -697,7 +600,10 @@
                   <label class="form-label">Judul Baru</label>
                   <input type="text" name="revisi_proposal" class="form-control" value="{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : '' }}">
                 </div>              
-                <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
+
+                @if($penjadwalan->status_seminar == '0')
+              <button type="submit"  class="btn btn-lg btn-success float-right">Perbarui</button>
+              @endif
               </form>
 
             </div>
@@ -1169,7 +1075,7 @@
                                   </div>
                                   </div>                        
                     
-                    @elseif($total_nilai <= 55)
+                    @elseif($total_nilai < 60)
                               <a href="#ModalApprove5"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove5">
                                   <div class="modal-dialog modal-dialog-centered">

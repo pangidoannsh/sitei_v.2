@@ -122,7 +122,7 @@
 
 
 
-      
+<div class="container">
             <!-- APPROVAL KOORDINATOR SKRIPSI -->
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
@@ -170,7 +170,7 @@
     @endif
    
   @endforeach
-
+</div>
 
 <br>
 <br>

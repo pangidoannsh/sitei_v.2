@@ -102,13 +102,18 @@
     @endforeach
 
 
-     @foreach ($penjadwalan_sempros as $sempro)    
+     @foreach ($penjadwalan_sempros as $sempro)
+     @if($sempro->pengujisatu ==! null)    
         <tr>                  
           <td class="text-center">{{$sempro->mahasiswa->nim}}</td>                             
           <td class="text-center">{{$sempro->mahasiswa->nama}}</td>                     
           <td class="bg-success text-center">{{$sempro->jenis_seminar}}</td>                     
-          <td class="text-center">{{$sempro->prodi->nama_prodi}}</td>          
-          <td class="text-center">{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td class="text-center">{{$sempro->prodi->nama_prodi}}</td>
+           @if ($sempro->tanggal == !null)         
+          <td class="text-center">{{Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y')}}</td>
+          @else    
+          <td class="text-center"></td>    
+          @endif               
           <td class="text-center">{{$sempro->waktu}}</td>                   
           <td class="text-center">{{$sempro->lokasi}}</td>               
           <td class="text-center">
@@ -142,7 +147,8 @@
               <a href="/penilaian-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
             @endif              
           </td>                        
-        </tr>               
+        </tr>
+        @endif               
     @endforeach
 
     @foreach ($penjadwalan_skripsis as $skripsi)    

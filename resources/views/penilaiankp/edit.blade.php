@@ -282,7 +282,7 @@
                       </table>
             </div>
 
-                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
+                  <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -312,7 +312,7 @@
                     <div class="fw-bold mb-2">Perbaikan 5</div>
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kp->revisi_naskah5 != null ? $kp->revisi_naskah5 : '' }}">
                     </div>
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>    
+                    <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>    
                   </form>
                 </div>
                    
@@ -466,7 +466,7 @@
                       </table>
             </div>
                                 
-                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
+                  <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>    
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -475,7 +475,7 @@
                     <div class="mb-3 gridratakiri">                      
                       <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
                     </div>
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
+                    <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
@@ -496,7 +496,7 @@
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
                     
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
+                    <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
                   </form>
                 </div>
 
@@ -836,7 +836,7 @@
                       </table>
             </div>
 @if($penjadwalan->status_seminar == '0')
-                  <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+                  <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
 @endif       
            
   </div>
@@ -866,7 +866,7 @@
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kpp->revisi_naskah5 != null ? $kpp->revisi_naskah5 : '' }}">
                     </div>
                     @if($penjadwalan->status_seminar == '0')
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button> 
+                    <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button> 
                     @endif
                     </form>
   </div>
@@ -878,7 +878,7 @@
                       <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
                     </div>
                     @if($penjadwalan->status_seminar == '0')
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>
+                    <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
                     @endif
   </div>
   <div class="tab-pane fade" id="empat" role="tabpanel" aria-labelledby="empat-tab">
@@ -897,7 +897,7 @@
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
                     @if($penjadwalan->status_seminar == '0')
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Perbarui</button>  
+                    <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>  
                     @endif
                   </form>
   
