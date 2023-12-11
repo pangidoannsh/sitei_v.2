@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Kerja Praktek | SIA ELEKTRO
+    SITEI | Detail Mahasiswa
 @endsection
 
 @section('sub-title')

@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Kerja Praktek | SIA ELEKTRO
+   SITEI | Daftar Beban Bimbingan Skripsi
 @endsection
 
 @section('sub-title')
-Beban Bimbingan Skripsi Dosen
+Daftar Beban Bimbingan Skripsi
 @endsection
 
 @section('content')

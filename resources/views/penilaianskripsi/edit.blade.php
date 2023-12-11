@@ -5,7 +5,7 @@ use Carbon\Carbon;
 @endphp
 
 @section('header')
-Penilaian Skripsi | SIA Elektro
+SITEI | Edit Penilaian Sidang Skripsi
 @endsection
 
 @section('sub-title')

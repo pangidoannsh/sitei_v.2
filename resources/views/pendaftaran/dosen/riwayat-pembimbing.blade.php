@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    SITEI | Riwayat
+    SITEI | Riwayat Seminar Mahasiswa Bimbingan
 @endsection
 
 @section('sub-title')

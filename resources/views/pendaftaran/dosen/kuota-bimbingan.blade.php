@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    SITEI | Statistik Bimbingan
+    SITEI | Daftar Beban Bimbingan Dosen
 @endsection
 
 @section('sub-title')
-Beban Bimbingan Dosen
+Daftar Beban Bimbingan Dosen
 @endsection
 
 @section('content')

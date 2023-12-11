@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar KP | SIA ELEKTRO
+    SITEI | Permohonan Perpanjangan 1 Waktu Skripsi
 @endsection
 
 @section('sub-title')

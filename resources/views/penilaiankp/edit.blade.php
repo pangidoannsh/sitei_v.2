@@ -5,7 +5,7 @@
 @endphp
 
 @section('header')
-    Penilaian KP | SIA Elektro
+    SITEI | Edit Penilaian Seminar KP
 @endsection
 
 @section('sub-title')

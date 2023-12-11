@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Berita Acara KP | SIA ELEKTRO
+    SITEI | Berita Acara Seminar KP
 @endsection
 
 @section('sub-title')

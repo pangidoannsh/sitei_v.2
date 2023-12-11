@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Riwayat Persetujuan | SIA ELEKTRO
+    SITEI | Riwayat Persetujuan
 @endsection
 
 @section('sub-title')

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar KP | SIA ELEKTRO
+    SITEI | Bukti Penyerahan Laporan Kerja Praktek
 @endsection
 
 @section('sub-title')

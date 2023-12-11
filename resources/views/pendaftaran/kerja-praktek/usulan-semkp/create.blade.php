@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar KP | SIA ELEKTRO
+    SITEI |Daftar Seminar Kerja Praktek
 @endsection
 
 @section('sub-title')
-    Daftar Seminar Kerja Praktek
+   Daftar Seminar Kerja Praktek
 @endsection
 
 @section('content')

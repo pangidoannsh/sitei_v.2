@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Edit Jadwal Sempro | SIA ELEKTRO
+    SITEI | Edit Jadwal Sempro
 @endsection
 
 @section('sub-title')
@@ -211,20 +211,18 @@
                                   <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content shadow-sm">
                                       <div class="modal-body">
-                                        <div class="container px-5 pt-5 pb-2">
+                                        <div class="container text-center px-5 pt-5 pb-2">
                                           <h3 class="text-center">Apakah Anda Yakin?</h3>
                                         <p class="text-center">Status Mahasiswa akan di Jadwalkan Seminar Proposal.</p>
                                          <div class="row text-center">
-                                              <div class="col-3">
-                                              </div>
-                                              <div class="col-3">
+                    
+                                              <div class="col-6 text-end">
                                                <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
                                               </div>
-                                              <div class="col-3">
-                                               <button type="submit" class="btn p-2 px-3 btn-success float-right">Jadwalkan</button>
+                                              <div class="col-6 text-start">
+                                               <button type="submit" class="btn p-2 px-3 btn-success ">Jadwalkan</button>
                                               </div>
-                                              <div class="col-3">
-                                              </div>
+                                             
                                             </div>
                                         </div>
                                       </div>

@@ -553,12 +553,12 @@ class PendaftaranSkripsiController extends Controller
     public function storeperpanjangan1_skripsi(Request $request, $id)
     {
         $request->validate([         
-            'sti_22_p1' => 'required|mimes:pdf|max:200',           
+            'sti_22' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_22_p1 = $request->file('sti_22_p1')->store('file');
+        $skripsi->sti_22 = $request->file('sti_22')->store('file');
        
         $skripsi->jenis_usulan = 'Permohonan Perpanjangan 1 Waktu Skripsi';
         $skripsi->tgl_created_perpanjangan1 = Carbon::now();
@@ -574,12 +574,12 @@ class PendaftaranSkripsiController extends Controller
     public function storeperpanjangan2_skripsi(Request $request, $id)
     {
         $request->validate([         
-            'sti_22_p1' => 'required|mimes:pdf|max:200',           
+            'sti_22' => 'required|mimes:pdf|max:200',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_22_p1 = $request->file('sti_22_p1')->store('file');
+        $skripsi->sti_22 = $request->file('sti_22')->store('file');
        
         $skripsi->jenis_usulan = 'Permohonan Perpanjangan 2 Waktu Skripsi';
         $skripsi->tgl_created_perpanjangan2 = Carbon::now();
@@ -1509,7 +1509,6 @@ class PendaftaranSkripsiController extends Controller
          Alert::success('Disetujui!', 'Perpanjangan 1 Waktu Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
        
- 
      }
      public function tolakperpanjangan1_pembimbing(Request $request, $id)
      {

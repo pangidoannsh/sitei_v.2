@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar Hak Ases| SIA ELEKTRO
+    SITEI | Daftar Hak Akses
 @endsection
 
 @section('sub-title')

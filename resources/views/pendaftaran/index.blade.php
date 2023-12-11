@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Pendaftaran | SIA ELEKTRO
+    SITEI | Kerja Praktek dan Skripsi
 @endsection
 
 

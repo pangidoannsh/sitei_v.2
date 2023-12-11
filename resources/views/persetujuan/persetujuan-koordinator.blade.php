@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Persetujuan Berita Acara | SIA ELEKTRO
+    SITEI | Persetujuan Berita Acara
 @endsection
 
 @section('sub-title')

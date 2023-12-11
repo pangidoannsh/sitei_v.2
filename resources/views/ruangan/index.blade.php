@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar Ruangan | SIA ELEKTRO
+    SITEI | Daftar Ruangan
 @endsection
 
 @section('sub-title')

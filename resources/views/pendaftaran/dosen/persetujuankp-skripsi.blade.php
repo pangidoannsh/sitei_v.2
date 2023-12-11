@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    SITEI ELEKTRO | Persetujuan Kerja Praktek
+    SITEI | Persetujuan Kerja Praktek dan Skripsi
 @endsection
 
 @section('sub-title')
-    Persetujuan Kerja Praktek & Skripsi
+    Persetujuan Kerja Praktek dan Skripsi
 @endsection
 
 @section('content')

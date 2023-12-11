@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Edit Program Studi | SIA ELEKTRO
+    SITEI| Edit Program Studi
 @endsection
 
 @section('sub-title')

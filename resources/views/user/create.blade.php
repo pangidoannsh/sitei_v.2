@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Staff Jurusan | SIA ELEKTRO
+    SITEI | Tambah Staff Jurusan
 @endsection
 
 @section('sub-title')

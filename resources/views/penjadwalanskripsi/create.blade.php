@@ -3,11 +3,11 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Jadwal Skripsi | SIA ELEKTRO
+    SITEI | Tambah Jadwal Sidang Skripsi
 @endsection
 
 @section('sub-title')
-    Tambah Jadwal Skripsi
+    Tambah Jadwal Sidang Skripsi
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar Staff | SIA ELEKTRO
+    SITEI| Daftar Staff Jurusan
 @endsection
 
 @section('sub-title')

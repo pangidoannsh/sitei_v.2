@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Penilaian Sempro | SIA ELEKTRO
+    SITEI | Penilaian Seminar Proposal
 @endsection
 
 @section('sub-title')

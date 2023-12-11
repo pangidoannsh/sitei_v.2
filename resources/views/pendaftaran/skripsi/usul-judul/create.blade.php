@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar KP | SIA ELEKTRO
+    SITEI | Usulan Judul Skripsi
 @endsection
 
 @section('sub-title')

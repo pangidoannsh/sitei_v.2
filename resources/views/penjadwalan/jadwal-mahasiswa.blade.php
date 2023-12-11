@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Jadwal Seminar | SIA ELEKTRO
+    SITEI | Jadwal Seminar
 @endsection
 
 @section('sub-title')

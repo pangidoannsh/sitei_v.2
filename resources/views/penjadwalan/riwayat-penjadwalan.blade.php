@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Riwayat Jadwal | SIA ELEKTRO
+    SITEI | Riwayat Penjadwalan Seminar
 @endsection
 
 @section('sub-title')

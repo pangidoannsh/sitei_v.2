@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Kerja Praktek | SIA ELEKTRO
+    SITEI | Skripsi
 @endsection
 @section('sub-title')
     Skripsi
@@ -576,14 +576,14 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
 </div>
     @endif
-@if($pendaftaran_skripsi->status_skripsi == 'SEMPRO SELESAI' )
+<!-- @if($pendaftaran_skripsi->status_skripsi == 'SEMPRO SELESAI' )
 <div class="container">
     <div class="alert alert-info" role="alert"> 
         <img height="25" width="25" src="/assets/img/wink.png"  alt="..." class="bg-light rounded-pill"> <span class="pl-2 fw-bold">Silahkan Daftar Sidang Skripsi!</span>
         
     </div>
 </div>
-    @endif
+    @endif -->
 
 @if($pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' )
 <div class="container">
@@ -729,9 +729,9 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="col">
                                  <div class="mb-3">
                                         <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
-                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
+                                        <input name="sti_22" class="form-control @error ('sti_22') is-invalid @enderror" value="{{ old('sti_22') }}" type="file" id="formFile" required autofocus>
 
-                                        @error('sti_22_p1')
+                                        @error('sti_22')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
@@ -739,7 +739,33 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 </div>
 
                                     
-                                    <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
+                                    <!-- <button type="submit" class="btn btn-success px-3 py-2 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#ModalApprove">Kirim</button> -->
+
+                                     <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Kirim</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                              <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
 
                                             
                                         </div>
@@ -798,9 +824,9 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="col">
                                  <div class="mb-3">
                                         <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
-                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
+                                        <input name="sti_22" class="form-control @error ('sti_22') is-invalid @enderror" value="{{ old('sti_22') }}" type="file" id="formFile" required autofocus>
 
-                                        @error('sti_22_p1')
+                                        @error('sti_22')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
@@ -808,7 +834,33 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 </div>
 
                                     
-                                    <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
+                                    <!-- <button type="submit" class="btn btn-success px-3 py-2 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#ModalApprove">Kirim</button> -->
+
+                                     <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Kirim</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                              <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
 
                                             
                                         </div>
@@ -853,15 +905,41 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="col">
                                  <div class="mb-3">
                                         <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
-                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
+                                        <input name="sti_22" class="form-control @error ('sti_22') is-invalid @enderror" value="{{ old('sti_22') }}" type="file" id="formFile" required autofocus>
 
-                                        @error('sti_22_p1')
+                                        @error('sti_22')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
                                         @enderror
                                 </div> 
-                                <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>     
+                                <!-- <button type="submit" class="btn btn-success px-3 py-2 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#ModalApprove">Kirim</button> -->
+                                
+                                 <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Kirim</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                              <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                                         </div>
 
                                     </div>
@@ -915,9 +993,9 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 <div class="col">
                                  <div class="mb-3">
                                         <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi<span class="text-danger">*</span> <small class="text-secondary">( Format .pdf | Maks. 200 KB ) </small></label>
-                                        <input name="sti_22_p1" class="form-control @error ('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
+                                        <input name="sti_22" class="form-control @error ('sti_22') is-invalid @enderror" value="{{ old('sti_22') }}" type="file" id="formFile" required autofocus>
 
-                                        @error('sti_22_p1')
+                                        @error('sti_22')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
@@ -925,7 +1003,33 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 </div>
 
                                     
-                                    <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
+                                    <!-- <button type="submit" class="btn btn-success px-3 py-2 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#ModalApprove">Kirim</button> -->
+
+                                     <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Kirim</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                              <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
 
                                             
                                         </div>
@@ -1010,7 +1114,33 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 </div>
 
                                     
-                                    <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
+                                    <!-- <button type="submit" class="btn btn-success px-3 py-2 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#ModalApprove">Kirim</button> -->
+
+                                     <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Kirim</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                              <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
 
                                             
                                         </div>
@@ -1075,7 +1205,33 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
                                 </div>
 
                                     
-                                    <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
+                                    <!-- <button type="submit" class="btn btn-success px-3 py-2 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#ModalApprove">Kirim</button> -->
+
+                                     <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Kirim</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.</p>
+                                         <div class="row text-center">
+                                              <div class="col-3">
+                                              </div>
+                                              <div class="col-3">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-3">
+                                              <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
+                                              </div>
+                                              <div class="col-3">
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
 
                                             
                                         </div>

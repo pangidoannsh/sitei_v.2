@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Riwayat Jadwal KP | SIA ELEKTRO
+    SITEI | Riwayat Jadwal Seminar KP
 @endsection
 
 @section('sub-title')
-    Riwayat Jadwal KP
+    Riwayat Jadwal Seminar KP
 @endsection
 
 @section('content')

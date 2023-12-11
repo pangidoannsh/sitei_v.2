@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Skripsi | SITEI UNRI
+    SITEI | Riwayat Skripsi Mahasiswa
 @endsection
 
 @section('sub-title')

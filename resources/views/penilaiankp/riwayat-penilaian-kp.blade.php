@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Riwayat Penilaian Seminar KP | SIA ELEKTRO
+    SITEI | Riwayat Penilaian Seminar KP
 @endsection
 
 @section('sub-title')

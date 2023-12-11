@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Jadwal Sempro | SIA ELEKTRO
+    SITEI | Jadwal Sempro
 @endsection
 
 @section('sub-title')

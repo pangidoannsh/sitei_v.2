@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Penilaian | SIA ELEKTRO
+    SITEI | Jadwal Seminar
 @endsection
 
 @section('sub-title')

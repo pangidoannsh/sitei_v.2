@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    SITEI ELEKTRO | Skripsi Prodi
+    SITEI | Data Skripsi Mahasiswa
 @endsection
 
 @section('sub-title')

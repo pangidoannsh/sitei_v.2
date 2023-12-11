@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Edit Password | SIA ELEKTRO
+    SITEI | Edit Password
 @endsection
 
 @section('sub-title')

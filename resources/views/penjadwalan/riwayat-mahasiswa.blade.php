@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Riwayat Mahasiswa | SIA ELEKTRO
+    SITEI | Riwayat Seminar Mahasiswa
 @endsection
 
 @section('sub-title')
-    Riwayat Mahasiswa
+    Riwayat Seminar Mahasiswa
 @endsection
 
 @section('content')

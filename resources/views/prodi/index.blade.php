@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar Program Studi | SIA ELEKTRO
+    SITEI | Daftar Program Studi
 @endsection
 
 @section('sub-title')

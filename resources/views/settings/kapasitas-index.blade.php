@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Jadwal KP | SIA ELEKTRO
+    SITEI | Kapasitas Bimbingan
 @endsection
 
 @section('sub-title')

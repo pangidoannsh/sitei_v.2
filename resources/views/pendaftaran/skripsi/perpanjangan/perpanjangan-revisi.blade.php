@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar KP | SIA ELEKTRO
+    SITEI | Permohonan Perpanjangan Revisi
 @endsection
 
 @section('sub-title')
-    Pernyataan Perpanjangan Revisi
+    Permohonan Perpanjangan Revisi
 @endsection
 
 @section('content')

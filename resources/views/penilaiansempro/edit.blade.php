@@ -5,7 +5,7 @@
 @endphp
 
 @section('header')
-    Penilaian Sempro | SIA Elektro
+    SITEI | Edit Penilaian Seminar Proposal
 @endsection
 
 @section('sub-title')
@@ -1018,7 +1018,7 @@
                                   <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                       <div class="modal-body">
-                                       <div class="container p-5 text-center">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
                                         <h5><b>Pembimbing</b> belum melakukan Input Nilai</h5>
                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>

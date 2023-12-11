@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-   SITEI ELEKTRO | Bimbingan Kerja Praktek
+   SITEI | Daftar Bimbingan Kerja Praktek
 @endsection
 
 @section('sub-title')

@@ -5,7 +5,7 @@
 @endphp
 
 @section('header')
-    Penilaian Skripsi | SIA Elektro
+    SITEI | Penilaian Sidang Skripsi
 @endsection
 
 @section('sub-title')

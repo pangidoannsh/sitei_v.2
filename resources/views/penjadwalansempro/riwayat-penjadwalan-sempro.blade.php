@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Riwayat Jadwal Sempro | SIA ELEKTRO
+   SITEI | Riwayat Jadwal Sempro
 @endsection
 
 @section('sub-title')

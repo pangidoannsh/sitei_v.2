@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Jadwal Sempro | SIA ELEKTRO
+    SITEI | Tambah Jadwal Sempro
 @endsection
 
 @section('sub-title')

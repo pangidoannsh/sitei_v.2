@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Jadwal Skripsi | SIA ELEKTRO
+    SITEI | Jadwal Sidang Skripsi
 @endsection
 
 @section('sub-title')
-    Jadwal Skripsi
+    Jadwal Sidang Skripsi
 @endsection
 
 @section('content')

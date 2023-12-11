@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Penilaian Skripsi | SIA ELEKTRO
+    SITEI | Penilaian Sidang Skripsi
 @endsection
 
 @section('sub-title')

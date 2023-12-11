@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Riwayat Penilaian Sempro | SIA ELEKTRO
+    SITEI | Riwayat Penilaian Sempro
 @endsection
 
 @section('sub-title')

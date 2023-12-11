@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Hak Akses | SIA ELEKTRO
+    SITEI | Tambah Hak Akses
 @endsection
 
 @section('sub-title')

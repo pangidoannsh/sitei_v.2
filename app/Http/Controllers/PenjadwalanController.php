@@ -23,8 +23,9 @@ class PenjadwalanController extends Controller
             return view('penjadwalan.index', [
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
-                'penjadwalan_sempros' => PenjadwalanSempro::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
+                // 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
             ]);
         }
         if (auth()->user()->role_id == 2) {            
@@ -40,9 +41,8 @@ class PenjadwalanController extends Controller
                 ->get()->sortBy('update_at'),
                 
 
-                'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
-                    $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
-                })->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
+                
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
@@ -61,9 +61,10 @@ class PenjadwalanController extends Controller
                 ->get()->sortBy('update_at'),
                 
 
-                'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
-                    $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
-                })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
+                // 'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
+                //     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
+                // })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
@@ -78,15 +79,14 @@ class PenjadwalanController extends Controller
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
 
-                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
+                'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '3')
                 ->orWhere('keterangan', 'Menunggu Jadwal Seminar KP')->where('prodi_id', '3')
                 ->get()->sortBy('update_at'),
 
                 
 
-                'penjadwalan_sempros' => PenjadwalanSempro::where(function($query) {
-                    $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
-                })->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
+
                 'penjadwalan_skripsis' => PenjadwalanSkripsi::where(function($query) {
                     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 })->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
@@ -100,32 +100,32 @@ class PenjadwalanController extends Controller
             return view('penjadwalan.riwayat-penjadwalan', [
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('tanggal', '<', Carbon::today())->get(),
-                'penjadwalan_sempros' => PenjadwalanSempro::where('tanggal', '<', Carbon::today())->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '<', Carbon::today())->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '1')->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '3')->get(),
             ]);
         }
         if (auth()->user()->role_id == 2) {            
             return view('penjadwalan.riwayat-penjadwalan', [
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('tanggal', '<', Carbon::today())->where('prodi_id', 1)->get(),
-                'penjadwalan_sempros' => PenjadwalanSempro::where('tanggal', '<', Carbon::today())->where('prodi_id', 1)->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '<', Carbon::today())->where('prodi_id', 1)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 1)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 1)->get(),
             ]);
         }
         if (auth()->user()->role_id == 3) {            
             return view('penjadwalan.riwayat-penjadwalan', [
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('tanggal', '<', Carbon::today())->where('prodi_id', 2)->get(),
-                'penjadwalan_sempros' => PenjadwalanSempro::where('tanggal', '<', Carbon::today())->where('prodi_id', 2)->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '<', Carbon::today())->where('prodi_id', 2)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 2)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 2)->get(),
             ]);
         }
         if (auth()->user()->role_id == 4) {            
             return view('penjadwalan.riwayat-penjadwalan', [
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('tanggal', '<', Carbon::today())->where('prodi_id', 3)->get(),
-                'penjadwalan_sempros' => PenjadwalanSempro::where('tanggal', '<', Carbon::today())->where('prodi_id', 3)->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '<', Carbon::today())->where('prodi_id', 3)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 3)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 3)->get(),
             ]);
         }
     }    

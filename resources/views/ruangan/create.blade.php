@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Ruangan | SIA ELEKTRO
+    SITEI | Tambah Ruangan
 @endsection
 
 @section('sub-title')

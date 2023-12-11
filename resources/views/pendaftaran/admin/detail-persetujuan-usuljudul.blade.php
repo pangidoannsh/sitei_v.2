@@ -5,7 +5,7 @@
 @endphp
 
 @section('title')
-    Kerja Praktek | SIA ELEKTRO
+    SITEI | Detail Mahasiswa
 @endsection
 
 @section('sub-title')
@@ -45,7 +45,11 @@
         <p class="card-text lh-1 text-start" >{{$skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
         </div>
         <div class="col-lg-6 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
+            @if ($skripsi->status_skripsi == 'USULAN JUDUL' )
             <h5 class="text-bold">Calon Dosen Pembimbing</h5>
+            @elseif($skripsi->status_skripsi == 'JUDUL DISETUJUI' )
+            <h5 class="text-bold">Dosen Pembimbing</h5>
+            @endif
         <hr>
         @if ($skripsi->pembimbing_2_nip == null )
         <p class="card-title text-secondary text-sm" >Nama</p>

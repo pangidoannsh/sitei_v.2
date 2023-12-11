@@ -2,11 +2,11 @@
 @extends('layouts.main')
 
 @section('title')
-    Tambah Jadwal KP | SIA ELEKTRO
+    SITEI | Tambah Jadwal Seminar KP
 @endsection
 
 @section('sub-title')
-    Tambah Jadwal KP
+    Tambah Jadwal Seminar KP
 @endsection
 
 @section('content')
