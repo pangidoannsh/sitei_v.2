@@ -121,6 +121,7 @@ class PenjadwalanSkripsiController extends Controller
         $skripsi = PenjadwalanSkripsi::findOrFail($decrypted);
         return view('penjadwalanskripsi.edit', [
             'skripsi' => $skripsi,
+            'skripsip' => PendaftaranSkripsi::where('mahasiswa_nim', $skripsi->mahasiswa_nim )->latest('created_at')->first(),
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),
@@ -322,7 +323,7 @@ class PenjadwalanSkripsiController extends Controller
         $pendaftaran_skripsi->update();
 
         Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
-        return redirect('/persetujuan-kp-skripsi    ');
+        return back();
     }
 
     public function approve_koordinator($id)
@@ -503,6 +504,12 @@ class PenjadwalanSkripsiController extends Controller
         $id = Crypt::decryptString($id);
         $penjadwalan = PenjadwalanSkripsi::find($id);
         $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
+        $kaprodi1 = Dosen::where('role_id','6')->first();
+        $kaprodi2 = Dosen::where('role_id','7')->first();
+        $kaprodi3 = Dosen::where('role_id','8')->first();
+        $koordinator1 = Dosen::where('role_id','9')->first();
+        $koordinator2 = Dosen::where('role_id','10')->first();
+        $koordinator3 = Dosen::where('role_id','11')->first();
 
         $nilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
 
@@ -517,6 +524,7 @@ class PenjadwalanSkripsiController extends Controller
         }
 
         $nilaipembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingsatu_nip)->first();
+        
 
         if ($penjadwalan->pembimbingdua_nip == null) {
 
@@ -525,7 +533,7 @@ class PenjadwalanSkripsiController extends Controller
             $qrcodeee = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate(URL::to('/detail-skripsi').'/'. $penjadwalan->id));
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
 
-            $pdf->loadView('penjadwalanskripsi.beritaacara-skripsi',compact('penjadwalan','qrcode', 'qrcodee', 'qrcodeee', 'pdf','pembimbing','pembimbingnilai','nilaipenguji1','nilaipenguji2','nilaipenguji3','nilaipembimbing1'));
+            $pdf->loadView('penjadwalanskripsi.beritaacara-skripsi',compact('penjadwalan','qrcode', 'qrcodee', 'qrcodeee', 'pdf','pembimbing','pembimbingnilai','nilaipenguji1','nilaipenguji2','nilaipenguji3','nilaipembimbing1','kaprodi1', 'kaprodi2', 'kaprodi3', 'koordinator1', 'koordinator2', 'koordinator3'));
         
             return $pdf->stream('STI/TE-15 Berita Acara Sidang Skripsi.pdf', array("Attachment" => false));
             
@@ -537,7 +545,7 @@ class PenjadwalanSkripsiController extends Controller
             $qrcodeee = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate(URL::to('/detail-skripsi').'/'. $penjadwalan->id));
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
 
-            $pdf->loadView('penjadwalanskripsi.beritaacara-skripsi',compact('penjadwalan','qrcode', 'qrcodee', 'qrcodeee', 'pdf','pembimbing','pembimbingnilai','nilaipenguji1','nilaipenguji2','nilaipenguji3','nilaipembimbing1','nilaipembimbing2'));
+            $pdf->loadView('penjadwalanskripsi.beritaacara-skripsi',compact('penjadwalan','qrcode', 'qrcodee', 'qrcodeee', 'pdf','pembimbing','pembimbingnilai','nilaipenguji1','nilaipenguji2','nilaipenguji3','nilaipembimbing1','nilaipembimbing2' ,'kaprodi1', 'kaprodi2', 'kaprodi3', 'koordinator1', 'koordinator2', 'koordinator3'));
         
             return $pdf->stream('STI/TE-15 Berita Acara Sidang Skripsi.pdf', array("Attachment" => false));    
         }

@@ -18,49 +18,27 @@ Edit Penilaian Sidang Skripsi
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif
 
-<div>
+<div class="container">
+  <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success py-1 px-2 mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
 
-    <a href="/kp-skripsi/penilaian-skripsi" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-
-
-    <div class="row mt-4">
-        <div class="col">
-         <div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
+<div class="container">
+  <div class="row shadow-sm rounded">
+    <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
       <h5 class="text-bold">Mahasiswa</h5>
-      <hr>
+      <hr class="border border-success">
         <p class="card-title text-secondary text-sm " >Nama</p>
-        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->mahasiswa->nama }}</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->mahasiswa->nama}}</p>
         <p class="card-title text-secondary text-sm " >NIM</p>
-        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->mahasiswa->nim }}</p>
+        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->mahasiswa->nim}}</p>
         <p class="card-title text-secondary text-sm " >Program Studi</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->mahasiswa->prodi->nama_prodi}}</p>
         <p class="card-title text-secondary text-sm " >Konsentrasi</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-      </div>
     </div>
-
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Judul Skripsi</h5>
-        <hr>
-
-        <p class="card-title text-secondary text-sm" >Judul</p>
-        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : $skripsi->penjadwalan_skripsi->judul_skripsi }}</p>
-
-      </div>
-    </div>
-
-
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Dosen Pembimbing</h5>
-        <hr>
+    <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white ">
+       <h5 class="text-bold">Dosen Pembimbing</h5>
+        <hr class="border border-success">
         @if ($skripsi->penjadwalan_skripsi->pembimbingdua_nip == null )
         <p class="card-title text-secondary text-sm" >Nama</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pembimbingsatu->nama}}</p>
@@ -73,13 +51,10 @@ Edit Penilaian Sidang Skripsi
         <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pembimbingdua->nama}}</p>
         @endif
-        
-      </div>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Dosen Penguji</h5>
-        <hr>
+    <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+      <h5 class="text-bold">Dosen Penguji</h5>
+        <hr class="border border-success">
 
         <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pengujisatu->nama}}</p>
@@ -92,115 +67,70 @@ Edit Penilaian Sidang Skripsi
         <p class="card-title text-secondary text-sm" >Nama Penguji 3</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->pengujitiga->nama}}</p>
         @endif
-        
-      </div>
     </div>
   </div>
 </div>
-        </div>
+
+<div class="container">
+  <div class="row shadow-sm rounded">
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+      <h5 class="text-bold">Judul Skripsi</h5>
+        <hr class="border border-success">
+
+        <p class="card-title text-secondary text-sm" >Judul</p>
+        <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : $skripsi->penjadwalan_skripsi->judul_skripsi }}</p>
     </div>
-</div>
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+         <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
+        <hr class="border border-success">
 
-<div class="row ">
-    <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
-        <hr>
-
-        <p class="card-title text-secondary text-sm" >Tanggal</p>
+        <p class="card-title text-secondary text-sm" >Hari/Tanggal</p>
         <p class="card-text text-start" >{{Carbon::parse($skripsi->penjadwalan_skripsi->tanggal)->translatedFormat('l, d F Y')}}</p>
         <p class="card-title text-secondary text-sm" >Pukul</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->waktu}}</p>
         <p class="card-title text-secondary text-sm" >Lokasi</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->lokasi}}</p>
-
-      </div>
     </div>
+  </div>
+</div>
+
+ @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujisatu_nip ||
+    auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujidua_nip ||
+    auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujitiga_nip)
+<div class="container">
+  <div class="row rounded shadow-sm">
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Perbaikan Penguji (Sempro)</h5>
+  <hr class="border border-success">
+
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujisatu->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        @if ($sempro->pengujitiga == !null)
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujitiga->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        @endif
+            
 
     </div>
-    <div class="col-md">
-       <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Publikasi Jurnal</h5>
-        <hr>
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+      <h5 class="text-bold">Publikasi Jurnal</h5>
+        <hr class="border border-success">
 
-        <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
+        <!-- <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->indeksasi_jurnal}}</p>
         @if ($skripsi->penjadwalan_skripsi->indeksasi_jurnal !== 'Tanpa Jurnal')
         <p class="card-title text-secondary text-sm" >Judul Jurnal</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->judul_jurnal}}</p>
         <p class="card-title text-secondary text-sm" >Status Publikasi Jurnal</p>
         <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->status_publikasi_jurnal}}</p>
-@endif
-      </div>
+        @endif -->
     </div>
-    
-  
-    </div>
-  </div>
-
-  @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujisatu_nip ||
-    auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujidua_nip ||
-    auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujitiga_nip)
-<div class="container  bg-white shadow-sm mb-4 rounded">
-  <h5 class="text-bold px-2 pt-3">Perbaikan Penguji (Sempro)</h5>
-  <hr class="mx-2">
-  <div class="row pb-4 text-center">
-
-    <div class="col-lg-2 col-md-12">
-        <a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/" class="badge bg-danger p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji 1</a>
-    </div>
-    <div class="col-lg-2 col-md-12">
-     <a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/" class="badge bg-warning p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji 2</a>
-    </div>
-    <div class="col-lg-2 col-md-12">
-            <a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/" class="badge bg-success p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji 3</a>
-    </div>
-
   </div>
 </div>
 @endif
 
-<!-- <div class="kol-judul mt-3">
-    <div class="row">
-        <div class="col">
-        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Judul</div>
-                    <span>{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : $skripsi->penjadwalan_skripsi->judul_skripsi }}</span>
-                </div>
-            </li>
-        </ol>
-        </div>
-    </div>
-</div>
-
-<div class="kol-jadwal mt-3 mb-3">
-    <div class="row">
-        <div class="col mb-3 kol-jadwal">
-        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Jadwal</div>
-                    <span>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}, {{$skripsi->waktu}}</span>
-                </div>
-            </li>
-        </ol>
-        </div>
-        <div class="col-md">
-        <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto gridratakiri">
-                    <div class="fw-bold ">Lokasi</div>
-                    <span>{{ $skripsi->penjadwalan_skripsi->lokasi }}</span>
-                </div>
-            </li>
-        </ol>
-        </div>
-    </div>
-</div> -->
 
 @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingsatu_nip ||
     auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingdua_nip)
@@ -387,7 +317,9 @@ Edit Penilaian Sidang Skripsi
                       </table>
             </div>
 
-                        <button type="submit" class="btn btnsimpan btn-success float-right">Perbarui</button>
+            @if($skripsi->penjadwalan_skripsi->status_seminar == '0')
+                        <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+            @endif
                     </form>
                 </div>
             </div>
@@ -809,7 +741,9 @@ Edit Penilaian Sidang Skripsi
                       </table>
             </div>
 
-                        <button type="submit" class="btn btnsimpan btn-success float-right">Perbarui</button>
+                        @if($skripsi->penjadwalan_skripsi->status_seminar == '0')
+                        <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+                         @endif
 
                     </div>
 
@@ -840,7 +774,9 @@ Edit Penilaian Sidang Skripsi
                     <div class="fw-bold mb-2">Perbaikan 5</div>
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $skripsi->revisi_naskah5 != null ? $skripsi->revisi_naskah5 : '' }}">
                     </div>
-                        <button type="submit" class="btn btn-success float-right">Perbarui</button>
+                        @if($skripsi->penjadwalan_skripsi->status_seminar == '0')
+                        <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+                         @endif
                     </form>
                     </div>
 
@@ -858,7 +794,9 @@ Edit Penilaian Sidang Skripsi
                             <label class="form-label">Judul Baru</label>
                             <input type="text" name="revisi_skripsi" class="form-control" value="{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : '' }}">
                             </div>              
-                            <button type="submit" class="btn btn-success float-right">Perbarui</button>
+                           @if($skripsi->penjadwalan_skripsi->status_seminar == '0')
+                        <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+                         @endif
                         </form>
 
                     </div>
@@ -1360,7 +1298,7 @@ Edit Penilaian Sidang Skripsi
                                     <a href="#ModalApprove1"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>  
                                   <div class="modal fade"id="ModalApprove1">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container p-5 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1371,12 +1309,12 @@ Edit Penilaian Sidang Skripsi
                                       </div>
                                     </div>
                                   </div>
-                                  </div>    
-                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
+                                  </div>   
+                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null && $skripsi->penjadwalan_skripsi->pengujitiga_nip ==! null )
                               <a href="#ModalApprove2"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove2">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1386,12 +1324,13 @@ Edit Penilaian Sidang Skripsi
                                       </div>
                                     </div>
                                   </div>
-                                  </div>                                 
+                                  </div> 
+                                                             
                     @elseif($nilaipenguji2 == null)
                               <a href="#ModalApprove3"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
                               <div class="modal fade"id="ModalApprove3">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1403,11 +1342,11 @@ Edit Penilaian Sidang Skripsi
                                   </div>
                                   </div> 
                                               
-                    @elseif($nilaipenguji3 == null)
+                    @elseif($nilaipenguji3 == null && $skripsi->penjadwalan_skripsi->pengujitiga_nip ==! null)
                               <a href="#ModalApprove4"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove4">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1423,7 +1362,7 @@ Edit Penilaian Sidang Skripsi
                               <a href="#ModalApprove5"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove5">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1439,7 +1378,7 @@ Edit Penilaian Sidang Skripsi
                         <a href="#ModalApprove6"  data-toggle="modal" class="btn btn-md btn-danger float-right">Selesai Seminar</a>  
                                                 <div class="modal fade"id="ModalApprove6">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1455,7 +1394,7 @@ Edit Penilaian Sidang Skripsi
                                 <a href="#ModalApprove7"  data-toggle="modal" class="btn btn-md btn-danger float-right">Selesai Seminar</a>  
                                                 <div class="modal fade"id="ModalApprove7">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
@@ -1471,7 +1410,7 @@ Edit Penilaian Sidang Skripsi
                               <a href="#ModalApprove6"  data-toggle="modal" class="btn mt-5 btn-lg btn-success float-right">Seminar telah Selesai <i class="fas fa-check fa-lg"></i> </a>
                               <div class="modal fade"id="ModalApprove6">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
@@ -1489,7 +1428,7 @@ Edit Penilaian Sidang Skripsi
                               
                               <div class="modal fade"id="ModalApprove7">
                                   <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                    <div class="modal-content shadow-sm">
                                       <div class="modal-body">
                                         <div class="container px-5 pt-5 pb-2">
                                           <h3 class="text-center">Apakah Anda Yakin?</h3>

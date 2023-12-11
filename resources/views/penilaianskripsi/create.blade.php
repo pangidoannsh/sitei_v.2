@@ -20,17 +20,15 @@
   </div>
 @endif
 
-<div>
+<div class="container">
+  <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success py-1 px-2 mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
 
-  <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-
-
-  <div class="row mt-4">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
+<div class="container">
+  <div class="row shadow-sm rounded">
+    <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
       <h5 class="text-bold">Mahasiswa</h5>
-      <hr>
+      <hr class="border border-success">
         <p class="card-title text-secondary text-sm " >Nama</p>
         <p class="card-text text-start" >{{$skripsi->mahasiswa->nama}}</p>
         <p class="card-title text-secondary text-sm " >NIM</p>
@@ -39,28 +37,10 @@
         <p class="card-text text-start" >{{$skripsi->mahasiswa->prodi->nama_prodi}}</p>
         <p class="card-title text-secondary text-sm " >Konsentrasi</p>
         <p class="card-text text-start" >{{$skripsi->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-      </div>
     </div>
-
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Judul Skripsi</h5>
-        <hr>
-
-        <p class="card-title text-secondary text-sm" >Judul</p>
-        <p class="card-text text-start" >{{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : $skripsi->judul_skripsi }}</p>
-
-      </div>
-    </div>
-
-
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Dosen Pembimbing</h5>
-        <hr>
+    <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white ">
+       <h5 class="text-bold">Dosen Pembimbing</h5>
+        <hr class="border border-success">
         @if ($skripsi->pembimbingdua_nip == null )
         <p class="card-title text-secondary text-sm" >Nama</p>
         <p class="card-text text-start" >{{$skripsi->pembimbingsatu->nama}}</p>
@@ -73,13 +53,10 @@
         <p class="card-title text-secondary text-sm" >Nama Pembimbing 2</p>
         <p class="card-text text-start" >{{$skripsi->pembimbingdua->nama}}</p>
         @endif
-        
-      </div>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Dosen Penguji</h5>
-        <hr>
+    <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+      <h5 class="text-bold">Dosen Penguji</h5>
+        <hr class="border border-success">
 
         <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
         <p class="card-text text-start" >{{$skripsi->pengujisatu->nama}}</p>
@@ -92,95 +69,69 @@
         <p class="card-title text-secondary text-sm" >Nama Penguji 3</p>
         <p class="card-text text-start" >{{$skripsi->pengujitiga->nama}}</p>
         @endif
-        
-      </div>
     </div>
   </div>
 </div>
 
+<div class="container">
+  <div class="row shadow-sm rounded">
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+      <h5 class="text-bold">Judul Skripsi</h5>
+        <hr class="border border-success">
 
-  <div class="row ">
-    <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
-        <hr>
+        <p class="card-title text-secondary text-sm" >Judul</p>
+        <p class="card-text text-start" >{{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : $skripsi->judul_skripsi }}</p>
+    </div>
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+         <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
+        <hr class="border border-success">
 
-        <p class="card-title text-secondary text-sm" >Tanggal</p>
+        <p class="card-title text-secondary text-sm" >Hari/Tanggal</p>
         <p class="card-text text-start" >{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</p>
         <p class="card-title text-secondary text-sm" >Pukul</p>
         <p class="card-text text-start" >{{$skripsi->waktu}}</p>
         <p class="card-title text-secondary text-sm" >Lokasi</p>
         <p class="card-text text-start" >{{$skripsi->lokasi}}</p>
-
+    </div>
+  </div>
+</div>
+ @if (auth()->user()->nip == $skripsi->pengujisatu_nip ||
+    auth()->user()->nip == $skripsi->pengujidua_nip ||
+    auth()->user()->nip == $skripsi->pengujitiga_nip)
+<div class="container">
+  <div class="row rounded shadow-sm">
+    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Perbaikan Penguji (Sempro)</h5>
+  <hr class="border border-success">
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujisatu->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        @if ($sempro->pengujitiga == !null)
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujitiga->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        @endif
+        
+        
       </div>
-    </div>
-
-    </div>
-    <div class="col-md">
-       <div class="card">
-      <div class="card-body">
+      <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
         <h5 class="text-bold">Publikasi Jurnal</h5>
-        <hr>
-
-        <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
+        <hr class="border border-success">
+        
+        <!-- <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
         <p class="card-text text-start" >{{$skripsi->indeksasi_jurnal}}</p>
         @if ($skripsi->indeksasi_jurnal !== 'Tanpa Jurnal')
         <p class="card-title text-secondary text-sm" >Judul Jurnal</p>
         <p class="card-text text-start" >{{$skripsi->judul_jurnal}}</p>
         <p class="card-title text-secondary text-sm" >Status Publikasi Jurnal</p>
         <p class="card-text text-start" >{{$skripsi->status_publikasi_jurnal}}</p>
-@endif
+        @endif -->
       </div>
     </div>
-    
-  
-    </div>
   </div>
-</div>
+  @endif
 
 
-
-
-<!-- <div class="kol-judul mt-3">
-  <div class="row">
-    <div class="col">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Judul</div>
-          <span>{{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : $skripsi->judul_skripsi }}</span>
-        </div>        
-      </li>   
-    </ol>  
-    </div>
-  </div>
-</div>
-
-<div class="kol-jadwal mt-3 mb-3">
-  <div class="row">
-    <div class="col mb-3 kol-jadwal">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-        <div class="fw-bold  ">Jadwal</div>          
-          <span>{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}, {{$skripsi->waktu}}</span>
-        </div>        
-      </li>   
-    </ol>
-    </div>
-    <div class="col-md">
-    <ol class="list-group" style="box-shadow: 1px 1px 1px 1px #dbdbdb; border-radius:5px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-        <div class="fw-bold  ">Lokasi</div>
-          <span>{{$skripsi->lokasi}}</span>
-        </div>        
-      </li>   
-    </ol>
-    </div>
-  </div>
-</div> -->
 
 
 @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
@@ -204,19 +155,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="2" onclick="hasil()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori2" value="4" onclick="hasil()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="penguasaan_dasar_teori2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="penguasaan_dasar_teori2">Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori3" value="6" onclick="hasil()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="penguasaan_dasar_teori3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="penguasaan_dasar_teori3">Biasa</label>
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori4" value="8" onclick="hasil()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="penguasaan_dasar_teori4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="penguasaan_dasar_teori4">Baik</label>
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori5" value="10" onclick="hasil()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '10' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="penguasaan_dasar_teori5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="penguasaan_dasar_teori5">Sangat Baik</label>
  
                 </div>                                                         
               </div>
@@ -232,19 +183,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="2" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi2" value="4" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="tingkat_penguasaan_materi2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tingkat_penguasaan_materi2">Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi3" value="6" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="tingkat_penguasaan_materi3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tingkat_penguasaan_materi3">Biasa</label>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi4" value="8" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="tingkat_penguasaan_materi4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tingkat_penguasaan_materi4">Baik</label>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi5" value="10" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '10' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="tingkat_penguasaan_materi5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tingkat_penguasaan_materi5">Sangat Baik</label>
                 </div>                                                         
               </div>
               @error('tingkat_penguasaan_materi')
@@ -259,19 +210,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.8" onclick="hasil()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka2" value="3.6" onclick="hasil()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '3.6' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-warning fw-normal " for="tinjauan_pustaka2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tinjauan_pustaka2">Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka3" value="5.4" onclick="hasil()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '5.4' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-info fw-normal " for="tinjauan_pustaka3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tinjauan_pustaka3">Biasa</label>
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka4" value="7.2" onclick="hasil()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '7.2' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-primary fw-normal " for="tinjauan_pustaka4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tinjauan_pustaka4">Baik</label>
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka5" value="9" onclick="hasil()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '9' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-success fw-normal " for="tinjauan_pustaka5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tinjauan_pustaka5">Sangat Baik</label>
  
                 </div>                                                         
               </div>
@@ -287,19 +238,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1.6" onclick="hasil()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.6' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis2" value="3.2" onclick="hasil()" {{ old('tata_tulis', $skripsi->tata_tulis) == '3.2' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-warning fw-normal " for="tata_tulis2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tata_tulis2">Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis3" value="4.8" onclick="hasil()" {{ old('tata_tulis', $skripsi->tata_tulis) == '4.8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-info fw-normal " for="tata_tulis3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tata_tulis3">Biasa</label>
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis4" value="6.4" onclick="hasil()" {{ old('tata_tulis', $skripsi->tata_tulis) == '6.4' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-primary fw-normal " for="tata_tulis4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tata_tulis4">Baik</label>
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis5" value="8" onclick="hasil()" {{ old('tata_tulis', $skripsi->tata_tulis) == '8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-success fw-normal " for="tata_tulis5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tata_tulis5">Sangat Baik</label>
  
                 </div>                                                         
               </div>
@@ -315,19 +266,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="hasil_dan_pembahasan1" value="1.6" onclick="hasil()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '1.6' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-danger fw-normal " for="hasil_dan_pembahasan1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="hasil_dan_pembahasan1">Sangat Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="hasil_dan_pembahasan2" value="4" onclick="hasil()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '4' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-warning fw-normal " for="hasil_dan_pembahasan2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="hasil_dan_pembahasan2">Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="hasil_dan_pembahasan3" value="6" onclick="hasil()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '6' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-info fw-normal " for="hasil_dan_pembahasan3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="hasil_dan_pembahasan3">Biasa</label>
 
                 <input type="radio" class="btn-check @error ('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="hasil_dan_pembahasan4" value="8" onclick="hasil()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-primary fw-normal " for="hasil_dan_pembahasan4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="hasil_dan_pembahasan4">Baik</label>
 
                 <input type="radio" class="btn-check @error ('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="hasil_dan_pembahasan5" value="10" onclick="hasil()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '10' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-success fw-normal " for="hasil_dan_pembahasan5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="hasil_dan_pembahasan5">Sangat Baik</label>
                   
                 </div>                                                         
               </div>
@@ -343,19 +294,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian1" value="1.6" onclick="hasil()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '1.6' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-danger fw-normal " for="sikap_dan_kepribadian1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="sikap_dan_kepribadian1">Sangat Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian2" value="3.2" onclick="hasil()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '3.2' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-warning fw-normal " for="sikap_dan_kepribadian2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="sikap_dan_kepribadian2">Kurang Baik</label>
 
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian3" value="4.8" onclick="hasil()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '4.8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-info fw-normal " for="sikap_dan_kepribadian3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="sikap_dan_kepribadian3">Biasa</label>
 
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian4" value="6.4" onclick="hasil()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '6.4' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-primary fw-normal " for="sikap_dan_kepribadian4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="sikap_dan_kepribadian4">Baik</label>
 
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian5" value="8" onclick="hasil()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-success fw-normal " for="sikap_dan_kepribadian5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="sikap_dan_kepribadian5">Sangat Baik</label>
                    
                 </div>                                                         
               </div>
@@ -390,7 +341,7 @@
                         </tbody>
                       </table>
             </div>
-              <button type="submit" class="btn btnsimpan btn-success float-right">Simpan</button>
+              <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>
           </form> 
         </div>    
       </div>
@@ -440,19 +391,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="0.4" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '0.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="presentasi1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="presentasi1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi2" value="0.8" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '0.8' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-warning fw-normal " for="presentasi2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="presentasi2">Kurang Baik</label>
                 
               <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi3" value="1.2" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '1.2' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-info fw-normal " for="presentasi3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="presentasi3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi4" value="1.6" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '1.6' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-primary fw-normal " for="presentasi4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="presentasi4">Baik</label>
 
               <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi5" value="2" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '2' ? 'checked' : null }}>
-                <label class="btn tombol rounded btn-success fw-normal " for="presentasi5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="presentasi5">Sangat Baik</label>
 
                 </div>                                                                       
               </div>
@@ -468,19 +419,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="0.6" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi2" value="1.2" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="tingkat_penguasaan_materi2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tingkat_penguasaan_materi2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi3" value="1.8" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="tingkat_penguasaan_materi3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tingkat_penguasaan_materi3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi4" value="2.4" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="tingkat_penguasaan_materi4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tingkat_penguasaan_materi4">Baik</label>
 
               <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi5" value="3" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="tingkat_penguasaan_materi5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tingkat_penguasaan_materi5">Sangat Baik</label>
   
                 </div>                                                         
               </div>
@@ -496,19 +447,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian1" value="0.4" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '0.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="keaslian1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="keaslian1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian2" value="0.8" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="keaslian2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="keaslian2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian3" value="1.2" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="keaslian3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="keaslian3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian4" value="1.6" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="keaslian4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="keaslian4">Baik</label>
 
               <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian5" value="2" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="keaslian5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="keaslian5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -524,19 +475,19 @@
                   <hr>
 
               <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi1" value="0.8" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="ketepatan_metodologi1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="ketepatan_metodologi1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi2" value="1.6" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="ketepatan_metodologi2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="ketepatan_metodologi2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi3" value="2.4" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="ketepatan_metodologi3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="ketepatan_metodologi3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi4" value="3.2" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '3.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="ketepatan_metodologi4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="ketepatan_metodologi4">Baik</label>
 
               <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi5" value="4" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="ketepatan_metodologi5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="ketepatan_metodologi5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -552,19 +503,19 @@
                   <hr>
 
               <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="0.8" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori2" value="1.6" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="penguasaan_dasar_teori2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="penguasaan_dasar_teori2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori3" value="2.4" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="penguasaan_dasar_teori3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="penguasaan_dasar_teori3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori4" value="3.2" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '3.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="penguasaan_dasar_teori4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="penguasaan_dasar_teori4">Baik</label>
 
               <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori5" value="4" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="penguasaan_dasar_teori5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="penguasaan_dasar_teori5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -580,19 +531,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah1" value="0.6" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="kecermatan_perumusan_masalah1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="kecermatan_perumusan_masalah1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah2" value="1.2" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="kecermatan_perumusan_masalah2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="kecermatan_perumusan_masalah2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah3" value="1.8" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="kecermatan_perumusan_masalah3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="kecermatan_perumusan_masalah3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah4" value="2.4" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="kecermatan_perumusan_masalah4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="kecermatan_perumusan_masalah4">Baik</label>
 
               <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah5" value="3" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="kecermatan_perumusan_masalah5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="kecermatan_perumusan_masalah5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -608,19 +559,19 @@
                   <hr>
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="0.6" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka2" value="1.2" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="tinjauan_pustaka2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tinjauan_pustaka2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka3" value="1.8" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="tinjauan_pustaka3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tinjauan_pustaka3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka4" value="2.4" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="tinjauan_pustaka4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tinjauan_pustaka4">Baik</label>
 
               <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka5" value="3" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="tinjauan_pustaka5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tinjauan_pustaka5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -636,19 +587,19 @@
                   <hr>
 
               <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="0.4" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '0.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis2" value="0.8" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="tata_tulis2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tata_tulis2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis3" value="1.2" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="tata_tulis3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tata_tulis3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis4" value="1.6" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="tata_tulis4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tata_tulis4">Baik</label>
 
               <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis5" value="2" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="tata_tulis5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tata_tulis5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -665,19 +616,19 @@
                     <hr>
 
               <input type="radio" class="btn-check @error ('tools') is-invalid @enderror" name="tools" id="tools1" value="0.4" onclick="total()" {{ old('tools', $skripsi->tools) == '0.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="tools1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="tools1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tools') is-invalid @enderror" name="tools" id="tools2" value="0.8" onclick="total()" {{ old('tools', $skripsi->tools) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="tools2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="tools2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('tools') is-invalid @enderror" name="tools" id="tools3" value="1.2" onclick="total()" {{ old('tools', $skripsi->tools) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="tools3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="tools3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('tools') is-invalid @enderror" name="tools" id="tools4" value="1.6" onclick="total()" {{ old('tools', $skripsi->tools) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="tools4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="tools4">Baik</label>
 
               <input type="radio" class="btn-check @error ('tools') is-invalid @enderror" name="tools" id="tools5" value="2" onclick="total()" {{ old('tools', $skripsi->tools) == '2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="tools5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="tools5">Sangat Baik</label>
 
                   </div>                                                         
               </div>
@@ -693,19 +644,19 @@
                     <hr>
 
               <input type="radio" class="btn-check @error ('penyajian_data') is-invalid @enderror" name="penyajian_data" id="penyajian_data1" value="0.6" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="penyajian_data1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="penyajian_data1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('penyajian_data') is-invalid @enderror" name="penyajian_data" id="penyajian_data2" value="1.2" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="penyajian_data2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="penyajian_data2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('penyajian_data') is-invalid @enderror" name="penyajian_data" id="penyajian_data3" value="1.8" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="penyajian_data3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="penyajian_data3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('penyajian_data') is-invalid @enderror" name="penyajian_data" id="penyajian_data4" value="2.4" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="penyajian_data4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="penyajian_data4">Baik</label>
 
               <input type="radio" class="btn-check @error ('penyajian_data') is-invalid @enderror" name="penyajian_data" id="penyajian_data5" value="3" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="penyajian_data5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="penyajian_data5">Sangat Baik</label>
 
                   </div>                                                         
               </div>
@@ -721,19 +672,19 @@
                     <hr>
 
               <input type="radio" class="btn-check @error ('hasil') is-invalid @enderror" name="hasil" id="hasil1" value="0.8" onclick="total()" {{ old('hasil', $skripsi->hasil) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="hasil1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="hasil1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('hasil') is-invalid @enderror" name="hasil" id="hasil2" value="1.6" onclick="total()" {{ old('hasil', $skripsi->hasil) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="hasil2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="hasil2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('hasil') is-invalid @enderror" name="hasil" id="hasil3" value="2.4" onclick="total()" {{ old('hasil', $skripsi->hasil) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="hasil3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="hasil3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('hasil') is-invalid @enderror" name="hasil" id="hasil4" value="3.2" onclick="total()" {{ old('hasil', $skripsi->hasil) == '3.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="hasil4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="hasil4">Baik</label>
 
               <input type="radio" class="btn-check @error ('hasil') is-invalid @enderror" name="hasil" id="hasil5" value="4" onclick="total()" {{ old('hasil', $skripsi->hasil) == '4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="hasil5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="hasil5">Sangat Baik</label>
 
                   </div>                                                         
               </div>
@@ -749,19 +700,19 @@
                     <hr>
 
               <input type="radio" class="btn-check @error ('pembahasan') is-invalid @enderror" name="pembahasan" id="pembahasan1" value="0.8" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '0.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="pembahasan1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="pembahasan1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('pembahasan') is-invalid @enderror" name="pembahasan" id="pembahasan2" value="1.6" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '1.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="pembahasan2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="pembahasan2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('pembahasan') is-invalid @enderror" name="pembahasan" id="pembahasan3" value="2.4" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="pembahasan3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="pembahasan3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('pembahasan') is-invalid @enderror" name="pembahasan" id="pembahasan4" value="3.2" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '3.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="pembahasan4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="pembahasan4">Baik</label>
 
               <input type="radio" class="btn-check @error ('pembahasan') is-invalid @enderror" name="pembahasan" id="pembahasan5" value="4" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="pembahasan5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="pembahasan5">Sangat Baik</label>
 
                   </div>                                                         
               </div>
@@ -777,19 +728,19 @@
                     <hr>
 
               <input type="radio" class="btn-check @error ('kesimpulan') is-invalid @enderror" name="kesimpulan" id="kesimpulan1" value="0.6" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="kesimpulan1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="kesimpulan1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('kesimpulan') is-invalid @enderror" name="kesimpulan" id="kesimpulan2" value="1.2" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="kesimpulan2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="kesimpulan2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('kesimpulan') is-invalid @enderror" name="kesimpulan" id="kesimpulan3" value="1.8" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="kesimpulan3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="kesimpulan3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('kesimpulan') is-invalid @enderror" name="kesimpulan" id="kesimpulan4" value="2.4" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="kesimpulan4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="kesimpulan4">Baik</label>
 
               <input type="radio" class="btn-check @error ('kesimpulan') is-invalid @enderror" name="kesimpulan" id="kesimpulan5" value="3" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="kesimpulan5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="kesimpulan5">Sangat Baik</label>
   
                   </div>                                                         
               </div>
@@ -805,19 +756,19 @@
                     <hr>
 
               <input type="radio" class="btn-check @error ('luaran') is-invalid @enderror" name="luaran" id="luaran1" value="0.6" onclick="total()" {{ old('luaran', $skripsi->luaran) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="luaran1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="luaran1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('luaran') is-invalid @enderror" name="luaran" id="luaran2" value="1.2" onclick="total()" {{ old('luaran', $skripsi->luaran) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="luaran2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="luaran2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('luaran') is-invalid @enderror" name="luaran" id="luaran3" value="1.8" onclick="total()" {{ old('luaran', $skripsi->luaran) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="luaran3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="luaran3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('luaran') is-invalid @enderror" name="luaran" id="luaran4" value="2.4" onclick="total()" {{ old('luaran', $skripsi->luaran) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="luaran4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="luaran4">Baik</label>
 
               <input type="radio" class="btn-check @error ('luaran') is-invalid @enderror" name="luaran" id="luaran5" value="3" onclick="total()" {{ old('luaran', $skripsi->luaran) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="luaran5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="luaran5">Sangat Baik</label>
 
               </div>                                                         
               </div>
@@ -833,19 +784,19 @@
                   <hr>
 
               <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran1" value="0.6" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '0.6' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-danger fw-normal " for="sumbangan_pemikiran1">Sangat Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-danger fw-normal " for="sumbangan_pemikiran1">Sangat Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran2" value="1.2" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '1.2' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-warning fw-normal " for="sumbangan_pemikiran2">Kurang Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-warning fw-normal " for="sumbangan_pemikiran2">Kurang Baik</label>
 
               <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran3" value="1.8" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '1.8' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-info fw-normal " for="sumbangan_pemikiran3">Biasa</label>
+                <label class="btn tombol shadow-sm rounded btn-info fw-normal " for="sumbangan_pemikiran3">Biasa</label>
 
               <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran4" value="2.4" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '2.4' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-primary fw-normal " for="sumbangan_pemikiran4">Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-primary fw-normal " for="sumbangan_pemikiran4">Baik</label>
 
               <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran5" value="3" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '3' ? 'checked' : null }} >
-                <label class="btn tombol rounded btn-success fw-normal " for="sumbangan_pemikiran5">Sangat Baik</label>
+                <label class="btn tombol shadow-sm rounded btn-success fw-normal " for="sumbangan_pemikiran5">Sangat Baik</label>
 
                 </div>                                                         
               </div>
@@ -881,7 +832,7 @@
                       </table>
             </div>
 
-              <button type="submit" class="btn btnsimpan btn-success float-right">Simpan</button>    
+              <button type="submit" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
 
             </div>
 
@@ -912,7 +863,7 @@
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $skripsi->revisi_naskah5 != null ? $skripsi->revisi_naskah5 : '' }}">
                     </div>
 
-              <button type="submit" class="btn btn-success float-right">Simpan</button>    
+              <button type="submit" class="btn btn-lg btn-success float-right">Simpan</button>    
             </form>
             </div> 
             
@@ -930,7 +881,7 @@
                   <label class="form-label">Judul Baru</label>
                   <input type="text" name="revisi_skripsi" class="form-control" value="{{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : '' }}">
                 </div>              
-                <button type="submit" class="btn btn-success float-right">Perbarui</button>
+                <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
               </form>
 
             </div>
@@ -1493,12 +1444,169 @@
             @endif
         @endif
         
-        <form action="/penilaian-skripsi/approve/{{ $penjadwalan->id  }}" method="POST">
-          @method('put')
-          @csrf
-          <button type="submit" class="btn btn-lg btn-danger float-right mt-5" disabled> Selesai Sidang</button>
-      </form>
+       @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
+                                    <a href="#ModalApprove1"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>  
+                                  <div class="modal fade"id="ModalApprove1">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container p-5 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Pembimbing</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                        
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>    
+                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
+                              <a href="#ModalApprove2"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
+                              <div class="modal fade"id="ModalApprove2">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji 2 & 3</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                                 
+                    @elseif($nilaipenguji2 == null)
+                              <a href="#ModalApprove3"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
+                              <div class="modal fade"id="ModalApprove3">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji 2</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div> 
+                                              
+                    @elseif($nilaipenguji3 == null)
+                              <a href="#ModalApprove4"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
+                              <div class="modal fade"id="ModalApprove4">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji 3</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                        
+                    
+                    @elseif($total_nilai <= 55)
+                              <a href="#ModalApprove5"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
+                              <div class="modal fade"id="ModalApprove5">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5 >Nilai Seminar Belum Mencukupi</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                                                 
+                                             
+                        @elseif($skripsi->indeksasi_jurnal == 'Sinta 3' &&  $total_nilai < 80 || $skripsi->indeksasi_jurnal == 'Sinta 4' &&  $total_nilai < 80 || $skripsi->indeksasi_jurnal == 'IEEE' &&  $total_nilai < 80 || $skripsi->indeksasi_jurnal == 'IOP' &&  $total_nilai < 80 || $skripsi->indeksasi_jurnal == 'SCOPUS' &&  $total_nilai < 80 )
+                        <a href="#ModalApprove6"  data-toggle="modal" class="btn btn-md btn-danger float-right">Selesai Seminar</a>  
+                                                <div class="modal fade"id="ModalApprove6">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5 >Nilai Harus Mencapai A-!</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div> 
 
+                        @elseif($skripsi->indeksasi_jurnal == 'Sinta 1' &&  $total_nilai < 85 || $skripsi->indeksasi_jurnal == 'Sinta 2' &&  $total_nilai < 85 || $skripsi->indeksasi_jurnal == 'Q1' &&  $total_nilai < 85 || $skripsi->indeksasi_jurnal == 'Q2' &&  $total_nilai < 85 || $skripsi->indeksasi_jurnal == 'Q3' &&  $total_nilai < 85 || $skripsi->indeksasi_jurnal == 'Q4' &&  $total_nilai < 85)
+                                <a href="#ModalApprove7"  data-toggle="modal" class="btn btn-md btn-danger float-right">Selesai Seminar</a>  
+                                                <div class="modal fade"id="ModalApprove7">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5 >Nilai Harus Mencapai A!</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+
+                    @elseif($skripsi->status_seminar > 0)
+                              <a href="#ModalApprove6"  data-toggle="modal" class="btn mt-5 btn-lg btn-success float-right">Seminar telah Selesai <i class="fas fa-check fa-lg"></i> </a>
+                              <div class="modal fade"id="ModalApprove6">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
+                                        <h5 >Seminar telah disetujui</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div> 
+            
+                                                      
+                        @else
+                                <a href="#ModalApprove7"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a> 
+                              
+                              <div class="modal fade"id="ModalApprove7">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                         <div class="row text-center">
+                                              <div class="col-4">
+                                              </div>
+                                              <div class="col-2">
+                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-2">
+                                               <form action="/penilaian-skripsi/approve/{{ $penjadwalan->id }}" method="POST">
+                                          @method('put')
+                                          @csrf
+                                          <button type="submit" class="btn btn-success"> Selesai</button>
+                                        </form>
+                                              </div>
+                                              <div class="col-4">
+                                              </div>
+                                            </div>
+                                      
+                                        </div>
+                                      </div>
+ 
+                                    </div>
+                                  </div>
+                                    </div>                          
+                      
+                        @endif
         </div>
 
         </div>

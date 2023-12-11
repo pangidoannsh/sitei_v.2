@@ -18,10 +18,10 @@
 </div>
 
 <div class="container ">
-  <div class="row">
-    <div class="bg-white col-lg-4 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+  <div class="row shadow-sm rounded">
+    <div class="bg-white col-lg-4 col-md-12 px-4 py-3 mb-2 rounded-start">
       <h5 class="text-bold">Mahasiswa</h5>
-      <hr>
+      <hr class="border border-success">
         <p class="card-title text-secondary text-sm " >Nama</p>
         <p class="card-text text-start" >{{$penjadwalan->mahasiswa->nama}}</p>
         <p class="card-title text-secondary text-sm " >NIM</p>
@@ -31,9 +31,9 @@
         <p class="card-title text-secondary text-sm " >Konsentrasi</p>
         <p class="card-text text-start" >{{$penjadwalan->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
     </div>
-    <div class="bg-white col-lg-4 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+    <div class="bg-white col-lg-4 col-md-12 px-4 py-3 mb-2">
         <h5 class="text-bold">Dosen Pembimbing</h5>
-        <hr>
+        <hr class="border border-success">
         @if ($penjadwalan->pembimbingdua == null )
         <p class="card-title text-secondary text-sm" >Nama</p>
         <p class="card-text text-start" >{{$penjadwalan->pembimbingsatu->nama}}</p>
@@ -48,9 +48,9 @@
 
         @endif
     </div>
-    <div class="bg-white col-lg-4 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+    <div class="bg-white col-lg-4 col-md-12 px-4 py-3 mb-2 rounded-end">
         <h5 class="text-bold">Dosen Penguji</h5>
-        <hr>
+        <hr class="border border-success">
         @if ($penjadwalan->pengujitiga == null )
         <p class="card-title text-secondary text-sm" >Nama Penguji 1</p>
         <p class="card-text text-start" >{{$penjadwalan->pengujisatu->nama}}</p>
@@ -72,16 +72,16 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="bg-white col-lg-6 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+  <div class="row rounded shadow-sm">
+    <div class="bg-white col-lg-6 col-md-12 px-4 py-3 mb-2 rounded-start">
       <h5 class="text-bold">Judul Skripsi</h5>
-      <hr>
+      <hr class="border border-success">
         <p class="card-title text-secondary text-sm " >Judul</p>
         <p class="card-text text-start" >{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}</p>
     </div>
-    <div class="bg-white col-lg-6 col-md-12 mb-1 rounded-3 border shadow-sm  p-4  ">
+    <div class="bg-white col-lg-6 col-md-12 px-4 py-3 mb-2 rounded-end">
       <h5 class="text-bold">Jadwal Seminar</h5>
-      <hr>
+      <hr class="border border-success">
         <p class="card-title text-secondary text-sm " >Hari/Tanggal</p>
         <p class="card-text text-start" >{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}, : {{$penjadwalan->waktu}}</p>
         <p class="card-title text-secondary text-sm " >Pukul</p>

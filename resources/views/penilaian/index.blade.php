@@ -151,7 +151,8 @@
         @endif               
     @endforeach
 
-    @foreach ($penjadwalan_skripsis as $skripsi)    
+    @foreach ($penjadwalan_skripsis as $skripsi)
+    @if($skripsi->lokasi ==! null)    
         <tr>               
           <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
           <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
@@ -192,9 +193,10 @@
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
             @endif    
             
-
+            
           </td>                        
         </tr>               
+        @endif    
     @endforeach
 
    

@@ -227,7 +227,7 @@
         </tr>        
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:100px;">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:10px;">
         <tr>
             <td width="60%" align="right">
                 <!-- Disini untuk perintah Qr code -->

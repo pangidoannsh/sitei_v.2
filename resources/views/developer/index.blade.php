@@ -36,15 +36,13 @@
             </div>
             <h3 class="text-center p-2 mb-3 rounded-top profil fw-bold">Profil Pengembang</h3>
 
-  @foreach ($developer as $dev)
-
-
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="card mb-4">
-                      <div class="card-body text-center">
+              <div class="col-lg-4">
+                <div class="card mb-4">
+                  <div class="card-body text-center">
+                        @foreach ($developer as $dev)
                       
-                        <img src="{{asset('storage/' .$dev->foto )}}" alt="fahril"
+                        <img src="{{asset('storage/' .$dev->foto )}}" alt="{{ $dev->nama }}"
                           class="rounded-circle img-fluid" style="width: 143px;">
                         <h5 class="my-3">{{ $dev->nama }}</h5>
                         <p class="text-muted mb-3">{{ $dev->peran }}</p>

@@ -10,6 +10,7 @@
 
 @section('content')
 
+
 <form action="/form-skripsi/edit/{{$skripsi->id}}" method="POST">
         @method('put')
         @csrf
@@ -20,7 +21,7 @@
             <label for="mahasiswa_nim" class="form-label">Mahasiswa</label>
 
             <input type="hidden" class="form-control" name="mahasiswa_nim" value="{{ old('mahasiswa_nim', $skripsi->mahasiswa->nim ?? '') }}" readonly>
-            <span class="form-control" readonly>{{ old('mahasiswa_nama', $skripsi->mahasiswa->nama ?? '') }}</span>
+            <input class="form-control disable"  value="{{  $skripsi->mahasiswa->nama }}" readonly>
             
             <!-- <select name="mahasiswa_nim" id="mhs" class="form-select @error('mahasiswa_nim') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -39,7 +40,7 @@
             <label for="prodi_id" class="form-label">Program Studi</label>
 
              <input type="hidden" name="prodi_id" class="form-control" value="{{old('prodi_id', $skripsi->prodi_id ?? '')}}" readonly>
-            <span class="form-control" readonly>{{ old('nama_prodi', $skripsi->prodi->nama_prodi ?? '') }}</span>
+             <input class="form-control disable"  value="{{  $skripsi->prodi->nama_prodi }}" readonly>
             
             <!-- <select name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">                
             @if(auth()->user()->role_id == 2)                                                          
@@ -130,7 +131,7 @@
             <div class="mb-3 field">
             <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
             <input type="hidden" name="pembimbingsatu_nip" class="form-control" value="{{old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip ?? '')}}" readonly>
-            <span class="form-control" readonly>{{ old('nama', $skripsi->pembimbingsatu->nama ?? '') }}</span>
+            <input class="form-control disable"  value="{{  $skripsi->pembimbingsatu->nama }}" readonly>
             
             <!-- <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
                 <option value="">-Pilih-</option>
@@ -148,7 +149,7 @@
         <div class="mb-3 field">
             <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
             <input type="hidden" name="pembimbingdua_nip" class="form-control" value="{{old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '')}}" readonly>
-            <p class="form-control" readonly>{{ old('nama', $skripsi->pembimbingdua->nama ?? '') }}</p>
+            <input class="form-control disable"  value="{{  $skripsi->pembimbingdua->nama }}" readonly>
             
             <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
                 <option value="1">-Pilih-</option>
@@ -208,7 +209,35 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success float-right mt-4">Perbarui</button>
+
+        @if($skripsip->keterangan == 'Menunggu Jadwal Sidang Skripsi')
+         <a href="#ModalApprove"  data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Jadwalkan</a>  
+                            <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container text-center px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Status Mahasiswa akan di Jadwalkan Sidang Skripsi.</p>
+                                         <div class="row text-center">
+                    
+                                              <div class="col-6 text-end">
+                                               <button type="button" class="btn p-2 px-3 btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-6 text-start">
+                                               <button type="submit" class="btn p-2 px-3 btn-success ">Jadwalkan</button>
+                                              </div>
+                                             
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div> 
+        @else
+        <button type="submit" class="btn btn-lg btn-success float-right mt-4">Perbarui</button>
+        @endif
+
             </div>
         </div>
     </div>

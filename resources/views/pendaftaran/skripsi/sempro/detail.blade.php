@@ -78,7 +78,6 @@
 <div class="container">
   <div class="row rounded shadow-sm ">
     <div class="col-lg-6 col-md-12 bg-white mb-2 px-4 py-3 rounded-start">
-      @if($skripsi->status_skripsi == 'DAFTAR SEMPRO')
       <h5 class="text-bold">Data Usulan</h5>
       <hr>
       <div class="row">

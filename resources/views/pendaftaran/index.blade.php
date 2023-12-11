@@ -240,6 +240,7 @@
 
 @elseif($pendaftaran_skripsi->status_skripsi == 'JUDUL DISETUJUI' 
 || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI'
+|| $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI'
 || $pendaftaran_skripsi->status_skripsi == 'SEMPRO SELESAI' 
 || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' 
 || $pendaftaran_skripsi->status_skripsi == 'SIDANG SELESAI' 

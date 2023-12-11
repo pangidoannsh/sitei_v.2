@@ -133,7 +133,7 @@
 <body>
     <div class="isi">
 
-        <table width="100%" style="margin-bottom: 0%">
+        <table width="100%" style="margin-bottom: 0%; margin-top: -30px;">
             <tr>
                 <td>
                     <div class="logo">
@@ -836,7 +836,7 @@
                             <img src="data:img/png;base64, {!! $qrcodeee !!}">
                         </div>
                         <br><br><br><br>
-                        <strong style="text-decoration: underline;">Firdaus, ST., MT</strong><br>NIP. 197705102005011002
+                        <strong style="text-decoration: underline;">{{ $koordinator1->nama }}</strong><br>NIP. {{ $koordinator1->nip }}
                     </div>
                 @elseif ($penjadwalan->mahasiswa->prodi->id == 2)
                     <div class="container">
@@ -845,7 +845,7 @@
                             <img src="data:img/png;base64, {!! $qrcodeee !!}">
                         </div>
                         <br><br><br><br>
-                        <strong style="text-decoration: underline;">Rahmat Rizal Andhi, ST., MT</strong><br>NIP. 198312032019031006
+                        <strong style="text-decoration: underline;">{{ $koordinator2->nama }}</strong><br>NIP. {{ $koordinator2->nip }}
                     </div>
                 @else
                     <div class="container">
@@ -854,7 +854,7 @@
                             <img src="data:img/png;base64, {!! $qrcodeee !!}">
                         </div>
                         <br><br><br><br>
-                        <strong style="text-decoration: underline;">Edi Susilo, S.Pd., M.Kom., M.Eng</strong><br>NIP. 199110292019031010
+                        <strong style="text-decoration: underline;">{{ $koordinator3->nama }}</strong><br>NIP. {{ $koordinator3->nip }}
                     </div>
                 @endif            
                 <br>
@@ -869,7 +869,7 @@
             <td class="text" style="text-align: center;">                
                 <div class="container">
                     <p>Pekanbaru, {{Carbon::parse($penjadwalan->tanggal)->translatedFormat('d F Y')}} </p>
-                    <p>Ketua Tim Penguji,</p>
+                    <p style="margin-top: -10px;">Ketua Tim Penguji,</p>
                     <div class="ttd">
                         <img src="data:img/png;base64, {!! $qrcodeee !!}">
                     </div>
@@ -894,7 +894,7 @@
                             <img src="data:img/png;base64, {!! $qrcodeee !!}">
                         </div>
                         <br><br><br><br>
-                        <strong style="text-decoration: underline;">Amir Hamzah, ST., MT</strong><br>NIP. 197507052002121003
+                        <strong style="text-decoration: underline;">{{ $kaprodi1->nama }}</strong><br>NIP. {{ $kaprodi1->nip }}
                     </div>
                 @elseif ($penjadwalan->mahasiswa->prodi->id == 2)
                     <div class="container">
@@ -904,17 +904,17 @@
                             <img src="data:img/png;base64, {!! $qrcodeee !!}">
                         </div>
                         <br><br><br><br>
-                        <strong style="text-decoration: underline;">Yusnita Rahayu, ST, M.Eng, Ph.D</strong><br>NIP. 197511042005012001
+                        <strong style="text-decoration: underline;">{{ $kaprodi2->nama }}</strong><br>NIP. {{ $kaprodi2->nip }}
                     </div>
                 @else
                     <div class="container">
                         <p>Koor. Program Studi Teknik Informatika </p>
-                        <p width="30%">Koordinator,</p>
+                        <p width="30%" style="margin-top: -10px;">Koordinator,</p>
                         <div class="ttd">
                             <img src="data:img/png;base64, {!! $qrcodeee !!}">
                         </div>
                         <br><br><br><br>
-                        <strong style="text-decoration: underline;">Dr. Feri Candra, ST., MT</strong><br>NIP. 197404282002121003
+                        <strong style="text-decoration: underline;">{{ $kaprodi3->nama }}</strong><br>NIP. {{ $kaprodi3->nip }}
                     </div>
                 @endif            
                 <br>

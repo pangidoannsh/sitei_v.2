@@ -259,8 +259,9 @@
                         </tbody>
                       </table>
             </div>
-               
+               @if($sempro->penjadwalan_sempro->status_seminar == '0')
               <button type="submit"  class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
+              @endif
          
           </form> 
         </div>    
@@ -1028,7 +1029,7 @@
                                     </div>
                                   </div>
                                   </div>    
-                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
+                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga_nip ==! null)
                               <a href="#ModalApprove2"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove2">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -1059,7 +1060,7 @@
                                   </div>
                                   </div> 
                                               
-                    @elseif($nilaipenguji3 == null)
+                    @elseif($nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga_nip ==! null)
                               <a href="#ModalApprove4"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove4">
                                   <div class="modal-dialog modal-dialog-centered">

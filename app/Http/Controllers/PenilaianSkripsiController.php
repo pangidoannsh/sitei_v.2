@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PenjadwalanSkripsi;
 use App\Models\PenjadwalanSempro;
+use App\Models\PenjadwalanSkripsi;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSkripsiPenguji;
-use App\Models\PenilaianSkripsiPembimbing;
+use App\Models\PenilaianSemproPenguji;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\PenilaianSkripsiPembimbing;
 
 class PenilaianSkripsiController extends Controller
 {
@@ -28,7 +30,9 @@ class PenilaianSkripsiController extends Controller
         $id = Crypt::decryptString($id);  
         $penjadwalan = PenjadwalanSkripsi::find($id);
         $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
-        $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();   
+        $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
+        
+        $penjadwalan_sempro = PenjadwalanSempro::find($id);
                  
         
         if ($ceknilaipenguji1 == null) {
@@ -75,7 +79,7 @@ class PenilaianSkripsiController extends Controller
 
         return view('penilaianskripsi.create', [
             'skripsi' => PenjadwalanSkripsi::find($id),
-            'sempro' => PenjadwalanSempro::find($id),
+            'sempro' => $penjadwalan_sempro,
             'pembimbing' => $pembimbing,
             'pembimbingnilai' => $pembimbingnilai,
             'penjadwalan' => $penjadwalan,
@@ -117,7 +121,18 @@ class PenilaianSkripsiController extends Controller
     }
 
     public function store_penguji(Request $request, $id)
-    {        
+    {   
+        // $request->validate([
+        //     'penguasaan_dasar_teori' => 'required',
+        //     'tingkat_penguasaan_materi' => 'required',
+        //     'tinjauan_pustaka' => 'required',
+        //     'tata_tulis' => 'required',
+        //     'hasil_dan_pembahasan' => 'required',
+        //     'sikap_dan_kepribadian' => 'required',
+        //     'total_nilai_angka' => 'required',
+        //     'total_nilai_huruf' => 'required',
+        // ]);
+             
         $penilaian = new PenilaianSkripsiPenguji;
         $penilaian->presentasi = $request['presentasi'];
         $penilaian->tingkat_penguasaan_materi = $request['tingkat_penguasaan_materi'];
@@ -164,6 +179,9 @@ class PenilaianSkripsiController extends Controller
     {
         $id = Crypt::decryptString($id);  
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
+
+        $penjadwalan_sempro = PenjadwalanSempro::find($id);
+        $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
 
         if ($cari_penguji == 0) {
             return view('penilaianskripsi.edit', [
@@ -220,7 +238,9 @@ class PenilaianSkripsiController extends Controller
                 'skripsi' => PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->first(),
                 'pembimbing' => $pembimbing,
                 'pembimbingnilai' => $pembimbingnilai,
+                'sempro' => $penjadwalan_sempro,
                 'penjadwalan' => $penjadwalan,
+                'penjadwalan_skripsi' => $penjadwalan_skripsi,
                 'nilaipenguji1' => $nilaipenguji1,
                 'nilaipenguji2' => $nilaipenguji2,
                 'nilaipenguji3' => $nilaipenguji3,

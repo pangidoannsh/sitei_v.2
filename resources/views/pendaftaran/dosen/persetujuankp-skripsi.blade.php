@@ -702,6 +702,15 @@
 @endphp
 <!-- BATAS -->
 
+<!-- BUKTI PENYERAHAN BUKU SKRIPSI KOORDINATOR -->
+@php
+    $countDownDateBukuSkripsiKoordinator = strtotime($skripsi->tgl_created_sti_17) + (4 * 24 * 60 * 60);
+    $nowBukuSkripsiKoordinator = time();
+    $distanceBukuSkripsiKoordinator = $countDownDateBukuSkripsiKoordinator - $nowBukuSkripsiKoordinator;
+    $daysBukuSkripsiKoordinator = floor($distanceBukuSkripsiKoordinator / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
 <div></div>
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>                              -->
@@ -736,6 +745,9 @@
             <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
             <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
@@ -931,6 +943,7 @@
             @endif
             @endif
             @endif
+
              
             @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
@@ -946,6 +959,20 @@
             @endif
             @endif
             
+            @endif
+
+         @if (Str::length(Auth::guard('dosen')->user()) > 0)
+          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
+           @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' )
+           <td class="text-center" >
+                @if ($daysBukuSkripsiKoordinator > 0)
+                    <span class="text-danger"> {{ $daysBukuSkripsiKoordinator }}  hari lagi</span>
+                @elseif($daysBukuSkripsiKoordinator <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
             @endif
 
             <td class="text-center">{{$skripsi->keterangan}}</td> 

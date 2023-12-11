@@ -59,7 +59,7 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('skor_turnitin')->nullable(); 
              $table->string('resume_turnitin')->nullable(); 
              $table->string('sti_9')->nullable(); 
-             $table->string('sti_11')->nullable(); 
+            //  $table->string('sti_11')->nullable(); 
             //  $table->string('naskah_skripsi')->nullable(); 
              $table->string('konsultasi_pa')->nullable(); 
              $table->string('toefl')->nullable(); 

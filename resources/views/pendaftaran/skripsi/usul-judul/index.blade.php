@@ -41,7 +41,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @endphp
 
 @php
- $tanggalDisetujuiSidang = $pendaftaran_skripsi->tgl_disetujui_sidang;
+ $tanggalDisetujuiSidang = $pendaftaran_skripsi->tgl_selesai_sidang;
 @endphp
 
 
@@ -496,7 +496,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
   </div>
 @endif
-    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG')
+    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG')
     <div class="row biru mb-4">
     <div class="col">
         <span class="mt-0 "> Tanggal disetujui <br></span>
@@ -512,8 +512,26 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
   </div>
 @endif
+    @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+@endif
 
-     @if ($pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $pendaftaran_skripsi->status_skripsi == 'SIDANG SELESAI' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' )
+     @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG SELESAI' )
     <div class="row biru mb-4">
     <div class="col">
         <span class="mt-0 "> Tanggal disetujui <br></span>
@@ -530,6 +548,46 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     <div class="col">
         <span class="mt-0 text-danger"> Batas Unggah <br></span>
         <strong class="mt-2 text-danger"><strong class="text-bold" id="timer-batas-buku-skripsi"></strong></strong>
+    </div>
+  </div>
+@endif
+     @if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' )
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 text-danger"> Tanggal Usulan <br></span>
+        <strong class="mt-2 text-danger"><strong class="text-bold" id="timer-batas-buku-skripsi"></strong></strong>
+    </div>
+  </div>
+@endif
+     @if ($pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 text-muted"> Tanggal Usulan <br></span>
+        <span class="mt-2 fw-bold text-muted">{{Carbon::parse($pendaftaran_skripsi->tgl_created_sti_17 )->translatedFormat('l, d F Y')}}</span>
     </div>
   </div>
 @endif

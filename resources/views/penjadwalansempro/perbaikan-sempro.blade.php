@@ -93,7 +93,7 @@
 <body>
     <div class="isi">
 
-        <table width="100%" style="margin-bottom: 0%">
+        <table width="100%" style="margin-bottom: 0%; margin-top:-30px;">
             <tr>
                 <td>
                     <div class="logo">
@@ -162,7 +162,7 @@
             </tr>
         </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:10px; line-height: 1.5">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-20px; line-height: 1.5">
         <tr class="text2">
             <td>Nama Mahasiswa</td>
             <td>:</td>
@@ -216,44 +216,44 @@
         </tr>
     </table>
 
-    <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:0px;">
+    <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:0px; line-height:14px;">
         <tr>
-            <th class="table1" width="10px">No</th>
+            <th class="table1" style="padding: 5px; text-align: center;" width="10px">No</th>
             <th class="table1">Saran/Perbaikan</th>
-            <th class="table1" width="10px">Paraf Pembimbing</th>
+            <th class="table1" style="padding: 5px; text-align: center;" width="10px">Paraf Pembimbing</th>
         </tr>
         <tr>
-            <td class="table1">1</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah1}}</td>                
+            <td class="table1" style="padding: 5px; text-align: center;">1</td>  
+            <td class="table1" style="padding: 5px;">{{$penilaianpenguji->revisi_naskah1}}</td>                
             <td class="table1"></td>                        
         </tr>
         
         <tr>
-            <td class="table1">2</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah2}}</td>              
+            <td class="table1" style="padding: 5px; text-align: center;">2</td>  
+            <td class="table1" style="padding: 5px;">{{$penilaianpenguji->revisi_naskah2}}</td>              
             <td class="table1"></td>   
         </tr>
         
         <tr>
-            <td class="table1">3</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah3}}</td>                
+            <td class="table1" style="padding: 5px; text-align: center;">3</td>  
+            <td class="table1" style="padding: 5px;">{{$penilaianpenguji->revisi_naskah3}}</td>                
             <td class="table1"></td>                        
         </tr>  
 
         <tr>
-            <td class="table1">4</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah4}}</td>
+            <td class="table1" style="padding: 5px; text-align: center;">4</td>  
+            <td class="table1" style="padding: 5px;">{{$penilaianpenguji->revisi_naskah4}}</td>
             <td class="table1"></td>                        
         </tr>  
 
         <tr>
-            <td class="table1">5</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah5}}</td>               
+            <td class="table1" style="padding: 5px; text-align: center;">5</td>  
+            <td class="table1" style="padding: 5px;">{{$penilaianpenguji->revisi_naskah5}}</td>               
             <td class="table1"></td>                        
         </tr>           
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:100px;">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top: -20px;">
         <tr>
             <td width="60%" align="right">
                 <!-- Disini untuk perintah Qr code -->
@@ -261,7 +261,7 @@
             <td class="text" style="text-align: left;">
                 <div class="container">
                     <p>Pekanbaru, {{Carbon::parse($penjadwalan->tanggal)->translatedFormat('d F Y')}} </p>
-                    <p>Dosen Penguji</p>
+                    <p style="margin-top: -10px;">Dosen Penguji</p>
                     <div class="ttd">
                         <img src="data:img/png;base64, {!! $qrcode !!}">
                     </div>

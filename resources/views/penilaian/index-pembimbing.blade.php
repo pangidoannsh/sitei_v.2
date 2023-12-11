@@ -135,6 +135,7 @@
     @endforeach
 
     @foreach ($penjadwalan_skripsis as $skripsi)    
+    @if($skripsi->tanggal ==! null) 
         <tr>               
           <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
           <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
@@ -168,9 +169,10 @@
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
             @endif 
             <a formtarget="_blank" target="_blank" href="/undangan-sidang/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>   
-
+            
           </td>                        
         </tr>               
+        @endif 
     @endforeach
 
   </tbody>

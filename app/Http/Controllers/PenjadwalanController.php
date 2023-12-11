@@ -24,7 +24,7 @@ class PenjadwalanController extends Controller
                 'role' => Role::all(),
                 'penjadwalan_kps' => PenjadwalanKP::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '0')->orderBy('tanggal', 'ASC')->get(),
                 // 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
             ]);
         }
@@ -43,9 +43,7 @@ class PenjadwalanController extends Controller
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
                 
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where(function($query) {
-                    $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
-                })->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->get(),
             ]);
         }
         if (auth()->user()->role_id == 3) {            
@@ -65,9 +63,7 @@ class PenjadwalanController extends Controller
                 //     $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
                 // })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where(function($query) {
-                    $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
-                })->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->get(),
             ]);
         }
         if (auth()->user()->role_id == 4) {   
@@ -87,9 +83,7 @@ class PenjadwalanController extends Controller
 
                 'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
 
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where(function($query) {
-                    $query->where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL);
-                })->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
             ]);
         }
     }
