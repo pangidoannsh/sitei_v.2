@@ -64,7 +64,8 @@
   </thead>
   <tbody> 
     
-    @foreach ($penjadwalan_kps as $kp)    
+    @foreach ($penjadwalan_kps as $kp)
+    @if($kp->lokasi ==! null)     
       <tr>                 
         <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
         <td class="text-center">{{$kp->mahasiswa->nama}}</td>                    
@@ -79,7 +80,7 @@
         <td class="text-center">
           <p>{{$kp->penguji->nama_singkat}}</p>           
         </td>
-        {{-- <td class="text-center">
+       <td class="text-center">
           @if ($kp->penilaian(Auth::user()->nip, $kp->id) == false)
             @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
             <a href="/penilaian-kp/create/{{Crypt::encryptString($kp->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
@@ -97,8 +98,9 @@
           @endif      
           
           
-        </td>                                 --}}
+        </td>                                 
       </tr>               
+      @endif      
     @endforeach
 
 

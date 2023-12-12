@@ -404,7 +404,7 @@
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">         <span class="mt-3 text-danger"> Batas Unggah <br></span>
          <strong class="mt-3 text-danger"><strong class="text-bold" id="timer-batas-balasan"></strong><br></strong>
@@ -420,7 +420,7 @@
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
         <span class="mt-3 text-secondary"> Tanggal Diusulkan <br></span>
@@ -437,7 +437,7 @@
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
          <span class="mt-3  "> Tanggal Disetujui <br></span>
@@ -455,7 +455,7 @@
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
          <span class="mt-3  "> Tanggal Disetujui <br></span>
@@ -474,7 +474,7 @@
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
          <span class="mt-3  "> Tanggal Disetujui <br></span>
@@ -489,11 +489,11 @@
     </div>
   </div>
 @endif
-    @if ($pendaftaran_kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' || $pendaftaran_kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $pendaftaran_kp->status_kp == 'SEMINAR KP SELESAI' )
+    @if ($pendaftaran_kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' || $pendaftaran_kp->status_kp == 'SEMINAR KP SELESAI' )
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
          <span class="mt-3  "> Tanggal Disetujui <br></span>
@@ -510,11 +510,34 @@
     </div>
   </div>
 @endif
+
+    @if ($pendaftaran_kp->status_kp == 'BUKTI PENYERAHAN LAPORAN'  )
+    <div class="row biru mb-4">
+    <div class="col">
+         <span class="mt-3 "> Tanggal Diterima <br></span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+         <span class="mt-3  "> Tanggal Disetujui <br></span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+         <span class="mt-3  "> Tanggal Selesai <br></span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_selesai_semkp)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-3 text-secondary"> Tanggal Diusulkan <br></span>
+        <span class="mt-3 text-secondary  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_created_kpti10)->translatedFormat('l, d F Y')}}</span>
+        
+    </div>
+  </div>
+@endif
+
         @if ($pendaftaran_kp->status_kp == 'KP SELESAI' )
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal disetujui <br></span>
-        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulan)->translatedFormat('l, d F Y')}}</span>
+        <span class="mt-3  text-bold">{{Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
          <span class="mt-3  "> Tanggal disetujui <br></span>

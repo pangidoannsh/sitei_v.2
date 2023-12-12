@@ -8,8 +8,12 @@
     SITEI | Edit Penilaian Seminar KP
 @endsection
 
+@section('title')
+   SITEI | Penilaian Seminar Kerja Praktek
+@endsection
+
 @section('sub-title')
-    Edit Penilaian Seminar KP
+    Edit Penilaian Seminar Kerja Praktek
 @endsection
 
 @section('content')
@@ -22,130 +26,55 @@
 
   <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin? Data tidak akan tersimpan!')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
-  <div class="row mt-3">
-    <div class="col col-lg-6 col-md-6 col-sm-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="text-bold">Mahasiswa</h5>
+<div class="container">
+    <div class="row shadow-sm rounded">
+      <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Mahasiswa</h5>
           <hr>
           <p class="card-title text-secondary text-sm " >Nama</p>
           <p class="card-text text-start" >{{$kp->penjadwalan_kp->mahasiswa->nama}}</p>
           <p class="card-title text-secondary text-sm " >NIM</p>
           <p class="card-text text-start" >{{$kp->penjadwalan_kp->mahasiswa->nim}}</p>
-        </div>
+          <p class="card-title text-secondary text-sm " >Program Studi</p>
+          <p class="card-text text-start" >{{$kp->penjadwalan_kp->mahasiswa->prodi->nama_prodi}}</p>
+          <p class="card-title text-secondary text-sm " >Konsentrasi</p>
+          <p class="card-text text-start" >{{$kp->penjadwalan_kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
       </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="text-bold">Dosen</h5>
+      <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+       <h5 class="text-bold">Dosen Pembimbing</h5>
           <hr>
           <p class="card-title text-secondary text-sm" >Nama Pembimbing</p>
           <p class="card-text text-start" >{{$kp->penjadwalan_kp->pembimbing->nama}}</p>
+      </div>
+      <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+       <h5 class="text-bold">Dosen Penguji</h5>
+          <hr>
           <p class="card-title text-secondary text-sm" >Nama Penguji</p>
           <p class="card-text text-start" >{{$kp->penjadwalan_kp->penguji->nama}}</p>
-        </div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <h5 class="text-bold">Judul Kerja Praktek</h5>
+  <div class="container">
+    <div class="row shadow-sm rounded">
+      <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Judul Kerja Praktek</h5>
       <hr>
       <p class="card-title text-secondary text-sm" >Judul</p>
       <p class="card-text text-start" >{{$kp->penjadwalan_kp->judul_kp}}</p>
-    </div>
-  </div>
-
-  <div class="card mb-5">
-    <div class="card-body">
-      <h5 class="text-bold">Jadwal Seminar Kerja Praktek</h5>
+      </div>
+      <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+      <h5 class="text-bold">Jadwal Seminar</h5>
       <hr>
-      <p class="card-title text-secondary text-sm" >Tanggal</p>
-      <p class="card-text text-start" >{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</p>
+      <p class="card-title text-secondary text-sm" >Hari/Tanggal</p>
+      <p class="card-text text-start" >{{Carbon::parse($kp->penjadwalan_kp->tanggal)->translatedFormat('l, d F Y')}}</p>
       <p class="card-title text-secondary text-sm" >Pukul</p>
       <p class="card-text text-start" >{{$kp->penjadwalan_kp->waktu}}</p>
       <p class="card-title text-secondary text-sm" >Ruangan</p>
       <p class="card-text text-start" >{{$kp->penjadwalan_kp->lokasi}}</p>
+      </div>
     </div>
   </div>
-
-  {{-- <div class="row">
-    <div class="col col-lg-6 col-md-6 col-sm-12 mt-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold  gridratakiri">NIM</div>
-          <span>{{$kp->penjadwalan_kp->mahasiswa->nim}}</span>
-        </div>        
-      </li> 
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto field">
-          <div class="fw-bold  gridratakiri">Nama</div>
-          <span>{{$kp->penjadwalan_kp->mahasiswa->nama}}</span>
-        </div>        
-      </li>   
-    </ol>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Pembimbing</div>
-          <span>{{$kp->penjadwalan_kp->pembimbing->nama}}</span>
-        </div>        
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Penguji</div>
-          <span>{{$kp->penjadwalan_kp->penguji->nama}}</span>
-        </div>        
-      </li>     
-    </ol>
-    </div>
-  </div>
-</div>
-
-<div class="kol-judul mt-3">
-  <div class="row">
-    <div class="col">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Judul</div>
-          <span>{{$kp->penjadwalan_kp->judul_kp}}</span>
-        </div>        
-      </li>   
-    </ol>  
-    </div>
-  </div>
-</div>
-
-<div class="kol-jadwal mt-3 mb-3">
-  <div class="row">
-    <div class="col-md mb-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-        <div class="fw-bold  ">Jadwal</div>          
-          <span>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}, {{$kp->penjadwalan_kp->waktu}}</span>             
-        </div>        
-      </li>   
-    </ol>
-    </div>
-    <div class="col-md">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-        <div class="fw-bold ">Lokasi</div>
-          <span>{{$kp->penjadwalan_kp->lokasi}}</span>
-        </div>        
-      </li>   
-    </ol>
-    </div>
-  </div> --}}
-</div>
 
 @if (auth()->user()->nip == $kp->penjadwalan_kp->penguji_nip && auth()->user()->nip !== $kp->penjadwalan_kp->pembimbing_nip)
 <form action="/penilaian-kp-penguji/edit/{{$kp->id}}" method="POST">
@@ -155,12 +84,12 @@
         <div class="card-header p-0 pt-1">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white active" id="custom-tabs-one-home-tab" data-toggle="pill"
                 href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
                 aria-selected="true">Form Nilai</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white" id="custom-tabs-one-profile-tab" data-toggle="pill"
                 href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
                 aria-selected="false">Saran Perbaikan</a>
             </li>                     
@@ -318,8 +247,10 @@
                    
         </div>    
     </div>
+    
 </form>
 @endif
+
 
 @if (auth()->user()->nip == $kp->penjadwalan_kp->pembimbing_nip && auth()->user()->nip !== $kp->penjadwalan_kp->penguji_nip)
 <form action="/penilaian-kp-pembimbing/edit/{{$kp->id}}" method="POST">
@@ -329,22 +260,22 @@
         <div class="card-header p-0 pt-1">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white active" id="custom-tabs-one-home-tab" data-toggle="pill"
                 href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
                 aria-selected="true">Form Nilai</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+              <a class="nav-link btn-success text-white" id="custom-tabs-one-profile-tab" data-toggle="pill"
               href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
               aria-selected="false">Nilai Pembimbing Lapangan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-form-tab" data-toggle="pill"
+              <a class="nav-link btn-success text-white" id="custom-tabs-one-form-tab" data-toggle="pill"
                 href="#custom-tabs-one-form" role="tab" aria-controls="custom-tabs-one-form"
                 aria-selected="false">Catatan</a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-setting-tab" data-toggle="pill"
+              <a class="nav-link btn-success text-white" id="custom-tabs-one-setting-tab" data-toggle="pill"
               href="#custom-tabs-one-setting" role="tab" aria-controls="custom-tabs-one-setting"
               aria-selected="false">Berita Acara</a>
             </li>         
@@ -472,8 +403,9 @@
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
                     aria-labelledby="custom-tabs-one-profile-tab">
 
-                    <div class="mb-3 gridratakiri">                      
-                      <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
+                    <div class="mb-3 gridratakiri">
+                      <div class="fw-bold mb-2">Input Nilai :</div>                       
+                      <input type="number" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}" min="0" max="100">  
                     </div>
                     <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
                 </div>
@@ -659,44 +591,146 @@
 
                       </tbody>
                     </table>
-                    @if ($penjadwalan->status_seminar == 0)                
+                    <!-- @if ($penjadwalan->status_seminar == 0)                
                     @if ($penjadwalan->cek($penjadwalan->id) == $penjadwalan->jmlpenilaian($penjadwalan->id))
                     <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>                                    
                     @else
                     <a href="#ModalApprove"  data-toggle="modal" class="btn btn-lg btn-danger disabled float-right">Selesai Seminar</a>                                    
                 
                     @endif
+                    @endif -->
+
+
+                     <div class="container pb-5">
+                    @if ($nilaipembimbing->total_nilai_angka == null)   
+                                    <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove1">Selesai Seminar</button>  
+                                  <div class="modal fade"id="ModalApprove1">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Pembimbing</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                        
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>    
+                        @elseif($nilaipenguji->total_nilai_angka == null)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove2">Selesai Seminar</button> 
+                              <div class="modal fade"id="ModalApprove2">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                                 
+                    @elseif($nilaipembimbing->nilai_pembimbing_lapangan == null)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove3">Selesai Seminar</button>
+                              <div class="modal fade"id="ModalApprove3">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Nilai Pembimbing Lapangan belum di Input</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                  
+                    
+                    @elseif(($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 < 60)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove4">Selesai Seminar</button>  
+                              <div class="modal fade"id="ModalApprove4">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5 >Nilai Seminar Belum Mencukupi</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+
+                    @elseif($penjadwalan->status_seminar > 0)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove5">Selesai Seminar</button>
+                              <div class="modal fade"id="ModalApprove5">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
+                                        <h5 >Seminar telah disetujui</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+
+                    @else
+                             <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
+                              
+                              <div class="modal fade"id="ModalApprove6">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                         <div class="row text-center">
+                                              <div class="col-4">
+                                              </div>
+                                              <div class="col-2">
+                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-2">
+                                               <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
+                                          @method('put')
+                                          @csrf
+                                          <button type="submit" class="btn btn-success"> Selesai</button>
+                                        </form>
+                                              </div>
+                                              <div class="col-4">
+                                              </div>
+                                            </div>
+                                        
+                                         
+                                        </div>
+                                      </div>
+                                        
+                                    
+                                    </div>
+                                  </div>
+                                    </div>
+                   
                     @endif
+      </div>
+
+
+                   
            
-            </div>            
+                  
         </div>              
     </div>
+    </div>
 
-    <div class="modal fade"id="ModalApprove">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Apakah Anda Yakin?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Data Tidak Bisa Dikembalikan!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-        <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
-          @method('put')
-          @csrf
-          <button type="submit" class="btn btn-success"> Selesai</button>
-        </form>        
-      </div>
-    </div>
-  </div>
-    </div>
+
     @endif
-
+     </div> 
 
 
 @if (auth()->user()->nip == $kp->penjadwalan_kp->penguji_nip && auth()->user()->nip == $kp->penjadwalan_kp->pembimbing_nip)
@@ -870,12 +904,15 @@
                     @endif
                     </form>
   </div>
+
+  
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
     <form action="/penilaian-kp-pembimbing/edit/{{$kp->id}}" method="POST">
     @method('put')
     @csrf
-                <div class="mb-3 gridratakiri">                      
-                      <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
+                <div class="mb-3 gridratakiri">      
+                  <div class="fw-bold mb-2">Input Nilai :</div>                 
+                      <input type="number" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}" min="0" max="100">  
                     </div>
                     @if($penjadwalan->status_seminar == '0')
                     <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
@@ -1062,19 +1099,126 @@
                       </tbody>
                     </table> 
 
-                                        <!-- <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
-                                              @method('put')
-                                              @csrf
-                                              <button type="submit" class="btn p-2 px-3 btn-success float-right">Selesai Seminar</button>
-                                            </form> -->
+                    <div class="container pb-5">
+                    @if ($nilaipembimbing->total_nilai_angka == null)   
+                                    <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove1">Selesai Seminar</button>  
+                                  <div class="modal fade"id="ModalApprove1">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Pembimbing</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                        
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>    
+                        @elseif($nilaipenguji->total_nilai_angka == null)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove2">Selesai Seminar</button> 
+                              <div class="modal fade"id="ModalApprove2">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Penguji belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                                 
+                    @elseif($nilaipembimbing->nilai_pembimbing_lapangan == null)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove3">Selesai Seminar</button>
+                              <div class="modal fade"id="ModalApprove3">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Nilai Pembimbing Lapangan belum di Input</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>                  
+                    
+                    @elseif(($nilaipembimbing->total_nilai_angka + $nilaipenguji->total_nilai_angka + $nilaipembimbing->nilai_pembimbing_lapangan) / 3 < 60)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove4">Selesai Seminar</button>  
+                              <div class="modal fade"id="ModalApprove4">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5 >Nilai Seminar Belum Mencukupi</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
 
-                   @if($penjadwalan->status_seminar == '0')
-                    <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" class="selesai-semkp-admin" method="POST"> 
-                        @method('put')
-                        @csrf
-                        <button type="submit" class="btn-lg btn py-2 px-3 btn-danger float-right">Selesai Seminar</button>
-                    </form>
+                    @elseif($penjadwalan->status_seminar > 0)
+                              <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove5">Seminar telah Selesai <i class="fas fa-check fa-lg"></i> </button>
+                              <div class="modal fade"id="ModalApprove5">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
+                                        <h5 >Seminar telah disetujui</h5>
+                                         <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+
+                    @else
+                             <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
+                              
+                              <div class="modal fade"id="ModalApprove6">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                         <div class="row text-center">
+                                              <div class="col-4">
+                                              </div>
+                                              <div class="col-2">
+                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-2">
+                                               <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
+                                          @method('put')
+                                          @csrf
+                                          <button type="submit" class="btn btn-success"> Selesai</button>
+                                        </form>
+                                              </div>
+                                              <div class="col-4">
+                                              </div>
+                                            </div>
+                                        
+                                         
+                                        </div>
+                                      </div>
+                                        
+                                    
+                                    </div>
+                                  </div>
+                                    </div>
+                   
                     @endif
+      </div>
+
+
 
 
                      

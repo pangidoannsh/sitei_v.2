@@ -21,92 +21,58 @@
 @endif
 
 
-<div class="container-fluid">
-<div>
+
+
+      <section class="mb-5">
+<div class="container">
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+    <a href="/persetujuan-kp-skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+   @endif
+   @if (Str::length(Auth::guard('web')->user()) > 0)
+    <a href="/persetujuan/admin/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+   @endif
+ </div>
+
 @foreach ($pendaftaran_kp as $kp)
-
-@if (Str::length(Auth::guard('dosen')->user()) > 0)       
-
-  <a href="/kp-skripsi/persetujuan-kp" class="badge bg-success p-2 mb-3 "> Kembali <a>
-  @endif
-  
-  @if (Str::length(Auth::guard('web')->user()) > 0)       
-  
-    <a href="/persetujuan/admin/index" class="badge bg-success p-2 mb-3"> Kembali <a><br>
-        <!-- <a href="/form-kp/create" class="badge bg-success p-2 mb-3"> Tambah Jadwal KP<a> -->
-    @endif
-
- <div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-      <h5 class="text-bold">Mahasiswa</h5>
+ <div class="container">
+    <div class="row rounded shadow-sm">
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+            <h5 class="text-bold">Mahasiswa</h5>
       <hr>
         <p class="card-title text-secondary text-sm " >Nama</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->nama}}</p>
         <p class="card-title text-secondary text-sm " >NIM</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->nim}}</p>
-        <p class="card-title text-secondary text-sm " >Program Studi</p>
+         <p class="card-title text-secondary text-sm " >Program Studi</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->prodi->nama_prodi}}</p>
         <p class="card-title text-secondary text-sm " >Konsentrasi</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-        
-      </div>
-    </div>
-     <div class="card">
-      <div class="card-body">
+        </div>
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
         <h5 class="text-bold">Dosen Pembimbing</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >Nama</p>
         <p class="card-text text-start" >{{$kp->dosen_pembimbingkp->nama}}</p>
-        <!-- <p class="card-title text-secondary text-sm" >NIP</p>
-        <p class="card-text text-start" >{{$kp->dosen_pembimbingkp->nip}}</p> -->
-
-      </div>
+        </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-<div class="card-body">
-      <h5 class="text-bold">Data Usulan</h5>
-        <hr>
-        <p class="card-title text-secondary text-sm" >Judul Laporan</p>
-        <p class="card-text text-start"> {{$kp->judul_laporan}}</p>
-        <p class="card-title text-secondary text-sm" >Laporan</p>
-       <p class="card-text text-start " ><button  onclick="window.location.href='{{asset('storage/' .$kp->laporan_kp )}}';" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
-        <!-- <p class="card-text text-start" > <span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->laporan_kp)}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></span></p> -->
-        <p class="card-title text-secondary text-sm" >KPTI-11</p>
-        <p class="card-text text-start " ><button  onclick="window.location.href='{{asset('storage/' .$kp->kpti_11 )}}';" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
-        <!-- <p class="card-text text-start" > <span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_11)}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></span></p> -->
-        <p class="card-title text-secondary text-sm" >STI-31</p>
-        <p class="card-text text-start " ><button  onclick="window.location.href='{{asset('storage/' .$kp->sti_31 )}}';" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
-        <!-- <p class="card-text text-start" > <span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->sti_31)}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></span></p> -->
-
-  </div>
-  </div>
-   
-  </div>
 </div>
 
-<!-- <div class="card">
-      <div class="card-body">
+
+<div class="container">
+    <div class="row rounded shadow-sm">
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
         <h5 class="text-bold">Data Usulan</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >Judul Laporan</p>
         <p class="card-text text-start"> {{$kp->judul_laporan}}</p>
         <p class="card-title text-secondary text-sm" >Laporan</p>
-        <p class="card-text text-start" > <span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->laporan_kp)}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></span></p>
-        <p class="card-title text-secondary text-sm" >KPTI-11</p>
-        <p class="card-text text-start" > <span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_11)}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></span></p>
-        <p class="card-title text-secondary text-sm" >STI-31</p>
-        <p class="card-text text-start" > <span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->sti_31)}}" class="badge bg-dark pr-3 p-2 pl-3">Lihat</a></span></p>
-
-      </div>
-    </div> -->
-
-
-    <div class="card">
-      <div class="card-body">
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->laporan_kp )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        <p class="card-title text-secondary text-sm" >KPTI-11/Bukti Mengumpulkan Syarat Pendaftaran Seminar KP</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_11 )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        <p class="card-title text-secondary text-sm" >STI-31/Surat Persetujuan Sertifikat Pendamping</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->sti_31 )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        </div>
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
         <h5 class="text-bold">Keterangan Pendaftaran</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
@@ -114,6 +80,10 @@
         @if ($kp->status_kp == 'DAFTAR SEMINAR KP' )
         <p class="card-title text-secondary text-sm" >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
+        @if ($kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' )
+        <p class="card-title text-secondary text-sm" >Status KP</p>
+        <p class="card-text text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
         @endif
         @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN' )
         <p class="card-title text-secondary text-sm " >Status KP</p>
@@ -125,10 +95,11 @@
         @endif
         <p class="card-title text-secondary text-sm" >Keterangan</p>
         <p class="card-text text-start" ><span>{{$kp->keterangan}}</span></p>
-
-      </div>
+        </div>
     </div>
+</div>
 
+<div class="container">
     @if (Str::length(Auth::guard('web')->user()) > 0)
     @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     
@@ -136,13 +107,13 @@
    <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemKPAdmin()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakSemKPAdmin()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/semkp/admin/approve/{{$kp->id}}" class="setujui-semkp-admin" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
   </div>
@@ -155,15 +126,16 @@
   <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemKPPemb()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakSemKPPemb()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/usulan-semkp/pembimbing/approve/{{$kp->id}}" class="setujui-semkp-pembimbing" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
 
             @endif
@@ -174,15 +146,16 @@
       <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakGagalSemKPPemb()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Gagal</button> 
+        <button onclick="tolakGagalSemKPPemb()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Gagal</button> 
 </div>
     <div class="col">
         <form action="/selesaiseminar-kp/pembimbing/approve/{{$kp->id}}" class="setujui-selesai-semkp-pembimbing" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Selesai</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Selesai</i></button>
 </form>
     </div>
+  </div>
   </div>
 
             @endif
@@ -195,15 +168,16 @@
 <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemKPKoordinator()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakSemKPKoordinator()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/usulan-semkp/koordinator/approve/{{$kp->id}}" class="setujui-semkp-koordinator" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
     @endif
     @endif
@@ -214,27 +188,24 @@
 <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakSemKPKaprodi()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakSemKPKaprodi()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/usulan-semkp/kaprodi/approve/{{$kp->id}}" class="setujui-semkp-kaprodi" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
     @endif
     @endif
     @endif
+</div>
  
-
   @endforeach
-</div>
-</div>
-
-<br>
-<br>
+</section>
 <br>
 
 @endsection

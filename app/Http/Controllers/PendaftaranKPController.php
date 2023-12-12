@@ -453,43 +453,63 @@ public function kapasitasbimbingan_store(Request $request, $id)
 
     public function detailpersetujuan_kpti10($id)
     { 
+        $pendaftaran_kp = PendaftaranKP::find($id);
+
+        $penjadwalan_kp = PenjadwalanKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim)->latest('created_at')->first();
+        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        $nilai_penguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+
         //DOSEN ROLE
         if (auth()->user()->role_id == 6) {            
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 7) {            
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 8) {     
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
        
         if (auth()->user()->role_id == 9) {            
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 10) {            
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 11) {  
             
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
         //DOSEN
         if (auth()->user()->nip > 0) {  
             return view('pendaftaran.dosen.detail-persetujuan-kpti10', [
                 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('dosen_pembimbing_nip', Auth::user()->nip)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
 
@@ -725,6 +745,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->jenis_usulan = 'Penyerahan file KPTI-10/Bukti penyerahan laporan';
         $kp->status_kp = 'BUKTI PENYERAHAN LAPORAN';
         $kp->keterangan = 'Menunggu persetujuan Koordinator KP';
+        $kp->tgl_created_kpti10 = Carbon::now();
         $kp->update();
 
         Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
@@ -743,62 +764,84 @@ public function kapasitasbimbingan_store(Request $request, $id)
         if (auth()->user()->role_id == 1) {     
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
        
         if (auth()->user()->role_id == 2) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 3) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 4) {  
             
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
                 // 'penjadwalan_kp' => PenjadwalanKP::where('prodi_id', '3')->get(),
             ]);
         } 
         if (auth()->user()->role_id == 5 ) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
        
         if (auth()->user()->role_id == 6) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 7) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 8) {     
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
        
         if (auth()->user()->role_id == 9) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 10) {            
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 11) {  
             
             return view('pendaftaran.kerja-praktek.kpti-10.detail', [
                 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
         if (auth()->user()->nim > 0) {     
@@ -1141,7 +1184,8 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         $kp = PendaftaranKP::find($id);
         $kp->status_kp = 'KP SELESAI';
-        $kp->keterangan = 'Proses Kerja Praktek Selesai, Bukti Penyerahan Laporan KP Disetujui';
+        $kp->keterangan = 'Nilai KP Telah Keluar';
+        $kp->tgl_disetujui_kpti_10_koordinator = Carbon::now();
         $kp->update();
 
         Alert::success('Disetujui', 'Bukti penyerahan laporan KP disetujui!')->showConfirmButton('Ok', '#28a745');

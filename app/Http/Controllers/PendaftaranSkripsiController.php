@@ -883,8 +883,36 @@ class PendaftaranSkripsiController extends Controller
     }
     public function detail_bukti_buku_skripsi($id)
     {
+         $pendaftaran_skripsi = PendaftaranSkripsi::find($id);
+
+         $penjadwalan_skripsi = PenjadwalanSkripsi::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim)->latest('created_at')->first();
+
+
+        $nilai_pembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingsatu_nip)->latest('created_at')->first();
+        
+        $nilai_pembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingdua_nip)->latest('created_at')->first();
+
+        
+        $nilai_penguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('penguji_nip', $penjadwalan_skripsi->pengujisatu_nip)->latest('created_at')->first();
+        
+        $nilai_penguji2 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('penguji_nip', $penjadwalan_skripsi->pengujidua_nip)->latest('created_at')->first();
+        
+        $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
+
        return view('pendaftaran.dosen.detail-laporan-skripsi-pemb', [
                 'pendaftaran_skripsi' =>  PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('id', $id)->where('pembimbing_2_nip', Auth::user()->nip)->get(),
+
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            'nilaipembimbing1' => $nilai_pembimbing1,
+            'nilaipembimbing2' => $nilai_pembimbing2,
+            'nilaipenguji1' => $nilai_penguji1, 
+            'nilaipenguji2' => $nilai_penguji2, 
+            'nilaipenguji3' => $nilai_penguji3,
             ]);
     }
 

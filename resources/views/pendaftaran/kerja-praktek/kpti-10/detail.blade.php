@@ -62,6 +62,7 @@
   </div>
 </div>
 
+@if ($kp->status_kp == 'KP SELESAI' )
 <div class="container">
   <div class="row shadow-sm">
     <div class="col-lg-6 col-md-12 bg-white rounded-start mb-2 px-4 py-3">
@@ -138,6 +139,43 @@
     </div>
   </div>
 </div>
+@else
+
+<div class="container">
+  <div class="row shadow-sm">
+    <div class="col-lg-6 col-md-12 bg-white rounded-start mb-2 px-4 py-3">
+         <h5 class="text-bold">Data Usulan</h5>
+        <hr>
+        <p class="card-title text-secondary text-sm" >KPTI-10 - Bukti Penyerahan Laporan</p>
+        <p class="card-text lh-1 text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark rounded py-2 px-3">Buka</a></p>
+
+        <p class="card-title text-secondary text-sm" >Laporan KP</p>
+        <p class="card-text lh-1 text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark rounded py-2 px-3">Buka</a></p>
+
+
+    </div>
+    <div class="col-lg-6 col-md-12 bg-white rounded-end mb-2 px-4 py-3">
+          <h5 class="text-bold">Keterangan Pendaftaran</h5>
+        <hr>
+        <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
+        <p class="card-text lh-1 text-start" ><span >{{$kp->jenis_usulan}}</span></p>
+        @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )
+        <p class="card-title text-secondary text-sm" >Status KP</p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
+        @if ($kp->status_kp == 'KP SELESAI' )
+        <p class="card-title text-secondary text-sm " >Status KP</p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
+        <p class="card-title text-secondary text-sm" >Keterangan</p>
+        <p class="card-text lh-1 text-start" ><span>{{$kp->keterangan}}</span></p>
+
+    </div>
+  </div>
+</div>
+
+@endif
+
 
 
       @if (Str::length(Auth::guard('dosen')->user()) > 0)
@@ -147,13 +185,13 @@
    <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakKPTI10Koordinator()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakKPTI10Koordinator()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/kpti10/koordinator/approve/{{$kp->id}}" class="setujui-kpti10-koordinator" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
   </div>

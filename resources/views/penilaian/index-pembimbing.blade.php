@@ -62,7 +62,8 @@
   </thead>
   <tbody> 
 
-      @foreach ($penjadwalan_kps as $kp)    
+      @foreach ($penjadwalan_kps as $kp)
+      @if($kp->tanggal ==! null)     
       <tr>                 
         <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
         <td class="text-center">{{$kp->mahasiswa->nama}}</td>                    
@@ -89,14 +90,13 @@
             <a href="/penilaian-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
           @endif      
           <a formtarget="_blank" target="_blank" href="/undangan-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>
-          
-          
         </td>                                
       </tr>               
+      @endif      
     @endforeach
     
-
-    @foreach ($penjadwalan_sempros as $sempro)    
+    @foreach ($penjadwalan_sempros as $sempro)
+    @if($sempro->tanggal ==! null)     
         <tr>                  
           <td class="text-center">{{$sempro->mahasiswa->nim}}</td>                             
           <td class="text-center">{{$sempro->mahasiswa->nama}}</td>                     
@@ -132,6 +132,7 @@
             <a formtarget="_blank" target="_blank" href="/undangan-sempro/{{Crypt::encryptString($sempro->id)}}" class="badge bg-info p-2 mt-2"style="border-radius:20px;">Undangan</a>          
           </td>                        
         </tr>               
+        @endif    
     @endforeach
 
     @foreach ($penjadwalan_skripsis as $skripsi)    

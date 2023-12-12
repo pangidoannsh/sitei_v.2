@@ -20,101 +20,160 @@
 </div>
 @endif
 
-<div class="container-fluid">
 
-<div>
+
+  <section class="mb-5">
+  <div class="container">
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-
-  <a href="/kp-skripsi/persetujuan-kp" class="badge bg-success p-2 mb-3"> Kembali <a>
-
+  <a href="/persetujuan-kp-skripsi" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
   @endif
-
+</div>
   @foreach ($pendaftaran_kp as $kp)
+<div class="container">
+  <div class="row shadow-sm">
+    <div class="col-lg-6 col-md-12 bg-white rounded-start px-4 py-3 mb-2">
   
-
-  @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-              @if (Auth::guard('mahasiswa')->user())
-  
-  <a href="/usulankp/index" class="badge bg-success p-2 mb-3"> Kembali <a>
-
-  @if ($kp->status_kp == 'KP SELESAI' )
-  <div class="mb-3">
-  <a formtarget="_blank" target="_blank" href="/surat-permohonan-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-dark p-2 fas fa-download">  Unduh Surat Permohonan KP</a>
-  </div>
-  @endif
-
-  @endif
-  @endif
-
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-      <h5 class="text-bold">Mahasiswa</h5>
+        <h5 class="text-bold">Mahasiswa</h5>
       <hr>
-        <p class="card-title text-secondary text-sm " >Nama</p>
-        <p class="card-text text-start" >{{$kp->mahasiswa->nama}}</p>
-        <p class="card-title text-secondary text-sm " >NIM</p>
-        <p class="card-text text-start" >{{$kp->mahasiswa->nim}}</p>
-        <p class="card-title text-secondary text-sm " >Program Studi</p>
-        <p class="card-text text-start" >{{$kp->mahasiswa->prodi->nama_prodi}}</p>
-        <p class="card-title text-secondary text-sm " >Konsentrasi</p>
-        <p class="card-text text-start" >{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-        
-      </div>
+        <p class="card-title  text-muted text-sm " >Nama</p>
+        <p class="card-text lh-1 text-start" >{{$kp->mahasiswa->nama}}</p>
+        <p class="card-title  text-muted text-sm " >NIM</p>
+        <p class="card-text lh-1 text-start" >{{$kp->mahasiswa->nim}}</p>
+        <p class="card-title  text-muted text-sm " >Program Studi</p>
+        <p class="card-text lh-1 text-start" >{{$kp->mahasiswa->prodi->nama_prodi}}</p>
+        <p class="card-title  text-muted text-sm " >Konsentrasi</p>
+        <p class="card-text lh-1 text-start" >{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
+   
     </div>
-     <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Dosen Pembimbing</h5>
+    <div class="col-lg-6 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
+  
+         <h5 class="text-bold">Dosen Pembimbing</h5>
         <hr>
-        <p class="card-title text-secondary text-sm" >Nama</p>
-        <p class="card-text text-start" >{{$kp->dosen_pembimbingkp->nama}}</p>
+        <p class="card-title  text-secondary text-sm" >Nama Pembimbing</p>
+        <p class="card-text lh-1 text-start" >{{$kp->dosen_pembimbingkp->nama}}</p>
         <!-- <p class="card-title text-secondary text-sm" >NIP</p>
         <p class="card-text text-start" >{{$kp->dosen_pembimbingkp->nip}}</p> -->
 
-      </div>
     </div>
   </div>
-  <div class="col-sm-6">
-    <div class="card">
-<div class="card-body">
-      <h5 class="text-bold">Data Usulan</h5>
+</div>
+
+@if ($kp->status_kp == 'KP SELESAI' )
+<div class="container">
+  <div class="row shadow-sm">
+    <div class="col-lg-6 col-md-12 bg-white rounded-start mb-2 px-4 py-3">
+         <h5 class="text-bold">Data Usulan</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >KPTI-10 - Bukti Penyerahan Laporan</p>
-        <!-- <p class="card-text text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></p> -->
-       <p class="card-text text-start " ><button  onclick="window.location.href='{{asset('storage/' .$kp->kpti_10 )}}';" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
+        <p class="card-text lh-1 text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark rounded py-2 px-3">Buka</a></p>
 
-       <p class="card-title text-secondary text-sm" >Laporan KP</p>
-        <!-- <p class="card-text text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></p> -->
-       <p class="card-text text-start " ><button  onclick="window.location.href='{{asset('storage/' .$kp->laporan_akhir )}}';" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
+        <p class="card-title text-secondary text-sm" >Laporan KP</p>
+        <p class="card-text lh-1 text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark rounded py-2 px-3">Buka</a></p>
 
-  </div>
-  </div>
-   
+
+    </div>
+    <div class="col-lg-6 col-md-12 bg-white rounded-end mb-2 px-4 py-3">
+         <h5 class="text-bold">Nilai Kerja Praktek</h5>
+        <hr>
+        <p class="card-title  text-secondary text-sm" >Nilai Angka</p>
+        <p class="card-text lh-1 lh-1 text-start" >
+           @if ($nilai_pembimbing == '' || $nilai_penguji == '')
+                                    -
+           @else
+                                    {{round(($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3) }}
+            @endif
+        </p>
+        
+        <p class="card-title  text-secondary text-sm" >Nilai Huruf</p>
+        <p class="card-text lh-1 lh-1 text-start" >
+           @if ($nilai_pembimbing == '' || $nilai_penguji == '')
+                                    -
+           @else
+                                    @if (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 85)
+                                    A
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 80)
+                                        A-
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 75)
+                                        B+
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 70)
+                                        B
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 65)
+                                        B-
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 60)
+                                        C+
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 55)
+                                        C
+                                    @elseif (($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3 >= 40)
+                                        D
+                                    @else
+                                        E
+                                    @endif
+           @endif
+        </p>
+
+    </div>
   </div>
 </div>
- 
 
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Keterangan Pendaftaran</h5>
+<div class="container">
+  <div class="row rounded shadow-sm">
+    <div class="col bg-white rounded px-4 py-3 mb-2">
+      <h5 class="text-bold">Keterangan Pendaftaran</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
-        <p class="card-text text-start" ><span >{{$kp->jenis_usulan}}</span></p>
+        <p class="card-text lh-1 text-start" ><span >{{$kp->jenis_usulan}}</span></p>
         @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )
         <p class="card-title text-secondary text-sm" >Status KP</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
         @endif
         @if ($kp->status_kp == 'KP SELESAI' )
         <p class="card-title text-secondary text-sm " >Status KP</p>
-        <p class="card-text text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
         @endif
         <p class="card-title text-secondary text-sm" >Keterangan</p>
-        <p class="card-text text-start" ><span>{{$kp->keterangan}}</span></p>
-
-      </div>
+        <p class="card-text lh-1 text-start" ><span>{{$kp->keterangan}}</span></p>
     </div>
+  </div>
+</div>
+@else
 
+<div class="container">
+  <div class="row shadow-sm">
+    <div class="col-lg-6 col-md-12 bg-white rounded-start mb-2 px-4 py-3">
+         <h5 class="text-bold">Data Usulan</h5>
+        <hr>
+        <p class="card-title text-secondary text-sm" >KPTI-10 - Bukti Penyerahan Laporan</p>
+        <p class="card-text lh-1 text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark rounded py-2 px-3">Buka</a></p>
+
+        <p class="card-title text-secondary text-sm" >Laporan KP</p>
+        <p class="card-text lh-1 text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->kpti_10 )}}" class="badge bg-dark rounded py-2 px-3">Buka</a></p>
+
+
+    </div>
+    <div class="col-lg-6 col-md-12 bg-white rounded-end mb-2 px-4 py-3">
+          <h5 class="text-bold">Keterangan Pendaftaran</h5>
+        <hr>
+        <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
+        <p class="card-text lh-1 text-start" ><span >{{$kp->jenis_usulan}}</span></p>
+        @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )
+        <p class="card-title text-secondary text-sm" >Status KP</p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
+        @if ($kp->status_kp == 'KP SELESAI' )
+        <p class="card-title text-secondary text-sm " >Status KP</p>
+        <p class="card-text lh-1 text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
+        <p class="card-title text-secondary text-sm" >Keterangan</p>
+        <p class="card-text lh-1 text-start" ><span>{{$kp->keterangan}}</span></p>
+
+    </div>
+  </div>
+</div>
+
+@endif
+
+
+<div class="container">
  @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
  
@@ -122,15 +181,16 @@
    <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakKPTI10Koordinator()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakKPTI10Koordinator()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/kpti10/koordinator/approve/{{$kp->id}}" class="setujui-kpti10-koordinator" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
 
     @endif 
@@ -139,10 +199,10 @@
   
   @endforeach
 </div>
-</div>
+
+</section>
 <br>
-<br>
-<br>
+
 @endsection
 
 @push('scripts')

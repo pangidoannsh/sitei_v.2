@@ -10,15 +10,17 @@ use App\Models\Mahasiswa;
 use App\Models\PermohonanKP;
 use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
-use App\Models\PenjadwalanSempro;
 use App\Models\PenjadwalanKP;
-use App\Models\PendaftaranSkripsi;
+use App\Models\PenjadwalanSempro;
 use App\Models\KapasitasBimbingan;
+use App\Models\PendaftaranSkripsi;
 
+use App\Models\PenilaianKPPenguji;
 use App\Models\PenjadwalanSkripsi;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\URL;
+use App\Models\PenilaianKPPembimbing;
 use Illuminate\Support\Facades\Crypt;
 
 
@@ -217,34 +219,49 @@ class PendaftaranController extends Controller
     }
     public function detailkpti10_pembimbing ($id)
     {
+        $pendaftaran_kp = PendaftaranKP::find($id);
+
+        $penjadwalan_kp = PenjadwalanKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim)->latest('created_at')->first();
+        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        $nilai_penguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
         
         //ADMIN
         if (auth()->user()->role_id == 1) {     
             return view('pendaftaran.dosen.detailkpti-10-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
        
         if (auth()->user()->role_id == 2) {            
             return view('pendaftaran.dosen.detailkpti-10-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 3) {            
             return view('pendaftaran.dosen.detailkpti-10-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 4) {  
             
             return view('pendaftaran.dosen.detailkpti-10-pemb', [
                 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
         //DOSEN
         if (auth()->user()->nip >0) {  
             return view('pendaftaran.dosen.detailkpti-10-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('dosen_pembimbing_nip', Auth::user()->nip)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
             ]);
         } 
     }
@@ -1671,7 +1688,6 @@ class PendaftaranController extends Controller
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan', 'Menunggu persetujuan Koordinator KP')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
                 
-                ->orWhere('prodi_id', '1')->where('keterangan', 'Proses Kerja Praktek Selesai')
                 ->orWhere('prodi_id', '1')->where('status_kp', 'DAFTAR SEMINAR KP')->where('keterangan', 'Menunggu Jadwal Seminar KP')
                 ->orderBy('status_kp', 'desc')->get(),
 
@@ -1699,8 +1715,6 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.persetujuankp-skripsi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', 'Menunggu persetujuan Koordinator KP')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
-                
-                ->orWhere('prodi_id', '2')->where('keterangan', 'Proses Kerja Praktek Selesai')
                 ->orWhere('prodi_id', '2')->where('status_kp', 'DAFTAR SEMINAR KP')->where('keterangan', 'Menunggu Jadwal Seminar KP')
                 ->orderBy('status_kp', 'desc')->get(),
 
@@ -1730,7 +1744,6 @@ class PendaftaranController extends Controller
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan', 'Menunggu persetujuan Koordinator KP')
                 ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
                 
-                ->orWhere('prodi_id', '3')->where('keterangan', 'Proses Kerja Praktek Selesai')
                 ->orWhere('prodi_id', '3')->where('status_kp', 'DAFTAR SEMINAR KP')->where('keterangan', 'Menunggu Jadwal Seminar KP')
                 ->orderBy('status_kp', 'desc')->get(),
 

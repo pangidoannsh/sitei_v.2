@@ -5,11 +5,15 @@
 @endphp
 
 @section('header')
-    SITEI | Penilaian Seminar KP
+    SITEI | Penilaian Seminar Kerja Praktek
+@endsection
+
+@section('title')
+   SITEI | Penilaian Seminar Kerja Praktek
 @endsection
 
 @section('sub-title')
-    Penilaian Seminar KP
+    Penilaian Seminar Kerja Praktek
 @endsection
 
 @section('content')
@@ -23,129 +27,56 @@
   
   <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
-  <div class="row mt-3">
-    <div class="col col-lg-6 col-md-6 col-sm-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="text-bold">Mahasiswa</h5>
+  <div class="container">
+    <div class="row shadow-sm rounded">
+      <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Mahasiswa</h5>
           <hr>
           <p class="card-title text-secondary text-sm " >Nama</p>
           <p class="card-text text-start" >{{$kp->mahasiswa->nama}}</p>
           <p class="card-title text-secondary text-sm " >NIM</p>
           <p class="card-text text-start" >{{$kp->mahasiswa->nim}}</p>
-        </div>
+          <p class="card-title text-secondary text-sm " >Program Studi</p>
+          <p class="card-text text-start" >{{$kp->mahasiswa->prodi->nama_prodi}}</p>
+          <p class="card-title text-secondary text-sm " >Konsentrasi</p>
+          <p class="card-text text-start" >{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
       </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="text-bold">Dosen</h5>
+      <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+       <h5 class="text-bold">Dosen Pembimbing</h5>
           <hr>
           <p class="card-title text-secondary text-sm" >Nama Pembimbing</p>
           <p class="card-text text-start" >{{$kp->pembimbing->nama}}</p>
+      </div>
+      <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+       <h5 class="text-bold">Dosen Penguji</h5>
+          <hr>
           <p class="card-title text-secondary text-sm" >Nama Penguji</p>
           <p class="card-text text-start" >{{$kp->penguji->nama}}</p>
-        </div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <h5 class="text-bold">Judul Kerja Praktek</h5>
+  <div class="container">
+    <div class="row shadow-sm rounded">
+      <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Judul Kerja Praktek</h5>
       <hr>
       <p class="card-title text-secondary text-sm" >Judul</p>
       <p class="card-text text-start" >{{$kp->judul_kp}}</p>
-    </div>
-  </div>
-
-  <div class="card mb-5">
-    <div class="card-body">
-      <h5 class="text-bold">Jadwal Seminar Kerja Praktek</h5>
+      </div>
+      <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+      <h5 class="text-bold">Jadwal Seminar</h5>
       <hr>
-      <p class="card-title text-secondary text-sm" >Tanggal</p>
+      <p class="card-title text-secondary text-sm" >Hari/Tanggal</p>
       <p class="card-text text-start" >{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</p>
       <p class="card-title text-secondary text-sm" >Pukul</p>
       <p class="card-text text-start" >{{$kp->waktu}}</p>
       <p class="card-title text-secondary text-sm" >Ruangan</p>
       <p class="card-text text-start" >{{$kp->lokasi}}</p>
+      </div>
     </div>
   </div>
 
-  {{-- <div class="row">
-    <div class="col col-lg-6 col-md-6 col-sm-12 mt-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold  gridratakiri">NIM</div>
-          <span>{{$kp->mahasiswa->nim}}</span>
-        </div>        
-      </li> 
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto field">
-          <div class="fw-bold  gridratakiri">Nama</div>
-          <span>{{$kp->mahasiswa->nama}}</span>
-        </div>        
-      </li>   
-    </ol>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Pembimbing</div>
-          <span>{{$kp->pembimbing->nama}}</span>
-        </div>        
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Penguji</div>
-          <span>{{$kp->penguji->nama}}</span>
-        </div>        
-      </li>     
-    </ol>
-    </div>
-  </div>
-</div>
-
-<div class="kol-judul mt-3">
-  <div class="row">
-    <div class="col">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-          <div class="fw-bold ">Judul</div>
-          <span>{{$kp->judul_kp}}</span>
-        </div>        
-      </li>   
-    </ol>  
-    </div>
-  </div>
-</div>
-
-<div class="kol-jadwal mt-3 mb-3">
-  <div class="row">
-    <div class="col-md mb-3">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-        <div class="fw-bold  ">Jadwal</div>          
-          <span>{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}, : {{$kp->waktu}}</span>             
-        </div>        
-      </li>   
-    </ol>
-    </div>
-    <div class="col-md">
-    <ol class="list-group" style="box-shadow: 0.6px 0.6px 0.6px 0.6px #e5e5e5; border-radius:3px;">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto gridratakiri">
-        <div class="fw-bold ">Lokasi</div>
-          <span>{{$kp->lokasi}}</span>
-        </div>        
-      </li>   
-    </ol>
-    </div>
-  </div> --}}
 
 
 @if (auth()->user()->nip == $kp->penguji_nip && auth()->user()->nip !== $kp->pembimbing_nip)
@@ -155,12 +86,12 @@
         <div class="card-header p-0 pt-1">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white active" id="custom-tabs-one-home-tab" data-toggle="pill"
                 href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
                 aria-selected="true">Form Nilai</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white" id="custom-tabs-one-profile-tab" data-toggle="pill"
                 href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
                 aria-selected="false">Saran Perbaikan</a>
             </li>                      
@@ -282,7 +213,9 @@
                       </table>
             </div>
                     
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
+                    <!-- <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>     -->
+                    
+                    <button type="submit"  class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -313,7 +246,7 @@
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kp->revisi_naskah5 != null ? $kp->revisi_naskah5 : '' }}">
                     </div>
 
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>    
+                    <button type="submit"  class="btn btn-lg btn-success float-right">Simpan</button>    
                 </div>                
                 </form>
         </div>      
@@ -327,22 +260,22 @@
         <div class="card-header p-0 pt-1">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white active" id="custom-tabs-one-home-tab" data-toggle="pill"
                 href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
                 aria-selected="true">Form Nilai</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                <a class="nav-link btn-success text-white" id="custom-tabs-one-profile-tab" data-toggle="pill"
                 href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
                 aria-selected="false">Nilai Pembimbing Lapangan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-form-tab" data-toggle="pill"
+              <a class="nav-link btn-success text-white" id="custom-tabs-one-form-tab" data-toggle="pill"
                 href="#custom-tabs-one-form" role="tab" aria-controls="custom-tabs-one-form"
                 aria-selected="false">Catatan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-setting-tab" data-toggle="pill"
+              <a class="nav-link btn-success text-white" id="custom-tabs-one-setting-tab" data-toggle="pill"
                 href="#custom-tabs-one-setting" role="tab" aria-controls="custom-tabs-one-setting"
                 aria-selected="false">Berita Acara</a>
           </li>          
@@ -463,7 +396,7 @@
                         </tbody>
                       </table>
             </div>
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
+                    <button type="submit"  class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
@@ -471,9 +404,9 @@
 
                     <div class="mb-3 gridratakiri">    
                     <div class="fw-bold mb-2">Input Nilai :</div>                  
-                      <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
+                      <input type="number" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}" min="0" max="100"> 
                     </div>                                        
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>                  
+                    <button type="submit"  class="btn btn-lg btn-success float-right">Simpan</button>                  
                 </div>
 
                 <div class="tab-pane fade" id="custom-tabs-one-form" role="tabpanel"
@@ -494,7 +427,7 @@
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
                     
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>    
+                    <button type="submit"  class="btn btn-lg btn-success float-right">Simpan</button>    
                   </form>
                 </div>
 
@@ -625,11 +558,29 @@
                       </tbody>
                     </table> 
 
-                    <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
+                    <!-- <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
                         @method('put')
                         @csrf
-                        <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-danger float-right">Selesai Seminar</button>
-                      </form>                
+                        <button type="submit"  class="btn btn-lg btn-danger float-right">Selesai Seminar</button>
+                      </form>                 -->
+
+                       <div class="container pb-5">
+                      <button type="button" class="btn mt-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove">Selesai Seminar</button>
+
+                              <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5>Anda belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  </div>
 
                 </div>              
 
@@ -783,7 +734,7 @@
                       </table>
             </div>
                     
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
+                    <button type="submit"  class="btn btn-lg btnsimpan btn-success float-right">Simpan</button>    
            
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -812,7 +763,7 @@
                       <input type="text" name="revisi_naskah5" class="form-control" value="{{ $kp->revisi_naskah5 != null ? $kp->revisi_naskah5 : '' }}">
                     </div>
 
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button> 
+                    <button type="submit"  class="btn btn-lg btn-success float-right">Simpan</button> 
                     </form>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -820,9 +771,9 @@
                  @csrf
                  <div class="mb-3 gridratakiri">    
                     <div class="fw-bold mb-2">Input Nilai :</div>                  
-                      <input type="text" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}">  
+                      <input type="number" name="nilai_pembimbing_lapangan" class="form-control" value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}" min="0" max="100">  
                     </div>                                        
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>
+                    <button type="submit"  class="btn btn-lg btn-success float-right">Simpan</button>
   </div>
   <div class="tab-pane fade" id="empat" role="tabpanel" aria-labelledby="empat-tab">
      <div class="mb-3 gridratakiri">                      
@@ -840,7 +791,7 @@
                       <input type="text" name="catatan3" class="form-control" value="{{ $kp->catatan3 != null ? $kp->catatan3 : '' }}">
                     </div>
                     
-                    <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-success float-right">Simpan</button>    
+                    <button type="submit"  class="btn btn-lg btn-success float-right">Simpan</button>    
                   </form>
   
   </div>
@@ -970,11 +921,31 @@
                       </tbody>
                     </table> 
 
-                    <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
+                    <!-- <form action="/penilaian-kp/approve/{{$penjadwalan->id}}" method="POST">
                         @method('put')
                         @csrf
                         <button type="submit" onclick="return confirm('Apakah anda yakin?')" class="btn btn-lg btn-danger float-right">Selesai Seminar</button>
-                      </form>
+                      </form> -->
+                <div class="container pb-5">
+                      <button type="button" class="btn mt-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove">Selesai Seminar</button>
+
+                              <div class="modal fade"id="ModalApprove">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5>Anda belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  
+                                  
+                                  </div> 
+
   </div>
   </div>
   </div>

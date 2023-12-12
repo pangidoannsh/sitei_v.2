@@ -19,60 +19,53 @@
   {{session('message')}}
 </div>
 @endif
-
-
-<div class="container-fluid">
-
-<div>
-  
+    
+ <section class="mb-5">
+    <div class="container">
+ @if (Str::length(Auth::guard('dosen')->user()) > 0)
+   <a href="/pembimbing/kerja-praktek" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+       @endif
+                
+       @if (Str::length(Auth::guard('web')->user()) > 0)
+    <a href="/kerja-praktek/admin/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+@endif                          
+  </div>
+                
 @foreach ($pendaftaran_kp as $kp)
-@if (Str::length(Auth::guard('dosen')->user()) > 0)
-<div class="container float-start">
-  <a href="/pembimbing/kerja-praktek" class="badge bg-success p-2 mb-3 float-start"> Kembali <a>
-</div>
-@endif
-@if (Str::length(Auth::guard('web')->user()) > 0)
-<div class="container float-start">
-  <a href="/kerja-praktek/admin/index" class="badge bg-success p-2 mb-3 float-start"> Kembali <a>
-</div>
-  @endif
-
- <div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-      <h5 class="text-bold">Mahasiswa</h5>
+ <div class="container">
+    <div class="row rounded shadow-sm">
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+            <h5 class="text-bold">Mahasiswa</h5>
       <hr>
         <p class="card-title text-secondary text-sm " >Nama</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->nama}}</p>
         <p class="card-title text-secondary text-sm " >NIM</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->nim}}</p>
-         <p class="card-title text-secondary text-sm " >Program Studi</p>
+        <p class="card-title text-secondary text-sm " >Program Studi</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->prodi->nama_prodi}}</p>
         <p class="card-title text-secondary text-sm " >Konsentrasi</p>
         <p class="card-text text-start" >{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
-        
-      </div>
-    </div>
-     <div class="card">
-      <div class="card-body">
+        </div>
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+        @if($kp->status_kp == 'USULAN KP')
         <h5 class="text-bold">Calon Dosen Pembimbing</h5>
+        @else
+        <h5 class="text-bold">Dosen Pembimbing</h5>
+        @endif
         <hr>
         <p class="card-title text-secondary text-sm" >Nama</p>
         <p class="card-text text-start" >{{$kp->dosen_pembimbingkp->nama}}</p>
-        <!-- <p class="card-title text-secondary text-sm" >NIP</p>
-        <p class="card-text text-start" >{{$kp->dosen_pembimbingkp->nip}}</p> -->
-
-      </div>
+        </div>
     </div>
   </div>
-  <div class="col-sm-6">
-    <div class="card">
-<div class="card-body">
-      <h5 class="text-bold">Data Usulan</h5>
+
+  <div class="container">
+    <div class="row rounded shadow-sm">
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+        <h5 class="text-bold">Data Usulan</h5>
       <hr>
 
-<p class="card-title text-secondary text-sm" >Nama Perusahaan</p>
+        <p class="card-title text-secondary text-sm" >Nama Perusahaan</p>
         <p class="card-text text-start" >{{$kp->nama_perusahaan}}</p>
      
         <p class="card-title text-secondary text-sm" >Alamat Perusahaan</p>
@@ -81,23 +74,17 @@
         <p class="card-title text-secondary text-sm" >Bidang Usaha/Kegiatan</p>
         <p class="card-text text-start" >{{$kp->bidang_usaha}}</p>
         <p class="card-title text-secondary text-sm " >KRS Semester Berjalan</p>
-        <p class="card-text text-start " ><button  onclick="newTab1();" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->krs_berjalan )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
         <p class="card-title text-secondary text-sm " >Transkip Nilai</p>
-        <!-- <p class="card-text text-start " ><button  onclick="window.location.href='{{asset('storage/' .$kp->transkip_nilai )}}';" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p> -->
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$kp->transkip_nilai )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
 
-        <p class="card-text text-start " ><button  onclick="newTab2();" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p>
+        <!-- <p class="card-text text-start " ><button  onclick="newTab2();" formtarget="_blank" target="_blank"class="badge bg-dark px-3 p-1">Buka</button></p> -->
 
         <p class="card-title text-secondary text-sm" >Rencana Mulai KP</p>
         <p class="card-text text-start mb-md-4"> {{Carbon::parse($kp->tanggal_rencana)->translatedFormat('l, d F Y')}}</p>
-
-  </div>
-  </div>
-   
-  </div>
-</div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="text-bold">Keterangan Pendaftaran</h5>
+        </div>
+        <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+            <h5 class="text-bold">Keterangan Pendaftaran</h5>
         <hr>
         <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
         <p class="card-text text-start" ><span >{{$kp->jenis_usulan}}</span></p>
@@ -111,9 +98,11 @@
         @endif
         <p class="card-title text-secondary text-sm" >Keterangan</p>
         <p class="card-text text-start" ><span>{{$kp->keterangan}}</span></p>
-
-      </div>
+        </div>
     </div>
+  </div>
+
+   <div class="container">
 
     <!-- APPROVAL PEMBIMBING -->
     @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
@@ -121,15 +110,16 @@
 <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-<button onclick="tolakUsulanKPPembimbing()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+<button onclick="tolakUsulanKPPembimbing()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/usulankp/pembimbing/approve/{{$kp->id}}" class="setujui-usulankp-pemb" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
     @endif
     @endif
@@ -141,15 +131,16 @@
 <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakUsulanKPAdmin()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
+        <button onclick="tolakUsulanKPAdmin()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
 </div>
     <div class="col">
         <form action="/usulankp/admin/approve/{{$kp->id}}" class="setujui-usulankp-admin" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
     @endif
     @endif
@@ -165,16 +156,17 @@
         <form action="/usulankp/koordinator/tolak/{{$kp->id}}" class="tolak-usulankp-koordinator" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-danger badge p-2 px-3">Tolak</i></button>
+    <button class="btn btn-danger py-2 px-3 mb-3">Tolak</i></button>
 </form>
 </div>
     <div class="col">
         <form action="/usulankp/koordinator/approve/{{$kp->id}}" class="setujui-usulankp-koordinator" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
 
     @endif
@@ -191,34 +183,30 @@
         <form action="/usulankp/kaprodi/tolak/{{$kp->id}}" class="tolak-usulankp-kaprodi" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-danger badge p-2 px-3">Tolak</i></button>
+    <button class="btn btn-danger py-2 px-3 mb-3">Tolak</i></button>
 </form>
 </div>
     <div class="col">
         <form action="/usulankp/kaprodi/approve/{{$kp->id}}" class="setujui-usulankp-kaprodi" method="POST"> 
     @method('put')
     @csrf
-    <button class="btn btn-success badge p-2 px-3 mb-3">Setujui</i></button>
+    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
 </form>
     </div>
+  </div>
   </div>
   
     @endif
     @endif
     @endif
+</div>
 
   @endforeach
-</div>
-</div>
-
-
-<br>
-<br>
-<br>
+</section>
 
 @endsection
 
-<script>
+<!-- <script>
     function newTab1(url){
         var x = window.open('{{asset('storage/' .$kp->krs_berjalan )}}','_blank');
         x.focus();
@@ -227,8 +215,7 @@
         var x = window.open('{{asset('storage/' .$kp->transkip_nilai )}}','_blank');
         x.focus();
     }
-
-</script>
+</script> -->
 
 @push('scripts')
 @foreach ($pendaftaran_kp as $kp)

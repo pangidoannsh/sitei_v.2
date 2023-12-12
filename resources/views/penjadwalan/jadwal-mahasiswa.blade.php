@@ -19,7 +19,7 @@
   {{session('message')}}
 </div>
 @endif
-  <a href="/usulankp/index" class="badge bg-success p-2 mb-3 float-start"> Kembali <a>
+    <!-- <a href="/usulankp/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a> -->
 
 <!-- <ol class="breadcrumb col-lg-12">
     <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/jadwal">Jadwal</a></li>    
