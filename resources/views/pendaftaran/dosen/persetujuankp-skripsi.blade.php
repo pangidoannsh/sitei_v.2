@@ -28,8 +28,8 @@
      
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
-          <span class="px-2">|</span>      
-            <li><a href="/persetujuan-kaprodi" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li>
+          <!-- <span class="px-2">|</span>      
+            <li><a href="/persetujuan-kaprodi" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li> -->
 
           <span class="px-2">|</span>
             <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan (<span id=""></span>)</a></li>
@@ -40,8 +40,8 @@
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 
-          <span class="px-2">|</span>      
-            <li><a href="persetujuan-koordinator" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li>
+          <!-- <span class="px-2">|</span>      
+            <li><a href="persetujuan-koordinator" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li> -->
 
           <span class="px-2">|</span>
             <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan (<span id=""></span>)</a></li>

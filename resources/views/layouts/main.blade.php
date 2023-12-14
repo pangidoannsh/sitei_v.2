@@ -202,6 +202,9 @@
                 @endif             
               </ul>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }}" aria-current="page" href="/inventaris/peminjamanadm">Inventaris</a>
+          </li>
           @endif
         </ul>
 

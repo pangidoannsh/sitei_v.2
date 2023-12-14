@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Kerja Praktek | SIA ELEKTRO
+    SITEI | Daftar Peminjaman
 @endsection
 
 @section('sub-title')
-    Kerja Praktek
+    Daftar Peminjaman
 @endsection
 
 @section('content')

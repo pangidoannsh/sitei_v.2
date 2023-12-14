@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar KP | SIA ELEKTRO
+    SITEI | Tambah Developer
 @endsection
 
 @section('sub-title')
-    Usulan Judul Skripsi
+    Tambah Developer
 @endsection
 <style>
 

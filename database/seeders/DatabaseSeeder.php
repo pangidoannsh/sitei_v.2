@@ -2,21 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\StatusKP;
-use App\Models\Dosen;
-use App\Models\Konsentrasi;
-use App\Models\Mahasiswa;
-use App\Models\KapasitasBimbingan;
+use App\Models\Jam;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Dosen;
 use App\Models\Prodi;
-use Illuminate\Database\Seeder;
+use App\Models\Barang;
+use App\Models\JamKam;
+use App\Models\JamSel;
+use App\Models\Ruangan;
 use App\Models\JamKPKam;
 use App\Models\JamKPSel;
-use App\Models\JamSel;
-use App\Models\JamKam;
-use App\Models\Jam;
-use App\Models\Ruangan;
+use App\Models\StatusKP;
+use App\Models\Mahasiswa;
+use App\Models\Konsentrasi;
+use Illuminate\Database\Seeder;
+use App\Models\KapasitasBimbingan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -689,6 +690,62 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+
+        // INVENTARIS
+
+        Barang::create([
+            'kode_barang' => '001',
+            'nama_barang' => 'Infocus 001',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => '002',
+            'nama_barang' => 'Infocus 002',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => '003',
+            'nama_barang' => 'Infocus 003',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => '004',
+            'nama_barang' => 'Infocus 004',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => 'RW',
+            'nama_barang' => 'Absen Rekayasa Web',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => 'IMK',
+            'nama_barang' => 'Absen IMK',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => 'MMD',
+            'nama_barang' => 'Absen Multimedia',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => 'RC1TI',
+            'nama_barang' => 'Kunci RC1TI',
+            'jumlah' => 1
+        ]);
+
+        Barang::create([
+            'kode_barang' => 'C314',
+            'nama_barang' => 'Kunci C314',
+            'jumlah' => 1
+        ]);
               
     }
 }
