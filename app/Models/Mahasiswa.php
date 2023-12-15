@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Role;
 use App\Models\Prodi;
-use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
 use App\Models\PendaftaranKP;
 use Laravel\Sanctum\HasApiTokens;

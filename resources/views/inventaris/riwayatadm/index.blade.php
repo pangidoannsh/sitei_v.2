@@ -20,8 +20,8 @@
         
 
 <ol class="breadcrumb col-lg-12">
-    <li class="breadcrumb-item"><a  href="{{ route('peminjamanadm') }}">Daftar Pinjam ({{ $jumlah_pinjaman }})</a></li>   
-    <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="{{ route('riwayatadm') }}">Riwayat ({{ $jumlah_riwayat }})</a></li>
+    <li class="breadcrumb-item"><a  href="{{ route('peminjamanadm') }}">Daftar Pinjaman ({{ $jumlah_pinjaman }})</a></li>   
+    <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="{{ route('riwayatadm') }}">Riwayat Pinjaman ({{ $jumlah_riwayat }})</a></li>
     <li class="breadcrumb-item"><a  href="{{ route('stok') }}"> Inventaris ({{ $jumlah_barang }})</a></li>  
 </ol>
 

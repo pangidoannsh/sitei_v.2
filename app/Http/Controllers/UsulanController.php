@@ -26,6 +26,6 @@ class UsulanController extends Controller
             'user_id' => auth()->user()->id
         ]); 
 
-        return redirect()->route('peminjaman');
+        return redirect()->route('peminjaman')->with('message', 'Barang Berhasil Diusulkan!');
     }
 }

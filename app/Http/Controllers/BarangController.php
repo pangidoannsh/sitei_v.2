@@ -43,23 +43,19 @@ class BarangController extends Controller
             'jumlah' => request('jumlah'),
         ]); 
         // return redirect()->route('stok');
-        return redirect('/inventaris/stok');
+        return redirect('/inventaris/stok')->with('message', 'Barang Berhasil Ditambahkan');
     }
 
     public function addbarang(){
-        return view('inventaris.barang.modal');
+        return view('inventaris.barang.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreBarangRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBarangRequest $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -95,7 +91,7 @@ class BarangController extends Controller
     {
         $barang = Barang::find($id);
         $barang->update($request->all());
-        return redirect(route('stok'));
+        return redirect(route('stok'))->with('message', 'Barang Berhasil Diubah');
     }
 
     /**

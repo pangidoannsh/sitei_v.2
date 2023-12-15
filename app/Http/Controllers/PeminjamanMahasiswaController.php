@@ -45,7 +45,7 @@ class PeminjamanMahasiswaController extends Controller
         $pinjaman = Peminjaman::find($id);
         $pinjaman->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Barang Berhasil Dihapus!');
     }
 
     public function edit($id){
@@ -58,6 +58,6 @@ class PeminjamanMahasiswaController extends Controller
     public function update(Request $request, $id){
         $pinjaman = Peminjaman::find($id);
         $pinjaman->update($request->all());
-        return redirect('/inentaris/peminjamanmhs');
+        return redirect()->route('peminjaman')->with('message', 'Barang Berhasil Diubah!');
     }
 }

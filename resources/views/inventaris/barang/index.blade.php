@@ -5,20 +5,24 @@
 @endphp
 
 @section('title')
-    SITEI | Riwayat Peminjaman
+    SITEI | Inventaris Barang
 @endsection
 
 @section('sub-title')
-    Riwayat Peminjaman
+    Inventaris Barang
 @endsection
 
 @section('content')
+
+@if (session()->has('message'))
+<div class="swal" data-swal="{{session('message')}}"></div>
+@endif
 
     <!-- Main content -->
     <div class="content">
       <div class="container">
         <!-- Button trigger modal -->
-        <a href="/inventaris/tambahbarang" type="button" class="mb-4 w-85 btn btn-success rounded border" data-toggle="modal" data-target="#exampleModal">
+        <a href="{{ url('inventaris/tambahbarang') }}" class="mb-4 w-85 btn btn-success rounded border">
           + Tambah Barang
         </a>
   
@@ -93,3 +97,17 @@
   }, 2000);
 </script>
 @endsection
+
+@push('scripts')
+  <script>
+    const swal= $('.swal').data('swal');
+    if (swal) {
+      Swal.fire({
+        title : 'Berhasil',
+        text : swal,
+        confirmButtonColor: '#28A745',
+        icon : 'success'
+      })    
+    }
+  </script>
+@endpush()

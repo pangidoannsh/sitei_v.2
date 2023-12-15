@@ -63,7 +63,11 @@
                   {{$message}}
               </div>
             @enderror
-        </div> 
+    </div> 
+    <div class="mb-3">
+        <label class="form-label pb-0">Link Linkedin</label>
+        <input type="text" name="linkedin" class="form-control">
+    </div> 
 
    
 </div>
@@ -96,7 +100,10 @@
               </div>
             @enderror
     </div> 
-          
+    <div class="mb-3">
+            <label class="form-label pb-0">Link Github</label>
+            <input type="text" name="github" class="form-control">
+    </div> 
           
 </div>  
 

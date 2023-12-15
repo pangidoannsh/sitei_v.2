@@ -71,7 +71,7 @@ class PeminjamanAdminController extends Controller
             $barang_tiga->update();
         }
 
-        return redirect()->back()->with('Success', 'Peminjaman Disetujui');
+        return redirect()->back()->with('message', 'Peminjaman Disetujui');
     }
 
     public function ditolak($id)
@@ -82,7 +82,7 @@ class PeminjamanAdminController extends Controller
         $pinjaman->status = 'Ditolak';
         $pinjaman->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('message','Peminjaman Ditolak');
     }
 
     public function kembali($id)
@@ -115,6 +115,6 @@ class PeminjamanAdminController extends Controller
         }
 
 
-        return redirect()->back();
+        return redirect()->back()->with('message','Peminjaman Dikembalikan');
     }
 }

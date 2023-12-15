@@ -181,7 +181,7 @@ class DatabaseSeeder extends Seeder
             'prodi_id' => 3,
             // 'role_id' => 13,
             'konsentrasi_id' => 4,
-            'nim' => '1807125151',
+            'nim' => '1807111442',
             'nama' => 'Fahril Hadi',
             'email' => 'fahril.hadi515q@student.unri.ac.id',
             'password' => bcrypt('123456'),

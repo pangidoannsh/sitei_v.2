@@ -159,11 +159,11 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
 
 
 //    INVENTARIS
- Route::get('/inventaris/peminjamanmhs', [PeminjamanMahasiswaController::class, 'index'])->name('peminjaman');
+    Route::get('/inventaris/peminjamanmhs', [PeminjamanMahasiswaController::class, 'index'])->name('peminjaman');
     Route::get('/inventaris/riwayatmhs', [RiwayatController::class, 'riwayatmhs'])->name('riwayatmhs');
-    Route::delete('/inventaris/delete/{id}', [PeminjamanMahasiswaController::class, 'destroy'])->name('hapus');
-    Route::get('/inventaris/edit/{id}', [PeminjamanMahasiswaController::class, 'edit'])->name('edit');
-    Route::put('/inventaris/update/{id}', [PeminjamanMahasiswaController::class, 'update'])->name('edit');
+    Route::get('/inventaris/delete/{id}', [PeminjamanMahasiswaController::class, 'destroy']);
+    Route::get('/inventaris/edit/{id}', [PeminjamanMahasiswaController::class, 'edit']);
+    Route::post('/inventaris/update/{id}', [PeminjamanMahasiswaController::class, 'update']);
 
     Route::get('/inventaris/formpinjam', [UsulanController::class, 'index'])->name('formusulan');
     Route::post('/inventaris/usulan', [UsulanController::class, 'create']);
@@ -464,13 +464,13 @@ Route::group(['middleware' => ['auth:web']], function () {
 
     // INVENTARIS
     Route::get('/inventaris/peminjamanadm', [PeminjamanAdminController::class, 'index'])->name('peminjamanadm');
-    Route::post('/inventaris/setuju/{id}', [PeminjamanAdminController::class, 'setuju'])->name('setuju');
-    Route::post('/inventaris/tolak/{id}', [PeminjamanAdminController::class, 'ditolak']);
-    Route::post('/inventaris/kembali/{id}', [PeminjamanAdminController::class, 'kembali']);
+    Route::get('/inventaris/setuju/{id}', [PeminjamanAdminController::class, 'setuju']);
+    Route::get('/inventaris/tolak/{id}', [PeminjamanAdminController::class, 'ditolak']);
+    Route::get('/inventaris/kembali/{id}', [PeminjamanAdminController::class, 'kembali']);
     Route::get('/inventaris/riwayatadm', [RiwayatController::class, 'riwayat'])->name('riwayatadm');
     Route::get('/inventaris/stok', [BarangController::class, 'index'])->name('stok');
     Route::post('/inventaris/stokbaru', [BarangController::class, 'create'])->name('stokbaru');
-    Route::post('/inventaris/tambahbarang', [BarangController::class, 'addbarang'])->name('tambahbarang');
+    Route::get('/inventaris/tambahbarang', [BarangController::class, 'addbarang'])->name('tambahbarang');
     Route::delete('/inventaris/deletebarang/{id}', [BarangController::class, 'destroy'])->name('deletebarang');
     Route::get('/inventaris/editbarang/{id}', [BarangController::class, 'edit'])->name('editbarang');
     Route::put('/inventaris/updatebarang/{id}', [BarangController::class, 'update'])->name('updatebarang');

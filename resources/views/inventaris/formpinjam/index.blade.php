@@ -5,14 +5,15 @@
 @endphp
 
 @section('title')
-    SITEI | Usulan Peminjaman Mahasiswa
+    SITEI | Usulan Peminjaman Barang
 @endsection
 
 @section('sub-title')
-    Usulan Peminjaman Mahasiswa
+    Usulan Peminjaman Barang
 @endsection
 
 @section('content')
+
 
     <!-- Main content -->
     <div class="content">
@@ -30,7 +31,7 @@
     <div class="card-body">
       <div class="row justify-content-center">
       <div class="col-sm-5">
-          <form action="/usulan" method="POST" class="mx-auto" id="input-form">
+          <form action="{{ url('/inventaris/usulan') }}" method="POST" class="mx-auto" id="input-form">
             @csrf
             <div class="form-group row justify-content-center">
               <label for="inputPassword3" class="col-sm-5 col-form-label">Tujuan</label>

@@ -14,6 +14,10 @@
 
 @section('content')
 
+@if (session()->has('message'))
+<div class="swal" data-swal="{{session('message')}}"></div>
+@endif
+
 
     <!-- Main content -->
     <div class="content">
@@ -21,8 +25,8 @@
         
 
 <ol class="breadcrumb col-lg-12">
-    <li class="breadcrumb-item active fw-bold text-black"><a  href="{{ route('peminjamanadm') }}">Daftar Pinjam ({{ $jumlah_pinjaman }})</a></li>    
-    <li class="breadcrumb-item"><a class="breadcrumb-item " href="{{ route('riwayatadm') }}">Riwayat ({{ $jumlah_riwayat }})</a></li>
+    <li class="breadcrumb-item active fw-bold text-black"><a  href="{{ route('peminjamanadm') }}">Daftar Pinjaman ({{ $jumlah_pinjaman }})</a></li>    
+    <li class="breadcrumb-item"><a class="breadcrumb-item " href="{{ route('riwayatadm') }}">Riwayat Pinjaman ({{ $jumlah_riwayat }})</a></li>
     <li class="breadcrumb-item"><a class="breadcrumb-item " href="{{ route('stok') }}">Inventaris ({{ $jumlah_barang }})</a></li>  
 </ol>
 
@@ -68,28 +72,16 @@
               <!-- Button trigger modal -->
 
               @if($pinjaman->status == 'Usulan')
-              <form action="/admin/tolak/{{ $pinjaman->id }}" method="POST" class="d-inline">
-                @csrf
-              <button class="badge bg-danger rounded border-0">
-                <i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-                </i></button>
-              </form>
-                <form action="/admin/setuju/{{ $pinjaman->id }}" method="POST" class="d-inline">
-                  @csrf
-              <button class="badge bg-success rounded border-0" type="submit">
-                <i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
-                </i></button>
-              </form>
+              <a href="{{ url('inventaris/tolak/'.$pinjaman->id) }}" class="badge bg-danger rounded border-0"><i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+              </i></a>
+              <a href="{{ url('inventaris/setuju/'.$pinjaman->id) }}" class="badge bg-success rounded border-0"><i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+              </i></a>
               @endif
 
               @if($pinjaman->status == 'Disetujui')
               <p class="text-center">Dikembalikan</p>
-                <form action="/admin/kembali/{{ $pinjaman->id }}" method="POST">
-                  @csrf
-              <button class="badge bg-success rounded border-0" type="submit">
-                <i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
-                </i></button>
-              </form>
+              <a href="{{ url('inventaris/kembali/'.$pinjaman->id) }}" class="badge bg-success rounded border-0"><i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+              </i></a>
               @endif
             </td>                    
                     
@@ -112,3 +104,17 @@
 
 
 @endsection
+
+@push('scripts')
+  <script>
+    const swal= $('.swal').data('swal');
+    if (swal) {
+      Swal.fire({
+        title : 'Berhasil',
+        text : swal,
+        confirmButtonColor: '#28A745',
+        icon : 'success'
+      })    
+    }
+  </script>
+@endpush()

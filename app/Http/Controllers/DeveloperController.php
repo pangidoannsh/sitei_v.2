@@ -34,9 +34,8 @@ class DeveloperController extends Controller
     }
 
     public function index(){
-        return view('developer.index', [
-            'developer' => Developer::all(),
-        ]);
+        $developers = Developer::all();
+        return view('developer.index', compact('developers'));
     }
 
     /**
@@ -61,7 +60,7 @@ class DeveloperController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nama' => 'required',
             'nim' => 'required',
             'email' => 'required',
@@ -72,17 +71,27 @@ class DeveloperController extends Controller
                          
         ]);
 
-         Developer::create([
+        $foto = $request->file('foto');
+
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($foto->getClientOriginalExtension());
+        $img_name = $name_gen.'.'.$img_ext;
+        $up_location = 'img/developer/';
+        $last_img = $up_location.$img_name;
+        $foto->move($up_location,$img_name);
+
+        Developer::insert([
             'nama' => $request->nama,              
             'nim' => $request->nim,                        
             'email' => $request->email,                        
             'nama_aplikasi' => $request->nama_aplikasi,                        
             'deskripsi_peran' => $request->deskripsi_peran,                        
-            'peran' => $request->peran,                        
-            'foto' =>$request->file('foto')->store('gambar'),                       
+            'peran' => $request->peran,
+            'linkedin' => $request->linkedin,                        
+            'github' => $request->github,                        
+            'foto' => $last_img,                      
         ]);
 
-        
         return redirect('/developer');
         Alert::success('Berhasil!', 'Data Berhasil disimpan')->showConfirmButton('Ok', '#28a745');
     }
