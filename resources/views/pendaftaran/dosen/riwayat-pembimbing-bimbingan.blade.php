@@ -110,14 +110,14 @@
             <!-- <td class="text-center">{{$skripsi->jenis_usulan}}</td>    -->
             <!-- USUL JUDUL  -->
   
-            @if ($skripsi->status_skripsi == 'SKRIPSI SELESAI')           
+            @if ($skripsi->status_skripsi == 'LULUS')           
             <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
             <!-- ___________batas____________ -->
 
             <td class="text-center">{{$skripsi->keterangan}}</td> 
             <!-- USUL JUDUL  -->
-              @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $skripsi->status_skripsi == 'SKRIPSI SELESAI' ) 
+              @if ($skripsi->status_skripsi == 'LULUS' ) 
 
            <td class="text-center">
           <a href="/bukti-buku-skripsi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>

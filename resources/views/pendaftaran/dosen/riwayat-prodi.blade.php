@@ -28,7 +28,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 5 ||  Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 <li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span id="seminarKPCount"></span>)</a></li> 
         <span class="px-2">|</span>
-        <li><a href="/kerja-praktek" class=" px-1">Kerja Praktek (<span id="prodiKPCount"></span>)</a></li>
+        <li><a href="/kerja-praktek" class=" px-1">Kerja Praktek (<span>{{ $jml_prodikp }}</span>)</a></li>
         
         <span class="px-2">|</span>
         <li><a href="/skripsi" class="px-1">Skripsi (<span id="waitingApprovalCount"></span>)</a></li>
@@ -43,18 +43,18 @@
 
 
     @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-    <li><a href="/persetujuan/admin/index" class=" px-1">Persetujuan</a></li>
-    (<span id="waitingApprovalCount"></span>)
+    <li><a href="/persetujuan/admin/index" class=" px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
+    
     <span class="px-2">|</span> 
     @endif
-    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP</a></li>
-    (<span id="seminarKPCount"></span>)  
+    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodikp }}</span>)</a></li>
+      
     <span class="px-2">|</span>
-    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi</a></li>
-    (<span id="seminarKPCount"></span>)  
+    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a></li>
+     
     <span class="px-2">|</span>
-    <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat</a></li>
-    (<span id=""></span>)
+    <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a></li>
+    
     
     @endif
     @endif
@@ -116,14 +116,14 @@
             <!-- <td class="text-center">{{$skripsi->jenis_usulan}}</td>    -->
             <!-- USUL JUDUL  -->
   
-            @if ($skripsi->status_skripsi == 'SKRIPSI SELESAI')           
+            @if ($skripsi->status_skripsi == 'LULUS')           
             <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
             <!-- ___________batas____________ -->
 
             <td class="text-center">{{$skripsi->keterangan}}</td> 
             <!-- USUL JUDUL  -->
-              @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $skripsi->status_skripsi == 'SKRIPSI SELESAI' ) 
+              @if ($skripsi->status_skripsi == 'LULUS' ) 
 
            <td class="text-center">
           <a href="/bukti-buku-skripsi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
@@ -191,6 +191,7 @@
          @endif
          
           <td class="text-center">
+            <a formtarget="_blank" target="_blank" href="/nilai-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-success mt-2 p-2"style="border-radius:20px;">Nilai Penguji</a>
             @if ($kp->penguji_nip == auth()->user()->nip)                    
               <a formtarget="_blank" target="_blank" href="/perbaikan-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-info p-2"style="border-radius:20px;">Perbaikan</a>
               <a formtarget="_blank" target="_blank" href="/nilai-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-success mt-2 p-2"style="border-radius:20px;">Form Nilai</a>
@@ -408,42 +409,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @endpush() --}}
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const persetujuanKPCount = {!! json_encode($jml_persetujuankp->count()) !!};
-    const persetujuanKPElement = document.getElementById('persetujuanKPCount');
-       persetujuanKPElement.innerText = persetujuanKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const seminarKPCount = {!! json_encode($jml_seminarkp->count()) !!};
-    const seminarKPElement = document.getElementById('seminarKPCount');
-       seminarKPElement.innerText = seminarKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
-    const prodiKPElement = document.getElementById('prodiKPCount');
-       prodiKPElement.innerText = prodiKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const bimbinganKPCount = {!! json_encode($jml_bimbingankp->count()) !!};
-    const bimbinganKPElement = document.getElementById('bimbinganKPCount');
-       bimbinganKPElement.innerText = bimbinganKPCount;
-});
-</script>
-@endpush()
