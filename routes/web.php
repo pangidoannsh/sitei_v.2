@@ -532,6 +532,9 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11'] ], function(){
 
     Route::get('/form-sempro/edit/koordinator/{penjadwalan_sempro:id}', [PenjadwalanSemproController::class, 'edit_koordinator']);
     Route::put('/form-sempro/edit/koordinator/{penjadwalan_sempro:id}', [PenjadwalanSemproController::class, 'update_koordinator']);
+
+    Route::get('/form-skripsi/edit/koordinator/{penjadwalan_skripsi:id}', [PenjadwalanSkripsiController::class, 'edit_koordinator']);
+    Route::put('/form-skripsi/edit/koordinator/{penjadwalan_skripsi:id}', [PenjadwalanSkripsiController::class, 'update_koordinator']);
 });
 Route::group(['middleware' =>  ['auth:web']], function(){
     Route::get('/form-kp/edit/{id}', [PenjadwalanKPController::class, 'edit']);

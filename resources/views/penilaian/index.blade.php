@@ -173,7 +173,7 @@
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
         @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )           
           <td class="text-center">
-              <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
+              <a href="/form-skripsi/edit/koordinator/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning p-2" > <i class="fas fa-pen"></i><a>              
                 </td>                        
                 @endif              
                 @endif 

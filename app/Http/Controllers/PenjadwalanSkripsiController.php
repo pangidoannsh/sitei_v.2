@@ -205,7 +205,104 @@ class PenjadwalanSkripsiController extends Controller
 
 
 
-        return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
+        // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Jadwal Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        return back();
+    }
+    
+    public function edit_koordinator($id)
+    {
+        $decrypted = Crypt::decryptString($id);
+        $skripsi = PenjadwalanSkripsi::findOrFail($decrypted);
+        return view('penjadwalanskripsi.edit', [
+            'skripsi' => $skripsi,
+            'skripsip' => PendaftaranSkripsi::where('mahasiswa_nim', $skripsi->mahasiswa_nim )->latest('created_at')->first(),
+            'prodis' => Prodi::all(),
+            'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
+            'dosens' => Dosen::all()->sortBy('nama'),
+            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            'jamsels' => JamSel::all()->sortBy('id'),
+            'jamkams' => JamKam::all()->sortBy('id'),
+        ]);
+    }
+
+    public function update_koordinator(Request $request, PenjadwalanSkripsi $penjadwalan_skripsi)
+    {
+        $rules = [
+            'mahasiswa_nim' => 'required',
+            'pembimbingsatu_nip' => 'required',   
+            'pengujisatu_nip' => 'required',         
+            'pengujidua_nip' => 'required',         
+            'pengujitiga_nip' => 'required',  
+            'prodi_id' => 'required',                           
+            'judul_skripsi' => 'required',
+        ];        
+
+        if ($request->pembimbingdua_nip) {
+            if ($penjadwalan_skripsi->pembimbingdua_nip != $request->pembimbingdua_nip) {
+                $rules['pembimbingdua_nip'] = 'required';
+            }
+        }
+
+        if ($request->pengujitiga_nip) {
+            if ($penjadwalan_skripsi->pengujitiga_nip != $request->pengujitiga_nip) {
+                $rules['pengujitiga_nip'] = 'required';
+            }
+        }
+
+        $validated = $request->validate($rules);
+        $validated['dibuat_oleh'] = auth()->user()->username;
+
+        $edit = PenjadwalanSkripsi::find($penjadwalan_skripsi->id);
+        $edit->mahasiswa_nim = $validated['mahasiswa_nim'];
+        $edit->pembimbingsatu_nip = $validated['pembimbingsatu_nip'];
+
+        if ($request->pembimbingdua_nip) {
+            if ($penjadwalan_skripsi->pembimbingdua_nip != $request->pembimbingdua_nip) {
+                if ($request->pembimbingdua_nip == 1) {
+                    $edit->pembimbingdua_nip = null;
+                } else {
+                    $edit->pembimbingdua_nip = $validated['pembimbingdua_nip'];
+                }
+            }
+        }
+
+
+        $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
+        $edit->pengujidua_nip = $validated['pengujidua_nip'];
+        $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
+        
+        if($request->waktu_selasa != null) {
+            $request->waktu = $request->waktu_selasa;
+        }
+        if($request->waktu_kamis != null) {
+            $request->waktu = $request->waktu_kamis;
+        }
+        if(isset($request->lokasi)) {
+            $edit->lokasi = $request->lokasi;
+        }
+        if(isset($request->tanggal)) {
+            $edit->tanggal = $request->tanggal;
+        }
+        $edit->waktu = $request->waktu;                
+        $edit->prodi_id = $validated['prodi_id'];                
+        $edit->judul_skripsi = $validated['judul_skripsi'];
+        $edit->dibuat_oleh = $validated['dibuat_oleh'];
+        $edit->update();
+
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $edit->mahasiswa_nim )->latest('created_at')->first();
+        // $pendaftaran_skripsi = PendaftaranSkripsi::whereNotNull('mahasiswa_nim',  PenjadwalanSempro::find($mahasiswa_nim) )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
+        $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
+        $pendaftaran_skripsi->tgl_disetujui_jadwal_sidang = Carbon::now();
+        $pendaftaran_skripsi->update();
+
+
+
+        // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Jadwal Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        return back();
     }
 
     public function destroy($id)

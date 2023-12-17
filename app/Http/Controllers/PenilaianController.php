@@ -291,8 +291,8 @@ class PenilaianController extends Controller
             'jml_sempro' => $jml_sempro,
             'jml_sidang' => $jml_sidang,
             'jml_riwayat_kp' => $jml_riwayat_kp,
-            'jml_riwayat_sempro' => $jml_sempro,
-            'jml_riwayat_sidang' => $jml_sidang,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
         ]);
     }
 

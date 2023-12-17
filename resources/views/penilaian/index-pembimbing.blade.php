@@ -29,18 +29,12 @@
 <ol class="breadcrumb col-lg-12">  
   <li>
     <a href="/kp-skripsi/seminar-pembimbing-penguji" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a>
-  </li> 
-
-        {{-- <span class="px-2">|</span>
-        <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span id="prodiKPCount"></span>)</a></li>
-        
-        <span class="px-2">|</span>
-        <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li> --}}
+  </li>
         
   <span class="px-2">|</span>
 
   <li>
-    <a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="px-1">Riwayat (<span>{{ $jml_riwayat_sidang + $jml_riwayat_sempro + $jml_riwayat_kp }}</span>)</a>
+    <a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a>
   </li>
   
 </ol>
