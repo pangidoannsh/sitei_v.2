@@ -245,13 +245,13 @@
     <div class="col">
       <img src="/assets/img/pakedi.jpg" class="rounded-circle" alt="pakedi" width="100">
       <h6 class="mt-2 ">Edi Susilo, S.Pd., M.Kom., M.Eng.</h6>
-      <small>Pembimbing 1</small>
+      <small>Pembimbing</small>
       <hr class="border border-1">
     </div>
     <div class="col">
       <img src="/assets/img/pakanhar.jpg" class="rounded-circle" alt="pakanhar" width="100">
       <h6 class="mt-2 ">Anhar, S.T., M.T., Ph.D.</h6>
-      <small>Pembimbing 2</small>
+      <small>Pembimbing</small>
     </div>
   </div>
     </div>

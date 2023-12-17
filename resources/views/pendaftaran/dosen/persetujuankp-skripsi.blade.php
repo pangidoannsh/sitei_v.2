@@ -23,7 +23,7 @@
 <div class="container card  p-4">
 
 <ol class="breadcrumb col-lg-12">
-    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan (<span id="waitingApprovalCount"></span>)</a></li>
+    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)</a></li>
     
      
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
@@ -32,7 +32,7 @@
             <li><a href="/persetujuan-kaprodi" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li> -->
 
           <span class="px-2">|</span>
-            <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan (<span id=""></span>)</a></li>
+            <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan (<span>{{ $jml_riwayat_persetujuan_seminar }}</span>)</a></li>
             
         @endif
     @endif
@@ -44,7 +44,7 @@
             <li><a href="persetujuan-koordinator" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li> -->
 
           <span class="px-2">|</span>
-            <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan (<span id=""></span>)</a></li>
+            <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan (<span>{{ $jml_riwayat_persetujuan_seminar }}</span>)</a></li>
 
         @endif
     @endif
@@ -3096,46 +3096,3 @@ $('.setujui-lulus-koordinator').submit(function(event) {
 @endforeach
 @endpush()
 
-
-
-
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
-    const waitingApprovalElement = document.getElementById('waitingApprovalCount');
-    waitingApprovalElement.innerText = waitingApprovalCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
-    const prodiKPElement = document.getElementById('prodiKPCount');
-       prodiKPElement.innerText = prodiKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const bimbinganKPCount = {!! json_encode($jml_bimbingankp->count()) !!};
-    const bimbinganKPElement = document.getElementById('bimbinganKPCount');
-       bimbinganKPElement.innerText = bimbinganKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const seminarKPCount = {!! json_encode($jml_seminarkp->count()) !!};
-    const seminarKPElement = document.getElementById('seminarKPCount');
-       seminarKPElement.innerText = seminarKPCount;
-});
-</script>
-@endpush()

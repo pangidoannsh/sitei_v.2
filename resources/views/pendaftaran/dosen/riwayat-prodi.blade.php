@@ -26,15 +26,17 @@
  
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 5 ||  Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-<li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span id="seminarKPCount"></span>)</a></li> 
+  <li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a></li>
+
         <span class="px-2">|</span>
-        <li><a href="/kerja-praktek" class=" px-1">Kerja Praktek (<span>{{ $jml_prodikp }}</span>)</a></li>
+        <li><a href="/kerja-praktek" class="px-1">Kerja Praktek (<span>{{ $jml_prodi_kp }}</span>)</a></li>
         
         <span class="px-2">|</span>
-        <li><a href="/skripsi" class="px-1">Skripsi (<span id="waitingApprovalCount"></span>)</a></li>
+        <li><a href="/skripsi" class="px-1">Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a></li>
 
-       <span class="px-2">|</span>
-        <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span id=""></span>)</a></li>
+
+        <span class="px-2">|</span>
+        <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
               @endif
   @endif
 
@@ -47,13 +49,13 @@
     
     <span class="px-2">|</span> 
     @endif
-    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodikp }}</span>)</a></li>
+    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodi_kp }}</span>)</a></li>
       
     <span class="px-2">|</span>
-    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a></li>
+    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a></li>
      
     <span class="px-2">|</span>
-    <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a></li>
+    <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
     
     
     @endif
@@ -384,28 +386,28 @@
 @endsection
 
 
-{{-- @push('scripts')
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
+    const waitingApprovalCount = {!! json_encode( $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi) !!};
     if (waitingApprovalCount > 0) {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Bimbingan Kerja Praktek',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda telah selesai melaksanakan Kerja Praktek.`,
+            title: 'Ini adalah halaman Riwayat',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> yang telah selesai KP, Skripsi, dan Seminar.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     } else {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Bimbingan Kerja Praktek',
-            html: `Belum ada mahasiswa bimbingan Anda selesai Kerja Praktek.`,
+            title: 'Ini adalah halaman Riwayat',
+            html: `Belum ada mahasiswa yang selesai KP, Skripsi, dan Seminar.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     }
 });
 </script>
-@endpush() --}}
+@endpush()
 

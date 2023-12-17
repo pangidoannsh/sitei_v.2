@@ -527,8 +527,11 @@ Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){
 //ADMIN DAN KOORDINATOR
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11'] ], function(){
-    Route::get('/form-kp/edit/{id}', [PenjadwalanKPController::class, 'edit']);
-    Route::put('/form-kp/edit/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'update']);
+    Route::get('/form-kp/edit/koordinator/{id}', [PenjadwalanKPController::class, 'edit_koordinator']);
+    Route::put('/form-kp/edit/koordinator/{penjadwalan_kp:id}', [PenjadwalanKPController::class, 'update_koordinator']);
+
+    Route::get('/form-sempro/edit/koordinator/{penjadwalan_sempro:id}', [PenjadwalanSemproController::class, 'edit_koordinator']);
+    Route::put('/form-sempro/edit/koordinator/{penjadwalan_sempro:id}', [PenjadwalanSemproController::class, 'update_koordinator']);
 });
 Route::group(['middleware' =>  ['auth:web']], function(){
     Route::get('/form-kp/edit/{id}', [PenjadwalanKPController::class, 'edit']);

@@ -168,3 +168,28 @@
 
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waitingApprovalCount = {!! json_encode($jml_prodikp) !!};
+    if (waitingApprovalCount > 0) {
+        Swal.fire({
+            title: 'Ini adalah halaman Kerja Praktek',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> sedang melaksanakan Kerja Praktek.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    } else {
+        Swal.fire({
+            title: 'Ini adalah halaman Kerja Praktek',
+            html: `Belum ada mahasiswa yang melaksanakan Kerja Praktek.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    }
+});
+</script>
+@endpush()

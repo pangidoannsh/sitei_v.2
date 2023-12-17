@@ -63,11 +63,11 @@
   {{-- <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/form">Jadwal</a></li>       
   <li class="breadcrumb-item"><a href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li> --}}
   
-  <li><a href="/form" class="breadcrumb-item active fw-bold text-success px-1">Jadwal</a></li>
-  (<span id=""></span>)
+  <li><a href="/form" class="breadcrumb-item active fw-bold text-success px-1">Jadwal (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
+
   <span class="px-2">|</span>      
-  <li><a href="/riwayat-penjadwalan" class="px-1">Riwayat Penjadwalan</a></li>
-  (<span id=""></span>)
+  <li><a href="/riwayat-penjadwalan" class="px-1">Riwayat Penjadwalan (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li>
+  
 
 </ol>
 
@@ -248,25 +248,28 @@
 @endsection
 
 @push('scripts')
-  <script>
-    window.setTimeout(function() {
-      $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-      });
-    }, 2000);
-  </script>
-@endpush()
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const jumlahJadwal = {!! json_encode($jml_seminar_kp + $jml_sempro + $jml_sidang) !!};
+    const menungguJadwal = {!! json_encode($jml_menunggu_seminar_kp + $jml_menunggu_sempro + $jml_menunggu_sidang) !!};
 
-@push('scripts')
-  <script>
-    const swal= $('.swal').data('swal');
-    if (swal) {
-      Swal.fire({
-        title : 'Berhasil',
-        text : swal,
-        confirmButtonColor: '#28A745',
-        icon : 'success'
-      })    
+    if (jumlahJadwal > 0) {
+        Swal.fire({
+            title: 'Ini adalah halaman Jadwal Seminar',
+            html: `Ada <strong class="text-info"> ${menungguJadwal} Mahasiswa</strong> menunggu Jadwal seminar. <br> dan <strong class="text-info"> ${jumlahJadwal} Mahasiswa</strong> dijadwalkan seminar.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    } else {
+        Swal.fire({
+            title: 'Ini adalah halaman Jadwal Seminar',
+            html: `Belum ada mahasiswa yang menunggu dan dijadwalkan seminar.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
     }
-  </script>
+});
+</script>
 @endpush()

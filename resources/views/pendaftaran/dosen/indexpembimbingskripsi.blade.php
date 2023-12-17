@@ -25,12 +25,11 @@ Daftar Bimbingan Skripsi
 
 <ol class="breadcrumb col-lg-12">
 
-  <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span id=""></span>)</a></li>
-  
+<li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span>{{ $jml_kp }}</span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/pembimbing/skripsi" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
+  <li><a href="/pembimbing/skripsi" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan Skripsi (<span>{{ $jml_skripsi }}</span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span id=""></span>)</a></li>
+  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
   
 </ol>
 
@@ -48,6 +47,7 @@ Daftar Bimbingan Skripsi
         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
         <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status Skripsi</th>
+        <th class="text-center" scope="col">Tanggal Penting</th>
         <th class="text-center" scope="col">Keterangan</th>     
         <th class="text-center" scope="col">Aksi</th>
     </tr>
@@ -59,7 +59,7 @@ Daftar Bimbingan Skripsi
         <tr>        
             <td class="text-center">{{$loop->iteration}}</td>                             
             <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
+            <td class="text-center fw-bold">{{$skripsi->mahasiswa->nama}}</td>
             <!-- <td class="text-center">{{$skripsi->konsentrasi->nama_konsentrasi}}</td>            -->
             <td class="text-center">{{$skripsi->jenis_usulan}}</td>   
                
@@ -74,6 +74,66 @@ Daftar Bimbingan Skripsi
             @endif
             @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' )           
             <td class="text-center bg-danger">{{$skripsi->status_skripsi}}</td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_sempro_admin)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')           
+            <td class="text-center"> Tanggal Dijadwalkan: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_jadwalsempro)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan1_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan2_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
+            <td class="text-center"> Tanggal Dijadwalkan: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y')}}</b></td>
             @endif
 
                                
@@ -146,3 +206,43 @@ Daftar Bimbingan Skripsi
 
 @endsection
 
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waitingApprovalCount = {!! json_encode($jml_skripsi) !!};
+
+    const totalKuota = {!! json_encode($kapasitas_bimbingan_skripsi) !!};
+    const sisaKuota = totalKuota - waitingApprovalCount;
+
+    if (waitingApprovalCount > 0 && waitingApprovalCount < totalKuota) {
+      
+        Swal.fire({
+            title: 'Ini adalah halaman Bimbingan Skripsi',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan Skripsi. <br>
+            Anda memiliki sisa <strong class="text-info">${sisaKuota} kuota </strong>Mahasiswa Bimbingan Skripsi.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    }else if(waitingApprovalCount >= totalKuota ){
+        Swal.fire({
+            title: 'Ini adalah halaman Bimbingan Skripsi',
+            html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan Skripsi. <br>
+            Kuota Mahasiswa Bimbingan Anda Sudah Penuh!`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    } else {
+
+        Swal.fire({
+            title: 'Ini adalah halaman Bimbingan Skripsi',
+            html: `Tidak ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">${totalKuota} kuota</strong> mahasiswa bimbingan`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    }
+});
+</script>
+@endpush()

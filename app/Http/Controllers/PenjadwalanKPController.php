@@ -121,21 +121,6 @@ class PenjadwalanKPController extends Controller
             'jamkpkams' => JamKPKam::all()->sortBy('id'),  
         ]);
     }
-    public function edit_koordinator($id)
-    {
-        $decrypted = Crypt::decryptString($id);
-        $kps = PenjadwalanKP::findOrFail($decrypted);
-
-        return view('penjadwalankp.edit', [                      
-            'kp' => $kps,
-            'prodis' => Prodi::all(),
-            'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
-            'dosens' => Dosen::all()->sortBy('nama'), 
-            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-            'jamkpsels' => JamKPSel::all()->sortBy('id'),
-            'jamkpkams' => JamKPKam::all()->sortBy('id'),  
-        ]);
-    }
     
 
     public function update(Request $request, PenjadwalanKP $penjadwalan_kp)
@@ -185,7 +170,78 @@ class PenjadwalanKPController extends Controller
         $kp->tgl_dijadwalkan = Carbon::now();
         $kp->update();
 
-        return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
+        // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Jadwal berhasil diubah')->showConfirmButton('Ok', '#28a745');
+        return back();
+    }
+
+        public function edit_koordinator($id)
+    {
+        $decrypted = Crypt::decryptString($id);
+        $kps = PenjadwalanKP::findOrFail($decrypted);
+
+        return view('penjadwalankp.edit', [                      
+            'kp' => $kps,
+            'kpp' => PendaftaranKP::where('mahasiswa_nim', $kps->mahasiswa_nim )->latest('created_at')->first(),
+            'prodis' => Prodi::all(),
+            'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
+            'dosens' => Dosen::all()->sortBy('nama'), 
+            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            'jamkpsels' => JamKPSel::all()->sortBy('id'),
+            'jamkpkams' => JamKPKam::all()->sortBy('id'),  
+        ]);
+    }
+
+    public function update_koordinator(Request $request, PenjadwalanKP $penjadwalan_kp)
+    {
+        $rules = [
+            'mahasiswa_nim' => 'required',
+            'pembimbing_nip' => 'required',
+            'penguji_nip' => 'required',
+            'prodi_id' => 'required',                        
+            'judul_kp' => 'required',
+            'lokasi' => 'max:255',
+            'waktu' => 'max:255',
+        ];
+               
+        $validated = $request->validate($rules);
+
+        if($request->waktu_selasa != null) {
+            $request->waktu = $request->waktu_selasa;
+        }
+        if($request->waktu_kamis != null) {
+            $request->waktu = $request->waktu_kamis;
+        }
+        if(isset($request->ruangan_id)) {
+            $validated["lokasi"]= $request->ruangan_id;
+        }
+        if(isset($request->tanggal)) {
+            $validated["tanggal"]= $request->tanggal;
+        }
+        
+        if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4){
+        $validated["waktu"] = $request->waktu;
+        $validated['dibuat_oleh'] = auth()->user()->username;
+        PenjadwalanKP::where('id', $penjadwalan_kp->id)
+            ->update($validated);
+        }
+        if(auth()->user()->role_id == 9 || auth()->user()->role_id == 10 || auth()->user()->role_id == 11 ){
+        $validated["waktu"] = $request->waktu;
+        $validated['dibuat_oleh'] = auth()->user()->nip;
+        PenjadwalanKP::where('id', $penjadwalan_kp->id)
+            ->update($validated);
+        }
+
+        $kp = PendaftaranKP::where('mahasiswa_nim', $penjadwalan_kp->mahasiswa_nim )->latest('created_at')->first();
+
+        $kp->status_kp = 'SEMINAR KP DIJADWALKAN';
+        $kp->keterangan = 'Seminar KP Dijadwalkan';
+        $kp->tgl_dijadwalkan = Carbon::now();
+        $kp->update();
+
+        // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Jadwal berhasil diubah')->showConfirmButton('Ok', '#28a745');
+        return back();
     }
 
     public function destroy($id)

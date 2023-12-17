@@ -17,14 +17,11 @@
 <div class="container card p-4">
 
 <ol class="breadcrumb col-lg-12">   
-  {{-- <li class="breadcrumb-item"><a href="/form">Jadwal</a></li>        
-  <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li>   --}}
+  
+  <li><a href="/form" class="px-1">Jadwal (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
 
-  <li><a href="/form" class="px-1">Jadwal</a></li>
-  (<span id=""></span>)
   <span class="px-2">|</span>      
-  <li><a href="/riwayat-penjadwalan" class="breadcrumb-item active fw-bold text-success px-1">Riwayat Penjadwalan</a></li>
-  (<span id=""></span>)
+  <li><a href="/riwayat-penjadwalan" class="breadcrumb-item active fw-bold text-success px-1">Riwayat Penjadwalan (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li>
 </ol>
 
 <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
@@ -181,3 +178,29 @@
 </div>
     
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const jumlahJadwal = {!! json_encode($jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang) !!};
+
+    if (jumlahJadwal > 0) {
+        Swal.fire({
+            title: 'Ini adalah halaman Riwayat Seminar',
+            html: `Ada <strong class="text-info"> ${jumlahJadwal} Mahasiswa</strong> telah melaksanakan seminar.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    } else {
+        Swal.fire({
+            title: 'Ini adalah halaman Riwayat Seminar',
+            html: `Belum ada mahasiswa yang melaksanakan seminar.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    }
+});
+</script>
+@endpush()

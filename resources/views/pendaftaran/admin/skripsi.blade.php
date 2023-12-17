@@ -54,7 +54,7 @@
         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
         <th class="text-center" scope="col">Jenis Usulan</th>
         <th class="text-center" scope="col">Status</th>
-        <th class="text-center" scope="col">Tanggal Usulan</th>
+        <th class="text-center" scope="col">Tanggal Penting</th>
         <th class="text-center" scope="col">Keterangan</th>     
         <th class="text-center" scope="col">Aksi</th>
     </tr>
@@ -82,24 +82,64 @@
             <td class="text-center bg-danger">{{$skripsi->status_skripsi}}</td>
             @endif
 
-            @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
+           @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</b></td>
             @endif
-            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI' || $skripsi->status_skripsi == 'SEMPRO SELESAI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+
+            @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
             @endif
             
-            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</td>
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</b></td>
             @endif
-            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</td>
+
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_sempro_admin)->translatedFormat('l, d F Y')}}</b></td>
             @endif
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+            
+            @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')           
+            <td class="text-center"> Tanggal Dijadwalkan: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_jadwalsempro)->translatedFormat('l, d F Y')}}</b></td>
             @endif
-            @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DISETUJUI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan1_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan2_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
+            <td class="text-center"> Tanggal Dijadwalkan: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI')           
+            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @endif
+
+            @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
+            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y')}}</b></td>
             @endif
                                
              @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' )
@@ -168,3 +208,28 @@
 
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waitingApprovalCount = {!! json_encode($jml_prodiskripsi) !!};
+    if (waitingApprovalCount > 0) {
+        Swal.fire({
+            title: 'Ini adalah halaman Skripsi',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> sedang melaksanakan Skripsi.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    } else {
+        Swal.fire({
+            title: 'Ini adalah halaman Skripsi',
+            html: `Belum ada mahasiswa yang melaksanakan Skripsi.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    }
+});
+</script>
+@endpush()

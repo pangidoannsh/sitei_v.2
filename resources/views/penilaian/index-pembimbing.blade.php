@@ -28,7 +28,7 @@
 
 <ol class="breadcrumb col-lg-12">  
   <li>
-    <a href="/kp-skripsi/seminar-pembimbing-penguji" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span id="seminarKPCount"></span>) </a>
+    <a href="/kp-skripsi/seminar-pembimbing-penguji" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a>
   </li> 
 
         {{-- <span class="px-2">|</span>
@@ -40,7 +40,7 @@
   <span class="px-2">|</span>
 
   <li>
-    <a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="px-1">Riwayat (<span id=""></span>)</a>
+    <a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="px-1">Riwayat (<span>{{ $jml_riwayat_sidang + $jml_riwayat_sempro + $jml_riwayat_kp }}</span>)</a>
   </li>
   
 </ol>
@@ -202,5 +202,30 @@
       icon : 'success'
     })    
   }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waitingApprovalCount = {!! json_encode($jml_seminar_kp + $jml_sempro + $jml_sidang) !!};
+    if (waitingApprovalCount > 0) {
+        Swal.fire({
+            title: 'Ini adalah halaman Seminar Pembimbing dan Penguji',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> akan melaksanakan seminar.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    } else {
+        Swal.fire({
+            title: 'Ini adalah halaman Seminar Pembimbing dan Penguji',
+            html: `Belum ada mahasiswa yang akan melaksanakan seminar.`,
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
+        });
+    }
+});
 </script>
 @endpush()

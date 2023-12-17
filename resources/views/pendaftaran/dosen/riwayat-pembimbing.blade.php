@@ -26,9 +26,9 @@
  
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
      
-  <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span id=""></span>) </a></li>
+  <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a></li>
   <span class="px-2">|</span>
-  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span id=""></span>)</a></li>
+  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li>
     
  
   @endif
@@ -74,10 +74,50 @@
       <th class="text-center" scope="col">Lokasi</th>              
       <th class="text-center" scope="col">Pembimbing</th>
       <th class="text-center" scope="col">Penguji</th>          
+      <th class="text-center" scope="col">Status</th>          
       <th class="text-center" scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>    
+       @foreach ($penjadwalan_kps as $kp)    
+        <tr>
+          <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
+          <td class="text-center">{{$kp->mahasiswa->nama}}</td>                     
+          <td class="bg-primary text-center">{{$kp->jenis_seminar}}</td>                  
+          <td class="text-center">{{$kp->prodi->nama_prodi}}</td>          
+          <td class="text-center">{{Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td class="text-center">{{$kp->waktu}}</td>                   
+          <td class="text-center">{{$kp->lokasi}}</td>              
+          <td class="text-center">
+            <p>{{$kp->pembimbing->nama_singkat}}</p>            
+          </td>         
+          <td class="text-center">
+            <p>{{$kp->penguji->nama_singkat}}</p>            
+          </td>          
+           @if ($kp->status_seminar == 1)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Belum Lulus</td>
+         @endif
+         
+          <td class="text-center">
+            
+            @if ($kp->penguji_nip == auth()->user()->nip && $kp->pembimbing_nip !== auth()->user()->nip)                    
+              <a formtarget="_blank" target="_blank" href="/perbaikan-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-info mt-1 p-2"style="border-radius:20px;">Perbaikan</a>
+              <a formtarget="_blank" target="_blank" href="/nilai-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-success mt-1 p-2"style="border-radius:20px;">Form Nilai</a>
+            
+            @elseif ($kp->pembimbing_nip == auth()->user()->nip && $kp->penguji_nip !== auth()->user()->nip )   
+              <a formtarget="_blank" target="_blank" href="/perbaikan-pengujikp/{{Crypt::encryptString($kp->id)}}/{{$kp->penguji->nip}}" class="badge bg-info mt-1 p-2"style="border-radius:20px;">Perbaikan Penguji</a>                
+              <a formtarget="_blank" target="_blank" href="/nilai-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-success mt-1 p-2"style="border-radius:20px;">Nilai Penguji</a>               
+              <a formtarget="_blank" target="_blank" href="/beritaacara-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-danger mt-1 p-2"style="border-radius:20px;">Berita Acara</a>
+            @elseif ($kp->pembimbing_nip == auth()->user()->nip && $kp->penguji_nip == auth()->user()->nip)   
+              <a formtarget="_blank" target="_blank" href="/perbaikan-pengujikp/{{Crypt::encryptString($kp->id)}}/{{$kp->penguji->nip}}" class="badge bg-info mt-1 p-2"style="border-radius:20px;">Perbaikan</a>
+              <a formtarget="_blank" target="_blank" href="/nilai-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-success mt-1 p-2"style="border-radius:20px;">Form Nilai</a>                               
+              <a formtarget="_blank" target="_blank" href="/beritaacara-kp/{{Crypt::encryptString($kp->id)}}" class="badge bg-danger mt-1 p-2"style="border-radius:20px;">Berita Acara</a>
+            @endif
+          </td>                        
+        </tr>               
+    @endforeach
 
     @foreach ($penjadwalan_sempros as $sempro)
         <tr>
@@ -100,7 +140,12 @@
             @if ($sempro->pengujitiga == !null)
             <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
             @endif
-          </td>                    
+          </td>  
+           @if ($sempro->status_seminar == 1)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Belum Lulus</td>
+         @endif                  
           <td class="text-center">            
             <a formtarget="_blank" target="_blank" href="/nilai-sempro/{{Crypt::encryptString($sempro->id)}}" class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a>
 
@@ -145,7 +190,12 @@
             @if ($skripsi->pengujitiga == !null)
             <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
             @endif
-          </td>                    
+          </td>   
+           @if ($skripsi->status_seminar == 3)
+          <td class="text-center">Lulus</td>
+          @else
+          <td class="text-center">Belum Lulus</td>
+         @endif                 
           <td class="text-center">            
             <a formtarget="_blank" target="_blank" href="/nilai-skripsi/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a>
             @if ($skripsi->pengujisatu_nip == auth()->user()->nip || $skripsi->pengujidua_nip == auth()->user()->nip || $skripsi->pengujitiga_nip == auth()->user()->nip)
@@ -234,67 +284,28 @@
 @endsection
 
 
-{{-- @push('scripts')
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
+    const waitingApprovalCount = {!! json_encode($jml_riwayat_sidang + $jml_riwayat_sempro + $jml_riwayat_kp ) !!};
     if (waitingApprovalCount > 0) {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Bimbingan Kerja Praktek',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda telah selesai melaksanakan Kerja Praktek.`,
+            title: 'Ini adalah halaman Riwayat Seminar Pembimbing dan Penguji',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> telah selesai melaksanakan seminar.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     } else {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Bimbingan Kerja Praktek',
-            html: `Belum ada mahasiswa bimbingan Anda selesai Kerja Praktek.`,
+            title: 'Ini adalah halaman Riwayat Seminar Pembimbing dan Penguji',
+            html: `Belum ada mahasiswa selesai seminar.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     }
 });
 </script>
-@endpush() --}}
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const persetujuanKPCount = {!! json_encode($jml_persetujuankp->count()) !!};
-    const persetujuanKPElement = document.getElementById('persetujuanKPCount');
-       persetujuanKPElement.innerText = persetujuanKPCount;
-});
-</script>
 @endpush()
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const seminarKPCount = {!! json_encode($jml_seminarkp->count()) !!};
-    const seminarKPElement = document.getElementById('seminarKPCount');
-       seminarKPElement.innerText = seminarKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
-    const prodiKPElement = document.getElementById('prodiKPCount');
-       prodiKPElement.innerText = prodiKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const bimbinganKPCount = {!! json_encode($jml_bimbingankp->count()) !!};
-    const bimbinganKPElement = document.getElementById('bimbinganKPCount');
-       bimbinganKPElement.innerText = bimbinganKPCount;
-});
-</script>
-@endpush()

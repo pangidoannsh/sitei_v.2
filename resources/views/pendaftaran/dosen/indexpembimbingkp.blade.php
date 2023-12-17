@@ -24,11 +24,11 @@ Daftar Bimbingan Kerja Praktek
 
 <ol class="breadcrumb col-lg-12">
 
-  <li><a href="/pembimbing/kerja-praktek" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan KP (<span id=""></span>)</a></li>
+<li><a href="/pembimbing/kerja-praktek" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan KP (<span>{{ $jml_kp }}</span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
+  <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_skripsi }}</span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span id=""></span>)</a></li>
+  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
 
 </ol>
 
@@ -163,43 +163,41 @@ Daftar Bimbingan Kerja Praktek
 @endsection
 
 
-
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
-    const waitingApprovalElement = document.getElementById('waitingApprovalCount');
+    const waitingApprovalCount = {!! json_encode($jml_kp) !!};
 
-    const totalKuota = 10;
+    const totalKuota = {!! json_encode($kapasitas_bimbingan_kp) !!};
     const sisaKuota = totalKuota - waitingApprovalCount;
 
     if (waitingApprovalCount > 0 && waitingApprovalCount < totalKuota) {
-      waitingApprovalElement.innerText = waitingApprovalCount;
+      
         Swal.fire({
-            title: 'Ini adalah halaman Daftar Bimbingan Kerja Praktek',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> dibawah bimbingan Anda. <br>
-            Anda memiliki sisa <strong class="text-info">${sisaKuota} kuota </strong>Mahasiswa Bimbingan.`,
+            title: 'Ini adalah halaman Bimbingan Kerja Praktek',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan kerja praktek. <br>
+            Anda memiliki sisa <strong class="text-info">${sisaKuota} kuota </strong>Mahasiswa Bimbingan Kerja Praktek.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
-    }else if(waitingApprovalCount >= 10){
+    }else if(waitingApprovalCount >= totalKuota ){
         Swal.fire({
-            title: 'Ini adalah halaman Daftar Bimbingan Kerja Praktek',
-            html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> dibawah bimbingan Anda. <br>
+            title: 'Ini adalah halaman Bimbingan Kerja Praktek',
+            html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan kerja praktek. <br>
             Kuota Mahasiswa Bimbingan Anda Sudah Penuh!`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     } else {
-    waitingApprovalElement.innerText = '0';
+
         Swal.fire({
-            title: 'Ini adalah halaman Daftar Bimbingan Kerja Praktek',
-            html: `Tidak ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">10 kuota</strong> mahasiswa bimbingan`,
+            title: 'Ini adalah halaman Bimbingan Kerja Praktek',
+            html: `Tidak ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">${totalKuota} kuota</strong> mahasiswa bimbingan`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     }
 });
@@ -207,35 +205,8 @@ document.addEventListener('DOMContentLoaded', function() {
 @endpush()
 
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const persetujuanKPCount = {!! json_encode($jml_persetujuankp->count()) !!};
-    const persetujuanKPElement = document.getElementById('persetujuanKPCount');
-       persetujuanKPElement.innerText = persetujuanKPCount;
-});
-</script>
-@endpush()
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const seminarKPCount = {!! json_encode($jml_seminarkp->count()) !!};
-    const seminarKPElement = document.getElementById('seminarKPCount');
-       seminarKPElement.innerText = seminarKPCount;
-});
-</script>
-@endpush()
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
-    const prodiKPElement = document.getElementById('prodiKPCount');
-       prodiKPElement.innerText = prodiKPCount;
-});
-</script>
-@endpush()
 
 
 

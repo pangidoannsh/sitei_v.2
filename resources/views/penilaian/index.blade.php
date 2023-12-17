@@ -29,17 +29,17 @@
 <ol class="breadcrumb col-lg-12">
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
         @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-  <li><a href="/kp-skripsi/seminar" class="breadcrumb-item active fw-bold text-success px-1">Seminar  (<span id=""></span>) </a></li>
+  <li><a href="/kp-skripsi/seminar" class="breadcrumb-item active fw-bold text-success px-1">Seminar  (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a></li>
 
         <span class="px-2">|</span>
-        <li><a href="/kerja-praktek" class="px-1">Kerja Praktek (<span id=""></span>)</a></li>
+        <li><a href="/kerja-praktek" class="px-1">Kerja Praktek (<span>{{ $jml_prodi_kp }}</span>)</a></li>
         
         <span class="px-2">|</span>
-        <li><a href="/skripsi" class="px-1">Skripsi (<span id=""></span>)</a></li>
+        <li><a href="/skripsi" class="px-1">Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a></li>
 
 
         <span class="px-2">|</span>
-        <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat (<span id=""></span>)</a></li>
+        <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
         
         @endif
   @endif
@@ -58,14 +58,18 @@
       <th class="text-center" scope="col">Waktu</th>
       <th class="text-center" scope="col">Lokasi</th>              
       <th class="text-center" scope="col">Pembimbing</th>
-      <th class="text-center" scope="col">Penguji</th>          
+      <th class="text-center" scope="col">Penguji</th>  
+       @if (Str::length(Auth::guard('dosen')->user()) > 0)
+        @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )        
      <th class="text-center"scope="col">Aksi</th>
+      @endif
+      @endif
     </tr>
   </thead>
   <tbody> 
     
     @foreach ($penjadwalan_kps as $kp)
-    @if($kp->lokasi ==! null)     
+    @if($kp->waktu ==! null)     
       <tr>                 
         <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
         <td class="text-center">{{$kp->mahasiswa->nama}}</td>                    
@@ -80,25 +84,13 @@
         <td class="text-center">
           <p>{{$kp->penguji->nama_singkat}}</p>           
         </td>
-       <td class="text-center">
-          @if ($kp->penilaian(Auth::user()->nip, $kp->id) == false)
-            @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
-            <a href="/penilaian-kp/create/{{Crypt::encryptString($kp->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
-            @else
-            <span class="badge bg-danger" style="border-radius:20px; padding:7px;">Belum Dimulai</span>
-         @if (Str::length(Auth::guard('dosen')->user()) > 0)
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
         @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-               <a href="/form-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning mt-2" style="border-radius:20px; padding:7px;">Edit Jadwal</a>
-              @endif
-              @endif
-
-            @endif
-          @else
-            <a href="/penilaian-kp/edit/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
-          @endif      
-          
-          
-        </td>                                 
+       <td class="text-center">
+               <a href="/form-kp/edit/koordinator/{{Crypt::encryptString($kp->id)}}" class="badge bg-warning mt-2 p-2"><i class="fas fa-pen"></i></a>
+        </td>                  
+         @endif
+        @endif               
       </tr>               
       @endif      
     @endforeach
@@ -137,24 +129,19 @@
             @else
                 <td class="text-center"></td> 
             @endif 
-                      
+           @if (Str::length(Auth::guard('dosen')->user()) > 0)
+        @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )           
           <td class="text-center">
-            @if ($sempro->penilaian(Auth::user()->nip, $sempro->id) == false)
-              @if (Carbon::now() >= $sempro->tanggal && Carbon::now()->format('H:i:m') >= $sempro->waktu)
-              <a href="/penilaian-sempro/create/{{Crypt::encryptString($sempro->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
-              @else
-              <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
-              @endif
-            @else
-              <a href="/penilaian-sempro/edit/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
-            @endif              
-          </td>                        
+              <a href="/form-sempro/edit/koordinator/{{Crypt::encryptString($sempro->id)}}" class="badge bg-warning p-2" > <i class="fas fa-pen"></i><a>              
+                </td>                        
+                @endif              
+                @endif              
         </tr>
         @endif               
     @endforeach
 
     @foreach ($penjadwalan_skripsis as $skripsi)
-    @if($skripsi->lokasi ==! null)    
+    @if($skripsi->waktu ==! null)    
         <tr>               
           <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
           <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
@@ -182,21 +169,14 @@
             @else
                 <td class="text-center"></td> 
             @endif 
-                             
+          
+          @if (Str::length(Auth::guard('dosen')->user()) > 0)
+        @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )           
           <td class="text-center">
-            @if ($skripsi->penilaian(Auth::user()->nip, $skripsi->id) == false)
-              @if (Carbon::now() >= $skripsi->tanggal && Carbon::now()->format('H:i:m') >= $skripsi->waktu)
-              <a href="/penilaian-skripsi/create/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
-              @else
-              <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
-
-              @endif
-            @else
               <a href="/penilaian-skripsi/edit/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-warning" style="border-radius:20px; padding:7px;"> Edit Nilai<a>              
-            @endif    
-            
-            
-          </td>                        
+                </td>                        
+                @endif              
+                @endif 
         </tr>               
         @endif    
     @endforeach
@@ -236,57 +216,24 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($penjadwalan_kps->count()) !!};
-    const waitingApprovalElement = document.getElementById('waitingApprovalCount');
+    const waitingApprovalCount = {!! json_encode($jml_seminar_kp + $jml_sempro + $jml_sidang) !!};
     if (waitingApprovalCount > 0) {
-      waitingApprovalElement.innerText = waitingApprovalCount;
         Swal.fire({
-            title: 'Ini adalah halaman Jadwal Seminar Kerja Paktek',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> dijadwalkan Seminar.`,
+            title: 'Ini adalah halaman Jadwal Seminar',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> akan melaksanakan seminar.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     } else {
-      waitingApprovalElement.innerText = '0';
         Swal.fire({
-            title: 'Ini adalah halaman Jadwal Seminar Kerja Paktek',
-            html: `Tidak ada mahasiswa dijadwalkan Seminar.`,
+            title: 'Ini adalah halaman Jadwal Seminar',
+            html: `Belum ada mahasiswa yang akan melaksanakan seminar.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     }
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const persetujuanKPCount = {!! json_encode($jml_persetujuankp->count()) !!};
-    const persetujuanKPElement = document.getElementById('persetujuanKPCount');
-       persetujuanKPElement.innerText = persetujuanKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
-    const prodiKPElement = document.getElementById('prodiKPCount');
-       prodiKPElement.innerText = prodiKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const bimbinganKPCount = {!! json_encode($jml_bimbingankp->count()) !!};
-    const bimbinganKPElement = document.getElementById('bimbinganKPCount');
-       bimbinganKPElement.innerText = bimbinganKPCount;
 });
 </script>
 @endpush()

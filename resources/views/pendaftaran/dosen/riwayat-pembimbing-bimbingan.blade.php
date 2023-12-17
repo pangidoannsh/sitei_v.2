@@ -26,11 +26,11 @@
  
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
 
-  <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span id=""></span>)</a></li>
+<li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span>{{ $jml_kp }}</span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span id=""></span>)</a></li>
+  <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_skripsi }}</span>)</a></li>
   <span class="px-2">|</span>
-<li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span id=""></span>)</a></li>
+  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
     
  
   @endif
@@ -140,67 +140,27 @@
 @endsection
 
 
-{{-- @push('scripts')
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const waitingApprovalCount = {!! json_encode($pendaftaran_kp->count()) !!};
+    const waitingApprovalCount = {!! json_encode($jml_riwayat_kp + $jml_riwayat_skripsi) !!};
     if (waitingApprovalCount > 0) {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Bimbingan Mahasiswa',
-            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda telah selesai melaksanakan Kerja Praktek.`,
+            title: 'Ini adalah halaman Riwayat Bimbingan',
+            html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda telah selesai melaksanakan Kerja Praktek dan Skripsi.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     } else {
         Swal.fire({
-            title: 'Ini adalah halaman Riwayat Bimbingan Mahasiswa',
+            title: 'Ini adalah halaman Riwayat Bimbingan',
             html: `Belum ada mahasiswa bimbingan Anda selesai Kerja Praktek dan Skripsi.`,
             icon: 'info',
-            showConfirmButton: false,
-            timer: 5000,
+            showConfirmButton: true,
+            confirmButtonColor: '#28a745',
         });
     }
-});
-</script>
-@endpush() --}}
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const persetujuanKPCount = {!! json_encode($jml_persetujuankp->count()) !!};
-    const persetujuanKPElement = document.getElementById('persetujuanKPCount');
-       persetujuanKPElement.innerText = persetujuanKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const seminarKPCount = {!! json_encode($jml_seminarkp->count()) !!};
-    const seminarKPElement = document.getElementById('seminarKPCount');
-       seminarKPElement.innerText = seminarKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const prodiKPCount = {!! json_encode($jml_prodikp->count()) !!};
-    const prodiKPElement = document.getElementById('prodiKPCount');
-       prodiKPElement.innerText = prodiKPCount;
-});
-</script>
-@endpush()
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const bimbinganKPCount = {!! json_encode($jml_bimbingankp->count()) !!};
-    const bimbinganKPElement = document.getElementById('bimbinganKPCount');
-       bimbinganKPElement.innerText = bimbinganKPCount;
 });
 </script>
 @endpush()
