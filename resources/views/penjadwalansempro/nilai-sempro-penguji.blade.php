@@ -211,7 +211,7 @@
 
     <table width="100%" style="font-family: Arial, sans-serif; margin-top:2px;">
         <tr>
-            <td width="27%">Dosen Penguji (1 / 2 / 3)*</td>
+            <td width="27%">Dosen Penguji ( @if ($penjadwalan->pengujisatu_nip == $penilaianpenguji->penguji->nip)1 @elseif ($penjadwalan->pengujidua_nip == $penilaianpenguji->penguji->nip) 2 @elseif ($penjadwalan->pengujitiga_nip == $penilaianpenguji->penguji->nip) 3 @endif)</td>
             <td>:</td>
             <td width="70%">{{$penilaianpenguji->penguji->nama}}</td>
         </tr>

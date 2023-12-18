@@ -93,7 +93,7 @@
 <body>
     <div class="isi">
 
-        <table width="100%" style="margin-bottom: 0%">
+        <table width="100%" style="margin-bottom: 0%; margin-top: -25;">
             <tr>
                 <td>
                     <div class="logo">
@@ -158,7 +158,7 @@
             </tr>         
         </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:20px; line-height: 1.5">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-5px; line-height: 1.5">
         <tr class="text2">
             <td width="27%">Nama Mahasiswa</td>
             <td>:</td>
@@ -182,58 +182,58 @@
         </tr>
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; ">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top: -10px;">
         <tr>
-            <td width="27%">Dosen Penguji (1 / 2 / 3)*</td>
+            <td width="27%">Dosen Penguji ( @if ($penjadwalan->pengujisatu_nip == $penilaianpenguji->penguji->nip)1 @elseif ($penjadwalan->pengujidua_nip == $penilaianpenguji->penguji->nip) 2 @elseif ($penjadwalan->pengujitiga_nip == $penilaianpenguji->penguji->nip) 3 @endif)</td>
             <td>:</td>
             <td width="70%">{{$penilaianpenguji->penguji->nama}}</td>
         </tr>
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
+    <!-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
         <tr class="text2">
             <td width="70%" style="font-size:10px"><i>*coret yang tidak perlu</i></td>
         </tr>
-    </table>
+    </table> -->
 
-    <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:0px;">
+    <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:-10px;">
         <tr>
-            <th class="table1" width="10px">No</th>
-            <th class="table1">Saran/Perbaikan</th>
-            <th class="table1" width="10px">Paraf Pembimbing</th>
+            <th class="table1" style="padding: 5px" width="10px">No</th>
+            <th class="table1" style="padding: 5px">Saran/Perbaikan</th>
+            <th class="table1" style="padding: 5px" width="10px">Paraf Pembimbing</th>
         </tr>
         <tr>
-            <td class="table1">1</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah1}}</td>                
-            <td class="table1"></td>                        
-        </tr>
-        
-        <tr>
-            <td class="table1">2</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah2}}</td>              
-            <td class="table1"></td>   
+            <td class="table1" style="padding: 5px; text-align:center;">1</td>  
+            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah1}}</td>                
+            <td class="table1" style="padding: 5px"></td>                        
         </tr>
         
         <tr>
-            <td class="table1">3</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah3}}</td>                
-            <td class="table1"></td>                        
+            <td class="table1" style="padding: 5px; text-align:center;">2</td>  
+            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah2}}</td>              
+            <td class="table1" style="padding: 5px"></td>   
+        </tr>
+        
+        <tr>
+            <td class="table1" style="padding: 5px; text-align:center;">3</td>  
+            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah3}}</td>                
+            <td class="table1" style="padding: 5px"></td>                        
         </tr>  
 
         <tr>
-            <td class="table1">4</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah4}}</td>
-            <td class="table1"></td>                        
+            <td class="table1" style="padding: 5px; text-align:center;">4</td>  
+            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah4}}</td>
+            <td class="table1" style="padding: 5px"></td>                        
         </tr>  
 
         <tr>
-            <td class="table1">5</td>  
-            <td class="table1">{{$penilaianpenguji->revisi_naskah5}}</td>               
-            <td class="table1"></td>                        
+            <td class="table1" style="padding: 5px; text-align:center;">5</td>  
+            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah5}}</td>               
+            <td class="table1" style="padding: 5px"></td>                        
         </tr>           
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:10px;">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-20px;">
         <tr>
             <td width="60%" align="right">
                 <!-- Disini untuk perintah Qr code -->
@@ -241,12 +241,12 @@
             <td class="text" style="text-align: left;">
                 <div class="container">
                     <p>Pekanbaru, {{Carbon::parse($penjadwalan->tanggal)->translatedFormat('d F Y')}} </p>
-                    <p>Dosen Penguji</p>
+                    <p style="margin-top:-10px;">Dosen Penguji</p>
                     <div class="ttd">
                         <img src="data:img/png;base64, {!! $qrcode !!}">
                     </div>
                     <br><br><br><br><br><br>
-                    <strong style="text-decoration: underline;">{{$penilaianpenguji->penguji->nama}}</strong><br>NIP. {{$penilaianpenguji->penguji->nip}}
+                    <strong style="text-decoration: underline; ">{{$penilaianpenguji->penguji->nama}}</strong><br>NIP. {{$penilaianpenguji->penguji->nip}}
                 </div>
                 <br>
             </td>

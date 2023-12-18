@@ -196,7 +196,7 @@
         </tr>
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; ">
+    <table width="100%" style="font-family: Arial, sans-serif; margin-top: -15px;">
         <tr class="text2">
             <td>Tanggal Seminar</td>
             <td>:</td>
@@ -204,17 +204,17 @@
         </tr>
 
         <tr class="text2">
-            <td width="27%">Dosen Penguji (1 / 2 / 3)*</td>
+            <td width="27%">Dosen Penguji ( @if ($penjadwalan->pengujisatu_nip == $penilaianpenguji->penguji->nip)1 @elseif ($penjadwalan->pengujidua_nip == $penilaianpenguji->penguji->nip) 2 @elseif ($penjadwalan->pengujitiga_nip == $penilaianpenguji->penguji->nip) 3 @endif)</td>
             <td>:</td>
             <td width="70%">{{$penilaianpenguji->penguji->nama}}</td>
         </tr>
     </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-13px;">
+    <!-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-13px;">
         <tr class="text2">
             <td width="70%" style="font-size:10px"><i>*coret yang tidak perlu</i></td>
         </tr>
-    </table>
+    </table> -->
 
     <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:0px; line-height:14px;">
         <tr>
