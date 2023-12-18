@@ -382,6 +382,9 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/penilaian-kp/edit/{penjadwalan_kp:id}', [PenilaianKPController::class, 'edit']);
     Route::put('/penilaian-kp-penguji/edit/{penilaian_kp_penguji:id}', [PenilaianKPController::class, 'update_penguji']);
     Route::put('/penilaian-kp-pembimbing/edit/{penilaian_kp_pembimbing:id}', [PenilaianKPController::class, 'update_pembimbing']);
+    
+    Route::put('/penilaian-kp-penguji/edit/sama/{penilaian_kp_penguji:id}', [PenilaianKPController::class, 'update_penguji_sama']);
+    Route::put('/penilaian-kp-pembimbing/edit/sama/{penilaian_kp_pembimbing:id}', [PenilaianKPController::class, 'update_pembimbing_sama']);
    
     Route::put('/penilaian-kp/approve/{id}', [PenjadwalanKPController::class, 'approve']);
     Route::get('/riwayat-penilaian-kp', [PenilaianKPController::class, 'riwayat']);

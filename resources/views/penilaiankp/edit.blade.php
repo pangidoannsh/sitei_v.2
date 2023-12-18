@@ -24,7 +24,7 @@
 
 <div>  
 
-  <a href="/kp-skripsi/seminar-pembimbing-penguji" onclick="return confirm ('Apakah anda yakin? Data tidak akan tersimpan!')" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/kp-skripsi/seminar-pembimbing-penguji" class="btn btn-success mb-3"> <i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 
 <div class="container">
     <div class="row shadow-sm rounded">
@@ -602,7 +602,7 @@
 
 
                      <div class="container pb-5">
-                    @if ($nilaipembimbing->total_nilai_angka == null)   
+                    @if ($nilaipembimbing == null)   
                                     <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove1">Selesai Seminar</button>  
                                   <div class="modal fade"id="ModalApprove1">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -618,7 +618,7 @@
                                     </div>
                                   </div>
                                   </div>    
-                        @elseif($nilaipenguji->total_nilai_angka == null)
+                        @elseif($nilaipenguji == null)
                               <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove2">Selesai Seminar</button> 
                               <div class="modal fade"id="ModalApprove2">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -757,7 +757,7 @@
 </ul>
 <div class="tab-content p-5" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
- <form action="/penilaian-kp-penguji/edit/{{$kp->id}}" method="POST">
+ <form action="/penilaian-kp-penguji/edit/sama/{{$kp->id}}" method="POST">
     @method('put')
     @csrf
     <div class="mb-3 gridratakiri ">
@@ -907,7 +907,7 @@
 
   
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <form action="/penilaian-kp-pembimbing/edit/{{$kp->id}}" method="POST">
+    <form action="/penilaian-kp-pembimbing/edit/sama/{{$kp->id}}" method="POST">
     @method('put')
     @csrf
                 <div class="mb-3 gridratakiri">      
@@ -1100,7 +1100,7 @@
                     </table> 
 
                     <div class="container pb-5">
-                    @if ($nilaipembimbing->total_nilai_angka == null)   
+                    @if ($nilaipembimbing == null)   
                                     <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove1">Selesai Seminar</button>  
                                   <div class="modal fade"id="ModalApprove1">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -1116,7 +1116,7 @@
                                     </div>
                                   </div>
                                   </div>    
-                        @elseif($nilaipenguji->total_nilai_angka == null)
+                        @elseif($nilaipenguji == null)
                               <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right" data-bs-toggle="modal" data-bs-target="#ModalApprove2">Selesai Seminar</button> 
                               <div class="modal fade"id="ModalApprove2">
                                   <div class="modal-dialog modal-dialog-centered">
