@@ -296,6 +296,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/kp-skripsi/pembimbing/perpanjangan-2/{id}', [PendaftaranSkripsiController::class, 'detail_perpanjangan_2_pemb']);
     Route::get('/kp-skripsi/pembimbing/perpanjangan-revisi/{id}', [PendaftaranSkripsiController::class, 'detail_perpanjangan_revisi_pemb']);
     Route::get('/kp-skripsi/pembimbing/bukti-buku-skripsi/{id}', [PendaftaranSkripsiController::class, 'detail_bukti_buku_skripsi']);
+    Route::get('/kp-skripsi/riwayat/pembimbing/bukti-buku-skripsi/{id}', [PendaftaranSkripsiController::class, 'detail_riwayat_pemb_bukti_buku_skripsi']);
 
     
     Route::get('/pembimbing/skripsi', [PendaftaranController::class, 'pendaftaran_skripsi_pembimbing']);
@@ -504,10 +505,12 @@ Route::group(['middleware' => ['auth:web,dosen']], function(){
 Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){    
 
  Route::get('/kpti10-kp/detail/{id}', [PendaftaranKPController::class, 'detailkpti_10']);
+ Route::get('/kpti10-kp/detail/riwayat/{id}', [PendaftaranKPController::class, 'detail_riwayat_prodi_kpti_10']);
     Route::get('/perpanjangan-revisi/detail/{id}', [PendaftaranSkripsiController::class, 'detailperpanjangan_revisi']);
     Route::get('/perpanjangan-1/detail/{id}', [PendaftaranSkripsiController::class, 'detailperpanjangan_1']);
     Route::get('/perpanjangan-2/detail/{id}', [PendaftaranSkripsiController::class, 'detailperpanjangan_2']);
     Route::get('/bukti-buku-skripsi/detail/{id}', [PendaftaranSkripsiController::class, 'detailbukti_buku_skripsi']);
+    Route::get('/bukti-buku-skripsi/riwayat/detail/{id}', [PendaftaranSkripsiController::class, 'detail_riwayat_prodi_bukti_buku_skripsi']);
 
     Route::get('/statistik', [PendaftaranController::class, 'kuotabimbingan']);
     Route::get('/detail/kuota-bimbingan/kp/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_kp']);
@@ -550,6 +553,9 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
 
     Route::get('/developer/create', [DeveloperController::class, 'create']);
     Route::post('/developer/create', [DeveloperController::class, 'store']);
+    
+    Route::get('/developer/edit/{id}', [DeveloperController::class, 'edit']);
+    Route::put('/developer/edit/{id}', [DeveloperController::class, 'update']);
 
     Route::get('/persetujuan-koordinator', [PenjadwalanController::class, 'persetujuan_koordinator']);    
     Route::get('/persetujuan-koordinator/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_koordinator']);    
@@ -681,6 +687,7 @@ Route::group(['middleware' => ['auth:dosen,web']], function () {
     Route::get('/usulan/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailusulan_pembimbing']);
     Route::get('/suratperusahaan/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailbalasan_pembimbing']);
     Route::get('/kpti10/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailkpti10_pembimbing']);
+    Route::get('/kpti10/detail/riwayat/pembimbingprodi/{id}', [PendaftaranController::class, 'detail_riwayat_kpti10_pembimbing']);
 
     Route::get('/kp-skripsi/prodi/riwayat', [PendaftaranController::class, 'riwayat_prodi']);
 

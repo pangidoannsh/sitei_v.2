@@ -63,6 +63,9 @@ Daftar Beban Bimbingan Kerja Praktek
 </table>
 </div>
 </div>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

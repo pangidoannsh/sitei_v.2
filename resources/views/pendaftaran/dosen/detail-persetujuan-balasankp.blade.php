@@ -115,6 +115,9 @@
   </div>
 
   @endforeach
+  <br>
+<br>
+<br>
 </section>
 
 @endsection

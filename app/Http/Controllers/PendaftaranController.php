@@ -166,6 +166,56 @@ class PendaftaranController extends Controller
             ]);
         } 
     }
+    
+    public function detail_riwayat_kpti10_pembimbing ($id)
+    {
+        $pendaftaran_kp = PendaftaranKP::find($id);
+
+        $penjadwalan_kp = PenjadwalanKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim)->latest('created_at')->first();
+        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        $nilai_penguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        
+        //ADMIN
+        if (auth()->user()->role_id == 1) {     
+            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 2) {            
+            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 3) {            
+            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 4) {  
+            
+            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+                'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        } 
+        //DOSEN
+        if (auth()->user()->nip >0) {  
+            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('dosen_pembimbing_nip', Auth::user()->nip)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        } 
+    }
+
     public function detailbalasan_pembimbing ($id)
     {
         
@@ -1018,8 +1068,6 @@ class PendaftaranController extends Controller
     public function riwayat_prodi ()
     {
         
-                
-
         if (auth()->user()->role_id == 1) {     
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('keterangan', 'Nilai KP Telah Keluar')->orderBy('updated_at', 'desc')->get(),

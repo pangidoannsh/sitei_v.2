@@ -27,16 +27,8 @@
 
   <div class="container">
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-  <a href="/skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
   @endif
-@if (Str::length(Auth::guard('web')->user()) > 0)
-  <a href="/sidang/admin/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-  @endif
-  @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-              @if (Auth::guard('mahasiswa')->user())
-  <a href="/usuljudul/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-  @endif
-  @endif 
 </div>
 
   <div class="container">
@@ -251,39 +243,9 @@
   </div>
 
 @endif
-
- 
-<div class="container">
-   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-    @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-
-    @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' && $skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' )
-    <div class="mb-5 mt-3 float-right">
-        <div class="row row-cols-2">
-    <div class="col">
-        <button onclick="tolakBukuSkripsiKoordinator()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
-</div>
-    <div class="col">
-        <form action="/buku-skripsi/koordinator/approve/{{$skripsi->id}}" class="setujui-buku-skripsi-koordinator" method="POST"> 
-    @method('put')
-    @csrf
-    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
-</form>
-    </div>
-  </div>
-  </div>
-
-        @endif
-
-    @endif
-    @endif
- </div>
   
   @endforeach
 </section>
-<br>
-<br>
-<br>
 
 @endsection
 
@@ -294,59 +256,3 @@
         </div>
 </section>
 @endsection
-
-
-@push('scripts')
-@foreach ($pendaftaran_skripsi as $skripsi)
-<script>
-$('.setujui-buku-skripsi-koordinator').submit(function(event) {
-    event.preventDefault();
-    Swal.fire({
-        title: 'Setujui Bukti Penyerahan Buku Skripsi!',
-        text: "Apakah Anda Yakin?",
-        icon: 'question',
-        showCancelButton: true,
-        cancelButtonText: 'Batal',
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: 'grey',
-        confirmButtonText: 'Setuju'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            event.currentTarget.submit();
-        }
-    })
-});
-
-function tolakBukuSkripsiKoordinator() {
-     Swal.fire({
-            title: 'Tolak Bukti Penyerahan Buku Skripsi!',
-            text: 'Apakah Anda Yakin?',
-            icon: 'question',
-            showCancelButton: true,
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Tolak',
-            confirmButtonColor: '#dc3545'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Tolak Bukti Penyerahan Buku Skripsi',
-                    html: `
-                        <form id="reasonForm" action="/buku-skripsi/koordinator/tolak/{{$skripsi->id}}" method="POST">
-                        @method('put')
-                            @csrf
-                            <label for="alasan">Alasan Penolakan :</label>
-                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
-                            <br>
-                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
-                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
-                        </form>
-                    `,
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                });
-            }
-        });
-    }
-</script>
- @endforeach
-@endpush()

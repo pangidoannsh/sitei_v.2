@@ -20,14 +20,15 @@
 </div>
 @endif
 
-
-
-  <section class="mb-5">
-  <div class="container">
+<div class="container">
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-  <a href="/persetujuan-kp-skripsi" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-  @endif
+  <a href="/kp-skripsi/prodi/riwayat" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  @endif 
+@if (Str::length(Auth::guard('web')->user()) > 0)
+  <a href="/kp-skripsi/prodi/riwayat" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  @endif 
 </div>
+
   @foreach ($pendaftaran_kp as $kp)
 <div class="container">
   <div class="row shadow-sm">
@@ -170,41 +171,14 @@
   </div>
 </div>
 
-@endif
-
-
-<div class="container">
- @if (Str::length(Auth::guard('dosen')->user()) > 0)
-          @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
- 
-          @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' && $kp->keterangan == 'Menunggu persetujuan Koordinator KP')
-   <div class="mb-5 mt-3 float-right">
-        <div class="row row-cols-2">
-    <div class="col">
-        <button onclick="tolakKPTI10Koordinator()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button> 
-</div>
-    <div class="col">
-        <form action="/kpti10/koordinator/approve/{{$kp->id}}" class="setujui-kpti10-koordinator" method="POST"> 
-    @method('put')
-    @csrf
-    <button class="btn btn-success py-2 px-3 mb-3">Setujui</i></button>
-</form>
-    </div>
-  </div>
-  </div>
-
-    @endif 
-    @endif
-    @endif
+@endif   
   
   @endforeach
 </div>
-
-</section>
+</div>
 <br>
 <br>
 <br>
-
 @endsection
 
 @section('footer')
@@ -214,60 +188,4 @@
         </div>
 </section>
 @endsection
-
-@push('scripts')
-@foreach ($pendaftaran_kp as $kp)
-<script>
-   
-   $('.setujui-kpti10-koordinator').submit(function(event) {
-    event.preventDefault();
-    Swal.fire({
-        title: 'Setujui Bukti Penyerahan Laporan KP!',
-        text: "Apakah Anda Yakin?",
-        icon: 'question',
-        showCancelButton: true,
-        cancelButtonText: 'Batal',
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: 'grey',
-        confirmButtonText: 'Setuju'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            event.currentTarget.submit();
-        }
-    })
-});
-
-function tolakKPTI10Koordinator() {
-     Swal.fire({
-            title: 'Tolak KPTI-10/Bukti Penyerahan Laporan KP',
-            text: 'Apakah Anda Yakin?',
-            icon: 'question',
-            showCancelButton: true,
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Tolak',
-            confirmButtonColor: '#dc3545'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Tolak KPTI-10/Bukti Penyerahan Laporan KP',
-                    html: `
-                        <form id="reasonForm" action="/kpti10/koordinator/tolak/{{$kp->id}}" method="POST">
-                        @method('put')
-                            @csrf
-                            <label for="alasan">Alasan Penolakan :</label>
-                            <textarea class="form-control" id="alasan" name="alasan" rows="4" cols="50" required></textarea>
-                            <br>
-                            <button type="submit" class="btn btn-danger p-2 px-3">Kirim</button>
-                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
-                        </form>
-                    `,
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                });
-            }
-        });
-    }
   
-</script>
-@endforeach
-@endpush()  

@@ -92,8 +92,44 @@ class DeveloperController extends Controller
             'foto' => $last_img,                      
         ]);
 
-        return redirect('/developer');
         Alert::success('Berhasil!', 'Data Berhasil disimpan')->showConfirmButton('Ok', '#28a745');
+        return redirect('/developer');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        return view('developer.edit', [
+            'dev' => Developer::where('id', $id)->first(),
+        ]);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $request->validate([                                           
+            'nama' => 'required',
+            'nim' => 'required',
+            'email' => 'required',
+            'nama_aplikasi' => 'required',
+            'deskripsi_peran' => 'required',
+            // 'foto' => 'required|mimes:jpg, jpeg, png|max:200',
+                         
+        ]);
+
+        $dev = Developer::find($id);
+        $dev->nama = $request->nama;
+        $dev->nim = $request->nim;
+        $dev->email = $request->email;
+        $dev->nama_aplikasi = $request->nama_aplikasi;
+        $dev->deskripsi_peran = $request->deskripsi_peran;
+        $dev->linkedin = $request->linkedin;
+        $dev->github = $request->github;
+        // $dev->foto = str_replace('public/file/', 'img/developer/', $request->file('foto')->store('public/file'));
+
+        $dev->update();
+
+        Alert::success('Berhasil!', 'Data berhasil diubah')->showConfirmButton('Ok', '#28a745');
+        // return redirect('/developer');
+        return back();
     }
 
     /**

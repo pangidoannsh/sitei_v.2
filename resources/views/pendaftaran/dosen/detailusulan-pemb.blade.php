@@ -13,12 +13,6 @@
 @endsection
 
 @section('content')
-
-@if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{session('message')}}
-</div>
-@endif
     
  <section class="mb-5">
     <div class="container">
@@ -203,7 +197,9 @@
 
   @endforeach
 </section>
-
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

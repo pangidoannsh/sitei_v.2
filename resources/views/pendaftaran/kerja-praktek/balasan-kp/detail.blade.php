@@ -121,6 +121,9 @@
  
   @endforeach
 </section>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

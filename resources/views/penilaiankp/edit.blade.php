@@ -1231,7 +1231,9 @@
 
                      
 @endif
-
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

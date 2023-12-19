@@ -185,6 +185,8 @@
 </section>
 @endsection
 
+
+
 @push('scripts')
 <script>
   window.setTimeout(function() {

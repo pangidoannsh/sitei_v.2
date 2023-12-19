@@ -853,6 +853,108 @@ public function kapasitasbimbingan_store(Request $request, $id)
             ]);
         } 
     }
+    
+    public function detail_riwayat_prodi_kpti_10($id)
+    {
+        $pendaftaran_kp = PendaftaranKP::find($id);
+
+        $penjadwalan_kp = PenjadwalanKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim)->latest('created_at')->first();
+        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        $nilai_penguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+
+
+        //ADMIN
+        if (auth()->user()->role_id == 1) {     
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 2) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 3) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 4) {  
+            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+                // 'penjadwalan_kp' => PenjadwalanKP::where('prodi_id', '3')->get(),
+            ]);
+        } 
+        if (auth()->user()->role_id == 5 ) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+       
+        if (auth()->user()->role_id == 6) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 7) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 8) {     
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 9) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 10) {            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        }
+        if (auth()->user()->role_id == 11) {  
+            
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-prodi', [
+                'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji, 
+            ]);
+        } 
+        if (auth()->user()->nim > 0) {     
+            return view('pendaftaran.kerja-praktek.kpti-10.detail', [
+                'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('mahasiswa_nim', Auth::user()->nim)->get(),      
+                'nilai_pembimbing' => $nilai_pembimbing,
+                'nilai_penguji' => $nilai_penguji,    
+            ]);
+        } 
+    }
    
     public function destroy(PendaftaranKP $pendaftaranKP)
     {

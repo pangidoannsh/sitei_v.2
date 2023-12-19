@@ -194,7 +194,9 @@
   @endforeach
 </div>
 </section>
-
+<br>
+<br>
+<br>
 
 
 @endsection

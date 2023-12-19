@@ -1475,7 +1475,9 @@ Edit Penilaian Sidang Skripsi
 
 @endif
 
-
+<br>
+<br>
+<br>
 
 @endsection
 

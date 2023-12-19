@@ -60,6 +60,9 @@ Daftar Beban Bimbingan Skripsi
 </table>
 </div>
 </div>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

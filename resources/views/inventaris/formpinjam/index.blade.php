@@ -168,3 +168,11 @@ $(document).ready(function(){
   }, 2000);
 </script>
 @endsection
+
+@section('footer')
+<section class="bg-dark p-1">
+<div class="container">
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="#">( Ahmad Fajri )</a></p>
+        </div>
+</section>
+@endsection
