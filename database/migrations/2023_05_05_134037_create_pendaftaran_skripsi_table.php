@@ -80,18 +80,14 @@ class CreatePendaftaranSkripsiTable extends Migration
              $table->string('sti_29')->nullable();
             //  $table->string('buku_skripsi_akhir')->nullable();
              $table->string('tgl_created_sti_17')->nullable();
-             $table->string('tgl_disetujui_sti_17_admin')->nullable();
-             $table->string('tgl_disetujui_sti_17_pemb1')->nullable();
-             $table->string('tgl_disetujui_sti_17_pemb2')->nullable();
              $table->string('tgl_disetujui_sti_17_koordinator')->nullable();
-             $table->string('tgl_disetujui_sti_17_kaprodi')->nullable();
              //perpanjangan revisi
              $table->string('sti_23')->nullable();
              $table->string('tgl_created_revisi')->nullable();
              $table->string('tgl_disetujui_revisi_pemb1')->nullable();
              $table->string('tgl_disetujui_revisi_kaprodi')->nullable();
              //Alasan ditolak
-            $table->string('alasan')->nullable();  
+             $table->string('alasan')->nullable();  
              
              $table->string('jenis_usulan')->default('Usulan Judul Skripsi');
              $table->string('status_skripsi')->default('USULAN JUDUL');

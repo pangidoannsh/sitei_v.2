@@ -113,9 +113,6 @@ class PendaftaranSkripsiController extends Controller
             return  back();
         }
         }
-  
-        
-    
 
         PendaftaranSkripsi::create([
             'mahasiswa_nim' => auth()->user()->nim,                

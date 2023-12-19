@@ -107,7 +107,6 @@ class Kernel extends ConsoleKernel
         ]);
         })->monthly();
 
-
         $schedule->call(function () {
             \App\Models\PendaftaranSkripsi::whereNull('tgl_created_sidang')
                 ->whereNotNull('tgl_created_perpanjangan1')
@@ -167,7 +166,8 @@ class Kernel extends ConsoleKernel
         ->where('tgl_created_usulankp', '<=', now()->subDays(3))
         ->update([
             'status_kp' => 'USULKAN KP ULANG',
-            'alasan' => 'Usulan Anda belum disetujui Admin Prodi',
+            'keterangan' => 'Usulan Anda belum disetujui Admin Prodi',
+            'alasan' => 'Silahkan Usulkan KP Ulang',
         ]);
         })->daily();
        
@@ -176,7 +176,9 @@ class Kernel extends ConsoleKernel
         ->where('tgl_disetujui_usulankp_admin', '<=', now()->subDays(3))
         ->update([
             'status_kp' => 'USULKAN KP ULANG',
-            'alasan' => 'Usulan Anda belum disetujui Pembimbing',
+            'keterangan' => 'Usulan Anda belum disetujui Pembimbing',
+            'alasan' => 'Silahkan Usulkan KP Ulang',
+            'tgl_disetujui_usulankp_admin' => null,
         ]);
         })->daily();
 
@@ -185,7 +187,10 @@ class Kernel extends ConsoleKernel
         ->where('tgl_disetujui_usulankp_pembimbing', '<=', now()->subDays(3))
         ->update([
             'status_kp' => 'USULKAN KP ULANG',
-            'alasan' => 'Usulan Anda belum disetujui Koordinator',
+            'keterangan' => 'Usulan Anda belum disetujui Koordinator',
+            'alasan' => 'Silahkan Usulkan KP Ulang',
+            'tgl_disetujui_usulankp_admin' => null,
+            'tgl_disetujui_usulankp_pembimbing' => null,
         ]);
         })->daily();
 
@@ -194,7 +199,11 @@ class Kernel extends ConsoleKernel
         ->where('tgl_disetujui_usulankp_koordinator', '<=', now()->subDays(3))
         ->update([
             'status_kp' => 'USULKAN KP ULANG',
-            'alasan' => 'Usulan Anda belum disetujui Kaprodi',
+            'keterangan' => 'Usulan Anda belum disetujui Kaprodi',
+            'alasan' => 'Silahkan Usulkan KP Ulang',
+            'tgl_disetujui_usulankp_admin' => null,
+            'tgl_disetujui_usulankp_pembimbing' => null,
+            'tgl_disetujui_usulankp_koordinator' => null,
         ]);
         })->daily();
        
@@ -211,7 +220,7 @@ class Kernel extends ConsoleKernel
        
         //DAFTAR SEMINAR KP
         $schedule->call(function () {
-        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_semkp_pemb1')
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_semkp_admin')
         ->where('tgl_created_semkp', '<=', now()->subDays(3))
         ->update([
             'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
@@ -219,7 +228,306 @@ class Kernel extends ConsoleKernel
             'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
         ]);
         })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_semkp_pembimbing')
+        ->where('tgl_disetujui_semkp_admin', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+            'tgl_disetujui_semkp_admin' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_semkp_koordinator')
+        ->where('tgl_disetujui_semkp_pembimbing', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+            'tgl_disetujui_semkp_admin' => null,
+            'tgl_disetujui_semkp_pembimbing' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_semkp_kaprodi')
+        ->where('tgl_disetujui_semkp_koordinator', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+            'tgl_disetujui_semkp_admin' => null,
+            'tgl_disetujui_semkp_pembimbing' => null,
+            'tgl_disetujui_semkp_koordinator' => null,
+        ]);
+        })->daily();
 
+        //BUKTI PENYERAHAN LAPORAN
+
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_kpti_10_koordinator')
+        ->where('tgl_created_kpti10', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_kpti_10_kaprodi')
+        ->where('tgl_disetujui_kpti_10_koordinator', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+            'tgl_disetujui_kpti_10_koordinator' => null,
+        ]);
+        })->daily();
+
+
+
+        //BATAS PERSETUJUAN SKRIPSI
+
+        //UDUL JUDUL
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_usuljudul_admin')
+        ->where('tgl_created_usuljudul', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN JUDUL ULANG',
+            'keterangan' => 'Usulan Judul Anda belum disetujui Admin Prodi',
+            'alasan' => 'Silahkan Usulkan Judul ulang!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_usuljudul_pemb1')
+        ->where('tgl_disetujui_usuljudul_admin', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN JUDUL ULANG',
+            'keterangan' => 'Usulan Judul Anda belum disetujui Pembimbing 1',
+            'alasan' => 'Silahkan Usulkan Judul ulang!',
+            'tgl_disetujui_usuljudul_admin' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_usuljudul_pemb2')
+        ->where('tgl_disetujui_usuljudul_pemb1', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN JUDUL ULANG',
+            'keterangan' => 'Usulan Judul Anda belum disetujui Pembimbing 2',
+            'alasan' => 'Silahkan Usulkan Judul ulang!',
+            'tgl_disetujui_usuljudul_admin' => null,
+            'tgl_disetujui_usuljudul_pemb1' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_usuljudul_koordinator')
+        ->where('tgl_disetujui_usuljudul_pemb2', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN JUDUL ULANG',
+            'keterangan' => 'Usulan Judul Anda belum disetujui Koordinator Skripsi',
+            'alasan' => 'Silahkan Usulkan Judul ulang!',
+            'tgl_disetujui_usuljudul_admin' => null,
+            'tgl_disetujui_usuljudul_pemb1' => null,
+            'tgl_disetujui_usuljudul_pemb2' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_usuljudul_kaprodi')
+        ->where('tgl_disetujui_usuljudul_koordinator', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'USULKAN JUDUL ULANG',
+            'keterangan' => 'Usulan Judul Anda belum disetujui Koordinator Program Studi',
+            'alasan' => 'Silahkan Usulkan Judul ulang!',
+            'tgl_disetujui_usuljudul_admin' => null,
+            'tgl_disetujui_usuljudul_pemb1' => null,
+            'tgl_disetujui_usuljudul_pemb2' => null,
+            'tgl_disetujui_usuljudul_koordinator' => null,
+        ]);
+        })->daily();
+
+
+        //DAFTAR SEMPRO
+         $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sempro_pemb1')
+        ->where('tgl_created_sempro', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SEMPRO ULANG',
+            'keterangan' => 'Pendaftaran Seminar Proposal Anda belum disetujui Pembimbing 1',
+            'alasan' => 'Silahkan Daftar Sempro ulang!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sempro_pemb2')
+        ->where('tgl_disetujui_sempro_pemb1', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SEMPRO ULANG',
+            'keterangan' => 'Pendaftaran Seminar Proposal Anda belum disetujui Pembimbing 2',
+            'alasan' => 'Silahkan Daftar Sempro ulang!',
+            'tgl_disetujui_sempro_pemb1' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sempro_admin')
+        ->where('tgl_disetujui_sempro_pemb2', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SEMPRO ULANG',
+            'keterangan' => 'Pendaftaran Seminar Proposal Anda belum disetujui Admin Prodi',
+            'alasan' => 'Silahkan Daftar Sempro ulang!',
+            'tgl_disetujui_sempro_pemb1' => null,
+            'tgl_disetujui_sempro_pemb2' => null,
+        ]);
+        })->daily();
+
+        //PERPANJANGAN 1
+
+         $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_perpanjangan1_pemb1')
+        ->where('tgl_created_perpanjangan1', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'PERPANJANGAN 1 DITOLAK',
+            'keterangan' => 'Usulan Perpanjangan 1 Anda belum disetujui Pembimbing 1',
+            'alasan' => 'Silahkan Usulkan Perpanjangan 1 ulang!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_perpanjangan1_kaprodi')
+        ->where('tgl_disetujui_perpanjangan1_pemb1', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'PERPANJANGAN 1 DITOLAK',
+            'keterangan' => 'Usulan Perpanjangan 1 Anda belum disetujui Koordinator Program Studi',
+            'alasan' => 'Silahkan Usulkan Perpanjangan 1 ulang!',
+            'tgl_disetujui_perpanjangan1_pemb1' => null,
+        ]);
+        })->daily();
+        
+        //PERPANJANGAN 2
+
+         $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_perpanjangan2_pemb1')
+        ->where('tgl_created_perpanjangan2', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'PERPANJANGAN 2 DITOLAK',
+            'keterangan' => 'Usulan Perpanjangan 2 Anda belum disetujui Pembimbing 1',
+            'alasan' => 'Silahkan Usulkan Perpanjangan 2 ulang!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_perpanjangan2_kaprodi')
+        ->where('tgl_disetujui_perpanjangan2_pemb2', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'PERPANJANGAN 2 DITOLAK',
+            'keterangan' => 'Usulan Perpanjangan 2 Anda belum disetujui Koordinator Program Studi',
+            'alasan' => 'Silahkan Usulkan Perpanjangan 2 ulang!',
+            'tgl_disetujui_perpanjangan2_pemb1' => null,
+        ]);
+        })->daily();
+
+        // DAFTAR SIDANG
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sidang_admin')
+        ->where('tgl_created_sidang', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SIDANG ULANG',
+            'keterangan' => 'Pendaftaran Sidang Skripsi Anda belum disetujui Admin Prodi',
+            'alasan' => 'Silahkan Daftar Sidang ulang!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sidang_pemb1')
+        ->where('tgl_disetujui_sidang_admin', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SIDANG ULANG',
+            'keterangan' => 'Pendaftaran Sidang Skripsi Anda belum disetujui Pembimbing 1',
+            'alasan' => 'Silahkan Daftar Sidang ulang!',
+            'tgl_disetujui_sidang_admin' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sidang_pemb2')
+        ->where('tgl_disetujui_sidang_pemb1', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SIDANG ULANG',
+            'keterangan' => 'Pendaftaran Sidang Skripsi Anda belum disetujui Pembimbing 2',
+            'alasan' => 'Silahkan Daftar Sidang ulang!',
+            'tgl_disetujui_sidang_admin' => null,
+            'tgl_disetujui_sidang_pemb1' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sidang_koordinator')
+        ->where('tgl_disetujui_sidang_pemb2', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SIDANG ULANG',
+            'keterangan' => 'Pendaftaran Sidang Skripsi Anda belum disetujui Koordinator Skripsi',
+            'alasan' => 'Silahkan Daftar Sidang ulang!',
+            'tgl_disetujui_sidang_admin' => null,
+            'tgl_disetujui_sidang_pemb1' => null,
+            'tgl_disetujui_sidang_pemb2' => null,
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sidang_kaprodi')
+        ->where('tgl_disetujui_sidang_koordinator', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'DAFTAR SIDANG ULANG',
+            'keterangan' => 'Pendaftaran Sidang Skripsi Anda belum disetujui Koordinator Program Studi',
+            'alasan' => 'Silahkan Daftar Sidang ulang!',
+            'tgl_disetujui_sidang_admin' => null,
+            'tgl_disetujui_sidang_pemb1' => null,
+            'tgl_disetujui_sidang_pemb2' => null,
+            'tgl_disetujui_sidang_koordinator' => null,
+        ]);
+        })->daily();
+
+        // PERPANJANGAN REVISI
+         $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_revisi_pemb1')
+        ->where('tgl_created_revisi', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'PERPANJANGAN 2 DITOLAK',
+            'keterangan' => 'Usulan Perpanjangan 2 Anda belum disetujui Pembimbing 1',
+            'alasan' => 'Silahkan Usulkan Perpanjangan 2 ulang!',
+        ]);
+        })->daily();
+        
+        $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_revisi_kaprodi')
+        ->where('tgl_disetujui_revisi_pemb1', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'PERPANJANGAN 2 DITOLAK',
+            'keterangan' => 'Usulan Perpanjangan 2 Anda belum disetujui Koordinator Program Studi',
+            'alasan' => 'Silahkan Usulkan Perpanjangan 2 ulang!',
+            'tgl_disetujui_revisi_pemb1' => null,
+        ]);
+        })->daily();
+        
+        // PENYERAHAN BUKU SKRIPSI
+         $schedule->call(function () {
+        \App\Models\PendaftaranSkripsi::whereNull('tgl_disetujui_sti_17_koordinator')
+        ->where('tgl_created_sti_17', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK',
+            'keterangan' => 'Bukti Penyerahan Buku Skripsi Anda belum disetujui Koordinator Skripsi',
+            'alasan' => 'Silahkan Usulkan Bukti Penyerahan Buku Skripsi ulang!',
+        ]);
+        })->daily();
+        
 
     }
 
