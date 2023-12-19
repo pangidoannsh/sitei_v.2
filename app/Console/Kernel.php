@@ -199,14 +199,24 @@ class Kernel extends ConsoleKernel
         })->daily();
        
     //    BALASAN KP 
-       
         $schedule->call(function () {
         \App\Models\PendaftaranKP::whereNull('tgl_disetujui_balasan')
         ->where('tgl_created_balasan', '<=', now()->subDays(3))
         ->update([
-            'status_kp' => 'USULAN KP',
-            'keterangan' => 'Usulan Kerja Praktek Diterima',
-            'alasan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP, Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
+        ]);
+        })->daily();
+       
+        //DAFTAR SEMINAR KP
+        $schedule->call(function () {
+        \App\Models\PendaftaranKP::whereNull('tgl_disetujui_semkp_pemb1')
+        ->where('tgl_created_semkp', '<=', now()->subDays(3))
+        ->update([
+            'status_kp' => 'SURAT PERUSAHAAN DITOLAK',
+            'keterangan' => 'Surat Perusahaan Anda belum disetujui Koordinator KP',
+            'alasan' => 'Silahkan Unggah Ulang Surat Balasan Perusahaan!',
         ]);
         })->daily();
 

@@ -114,8 +114,9 @@ class PendaftaranKPController extends Controller
             'mahasiswa_nim' => auth()->user()->nim,               
             'prodi_id' => auth()->user()->prodi_id,   
             'konsentrasi_id' => auth()->user()->konsentrasi_id,              
-            'krs_berjalan' =>$request->file('krs_berjalan')->store('file'),                        
-            'transkip_nilai' =>$request->file('transkip_nilai')->store('file'),                        
+            'krs_berjalan' =>str_replace('public/', '', $request->file('krs_berjalan')->store('public/file')),                    
+            // 'transkip_nilai' =>$request->file('transkip_nilai')->store('file'),                        
+            'transkip_nilai' =>str_replace('public/', '', $request->file('transkip_nilai')->store('public/file')),                        
             'dosen_pembimbing_nip' =>$request->dosen_pembimbing_nip,   
             'nama_perusahaan' => $request->nama_perusahaan,
             'alamat_perusahaan' => $request->alamat_perusahaan,
@@ -582,7 +583,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
         ]);
 
         $kp = PendaftaranKP::find($id);
-        $kp->surat_balasan = $request->file('surat_balasan')->store('file');
+        $kp->surat_balasan = str_replace('public/', '', $request->file('surat_balasan')->store('public/file'));
         $kp->tanggal_mulai = $request->tanggal_mulai;
 
         $kp->jenis_usulan = 'Surat Balasan Perusahaan';
@@ -697,11 +698,11 @@ public function kapasitasbimbingan_store(Request $request, $id)
 
         $kp = PendaftaranKP::find($id);
         $kp->judul_laporan = $request->judul_laporan;
-        $kp->laporan_kp = $request->file('laporan_kp')->store('file');
-        $kp->kpti_11 = $request->file('kpti_11')->store('file');  
+        $kp->laporan_kp = str_replace('public/', '', $request->file('laporan_kp')->store('public/file'));
+        $kp->kpti_11 = str_replace('public/', '', $request->file('kpti_11')->store('public/file'));  
 
         if ($request->hasFile('sti_31')) {
-        $kp->sti_31 = $request->file('sti_31')->store('file');
+        $kp->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
         }
 
         $kp->jenis_usulan = 'Daftar Seminar Kerja Praktek';
@@ -740,8 +741,8 @@ public function kapasitasbimbingan_store(Request $request, $id)
 
         $kp = PendaftaranKP::find($id);
 
-        $kp->kpti_10 = $request->file('kpti_10')->store('file');
-        $kp->laporan_akhir = $request->file('laporan_akhir')->store('file');
+        $kp->kpti_10 = str_replace('public/', '', $request->file('kpti_10')->store('public/file'));
+        $kp->laporan_akhir = str_replace('public/', '', $request->file('laporan_akhir')->store('public/file'));
         $kp->jenis_usulan = 'Penyerahan file KPTI-10/Bukti penyerahan laporan';
         $kp->status_kp = 'BUKTI PENYERAHAN LAPORAN';
         $kp->keterangan = 'Menunggu persetujuan Koordinator KP';

@@ -122,9 +122,11 @@ class PendaftaranSkripsiController extends Controller
             'prodi_id' => auth()->user()->prodi_id,   
             'konsentrasi_id' => auth()->user()->konsentrasi_id,                          
             'judul_skripsi' =>$request->judul_skripsi,                       
-            'krs_berjalan' =>$request->file('krs_berjalan')->store('file'),                        
-            'khs' =>$request->file('khs')->store('file'),                        
-            'transkip_nilai' =>$request->file('transkip_nilai')->store('file'),                        
+            // 'krs_berjalan' =>$request->file('krs_berjalan')->store('file'),                        
+            // 'khs' =>$request->file('khs')->store('file'),                        
+            'krs_berjalan' =>str_replace('public/', '', $request->file('krs_berjalan')->store('public/file')),                        
+            'khs' =>str_replace('public/', '', $request->file('khs')->store('public/file')),                        
+            'transkip_nilai' =>str_replace('public/', '', $request->file('transkip_nilai')->store('public/file')),                        
             'pembimbing_1_nip' =>$request->pembimbing_1_nip,
             'pembimbing_2_nip' =>$request->pembimbing_2_nip,
             
@@ -156,9 +158,9 @@ class PendaftaranSkripsiController extends Controller
 
         $skripsi = PendaftaranSkripsi::find($id);
         $skripsi->judul_skripsi = $request->judul_skripsi;
-        $skripsi->krs_berjalan = $request->file('krs_berjalan')->store('file');
-        $skripsi->khs = $request->file('khs')->store('file');
-        $skripsi->transkip_nilai = $request->file('transkip_nilai')->store('file');
+        $skripsi->krs_berjalan = str_replace('public/', '', $request->file('krs_berjalan')->store('public/file'));
+        $skripsi->khs = str_replace('public/', '', $request->file('khs')->store('public/file'));
+        $skripsi->transkip_nilai = str_replace('public/', '', $request->file('transkip_nilai')->store('public/file'));
         $skripsi->pembimbing_1_nip = $request->pembimbing_1_nip;
         $skripsi->pembimbing_2_nip = $request->pembimbing_2_nip;
         
@@ -295,14 +297,14 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
-        $skripsi->krs_berjalan = $request->file('krs_berjalan')->store('file');
-        $skripsi->khs = $request->file('khs')->store('file');
-        $skripsi->logbook = $request->file('logbook')->store('file');
-        $skripsi->naskah = $request->file('naskah')->store('file');
-        $skripsi->sti_30 = $request->file('sti_30')->store('file');
+        $skripsi->krs_berjalan = str_replace('public/', '', $request->file('krs_berjalan')->store('public/file'));
+        $skripsi->khs = str_replace('public/', '', $request->file('khs')->store('public/file'));
+        $skripsi->logbook = str_replace('public/', '', $request->file('logbook')->store('public/file'));
+        $skripsi->naskah = str_replace('public/', '', $request->file('naskah')->store('public/file'));
+        $skripsi->sti_30 = str_replace('public/', '', $request->file('sti_30')->store('public/file'));
 
         if ($request->hasFile('sti_31')) {
-        $skripsi->sti_31 = $request->file('sti_31')->store('file');
+        $skripsi->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
         }
         
         $skripsi->jenis_usulan = 'Daftar Seminar Proposal';
@@ -472,24 +474,24 @@ class PendaftaranSkripsiController extends Controller
         $skripsi = PendaftaranSkripsi::find($id);
 
         $skripsi->skor_turnitin = $request->skor_turnitin;
-        $skripsi->resume_turnitin = $request->file('resume_turnitin')->store('file');
-        $skripsi->sti_9 = $request->file('sti_9')->store('file');
-        // $skripsi->sti_11 = $request->file('sti_11')->store('file');
-        $skripsi->naskah = $request->file('naskah')->store('file');
-        $skripsi->konsultasi_pa = $request->file('konsultasi_pa')->store('file');
-        $skripsi->transkip_nilai = $request->file('transkip_nilai')->store('file');
-        $skripsi->khs = $request->file('khs')->store('file');
-        $skripsi->toefl = $request->file('toefl')->store('file');
-        $skripsi->logbook = $request->file('logbook')->store('file');
-        $skripsi->pasang_poster = $request->file('pasang_poster')->store('file');
+        $skripsi->resume_turnitin = str_replace('public/', '', $request->file('resume_turnitin')->store('public/file'));
+        $skripsi->sti_9 = str_replace('public/', '', $request->file('sti_9')->store('public/file'));
+        // $skripsi->sti_11 = str_replace('public/', '', $request->file('sti_11')->store('public/file'));
+        $skripsi->naskah = str_replace('public/', '', $request->file('naskah')->store('public/file'));
+        $skripsi->konsultasi_pa = str_replace('public/', '', $request->file('konsultasi_pa')->store('public/file'));
+        $skripsi->transkip_nilai = str_replace('public/', '', $request->file('transkip_nilai')->store('public/file'));
+        $skripsi->khs = str_replace('public/', '', $request->file('khs')->store('public/file'));
+        $skripsi->toefl = str_replace('public/', '', $request->file('toefl')->store('public/file'));
+        $skripsi->logbook = str_replace('public/', '', $request->file('logbook')->store('public/file'));
+        $skripsi->pasang_poster = str_replace('public/', '', $request->file('pasang_poster')->store('public/file'));
         
         $skripsi->url_poster = $request->url_poster;
-        $skripsi->sti_30 = $request->file('sti_30')->store('file');
-        // $skripsi->sti_31 = $request->file('sti_31')->store('file');
+        $skripsi->sti_30 = str_replace('public/', '', $request->file('sti_30')->store('public/file'));
+        // $skripsi->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
 
          if ($request->hasFile('sti_31')) {
-        $skripsi->sti_31 = $request->file('sti_31')->store('file');
-        $skripsi->sti_10 = $request->file('sti_10')->store('file');
+        $skripsi->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
+        $skripsi->sti_10 = str_replace('public/', '', $request->file('sti_10')->store('public/file'));
         }
        
         
@@ -572,7 +574,7 @@ class PendaftaranSkripsiController extends Controller
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_22 = $request->file('sti_22')->store('file');
+        $skripsi->sti_22 = str_replace('public/', '', $request->file('sti_22')->store('public/file'));
        
         $skripsi->jenis_usulan = 'Permohonan Perpanjangan 1 Waktu Skripsi';
         $skripsi->tgl_created_perpanjangan1 = Carbon::now();
@@ -593,7 +595,7 @@ class PendaftaranSkripsiController extends Controller
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_22 = $request->file('sti_22')->store('file');
+        $skripsi->sti_22 = str_replace('public/', '', $request->file('sti_22')->store('public/file'));
        
         $skripsi->jenis_usulan = 'Permohonan Perpanjangan 2 Waktu Skripsi';
         $skripsi->tgl_created_perpanjangan2 = Carbon::now();
@@ -627,7 +629,7 @@ class PendaftaranSkripsiController extends Controller
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_23 = $request->file('sti_23')->store('file');
+        $skripsi->sti_23 = str_replace('public/', '', $request->file('sti_23')->store('public/file'));
        
         $skripsi->jenis_usulan = 'Permohonan Perpanjangan Revisi Buku Skripsi';
         $skripsi->tgl_created_revisi = Carbon::now();
@@ -967,12 +969,12 @@ class PendaftaranSkripsiController extends Controller
 
         $skripsi = PendaftaranSkripsi::find($id);
 
-        $skripsi->sti_17 = $request->file('sti_17')->store('file');
-        // $skripsi->sti_29 = $request->file('sti_29')->store('file');
-        $skripsi->naskah = $request->file('naskah')->store('file');
+        $skripsi->sti_17 = str_replace('public/', '', $request->file('sti_17')->store('public/file'));
+        // $skripsi->sti_29 = str_replace('public/', '', $request->file('sti_29')->store('public/file'));
+        $skripsi->naskah = str_replace('public/', '', $request->file('naskah')->store('public/file'));
 
         if ($request->hasFile('sti_29')) {
-        $skripsi->sti_29 = $request->file('sti_29')->store('file');
+        $skripsi->sti_29 = str_replace('public/', '', $request->file('sti_29')->store('public/file'));
         }
        
         $skripsi->jenis_usulan = 'Bukti Penyerahan Buku Skripsi';
