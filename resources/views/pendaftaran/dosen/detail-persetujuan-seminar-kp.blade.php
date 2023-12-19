@@ -210,6 +210,14 @@
 
 @endsection
 
+@section('footer')
+<section class="bg-dark p-1">
+<div class="container">
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">( M. Seprinaldi )</a></p>
+        </div>
+</section>
+@endsection
+
 @push('scripts')
 @foreach ($pendaftaran_kp as $kp)
 <script>

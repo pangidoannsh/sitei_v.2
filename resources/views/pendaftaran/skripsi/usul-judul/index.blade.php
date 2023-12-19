@@ -1344,6 +1344,14 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 
 @endsection
 
+@section('footer')
+<section class="bg-dark p-1">
+<div class="container">
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">( M. Seprinaldi )</a></p>
+        </div>
+</section>
+@endsection
+
 <!-- Script untuk mengurangi jumlah hari setiap hari -->
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>

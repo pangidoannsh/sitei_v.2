@@ -275,11 +275,20 @@
      
 
 
-<div class="footer-daftar text-center pt-5">
+<!-- <div class="footer-daftar text-center pt-5">
         <div class="container">
-          <p class="developer text-sm">Dikembangkan oleh Prodi Teknik Informatika UNRI <br> <a href="/developer/m-seprinaldi" class="text-dark text-sm fw-bold text-decoration-underline" target="_blank">(M. Seprinaldi)</a>  <br>Copyright © 2022-2023 SITEI All Rights Reserved</p>
+          <p class="developer text-sm">Dikembangkan oleh Prodi Teknik Informatika UNRI <br> <a href="/developer/m-seprinaldi" class="text-dark text-sm fw-bold text-decoration-underline" target="_blank">(M. Seprinaldi)</a>  <br>Copyright &copy; {{ now()->year }} - {{ now()->addYears(1)->year }} SITEI All Rights Reserved</p>
         </div>
-      </div>
+      </div> -->
+
+
 
 @endsection
 
+@section('footer')
+<section class="bg-dark p-1">
+<div class="container">
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">( M. Seprinaldi )</a></p>
+        </div>
+</section>
+@endsection

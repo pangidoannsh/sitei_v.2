@@ -291,22 +291,23 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content pb-5">
+    <div class="content">
       <div class="container">
         @yield('content')
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
   </div>
-  
   <!-- /.content-wrapper -->
-
+  
   <!-- Main Footer -->
-      <div class="footer bg-dark">
+  
+  @yield('footer')
+  <!-- <div class="footer bg-dark">
         <div class="container">
           <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI</p>
         </div>
-      </div>
+      </div> -->
   
 
 <!-- ./wrapper -->
