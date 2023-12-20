@@ -212,7 +212,7 @@
         </div><p class="mt-3"> KP SELESAI </p>
      </li>  -->
     @endif
-    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' )
+    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP ULANG' )
          <li class="step active"> 
             <div>
                 <i class="fas fa-check"></i>
@@ -433,7 +433,7 @@
     </div>
   </div>
 @endif
-    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $pendaftaran_kp->status_kp == 'KP DISETUJUI' )
+    @if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP ULANG'  || $pendaftaran_kp->status_kp == 'KP DISETUJUI' )
     <div class="row biru mb-4">
     <div class="col">
          <span class="mt-3 "> Tanggal Diterima <br></span>
@@ -580,10 +580,9 @@
  
 </div>
 @endif
-@if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' )
+@if ($pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP ULANG' )
 <div class="alert alert-danger" role="alert"> 
     <i class="fas fa-exclamation-triangle pr-2"></i><span class="fw-bold">{{ $pendaftaran_kp->alasan }}</span>, Silahkan Daftar Seminar KP Ulang!
- 
 </div>
 @endif
 
@@ -682,7 +681,7 @@
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN'|| $kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
             <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
             @endif
-             @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG'  || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' )           
+             @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG'  || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $pendaftaran_kp->status_kp == 'DAFTAR SEMINAR KP ULANG'  || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' )           
             <td class="text-center bg-danger">{{$kp->status_kp}}</td>
             @endif
             @if ($kp->status_kp == 'USULAN KP DITERIMA' ||$kp->status_kp == 'KP DISETUJUI' ||$kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI'||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'KP SELESAI' )           
@@ -736,7 +735,7 @@
             </td>
             @endif
 
-            @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' ||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK')
+            @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' ||$kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG' )
             <td class="text-center">
 
              <a href="/daftar-semkp/detail/ {{($kp->id)}}" class="badge btn btn-info " data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
@@ -744,7 +743,7 @@
                 @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')
                 <a href="/jadwal" class="badge" data-bs-toggle="tooltip" title="Lihat Jadwal"><img height="25" width="25" src="/assets/img/calendar.png"  alt="..." class="zoom-image"></a>
                 @endif
-                @if ($kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK')
+                @if ($kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG' )
                 <a href="/daftar-semkp/create/{{$kp->id}}" class="badge " data-bs-toggle="tooltip" title="Daftar Seminar KP"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>
                 @endif
 

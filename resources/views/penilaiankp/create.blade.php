@@ -587,9 +587,8 @@
             </div>
         </div>      
     </div>
+    
 @endif
-
-
 
 
 
@@ -949,13 +948,15 @@
   </div>
   </div>
   </div>
+  </div>
+  <br>
+  <br>
+  <br>
   <!-- <div class="tab-pane fade" id="enam" role="tabpanel" aria-labelledby="enam-tab">6</div>
 </div> -->
 
 @endif
-<br>
-<br>
-<br>
+
 
 @endsection
 

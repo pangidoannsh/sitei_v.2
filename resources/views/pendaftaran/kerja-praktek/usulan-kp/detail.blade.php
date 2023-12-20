@@ -55,7 +55,7 @@
         <p class="card-text text-start" >{{$kp->mahasiswa->konsentrasi->nama_konsentrasi}}</p>
         </div>
         <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
-        @if($kp->status_kp == 'USULAN KP')
+        @if($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG')
         <h5 class="text-bold">Calon Dosen Pembimbing</h5>
         @else
         <h5 class="text-bold">Dosen Pembimbing</h5>
@@ -96,6 +96,10 @@
         <hr>
         <p class="card-title text-secondary text-sm" >Jenis Usulan</p>
         <p class="card-text text-start" ><span >{{$kp->jenis_usulan}}</span></p>
+        @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG' )
+        <p class="card-title text-secondary text-sm" >Status KP</p>
+        <p class="card-text text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
         @if ($kp->status_kp == 'USULAN KP' )
         <p class="card-title text-secondary text-sm" >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
@@ -174,7 +178,7 @@
 </section>
 @endsection
 
-<script>
+<!-- <script>
     function newTab1(url){
         var x = window.open('{{asset('storage/' .$kp->krs_berjalan )}}','_blank');
         x.focus();
@@ -184,7 +188,7 @@
         x.focus();
     }
 
-</script>
+</script> -->
 
 @push('scripts')
 @foreach ($pendaftaran_kp as $kp)

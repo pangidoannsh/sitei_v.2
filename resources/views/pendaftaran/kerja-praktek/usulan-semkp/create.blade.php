@@ -12,6 +12,11 @@
 
 @foreach ($pendaftaran_kp as $kp)
 
+<div class="container">
+  <a href="/usulankp/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+
+
 <form action="/daftar-semkp/create/{{$kp->id}}" method="POST" enctype="multipart/form-data" >
 @method('put')
         @csrf
@@ -95,7 +100,6 @@
         </div>
     </div>
 </form>
-
 
 @endforeach
 

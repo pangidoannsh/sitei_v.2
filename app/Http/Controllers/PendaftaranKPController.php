@@ -73,6 +73,7 @@ class PendaftaranKPController extends Controller
         return view('pendaftaran.kerja-praktek.usulan-kp.create', [
             'dosens' => Dosen::all(), 
             'pendaftaran_kp' => PendaftaranKP::all()->sortBy('created_at'),
+            'kp' => PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first(),
             
         ]);
     }    
@@ -683,7 +684,8 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         return view('pendaftaran.kerja-praktek.usulan-semkp.create', [
             'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('status_kp','KP DISETUJUI' )->where('mahasiswa_nim', Auth::user()->nim)
-            ->orWhere('id', $id)->where('status_kp','DAFTAR SEMINAR KP DITOLAK' )->where('mahasiswa_nim', Auth::user()->nim)->get(), 
+            ->orWhere('id', $id)->where('status_kp','DAFTAR SEMINAR KP DITOLAK' )->where('mahasiswa_nim', Auth::user()->nim)
+            ->orWhere('id', $id)->where('status_kp','DAFTAR SEMINAR KP ULANG' )->where('mahasiswa_nim', Auth::user()->nim)->get(),
         ]);
     }
 
@@ -982,6 +984,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->status_kp = 'USULAN KP DITOLAK';
         $kp->keterangan = 'Ditolak Calon Pembimbing';
         $kp->alasan = $request->alasan;
+        $kp->tgl_disetujui_usulankp_admin = null;
         $kp->update();
 
         Alert::error('Ditolak', 'Usulan ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1039,6 +1042,8 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->status_kp = 'USULAN KP DITOLAK';
         $kp->keterangan = 'Ditolak Koordinator KP';
         $kp->alasan = $request->alasan;
+        $kp->tgl_disetujui_usulankp_admin = null;
+        $kp->tgl_disetujui_usulankp_pembimbing = null;
         $kp->update();
 
         Alert::error('Ditolak', 'Usulan KP ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1068,6 +1073,9 @@ public function kapasitasbimbingan_store(Request $request, $id)
             $kp->status_kp = 'USULAN KP DITOLAK';
             $kp->keterangan = 'Ditolak Koordinator Program Studi';
             $kp->alasan = $request->alasan;
+            $kp->tgl_disetujui_usulankp_admin = null;
+            $kp->tgl_disetujui_usulankp_pembimbing = null;
+            $kp->tgl_disetujui_usulankp_koordinator = null;
             $kp->update();
     
             Alert::error('Ditolak', 'Usulan KP berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1095,7 +1103,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
 
         $kp = PendaftaranKP::find($id);   
         $kp->status_kp = 'SURAT PERUSAHAAN DITOLAK';
-        $kp->keterangan = 'Unggah Ulang Surat Balasan Perusahaan';
+        $kp->keterangan = 'Ditolak Koordinator KP';
         $kp->alasan = $request->alasan;
         $kp->update();
 
@@ -1155,6 +1163,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
         $kp->keterangan = 'Ditolak Dosen Pembimbing';
         $kp->alasan = $request->alasan;
+        $kp->tgl_disetujui_semkp_admin = null;
         $kp->update();
 
 
@@ -1183,6 +1192,8 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
         $kp->keterangan = 'Ditolak Koordinator KP';
         $kp->alasan = $request->alasan;
+        $kp->tgl_disetujui_semkp_admin = null;
+        $kp->tgl_disetujui_semkp_pembimbing = null;
         $kp->update();
 
         Alert::error('Ditolak', 'Seminar KP berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1218,6 +1229,9 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $kp->status_kp = 'DAFTAR SEMINAR KP DITOLAK';
         $kp->keterangan = 'Ditolak Koordinator Program Studi';
         $kp->alasan = $request->alasan;
+        $kp->tgl_disetujui_semkp_admin = null;
+        $kp->tgl_disetujui_semkp_pembimbing = null;
+        $kp->tgl_disetujui_semkp_koordinator = null;
         $kp->update();
 
         Alert::error('Ditolak', 'Seminar KP berhasil ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1303,7 +1317,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
 
         $kp = PendaftaranKP::find($id);   
         $kp->status_kp = 'BUKTI PENYERAHAN LAPORAN DITOLAK';
-        $kp->keterangan = 'Unggah Ulang KPTI-10/Bukti Penyerahan Laporan KP';
+        $kp->keterangan = 'Ditolak Koordinator KP';
         $kp->alasan = $request->alasan;
         $kp->update();
 

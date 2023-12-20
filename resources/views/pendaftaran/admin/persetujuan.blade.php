@@ -200,33 +200,6 @@
             </td>
             @endif
 
-            @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')
-            <td class="text-center">
-  @if (Str::length(Auth::guard('web')->user()) > 0)
-  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-    @if ($kp->keterangan == 'Menunggu Jadwal Seminar KP' && $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' )
-    <div class="row">
-    
-    <div class="col-12 py-2 py-md-0 col-lg-4">
-        <button onclick="tolakSemKPAdmin({{$kp->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
-    </div>
-    <div class="col-12 py-2 py-md-0 col-lg-4">
-      <a href="/kp-skripsi/persetujuan/semkp/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
-    </div>
-    <div class="col-12 py-2 py-md-0 col-lg-4">
-        <form action="/semkp/admin/approve/{{$kp->id}}" class="setujui-semkp-admin" method="POST"> 
-    @method('put')
-    @csrf
-    <button class="btn btn-success badge p-1 "><i class="fas fa-check-circle"></i></button>
-</form>
-    </div>
-  </div>
-             @endif
-    @endif
-    @endif
-            </td>
-            @endif
-
         
         </tr>
 
@@ -527,7 +500,7 @@ $('.setujui-semkp-admin').submit(function(event) {
     })
 });
 
- function tolakUsulanKPAdmin(id) {
+ function tolakSemKPAdmin(id) {
      Swal.fire({
             title: 'Tolak Usulan Daftar Seminar KP',
             text: 'Apakah Anda Yakin?',

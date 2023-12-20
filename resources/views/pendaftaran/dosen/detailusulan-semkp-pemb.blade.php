@@ -76,7 +76,7 @@
         <p class="card-title text-secondary text-sm" >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
         @endif
-        @if ($kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' )
+        @if ($kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG')
         <p class="card-title text-secondary text-sm" >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
         @endif

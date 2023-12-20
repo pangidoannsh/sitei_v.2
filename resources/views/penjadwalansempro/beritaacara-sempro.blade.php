@@ -547,7 +547,7 @@
     <!--    </tr>  -->
     <!--</table>-->
 
-    <table width="100%" style="font-family: Arial, sans-serif; position: absolute; margin-top: 50px;">
+    <table width="100%" style="font-family: Arial, sans-serif; position: absolute; margin-top: 10px;">
         <tr>
             <td width="50%" align="right">
                 <!-- Disini untuk perintah Qr code -->

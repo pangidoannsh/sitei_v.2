@@ -84,6 +84,10 @@
         <p class="card-title text-secondary text-sm" >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
         @endif
+        @if ($kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' )
+        <p class="card-title text-secondary text-sm" >Status KP</p>
+        <p class="card-text text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
+        @endif
         @if ($kp->status_kp == 'KP DISETUJUI' )
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$kp->status_kp}}</span></p>
