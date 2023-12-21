@@ -12,7 +12,9 @@
     Edit Penilaian Seminar Proposal
 @endsection
 
+
 @section('content')
+
 
 @if (session()->has('message'))
 <div class="swal" data-swal="{{session('message')}}"></div>
@@ -124,6 +126,16 @@
                 <div class="radio1 d-inline">
                   <hr>
 
+            @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai = ($i / 10) * 9;
+            @endphp
+            <input type="radio" class="btn-check @error('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == $nilai ? 'checked' : null }}>
+            <label class="btn tombol text-sm shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
+            @endfor
+
+         <br>
+
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="1.8" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
 
@@ -146,6 +158,14 @@
                 <label for="tingkat_penguasaan_materi" class="col-form-label">2). Tingkat Penguasaan Materi</label>
                 <div class="radio2 d-inline">
                   <hr>
+         @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai2 = ($i / 10) * 9;
+            @endphp
+            <input type="radio" class="btn-check @error('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == $nilai2 ? 'checked' : null }}>
+            <label class="btn tombol text-sm shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
+        @endfor
+          <br>
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="1.8" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
@@ -170,6 +190,15 @@
                 <div class="radio3 d-inline">
                   <hr>
 
+            @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai3 = ($i / 10) * 9;
+            @endphp
+            <input type="radio" class="btn-check @error('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == $nilai3 ? 'checked' : null }}>
+            <label class="btn tombol text-sm shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
+        @endfor
+          <br>
+
                   <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.8" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
 
@@ -193,6 +222,15 @@
                 <div class="radio4 d-inline">
                   <hr>
 
+                  @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai4 = ($i / 10) * 9;
+            @endphp
+            <input type="radio" class="btn-check @error('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tombol_bulat4_{{ $i }}" value="{{ $nilai4 }}" onclick="setBulatValue4({{ $nilai4 }})" {{ old('tata_tulis', $sempro->tata_tulis) == $nilai4 ? 'checked' : null }}>
+            <label class="btn tombol text-sm shadow-sm btn-secondary fw-normal" for="tombol_bulat4_{{ $i }}">{{ $i }}</label>
+            @endfor
+              <br>
+
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1.8" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
 
@@ -215,6 +253,15 @@
                 <label for="hasil_dan_pembahasan" class="col-form-label">5). Sikap dan Kepribadian Ketika Bimbingan</label>
                 <div class="radio5 d-inline">
                   <hr>
+
+                       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai5 = ($i / 10) * 9;
+            @endphp
+            <input type="radio" class="btn-check @error('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="tombol_bulat5_{{ $i }}" value="{{ $nilai5 }}" onclick="setBulatValue5({{ $nilai5 }})" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == $nilai5 ? 'checked' : null }}>
+            <label class="btn tombol text-sm shadow-sm btn-secondary fw-normal" for="tombol_bulat5_{{ $i }}">{{ $i }}</label>
+            @endfor
+              <br>
                   
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian1" value="1.8" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="sikap_dan_kepribadian1">Sangat Kurang Baik</label>
@@ -1402,5 +1449,62 @@ $('input[name="total_nilai_angka"]').val(Math.round(total_angka));
       icon : 'success'
     })    
   }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+    function setBulatValue(value) {
+        // Setiap radio dengan nama 'penguasaan_dasar_teori' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="penguasaan_dasar_teori"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+        });
+    }
+
+
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+    function setBulatValue2(value) {
+        // Setiap radio dengan nama 'tingkat_penguasaan_materi' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="tingkat_penguasaan_materi"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+    function setBulatValue3(value) {
+        // Setiap radio dengan nama 'tinjauan_pustaka' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="tinjauan_pustaka"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+    function setBulatValue4(value) {
+        // Setiap radio dengan nama 'tata_tulis' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="tata_tulis"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+    function setBulatValue5(value) {
+        // Setiap radio dengan nama 'sikap_dan_kepribadian' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="sikap_dan_kepribadian"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+        });
+    }
 </script>
 @endpush()
