@@ -50,7 +50,7 @@
                 <!-- <th class="text-center" scope="col">Jenis Usulan</th> -->
                 <th class="text-center" scope="col">Status </th>
                 <th class="text-center" scope="col">Tanggal Usulan</th>    
-                <th class="text-center" scope="col">Batas Persetujuan</th>    
+                <th class="text-center" scope="col">Batas</th>    
                 <th class="text-center" scope="col">Keterangan</th> 
                 <th class="text-center" scope="col">Aksi</th>
             </tr>
@@ -89,33 +89,33 @@
 <!-- BATAS -->
 
             <tr>        
-            <!-- <td class="text-center">{{$loop->iteration}}</td> -->
-            <td class="text-center">{{$kp->mahasiswa_nim}}</td>                             
-            <td class="text-center fw-bold">{{$kp->mahasiswa->nama}}</td>
+            <!-- <td class="text-center px-1 py-2">{{$loop->iteration}}</td> -->
+            <td class="text-center px-1 py-2">{{$kp->mahasiswa_nim}}</td>                             
+            <td class="text-center px-1 py-2 fw-bold">{{$kp->mahasiswa->nama}}</td>
                        
-            <!-- <td class="text-center">{{$kp->jenis_usulan}}</td>       -->
+            <!-- <td class="text-center px-1 py-2">{{$kp->jenis_usulan}}</td>       -->
             
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'DAFTAR SEMINAR KP'|| $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
-            <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
+            <td class="text-center px-1 py-2 bg-secondary">{{$kp->status_kp}}</td>
             @endif
             @if ($kp->status_kp == 'USULAN KP DITERIMA' || $kp->status_kp == 'KP DISETUJUI'|| $kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'KP SELESAI')           
-            <td class="text-center bg-info">{{$kp->status_kp}}</td>
+            <td class="text-center px-1 py-2 bg-info">{{$kp->status_kp}}</td>
             @endif
             
 
             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
-            <td class="text-center bg-success">{{$kp->status_kp}}</td>
+            <td class="text-center px-1 py-2 bg-success">{{$kp->status_kp}}</td>
             @endif
             
             @if ($kp->status_kp == 'USULAN KP')           
-            <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
-            <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
              @if ($kp->status_kp == 'USULAN KP')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulanKPAdmin > 0)
                     <span class="text-danger"> {{ $daysUsulanKPAdmin }}  hari lagi</span>
                 @elseif($daysUsulanKPAdmin <= 0)
@@ -125,7 +125,7 @@
             @endif
              
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysSeminarKPAdmin >= 0)
                     <span class="text-danger"> {{ $daysSeminarKPAdmin }}  hari lagi</span>
                 @elseif($daysSeminarKPAdmin <= 0)
@@ -134,7 +134,7 @@
             </td>
             @endif
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysSeminarKPDisetujui >= 0)
                     <span class="text-danger"> {{ $daysSeminarKPDisetujui }}  hari lagi</span>
                 @elseif($daysSeminarKPDisetujui <= 0)
@@ -143,10 +143,10 @@
             </td>
             @endif
 
-            <td class="text-center">{{$kp->keterangan}}</td> 
+            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$kp->keterangan}}</td> 
 
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA'  )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
   @if (Str::length(Auth::guard('web')->user()) > 0)
   @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     @if ($kp->keterangan == 'Menunggu persetujuan Admin Prodi' && $kp->status_kp == 'USULAN KP' )
@@ -174,7 +174,7 @@
 
 
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
   @if (Str::length(Auth::guard('web')->user()) > 0)
   @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     @if ($kp->keterangan == 'Menunggu persetujuan Admin Prodi' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
@@ -217,8 +217,9 @@
 <!-- BATAS -->
 
 <!-- USULAN DAFTAR SEMPRO -->
+
 @php
-    $countDownDateDaftarSemproAdmin = strtotime($skripsi->tgl_disetujui_sempro_pemb2) + (4 * 24 * 60 * 60);
+    $countDownDateDaftarSemproAdmin = strtotime($skripsi->pembimbing_2_nip != null ? $skripsi->tgl_disetujui_sempro_pemb2 : $skripsi->tgl_disetujui_sempro_pemb1 ) + (4 * 24 * 60 * 60);
     $nowDaftarSemproAdmin = time();
     $distanceDaftarSemproAdmin = $countDownDateDaftarSemproAdmin - $nowDaftarSemproAdmin;
     $daysDaftarSemproAdmin = floor($distanceDaftarSemproAdmin / (60 * 60 * 24));
@@ -227,7 +228,7 @@
 
 <!-- USULAN DAFTAR SIDANG -->
 @php
-    $countDownDateDaftarSidangAdmin = strtotime($skripsi->tgl_disetujui_sidang_pemb2) + (4 * 24 * 60 * 60);
+    $countDownDateDaftarSidangAdmin = strtotime($skripsi->pembimbing_2_nip != null ? $skripsi->tgl_disetujui_sidang_pemb2 : $skripsi->tgl_disetujui_sidang_pemb1 ) + (4 * 24 * 60 * 60);
     $nowDaftarSidangAdmin = time();
     $distanceDaftarSidangAdmin = $countDownDateDaftarSidangAdmin - $nowDaftarSidangAdmin;
     $daysDaftarSidangAdmin = floor($distanceDaftarSidangAdmin / (60 * 60 * 24));
@@ -246,38 +247,38 @@
 
 <div></div>
         <tr>        
-            <!--<td class="text-center">{{$loop->iteration}}</td>                             -->
-            <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center fw-bold">{{$skripsi->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$skripsi->konsentrasi->nama_konsentrasi}}</td> -->
-            <!-- <td class="text-center">{{$skripsi->jenis_usulan}}</td>          -->
+            <!--<td class="text-center px-1 py-2">{{$loop->iteration}}</td>                             -->
+            <td class="text-center px-1 py-2">{{$skripsi->mahasiswa->nim}}</td>                             
+            <td class="text-center px-1 py-2 fw-bold">{{$skripsi->mahasiswa->nama}}</td>
+            <!-- <td class="text-center px-1 py-2">{{$skripsi->konsentrasi->nama_konsentrasi}}</td> -->
+            <!-- <td class="text-center px-1 py-2">{{$skripsi->jenis_usulan}}</td>          -->
             <!-- USUL JUDUL  -->
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
-            <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-secondary">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
-            <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
            
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
-            <td class="text-center bg-success">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-success">{{$skripsi->status_skripsi}}</td>
             @endif
 
             <!-- ___________batas____________ -->
 
             @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG'|| $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             <!-- BATAS PERSETUJUAN -->
             @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulJudulAdmin >= 0)
                     <span class="text-danger"> {{ $daysUsulJudulAdmin }}  hari lagi</span>
                 @elseif($daysUsulJudulAdmin <= 0)
@@ -288,7 +289,7 @@
             
             <!-- DAFTAR SEMPRO -->
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSemproAdmin >= 0)
                     <span class="text-danger"> {{ $daysDaftarSemproAdmin }}  hari lagi</span>
                 @elseif($daysDaftarSemproAdmin <= 0)
@@ -299,7 +300,7 @@
            
             <!-- DAFTAR SIDANG -->
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSidangAdmin >= 0)
                     <span class="text-danger"> {{ $daysDaftarSidangAdmin }}  hari lagi</span>
                 @elseif($daysDaftarSidangAdmin <= 0)
@@ -310,7 +311,7 @@
             
             <!-- DAFTAR MENUNGGU JADWAL SIDANG -->
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysMenungguSidangAdmin >= 0)
                     <span class="text-danger"> {{ $daysMenungguSidangAdmin }}  hari lagi</span>
                 @elseif($daysMenungguSidangAdmin <= 0)
@@ -319,14 +320,14 @@
             </td>
             @endif
                
-            <td class="text-center">{{$skripsi->keterangan}}</td> 
+            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$skripsi->keterangan}}</td> 
 
 
             <!-- USUL JUDUL  -->
             @if ($skripsi->status_skripsi == 'USULAN JUDUL'|| $skripsi->status_skripsi == 'JUDUL DISETUJUI'  )
             
             @if ($skripsi->keterangan == 'Menunggu persetujuan Admin Prodi' && $skripsi->status_skripsi == 'USULAN JUDUL' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
             <div class="row">
     <div class="col-12 py-2 py-md-0 col-lg-4">
         <button onclick="tolakUsulJudulAdmin({{$skripsi->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -350,7 +351,7 @@
 
            <!-- DAFTAR SEMPRO -->
            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI') 
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                  <div class="row">
     <div class="col-12 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSemproAdmin({{$skripsi->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -370,7 +371,7 @@
             
             <!-- DAFTAR SIDANG -->
              @if ($skripsi->keterangan == 'Menunggu persetujuan Admin Prodi' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                  <div class="row">
     <div class="col-12 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSidangAdmin({{$skripsi->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -390,7 +391,7 @@
            
              <!-- MENUNGGU JADWAL SIDANG -->
             @if ($skripsi->keterangan == 'Menunggu Jadwal Sidang Skripsi' && $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                  <div class="row">
     <div class="col-12 py-2 py-md-0 col-lg-4">
         <button onclick="tolakTungguSidangAdmin({{$skripsi->id}})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>

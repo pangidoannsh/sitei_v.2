@@ -63,95 +63,106 @@ Data Skripsi Mahasiswa
  @foreach ($pendaftaran_skripsi as $skripsi)
 <div></div>
         <tr>        
-            <td class="text-center ">{{$loop->iteration}}</td>                             
-            <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center fw-bold">{{$skripsi->mahasiswa->nama}}</td>
-            <td class="text-center">{{$skripsi->jenis_usulan}}</td>             
+            <td class="text-center px-1 py-2 ">{{$loop->iteration}}</td>                             
+            <td class="text-center px-1 py-2">{{$skripsi->mahasiswa->nim}}</td>                             
+            <td class="text-center px-1 py-2 fw-bold">{{$skripsi->mahasiswa->nama}}</td>
+            <td class="text-center px-1 py-2">{{$skripsi->jenis_usulan}}</td>             
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO'|| $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
-            <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-secondary">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI'||$skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SKRIPSI SELESAI' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
-            <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
-            <td class="text-center bg-success">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-success">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' )           
-            <td class="text-center bg-danger">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-danger">{{$skripsi->status_skripsi}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')           
-            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
             
-            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</b></td>
+            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||$skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')           
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')           
-            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_sempro_admin)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_sempro_admin)->translatedFormat('l, d F Y')}}</td>
             @endif
             
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')           
-            <td class="text-center"> Tanggal Dijadwalkan: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_jadwalsempro)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Dijadwalkan: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_jadwalsempro)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            @if ($skripsi->status_skripsi == 'SEMPRO SELESAI')           
+            <td class="text-center px-1 py-2"> <small> Tanggal Selesai: <br></small>{{Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat('l, d F Y')}}</td>
             @endif
 
-            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</b></td>
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK')           
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')           
-            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan1_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan1_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
             
-            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</b></td>
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN 2'  || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK')           
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI')           
-            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan2_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_perpanjangan2_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
             
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</b></td>
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')           
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
-            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')           
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
-            <td class="text-center"> Tanggal Dijadwalkan: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Dijadwalkan: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI')           
-            <td class="text-center"> Tanggal Disetujui: <br><b>{{Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y')}}</td>
             @endif
 
 
             
             @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' )
-            <td class="text-center text-danger">{{$skripsi->keterangan}}</td>
+            <td class="text-center px-1 py-2 text-danger">{{$skripsi->keterangan}}</td>
+            
+            @elseif($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && Auth::guard('dosen')->user()->role_id == 9 || $skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && Auth::guard('dosen')->user()->role_id == 10 || $skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && Auth::guard('dosen')->user()->role_id == 11 )
+            <td class="text-center px-1 py-2 text-success">
+              <i class="fas fa-circle small-icon"></i> {{$skripsi->keterangan}}
+              </td>
+            @elseif($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && Auth::guard('dosen')->user()->role_id == 6 || $skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && Auth::guard('dosen')->user()->role_id == 7 || $skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && Auth::guard('dosen')->user()->role_id == 8 )
+            <td class="text-center px-1 py-2 text-success">
+              <i class="fas fa-circle small-icon"></i> {{$skripsi->keterangan}}
+              </td>
             @else   
-            <td class="text-center">{{$skripsi->keterangan}}</td>
-            @endif 
-
+            <td class="text-center px-1 py-2">{{$skripsi->keterangan}}</td>
+            @endif
 
             <!-- USUL JUDUL  -->
             @if ($skripsi->status_skripsi == 'USULAN JUDUL'|| $skripsi->status_skripsi == 'JUDUL DISETUJUI'  )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
             
                 <a href="/usuljudul/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
 
@@ -159,40 +170,40 @@ Data Skripsi Mahasiswa
             @endif
 
            <!-- DAFTAR SEMPRO -->
-           @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'SEMPRO DIJADWALKAN'|| $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI') 
-            <td class="text-center">
+           @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'SEMPRO DIJADWALKAN'|| $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||$skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK') 
+            <td class="text-center px-1 py-2">
           <a href="/daftar-sempro/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
      @endif
             
             <!-- DAFTAR SIDANG -->
-            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG'  || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI') 
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG'  || $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' || $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI') 
 
-           <td class="text-center">
+           <td class="text-center px-1 py-2">
           <a href="/daftar-sidang/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
 @endif
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' ) 
 
-           <td class="text-center">
+           <td class="text-center px-1 py-2">
           <a href="/perpanjangan-1/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
 @endif
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' ) 
 
-           <td class="text-center">
+           <td class="text-center px-1 py-2">
           <a href="/perpanjangan-2/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
 @endif
             @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' ) 
 
-           <td class="text-center">
+           <td class="text-center px-1 py-2">
           <a href="/perpanjangan-revisi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
 @endif
             @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $skripsi->status_skripsi == 'SKRIPSI SELESAI' ) 
 
-           <td class="text-center">
+           <td class="text-center px-1 py-2">
           <a href="/bukti-buku-skripsi/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
 @endif

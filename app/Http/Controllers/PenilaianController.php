@@ -33,14 +33,14 @@ class PenilaianController extends Controller
 
             if (auth()->user()->role_id == 5 ) {            
             return view('penilaian.index', [
-               'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->get(),
+               'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('waktu','<>', null)->get(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
 
                 //JUMLAH KP PRODI
@@ -62,14 +62,14 @@ class PenilaianController extends Controller
         }
         if (auth()->user()->role_id == 6) {            
             return view('penilaian.index', [
-               'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 0)->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->get(),
+               'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
 
                 //JUMLAH KP PRODI
@@ -91,14 +91,14 @@ class PenilaianController extends Controller
         }
         if (auth()->user()->role_id == 7) {            
             return view('penilaian.index', [
-                'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 0)->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->get(),
+                'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
 
                 //JUMLAH KP PRODI
@@ -120,14 +120,14 @@ class PenilaianController extends Controller
         }
         if (auth()->user()->role_id == 8) {            
             return view('penilaian.index', [
-              'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 0)->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->get(),
+              'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
 
                 //JUMLAH KP PRODI
@@ -151,14 +151,14 @@ class PenilaianController extends Controller
 
         if (auth()->user()->role_id == 9) {            
             return view('penilaian.index', [
-               'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 0)->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->get(),
+               'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
 
                 //JUMLAH KP PRODI
@@ -181,14 +181,14 @@ class PenilaianController extends Controller
         }
         if (auth()->user()->role_id == 10) {            
             return view('penilaian.index', [
-              'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 0)->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->get(),
+              'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
 
                 //JUMLAH KP PRODI
@@ -211,13 +211,13 @@ class PenilaianController extends Controller
         if (auth()->user()->role_id == 11) {            
             return view('penilaian.index', [
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->get(),
-               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->get(),
-               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->get(),
+               'penjadwalan_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->get(),
                
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->count(),
-               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->count(),
-               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->count(),
+               'jml_sempro' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
+               'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->where('waktu','<>', null)->count(),
 
                 //JUMLAH KP PRODI
                 'jml_prodi_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
@@ -245,36 +245,36 @@ class PenilaianController extends Controller
     public function indexpembimbing()
     {        
         
-        $dosen = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
+        $dosen = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->get();
 
 
-        $dosens = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
+        $dosens = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->get();
 
-        $dosenss = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
+        $dosenss = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->get();
         
-        $jml_seminar_kp = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->count();
+        $jml_seminar_kp = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->count();
 
-        $jml_sempro = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->count();
+        $jml_sempro = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->count();
 
-        $jml_sidang = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->
-        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->count();
+        $jml_sidang = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
+        orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->count();
 
         //JUMLAH RIWAYAT SEMINAR
          $jml_riwayat_sempro = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 1)->count();        

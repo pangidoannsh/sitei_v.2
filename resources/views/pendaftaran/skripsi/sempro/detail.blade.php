@@ -109,6 +109,10 @@
         <p class="card-title text-secondary text-sm" >Status Skripsi</p>
         <p class="card-text  text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
+        @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' || $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG')
+        <p class="card-title text-secondary text-sm" >Status Skripsi</p>
+        <p class="card-text  text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
+        @endif
         @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text  text-start" ><span class="badge p-2 bg-success text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>

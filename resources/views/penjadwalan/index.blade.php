@@ -261,12 +261,13 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const jumlahJadwal = {!! json_encode($jml_seminar_kp + $jml_sempro + $jml_sidang) !!};
+    const jumlahSudahJadwal = {!! json_encode($jml_dijadwalkan_seminar_kp + $jml_dijadwalkan_sempro + $jml_dijadwalkan_sidang) !!};
     const menungguJadwal = {!! json_encode($jml_menunggu_seminar_kp + $jml_menunggu_sempro + $jml_menunggu_sidang) !!};
 
     if (jumlahJadwal > 0) {
         Swal.fire({
             title: 'Ini adalah halaman Jadwal Seminar',
-            html: `Ada <strong class="text-info"> ${menungguJadwal} Mahasiswa</strong> menunggu Jadwal seminar. <br> dan <strong class="text-info"> ${jumlahJadwal} Mahasiswa</strong> dijadwalkan seminar.`,
+            html: `Ada <strong class="text-info"> ${menungguJadwal} Mahasiswa</strong> menunggu Jadwal seminar. <br> dan <strong class="text-info"> ${jumlahSudahJadwal} Mahasiswa</strong> dijadwalkan seminar.`,
             icon: 'info',
             showConfirmButton: true,
             confirmButtonColor: '#28a745',

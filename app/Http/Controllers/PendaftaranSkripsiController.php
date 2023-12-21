@@ -58,10 +58,11 @@ class PendaftaranSkripsiController extends Controller
         return view('pendaftaran.skripsi.usul-judul.create', [
             'dosens' => Dosen::all(), 
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->get(),
+            'skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first(),
         ]);
     }
     public function storeusuljudul(Request $request)
-    {  
+    {
         $request->validate([                   
             'judul_skripsi' => 'required',                                           
             'krs_berjalan' => 'required|mimes:pdf|max:200',
@@ -133,6 +134,7 @@ class PendaftaranSkripsiController extends Controller
 
         Alert::success('Berhasil!', 'Judul Diusulkan')->showConfirmButton('Ok', '#28a745');
         return redirect('/usuljudul/index');
+
     }
 
     public function create_ulang_usuljudul()
@@ -143,8 +145,11 @@ class PendaftaranSkripsiController extends Controller
             'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->get(),
         ]);
     }
-    public function store_ulang_usuljudul(Request $request, $id)
+    public function store_ulang_usuljudul(Request $request)
     {  
+         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first();
+
+        if($pendaftaran_skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'USULKAN JUDUL ULANG'){
         $request->validate([                   
             'judul_skripsi' => 'required',                                           
             'krs_berjalan' => 'required|mimes:pdf|max:200',
@@ -153,24 +158,75 @@ class PendaftaranSkripsiController extends Controller
             'pembimbing_1_nip' => 'required',             
         ]);
 
-        $skripsi = PendaftaranSkripsi::find($id);
-        $skripsi->judul_skripsi = $request->judul_skripsi;
-        $skripsi->krs_berjalan = str_replace('public/', '', $request->file('krs_berjalan')->store('public/file'));
-        $skripsi->khs = str_replace('public/', '', $request->file('khs')->store('public/file'));
-        $skripsi->transkip_nilai = str_replace('public/', '', $request->file('transkip_nilai')->store('public/file'));
-        $skripsi->pembimbing_1_nip = $request->pembimbing_1_nip;
-        $skripsi->pembimbing_2_nip = $request->pembimbing_2_nip;
+       
+        $pembimbing1_nip = $request->input('pembimbing_1_nip');
+        $pembimbing2_nip = $request->input('pembimbing_2_nip');
+        $dosen = Dosen::where('nip', $pembimbing1_nip)->first();
+        $dosen2 = Dosen::where('nip', $pembimbing2_nip)->first();
+
+        $maxMahasiswaPerDosen = KapasitasBimbingan::value('kapasitas_skripsi');
         
-        $skripsi->jenis_usulan = 'Usulan Judul Skripsi';
-        $skripsi->tgl_created_usuljudul = Carbon::now();
-        $skripsi->status_skripsi = 'USULAN JUDUL';
-        $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 1';
-        $skripsi->update();
+        $pendaftaranSkripsiCount = $dosen->pendaftaranSkripsiPembimbing1()
+         ->where('status_skripsi', '!=', 'USULAN JUDUL DITOLAK')
+            ->where('status_skripsi', '!=', 'USULKAN JUDUL ULANG')
+            ->where('keterangan', '!=', 'Nilai Skripsi Telah Keluar')->count()
+            + $dosen->pendaftaranSkripsiPembimbing2()
+             ->where('status_skripsi', '!=', 'USULAN JUDUL DITOLAK')
+            ->where('status_skripsi', '!=', 'USULKAN JUDUL ULANG')
+            ->where('keterangan', '!=', 'Nilai Skripsi Telah Keluar')->count();
+    if ($pembimbing2_nip != null){ 
+        $pendaftaranSkripsiCount2 = $dosen2->pendaftaranSkripsiPembimbing1()
+         ->where('status_skripsi', '!=', 'USULAN JUDUL DITOLAK')
+            ->where('status_skripsi', '!=', 'USULKAN JUDUL ULANG')
+            ->where('keterangan', '!=', 'Nilai Skripsi Telah Keluar')->count()
+            + $dosen2->pendaftaranSkripsiPembimbing2()
+             ->where('status_skripsi', '!=', 'USULAN JUDUL DITOLAK')
+            ->where('status_skripsi', '!=', 'USULKAN JUDUL ULANG')
+            ->where('keterangan', '!=', 'Nilai Skripsi Telah Keluar')->count();
+            }
+            
+        if ($pendaftaranSkripsiCount >= $maxMahasiswaPerDosen) {
+           Alert::warning('<h4 class="text-bold mb-0">Pembimbing 1 Penuh!</h4> <h5 class="mt-3">Silahkan Usulkan Pembimbing Lain</h5>')
+                    ->showConfirmButton('Kembali', 'grey')
+                    ->footer('<a class="btn btn-info p-2 px-3" formtarget="_blank" target="_blank" href="/kuota-bimbingan/skripsi">Cek Kuota Pembimbing</a>');
 
-        Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
+            return  back();
+        }
+        if ($pembimbing2_nip != null){ 
+        if ($pendaftaranSkripsiCount2 >= $maxMahasiswaPerDosen) {
+           Alert::warning('<h4 class="text-bold mb-0">Pembimbing 2 Penuh!</h4> <h5 class="mt-3">Silahkan Usulkan Pembimbing Lain</h5>')
+                    ->showConfirmButton('Kembali', 'grey')
+                    ->footer('<a class="btn btn-info p-2 px-3" formtarget="_blank" target="_blank" href="/kuota-bimbingan/skripsi">Cek Kuota Pembimbing</a>');
+
+            return  back();
+        }
+        }
+
+        PendaftaranSkripsi::create([
+            'mahasiswa_nim' => auth()->user()->nim,                
+            'prodi_id' => auth()->user()->prodi_id,   
+            'konsentrasi_id' => auth()->user()->konsentrasi_id,                          
+            'judul_skripsi' =>$request->judul_skripsi,                       
+            // 'krs_berjalan' =>$request->file('krs_berjalan')->store('file'),                        
+            // 'khs' =>$request->file('khs')->store('file'),                        
+            'krs_berjalan' =>str_replace('public/', '', $request->file('krs_berjalan')->store('public/file')),                        
+            'khs' =>str_replace('public/', '', $request->file('khs')->store('public/file')),                        
+            'transkip_nilai' =>str_replace('public/', '', $request->file('transkip_nilai')->store('public/file')),                        
+            'pembimbing_1_nip' =>$request->pembimbing_1_nip,
+            'pembimbing_2_nip' =>$request->pembimbing_2_nip,
+            
+            'keterangan' => 'Menunggu persetujuan Admin Prodi',
+            'tgl_created_usuljudul' => Carbon::now(),
+        ]);
+
+        Alert::success('Berhasil!', 'Judul Diusulkan')->showConfirmButton('Ok', '#28a745');
         return redirect('/usuljudul/index');
-    }
 
+    }else{
+        Alert::error('Gagal!', 'Anda telah melakukan usulan judul.')->showConfirmButton('Ok', '#dc3545');
+        return back();
+    }
+}
 
 
     public function detailusuljudul(Request $request,$id)
@@ -1264,7 +1320,7 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SEMPRO DITOLAK';
         $skripsi->keterangan = 'Ditolak Koordinator Skripsi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sempro = null;
@@ -1280,7 +1336,7 @@ class PendaftaranSkripsiController extends Controller
         $skripsi = PendaftaranSkripsi::find($id);
 
         if ($skripsi->pembimbing_2_nip == null) {
-        $skripsi->keterangan = 'Menunggu Jadwal Seminar Proposal';
+        $skripsi->keterangan = 'Menunggu persetujuan Admin Prodi';
         $skripsi->tgl_disetujui_sempro_pemb1 = Carbon::now();
         $skripsi->update();
 
@@ -1303,10 +1359,9 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SEMPRO DITOLAK';
         $skripsi->keterangan = 'Ditolak Pembimbing 1';
         $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sempro = null;
         $skripsi->update();
 
         Alert::error('Ditolak', 'Daftar sempro ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1331,10 +1386,10 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SEMPRO DITOLAK';
         $skripsi->keterangan = 'Ditolak Pembimbing 2';
         $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sempro = null;
+        $skripsi->tgl_disetujui_pemb1 = null;
         $skripsi->update();
 
         Alert::error('Ditolak', 'Daftar Sempro Ditolak!')->showConfirmButton('Ok', '#dc3545');
@@ -1362,6 +1417,7 @@ class PendaftaranSkripsiController extends Controller
         return back();
 
     }
+    
     public function tolaksempro_admin(Request $request, $id)
     {
         $request->validate([                                           
@@ -1369,10 +1425,9 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SEMPRO DITOLAK';
         $skripsi->keterangan = 'Ditolak Admin prodi';
         $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sempro = null;
         $skripsi->tgl_disetujui_sempro_pemb1 = null;
         $skripsi->tgl_disetujui_sempro_pemb2 = null;
         $skripsi->tgl_disetujui_sempro_admin = null;
@@ -1476,7 +1531,7 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Ditolak Pembimbing 1';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang = null;
@@ -1503,7 +1558,7 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Ditolak Pembimbing 2';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang = null;
@@ -1534,8 +1589,8 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
-        $skripsi->keterangan = 'Ditolak Admin Koordinator Skripsi';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
+        $skripsi->keterangan = 'Ditolak Koordinator Skripsi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang_pemb1 = null;
         $skripsi->tgl_created_sidang_pemb2 = null;
@@ -1583,8 +1638,8 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
-        $skripsi->keterangan = 'Ditolak Admin Koordinator Program Studi';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
+        $skripsi->keterangan = 'Ditolak Koordinator Program Studi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang_pemb1 = null;
         $skripsi->tgl_created_sidang_pemb2 = null;
@@ -1617,7 +1672,7 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Ditolak Admin prodi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang = null;
@@ -1649,7 +1704,7 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Ditolak Admin prodi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang = null;
@@ -1680,7 +1735,7 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);        
-        $skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Tidak Lulus Sidang Skripsi';
         $skripsi->alasan = $request->alasan;
         $skripsi->tgl_created_sidang = null;
@@ -1712,11 +1767,8 @@ class PendaftaranSkripsiController extends Controller
         ]);
 
          $skripsi = PendaftaranSkripsi::find($id);
-    
          $skripsi->status_skripsi = 'PERPANJANGAN 1 DITOLAK';
          $skripsi->keterangan = 'Ditolak Dosen Pembimbing';
-         $skripsi->tgl_created_perpanjangan1 = null;
-         $skripsi->tgl_disetujui_perpanjangan1_pemb1 = null;
          $skripsi->alasan = $request->alasan;
          $skripsi->update();
  
@@ -1736,7 +1788,6 @@ class PendaftaranSkripsiController extends Controller
          Alert::success('Disetujui!', 'Perpanjangan 1 Waktu Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
        
- 
      }
      public function tolakperpanjangan1_kaprodi(Request $request, $id)
      {
@@ -1748,9 +1799,7 @@ class PendaftaranSkripsiController extends Controller
     
          $skripsi->status_skripsi = 'PERPANJANGAN 1 DITOLAK';
          $skripsi->keterangan = 'Ditolak Koordinator Program Studi';
-         $skripsi->tgl_created_perpanjangan1 = null;
          $skripsi->tgl_disetujui_perpanjangan1_pemb1 = null;
-         $skripsi->tgl_disetujui_perpanjangan1_koordinator = null;
          $skripsi->alasan = $request->alasan;
          $skripsi->update();
  

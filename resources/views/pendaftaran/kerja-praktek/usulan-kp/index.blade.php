@@ -564,7 +564,9 @@
 @if ($pendaftaran_kp->status_kp == 'USULAN KP DITOLAK' )
 <div class="alert alert-danger" role="alert"> 
     <i class="fas fa-exclamation-triangle pr-2"></i><span class="fw-bold">{{ $pendaftaran_kp->alasan }}</span>, Silahkan Usulkan KP ulang!
- 
+</div>
+<div class="container">
+    <a href="" class="btn btn-success px-3 py-2 mb-3"><i class="fas fa-plus-circle"></i> Usulkan KP Ulang</a>
 </div>
 @endif
 @if ($pendaftaran_kp->status_kp == 'USULKAN KP ULANG' )
@@ -709,6 +711,7 @@
 
                 @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG'  )
                 <a href="/usulankp/create" class="badge " data-bs-toggle="tooltip" title="Daftar KP Ulang"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>
+                <!-- <a href="/usulankp/create" class="badge btn btn-success p-1" data-bs-toggle="tooltip" title="Daftar KP Ulang"><i class="fas fa-folder-plus"></i></a> -->
                 @endif
                 @if ($kp->status_kp == 'USULAN KP DITERIMA' )
                 <a href="/balasankp/create/{{$kp->id}}" class="badge  " data-bs-toggle="tooltip" title="Unggah Surat Balasan Perusahaan"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a>

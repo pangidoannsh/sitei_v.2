@@ -98,8 +98,8 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
     Route::get('/usuljudul/index', [PendaftaranSkripsiController::class, 'indexusuljudul']);
     Route::get('/usuljudul/create', [PendaftaranSkripsiController::class, 'createusuljudul']);
     Route::post('/usuljudul/create', [PendaftaranSkripsiController::class, 'storeusuljudul']);
-    Route::get('/usuljudul-ulang/create/{id}', [PendaftaranSkripsiController::class, 'create_ulang_usuljudul']);
-    Route::post('/usuljudul-ulang/create/{id}', [PendaftaranSkripsiController::class, 'store_ulang_usuljudul']);
+    Route::get('/usuljudul-ulang/create', [PendaftaranSkripsiController::class, 'create_ulang_usuljudul']);
+    Route::post('/usuljudul-ulang/create', [PendaftaranSkripsiController::class, 'store_ulang_usuljudul']);
 
     Route::get('/surat-permohonan-kp/{id}', [PendaftaranKPController::class, 'suratpermohonankp']);
     Route::get('/surat-permohonan-kp-data/{id}', [QRController::class, 'suratpermohonankp']);

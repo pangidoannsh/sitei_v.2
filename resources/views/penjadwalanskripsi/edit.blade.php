@@ -154,7 +154,7 @@
         <div class="mb-3 field">
             <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
             <input type="hidden" name="pembimbingdua_nip" class="form-control" value="{{old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '')}}" readonly>
-            <input class="form-control disable"  value="{{  $skripsi->pembimbingdua->nama }}" readonly>
+            <input class="form-control disable"  value="{{ $skripsi->pembimbingdua_nip != null ?  $skripsi->pembimbingdua->nama : '' }}" readonly>
             
             <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
                 <option value="1">-Pilih-</option>
@@ -394,7 +394,7 @@
         <div class="mb-3 field">
             <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
             <input type="hidden" name="pembimbingdua_nip" class="form-control" value="{{old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '')}}" readonly>
-            <input class="form-control disable"  value="{{  $skripsi->pembimbingdua->nama }}" readonly>
+            <input class="form-control disable"  value="{{ $skripsi->pembimbingdua_nip != null ?  $skripsi->pembimbingdua->nama : '' }}" readonly>
             
             <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
                 <option value="1">-Pilih-</option>

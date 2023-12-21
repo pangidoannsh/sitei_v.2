@@ -17,6 +17,10 @@
 
 @foreach ($pendaftaran_skripsi as $skripsi)
 
+<div class="container">
+  <a href="/usuljudul/index" class="btn btn-success py-1 px-2 mb-4"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+
 <form action="/daftar-sempro/create/{{$skripsi->id}}" method="POST" enctype="multipart/form-data">
 @method('put')
         @csrf

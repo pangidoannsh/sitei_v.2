@@ -120,7 +120,7 @@
           <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakPerpanjanganRevisiPembimbing()"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+        <button onclick="tolakPerpanjanganRevisiPembimbing({{ $skripsi->id }})"  class="btn btn-danger badge p-2 px-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
 </div>
     <div class="col">
         <form action="/perpanjangan-revisi/pembimbing/approve/{{$skripsi->id}}" class="setujui-perpanjangan-revisi-pembimbing" method="POST"> 

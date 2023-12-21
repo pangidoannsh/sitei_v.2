@@ -13,11 +13,12 @@
 @foreach ($pendaftaran_skripsi as $skripsi)
 
 
+
 <form action="/daftar-sidang/create/{{$skripsi->id}}" method="POST" enctype="multipart/form-data">
 @method('put')
         @csrf
 
-<div class="container"></div>
+<div class="container">
 
 
 
@@ -346,11 +347,16 @@
         </div> -->
 
 
-</form>
+<!-- </form> -->
 
 
 
 @endforeach
+
+<br>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

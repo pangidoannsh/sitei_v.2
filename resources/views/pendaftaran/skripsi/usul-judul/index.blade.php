@@ -396,13 +396,32 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 
 <!-- ----------BATAS -------------->
 
+   @if ($pendaftaran_skripsi->status_skripsi == 'USULAN JUDUL' || $pendaftaran_skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'USULKAN JUDUL ULANG')
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
+         <span class="mt-2 text-muted text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_usuljudul_created)->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col ">
+        
+    </div>
+    <div class="col">
+        
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+@endif
    @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO' || $pendaftaran_skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')
     <div class="row biru mb-4">
     <div class="col">
         <span class="mt-0 "> Tanggal disetujui <br></span>
          <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
     </div>
-    <div class="col">
+    <div class="col ">
+        <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
+         <span class="mt-2 text-muted text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_sempro_created)->translatedFormat('l, d F Y')}}</span> 
     </div>
     <div class="col">
         
@@ -462,6 +481,14 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
     <div class="col">
 
+    @if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 1'  || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK')
+        <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
+        <span class="mt-2 text-muted text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_created_perpanjangan1 )->translatedFormat('l, d F Y')}}</span>
+        @endif
+    @if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2')
+        <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
+        <span class="mt-2 text-muted text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_created_perpanjangan2 )->translatedFormat('l, d F Y')}}</span>
+        @endif
     @if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')
         <span class="mt-2 text-danger"> Batas Daftar Sidang<br></span>
         <strong class="mt-2 text-danger"><strong class="text-bold" id="timer-batas-daftar-sidang-p1"></strong></strong>
@@ -496,7 +523,25 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
   </div>
 @endif
-    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG')
+    @if ( $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG')
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
+        <span class="mt-2 text-muted text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_created_sidang )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+@endif
+    @if ($pendaftaran_skripsi->status_skripsi == 'SIDANG DIJADWALKAN' )
     <div class="row biru mb-4">
     <div class="col">
         <span class="mt-0 "> Tanggal disetujui <br></span>
@@ -620,9 +665,11 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if($pendaftaran_skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Usulkan Judul Skripsi Ulang!</span>
-        
+         <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Usulkan Judul Skripsi Ulang!</span>  
     </div>
+</div>
+<div class="container">
+    <a href="/usuljudul/create" class="btn btn-success px-3 py-2 mb-3"><i class="fas fa-plus-circle"></i> Usulkan KP Ulang</a>
 </div>
     @endif
 

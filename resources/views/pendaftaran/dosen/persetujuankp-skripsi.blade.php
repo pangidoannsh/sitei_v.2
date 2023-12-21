@@ -57,12 +57,12 @@
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
     <tr>      
-        <!-- <th class="text-center p-2" scope="col">No.</th> -->
+        <!-- <th class="text-center p-2 p-2" scope="col">No.</th> -->
         <th class="text-center" scope="col">NIM</th>
         <th class="text-center" scope="col">Nama</th>
         <th class="text-center" scope="col">Status</th>
         <th class="text-center" scope="col">Tanggal Usulan</th> 
-        <th class="text-center" scope="col">Batas Persetujuan</th> 
+        <th class="text-center" scope="col">Batas</th> 
         <th class="text-center" scope="col">Keterangan</th>   
         <th class="text-center" scope="col" style="padding-left: 50px; padding-right:50px;">Aksi</th>
     </tr>
@@ -149,29 +149,29 @@
 
         <tr>        
             <!-- <td class="text-center">{{$loop->iteration}}</td>-->
-            <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
-            <td class="text-center fw-bold  ">{{$kp->mahasiswa->nama}}</td>            
+            <td class="text-center px-1 py-2">{{$kp->mahasiswa->nim}}</td>                             
+            <td class="text-center px-1 py-2 fw-bold  ">{{$kp->mahasiswa->nama}}</td>            
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN'|| $kp->status_kp == 'DAFTAR SEMINAR KP' ||$kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )           
-            <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
+            <td class="text-center px-1 py-2 bg-secondary">{{$kp->status_kp}}</td>
             @endif
             @if ($kp->status_kp == 'USULAN KP DITERIMA' || $kp->status_kp == 'KP DISETUJUI'|| $kp->status_kp == 'SEMINAR KP SELESAI' ||$kp->status_kp == 'KP SELESAI')           
-            <td class="text-center bg-info">{{$kp->status_kp}}</td>
+            <td class="text-center px-1 py-2 bg-info">{{$kp->status_kp}}</td>
             @endif
             @if ( $kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
-            <td class="text-center bg-success">{{$kp->status_kp}}</td>
+            <td class="text-center px-1 py-2 bg-success">{{$kp->status_kp}}</td>
             @endif
       
                 @if ($kp->status_kp == 'USULAN KP')           
-                <td class="text-center">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
+                <td class="text-center px-1 py-2">{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
                 @endif
             @if ($kp->status_kp == 'SURAT PERUSAHAAN')           
-            <td class="text-center">{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')           
-            <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
-            <td class="text-center">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             <!-- MULAI -->
@@ -180,7 +180,7 @@
              <!-- PEMBIMBING -->
                 @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
                 @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'USULAN KP')
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulanKPPembimbing > 0)
                     <span class="text-danger"> {{ $daysUsulanKPPembimbing }}  hari lagi</span>
                 @elseif($daysUsulanKPPembimbing <= 0)
@@ -196,7 +196,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
 
           @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'USULAN KP' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulanKPKoordinator >= 0)
                     <span class="text-danger"> {{ $daysUsulanKPKoordinator }}  hari lagi</span>
                 @elseif($daysUsulanKPKoordinator <= 0)
@@ -213,7 +213,7 @@
         @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           @if ($kp->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $kp->status_kp == 'USULAN KP' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulanKPKaprodi >= 0)
                     <span class="text-danger"> {{ $daysUsulanKPKaprodi }}  hari lagi</span>
                 @elseif($daysUsulanKPKaprodi <= 0)
@@ -236,7 +236,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           
             @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'SURAT PERUSAHAAN' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysBalasanKoordinator >= 0)
                     <span class="text-danger"> {{ $daysBalasanKoordinator }}  hari lagi</span>
                 @elseif($daysBalasanKoordinator <= 0)
@@ -253,7 +253,7 @@
              <!-- PEMBIMBING -->
                 @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
                 @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'DAFTAR SEMINAR KP')
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysSeminarKPPemb > 0)
                     <span class="text-danger"> {{ $daysSeminarKPPemb }}  hari lagi</span>
                 @elseif($daysSeminarKPPemb <= 0)
@@ -268,7 +268,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           
             @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysSeminarKPKoordinator > 0)
                     <span class="text-danger"> {{ $daysSeminarKPKoordinator }}  hari lagi</span>
                 @elseif($daysSeminarKPKoordinator <= 0)
@@ -284,7 +284,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
           
             @if ($kp->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysSeminarKPKaprodi > 0)
                     <span class="text-danger"> {{ $daysSeminarKPKaprodi }}  hari lagi</span>
                 @elseif($daysSeminarKPKaprodi <= 0)
@@ -302,7 +302,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           
             @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysKPTI10Koordinator > 0)
                     <span class="text-danger"> {{ $daysKPTI10Koordinator }}  hari lagi</span>
                 @elseif($daysKPTI10Koordinator <= 0)
@@ -313,12 +313,12 @@
             @endif
             @endif
                                
-            <td class="text-center">{{$kp->keterangan}}</td>  
+            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$kp->keterangan}}</td> 
 
          
             @if (Str::length(Auth::guard('dosen')->user()) > 0)
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
             @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
                 @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'USULAN KP')
                 <div class="row persetu">
@@ -393,7 +393,7 @@
             @endif
             
             @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'KP DISETUJUI' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
            @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
           @if ($kp->keterangan == 'Menunggu persetujuan Koordinator KP' && $kp->status_kp == 'SURAT PERUSAHAAN' )
@@ -419,7 +419,7 @@
             </td>
             @endif
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN'|| $kp->status_kp == 'SEMINAR KP SELESAI')
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
         @if ($kp->dosen_pembimbing_nip == Auth::user()->nip )
           @if ($kp->keterangan == 'Menunggu persetujuan Pembimbing' && $kp->status_kp == 'DAFTAR SEMINAR KP' )
    <div class="row persetu">
@@ -522,7 +522,7 @@
             @endif
 
             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'KP SELESAI')
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
 
         @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
@@ -713,42 +713,42 @@
 
 <div></div>
         <tr>        
-            <!-- <td class="text-center">{{$loop->iteration}}</td>                              -->
-            <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-            <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$skripsi->jenis_usulan}}</td>          -->
+            <!-- <td class="text-center px-1 py-2">{{$loop->iteration}}</td>                              -->
+            <td class="text-center px-1 py-2">{{$skripsi->mahasiswa->nim}}</td>                             
+            <td class="text-center px-1 py-2 fw-bold">{{$skripsi->mahasiswa->nama}}</td>
+            <!-- <td class="text-center px-1 py-2">{{$skripsi->jenis_usulan}}</td>          -->
          
             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SIDANG' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
-            <td class="text-center bg-secondary">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-secondary">{{$skripsi->status_skripsi}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI' || $skripsi->status_skripsi == 'SEMPRO SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'SIDANG SELESAI'  || $skripsi->status_skripsi == 'SKRIPSI SELESAI')           
-            <td class="text-center bg-info">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-info">{{$skripsi->status_skripsi}}</td>
             @endif
            
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN')           
-            <td class="text-center bg-success">{{$skripsi->status_skripsi}}</td>
+            <td class="text-center px-1 py-2 bg-success">{{$skripsi->status_skripsi}}</td>
             @endif
 
             <!-- ___________batas____________ -->
 
             @if ($skripsi->status_skripsi == 'USULAN JUDUL')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y')}}</td>
             @endif
             
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
-            <td class="text-center">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             <!-- BATAS PERSETUJUAN -->
@@ -756,7 +756,7 @@
 
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'USULAN JUDUL' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulJudulPemb1 > 0)
                     <span class="text-danger"> {{ $daysUsulJudulPemb1 }}  hari lagi</span>
                 @elseif($daysUsulJudulPemb1 <= 0)
@@ -768,7 +768,7 @@
             
             @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' && $skripsi->status_skripsi == 'USULAN JUDUL' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulJudulPemb2 > 0)
                     <span class="text-danger"> {{ $daysUsulJudulPemb2 }}  hari lagi</span>
                 @elseif($daysUsulJudulPemb2 <= 0)
@@ -781,7 +781,7 @@
              @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'USULAN JUDUL' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulJudulKoordinator > 0)
                     <span class="text-danger"> {{ $daysUsulJudulKoordinator }}  hari lagi</span>
                 @elseif($daysUsulJudulKoordinator <= 0)
@@ -795,7 +795,7 @@
         @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'USULAN JUDUL' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysUsulJudulKaprodi > 0)
                     <span class="text-danger"> {{ $daysUsulJudulKaprodi }}  hari lagi</span>
                 @elseif($daysUsulJudulKaprodi <= 0)
@@ -813,7 +813,7 @@
 
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'DAFTAR SEMPRO' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSemproPemb1 > 0)
                     <span class="text-danger"> {{ $daysDaftarSemproPemb1 }}  hari lagi</span>
                 @elseif($daysDaftarSemproPemb1 <= 0)
@@ -825,7 +825,7 @@
             
             @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' && $skripsi->status_skripsi == 'DAFTAR SEMPRO' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSemproPemb2 > 0)
                     <span class="text-danger"> {{ $daysDaftarSemproPemb2 }}  hari lagi</span>
                 @elseif($daysDaftarSemproPemb2 <= 0)
@@ -843,7 +843,7 @@
 
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'PERPANJANGAN 1' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysPerpanjangan1Pemb1 > 0)
                     <span class="text-danger"> {{ $daysPerpanjangan1Pemb1 }}  hari lagi</span>
                 @elseif($daysPerpanjangan1Pemb1 <= 0)
@@ -856,7 +856,7 @@
              @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN 1' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysPerpanjangan1Kaprodi > 0)
                     <span class="text-danger"> {{ $daysPerpanjangan1Kaprodi }}  hari lagi</span>
                 @elseif($daysPerpanjangan1Kaprodi <= 0)
@@ -875,7 +875,7 @@
 
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'PERPANJANGAN 2' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysPerpanjangan2Pemb1 > 0)
                     <span class="text-danger"> {{ $daysPerpanjangan2Pemb1 }}  hari lagi</span>
                 @elseif($daysPerpanjangan2Pemb1 <= 0)
@@ -888,7 +888,7 @@
              @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN 2' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysPerpanjangan2Kaprodi > 0)
                     <span class="text-danger"> {{ $daysPerpanjangan2Kaprodi }}  hari lagi</span>
                 @elseif($daysPerpanjangan2Kaprodi <= 0)
@@ -908,7 +908,7 @@
 
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSidangPemb1 > 0)
                     <span class="text-danger"> {{ $daysDaftarSidangPemb1 }}  hari lagi</span>
                 @elseif($daysDaftarSidangPemb1 <= 0)
@@ -920,7 +920,7 @@
             
             @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
-            <td class="text-center" >
+            <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSidangPemb2 > 0)
                     <span class="text-danger"> {{ $daysDaftarSidangPemb2 }}  hari lagi</span>
                 @elseif($daysDaftarSidangPemb2 <= 0)
@@ -933,7 +933,7 @@
              @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
-           <td class="text-center" >
+           <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSidangKoordinator > 0)
                     <span class="text-danger"> {{ $daysDaftarSidangKoordinator }}  hari lagi</span>
                 @elseif($daysDaftarSidangKoordinator <= 0)
@@ -948,7 +948,7 @@
             @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'DAFTAR SIDANG' )
-           <td class="text-center" >
+           <td class="text-center px-1 py-2" >
                 @if ($daysDaftarSidangKaprodi > 0)
                     <span class="text-danger"> {{ $daysDaftarSidangKaprodi }}  hari lagi</span>
                 @elseif($daysDaftarSidangKaprodi <= 0)
@@ -964,7 +964,7 @@
          @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' )
-           <td class="text-center" >
+           <td class="text-center px-1 py-2" >
                 @if ($daysBukuSkripsiKoordinator > 0)
                     <span class="text-danger"> {{ $daysBukuSkripsiKoordinator }}  hari lagi</span>
                 @elseif($daysBukuSkripsiKoordinator <= 0)
@@ -975,12 +975,12 @@
             @endif
             @endif
 
-            <td class="text-center">{{$skripsi->keterangan}}</td> 
+            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$skripsi->keterangan}}</td>  
 
 
             <!-- USUL JUDUL  -->
             @if ($skripsi->status_skripsi == 'USULAN JUDUL'|| $skripsi->status_skripsi == 'USULAN JUDUL DISETUJUI'  )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
             
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'USULAN JUDUL' )
@@ -1078,7 +1078,7 @@
 
            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSemproPemb1({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1101,7 +1101,7 @@
     @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
     
     @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu Jadwal Seminar Proposal')
-      <td class="text-center">
+      <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSemproKoordinator({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1124,7 +1124,7 @@
 
            @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' && $skripsi->keterangan == 'Seminar Proposal Dijadwalkan' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSelesaiSempro({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Gagal Sempro" ><i class="fas fa-times-circle"></i></button>
@@ -1146,7 +1146,7 @@
 
            @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakSemproPemb2({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1168,7 +1168,7 @@
 
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakPerpanjangan1Pembimbing({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Gagal Sempro" ><i class="fas fa-times-circle"></i></button>
@@ -1189,7 +1189,7 @@
 
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakPerpanjangan2Pembimbing({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Gagal Sempro" ><i class="fas fa-times-circle"></i></button>
@@ -1210,7 +1210,7 @@
 
      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakPerpanjanganRevisiPembimbing({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Gagal Sempro" ><i class="fas fa-times-circle"></i></button>
@@ -1233,7 +1233,7 @@
            @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN 1' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakPerpanjangan1Kaprodi({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1251,7 +1251,7 @@
     </div>
      @endif
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN 2' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakPerpanjangan2Kaprodi({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1270,7 +1270,7 @@
      @endif
 
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN REVISI' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakPerpanjanganRevisiKaprodi({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1295,7 +1295,7 @@
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
            
            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' && $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakBukuSkripsiKoordinator({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1314,7 +1314,7 @@
      @endif
      
            @if ($skripsi->keterangan == 'Proses Skripsi Selesai!' && $skripsi->status_skripsi == 'SKRIPSI SELESAI' )
-            <td class="text-center">
+            <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-6">
                 <a href="/kp-skripsi/persetujuan/bukti-buku-skripsi/{{($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
@@ -1338,7 +1338,7 @@
 
             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSidangPemb1({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1357,7 +1357,7 @@
 </tr>
 @endif
             @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN' && $skripsi->keterangan == 'Sidang Skripsi Dijadwalkan' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
         <button onclick="tolakSelesaiSidang({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Gagal Sidang" ><i class="fas fa-times-circle"></i></button>
@@ -1379,7 +1379,7 @@
 @endif
             @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu persetujuan Pembimbing 2' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakSidangPemb2({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1403,7 +1403,7 @@
      @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu persetujuan Koordinator Skripsi' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakSidangKoordinator({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1428,7 +1428,7 @@
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG' && $skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' )
-             <td class="text-center">
+             <td class="text-center px-1 py-2">
                 <div class="row persetu">
     <div class="col-4 py-2 py-md-0 col-lg-4">
        <button onclick="tolakSidangKaprodi({{ $skripsi->id }})" class="btn btn-danger badge p-1 " data-bs-toggle="tooltip" title="Tolak" ><i class="fas fa-times-circle"></i></button>
@@ -1457,44 +1457,44 @@
 
      @foreach ($penjadwalan_skripsis as $skripsi)
         <tr>
-          <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-          <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>                     
-          <td class="bg-warning text-center">Seminar {{$skripsi->jenis_seminar}}</td>                     
-          <!-- <td class="text-center">{{$skripsi->prodi->nama_prodi}}</td>           -->
-          <td class="text-center">{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
-          <td class="text-center">-</td>                   
+          <td class="text-center px-1 py-2">{{$skripsi->mahasiswa->nim}}</td>                             
+          <td class="text-center px-1 py-2">{{$skripsi->mahasiswa->nama}}</td>                     
+          <td class="bg-warning text-center px-1 py-2">Seminar {{$skripsi->jenis_seminar}}</td>                     
+          <!-- <td class="text-center px-1 py-2">{{$skripsi->prodi->nama_prodi}}</td>           -->
+          <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
+          <td class="text-center px-1 py-2">-</td>                   
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-          <td class="text-center">Menunggu Persetujuan Seminar Koordinator Skripsi</td> 
+          <td class="text-center px-1 py-2">Menunggu Persetujuan Seminar Koordinator Skripsi</td> 
     @endif
     @endif
           @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
-          <td class="text-center">Menunggu Persetujuan Seminar Koordinator Program Studi</td> 
+          <td class="text-center px-1 py-2">Menunggu Persetujuan Seminar Koordinator Program Studi</td> 
     @endif
     @endif
                  
-          <!-- <td class="text-center">{{$skripsi->lokasi}}</td>-->
-          <!-- <td class="text-center">
+          <!-- <td class="text-center px-1 py-2">{{$skripsi->lokasi}}</td>-->
+          <!-- <td class="text-center px-1 py-2">
             <p>1. {{$skripsi->pembimbingsatu->nama_singkat}}</p>
             @if ($skripsi->pembimbingdua == !null)
             <p>2. {{$skripsi->pembimbingdua->nama_singkat}}</p>                               
             @endif
           </td> 
-          <td class="text-center">
+          <td class="text-center px-1 py-2">
             <p>1. {{$skripsi->pengujisatu->nama_singkat}}</p>
             <p>2. {{$skripsi->pengujidua->nama_singkat}}</p>
             @if ($skripsi->pengujitiga == !null)
             <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
             @endif
           </td>           -->
-          <!-- <td class="text-center">                        
-            <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Berita Acara</a>                  
+          <!-- <td class="text-center px-1 py-2">                        
+            <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success px-1 py-2"style="border-radius:20px;">Berita Acara</a>                  
           </td> -->
 
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-          <td class="text-center">
+          <td class="text-center px-1 py-2">
             <div class="col-12 py-2 py-md-0 col-lg-12">
                 <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                  </div>
@@ -1504,7 +1504,7 @@
 
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
       @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
-          <td class="text-center">
+          <td class="text-center px-1 py-2">
             <div class="col-12 py-2 py-md-0 col-lg-12">
                 <a href="/penilaian-skripsi/cek-nilai/{{Crypt::encryptString($skripsi->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                  </div>

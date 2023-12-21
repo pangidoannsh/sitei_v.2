@@ -15,6 +15,22 @@
   </style>
 @section('content')
 
+@if($skripsi == null)
+<div class="container">
+  <a href="/kp-skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+@else
+<div class="container">
+  <a href="/usuljudul/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+@endif
+
+<!-- @if($skripsi == null)
+<form action="{{url ('/usuljudul/create')}}" method="POST" enctype="multipart/form-data">
+@else
+<form action="{{url ('/usuljudul-ulang/create')}}" method="POST" enctype="multipart/form-data">
+@endif -->
+
 <form action="{{url ('/usuljudul/create')}}" method="POST" enctype="multipart/form-data">
         @csrf
     <div>

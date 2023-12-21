@@ -47,7 +47,7 @@
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
     <tr>      
-        <th class="text-center p-2" scope="col">No.</th>
+        <th class="text-center p-0 pb-2" scope="col">No.</th>
         <th class="text-center" scope="col">NIM</th>
         <th class="text-center" scope="col">Nama</th>
         <!-- <th class="text-center" scope="col">Konsentrasi</th>-->
@@ -64,89 +64,93 @@
 
   <div></div>
         <tr>        
-            <td class="text-center">{{$loop->iteration}}</td>                             
-            <td class="text-center">{{$kp->mahasiswa->nim}}</td>                             
-            <td class="text-center fw-bold">{{$kp->mahasiswa->nama}}</td>
-            <!-- <td class="text-center">{{$kp->konsentrasi->nama_konsentrasi}}</td>                    -->
+            <td class="text-center p-2">{{$loop->iteration}}</td>                             
+            <td class="text-center p-2">{{$kp->mahasiswa->nim}}</td>                             
+            <td class="text-center p-2 fw-bold">{{$kp->mahasiswa->nama}}</td>
+            <!-- <td class="text-center p-2">{{$kp->konsentrasi->nama_konsentrasi}}</td>                    -->
                        
-            <td class="text-center">{{$kp->jenis_usulan}}</td>      
+            <td class="text-center p-2">{{$kp->jenis_usulan}}</td>      
             
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'DAFTAR SEMINAR KP'|| $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')           
-            <td class="text-center bg-secondary">{{$kp->status_kp}}</td>
+            <td class="text-center p-2 bg-secondary">{{$kp->status_kp}}</td>
             @endif
             @if ($kp->status_kp == 'USULAN KP DITERIMA' || $kp->status_kp == 'KP DISETUJUI' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI'|| $kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'KP SELESAI')           
-            <td class="text-center bg-info">{{$kp->status_kp}}</td>
+            <td class="text-center p-2 bg-info">{{$kp->status_kp}}</td>
             @endif
             
 
             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
-            <td class="text-center bg-success">{{$kp->status_kp}}</td>
+            <td class="text-center p-2 bg-success">{{$kp->status_kp}}</td>
             @endif
 
            @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' )           
-            <td class="text-center bg-danger">{{$kp->status_kp}}</td>
+            <td class="text-center p-2 bg-danger">{{$kp->status_kp}}</td>
             @endif
             
             @if ($kp->status_kp == 'USULAN KP')           
-            <td class="text-center"> Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small> Tanggal Usulan: <br></small>{{Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y')}}</td>
             @endif
 
              @if ($kp->status_kp == 'USULAN KP DITERIMA')           
-            <td class="text-center"> Tanggal Diterima: <br><b>{{Carbon::parse($kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small> Tanggal Diterima: <br></small>{{Carbon::parse($kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
 
              @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK')           
-            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Usulan: <br></small>{{Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y')}}</td>
             @endif
 
              @if ($kp->status_kp == 'KP DISETUJUI')           
-            <td class="text-center">Tanggal Disetujui: <br><b>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Disetujui: <br></small>{{Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y')}}</td>
             @endif
 
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG')           
-            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Usulan: <br></small>{{Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')           
-            <td class="text-center">Tanggal Disetujui: <br><b>{{Carbon::parse($kp->tgl_created_semkp_kaprodi)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Disetujui: <br></small>{{Carbon::parse($kp->tgl_created_semkp_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')           
-            <td class="text-center">Tanggal Dijadwalkan: <br><b>{{Carbon::parse($kp->tgl_dijadwalkan)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Dijadwalkan: <br></small>{{Carbon::parse($kp->tgl_dijadwalkan)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'SEMINAR KP SELESAI')           
-            <td class="text-center">Tanggal Selesai: <br><b>{{Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Selesai: <br></small>{{Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')           
-            <td class="text-center">Tanggal Usulan: <br><b>{{Carbon::parse($kp->tgl_created_kpti10)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Usulan: <br></small>{{Carbon::parse($kp->tgl_created_kpti10)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($kp->status_kp == 'KP SELESAI')           
-            <td class="text-center">Tanggal Selesai: <br><b>{{Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat('l, d F Y')}}</b></td>
+            <td class="text-center p-2"> <small>Tanggal Selesai: <br></small>{{Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat('l, d F Y')}}</td>
             @endif
             
             @if ( $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG')           
-             <td class="text-center text-danger">{{$kp->keterangan}}</td>
-             @else
-              <td class="text-center">{{$kp->keterangan}}</td>
-            @endif
+             <td class="text-center p-2 text-danger">{{$kp->keterangan}}</td>
+            @elseif($kp->keterangan == 'Menunggu persetujuan Admin Prodi' && Auth::guard('web')->user()->role_id == 2 || $kp->keterangan == 'Menunggu persetujuan Admin Prodi' && Auth::guard('web')->user()->role_id == 3 || $kp->keterangan == 'Menunggu persetujuan Admin Prodi' && Auth::guard('web')->user()->role_id == 4 )
+            <td class="text-center p-2 text-success">
+               <i class="fas fa-circle small-icon"></i> {{$kp->keterangan}}
+              </td>
+            @else   
+            <td class="text-center p-2">{{$kp->keterangan}}</td>
+            @endif 
 
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA'  )
-            <td class="text-center">
+            <td class="text-center p-2">
               <a href="/usulan/detail/pembimbingprodi/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
             @endif
             @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'KP DISETUJUI' || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' )
-            <td class="text-center">
+            <td class="text-center p-2">
               <a href="/suratperusahaan/detail/pembimbingprodi/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
             @endif
 
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' || $kp->status_kp == 'SEMINAR KP SELESAI' || $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' || $kp->status_kp == 'DAFTAR SEMINAR KP ULANG' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')
-            <td class="text-center">
+            <td class="text-center p-2">
               <a href="/daftar-semkp/detail/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
             @endif
 
             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'KP SELESAI' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')
-            <td class="text-center">
+            <td class="text-center p-2">
               <a href="/kpti10/detail/pembimbingprodi/{{($kp->id)}}" class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
             </td>
             @endif 

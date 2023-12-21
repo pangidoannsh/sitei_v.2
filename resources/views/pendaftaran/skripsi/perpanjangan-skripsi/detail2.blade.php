@@ -112,7 +112,7 @@
     <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakPerpanjangan2Kaprodi()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+        <button onclick="tolakPerpanjangan2Kaprodi({{ $skripsi->id }})"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
 </div>
     <div class="col">
         <form action="/perpanjangan2/kaprodi/approve/{{$skripsi->id}}" class="setujui-perpanjangan2-kaprodi" method="POST"> 

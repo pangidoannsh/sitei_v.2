@@ -113,7 +113,7 @@
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text  text-start" ><span class="badge p-2 bg-info text-bold px-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
-        @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' )
+        @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' )
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text  text-start" ><span class="badge p-2 bg-danger text-bold px-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
@@ -176,6 +176,8 @@
   @endforeach
 </div>
 
+<br>
+<br>
 <br>
 <br>
 <br>

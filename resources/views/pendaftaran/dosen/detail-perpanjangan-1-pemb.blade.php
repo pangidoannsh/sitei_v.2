@@ -89,6 +89,10 @@
         <p class="card-title text-secondary text-sm" >Status Skripsi</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-secondary text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
         @endif
+        @if ($skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK')
+        <p class="card-title text-secondary text-sm" >Status Skripsi</p>
+        <p class="card-text text-start" ><span class="badge p-2 bg-danger text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
+        @endif
         @if ($skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')
         <p class="card-title text-secondary text-sm " >Status KP</p>
         <p class="card-text text-start" ><span class="badge p-2 bg-info text-bold pr-3 pl-3" style="border-radius:20px;">{{$skripsi->status_skripsi}}</span></p>
@@ -105,7 +109,7 @@
           <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
-        <button onclick="tolakPerpanjangan1Pembimbing()"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
+        <button onclick="tolakPerpanjangan1Pembimbing({{ $skripsi->id }})"  class="btn btn-danger py-2 px-3 mb-3" data-bs-toggle="tooltip" title="Tolak" >Tolak</button>
 </div>
     <div class="col">
         <form action="/perpanjangan1/pembimbing/approve/{{$skripsi->id}}" class="setujui-perpanjangan1-pembimbing" method="POST"> 
