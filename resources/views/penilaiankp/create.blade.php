@@ -107,6 +107,18 @@
                       <label for="presentasi" class="col-form-label">1). Presentasi</label>
                       <div class="radio1 d-inline">
                         <hr>
+
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('presentasi', $kp->presentasi) == $nilai ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+         <br>
       
                       <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
@@ -135,6 +147,18 @@
                       <label for="materi" class="col-form-label">2). Materi</label>
                       <div class="radio1 d-inline">
                         <hr>
+                      
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai2 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('materi') is-invalid @enderror" name="materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('materi', $kp->materi) == $nilai2 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+         <br>
       
                       <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
@@ -163,6 +187,18 @@
                       <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
                       <div class="radio1 d-inline">
                         <hr>
+                      
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai3 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tanya_jawab', $kp->tanya_jawab) == $nilai3 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+            <br>
       
                       <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
@@ -291,6 +327,18 @@
                       <label for="presentasi" class="col-form-label">1). Presentasi</label>
                       <div class="radio1 d-inline">
                         <hr>
+
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai11 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat11_{{ $i }}" value="{{ $nilai11 }}" onclick="setBulatValue11({{ $nilai11 }})" {{ old('presentasi', $kp->presentasi) == $nilai11 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat11_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+            <br>
       
                       <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
@@ -319,6 +367,18 @@
                       <label for="materi" class="col-form-label">2). Materi</label>
                       <div class="radio1 d-inline">
                         <hr>
+
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai12 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('materi') is-invalid @enderror" name="materi" id="tombol_bulat12_{{ $i }}" value="{{ $nilai12 }}" onclick="setBulatValue12({{ $nilai12 }})" {{ old('materi', $kp->materi) == $nilai12 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat12_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+            <br>
       
                       <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
@@ -347,6 +407,18 @@
                       <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
                       <div class="radio1 d-inline">
                         <hr>
+                      
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai13 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tombol_bulat13_{{ $i }}" value="{{ $nilai13 }}" onclick="setBulatValue13({{ $nilai13 }})" {{ old('tanya_jawab', $kp->tanya_jawab) == $nilai13 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat13_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+            <br>
       
                       <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
@@ -627,6 +699,18 @@
                       <label for="presentasi" class="col-form-label">1). Presentasi</label>
                       <div class="radio1 d-inline">
                         <hr>
+                      
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+            @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('presentasi', $kp->presentasi) == $nilai ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+            <br>
       
                       <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
@@ -655,6 +739,18 @@
                       <label for="materi" class="col-form-label">2). Materi</label>
                       <div class="radio1 d-inline">
                         <hr>
+                      
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai2 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('materi') is-invalid @enderror" name="materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('materi', $kp->materi) == $nilai2 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+         <br>
       
                       <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
@@ -683,6 +779,18 @@
                       <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
                       <div class="radio1 d-inline">
                         <hr>
+
+                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+       @for ($i = 1; $i <= 10; $i++)
+            @php
+                $nilai3 = ($i / 10) * 10;
+            @endphp
+            <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tanya_jawab', $kp->tanya_jawab) == $nilai3 ? 'checked' : null }}>
+            <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
+            @endfor
+            </div>
+
+            <br>
       
                       <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
@@ -969,6 +1077,106 @@
         </div>
 </section>
 @endsection
+
+<!-- NILAI ANGKA PENGUJI  -->
+
+@push('scripts')
+<script>
+ function setBulatValue(value) {
+        // Setiap radio dengan nama 'presentasi' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="presentasi"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+            if (radio.checked) {
+                // Panggil script hasil() dengan nilai yang sesuai
+                hasil();
+            }
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+ function setBulatValue2(value) {
+        // Setiap radio dengan nama 'materi' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="materi"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+            if (radio.checked) {
+                // Panggil script hasil() dengan nilai yang sesuai
+                hasil();
+            }
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+ function setBulatValue3(value) {
+        // Setiap radio dengan nama 'tanya_jawab' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="tanya_jawab"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+            if (radio.checked) {
+                // Panggil script hasil() dengan nilai yang sesuai
+                hasil();
+            }
+        });
+    }
+</script>
+@endpush()
+
+<!-- NILAI ANGKA PEMBIMBING -->
+
+@push('scripts')
+<script>
+ function setBulatValue11(value) {
+        // Setiap radio dengan nama 'presentasi' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="presentasi"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+            if (radio.checked) {
+                // Panggil script hasil() dengan nilai yang sesuai
+                hasil();
+            }
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+ function setBulatValue12(value) {
+        // Setiap radio dengan nama 'materi' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="materi"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+            if (radio.checked) {
+                // Panggil script hasil() dengan nilai yang sesuai
+                hasil();
+            }
+        });
+    }
+</script>
+@endpush()
+
+@push('scripts')
+<script>
+ function setBulatValue13(value) {
+        // Setiap radio dengan nama 'tanya_jawab' akan di-set checked sesuai dengan korelasi nilai
+        document.querySelectorAll('input[name="tanya_jawab"]').forEach(function (radio) {
+            radio.checked = (parseFloat(radio.value) <= parseFloat(value));
+            if (radio.checked) {
+                // Panggil script hasil() dengan nilai yang sesuai
+                hasil();
+            }
+        });
+    }
+</script>
+@endpush()
+
+
+
+
+
+
 
 @push('scripts')
   <script>

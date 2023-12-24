@@ -163,7 +163,7 @@ Edit Penilaian Sidang Skripsi
                 $nilai = ($i / 10) * 10;
             @endphp
 
-              <input type="radio" class="btn-check d-flex flex-row @error('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == $nilai ? 'checked' : null }}>
+              <input type="radio" class="btn-check d-flex flex-row @error('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == $nilai ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -198,7 +198,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai2 = ($i / 10) * 10;
             @endphp
-            <input type="radio" class="btn-check @error('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == $nilai2 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == $nilai2 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -231,7 +231,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai3 = ($i / 10) * 9;
             @endphp
-            <input type="radio" class="btn-check @error('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == $nilai3 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == $nilai3 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -265,7 +265,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai4 = ($i / 10) * 8;
             @endphp
-            <input type="radio" class="btn-check @error('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tombol_bulat4_{{ $i }}" value="{{ $nilai4 }}" onclick="setBulatValue4({{ $nilai4 }})" {{ old('tata_tulis', $sempro->tata_tulis) == $nilai4 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tombol_bulat4_{{ $i }}" value="{{ $nilai4 }}" onclick="setBulatValue4({{ $nilai4 }})" {{ old('tata_tulis', $skripsi->tata_tulis) == $nilai4 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat4_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -299,7 +299,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai5 = ($i / 10) * 10;
             @endphp
-            <input type="radio" class="btn-check @error('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="tombol_bulat5_{{ $i }}" value="{{ $nilai5 }}" onclick="setBulatValue5({{ $nilai5 }})" {{ old('hasil_dan_pembahasan', $sempro->hasil_dan_pembahasan) == $nilai5 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="tombol_bulat5_{{ $i }}" value="{{ $nilai5 }}" onclick="setBulatValue5({{ $nilai5 }})" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == $nilai5 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat5_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -334,7 +334,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai6 = ($i / 10) * 8;
             @endphp
-            <input type="radio" class="btn-check @error('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="tombol_bulat6_{{ $i }}" value="{{ $nilai6 }}" onclick="setBulatValue6({{ $nilai6 }})" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == $nilai6 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="tombol_bulat6_{{ $i }}" value="{{ $nilai6 }}" onclick="setBulatValue6({{ $nilai6 }})" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == $nilai6 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat6_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -445,7 +445,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai11 = ($i / 10) * 2;
             @endphp
-            <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat11_{{ $i }}" value="{{ $nilai11 }}" onclick="setBulatValue11({{ $nilai11 }})" {{ old('presentasi', $sempro->presentasi) == $nilai11 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat11_{{ $i }}" value="{{ $nilai11 }}" onclick="setBulatValue11({{ $nilai11 }})" {{ old('presentasi', $skripsi->presentasi) == $nilai11 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat11_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -480,7 +480,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai12 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tombol_bulat12_{{ $i }}" value="{{ $nilai12 }}" onclick="setBulatValue12({{ $nilai12 }})" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == $nilai12 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tombol_bulat12_{{ $i }}" value="{{ $nilai12 }}" onclick="setBulatValue12({{ $nilai12 }})" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == $nilai12 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat12_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -514,7 +514,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai13 = ($i / 10) * 2;
             @endphp
-            <input type="radio" class="btn-check @error('keaslian') is-invalid @enderror" name="keaslian" id="tombol_bulat13_{{ $i }}" value="{{ $nilai13 }}" onclick="setBulatValue13({{ $nilai13 }})" {{ old('keaslian', $sempro->keaslian) == $nilai13 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('keaslian') is-invalid @enderror" name="keaslian" id="tombol_bulat13_{{ $i }}" value="{{ $nilai13 }}" onclick="setBulatValue13({{ $nilai13 }})" {{ old('keaslian', $skripsi->keaslian) == $nilai13 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat13_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -548,7 +548,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai14 = ($i / 10) * 4;
             @endphp
-            <input type="radio" class="btn-check @error('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="tombol_bulat14_{{ $i }}" value="{{ $nilai14 }}" onclick="setBulatValue14({{ $nilai14 }})" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == $nilai14 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="tombol_bulat14_{{ $i }}" value="{{ $nilai14 }}" onclick="setBulatValue14({{ $nilai14 }})" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == $nilai14 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat14_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -581,7 +581,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai15 = ($i / 10) * 4;
             @endphp
-            <input type="radio" class="btn-check @error('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="tombol_bulat15_{{ $i }}" value="{{ $nilai15 }}" onclick="setBulatValue15({{ $nilai15 }})" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == $nilai15 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="tombol_bulat15_{{ $i }}" value="{{ $nilai15 }}" onclick="setBulatValue15({{ $nilai15 }})" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == $nilai15 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat15_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -616,7 +616,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai16 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="tombol_bulat16_{{ $i }}" value="{{ $nilai16 }}" onclick="setBulatValue16({{ $nilai16 }})" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == $nilai16 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="tombol_bulat16_{{ $i }}" value="{{ $nilai16 }}" onclick="setBulatValue16({{ $nilai16 }})" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == $nilai16 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat16_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -650,7 +650,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai17 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tombol_bulat17_{{ $i }}" value="{{ $nilai17 }}" onclick="setBulatValue17({{ $nilai17 }})" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == $nilai17 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tombol_bulat17_{{ $i }}" value="{{ $nilai17 }}" onclick="setBulatValue17({{ $nilai17 }})" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == $nilai17 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat17_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -684,7 +684,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai18 = ($i / 10) * 2;
             @endphp
-            <input type="radio" class="btn-check @error('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tombol_bulat18_{{ $i }}" value="{{ $nilai18 }}" onclick="setBulatValue18({{ $nilai18 }})" {{ old('tata_tulis', $sempro->tata_tulis) == $nilai18 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tombol_bulat18_{{ $i }}" value="{{ $nilai18 }}" onclick="setBulatValue18({{ $nilai18 }})" {{ old('tata_tulis', $skripsi->tata_tulis) == $nilai18 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat18_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -718,7 +718,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai19 = ($i / 10) * 2;
             @endphp
-            <input type="radio" class="btn-check @error('tools') is-invalid @enderror" name="tools" id="tombol_bulat19_{{ $i }}" value="{{ $nilai19 }}" onclick="setBulatValue19({{ $nilai19 }})" {{ old('tools', $sempro->tools) == $nilai19 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('tools') is-invalid @enderror" name="tools" id="tombol_bulat19_{{ $i }}" value="{{ $nilai19 }}" onclick="setBulatValue19({{ $nilai19 }})" {{ old('tools', $skripsi->tools) == $nilai19 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat19_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -752,7 +752,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai20 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('penyajian_data') is-invalid @enderror" name="penyajian_data" id="tombol_bulat20_{{ $i }}" value="{{ $nilai20 }}" onclick="setBulatValue20({{ $nilai20 }})" {{ old('penyajian_data', $sempro->penyajian_data) == $nilai20 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('penyajian_data') is-invalid @enderror" name="penyajian_data" id="tombol_bulat20_{{ $i }}" value="{{ $nilai20 }}" onclick="setBulatValue20({{ $nilai20 }})" {{ old('penyajian_data', $skripsi->penyajian_data) == $nilai20 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat20_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -786,7 +786,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai21 = ($i / 10) * 4;
             @endphp
-            <input type="radio" class="btn-check @error('hasil') is-invalid @enderror" name="hasil" id="tombol_bulat21_{{ $i }}" value="{{ $nilai21 }}" onclick="setBulatValue21({{ $nilai21 }})" {{ old('hasil', $sempro->hasil) == $nilai21 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('hasil') is-invalid @enderror" name="hasil" id="tombol_bulat21_{{ $i }}" value="{{ $nilai21 }}" onclick="setBulatValue21({{ $nilai21 }})" {{ old('hasil', $skripsi->hasil) == $nilai21 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat21_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -820,7 +820,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai22 = ($i / 10) * 4;
             @endphp
-            <input type="radio" class="btn-check @error('pembahasan') is-invalid @enderror" name="pembahasan" id="tombol_bulat22_{{ $i }}" value="{{ $nilai22 }}" onclick="setBulatValue22({{ $nilai22 }})" {{ old('pembahasan', $sempro->pembahasan) == $nilai22 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('pembahasan') is-invalid @enderror" name="pembahasan" id="tombol_bulat22_{{ $i }}" value="{{ $nilai22 }}" onclick="setBulatValue22({{ $nilai22 }})" {{ old('pembahasan', $skripsi->pembahasan) == $nilai22 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat22_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -854,7 +854,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai23 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('kesimpulan') is-invalid @enderror" name="kesimpulan" id="tombol_bulat23_{{ $i }}" value="{{ $nilai23 }}" onclick="setBulatValue23({{ $nilai23 }})" {{ old('kesimpulan', $sempro->kesimpulan) == $nilai23 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('kesimpulan') is-invalid @enderror" name="kesimpulan" id="tombol_bulat23_{{ $i }}" value="{{ $nilai23 }}" onclick="setBulatValue23({{ $nilai23 }})" {{ old('kesimpulan', $skripsi->kesimpulan) == $nilai23 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat23_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -888,7 +888,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai24 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('luaran') is-invalid @enderror" name="luaran" id="tombol_bulat24_{{ $i }}" value="{{ $nilai24 }}" onclick="setBulatValue24({{ $nilai24 }})" {{ old('luaran', $sempro->luaran) == $nilai24 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('luaran') is-invalid @enderror" name="luaran" id="tombol_bulat24_{{ $i }}" value="{{ $nilai24 }}" onclick="setBulatValue24({{ $nilai24 }})" {{ old('luaran', $skripsi->luaran) == $nilai24 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat24_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
@@ -923,7 +923,7 @@ Edit Penilaian Sidang Skripsi
             @php
                 $nilai25 = ($i / 10) * 3;
             @endphp
-            <input type="radio" class="btn-check @error('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="tombol_bulat25_{{ $i }}" value="{{ $nilai25 }}" onclick="setBulatValue25({{ $nilai25 }})" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == $nilai25 ? 'checked' : null }}>
+            <input type="radio" class="btn-check @error('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="tombol_bulat25_{{ $i }}" value="{{ $nilai25 }}" onclick="setBulatValue25({{ $nilai25 }})" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == $nilai25 ? 'checked' : null }}>
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat25_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
