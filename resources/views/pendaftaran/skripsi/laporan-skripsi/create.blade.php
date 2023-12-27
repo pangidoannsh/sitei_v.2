@@ -10,6 +10,10 @@
 
 @section('content')
 
+<div class="container">
+  <a href="/usuljudul/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+
 @foreach ($pendaftaran_skripsi as $skripsi)
 
 <form action="/penyerahan-buku-skripsi/create/{{$skripsi->id}}" method="POST" enctype="multipart/form-data">

@@ -1883,7 +1883,7 @@ class PendaftaranSkripsiController extends Controller
  
         //  $skripsi->status_skripsi = 'PERPANJANGAN REVISI DISETUJUI';
          $skripsi->keterangan = 'Menunggu persetujuan Koordinator Program Studi';
-         $skripsi->tgl_disetujui_revisi = Carbon::now();
+         $skripsi->tgl_disetujui_revisi_pemb1 = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Perpanjangan Revisi Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1914,7 +1914,7 @@ class PendaftaranSkripsiController extends Controller
  
          $skripsi->status_skripsi = 'PERPANJANGAN REVISI DISETUJUI';
          $skripsi->keterangan = 'Perpanjangan Revisi Skripsi disetujui';
-         $skripsi->tgl_disetujui_revisi = Carbon::now();
+         $skripsi->tgl_disetujui_revisi_kaprodi = Carbon::now();
          $skripsi->update();
  
          Alert::success('Disetujui!', 'Perpanjangan Revisi Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
@@ -1933,6 +1933,7 @@ class PendaftaranSkripsiController extends Controller
          $skripsi->keterangan = 'Ditolak Koordinator Program Studi';
         //  $skripsi->tgl_created_perpanjangan2 = null;
          $skripsi->alasan = $request->alasan;
+          $skripsi->tgl_disetujui_revisi_pemb1 = null;
          $skripsi->update();
  
          Alert::error('Ditolak', 'Perpanjangan Revisi Skripsi ditolak!')->showConfirmButton('Ok', '#dc3545');

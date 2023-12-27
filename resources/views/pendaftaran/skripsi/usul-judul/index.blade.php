@@ -596,7 +596,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
     </div>
   </div>
 @endif
-     @if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' )
+     @if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI' )
     <div class="row biru mb-4">
     <div class="col">
         <span class="mt-0 "> Tanggal disetujui <br></span>
@@ -611,11 +611,33 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang )->translatedFormat('l, d F Y')}}</span>
     </div>
     <div class="col">
-        <span class="mt-0 text-danger"> Tanggal Usulan <br></span>
+        <span class="mt-0 text-muted"> Tanggal Usulan <br></span>
+        <span class="mt-2 text-muted text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_created_revisi )->translatedFormat('l, d F Y')}}</span>
+    </div>
+  </div>
+@endif
+
+@if ($pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' )
+    <div class="row biru mb-4">
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+         <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y')}}</span> 
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 "> Tanggal disetujui <br></span>
+        <span class="mt-2 text-bold">{{Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang )->translatedFormat('l, d F Y')}}</span>
+    </div>
+    <div class="col">
+        <span class="mt-0 text-danger"> Batas Unggah Penyerahan Buku Skripsi <br></span>
         <strong class="mt-2 text-danger"><strong class="text-bold" id="timer-batas-buku-skripsi"></strong></strong>
     </div>
   </div>
 @endif
+
      @if ($pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')
     <div class="row biru mb-4">
     <div class="col">
@@ -676,7 +698,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Seminar Proposal Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Seminar Proposal Ulang!</span>
         
     </div>
 </div>
@@ -693,7 +715,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if($pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sidang Skripsi Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sidang Skripsi Ulang!</span>
         
     </div>
 </div>
@@ -701,7 +723,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if( $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sidang atau Usulkan Perpanjangan Waktu Skripsi Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sidang atau Usulkan Perpanjangan Waktu Skripsi Ulang!</span>
         
     </div>
 </div>
@@ -709,7 +731,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if( $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sidang atau Usulkan Perpanjangan Waktu Skripsi Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sidang atau Usulkan Perpanjangan Waktu Skripsi Ulang!</span>
         
     </div>
 </div>
@@ -717,7 +739,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if(  $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Unggah Bukti Penyerahan Buku Skripsi atau Usulkan Perpanjangan Revisi Skripsi Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Unggah Bukti Penyerahan Buku Skripsi atau Usulkan Perpanjangan Revisi Skripsi Ulang!</span>
         
     </div>
 </div>
@@ -725,7 +747,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if(  $pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <img height="25" width="25" src="/assets/img/shocked.png"  alt="..." class="bg-light border border-light border-5 rounded-pill"> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Unggah Bukti Penyerahan Buku Skripsi Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Unggah Bukti Penyerahan Buku Skripsi Ulang!</span>
         
     </div>
 </div>

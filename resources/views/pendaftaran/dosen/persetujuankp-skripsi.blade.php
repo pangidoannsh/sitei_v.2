@@ -702,6 +702,24 @@
 @endphp
 <!-- BATAS -->
 
+<!-- PERPANJANGAN REVISI PEMBIMBING -->
+@php
+    $countDownDateRevisiPemb1 = strtotime($skripsi->tgl_created_revisi) + (4 * 24 * 60 * 60);
+    $nowRevisiPemb1 = time();
+    $distanceRevisiPemb1 = $countDownDateRevisiPemb1 - $nowRevisiPemb1;
+    $daysRevisiPemb1 = floor($distanceRevisiPemb1 / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
+<!-- PERPANJANGAN REVISI KAPRODI -->
+@php
+    $countDownDateRevisiKaprodi = strtotime($skripsi->tgl_disetujui_revisi_pemb1) + (4 * 24 * 60 * 60);
+    $nowRevisiKaprodi = time();
+    $distanceRevisiKaprodi = $countDownDateRevisiKaprodi - $nowRevisiKaprodi;
+    $daysRevisiKaprodi = floor($distanceRevisiKaprodi / (60 * 60 * 24));
+@endphp
+<!-- BATAS -->
+
 <!-- BUKTI PENYERAHAN BUKU SKRIPSI KOORDINATOR -->
 @php
     $countDownDateBukuSkripsiKoordinator = strtotime($skripsi->tgl_created_sti_17) + (4 * 24 * 60 * 60);
@@ -746,6 +764,10 @@
             @endif
             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')           
             <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
+            @endif
+            
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
+            <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y')}}</td>
             @endif
             @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
             <td class="text-center px-1 py-2">{{Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y')}}</td>
@@ -960,6 +982,34 @@
             @endif
             
             @endif
+
+            <!-- PERPANJANGAN REVISI -->
+
+             @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Pembimbing 1' && $skripsi->status_skripsi == 'PERPANJANGAN REVISI' )
+            <td class="text-center px-1 py-2" >
+                @if ($daysRevisiPemb1 > 0)
+                    <span class="text-danger"> {{ $daysRevisiPemb1 }}  hari lagi</span>
+                @elseif($daysRevisiPemb1 <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+             
+            @if (Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 )
+            @if ($skripsi->keterangan == 'Menunggu persetujuan Koordinator Program Studi' && $skripsi->status_skripsi == 'PERPANJANGAN REVISI' )
+            <td class="text-center px-1 py-2" >
+                @if ($daysRevisiKaprodi > 0)
+                    <span class="text-danger"> {{ $daysRevisiKaprodi }}  hari lagi</span>
+                @elseif($daysRevisiKaprodi <= 0)
+                    Batas Waktu Persetujuan telah habis
+                @endif
+            </td>
+            @endif
+            @endif
+
+            <!-- PENYERAHAN BUKU SKRIPSI -->
 
          @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )

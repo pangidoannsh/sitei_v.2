@@ -429,7 +429,9 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 2;
         $jadwal->update();
 
-        return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Disetujui!');
+        // return redirect('/riwayat-koordinator')->with('message', 'Berita Acara Disetujui!');
+        Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+    return back();
     }
 
     public function tolak_koordinator($id)
@@ -438,7 +440,9 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 0;
         $jadwal->update();
 
-        return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Ditolak!');
+        // return redirect('/riwayat-koordinator')->with('message', 'Berita Acara Ditolak!');
+        Alert::error('Berhasil', 'Berita acara berhasil ditolak')->showConfirmButton('Ok', '#dc3545');
+    return back();
     }
 
     public function approve_kaprodi($id)
@@ -447,7 +451,9 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 3;
         $jadwal->update();
 
-        return redirect('/persetujuan-kaprodi')->with('message', 'Berita Acara Disetujui!');
+        // return redirect('/riwayat-koordinator')->with('message', 'Berita Acara Disetujui!');
+        Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+    return back();
     }
 
     public function tolak_kaprodi($id)
@@ -456,7 +462,9 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 0;
         $jadwal->update();
 
-        return redirect('/persetujuan-kaprodi')->with('message', 'Berita Acara Ditolak!');
+        // return redirect('/riwayat-koordinator')->with('message', 'Berita Acara Ditolak!');
+        Alert::error('Berhasil', 'Berita acara berhasil ditolak')->showConfirmButton('Ok', '#dc3545');
+    return back();
     }
 
     public function riwayat()

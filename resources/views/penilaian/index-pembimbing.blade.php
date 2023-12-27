@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    Penilaian | SIA ELEKTRO
+    SITEI | Jadwal Seminar Pembimbing dan Penguji
 @endsection
 
 @section('sub-title')
-    Jadwal Seminar Mahasiswa Bimbingan
+    Jadwal Seminar Pembimbing dan Penguji
 @endsection
 
 @section('content')

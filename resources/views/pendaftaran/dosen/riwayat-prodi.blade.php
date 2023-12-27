@@ -189,7 +189,7 @@
            @if ($kp->status_seminar == 1)
           <td class="text-center">Lulus</td>
           @else
-          <td class="text-center">Tidak Lulus</td>
+          <td class="text-center">Belum Lulus</td>
          @endif
          
           <td class="text-center">
@@ -231,7 +231,7 @@
            @if ($sempro->status_seminar == 1)
           <td class="text-center">Lulus</td>
           @else
-          <td class="text-center">Tidak Lulus</td>
+          <td class="text-center">Belum Lulus</td>
          @endif
 
           <td class="text-center">            
@@ -285,7 +285,7 @@
           @if ($skripsi->status_seminar == 3)
           <td class="text-center">Lulus</td>
           @else
-          <td class="text-center">Tidak Lulus</td>
+          <td class="text-center">Belum Lulus</td>
          @endif
 
           <td class="text-center">            
@@ -334,7 +334,7 @@
                     @if ($skripsi->status_seminar == 3)
           <td class="text-center">Lulus</td>
           @else
-          <td class="text-center">Tidak Lulus</td>
+          <td class="text-center">Belum Lulus</td>
          @endif                 
           <td class="text-center">                                    
             <a href="/penilaian-skripsi/draft-ba/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Draft BA</a>
@@ -367,7 +367,7 @@
           @if ($skripsi->status_seminar == 3)
           <td class="text-center">Lulus</td>
           @else
-          <td class="text-center">Tidak Lulus</td>
+          <td class="text-center">Belum Lulus</td>
          @endif               
           <td class="text-center">                                    
             <a href="/penilaian-skripsi/draft-ba/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Draft BA</a>

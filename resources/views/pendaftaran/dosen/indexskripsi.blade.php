@@ -131,7 +131,7 @@ Data Skripsi Mahasiswa
             <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Dijadwalkan: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat('l, d F Y')}}</td>
             @endif
 
-            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI')           
+            @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK')           
             <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y')}}</td>
             @endif
 
@@ -139,7 +139,7 @@ Data Skripsi Mahasiswa
             <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui: </small><br>{{Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat('l, d F Y')}}</td>
             @endif
 
-            @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')           
+            @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')           
             <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan: </small><br>{{Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y')}}</td>
             @endif
 
