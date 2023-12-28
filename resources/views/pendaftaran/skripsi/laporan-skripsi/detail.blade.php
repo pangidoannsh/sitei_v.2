@@ -87,7 +87,7 @@
       <hr>
 
       <p class="card-title  text-secondary text-sm" >Nilai Angka</p>
-        <p class="card-text lh-1 lh-1 text-start" >
+        <p class="card-text text-start" > <span class=" fs-5 fw-bold">
             @if ($nilaipenguji1 == '' && $nilaipenguji2 == '' && $nilaipenguji3 == '' && $nilaipembimbing1 =='' && $nilaipembimbing2 == '')
                                   -
                                   @else
@@ -154,10 +154,11 @@
                                           ?>
                                           {{$total_nilai}}
                                     @endif
+                                    </span>
         </p>
         
         <p class="card-title  text-secondary text-sm" >Nilai Huruf</p>
-        <p class="card-text lh-1 lh-1 text-start" >
+        <p class="card-text text-start" ><span class=" fs-5 fw-bold">
            @if ($nilaitotalpenguji == '' && $nilaitotalpembimbing == '')
                                     -
                                     @else
@@ -182,6 +183,7 @@
                                     E
                                     @endif
                                   @endif
+                                </span>
         </p>
 
       </div>

@@ -146,7 +146,7 @@
             <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$kp->keterangan}}</td> 
 
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA'  )
-            <td class="text-center px-1 py-2">
+            <td class="text-center px-2 py-2">
   @if (Str::length(Auth::guard('web')->user()) > 0)
   @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     @if ($kp->keterangan == 'Menunggu persetujuan Admin Prodi' && $kp->status_kp == 'USULAN KP' )
@@ -174,7 +174,7 @@
 
 
             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')
-            <td class="text-center px-1 py-2">
+            <td class="text-center px-2 py-2">
   @if (Str::length(Auth::guard('web')->user()) > 0)
   @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     @if ($kp->keterangan == 'Menunggu persetujuan Admin Prodi' && $kp->status_kp == 'DAFTAR SEMINAR KP' )

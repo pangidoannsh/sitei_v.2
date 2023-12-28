@@ -1087,7 +1087,6 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('status_seminar', 1)->count(),
                'jml_jadwal_sempros' => PenjadwalanSempro::where('status_seminar', 1)->count(),
                'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->count(),
-               
                 
             ]);
         } 
@@ -1255,7 +1254,7 @@ class PendaftaranController extends Controller
                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 3)->get(),
 
                'penjadwalan_skripsis_draf' => PenjadwalanSkripsi::all(),
-            'penjadwalan_skripsis_draff' => PenjadwalanSkripsi::all(),
+                'penjadwalan_skripsis_draff' => PenjadwalanSkripsi::all(),
 
                //JUMLAH SEMINAR
                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu','<>', null)->orderBy('tanggal', 'ASC')->count(),
