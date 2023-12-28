@@ -26,7 +26,7 @@ Data Skripsi Mahasiswa
 
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
           @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 )
-  <li><a href="/kp-skripsi/seminar" class="px-1">Seminar  (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a></li>
+  <li><a href="/prodi/kp-skripsi/seminar" class="px-1">Seminar  (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a></li>
 
         <span class="px-2">|</span>
         <li><a href="/kerja-praktek" class="px-1">Kerja Praktek (<span>{{ $jml_prodi_kp }}</span>)</a></li>
@@ -36,7 +36,7 @@ Data Skripsi Mahasiswa
 
 
         <span class="px-2">|</span>
-        <li><a href="/kp-skripsi/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
+        <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
               @endif
   @endif
   

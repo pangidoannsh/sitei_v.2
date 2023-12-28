@@ -35,7 +35,7 @@ class UndanganSeminarController extends Controller
 
         $pdf->loadView('undanganseminar.undangan-kp',compact('penjadwalan','qrcode', 'pdf', 'kaprodi1', 'kaprodi2', 'kaprodi3', 'koor1', 'koor2', 'koor3'));
         
-        return $pdf->stream('STI/TE-4 Undangan Seminar ProposalKerja Praktek.pdf', array("Attachment" => false));  
+        return $pdf->stream('STI/TE-4 Undangan Seminar Kerja Praktek.pdf', array("Attachment" => false));  
     }
       public function undangan_sempro($id)
     {   

@@ -253,7 +253,7 @@
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
         @if (Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 ) 
 <div class="container">
-    <a href="/kp-skripsi/seminar" class="btn btn-success mb-4"><i class="fas fa-arrow-left fa-xs"></i> Kembali</a>
+    <a href="/prodi/kp-skripsi/seminar" class="btn btn-success mb-4"><i class="fas fa-arrow-left fa-xs"></i> Kembali</a>
 </div>
 
 <form action="/form-skripsi/edit/koordinator/{{$skripsi->id}}" method="POST">

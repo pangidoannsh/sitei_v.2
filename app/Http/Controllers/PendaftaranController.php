@@ -177,7 +177,7 @@ class PendaftaranController extends Controller
         
         //ADMIN
         if (auth()->user()->role_id == 1) {     
-            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->get(),
                 'nilai_pembimbing' => $nilai_pembimbing,
                 'nilai_penguji' => $nilai_penguji, 
@@ -185,14 +185,14 @@ class PendaftaranController extends Controller
         } 
        
         if (auth()->user()->role_id == 2) {            
-            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '1')->get(),
                 'nilai_pembimbing' => $nilai_pembimbing,
                 'nilai_penguji' => $nilai_penguji, 
             ]);
         }
         if (auth()->user()->role_id == 3) {            
-            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('prodi_id', '2')->get(),
                 'nilai_pembimbing' => $nilai_pembimbing,
                 'nilai_penguji' => $nilai_penguji, 
@@ -200,7 +200,7 @@ class PendaftaranController extends Controller
         }
         if (auth()->user()->role_id == 4) {  
             
-            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-pemb', [
                 'pendaftaran_kp' =>  PendaftaranKP::where('id', $id)->where('prodi_id', '3')->get(),
                 'nilai_pembimbing' => $nilai_pembimbing,
                 'nilai_penguji' => $nilai_penguji, 
@@ -208,7 +208,7 @@ class PendaftaranController extends Controller
         } 
         //DOSEN
         if (auth()->user()->nip >0) {  
-            return view('pendaftaran.dosen.detailkpti-10-pemb', [
+            return view('pendaftaran.kerja-praktek.kpti-10.detail-riwayat-pemb', [
                 'pendaftaran_kp' => PendaftaranKP::where('id', $id)->where('dosen_pembimbing_nip', Auth::user()->nip)->get(),
                 'nilai_pembimbing' => $nilai_pembimbing,
                 'nilai_penguji' => $nilai_penguji, 

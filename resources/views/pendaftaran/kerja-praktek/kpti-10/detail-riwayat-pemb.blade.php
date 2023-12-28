@@ -22,7 +22,7 @@
 
 <div class="container">
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-  <a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/pembimbing-penguji/riwayat-bimbingan" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
   @endif 
 </div>
 
@@ -74,16 +74,17 @@
          <h5 class="text-bold">Nilai Kerja Praktek</h5>
         <hr>
         <p class="card-title  text-secondary text-sm" >Nilai Angka</p>
-        <p class="card-text lh-1 lh-1 text-start" >
+        <p class="card-text   text-start" > <span class="fw-bold fs-5">
            @if ($nilai_pembimbing == '' || $nilai_penguji == '')
                                     -
            @else
                                     {{round(($nilai_pembimbing->total_nilai_angka + $nilai_penguji->total_nilai_angka + $nilai_pembimbing->nilai_pembimbing_lapangan) / 3) }}
             @endif
+            </span>
         </p>
         
         <p class="card-title  text-secondary text-sm" >Nilai Huruf</p>
-        <p class="card-text lh-1 lh-1 text-start" >
+        <p class="card-text   text-start" ><span class="fw-bold fs-5">
            @if ($nilai_pembimbing == '' || $nilai_penguji == '')
                                     -
            @else
@@ -107,6 +108,7 @@
                                         E
                                     @endif
            @endif
+          </span>
         </p>
 
     </div>

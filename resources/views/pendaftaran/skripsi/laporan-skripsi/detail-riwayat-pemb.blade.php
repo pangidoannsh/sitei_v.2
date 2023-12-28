@@ -27,7 +27,7 @@
 
   <div class="container">
   @if (Str::length(Auth::guard('dosen')->user()) > 0)
-  <a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/pembimbing-penguji/riwayat-bimbingan" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
   @endif
 </div>
 
@@ -248,6 +248,9 @@
   
   @endforeach
 </section>
+<br>
+<br>
+<br>
 
 @endsection
 

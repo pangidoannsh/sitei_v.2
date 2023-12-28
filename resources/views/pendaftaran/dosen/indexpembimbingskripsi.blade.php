@@ -29,7 +29,7 @@ Daftar Bimbingan Skripsi
   <span class="px-2">|</span>
   <li><a href="/pembimbing/skripsi" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan Skripsi (<span>{{ $jml_skripsi }}</span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/kp-skripsi/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
+  <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
   
 </ol>
 

@@ -100,7 +100,7 @@
               <li><a href="/pembimbing/skripsi" class="dropdown-item mb-1 {{Request::is ('pembimbing*') ? 'text-success' : '' }}">Bimbingan</a></li> 
               @if (Str::length(Auth::guard('dosen')->user()) > 0) 
               @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8)               
-              <li><a href="/kp-skripsi/seminar" class="dropdown-item mb-1 {{Request::is ('') ? 'text-success' : '' }}">Pengelola</a></li>    
+              <li><a href="/prodi/kp-skripsi/seminar" class="dropdown-item mb-1 {{Request::is ('prodi*') ? 'text-success' : '' }} {{Request::is ('kerja-praktek*') ? 'text-success' : '' }} {{Request::is ('skripsi*') ? 'text-success' : '' }}">Pengelola</a></li>    
               @endif                
               @endif                
               <li><a href="/statistik" class="dropdown-item mb-1 {{Request::is ('statistik*') ? 'text-success' : '' }}">Statistik</a></li>

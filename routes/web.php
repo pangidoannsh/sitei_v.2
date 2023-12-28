@@ -272,7 +272,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
 
     Route::get('/kp-skripsi/pembimbing-penguji/riwayat-seminar', [PendaftaranController::class, 'riwayat_seminar_pembimbing_penguji']);
-    Route::get('/kp-skripsi/pembimbing-penguji/riwayat-bimbingan', [PendaftaranController::class, 'riwayat_bimbingan_pembimbing_penguji']);
+    Route::get('/pembimbing-penguji/riwayat-bimbingan', [PendaftaranController::class, 'riwayat_bimbingan_pembimbing_penguji']);
 
     
 
@@ -371,7 +371,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/profil-dosen/editpassworddsn', [DosenProfilController::class, 'updatepswdsn']);
     
 
-    Route::get('/kp-skripsi/seminar', [PenilaianController::class, 'index']);
+    Route::get('/prodi/kp-skripsi/seminar', [PenilaianController::class, 'index']);
     Route::get('/kp-skripsi/seminar-pembimbing-penguji', [PenilaianController::class, 'indexpembimbing']);
     Route::get('/kp-skripsi/riwayat-penilaian-seminar', [PenilaianController::class, 'riwayat']);
     Route::get('/kp-skripsi/riwayat-penilaian-skripsi', [PenilaianController::class, 'riwayatskripsi']);
@@ -689,7 +689,7 @@ Route::group(['middleware' => ['auth:dosen,web']], function () {
     Route::get('/kpti10/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailkpti10_pembimbing']);
     Route::get('/kpti10/detail/riwayat/pembimbingprodi/{id}', [PendaftaranController::class, 'detail_riwayat_kpti10_pembimbing']);
 
-    Route::get('/kp-skripsi/prodi/riwayat', [PendaftaranController::class, 'riwayat_prodi']);
+    Route::get('/prodi/riwayat', [PendaftaranController::class, 'riwayat_prodi']);
 
     Route::get('/kerja-praktek/nilai-keluar', [PendaftaranController::class, 'nilai_keluar']);
     
