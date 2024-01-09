@@ -234,7 +234,7 @@
           <a class="pengembang" href="/developer" target="_blank">Prodi Teknik Informatika</a>
         </div>
         <div class="mt-3">
-          <p> Copyright &copy; {{ now()->year }} - {{ now()->addYears(1)->year }} SITEI All Rights Reserved</p>
+          <p> Copyright &copy; 2023 - {{ now()->year }}. All Rights Reserved.</p>
           <!-- <p> Copyright &copy; 2022-<script>document.write(new Date().getFullYear())</script> SITEI All Rights Reserved</p> -->
         </div>
       </div>
