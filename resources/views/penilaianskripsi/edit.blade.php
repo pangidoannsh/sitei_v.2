@@ -79,6 +79,9 @@ Edit Penilaian Sidang Skripsi
 
         <p class="card-title text-secondary text-sm" >Judul</p>
         <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : $skripsi->penjadwalan_skripsi->judul_skripsi }}</p>
+
+        <p class="card-title text-secondary text-sm" >Naskah</p>
+      <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
     </div>
     <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
          <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
@@ -157,7 +160,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio1 d-inline">
                                 <hr>
 
-              <div class="d-flex justify-content-center  justify-content-lg-start">
+              <!-- <div class="d-flex justify-content-center  justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai = ($i / 10) * 10;
@@ -167,7 +170,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-         <br>
+         <br> -->
 
                             <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="2" onclick="hasil()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '2' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
@@ -193,7 +196,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio2 d-inline">
                                 <hr>
 
-                          <div class="d-flex justify-content-center justify-content-lg-start">
+                          <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai2 = ($i / 10) * 10;
@@ -202,7 +205,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="2" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '2' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
@@ -226,7 +229,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio3 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai3 = ($i / 10) * 9;
@@ -235,7 +238,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.8" onclick="hasil()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '1.8' ? 'checked' : null }}>
             <label class="btn tombol btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
@@ -260,7 +263,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio4 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai4 = ($i / 10) * 8;
@@ -269,7 +272,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat4_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1.6" onclick="hasil()" {{ old('tata_tulis', $skripsi->tata_tulis) == '1.6' ? 'checked' : null }}>
             <label class="btn tombol btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
@@ -294,7 +297,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio15 d-inline">
                                 <hr>
 
-                          <div class="d-flex justify-content-center justify-content-lg-start">
+                          <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai5 = ($i / 10) * 10;
@@ -303,7 +306,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat5_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
             <input type="radio" class="btn-check @error ('hasil_dan_pembahasan') is-invalid @enderror" name="hasil_dan_pembahasan" id="hasil_dan_pembahasan1" value="1.6" onclick="hasil()" {{ old('hasil_dan_pembahasan', $skripsi->hasil_dan_pembahasan) == '1.6' ? 'checked' : null }}>
             <label class="btn tombol btn-danger fw-normal " for="hasil_dan_pembahasan1">Sangat Kurang Baik</label>
@@ -329,7 +332,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio5 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai6 = ($i / 10) * 8;
@@ -338,7 +341,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat6_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian1" value="1.6" onclick="hasil()" {{ old('sikap_dan_kepribadian', $skripsi->sikap_dan_kepribadian) == '1.6' ? 'checked' : null }}>
             <label class="btn tombol btn-danger fw-normal " for="sikap_dan_kepribadian1">Sangat Kurang Baik</label>
@@ -440,7 +443,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio6 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai11 = ($i / 10) * 2;
@@ -449,7 +452,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat11_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="0.4" onclick="total()" {{ old('presentasi', $skripsi->presentasi) == '0.4' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="presentasi1">Sangat Kurang Baik</label>
@@ -475,7 +478,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio7 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai12 = ($i / 10) * 3;
@@ -484,7 +487,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat12_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="0.6" onclick="total()" {{ old('tingkat_penguasaan_materi', $skripsi->tingkat_penguasaan_materi) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
@@ -509,7 +512,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio8 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai13 = ($i / 10) * 2;
@@ -518,7 +521,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat13_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian1" value="0.4" onclick="total()" {{ old('keaslian', $skripsi->keaslian) == '0.4' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="keaslian1">Sangat Kurang Baik</label>
@@ -543,7 +546,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio9 d-inline">
                                 <hr>
                             
-                                <div class="d-flex justify-content-center justify-content-lg-start">
+                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai14 = ($i / 10) * 4;
@@ -552,7 +555,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat14_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi1" value="0.8" onclick="total()" {{ old('ketepatan_metodologi', $skripsi->ketepatan_metodologi) == '0.8' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="ketepatan_metodologi1">Sangat Kurang Baik</label>
@@ -576,7 +579,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio10 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai15 = ($i / 10) * 4;
@@ -585,7 +588,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat15_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="0.8" onclick="total()" {{ old('penguasaan_dasar_teori', $skripsi->penguasaan_dasar_teori) == '0.8' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
@@ -611,7 +614,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio11 d-inline">
                                 <hr>
                             
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai16 = ($i / 10) * 3;
@@ -620,7 +623,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat16_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah1" value="0.6" onclick="total()" {{ old('kecermatan_perumusan_masalah', $skripsi->kecermatan_perumusan_masalah) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="kecermatan_perumusan_masalah1">Sangat Kurang Baik</label>
@@ -645,7 +648,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio12 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai17 = ($i / 10) * 3;
@@ -654,7 +657,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat17_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="0.6" onclick="total()" {{ old('tinjauan_pustaka', $skripsi->tinjauan_pustaka) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
@@ -679,7 +682,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio13 d-inline">
                                 <hr>
                             
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai18 = ($i / 10) * 2;
@@ -688,7 +691,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat18_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="0.4" onclick="total()" {{ old('tata_tulis', $skripsi->tata_tulis) == '0.4' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
@@ -713,7 +716,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio16 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai19 = ($i / 10) * 2;
@@ -722,7 +725,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat19_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('tools') is-invalid @enderror" name="tools" id="tools1" value="0.4" onclick="total()" {{ old('tools', $skripsi->tools) == '0.4' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="tools1">Sangat Kurang Baik</label>
@@ -747,7 +750,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio17 d-inline">
                                 <hr>
 
-            <div class="d-flex justify-content-center justify-content-lg-start">
+            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai20 = ($i / 10) * 3;
@@ -756,7 +759,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat20_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('penyajian_data') is-invalid @enderror" name="penyajian_data" id="penyajian_data1" value="0.6" onclick="total()" {{ old('penyajian_data', $skripsi->penyajian_data) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="penyajian_data1">Sangat Kurang Baik</label>
@@ -781,7 +784,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio18 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai21 = ($i / 10) * 4;
@@ -790,7 +793,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat21_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('hasil') is-invalid @enderror" name="hasil" id="hasil1" value="0.8" onclick="total()" {{ old('hasil', $skripsi->hasil) == '0.8' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="hasil1">Sangat Kurang Baik</label>
@@ -815,7 +818,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio19 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai22 = ($i / 10) * 4;
@@ -824,7 +827,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat22_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('pembahasan') is-invalid @enderror" name="pembahasan" id="pembahasan1" value="0.8" onclick="total()" {{ old('pembahasan', $skripsi->pembahasan) == '0.8' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="pembahasan1">Sangat Kurang Baik</label>
@@ -849,7 +852,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio20 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai23 = ($i / 10) * 3;
@@ -858,7 +861,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat23_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('kesimpulan') is-invalid @enderror" name="kesimpulan" id="kesimpulan1" value="0.6" onclick="total()" {{ old('kesimpulan', $skripsi->kesimpulan) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="kesimpulan1">Sangat Kurang Baik</label>
@@ -883,7 +886,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio21 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai24 = ($i / 10) * 3;
@@ -892,7 +895,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat24_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('luaran') is-invalid @enderror" name="luaran" id="luaran1" value="0.6" onclick="total()" {{ old('luaran', $skripsi->luaran) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="luaran1">Sangat Kurang Baik</label>
@@ -918,7 +921,7 @@ Edit Penilaian Sidang Skripsi
                             <div class="radio14 d-inline">
                                 <hr>
 
-                            <div class="d-flex justify-content-center justify-content-lg-start">
+                            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
               @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai25 = ($i / 10) * 3;
@@ -927,7 +930,7 @@ Edit Penilaian Sidang Skripsi
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat25_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                             <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran1" value="0.6" onclick="total()" {{ old('sumbangan_pemikiran', $skripsi->sumbangan_pemikiran) == '0.6' ? 'checked' : null }} >
             <label class="btn tombol btn-danger fw-normal " for="sumbangan_pemikiran1">Sangat Kurang Baik</label>
@@ -1716,7 +1719,7 @@ Edit Penilaian Sidang Skripsi
 @section('footer')
 <section class="bg-dark p-1">
 <div class="container">
-          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <small> <span class="text-success fw-bold">(</span><a class="text-success fw-bold" formtarget="_blank" target="_blank" href="https://fahrilhadi.com">Fahril Hadi, </a> 
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <small> <span class="text-success fw-bold">(</span><a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi, </a> 
           <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti </a> <span class="text-success fw-bold">&</span> 
           <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi"> M. Seprinaldi</a><span class="text-success fw-bold">)</span></small></p>
         </div>

@@ -63,7 +63,7 @@
             <p>{{$kp->penguji->nama}}</p>           
           </td>                    
           <td>            
-              @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
+              @if ($kp->status_seminar == '0')
               <a href="/penilaian-kp/create/{{$kp->id}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
@@ -96,7 +96,7 @@
           </td>                    
           <td>
             @if ($sempro->penilaian(Auth::user()->nip, $sempro->id) == false)
-              @if (Carbon::now() >= $sempro->tanggal && Carbon::now()->format('H:i:m') >= $sempro->waktu)
+              @if ($sempro->status_seminar == '0')
               <a href="/penilaian-sempro/create/{{$sempro->id}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
@@ -132,7 +132,7 @@
           </td>                    
           <td>
             @if ($skripsi->penilaian(Auth::user()->nip, $skripsi->id) == false)
-              @if (Carbon::now() >= $skripsi->tanggal && Carbon::now()->format('H:i:m') >= $skripsi->waktu)
+              @if ($skripsi->status_seminar == '0')
               <a href="/penilaian-skripsi/create/{{$skripsi->id}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>

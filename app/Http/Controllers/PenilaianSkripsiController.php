@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanSempro;
 use App\Models\PenjadwalanSkripsi;
+use App\Models\PendaftaranSkripsi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -75,7 +76,7 @@ class PenilaianSkripsiController extends Controller
             $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
         }   
 
-
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
 
         return view('penilaianskripsi.create', [
             'skripsi' => PenjadwalanSkripsi::find($id),
@@ -88,6 +89,7 @@ class PenilaianSkripsiController extends Controller
             'nilaipenguji3' => $nilaipenguji3,
             'nilaipembimbing1' => $nilaipembimbing1,
             'nilaipembimbing2' => $nilaipembimbing2,
+            'naskah' => $pendaftaran_skripsi,
         ]);        
     }
 
@@ -181,7 +183,8 @@ class PenilaianSkripsiController extends Controller
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
 
         $penjadwalan_sempro = PenjadwalanSempro::find($id);
-        $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
+        // $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
+
 
         if ($cari_penguji == 0) {
             return view('penilaianskripsi.edit', [
@@ -234,6 +237,10 @@ class PenilaianSkripsiController extends Controller
                 $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
             }
 
+            // $daftar = 
+
+            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+
             return view('penilaianskripsi.edit', [
                 'skripsi' => PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->first(),
                 'pembimbing' => $pembimbing,
@@ -246,6 +253,7 @@ class PenilaianSkripsiController extends Controller
                 'nilaipenguji3' => $nilaipenguji3,
                 'nilaipembimbing1' => $nilaipembimbing1,
                 'nilaipembimbing2' => $nilaipembimbing2,
+                'naskah' => $pendaftaran_skripsi,
             ]);
         }
     }

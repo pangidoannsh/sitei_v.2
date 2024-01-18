@@ -166,7 +166,7 @@
     </div>
   </div>
         @endif
-        @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN' &&  $skripsi->keterangan == 'Sidang Skripsi Dijadwalkan' )
+        <!-- @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN' &&  $skripsi->keterangan == 'Sidang Skripsi Dijadwalkan' )
      <div class="mb-3 mt-3 float-right">
         <div class="row row-cols-2">
     <div class="col">
@@ -182,7 +182,8 @@
     </div>
   </div>
 
-            @endif
+            @endif -->
+
         @endif
 
       @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )

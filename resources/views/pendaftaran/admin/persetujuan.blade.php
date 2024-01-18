@@ -143,7 +143,7 @@
             </td>
             @endif
 
-            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$kp->keterangan}}</td> 
+            <td class="text-center px-1 py-2">{{$kp->keterangan}}</td> 
 
             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA'  )
             <td class="text-center px-2 py-2">
@@ -320,7 +320,7 @@
             </td>
             @endif
                
-            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$skripsi->keterangan}}</td> 
+            <td class="text-center px-1 py-2"> {{$skripsi->keterangan}}</td> 
 
 
             <!-- USUL JUDUL  -->

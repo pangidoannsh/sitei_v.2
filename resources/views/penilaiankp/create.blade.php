@@ -63,6 +63,8 @@
       <hr>
       <p class="card-title text-secondary text-sm" >Judul</p>
       <p class="card-text text-start" >{{$kp->judul_kp}}</p>
+      <p class="card-title text-secondary text-sm" >Laporan</p>
+      <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$laporan_kp->laporan_kp )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
       </div>
       <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
       <h5 class="text-bold">Jadwal Seminar</h5>
@@ -108,7 +110,7 @@
                       <div class="radio1 d-inline">
                         <hr>
 
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai = ($i / 10) * 10;
@@ -118,7 +120,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
       
                       <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
@@ -148,7 +150,7 @@
                       <div class="radio1 d-inline">
                         <hr>
                       
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai2 = ($i / 10) * 10;
@@ -158,7 +160,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
       
                       <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
@@ -188,7 +190,7 @@
                       <div class="radio1 d-inline">
                         <hr>
                       
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai3 = ($i / 10) * 10;
@@ -198,7 +200,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
       
                       <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
@@ -328,7 +330,7 @@
                       <div class="radio1 d-inline">
                         <hr>
 
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai11 = ($i / 10) * 10;
@@ -338,7 +340,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
       
                       <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
@@ -368,7 +370,7 @@
                       <div class="radio1 d-inline">
                         <hr>
 
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai12 = ($i / 10) * 10;
@@ -378,7 +380,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
       
                       <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
@@ -408,7 +410,7 @@
                       <div class="radio1 d-inline">
                         <hr>
                       
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai13 = ($i / 10) * 10;
@@ -418,7 +420,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
       
                       <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>
@@ -700,7 +702,7 @@
                       <div class="radio1 d-inline">
                         <hr>
                       
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
             @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai = ($i / 10) * 10;
@@ -710,7 +712,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
       
                       <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="2" onclick="hasil()" {{ old('presentasi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang Baik</label>
@@ -740,7 +742,7 @@
                       <div class="radio1 d-inline">
                         <hr>
                       
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai2 = ($i / 10) * 10;
@@ -750,7 +752,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
       
                       <input type="radio" class="btn-check @error ('materi') is-invalid @enderror" name="materi" id="materi1" value="2" onclick="hasil()" {{ old('materi') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
@@ -780,7 +782,7 @@
                       <div class="radio1 d-inline">
                         <hr>
 
-                      <div class="d-flex justify-content-center justify-content-lg-start"> 
+                      <!-- <div class="d-flex justify-content-center justify-content-lg-start"> 
        @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai3 = ($i / 10) * 10;
@@ -790,7 +792,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
       
                       <input type="radio" class="btn-check @error ('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()" {{ old('tanya_jawab') == '2' ? 'checked' : null }} >
                       <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang Baik</label>

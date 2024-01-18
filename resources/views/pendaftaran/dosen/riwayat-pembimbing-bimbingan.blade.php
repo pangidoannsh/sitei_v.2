@@ -25,7 +25,8 @@
 <ol class="breadcrumb col-lg-12">
  
 @if (Str::length(Auth::guard('dosen')->user()) > 0)
-
+<li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span></span>) </a></li>
+  <span class="px-2">|</span>
 <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span>{{ $jml_kp }}</span>)</a></li>
   <span class="px-2">|</span>
   <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_skripsi }}</span>)</a></li>

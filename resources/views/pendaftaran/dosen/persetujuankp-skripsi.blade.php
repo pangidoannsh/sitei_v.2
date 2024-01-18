@@ -313,7 +313,7 @@
             @endif
             @endif
                                
-            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$kp->keterangan}}</td> 
+            <td class="text-center px-1 py-2"> {{$kp->keterangan}}</td> 
 
          
             @if (Str::length(Auth::guard('dosen')->user()) > 0)
@@ -1025,7 +1025,7 @@
             @endif
             @endif
 
-            <td class="text-center px-1 py-2 text-success"><i class="fas fa-circle small-icon"></i> {{$skripsi->keterangan}}</td>  
+            <td class="text-center px-1 py-2"> {{$skripsi->keterangan}}</td>  
 
 
             <!-- USUL JUDUL  -->

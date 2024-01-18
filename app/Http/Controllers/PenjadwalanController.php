@@ -24,9 +24,9 @@ class PenjadwalanController extends Controller
         if (auth()->user()->role_id == 1) {            
             return view('penjadwalan.index', [
                 'role' => Role::all(),
-                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', '0')->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
-                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
-                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '0')->orderBy('tanggal', 'ASC')->get(),
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', '0')->orWhere('tanggal', NULL)->orderBy('created_at', 'asc')->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', '0')->orWhere('tanggal', NULL)->orderBy('created_at', 'asc')->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', '0')->orderBy('created_at', 'asc')->get(),
                 // 'penjadwalan_skripsis' => PenjadwalanSkripsi::where('tanggal', '>=', Carbon::today())->orWhere('tanggal', NULL)->orderBy('tanggal', 'ASC')->get(),
 
                 //JUMLAH SEMINAR

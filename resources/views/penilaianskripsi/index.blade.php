@@ -64,7 +64,7 @@
           </td>
           <td>
             @if ($skripsi->penilaian(Auth::user()->nip, $skripsi->id) == false)
-              @if (Carbon::now() >= $skripsi->tanggal && Carbon::now()->format('H:i:m') >= $skripsi->waktu)
+              @if ($skripsi->status_seminar == '0')
               <a href="/penilaian-skripsi/create/{{$skripsi->id}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>

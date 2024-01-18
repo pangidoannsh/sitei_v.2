@@ -1904,7 +1904,7 @@ class PendaftaranController extends Controller
                 //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
                 'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 1)->count(),
                 //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
-                'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
+                'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 1)->count(),
             ]);
         }
         if (auth()->user()->role_id == 7) {            
@@ -1939,7 +1939,7 @@ class PendaftaranController extends Controller
                 //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
                 'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 2)->count(),
                 //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
-                'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 2)->count(),
+                'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 2)->count(),
 
             ]);
         }
@@ -1977,7 +1977,7 @@ class PendaftaranController extends Controller
                 //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
                 'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 3)->count(),
                 //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
-                'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 3)->count(),
+                'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 3)->count(),
 
             ]);
         }  

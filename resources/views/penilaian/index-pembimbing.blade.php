@@ -32,10 +32,15 @@
   </li>
         
   <span class="px-2">|</span>
+<li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span></span>)</a></li>
+  <span class="px-2">|</span>
+  <li><a href="/pembimbing/skripsi" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan Skripsi (<span></span>)</a></li>
+  <span class="px-2">|</span>
+  <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span></span>)</a></li>
 
-  <li>
+  <!-- <li>
     <a href="/kp-skripsi/pembimbing-penguji/riwayat-seminar" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a>
-  </li>
+  </li> -->
   
 </ol>
 
@@ -74,7 +79,7 @@
         </td>
         <td class="text-center">
           @if ($kp->penilaian(Auth::user()->nip, $kp->id) == false)
-            @if (Carbon::now() >= $kp->tanggal && Carbon::now()->format('H:i:m') >= $kp->waktu)
+            @if ($kp->status_seminar == '0')
             <a href="/penilaian-kp/create/{{Crypt::encryptString($kp->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
             @else
             <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
@@ -114,7 +119,7 @@
           </td>                    
           <td class="text-center">
             @if ($sempro->penilaian(Auth::user()->nip, $sempro->id) == false)
-              @if (Carbon::now() >= $sempro->tanggal && Carbon::now()->format('H:i:m') >= $sempro->waktu)
+              @if ($sempro->status_seminar == '0')
               <a href="/penilaian-sempro/create/{{Crypt::encryptString($sempro->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>
@@ -154,7 +159,7 @@
           </td>                    
           <td class="text-center">
             @if ($skripsi->penilaian(Auth::user()->nip, $skripsi->id) == false)
-              @if (Carbon::now() >= $skripsi->tanggal && Carbon::now()->format('H:i:m') >= $skripsi->waktu)
+              @if ($skripsi->status_seminar == '0')
               <a href="/penilaian-skripsi/create/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-primary"style="border-radius:20px; padding:7px;"> Input Nilai<a>          
               @else
               <span class="badge bg-danger"style="border-radius:20px; padding:7px;">Belum Dimulai</span>

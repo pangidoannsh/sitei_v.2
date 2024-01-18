@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
 use App\Models\PenjadwalanSempro;
+use App\Models\PendaftaranSkripsi;
 use App\Models\PenjadwalanSkripsi;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSemproPenguji;
-use App\Models\PenilaianSemproPembimbing;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\PenilaianSemproPembimbing;
 
 class PenilaianSemproController extends Controller
 {
@@ -74,7 +76,9 @@ class PenilaianSemproController extends Controller
             $nilaipembimbing2 = '';
         } else {
             $nilaipembimbing2 = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
-        }            
+        }         
+        
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
 
         return view('penilaiansempro.create', [
             'sempro' => PenjadwalanSempro::find($id),
@@ -86,6 +90,7 @@ class PenilaianSemproController extends Controller
             'nilaipenguji3' => $nilaipenguji3,
             'nilaipembimbing1' => $nilaipembimbing1,
             'nilaipembimbing2' => $nilaipembimbing2,
+            'proposal' => $pendaftaran_skripsi,
         ]);        
     }
 
@@ -159,7 +164,9 @@ class PenilaianSemproController extends Controller
     {
 
         $id = Crypt::decryptString($id);  
+        $penjadwalan = PenjadwalanSempro::find($id); 
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
+        
 
         if ($cari_penguji == 0) {
             return view('penilaiansempro.edit', [
@@ -211,6 +218,10 @@ class PenilaianSemproController extends Controller
                 $nilaipembimbing2 = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
             }
             $sempro = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
+            
+
+            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+
             return view('penilaiansempro.edit', [
                 'sempro' => $sempro,
                 'pembimbing' => $pembimbing,
@@ -221,6 +232,7 @@ class PenilaianSemproController extends Controller
                 'nilaipenguji3' => $nilaipenguji3,
                 'nilaipembimbing1' => $nilaipembimbing1,
                 'nilaipembimbing2' => $nilaipembimbing2,
+                'proposal' => $pendaftaran_skripsi,
             ]);
         }
     }

@@ -149,7 +149,7 @@
 @endif
 @endif
     
-      @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
+      <!-- @if ($skripsi->pembimbing_1_nip == Auth::user()->nip )
         @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' )
       <div class="mb-5 mt-3 float-right">
         <div class="row row-cols-2">
@@ -166,7 +166,7 @@
   </div>
   </div>
             @endif
-        @endif
+        @endif -->
 
         
       @if ($skripsi->pembimbing_2_nip == Auth::user()->nip )

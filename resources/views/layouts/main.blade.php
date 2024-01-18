@@ -86,7 +86,7 @@
           </li> --}}
 
           <li class="nav-item dropdown baru">
-            <a id="dropdownSubMenu1" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/TA</a>
+            <a id="dropdownSubMenu1" href="/persetujuan-kp-skripsi"  aria-current="page" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/Skripsi</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
 
               <li class="nav-item">
@@ -132,6 +132,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link {{Request::is ('statistik*') ? 'text-success' : '' }} " aria-current="page" href="/statistik">Statistik</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is ('seminar*') ? 'text-success' : '' }} " aria-current="page" href="/seminar">Riwayat</a>
           </li>
           
           <!-- <li class="nav-item dropdown baru">

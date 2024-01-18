@@ -87,6 +87,10 @@
     
             <p class="card-title text-secondary text-sm" >Judul</p>
             <p class="card-text text-start" >{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : $sempro->penjadwalan_sempro->judul_proposal }}</p>
+
+            <p class="card-title text-secondary text-sm" >Proposal</p>
+      <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
+
     </div>
     <div class="col-lg-6 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
       <h5 class="text-bold">Jadwal Seminar Proposal</h5>
@@ -126,7 +130,7 @@
                 <div class="radio1 d-inline">
                   <hr>
 
-            <div class="d-flex justify-content-center justify-content-lg-start">
+            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai = ($i / 10) * 9;
@@ -136,7 +140,7 @@
             @endfor
             </div>
 
-            <br>
+            <br> -->
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="1.8" onclick="hasil()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="penguasaan_dasar_teori1">Sangat Kurang Baik</label>
@@ -194,7 +198,7 @@
                 <div class="radio3 d-inline">
                   <hr>
 
-            <div class="d-flex justify-content-center justify-content-lg-start">
+            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai3 = ($i / 10) * 9;
@@ -203,7 +207,7 @@
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
         @endfor
         </div>
-          <br>
+          <br> -->
 
                   <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.8" onclick="hasil()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
@@ -228,7 +232,7 @@
                 <div class="radio4 d-inline">
                   <hr>
 
-                  <div class="d-flex justify-content-center justify-content-lg-start">
+                  <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai4 = ($i / 10) * 9;
@@ -237,7 +241,7 @@
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat4_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-              <br>
+              <br> -->
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1.8" onclick="hasil()" {{ old('tata_tulis', $sempro->tata_tulis) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
@@ -262,7 +266,7 @@
                 <div class="radio5 d-inline">
                   <hr>
 
-                  <div class="d-flex justify-content-center justify-content-lg-start">     
+                  <!-- <div class="d-flex justify-content-center justify-content-lg-start">     
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai5 = ($i / 10) * 9;
@@ -271,7 +275,7 @@
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat5_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-              <br>
+              <br> -->
                   
                 <input type="radio" class="btn-check @error ('sikap_dan_kepribadian') is-invalid @enderror" name="sikap_dan_kepribadian" id="sikap_dan_kepribadian1" value="1.8" onclick="hasil()" {{ old('sikap_dan_kepribadian', $sempro->sikap_dan_kepribadian) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="sikap_dan_kepribadian1">Sangat Kurang Baik</label>
@@ -370,7 +374,7 @@
                 <label for="presentasi" class="col-form-label">1). Presentasi</label>
                 <div class="radio6 d-inline">
                   <hr>
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai11 = ($i / 10) * 5;
@@ -380,7 +384,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('presentasi') is-invalid @enderror" name="presentasi" id="presentasi1" value="1" onclick="total()" {{ old('presentasi', $sempro->presentasi) == '1' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="presentasi1">Sangat Kurang Baik</label>
@@ -404,7 +408,7 @@
                 <label for="tingkat_penguasaan_materi" class="col-form-label">2). Tingkat Penguasaan Materi</label>
                 <div class="radio7 d-inline">
                   <hr>
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai12 = ($i / 10) * 8;
@@ -414,7 +418,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="1.6" onclick="total()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.6' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
@@ -438,7 +442,7 @@
                 <label for="keaslian" class="col-form-label">3). Keaslian</label>
                 <div class="radio8 d-inline">
                   <hr>
-            <div class="d-flex justify-content-center justify-content-lg-start">
+            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai13 = ($i / 10) * 5;
@@ -448,7 +452,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('keaslian') is-invalid @enderror" name="keaslian" id="keaslian1" value="1" onclick="total()" {{ old('keaslian', $sempro->keaslian) == '1' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="keaslian1">Sangat Kurang Baik</label>
@@ -472,7 +476,7 @@
                 <label for="ketepatan_metodologi" class="col-form-label">4). Ketepatan Metodologi</label>
                 <div class="radio9 d-inline">
                   <hr>
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai14 = ($i / 10) * 7;
@@ -482,7 +486,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('ketepatan_metodologi') is-invalid @enderror" name="ketepatan_metodologi" id="ketepatan_metodologi1" value="1.4" onclick="total()" {{ old('ketepatan_metodologi', $sempro->ketepatan_metodologi) == '1.4' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="ketepatan_metodologi1">Sangat Kurang Baik</label>
@@ -507,7 +511,7 @@
                 <div class="radio10 d-inline">
                   <hr>
                 
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai15 = ($i / 10) * 6;
@@ -517,7 +521,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
                 
 
                 <input type="radio" class="btn-check @error ('penguasaan_dasar_teori') is-invalid @enderror" name="penguasaan_dasar_teori" id="penguasaan_dasar_teori1" value="1.2" onclick="total()" {{ old('penguasaan_dasar_teori', $sempro->penguasaan_dasar_teori) == '1.2' ? 'checked' : null }} >
@@ -542,7 +546,7 @@
                 <label for="kecermatan_perumusan_masalah" class="col-form-label">6). Kecermatan Perumusan Masalah</label>
                 <div class="radio11 d-inline">
                   <hr>
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai16 = ($i / 10) * 6;
@@ -552,7 +556,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('kecermatan_perumusan_masalah') is-invalid @enderror" name="kecermatan_perumusan_masalah" id="kecermatan_perumusan_masalah1" value="1.2" onclick="total()" {{ old('kecermatan_perumusan_masalah', $sempro->kecermatan_perumusan_masalah) == '1.2' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="kecermatan_perumusan_masalah1">Sangat Kurang Baik</label>
@@ -576,7 +580,7 @@
                 <label for="tinjauan_pustaka" class="col-form-label">7). Tinjauan Pustaka</label>
                 <div class="radio12 d-inline">
                   <hr>
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai17 = ($i / 10) * 7;
@@ -586,7 +590,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('tinjauan_pustaka') is-invalid @enderror" name="tinjauan_pustaka" id="tinjauan_pustaka1" value="1.4" onclick="total()" {{ old('tinjauan_pustaka', $sempro->tinjauan_pustaka) == '1.4' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tinjauan_pustaka1">Sangat Kurang Baik</label>
@@ -610,7 +614,7 @@
                 <label for="tata_tulis" class="col-form-label">8). Tata Tulis</label>
                 <div class="radio13 d-inline">
                   <hr>
-            <div class="d-flex justify-content-center justify-content-lg-start">
+            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
             $nilai18 = ($i / 10) * 5;
@@ -619,7 +623,7 @@
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat18_{{ $i }}">{{ $i }}</label>
             @endfor
             </div>
-            <br>
+            <br> -->
 
                 <input type="radio" class="btn-check @error ('tata_tulis') is-invalid @enderror" name="tata_tulis" id="tata_tulis1" value="1" onclick="total()" {{ old('tata_tulis', $sempro->tata_tulis) == '1' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tata_tulis1">Sangat Kurang Baik</label>
@@ -643,7 +647,7 @@
                 <label for="sumbangan_pemikiran" class="col-form-label">9). Sumbangan Pemikiran Terhadap Ilmu Pengetahuan</label>
                 <div class="radio14 d-inline">
                   <hr>
-                <div class="d-flex justify-content-center justify-content-lg-start">
+                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++) 
             @php
                 $nilai19 = ($i / 10) * 6;
@@ -653,7 +657,7 @@
             @endfor
             </div>
 
-         <br>
+         <br> -->
 
                 <input type="radio" class="btn-check @error ('sumbangan_pemikiran') is-invalid @enderror" name="sumbangan_pemikiran" id="sumbangan_pemikiran1" value="1.2" onclick="total()" {{ old('sumbangan_pemikiran', $sempro->sumbangan_pemikiran) == '1.2' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="sumbangan_pemikiran1">Sangat Kurang Baik</label>

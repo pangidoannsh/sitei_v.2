@@ -43,11 +43,14 @@ class PenilaianKPController extends Controller
             $nilaipembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', $penjadwalan->pembimbing_nip)->first();
         }
 
+        $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+
         return view('penilaiankp.create', [
             'kp' => PenjadwalanKP::find($decrypted),                   
             'penjadwalan' => $penjadwalan,
             'nilaipenguji' => $nilaipenguji,
             'nilaipembimbing' => $nilaipembimbing,
+            'laporan_kp' => $pendaftaran_kp,
             
         ]);  
 
@@ -218,12 +221,15 @@ class PenilaianKPController extends Controller
             $kp = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', auth()->user()->nip)->first();
             $kpp = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', auth()->user()->nip)->first();
 
+            $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+
             return view('penilaiankp.edit', [
                 'kp' => $kp,                           
                 'kpp' => $kpp,                           
                 'penjadwalan' => $penjadwalan,
                 'nilaipenguji' => $nilaipenguji,
                 'nilaipembimbing' => $nilaipembimbing,
+                'laporan_kp' => $pendaftaran_kp,
  
             ]);
 
