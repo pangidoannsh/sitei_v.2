@@ -55,7 +55,7 @@
     <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a></li>
      
     <span class="px-2">|</span>
-    <li><a href="/kp-skripsi/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
+    <li><a href="/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
     
     
     @endif
@@ -389,7 +389,7 @@
 @section('footer')
 <section class="bg-dark p-1">
 <div class="container">
-          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <small> <span class="text-success fw-bold">(</span><a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi, </a> 
+          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <small> <span class="text-success fw-bold">(</span><a class="text-success fw-bold" formtarget="_blank" target="_blank" href="https://fahrilhadi.com">Fahril Hadi, </a> 
           <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti </a> <span class="text-success fw-bold">&</span> 
           <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi"> M. Seprinaldi</a><span class="text-success fw-bold">)</span></small></p>
         </div>
