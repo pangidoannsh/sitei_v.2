@@ -9,7 +9,7 @@
 @endsection
 
 @section('sub-title')
-    Inventaris Barang
+    Daftar Barang
 @endsection
 
 @section('content')
@@ -18,75 +18,65 @@
 <div class="swal" data-swal="{{session('message')}}"></div>
 @endif
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <!-- Button trigger modal -->
-        <a href="{{ url('inventaris/tambahbarang') }}" class="mb-4 w-85 btn btn-success rounded border">
-          + Tambah Barang
-        </a>
+<!-- Button trigger modal -->
+<a href="{{ url('inventaris/tambahbarang') }}" class="mb-4 w-85 btn btn-success rounded border">
+  + Tambah Barang
+</a>
+
+<div class="container card p-4">
+
+  <ol class="breadcrumb col-lg-12">
+    <li class="breadcrumb-item"><a  href="{{ route('peminjamanadm') }}">Daftar Pinjaman ({{ $jumlah_pinjaman }})</a></li>    
+    <span class="px-2">|</span>   
+    <li class="breadcrumb-item"><a class="breadcrumb-item" href="{{ route('riwayatadm') }}">Riwayat Pinjaman ({{ $jumlah_riwayat }})</a></li>
+    <span class="px-2">|</span>   
+    <li class="breadcrumb-item active fw-bold text-black"><a  href="{{ route('stok') }}">Daftar Barang ({{ $jumlah_barang }})</a></li>  
   
-
-            <ol class="breadcrumb col-lg-12">
-                <li class="breadcrumb-item"><a  href="{{ route('peminjamanadm') }}">Daftar Pinjam ({{ $jumlah_pinjaman }})</a></li>    
-                <li class="breadcrumb-item"><a class="breadcrumb-item" href="{{ route('riwayatadm') }}">Riwayat ({{ $jumlah_riwayat }})</a></li>
-                <li class="breadcrumb-item active fw-bold text-black"><a  href="{{ route('stok') }}">Inventaris ({{ $jumlah_barang }})</a></li>  
-            </ol>
-
-      <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
-          <thead class="table-dark">
-            <tr>      
-                <th class="text-center" scope="col">Kode Barang</th>
-                <th class="text-center" scope="col">Nama Barang</th>
-                <th class="text-center" scope="col">Jumlah</th>
-                <th class="text-center" scope="col">Status</th>
-                <th class="text-center" scope="col">Aksi</th>      
-            </tr>
-          </thead>
+  </ol>
+  
+  <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
+    <thead class="table-dark">
+      <tr>      
+          <th class="text-center" scope="col">Kode Barang</th>
+          <th class="text-center" scope="col">Nama Barang</th>
+          <th class="text-center" scope="col">Jumlah</th>
+          <th class="text-center" scope="col">Status</th>
+          <th class="text-center" scope="col">Aksi</th>      
+      </tr>
+    </thead>
 
 
-        <tbody>
-          @foreach ($barang as $barang)
-          <tr>
-            <td class="text-center">{{ $barang->kode_barang }}</td>                             
-            <td class="text-center">{{ $barang->nama_barang }}</td>                     
-            <td class="text-center">{{ $barang->jumlah }}</td>
-            @if($barang->status == 'Dipinjam')
-            <td class="text-center bg-danger">{{ $barang->status }}</td>
-            @else
-            <td class="text-center bg-success">{{ $barang->status }}</td>
-            @endif                    
-            <td class="text-center">
-                  <a type="button" href="{{ route('editbarang', $barang->id) }}" class="badge p-2 bg-warning border-0" >
-                    <i class="fas fa-pen"></i>
-                  </a>
-                <!-- <form action="{{  route('deletebarang', $barang->id)  }}" method="POST" class="d-inline">
-                  @method('DELETE')
-                  @csrf
-                  <button class="badge bg-danger border-0">
-                    <i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                    </i>
-                  </button>
-                </form>  -->
-            </td>                     
-          </tr>
-          @endforeach
-        </tbody>
-    </table>
-    
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+  <tbody>
+    @foreach ($barang as $barang)
+    <tr>
+      <td class="text-center">{{ $barang->kode_barang }}</td>                             
+      <td class="text-center">{{ $barang->nama_barang }}</td>                     
+      <td class="text-center">{{ $barang->jumlah }}</td>
+      @if($barang->status == 'Dipinjam')
+      <td class="text-center bg-danger">{{ $barang->status }}</td>
+      @else
+      <td class="text-center bg-success">{{ $barang->status }}</td>
+      @endif                    
+      <td class="text-center">
+            <a type="button" href="{{ route('editbarang', $barang->id) }}" class="badge p-2 bg-warning border-0" >
+              <i class="fas fa-pen"></i>
+            </a>
+          <!-- <form action="{{  route('deletebarang', $barang->id)  }}" method="POST" class="d-inline">
+            @method('DELETE')
+            @csrf
+            <button class="badge bg-danger border-0">
+              <i><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+              </i>
+            </button>
+          </form>  -->
+      </td>                     
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+  
+  
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Main Footer -->
-
-  
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
 
 
 <script>
