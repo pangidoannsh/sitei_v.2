@@ -34,6 +34,16 @@ class PenjadwalanController extends Controller
                 'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->count(),
                 'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->count(),
 
+                //JUMLAH RIWAYAT KP 
+                'jml_riwayat_prodi_kp' => PendaftaranKP::where('status_kp', 'KP SELESAI')->orderBy('created_at', 'desc')->count(),
+
+                //JUMLAH RIWAYAT SKRIPSI 
+                'jml_riwayat_prodi_skripsi' => PendaftaranSkripsi::where('status_skripsi', 'LULUS')->orderBy('created_at', 'desc')->count(),
+                //JUMLAH RIWAYAT SEMINAR
+                'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->count(),
+                'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
+                'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->count(),
+
                 //JUMLAH RIWAYAT SEMINAR
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
@@ -293,11 +303,35 @@ class PenjadwalanController extends Controller
 
     public function jadwal_mahasiswa()
     {       
-        return view('penjadwalan.jadwal-mahasiswa', [
-            'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('mahasiswa_nim', Auth::user()->nim)->get(),
-            'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('mahasiswa_nim', Auth::user()->nim)->get(),
-            'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('mahasiswa_nim', Auth::user()->nim)->get(),
-        ]);
+        // return view('penjadwalan.jadwal-mahasiswa', [
+        //     'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('mahasiswa_nim', Auth::user()->nim)->get(),
+        //     'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('mahasiswa_nim', Auth::user()->nim)->get(),
+        //     'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('mahasiswa_nim', Auth::user()->nim)->get(),
+        // ]);
+
+        if (auth()->user()->prodi_id == 1) {            
+            return view('penjadwalan.jadwal-mahasiswa', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 1)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('prodi_id', 1)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 1)->get(),
+            ]);
+        }
+
+        if (auth()->user()->prodi_id == 2) {            
+            return view('penjadwalan.jadwal-mahasiswa', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 2)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('prodi_id', 2)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 2)->get(),
+            ]);
+        }
+
+        if (auth()->user()->prodi_id == 3) {            
+            return view('penjadwalan.jadwal-mahasiswa', [
+                'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 0)->where('prodi_id', 3)->get(),
+                'penjadwalan_sempros' => PenjadwalanSempro::where('status_seminar', 0)->where('prodi_id', 3)->get(),
+                'penjadwalan_skripsis' => PenjadwalanSkripsi::where('status_seminar', 0)->where('prodi_id', 3)->get(),
+            ]);
+        }
     }
 
     public function riwayat_mahasiswa()

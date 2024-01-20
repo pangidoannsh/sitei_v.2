@@ -34,6 +34,8 @@
     <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a></li>
     <span class="px-2">|</span>
     <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a></li>
+    <span class="px-2">|</span>
+    <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan (<strong>belum diset</strong>)</a></li>
     
     @endif
     @endif

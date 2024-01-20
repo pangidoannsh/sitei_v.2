@@ -24,22 +24,23 @@
 
 <ol class="breadcrumb col-lg-12">
 
-          @if (Str::length(Auth::guard('web')->user()) > 0)
-    @if (Auth::guard('web')->user()->role_id == 1 || Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+  @if (Str::length(Auth::guard('web')->user()) > 0)
+  @if (Auth::guard('web')->user()->role_id == 1 || Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
 
-
-    @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-    <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
-    <span class="px-2">|</span> 
-    @endif
-    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodikp }}</span>)</a></li>
-    <span class="px-2">|</span>
-    <li><a href="/sidang/admin/index" class="breadcrumb-item active fw-bold text-success px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a></li>
-    <span class="px-2">|</span>
-    <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a></li>
-    
-    @endif
-    @endif
+  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+  <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
+  <span class="px-2">|</span> 
+  @endif
+  <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodikp }}</span>)</a></li> 
+  <span class="px-2">|</span>
+  <li><a href="/sidang/admin/index" class="breadcrumb-item active fw-bold text-success px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a></li>
+  <span class="px-2">|</span>
+  <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a></li>
+  <span class="px-2">|</span>
+  <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan (<strong>belum diset</strong>)</a></li>
+  
+  @endif
+  @endif
   
 </ol>
 

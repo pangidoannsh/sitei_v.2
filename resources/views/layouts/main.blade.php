@@ -99,6 +99,10 @@
               <li>                        
                 <a href="/kp-skripsi/seminar-pembimbing-penguji" class="dropdown-item mb-1 {{Request::is ('kp-skripsi*') ? 'text-success' : '' }} ">Seminar</a>
               </li>
+
+              <li>                        
+                <a href="/pembimbing-penguji/riwayat-bimbingan" class="dropdown-item mb-1 {{Request::is ('pembimbing-penguji*') ? 'text-success' : '' }} ">Riwayat</a>
+              </li>
               
               @if (Str::length(Auth::guard('dosen')->user()) > 0) 
               @if (Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11 || Auth::guard('dosen')->user()->role_id == 6 || Auth::guard('dosen')->user()->role_id == 7 || Auth::guard('dosen')->user()->role_id == 8)               
@@ -107,36 +111,36 @@
               @endif                
               <li><a href="/statistik" class="dropdown-item mb-1 {{Request::is ('statistik*') ? 'text-success' : '' }}">Statistik</a></li>
             </ul>
-          </li>
-@if ( Auth::guard('dosen')->user()->role_id == 9 || Auth::guard('dosen')->user()->role_id == 10 || Auth::guard('dosen')->user()->role_id == 11)  
-          <li class="nav-item dropdown baru">
-            <a id="dropdownSubMenu1" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pengaturan</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
-              <li>                        
-                <a href="/kapasitas-bimbingan/index" class="dropdown-item mb-1 {{Request::is ('kp-skripsi*') ? 'text-success' : '' }} ">Kapasitas Bimbingan</a>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }} " aria-current="page" href="/inventaris/peminjamanmhs">Inventaris</a>
               </li>
-              <li><a href="/developer" class="dropdown-item mb-1 {{Request::is ('developer*') ? 'text-success' : '' }}">Developer</a></li> 
-   
-            </ul>
           </li>
-           @endif
 
           @endif
 
           {{-- Menu KP/TA Mahasiswa --}}
 
           @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-          <li class="nav-item">
-            <a class="nav-link {{Request::is ('kp-skripsi*') ? 'text-success' : '' }}  {{Request::is ('usulankp*') ? 'text-success' : '' }} {{Request::is ('permohonankp*') ? 'text-success' : '' }} {{Request::is ('balasankp*') ? 'text-success' : '' }} {{Request::is ('seminarkp*') ? 'text-success' : '' }} {{Request::is ('usulan-semkp*') ? 'text-success' : '' }} {{Request::is ('kpti10-kp*') ? 'text-success' : '' }} {{Request::is ('usuljudul*') ? 'text-success' : '' }} {{Request::is ('jadwal*') ? 'text-success' : '' }} " aria-current="page" href="/kp-skripsi">KP/Skripsi</a>
+
+          <li class="nav-item dropdown baru">
+            <a id="dropdownSubMenu1" href=""  aria-current="page" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/Skripsi</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('kp-skripsi*') ? 'text-success' : '' }}  {{Request::is ('usulankp*') ? 'text-success' : '' }} {{Request::is ('permohonankp*') ? 'text-success' : '' }} {{Request::is ('balasankp*') ? 'text-success' : '' }} {{Request::is ('seminarkp*') ? 'text-success' : '' }} {{Request::is ('usulan-semkp*') ? 'text-success' : '' }} {{Request::is ('kpti10-kp*') ? 'text-success' : '' }} {{Request::is ('usuljudul*') ? 'text-success' : '' }}  " aria-current="page" href="/kp-skripsi">Usulan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('jadwal*') ? 'text-success' : '' }} " aria-current="page" href="/jadwal">Seminar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('seminar*') ? 'text-success' : '' }} " aria-current="page" href="/seminar">Download</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('statistik*') ? 'text-success' : '' }} " aria-current="page" href="/statistik">Statistik</a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }} " aria-current="page" href="/inventaris/peminjamanmhs">Inventaris</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{Request::is ('statistik*') ? 'text-success' : '' }} " aria-current="page" href="/statistik">Statistik</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{Request::is ('seminar*') ? 'text-success' : '' }} " aria-current="page" href="/seminar">Unduh</a>
           </li>
           
           <!-- <li class="nav-item dropdown baru">
@@ -172,19 +176,55 @@
 
           @if (Str::length(Auth::guard('web')->user()) > 0)        
           @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-          <li class="nav-item">
-            <a class="nav-link {{Request::is ('kerja-praktek*') ? 'text-success' : '' }}{{Request::is ('sempro*') ? 'text-success' : '' }}{{Request::is ('sidang*') ? 'text-success' : '' }}{{Request::is ('daftar-sempro*') ? 'text-success' : '' }}{{Request::is ('persetujuan*') ? 'text-success' : '' }}{{Request::is ('skripsi*') ? 'text-success' : '' }}{{Request::is ('usulan*') ? 'text-success' : '' }}{{Request::is ('daftar-semkp*') ? 'text-success' : '' }}{{Request::is ('suratperusahaan*') ? 'text-success' : '' }}{{Request::is ('usuljudul*') ? 'text-success' : '' }}{{Request::is ('daftar-sidang*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan/admin/index">KP/Skripsi</a>
-          </li>
-          @endif
-          <li class="nav-item">
-            <a class="nav-link {{Request::is ('form*') ? 'text-success' : '' }}" aria-current="page" href="/form">Jadwal</a>
+          <li class="nav-item dropdown baru">
+            <a id="dropdownSubMenu1" href=""  aria-current="page" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/Skripsi</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('sempro*') ? 'text-success' : '' }}{{Request::is ('daftar-sempro*') ? 'text-success' : '' }}{{Request::is ('persetujuan*') ? 'text-success' : '' }}{{Request::is ('skripsi*') ? 'text-success' : '' }}{{Request::is ('usulan*') ? 'text-success' : '' }}{{Request::is ('daftar-semkp*') ? 'text-success' : '' }}{{Request::is ('suratperusahaan*') ? 'text-success' : '' }}{{Request::is ('usuljudul*') ? 'text-success' : '' }}{{Request::is ('daftar-sidang*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan/admin/index">Persetujuan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('form*') ? 'text-success' : '' }}" aria-current="page" href="/form">Seminar</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link {{Request::is ('kerja-praktek*') ? 'text-success' : '' }}" aria-current="page" href="/kerja-praktek/admin/index">Data KP</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('sidang*') ? 'text-success' : '' }}" aria-current="page" href="/sidang/admin/index">Data Skripsi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('prodi*') ? 'text-success' : '' }}" aria-current="page" href="/prodi/riwayat">Riwayat</a>
+              </li>
+            </ul>
           </li>
           
+          @endif
           
           @if (Auth::guard('web')->user()->role_id == 1 )
           <li class="nav-item dropdown baru">
+            <a id="dropdownSubMenu1" href=""  aria-current="page" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">KP/Skripsi</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('form*') ? 'text-success' : '' }}" aria-current="page" href="/form">Seminar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('kerja-praktek*') ? 'text-success' : '' }}" aria-current="page" href="/kerja-praktek/admin/index">Data KP</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('sidang*') ? 'text-success' : '' }}" aria-current="page" href="/sidang/admin/index">Data Skripsi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{Request::is ('riwayat-penjadwalan*') ? 'text-success' : '' }}" aria-current="page" href="">Riwayat</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }}" aria-current="page" href="/inventaris/peminjamanadm">Inventaris</a>
+          </li>
+          <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Data Jurusan</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
+                <li><a href="/dosen" class="dropdown-item mb-1 {{Request::is ('dosen*') ? 'text-success' : '' }}">Dosen</a></li>
+                <li><a href="/user" class="dropdown-item mb-1 {{Request::is ('user*') ? 'text-success' : '' }}">Staff Jurusan</a></li>
                 <li>                        
                   <a href="/role" class="dropdown-item mb-1 {{Request::is ('role*') ? 'text-success' : '' }}">Hak Akses</a>
                 </li>
@@ -194,22 +234,16 @@
               </ul>
           </li>
           @endif
-
+          @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 ) 
           <li class="nav-item dropdown baru">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link  dropdown-toggle">Data Pengguna</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
-                @if (Auth::guard('web')->user()->role_id == 1 )
-                <li><a href="/dosen" class="dropdown-item mb-1 {{Request::is ('dosen*') ? 'text-success' : '' }}">Dosen</a></li>
-                <li><a href="/user" class="dropdown-item mb-1 {{Request::is ('user*') ? 'text-success' : '' }}">Staff Jurusan</a></li>
-                @endif             
-                @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 ) 
+               
+                
                 <li><a href="/mahasiswa" class="dropdown-item mb-1 {{Request::is ('mahasiswa*') ? 'text-success' : '' }}">Mahasiswa</a></li>
-                @endif             
               </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }}" aria-current="page" href="/inventaris/peminjamanadm">Inventaris</a>
-          </li>
+            </li>
+          @endif             
           @endif
         </ul>
 
@@ -392,7 +426,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var table = $('#datatables2').DataTable( {
-      "lengthMenu": [ 10, 25, 50, 100, 200 ],
+      "lengthMenu": [ 50, 100, 150, 200 ],
       "language": {
       "sProcessing": "Sedang memproses...",
       "sLengthMenu": "Tampilkan _MENU_ entri",

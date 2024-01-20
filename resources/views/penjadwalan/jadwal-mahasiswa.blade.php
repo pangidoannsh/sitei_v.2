@@ -27,7 +27,7 @@
 </ol> -->
 
 <div class="container card p-4">
-<table class="table table-responsive-lg table-bordered table-striped" width="100%" >
+<table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables2" >
   <thead class="table-dark">
     <tr>      
         <th class="text-center" scope="col">NIM</th>

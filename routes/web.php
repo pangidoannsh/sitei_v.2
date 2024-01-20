@@ -428,6 +428,18 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::post('/catatanskripsi/create/{id}', [PenjadwalanSkripsiController::class, 'catatanskripsi']);
 
 
+
+    //    INVENTARIS DOSEN
+    Route::get('/inventaris/peminjamanmhs', [PeminjamanMahasiswaController::class, 'index'])->name('peminjaman');
+    Route::get('/inventaris/riwayatmhs', [RiwayatController::class, 'riwayatmhs'])->name('riwayatmhs');
+    Route::get('/inventaris/delete/{id}', [PeminjamanMahasiswaController::class, 'destroy']);
+    Route::get('/inventaris/edit/{id}', [PeminjamanMahasiswaController::class, 'edit']);
+    Route::post('/inventaris/update/{id}', [PeminjamanMahasiswaController::class, 'update']);
+
+    Route::get('/inventaris/formpinjam', [UsulanController::class, 'index'])->name('formusulan');
+    Route::post('/inventaris/usulan', [UsulanController::class, 'create']);
+
+
 });
 
 
@@ -478,6 +490,11 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::delete('/inventaris/deletebarang/{id}', [BarangController::class, 'destroy'])->name('deletebarang');
     Route::get('/inventaris/editbarang/{id}', [BarangController::class, 'edit'])->name('editbarang');
     Route::put('/inventaris/updatebarang/{id}', [BarangController::class, 'update'])->name('updatebarang');
+
+    // PENGATURAN KUOTA BIMBINGAN
+    Route::get('/kapasitas-bimbingan/index', [PendaftaranKPController::class, 'kapasitas_index']);
+    Route::get('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitas_bimbingan_edit']);
+    Route::post('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitasbimbingan_store']);
 
 });
 
@@ -579,10 +596,6 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
 
     Route::put('/daftarsempro/koordinator/approve/{id}', [PendaftaranSkripsiController::class, 'approvedaftarsempro_koordinator']);
     Route::put('/daftarsempro/koordinator/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakdaftarsempro_koordinator']);
-
-    Route::get('/kapasitas-bimbingan/index', [PendaftaranKPController::class, 'kapasitas_index']);
-    Route::get('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitas_bimbingan_edit']);
-    Route::post('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitasbimbingan_store']);
     
 
     Route::put('/perpanjangan2/koordinator/approve/{id}', [PendaftaranSkripsiController::class, 'approveperpanjangan2_koordinator']);
