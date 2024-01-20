@@ -310,76 +310,11 @@
         </tr>               
     @endforeach
 
-    <!-- @foreach ($penjadwalan_skripsis_draf as $skripsi)    
-        <tr>                  
-          <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-          <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
-          <td class="bg-warning text-center">{{$skripsi->jenis_seminar}}</td>                                     
-          <td class="text-center">{{$skripsi->prodi->nama_prodi}}</td>          
-          <td class="text-center">{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
-          <td class="text-center">{{$skripsi->waktu}}</td>                   
-          <td class="text-center">{{$skripsi->lokasi}}</td>                
-          <td class="text-center">
-            <p>1. {{$skripsi->pembimbingsatu->nama_singkat}}</p>
-            @if ($skripsi->pembimbingdua == !null)
-            <p>2. {{$skripsi->pembimbingdua->nama_singkat}}</p>                               
-            @endif
-          </td>         
-          <td class="text-center">
-            <p>1. {{$skripsi->pengujisatu->nama_singkat}}</p>
-            <p>2. {{$skripsi->pengujidua->nama_singkat}}</p>
-            @if ($skripsi->pengujitiga == !null)
-            <p>3. {{$skripsi->pengujitiga->nama_singkat}}</p>
-            @endif
-          </td>   
-                    @if ($skripsi->status_seminar == 3)
-          <td class="text-center">Lulus</td>
-          @else
-          <td class="text-center">Belum Lulus</td>
-         @endif                 
-          <td class="text-center">                                    
-            <a href="/penilaian-skripsi/draft-ba/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Draft BA</a>
-          </td>                        
-        </tr>               
-    @endforeach
-
-    @foreach ($penjadwalan_skripsis_draff as $skripsi)    
-        <tr>                  
-          <td class="text-center">{{$skripsi->mahasiswa->nim}}</td>                             
-          <td class="text-center">{{$skripsi->mahasiswa->nama}}</td>
-          <td class="bg-warning text-center">{{$skripsi->jenis_seminar}}</td>                                     
-          <td class="text-center">{{$skripsi->prodi->nama_prodi}}</td>          
-          <td class="text-center">{{Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y')}}</td>                   
-          <td class="text-center">{{$skripsi->waktu}}</td>                   
-          <td class="text-center">{{$skripsi->lokasi}}</td>                
-          <td class="text-center">
-            <p>{{$skripsi->pembimbingsatu->nama_singkat}}</p>
-            @if ($skripsi->pembimbingdua == !null)
-            <p>{{$skripsi->pembimbingdua->nama_singkat}}</p>                               
-            @endif
-          </td>         
-          <td class="text-center">
-            <p>{{$skripsi->pengujisatu->nama_singkat}}</p>
-            <p>{{$skripsi->pengujidua->nama_singkat}}</p>
-            @if ($skripsi->pengujitiga == !null)
-            <p>{{$skripsi->pengujitiga->nama_singkat}}</p>
-            @endif
-          </td>     
-          @if ($skripsi->status_seminar == 3)
-          <td class="text-center">Lulus</td>
-          @else
-          <td class="text-center">Belum Lulus</td>
-         @endif               
-          <td class="text-center">                                    
-            <a href="/penilaian-skripsi/draft-ba/{{Crypt::encryptString($skripsi->id)}}" class="badge bg-success p-2"style="border-radius:20px;">Draft BA</a>
-          </td>                        
-        </tr>               
-    @endforeach -->
 
   </tbody>
 </table>
 
-<!-- </div> -->
+
 </div>
 
 

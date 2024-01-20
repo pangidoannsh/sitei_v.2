@@ -183,7 +183,7 @@ class PenilaianSkripsiController extends Controller
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
 
         $penjadwalan_sempro = PenjadwalanSempro::find($id);
-        // $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
+        $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
 
 
         if ($cari_penguji == 0) {

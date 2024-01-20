@@ -34,7 +34,7 @@
   <span class="px-2">|</span>
 <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span></span>)</a></li>
   <span class="px-2">|</span>
-  <li><a href="/pembimbing/skripsi" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan Skripsi (<span></span>)</a></li>
+  <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span></span>)</a></li>
   <span class="px-2">|</span>
   <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span></span>)</a></li>
 

@@ -221,20 +221,22 @@
     </div>
   </div>
       </div> 
-    {{-- <div class="mt-5">
+     <!-- <div class="mt-5">
       <h6>Dikembangkan oleh <a class="pengembang" href="#">Prodi Teknik Informatika</a></h6>
       <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/fahril-hadi">Fahril Hadi</a> | <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti">Rahul Ilsa Tajri Mukhti</a> |
       <a class="text-dark" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">M. Seprinaldi</a>
     
-    </div> --}}
+    </div>  -->
     <div class="row mt-5">
       <div class="col-12 text-center">
         <div>
-          Dikembangkan Oleh
-          <a class="pengembang" href="/developer" target="_blank">Prodi Teknik Informatika</a>
+          <span>Dikembangkan oleh</span>
+          <a class="pengembang" href="/developer" target="_blank">Prodi Teknik Informatika</a> <br>
+         <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/fahril-hadi"><small> Fahril Hadi</small></a> | <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti"><small>Rahul Ilsa Tajri Mukhti</small></a> |
+      <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi"><small>M. Seprinaldi</small></a>
         </div>
         <div class="mt-3">
-          <p> Copyright &copy; 2023 - {{ now()->year }}. All Rights Reserved.</p>
+          <small> Copyright &copy; 2023 - {{ now()->year }}. All Rights Reserved.</small>
           <!-- <p> Copyright &copy; 2022-<script>document.write(new Date().getFullYear())</script> SITEI All Rights Reserved</p> -->
         </div>
       </div>

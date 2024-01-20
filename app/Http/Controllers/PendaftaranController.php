@@ -1578,7 +1578,14 @@ class PendaftaranController extends Controller
                 'pendaftaran_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Nilai KP Telah Keluar')->orderBy('updated_at', 'desc')->get(),
 
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Nilai Skripsi Telah Keluar')
-            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Nilai Skripsi Telah Keluar')->orderBy('updated_at', 'desc')->get(),
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Nilai Skripsi Telah Keluar')->orderBy('updated_at', 'desc')->get(),
+
+                'penjadwalan_kps' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+
+               'penjadwalan_sempros' => PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 1)->get(),
+               'penjadwalan_skripsis' => PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->get(),
+
+                
 
             'penjadwalan_sempros' => $riwayat,
             'penjadwalan_skripsis' => $riwayatt,

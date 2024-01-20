@@ -46,7 +46,7 @@
             </div>
             <h3 class="text-center p-2 mb-3 rounded-top profil fw-bold">Profil Pengembang</h3>
 
-            @foreach ($developers as $dev)
+            <!-- @foreach ($developers as $dev)
             <div class="row">
               <div class="col-lg-4">
                 <div class="card mb-4">
@@ -142,9 +142,9 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @endforeach -->
             
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
                       <div class="card-body text-center">
@@ -292,7 +292,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </section>
 </body>
 </html>
