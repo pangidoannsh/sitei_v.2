@@ -22,6 +22,10 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\Dosen::class,
     ],
+    'plp' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\PLP::class,
+    ],
 
     'mahasiswa' => [
         'driver' => 'eloquent',
@@ -60,6 +64,11 @@ return [
             'driver' => 'session',
             'provider' => 'dosens'
         ],
+        
+        'plp' => [
+            'driver' => 'session',
+            'provider' => 'plps'
+        ],
 
         'mahasiswa' => [
             'driver' => 'session',
@@ -93,6 +102,11 @@ return [
         'dosens' => [
             'driver' => 'eloquent',
             'model' => App\Models\Dosen::class,
+        ],
+        
+        'plps' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\PLP::class,
         ],
 
         'mahasiswas' => [
@@ -132,6 +146,11 @@ return [
         'dosens' => [
             'driver' => 'eloquent',
             'model' => App\Models\Dosen::class,
+        ],
+        
+        'plps' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\PLP::class,
         ],
 
         'mahasiswas' => [

@@ -106,9 +106,6 @@
   </div>
 </div>
 
-
-
-
 @if (auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingsatu_nip || auth()->user()->nip == $sempro->penjadwalan_sempro->pembimbingdua_nip)
   <div class="card card-success card-tabs">
     <div class="card-header p-0">
@@ -164,7 +161,7 @@
                 <label for="tingkat_penguasaan_materi" class="col-form-label">2). Tingkat Penguasaan Materi</label>
                 <div class="radio2 d-inline">
                   <hr>
-         <div class="d-flex justify-content-center justify-content-lg-start">
+         <!-- <div class="d-flex justify-content-center justify-content-lg-start">
                   @for ($i = 1; $i <= 10; $i++)
             @php
                 $nilai2 = ($i / 10) * 9;
@@ -173,7 +170,7 @@
             <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
         @endfor
         </div>
-          <br>
+          <br> -->
 
                 <input type="radio" class="btn-check @error ('tingkat_penguasaan_materi') is-invalid @enderror" name="tingkat_penguasaan_materi" id="tingkat_penguasaan_materi1" value="1.8" onclick="hasil()" {{ old('tingkat_penguasaan_materi', $sempro->tingkat_penguasaan_materi) == '1.8' ? 'checked' : null }} >
                 <label class="btn tombol btn-danger fw-normal " for="tingkat_penguasaan_materi1">Sangat Kurang Baik</label>
@@ -780,7 +777,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th style="width: 200px">Penilaian Penguji</th>
-                                    <th class="bg-success text-center">B</th>
+                                    <!-- <th class="bg-success text-center">B</th> -->
                                     <th class="text-center">Penguji 1</th>
                                     <th class="text-center">Penguji 2</th>
                                     <th class="text-center">Penguji 3</th>
@@ -790,127 +787,240 @@
                                 <tr>
                                     <td>1</td>  
                                     <td>Presentasi</td>
-                                    <td class="bg-secondary text-center">5</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ? $nilaipenguji1->presentasi : '-' }}</td>                            
+                                    <!-- <td class="bg-secondary text-center">5</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->presentasi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                            
 
-                                    <td class="text-center">{{$nilaipenguji2 != '' ? $nilaipenguji2->presentasi : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ? $nilaipenguji3->presentasi : '-'}}</td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->presentasi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                       @if($nilaipenguji3 != '' && $nilaipenguji3->presentasi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
                                 </tr>
                                 <tr>
                                     <td>2</td> 
                                     <td>Tingkat Penguasaan Materi</td>
-                                    <td class="bg-secondary text-center">8</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ? $nilaipenguji1->tingkat_penguasaan_materi : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ? $nilaipenguji2->tingkat_penguasaan_materi : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ? $nilaipenguji3->tingkat_penguasaan_materi : '-'}}</td>                       
+                                    <!-- <td class="bg-secondary text-center">8</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipenguji1 != '' && $nilaipenguji1->tingkat_penguasaan_materi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->tingkat_penguasaan_materi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->tingkat_penguasaan_materi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                       
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Keaslian</td>
-                                    <td class="bg-secondary text-center">5</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ? $nilaipenguji1->keaslian : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ? $nilaipenguji2->keaslian : '-'}}</td>                                         
-                                    <td class="text-center">{{$nilaipenguji3 != '' ? $nilaipenguji3->keaslian : '-'}}</td>
+                                    <!-- <td class="bg-secondary text-center">5</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipenguji1 != '' && $nilaipenguji1->keaslian !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif 
+                                    </td>                                           
+                                    <td class="text-center">
+                                       @if($nilaipenguji2 != '' && $nilaipenguji2->keaslian !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif 
+                                    </td>                                         
+                                    <td class="text-center">
+                                       @if($nilaipenguji3 != '' && $nilaipenguji3->keaslian !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif 
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>4</td> 
                                     <td>Ketepatan Metodologi</td>
-                                    <td class="bg-secondary text-center">7</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ?$nilaipenguji1->ketepatan_metodologi : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ?$nilaipenguji2->ketepatan_metodologi : '-'}}</td>                                            
-                                    <td class="text-center">{{$nilaipenguji3 != '' ?$nilaipenguji3->ketepatan_metodologi : '-'}}</td> 
+                                    <!-- <td class="bg-secondary text-center">7</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->ketepatan_metodologi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif 
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->ketepatan_metodologi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                            
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->ketepatan_metodologi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td> 
                                 </tr>
                                 <tr>
                                     <td>5</td> 
                                     <td>Penguasaan Dasar Teori</td>
-                                    <td class="bg-secondary text-center">6</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ?$nilaipenguji1->penguasaan_dasar_teori : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ?$nilaipenguji2->penguasaan_dasar_teori : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ?$nilaipenguji3->penguasaan_dasar_teori : '-'}}</td>                        
+                                    <!-- <td class="bg-secondary text-center">6</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->penguasaan_dasar_teori !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->penguasaan_dasar_teori !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->penguasaan_dasar_teori !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                        
                                 </tr>
                                 <tr>
                                     <td>6</td>       
                                     <td>Kecermatan Perumusan Masalah</td>
-                                    <td class="bg-secondary text-center">6</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ?$nilaipenguji1->kecermatan_perumusan_masalah : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ?$nilaipenguji2->kecermatan_perumusan_masalah : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ?$nilaipenguji3->kecermatan_perumusan_masalah : '-'}}</td>                   
+                                    <!-- <td class="bg-secondary text-center">6</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->kecermatan_perumusan_masalah !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->kecermatan_perumusan_masalah !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->kecermatan_perumusan_masalah !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                   
                                 </tr>
                                 <tr>
                                     <td>7</td>        
                                     <td>Tinjauan Pustaka</td>
-                                    <td class="bg-secondary text-center">7</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ?$nilaipenguji1->tinjauan_pustaka : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ?$nilaipenguji2->tinjauan_pustaka : '-'}}</td>
-                                    <td class="text-center">{{$nilaipenguji3 != '' ?$nilaipenguji3->tinjauan_pustaka : '-'}}</td>
+                                    <!-- <td class="bg-secondary text-center">7</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->tinjauan_pustaka !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->tinjauan_pustaka !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->tinjauan_pustaka !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
                                     <td>Tata Tulis</td>
-                                    <td class="bg-secondary text-center">5</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ? $nilaipenguji1->tata_tulis : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ? $nilaipenguji2->tata_tulis : '-'}}</td>                                          
-                                    <td class="text-center">{{$nilaipenguji3 != '' ? $nilaipenguji3->tata_tulis : '-'}}</td>
+                                    <!-- <td class="bg-secondary text-center">5</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->tata_tulis !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                       @if($nilaipenguji2 != '' && $nilaipenguji2->tata_tulis !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                          
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->tata_tulis !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>9</td>
                                     <td>Sumbangan Pemikiran Terhadap Ilmu Pengetahuan dan Penerapannya</td>
-                                    <td class="bg-secondary text-center">6</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ? $nilaipenguji1->sumbangan_pemikiran : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ? $nilaipenguji2->sumbangan_pemikiran : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ? $nilaipenguji3->sumbangan_pemikiran : '-'}}</td>
-                                </tr>
-            
-                                <tr>
-                                    <td colspan="2">Total Nilai Penguji</td>
-                                    <td class="bg-success text-center">55</td>
-                                    <td class="text-center">{{$nilaipenguji1 != '' ?$nilaipenguji1->total_nilai_angka : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ?$nilaipenguji2->total_nilai_angka : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ?$nilaipenguji3->total_nilai_angka : '-'}}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Nilai Huruf Penguji</td>                        
-                                    <td class="text-center">{{$nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_huruf : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji2 != '' ? $nilaipenguji2->total_nilai_huruf : '-'}}</td>                                           
-                                    <td class="text-center">{{$nilaipenguji3 != '' ? $nilaipenguji3->total_nilai_huruf : '-'}}</td>
-                                </tr>
-                                <tr>                        
-                                    <td colspan="3">Rata Rata Nilai Penguji</td>
-                                    <td class="text-center" colspan="3">
-                                        <h3 class="text-bold">
-                                        @if ($nilaipenguji1 == '' && $nilaipenguji2 == '' && $nilaipenguji3 == '')
+                                    <!-- <td class="bg-secondary text-center">6</td> -->
+                                    <td class="text-center">
+                                      @if($nilaipenguji1 != '' && $nilaipenguji1->sumbangan_pemikiran !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
                                           -
-                                          @else
-                                              <?php
-                                                $nilai_masuk=0;
-                                                if(!empty($nilaipenguji1)){
-                                                  $nilai_masuk=$nilai_masuk+1;
-                                                  $penguji1=$nilaipenguji1->total_nilai_angka;
-                                                }
-                                                else{
-                                                  $penguji1=0;
-                                                }
-                                                if(!empty($nilaipenguji2)){
-                                                  $nilai_masuk=$nilai_masuk+1;
-                                                  $penguji2=$nilaipenguji2->total_nilai_angka;
-                                                }
-                                                else{
-                                                  $penguji2=0;
-                                                }
-                                                if(!empty($nilaipenguji3)){
-                                                  $nilai_masuk=$nilai_masuk+1;
-                                                  $penguji3=$nilaipenguji3->total_nilai_angka;
-                                                }
-                                                else{
-                                                  $penguji3=0;
-                                                }
-                                                $nilaitotalpenguji=round(($penguji1+$penguji2+$penguji3)/$nilai_masuk);
-                                                ?>
-                                            {{ $nilaitotalpenguji }}
-                                          @endif
-                                        </h3>
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji2 != '' && $nilaipenguji2->sumbangan_pemikiran !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>                                           
+                                    <td class="text-center">
+                                      @if($nilaipenguji3 != '' && $nilaipenguji3->sumbangan_pemikiran !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                     </td>
                                 </tr>
+            
+                                
                             </tbody>
                         </table>
                       </div>
@@ -921,7 +1031,7 @@
                             <tr>
                                 <th>#</th>
                                 <th style="width: 200px">Penilaian Pembimbing</th>
-                                <th class="bg-success text-center">B</th>
+                                <!-- <th class="bg-success text-center">B</th> -->
                                 <th class="text-center">Pembimbing 1</th>
                                 <th class="text-center">Pembimbing 2</th>
                             </tr>
@@ -930,95 +1040,100 @@
                             <tr>
                                 <td>1</td>
                                 <td>Penguasaan Dasar Teori</td>
-                                <td class="bg-secondary text-center">9</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->penguasaan_dasar_teori : '-' }}
+                                <!-- <td class="bg-secondary text-center">9</td> -->
+                                <td class="text-center">
+                                  @if($nilaipembimbing1 != '' && $nilaipembimbing1->penguasaan_dasar_teori !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->penguasaan_dasar_teori : '-' }}
+                                <td class="text-center">
+                                  @if($nilaipembimbing2 != '' && $nilaipembimbing2->penguasaan_dasar_teori !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Tingkat Penguasaan Materi</td>
-                                <td class="bg-secondary text-center">9</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->tingkat_penguasaan_materi : '-' }}
+                                <!-- <td class="bg-secondary text-center">9</td> -->
+                                <td class="text-center">
+                                  @if($nilaipembimbing1 != '' && $nilaipembimbing1->tingkat_penguasaan_materi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->tingkat_penguasaan_materi : '-' }}
+                                <td class="text-center">
+                                  @if($nilaipembimbing2 != '' && $nilaipembimbing2->tingkat_penguasaan_materi !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Tinjauan Pustaka</td>
-                                <td class="bg-secondary text-center">9</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->tinjauan_pustaka : '-' }}
+                                <!-- <td class="bg-secondary text-center">9</td> -->
+                                <td class="text-center">
+                                  @if($nilaipembimbing1 != '' && $nilaipembimbing1->tinjauan_pustaka !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->tinjauan_pustaka : '-' }}
+                                <td class="text-center">
+                                  @if($nilaipembimbing2 != '' && $nilaipembimbing2->tinjauan_pustaka !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Tata Tulis</td>
-                                <td class="bg-secondary text-center">9</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->tata_tulis : '-' }}
+                                <!-- <td class="bg-secondary text-center">9</td> -->
+                                <td class="text-center">
+                                  @if($nilaipembimbing1 != '' && $nilaipembimbing1->tata_tulis !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->tata_tulis : '-' }}
+                                <td class="text-center">
+                                  @if($nilaipembimbing2 != '' && $nilaipembimbing2->tata_tulis !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
                             </tr>                            
                             <tr>
                                 <td>5</td>
                                 <td>Sikap dan Kepribadian Ketika Bimbingan</td>
-                                <td class="bg-secondary text-center">9</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->sikap_dan_kepribadian : '-' }}
+                                <!-- <td class="bg-secondary text-center">9</td> -->
+                                <td class="text-center">
+                                  @if($nilaipembimbing1 != '' && $nilaipembimbing1->sikap_dan_kepribadian !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->sikap_dan_kepribadian : '-' }}
+                                <td class="text-center">
+                                  @if($nilaipembimbing2 != '' && $nilaipembimbing2->sikap_dan_kepribadian !== null)
+                                          <i class="fas fa-check fa-lg"></i>
+                                      @else
+                                          -
+                                      @endif
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td colspan="2">Total Nilai Pembimbing</td>
-                                <td class="bg-success text-center">45</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_angka : '-' }}
-                                </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_angka : '-' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">Nilai Huruf Pembimbing</td>
-                                <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_huruf : '-' }}
-                                </td>
-                                <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_huruf : '-' }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">Rata Rata Nilai Pembimbing</td>
-                                <td class="text-center" colspan="2">
-                                    <h3 class="text-bold">
-                                    @if ($nilaipembimbing1 == '' && $nilaipembimbing2 == '')
-                                          -
-                                          @else
-                                              <?php
-                                                $nilai_masuk1=0;
-                                                
-                                                if(!empty($nilaipembimbing1)){
-                                                  $nilai_masuk1=$nilai_masuk1+1;
-                                                  $pembimbing1=$nilaipembimbing1->total_nilai_angka;
-                                                }
-                                                else{
-                                                  $pembimbing1=0;
-                                                }
-                                                if(!empty($nilaipembimbing2)){
-                                                  $nilai_masuk1=$nilai_masuk1+1;
-                                                  $pembimbing2=$nilaipembimbing2->total_nilai_angka;
-                                                }
-                                                else{
-                                                  $pembimbing2=0;
-                                                }
-                                                $nilaitotalpembimbing = round(($pembimbing1+$pembimbing2)/$nilai_masuk1);
-                                              ?>
-                                          {{ $nilaitotalpembimbing }}
-                                          @endif
-                                    </h3>
-                                </td>
-                            </tr>
+                            
 
                         </tbody>
                     </table>
@@ -1221,7 +1336,7 @@
                                   </div>
                                   </div> 
                                               
-                    @elseif($nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga_nip ==! null)
+                    @elseif($nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga_nip !== null)
                               <a href="#ModalApprove4"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove4">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -1237,7 +1352,7 @@
                                   </div>
                                   </div>                        
                     
-                    @elseif($total_nilai < 60)
+                    @elseif($total_nilai < 55)
                               <a href="#ModalApprove5"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
                               <div class="modal fade"id="ModalApprove5">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -1245,13 +1360,15 @@
                                       <div class="modal-body">
                                        <div class="container px-5 pt-5 pb-2 text-center">
                                         <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
-                                        <h5 >Nilai Seminar Belum Mencukupi</h5>
+                                        <h5 >Nilai Seminar belum Mencukupi</h5>
                                          <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                  </div>                          
+                                  </div> 
+                   
+
                     @elseif($sempro->penjadwalan_sempro->status_seminar > 0)
                               <a href="#ModalApprove6"  data-toggle="modal" class="btn mt-5 btn-lg btn-success float-right">Seminar telah Selesai <i class="fas fa-check fa-lg"></i> </a>
                               <div class="modal fade"id="ModalApprove6">
@@ -1268,7 +1385,7 @@
                                   </div>
                                   </div>
 
-                    @else
+                    @elseif($nilaipenguji1 !== null && $nilaipenguji2 !== null && $nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga_nip == null || $nilaipenguji1 !== null && $nilaipenguji2 !== null && $nilaipenguji3 !== null && $sempro->penjadwalan_sempro->pengujitiga_nip !== null)
                               <a href="#ModalApprove7"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a> 
                               
                               <div class="modal fade"id="ModalApprove7">

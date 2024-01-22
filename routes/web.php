@@ -7,11 +7,13 @@ use App\Models\PenjadwalanSempro;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QRController;
+use App\Http\Controllers\PLPController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\UsulanController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\RuanganController;
@@ -21,27 +23,26 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\DosenProfilController;
 use App\Http\Controllers\KonsentrasiController;
+//M.Seprinaldi
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PenilaianKPController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\StaffProfilController;
-//M.Seprinaldi
 use App\Http\Controllers\PendaftaranKPController;
+//Murdillah
 use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\CountdownTimerController;
-//Murdillah
 use App\Http\Controllers\MahasiswaProfilController;
+use App\Http\Controllers\PeminjamanAdminController;
 use App\Http\Controllers\PenilaianSemproController;
 use App\Http\Controllers\UndanganSeminarController;
 use App\Http\Controllers\PenilaianSkripsiController;
+
+// INVENTARIS
 use App\Http\Controllers\PenjadwalanSemproController;
 use App\Http\Controllers\PendaftaranSkripsiController;
 use App\Http\Controllers\PenjadwalanSkripsiController;
-
-// INVENTARIS
-use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanMahasiswaController;
-use App\Http\Controllers\PeminjamanAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -262,6 +263,20 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/user/edit/{user:id}', [UserController::class, 'edit']);
     Route::put('/user/edit/{user:id}', [UserController::class, 'update']);
     Route::delete('/user/{user:id}', [UserController::class, 'destroy']);
+    
+
+    Route::get('/plp', [PLPController::class, 'index']);
+    Route::get('/plp/create', [PLPController::class, 'create']);
+    Route::post('/plp/create', [PLPController::class, 'store']);
+    Route::get('/plp/edit/{plp:id}', [PLPController::class, 'edit']);
+    Route::put('/plp/edit/{plp:id}', [PLPController::class, 'update']);
+    Route::delete('/plp/{plp:id}', [PLPController::class, 'destroy']);
+
+
+    //RESET PASSWORD 
+    Route::put('/reset-password/mahasiswa/{id}', [MahasiswaController::class, 'reset_password']);
+    Route::put('/reset-password/dosen/{id}', [DosenController::class, 'reset_password']);
+    Route::put('/reset-password/user/{id}', [UserController::class, 'reset_password']);
 });
 
 
@@ -406,6 +421,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
 
     Route::put('/penilaian-sempro/approve/{id}', [PenjadwalanSemproController::class, 'approve']);
+    Route::put('/penilaian-sempro/gagal/{id}', [PenjadwalanSemproController::class, 'gagal']);
     Route::get('/riwayat-penilaian-sempro', [PenilaianSemproController::class, 'riwayat']);
     Route::get('/nilai-sempro/{id}', [PenjadwalanSemproController::class, 'nilaisempro']);
     Route::get('/perbaikan-sempro/{id}', [PenjadwalanSemproController::class, 'perbaikan']);

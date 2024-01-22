@@ -63,10 +63,28 @@
   {{-- <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/form">Jadwal</a></li>       
   <li class="breadcrumb-item"><a href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li> --}}
   
-  <li><a href="/form" class="breadcrumb-item active fw-bold text-success px-1">Jadwal (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
+  <!-- <li><a href="/form" class="breadcrumb-item active fw-bold text-success px-1">Jadwal (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
 
   <span class="px-2">|</span>      
-  <li><a href="/riwayat-penjadwalan" class="px-1">Riwayat Penjadwalan (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li>
+  <li><a href="/riwayat-penjadwalan" class="px-1">Riwayat Penjadwalan (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li> -->
+
+  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+  <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan (<span></span>)</a></li>
+    <span class="px-2">|</span> 
+    @endif
+    
+    <li><a href="/form" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
+    <span class="px-2">|</span> 
+ 
+    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span></span>)</a></li> 
+    <span class="px-2">|</span>
+    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span></span>)</a></li>
+    <span class="px-2">|</span>
+    <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span></span>)</a></li>
+    @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+    <span class="px-2">|</span>
+    <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan</a></li>
+    @endif
   
 
 </ol>

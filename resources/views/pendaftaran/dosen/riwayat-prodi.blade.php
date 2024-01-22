@@ -46,9 +46,10 @@
 
     @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     <li><a href="/persetujuan/admin/index" class=" px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
-    
     <span class="px-2">|</span> 
     @endif
+      <li><a href="/form" class="px-1">Seminar (<span></span>)</a></li>
+    <span class="px-2">|</span> 
     <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodi_kp }}</span>)</a></li>
       
     <span class="px-2">|</span>
@@ -56,6 +57,11 @@
      
     <span class="px-2">|</span>
     <li><a href="/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a></li>
+    @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+  <span class="px-2">|</span>
+  <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan </a></li>
+  @endif
+  
     
     
     @endif

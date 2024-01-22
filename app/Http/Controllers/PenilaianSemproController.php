@@ -164,9 +164,10 @@ class PenilaianSemproController extends Controller
     {
 
         $id = Crypt::decryptString($id);  
-        $penjadwalan = PenjadwalanSempro::find($id); 
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
-        
+
+        $penjadwalan = PenjadwalanSempro::find($id);
+        $pembimbing = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->get();
 
         if ($cari_penguji == 0) {
             return view('penilaiansempro.edit', [
@@ -220,7 +221,7 @@ class PenilaianSemproController extends Controller
             $sempro = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
             
 
-            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $sempro->mahasiswa_nim )->latest('created_at')->first();
 
             return view('penilaiansempro.edit', [
                 'sempro' => $sempro,

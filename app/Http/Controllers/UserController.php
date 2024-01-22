@@ -6,7 +6,9 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -81,5 +83,18 @@ class UserController extends Controller
     {
         User::destroy($user->id);
         return redirect('/user')->with('message', 'Data Berhasil Dihapus!');
+    }
+
+    public function reset_password(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $newPassword = $user->username;
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        Alert::success('Berhasil!', 'Password berhasil direset ke username Staff bersangkutan')->showConfirmButton('Ok', '#28a745');
+        return  back();
+
     }
 }

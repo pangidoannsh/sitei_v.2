@@ -23,7 +23,23 @@
 <div class="container card  p-4">
 
 <ol class="breadcrumb col-lg-12">
-    <li><a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)</a></li>
+    <li>
+        <a href="/persetujuan-kp-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)</a>
+    </li>
+
+    <span class="px-2">|</span>
+  <li>
+    <a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span></span>) </a>
+  </li>
+        
+  <span class="px-2">|</span>
+<li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span></span>)</a></li>
+  <span class="px-2">|</span>
+  <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span></span>)</a></li>
+  <span class="px-2">|</span>
+  <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span></span>)</a></li>
+
+
     
      
     @if (Str::length(Auth::guard('dosen')->user()) > 0)
@@ -31,8 +47,8 @@
           <!-- <span class="px-2">|</span>      
             <li><a href="/persetujuan-kaprodi" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li> -->
 
-          <span class="px-2">|</span>
-            <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan (<span>{{ $jml_riwayat_persetujuan_seminar }}</span>)</a></li>
+          <!-- <span class="px-2">|</span>
+            <li><a href="/riwayat-kaprodi" class="px-1">Riwayat Persetujuan (<span>{{ $jml_riwayat_persetujuan_seminar }}</span>)</a></li> -->
             
         @endif
     @endif
@@ -43,8 +59,8 @@
           <!-- <span class="px-2">|</span>      
             <li><a href="persetujuan-koordinator" class="px-1">Persetujuan Seminar (<span id="seminarKPCount"></span>)</a></li> -->
 
-          <span class="px-2">|</span>
-            <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan (<span>{{ $jml_riwayat_persetujuan_seminar }}</span>)</a></li>
+          <!-- <span class="px-2">|</span>
+            <li><a href="riwayat-koordinator" class="px-1">Riwayat Persetujuan (<span>{{ $jml_riwayat_persetujuan_seminar }}</span>)</a></li> -->
 
         @endif
     @endif

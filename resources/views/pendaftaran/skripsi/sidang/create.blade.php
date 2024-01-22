@@ -121,8 +121,8 @@
     </div>
     <div class="col-lg-6 col-md-12">
       <div class="mb-3">
-            <label for="formFile" class="form-label float-start">Bukti Pasang Desain Poster<span class="text-danger">*</span> <small class="text-secondary">(Format .pdf | Maks. 200 KB) </small></label>
-            <input name="pasang_poster" class="form-control @error ('pasang_poster') is-invalid @enderror" value="{{ old('pasang_poster') }}" type="file" id="formFile" required>
+            <label for="formFile" class="form-label float-start">Bukti Pasang Desain Poster<small class="text-secondary">(Format .pdf | Maks. 200 KB) </small></label>
+            <input name="pasang_poster" class="form-control @error ('pasang_poster') is-invalid @enderror" value="{{ old('pasang_poster') }}" type="file" id="formFile">
 
             @error('pasang_poster')
               <div class="invalid-feedback">
@@ -133,8 +133,8 @@
     </div>
     <div class="col-lg-6 col-md-12">
       <div class="mb-3 field">
-            <label class="form-label float-start">URL Poster Skripsi<span class="text-danger">*</span></label>
-            <input type="text" name="url_poster" class="form-control @error ('url_poster') is-invalid @enderror" value="{{ old('url_poster') }}" required>
+            <label class="form-label float-start">URL Poster Skripsi</label>
+            <input type="text" name="url_poster" class="form-control @error ('url_poster') is-invalid @enderror" value="{{ old('url_poster') }}" >
             @error('url_poster')
               <div class="invalid-feedback">
                   {{$message}}
@@ -181,7 +181,7 @@
     <div class="col-lg-6 col-md-12">
       <div class="mb-3">
             <label for="formFile" class="form-label float-start">STI-31/ Surat Persetujuan Sertifikat Pendamping Ijazah <small class="text-secondary">(Format .pdf | Maks. 200 KB) </small></label>
-            <input name="sti_31" class="form-control @error ('sti_31') is-invalid @enderror" value="{{ old('sti_31') }}" type="file" id="formFile" required>
+            <input name="sti_31" class="form-control @error ('sti_31') is-invalid @enderror" value="{{ old('sti_31') }}" type="file" id="formFile">
 
             @error('sti_31')
               <div class="invalid-feedback">

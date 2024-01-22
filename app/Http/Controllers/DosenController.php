@@ -6,8 +6,10 @@ use App\Models\Role;
 use App\Models\Dosen;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DosenController extends Controller
 {
@@ -93,7 +95,7 @@ class DosenController extends Controller
         } elseif ($dosen->email != $request->email) {
             $rules['email'] = 'required|unique:dosen';
         } elseif ($dosen->role_id != $request->role_id) {
-            $rules['role_id'] = 'unique:dosen';
+            $rules['role_id'] = 'nullable';
         }
 
         $validated = $request->validate($rules);
@@ -112,5 +114,18 @@ class DosenController extends Controller
 
         Dosen::destroy($dosen->id);
         return redirect('/dosen')->with('message', 'Data Berhasil Dihapus!');
+    }
+
+    public function reset_password(Request $request, $id)
+    {
+        $dosen = Dosen::find($id);
+
+        $newPassword = $dosen->nip;
+        $dosen->password = Hash::make($newPassword);
+        $dosen->save();
+
+        Alert::success('Berhasil!', 'Password berhasil direset ke NIP Dosen bersangkutan')->showConfirmButton('Ok', '#28a745');
+        return  back();
+
     }
 }

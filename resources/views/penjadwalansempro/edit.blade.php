@@ -199,7 +199,7 @@
         <div class="mb-3 field">
             <label for="pengujitiga_nip" class="form-label">Penguji Tiga</label>
             <select name="pengujitiga_nip" id="penguji3" class="form-select @error('pengujitiga_nip') is-invalid @enderror">
-                <option value="1">-Pilih-</option>
+                <option value="">-Pilih-</option>
                 @foreach ($dosens as $dosen)
                     <option value="{{$dosen->nip}}" {{old('pengujitiga_nip', $sempro->pengujitiga_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
                 @endforeach
@@ -468,7 +468,6 @@
                                               <div class="col-6 text-start">
                                                <button type="submit" class="btn p-2 px-3 btn-success ">Jadwalkan</button>
                                               </div>
-                                             
                                             </div>
                                         </div>
                                       </div>

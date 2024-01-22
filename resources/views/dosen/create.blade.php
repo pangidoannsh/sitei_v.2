@@ -10,6 +10,10 @@
 
 @section('content')
 
+<div class="container">
+  <a href="/dosen" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+
 <form action="{{url ('/dosen/create')}}" method="POST" enctype="multipart/form-data">
         @csrf
 <div>

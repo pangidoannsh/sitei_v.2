@@ -28,6 +28,10 @@
 
 <ol class="breadcrumb col-lg-12">  
   <li>
+    <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan (<span></span>) </a>
+  </li>
+  <span class="px-2">|</span>
+  <li>
     <a href="/kp-skripsi/seminar-pembimbing-penguji" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a>
   </li>
         

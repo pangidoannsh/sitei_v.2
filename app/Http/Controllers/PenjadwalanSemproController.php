@@ -132,7 +132,7 @@ class PenjadwalanSemproController extends Controller
             'pembimbingsatu_nip' => 'required',   
             'pengujisatu_nip' => 'required',         
             'pengujidua_nip' => 'required',         
-            'pengujitiga_nip' => 'required',         
+            // 'pengujitiga_nip' => 'required',         
             'prodi_id' => 'required',                           
             'judul_proposal' => 'required',
         ];        
@@ -168,7 +168,7 @@ class PenjadwalanSemproController extends Controller
         
         $edit->pengujisatu_nip = $validated['pengujisatu_nip'];
         $edit->pengujidua_nip = $validated['pengujidua_nip'];
-        $edit->pengujitiga_nip = $validated['pengujitiga_nip'];
+        $edit->pengujitiga_nip = $request['pengujitiga_nip'];
 
         if($request->waktu_selasa != null) {
             $request->waktu = $request->waktu_selasa;
@@ -361,6 +361,26 @@ class PenjadwalanSemproController extends Controller
 
     $pendaftaran_skripsi->status_skripsi = 'SEMPRO SELESAI';
     $pendaftaran_skripsi->keterangan = 'Seminar Proposal Selesai';
+    $pendaftaran_skripsi->tgl_semproselesai = Carbon::now();
+    $pendaftaran_skripsi->save();
+
+    Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+        return back();
+}
+  
+public function gagal($id, PendaftaranSkripsi $pendaftaranid)
+{
+    $jadwal = PenjadwalanSempro::find($id);
+
+    $jadwal->status_seminar = null;
+    $jadwal->save();
+
+    // $pendaftaran_skripsi = PendaftaranSkripsi::whereNotNull('mahasiswa_nim',  PenjadwalanSempro::find($mahasiswa_nim) )->latest('created_at')->first();
+    
+    $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+    $pendaftaran_skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
+    $pendaftaran_skripsi->keterangan = 'Belum Lulus Seminar Proposal';
     $pendaftaran_skripsi->tgl_semproselesai = Carbon::now();
     $pendaftaran_skripsi->save();
 

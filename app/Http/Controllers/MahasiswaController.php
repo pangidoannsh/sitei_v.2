@@ -9,6 +9,7 @@ use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MahasiswaController extends Controller
 {
@@ -95,7 +96,8 @@ class MahasiswaController extends Controller
         Mahasiswa::where('id', $mahasiswa->id)
             ->update($validated);
 
-        return redirect('/mahasiswa')->with('message', 'Data Berhasil Diedit!');
+        Alert::success('Berhasil!', 'Data berhasill diubah')->showConfirmButton('Ok', '#28a745');
+        return redirect('/mahasiswa');
     }
 
     public function destroy(Mahasiswa $mahasiswa)
@@ -106,5 +108,19 @@ class MahasiswaController extends Controller
 
         Mahasiswa::destroy($mahasiswa->id);
         return redirect('/mahasiswa')->with('message', 'Data Berhasil Dihapus!');
+    }
+
+    public function reset_password(Request $request, $id)
+    {
+
+        $mhs = Mahasiswa::find($id);
+
+        $newPassword = $mhs->nim;
+        $mhs->password = Hash::make($newPassword);
+        $mhs->save();
+
+        Alert::success('Berhasil!', 'Password berhasil direset ke NIM Mahasiswa bersangkutan')->showConfirmButton('Ok', '#28a745');
+        return  back();
+
     }
 }

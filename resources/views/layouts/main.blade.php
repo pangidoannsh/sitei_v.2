@@ -93,7 +93,7 @@
                 <a class="nav-link setuju {{Request::is ('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{Request::is ('persetujuan-koordinator*') ? 'text-success' : '' }}{{Request::is ('riwayat-koordinator*') ? 'text-success' : '' }}" aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
               </li>
               <li>
-                <a href="/pembimbing/skripsi" class="dropdown-item mb-1 {{Request::is ('pembimbing*') ? 'text-success' : '' }}">Bimbingan</a>
+                <a href="/pembimbing/skripsi" class="dropdown-item mb-1 {{Request::is ('pembimbing/skripsi*') ? 'text-success' : '' }} {{Request::is ('pembimbing/kerja-praktek*') ? 'text-success' : '' }}">Bimbingan</a>
               </li> 
 
               <li>                        
@@ -225,6 +225,8 @@
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"style="border-radius:10px;">
                 <li><a href="/dosen" class="dropdown-item mb-1 {{Request::is ('dosen*') ? 'text-success' : '' }}">Dosen</a></li>
                 <li><a href="/user" class="dropdown-item mb-1 {{Request::is ('user*') ? 'text-success' : '' }}">Staff Jurusan</a></li>
+                <li>                        
+                <li><a href="/plp" class="dropdown-item mb-1 {{Request::is ('plp*') ? 'text-success' : '' }}">PLP</a></li>
                 <li>                        
                   <a href="/role" class="dropdown-item mb-1 {{Request::is ('role*') ? 'text-success' : '' }}">Hak Akses</a>
                 </li>

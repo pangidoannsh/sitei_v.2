@@ -20,10 +20,21 @@ Daftar Bimbingan Skripsi
 </div>
 @endif
 
+ @foreach ($pendaftaran_skripsi as $skripsi)
+
+@php
+$tanggalSelesaiSempro = $skripsi->tgl_semproselesai;
+@endphp
+
 
 <div class="container card p-4">
 
 <ol class="breadcrumb col-lg-12">
+  <li>
+        <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan (<span></span>)</a>
+    </li>
+
+    <span class="px-2">|</span>
 <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span></span>) </a></li>
   <span class="px-2">|</span>
 <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span>{{ $jml_kp }}</span>)</a></li>
@@ -55,7 +66,7 @@ Daftar Bimbingan Skripsi
   </thead>
   <tbody>
 
-    @foreach ($pendaftaran_skripsi as $skripsi)
+   
 <div></div>
         <tr>        
             <td class="text-center px-1 py-2">{{$loop->iteration}}</td>                             
@@ -98,7 +109,11 @@ Daftar Bimbingan Skripsi
             @endif
             
             @if ($skripsi->status_skripsi == 'SEMPRO SELESAI')           
-            <td class="text-center px-1 py-2"> <small> Tanggal Selesai: <br></small>{{Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat('l, d F Y')}}</td>
+            <td class="text-center px-1 py-2"> 
+              <small> Selesai Sempro: <br></small>{{Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat('l, d F Y')}} <br>
+               <small class="text-danger"> Batas Daftar Sidang: <br></small>
+               <strong class="mt-2 text-danger"><strong class="text-bold" id="timer-batas-daftar-sidang"></strong></strong>
+          </td>
             @endif
 
             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK')           
@@ -254,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         Swal.fire({
             title: 'Ini adalah halaman Bimbingan Skripsi',
-            html: `Tidak ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">${totalKuota} kuota</strong> mahasiswa bimbingan`,
+            html: `Belum ada mahasiswa dibawah bimbingan Anda. <br> Anda masih memiliki <strong class="text-info">${totalKuota} kuota</strong> mahasiswa bimbingan`,
             icon: 'info',
             showConfirmButton: true,
             confirmButtonColor: '#28a745',
@@ -262,4 +277,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+@endpush()
+
+
+
+@push('scripts')
+<script>
+
+     moment.locale('id');
+
+    function hitungWaktuBatas(targetDate) {
+        var tanggalSelesaiSempro = moment(targetDate);
+        var tanggalTerakhirDaftarSeminar = tanggalSelesaiSempro.add(6, 'months');
+        var formatTanggalTerakhirDaftar = tanggalTerakhirDaftarSeminar.format('dddd, D MMMM YYYY');
+        document.getElementById("timer-batas-daftar-sidang").textContent = formatTanggalTerakhirDaftar;
+    }
+    hitungWaktuBatas("{{ $tanggalSelesaiSempro }}");
+
+</script>
+
 @endpush()

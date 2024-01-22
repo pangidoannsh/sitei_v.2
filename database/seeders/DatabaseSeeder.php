@@ -106,11 +106,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Role::create([
-            'role_akses' => 'Dosen'
+            'role_akses' => 'PLP'
         ]);
-        Role::create([
-            'role_akses' => 'Mahasiswa'
-        ]);
+
 
         Prodi::create([
             'nama_prodi' => 'Teknik Elektro D3'

@@ -517,9 +517,9 @@ class PendaftaranSkripsiController extends Controller
             'khs' => 'required|mimes:pdf|max:200',
             'toefl' => 'required|mimes:pdf|max:200',
             'logbook' => 'required|mimes:pdf|max:200',
-            'pasang_poster' => 'required|mimes:pdf|max:200', 
+            'pasang_poster' => 'nullable|mimes:pdf|max:200', 
             'sti_10' => 'nullable|mimes:pdf|max:200',  
-            'url_poster'=>'required',          
+            'url_poster'=>'nullable',          
             'sti_30' => 'required|mimes:pdf|max:200',           
             'sti_31' => 'nullable|mimes:pdf|max:200',           
         ]);

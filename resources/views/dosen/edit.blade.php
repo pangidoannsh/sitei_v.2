@@ -10,6 +10,10 @@
 
 @section('content')
 
+<div class="container">
+  <a href="/dosen" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+</div>
+
 <form action="/dosen/edit/{{$dosen->id}}" method="POST" enctype="multipart/form-data">
         @method('put')
         @csrf
@@ -86,10 +90,17 @@
             @enderror
         </div>
         <button type="submit" class="btn btn-success float-right mt-4">Ubah</button>        
+    </form>
+
+    <form method="POST" action="/reset-password/dosen/{{$dosen->id}}" class="reset-password">
+        @csrf
+        @method('PUT')
+        <button class="btn btn-secondary mx-4 float-end mt-4" type="submit">Reset Password</button>
+        </form>
+
         </div>        
     </div>
 </div>
-</form>
 
 @endsection
 
@@ -101,3 +112,26 @@
         </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+   $('.reset-password').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Apakah Anda Yakin?',
+        text: "Anda akan me-Reset password Dosen bersangkutan",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: 'grey',
+        confirmButtonText: 'Ya'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.currentTarget.submit();
+        }
+    })
+});
+  
+</script>
+@endpush() 

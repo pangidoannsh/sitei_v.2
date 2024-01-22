@@ -514,33 +514,51 @@
                           <table class="table table-bordered">
                               <thead>
                                   <tr>
-                                      <th class="text-center">#</th>
+                                      <th class="text-center" style="width: 50px">#</th>
                                       <th style="width: 200px">Penilaian Penguji</th>
-                                      <th class="bg-success text-center">B</th>
+                                      <!-- <th class="bg-success text-center">B</th> -->
                                       <th class="text-center">Nilai</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
+                                 <tr>
                                       <td class="text-center">1</td>  
                                       <td>Presentasi</td>
-                                      <td class="bg-secondary text-center">10%</td>
-                                      <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->presentasi : '-' }}</td>             
+                                      <!-- <td class="bg-secondary text-center">10%</td> -->
+                                      <td class="text-center">
+                                      @if($nilaipenguji != '' && $nilaipenguji->presentasi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>             
                                   </tr>
                                   <tr>
                                     <td class="text-center">2</td>  
                                     <td>Materi</td>
-                                    <td class="bg-secondary text-center">10%</td>
-                                    <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->materi : '-' }}</td>             
+                                    <!-- <td class="bg-secondary text-center">10%</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipenguji != '' && $nilaipenguji->materi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>             
                                   </tr> 
                                   <tr>
                                     <td class="text-center">3</td>  
                                     <td>Tanya Jawab</td>
-                                    <td class="bg-secondary text-center">10%</td>
-                                    <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->tanya_jawab : '-' }}</td>             
-                                  </tr>                               
+                                    <!-- <td class="bg-secondary text-center">10%</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipenguji != '' && $nilaipenguji->tanya_jawab !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif  
+                                    </td>             
+                                  </tr>                                
               
-                                  <tr>
+                                  <!-- <tr>
                                       <td colspan="2">Total Nilai Penguji</td>
                                       <td class="bg-success text-center">30%</td>
                                       <td class="text-center">{{$nilaipenguji != '' ?$nilaipenguji->total_nilai_angka : '-'}}</td>
@@ -548,7 +566,7 @@
                                   <tr>
                                       <td colspan="3">Nilai Huruf Penguji</td>                        
                                       <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->total_nilai_huruf : '-'}}</td>
-                                  </tr>                                  
+                                  </tr>                                   -->
                               </tbody>
                           </table>
                       </div>
@@ -557,9 +575,9 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
+                                    <th class="text-center" style="width: 50px">#</th>
                                     <th style="width: 200px">Penilaian Pembimbing</th>
-                                    <th class="bg-success text-center">B</th>
+                                    <!-- <th class="bg-success text-center">B</th> -->
                                     <th class="text-center">Nilai</th>
                                 </tr>
                             </thead>
@@ -567,23 +585,41 @@
                                 <tr>
                                     <td class="text-center">1</td>  
                                     <td>Presentasi</td>
-                                    <td class="bg-secondary text-center">10%</td>
-                                    <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->presentasi : '-' }}</td>             
+                                    <!-- <td class="bg-secondary text-center">10%</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipembimbing != '' && $nilaipembimbing->presentasi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif    
+                                    </td>             
                                 </tr>
                                 <tr>
                                   <td class="text-center">2</td>  
                                   <td>Materi</td>
-                                  <td class="bg-secondary text-center">10%</td>
-                                  <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->materi : '-' }}</td>             
+                                  <!-- <td class="bg-secondary text-center">10%</td> -->
+                                  <td class="text-center">
+                                  @if($nilaipembimbing != '' && $nilaipembimbing->materi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                  </td>             
                                 </tr> 
                                 <tr>
                                   <td class="text-center">3</td>  
                                   <td>Tanya Jawab</td>
-                                  <td class="bg-secondary text-center">10%</td>
-                                  <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->tanya_jawab : '-' }}</td>             
+                                  <!-- <td class="bg-secondary text-center">10%</td> -->
+                                  <td class="text-center">
+                                    @if($nilaipembimbing != '' && $nilaipembimbing->tanya_jawab !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                  </td>
                                 </tr>                               
             
-                                <tr>
+                                <!-- <tr>
                                     <td colspan="2">Total Nilai Pembimbing</td>
                                     <td class="bg-success text-center">30%</td>
                                     <td class="text-center">{{$nilaipembimbing != '' ?$nilaipembimbing->total_nilai_angka : '-'}}</td>
@@ -591,7 +627,7 @@
                                 <tr>
                                     <td colspan="3">Nilai Huruf Pembimbing</td>                        
                                     <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->total_nilai_huruf : '-'}}</td>
-                                </tr>                                  
+                                </tr>                                   -->
                             </tbody>
                         </table>
                       </div>
@@ -600,29 +636,47 @@
                     <table class="table table-bordered" style="background-color:white;">
                       <thead class="bg-success">
                           <tr>
-                              <th style="width: 50px">#</th>
+                              <th class="text-center" style="width: 50px">#</th>
                               <th style="width: 600px">Nilai</th>                
                               <th>Total Nilai</th>                        
                           </tr>
                       </thead>
                       <tbody class="gridratakiri">
                           <tr>
-                              <td>1</td>  
-                              <td>Nilai Seminar (30%)</td>                
-                              <td>{{$nilaipenguji != '' ? $nilaipenguji->total_nilai_angka : '-' }}</td>                        
+                              <td class="text-center">1</td>  
+                              <td>Nilai Seminar</td>                
+                              <td>
+                              @if($nilaipenguji != '' && $nilaipenguji->total_nilai_angka !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif  
+                              </td>                        
                           </tr>
                           
                           <tr>
-                              <td>2</td>  
-                              <td>Nilai Pembimbing Lapangan (40%)</td> 
-                              <td>{{$nilaipembimbing != '' ? $nilaipembimbing->nilai_pembimbing_kp : '-' }}</
+                              <td class="text-center">2</td>  
+                              <td>Nilai Pembimbing Lapangan</td> 
+                              <td>
+                                @if($nilaipembimbing != '' && $nilaipembimbing->nilai_pembimbing_lapangan !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif  
+                              </td>
                           </tr>
                           
                           <tr>
-                              <td>3</td>  
-                              <td>Nilai Pembimbing KP (30%)</td>                
-                              <td>{{$nilaipembimbing != '' ? $nilaipembimbing->total_nilai_angka : '-' }}</td>                        
-                          </tr>  
+                              <td class="text-center">3</td>  
+                              <td>Nilai Pembimbing KP</td>                
+                              <td>
+                              @if($nilaipembimbing != '' && $nilaipembimbing->total_nilai_angka !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif   
+                              </td>                        
+                          </tr> 
               
                           <tr>
                               <td colspan="2">Total Akhir</td>
@@ -912,9 +966,9 @@
                           <table class="table table-bordered">
                               <thead>
                                   <tr>
-                                      <th class="text-center">#</th>
+                                      <th class="text-center" style="width: 50px">#</th>
                                       <th style="width: 200px">Penilaian Penguji</th>
-                                      <th class="bg-success text-center">B</th>
+                                      <!-- <th class="bg-success text-center">B</th> -->
                                       <th class="text-center">Nilai</th>
                                   </tr>
                               </thead>
@@ -922,23 +976,41 @@
                                   <tr>
                                       <td class="text-center">1</td>  
                                       <td>Presentasi</td>
-                                      <td class="bg-secondary text-center">10%</td>
-                                      <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->presentasi : '-' }}</td>             
+                                      <!-- <td class="bg-secondary text-center">10%</td> -->
+                                      <td class="text-center">
+                                      @if($nilaipenguji != '' && $nilaipenguji->presentasi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>             
                                   </tr>
                                   <tr>
                                     <td class="text-center">2</td>  
                                     <td>Materi</td>
-                                    <td class="bg-secondary text-center">10%</td>
-                                    <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->materi : '-' }}</td>             
+                                    <!-- <td class="bg-secondary text-center">10%</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipenguji != '' && $nilaipenguji->materi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                    </td>             
                                   </tr> 
                                   <tr>
                                     <td class="text-center">3</td>  
                                     <td>Tanya Jawab</td>
-                                    <td class="bg-secondary text-center">10%</td>
-                                    <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->tanya_jawab : '-' }}</td>             
+                                    <!-- <td class="bg-secondary text-center">10%</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipenguji != '' && $nilaipenguji->tanya_jawab !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif  
+                                    </td>             
                                   </tr>                               
               
-                                  <tr>
+                                  <!-- <tr>
                                       <td colspan="2">Total Nilai Penguji</td>
                                       <td class="bg-success text-center">30%</td>
                                       <td class="text-center">{{$nilaipenguji != '' ?$nilaipenguji->total_nilai_angka : '-'}}</td>
@@ -946,7 +1018,7 @@
                                   <tr>
                                       <td colspan="3">Nilai Huruf Penguji</td>                        
                                       <td class="text-center">{{$nilaipenguji != '' ? $nilaipenguji->total_nilai_huruf : '-'}}</td>
-                                  </tr>                                  
+                                  </tr>                                   -->
                               </tbody>
                           </table>
                       </div>
@@ -955,9 +1027,9 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
+                                    <th class="text-center" style="width: 50px">#</th>
                                     <th style="width: 200px">Penilaian Pembimbing</th>
-                                    <th class="bg-success text-center">B</th>
+                                    <!-- <th class="bg-success text-center">B</th> -->
                                     <th class="text-center">Nilai</th>
                                 </tr>
                             </thead>
@@ -965,23 +1037,41 @@
                                 <tr>
                                     <td class="text-center">1</td>  
                                     <td>Presentasi</td>
-                                    <td class="bg-secondary text-center">10%</td>
-                                    <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->presentasi : '-' }}</td>             
+                                    <!-- <td class="bg-secondary text-center">10%</td> -->
+                                    <td class="text-center">
+                                    @if($nilaipembimbing != '' && $nilaipembimbing->presentasi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif    
+                                    </td>             
                                 </tr>
                                 <tr>
                                   <td class="text-center">2</td>  
                                   <td>Materi</td>
-                                  <td class="bg-secondary text-center">10%</td>
-                                  <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->materi : '-' }}</td>             
+                                  <!-- <td class="bg-secondary text-center">10%</td> -->
+                                  <td class="text-center">
+                                  @if($nilaipembimbing != '' && $nilaipembimbing->materi !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                  </td>             
                                 </tr> 
                                 <tr>
                                   <td class="text-center">3</td>  
                                   <td>Tanya Jawab</td>
-                                  <td class="bg-secondary text-center">10%</td>
-                                  <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->tanya_jawab : '-' }}</td>             
+                                  <!-- <td class="bg-secondary text-center">10%</td> -->
+                                  <td class="text-center">
+                                    @if($nilaipembimbing != '' && $nilaipembimbing->tanya_jawab !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif
+                                  </td>
                                 </tr>                               
             
-                                <tr>
+                                <!-- <tr>
                                     <td colspan="2">Total Nilai Pembimbing</td>
                                     <td class="bg-success text-center">30%</td>
                                     <td class="text-center">{{$nilaipembimbing != '' ?$nilaipembimbing->total_nilai_angka : '-'}}</td>
@@ -989,7 +1079,7 @@
                                 <tr>
                                     <td colspan="3">Nilai Huruf Pembimbing</td>                        
                                     <td class="text-center">{{$nilaipembimbing != '' ? $nilaipembimbing->total_nilai_huruf : '-'}}</td>
-                                </tr>                                  
+                                </tr>                                   -->
                             </tbody>
                         </table>
                       </div>
@@ -998,29 +1088,47 @@
                     <table class="table table-bordered" style="background-color:white;">
                       <thead class="bg-success">
                           <tr>
-                              <th style="width: 50px">#</th>
+                              <th class="text-center" style="width: 50px">#</th>
                               <th style="width: 600px">Nilai</th>                
                               <th>Total Nilai</th>                        
                           </tr>
                       </thead>
                       <tbody class="gridratakiri">
                           <tr>
-                              <td>1</td>  
-                              <td>Nilai Seminar (30%)</td>                
-                              <td>{{$nilaipenguji != '' ? $nilaipenguji->total_nilai_angka : '-' }}</td>                        
+                              <td class="text-center">1</td>  
+                              <td>Nilai Seminar</td>                
+                              <td>
+                              @if($nilaipenguji != '' && $nilaipenguji->total_nilai_angka !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif  
+                              </td>                        
                           </tr>
                           
                           <tr>
-                              <td>2</td>  
-                              <td>Nilai Pembimbing Lapangan (40%)</td> 
-                              <td>{{$nilaipembimbing != '' ? $nilaipembimbing->nilai_pembimbing_kp : '-' }}</
+                              <td class="text-center">2</td>  
+                              <td>Nilai Pembimbing Lapangan</td> 
+                              <td>
+                                @if($nilaipembimbing != '' && $nilaipembimbing->nilai_pembimbing_lapangan !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif  
+                              </td>
                           </tr>
                           
                           <tr>
-                              <td>3</td>  
-                              <td>Nilai Pembimbing KP (30%)</td>                
-                              <td>{{$nilaipembimbing != '' ? $nilaipembimbing->total_nilai_angka : '-' }}</td>                        
-                          </tr>  
+                              <td class="text-center">3</td>  
+                              <td>Nilai Pembimbing KP</td>                
+                              <td>
+                              @if($nilaipembimbing != '' && $nilaipembimbing->total_nilai_angka !== null)
+                                         <i class="fas fa-check fa-lg "></i>
+                                      @else
+                                          -
+                                      @endif   
+                              </td>                        
+                          </tr>   
               
                           <tr>
                               <td colspan="2">Total Akhir</td>
