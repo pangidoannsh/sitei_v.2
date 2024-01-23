@@ -14,6 +14,12 @@ class UsulanController extends Controller
         ]);
     }
 
+    public function indexdsn(){
+        return view('inventaris.formpinjamdsn.index', [
+            'nama_barang' => Barang::all()
+        ]);
+    }
+
     public function create(){
         $peminjaman = Peminjaman::create([
             'barang_satu' => request('barang_satu'),
@@ -27,5 +33,20 @@ class UsulanController extends Controller
         ]); 
 
         return redirect()->route('peminjaman')->with('message', 'Barang Berhasil Diusulkan!');
+    }
+
+    public function createdsn(){
+        $peminjaman = Peminjaman::create([
+            'barang_satu' => request('barang_satu'),
+            'barang_dua' => request('barang_dua'),
+            'barang_tiga' => request('barang_tiga'),
+            'tujuan' => request('tujuan'),
+            'ruangan' => request('ruangan'),
+            'jaminan' => request('jaminan'),
+            'peminjam' => auth()->user()->nama,
+            'user_id' => auth()->user()->id
+        ]); 
+
+        return redirect()->route('peminjamandsn')->with('message', 'Barang Berhasil Diusulkan!');
     }
 }

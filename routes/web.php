@@ -34,6 +34,7 @@ use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\CountdownTimerController;
 use App\Http\Controllers\MahasiswaProfilController;
 use App\Http\Controllers\PeminjamanAdminController;
+use App\Http\Controllers\PeminjamanDosenController;
 use App\Http\Controllers\PenilaianSemproController;
 use App\Http\Controllers\UndanganSeminarController;
 use App\Http\Controllers\PenilaianSkripsiController;
@@ -43,6 +44,7 @@ use App\Http\Controllers\PenjadwalanSemproController;
 use App\Http\Controllers\PendaftaranSkripsiController;
 use App\Http\Controllers\PenjadwalanSkripsiController;
 use App\Http\Controllers\PeminjamanMahasiswaController;
+use App\Http\Controllers\PeminjamanPLPController;
 
 /*
 |--------------------------------------------------------------------------
@@ -267,16 +269,15 @@ Route::group(['middleware' => ['auth:web']], function () {
 
     Route::get('/plp', [PLPController::class, 'index']);
     Route::get('/plp/create', [PLPController::class, 'create']);
-    Route::post('/plp/create', [PLPController::class, 'store']);
-    Route::get('/plp/edit/{plp:id}', [PLPController::class, 'edit']);
-    Route::put('/plp/edit/{plp:id}', [PLPController::class, 'update']);
-    Route::delete('/plp/{plp:id}', [PLPController::class, 'destroy']);
+    Route::post('/plp/store', [PLPController::class, 'store']);
+    Route::get('/plp/edit/{id}', [PLPController::class, 'edit']);
+    Route::post('/plp/update/{id}', [PLPController::class, 'update']);
 
 
     //RESET PASSWORD 
     Route::put('/reset-password/mahasiswa/{id}', [MahasiswaController::class, 'reset_password']);
     Route::put('/reset-password/dosen/{id}', [DosenController::class, 'reset_password']);
-    Route::put('/reset-password/user/{id}', [UserController::class, 'reset_password']);
+    Route::post('/reset-password/plp/{id}', [UserController::class, 'reset_password']);
 });
 
 
@@ -446,14 +447,14 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
 
     //    INVENTARIS DOSEN
-    Route::get('/inventaris/peminjamanmhs', [PeminjamanMahasiswaController::class, 'index'])->name('peminjaman');
-    Route::get('/inventaris/riwayatmhs', [RiwayatController::class, 'riwayatmhs'])->name('riwayatmhs');
-    Route::get('/inventaris/delete/{id}', [PeminjamanMahasiswaController::class, 'destroy']);
-    Route::get('/inventaris/edit/{id}', [PeminjamanMahasiswaController::class, 'edit']);
-    Route::post('/inventaris/update/{id}', [PeminjamanMahasiswaController::class, 'update']);
+    Route::get('/inventaris/peminjaman-dosen', [PeminjamanDosenController::class, 'index'])->name('peminjamandsn');
+    Route::get('/inventaris/riwayat-dosen', [RiwayatController::class, 'riwayatdsn'])->name('riwayatdsn');
+    Route::get('/inventaris/delete-dosen/{id}', [PeminjamanDosenController::class, 'destroydsn']);
+    Route::get('/inventaris/edit-dosen/{id}', [PeminjamanDosenController::class, 'editdsn']);
+    Route::post('/inventaris/update-dosen/{id}', [PeminjamanDosenController::class, 'updatedsn']);
 
-    Route::get('/inventaris/formpinjam', [UsulanController::class, 'index'])->name('formusulan');
-    Route::post('/inventaris/usulan', [UsulanController::class, 'create']);
+    Route::get('/inventaris/formpinjam-dosen', [UsulanController::class, 'indexdsn'])->name('formusulandosen');
+    Route::post('/inventaris/usulan-dosen', [UsulanController::class, 'createdsn']);
 
 
 });
@@ -642,6 +643,27 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
 
     Route::put('/pendaftarankp-koordinator/approve/{id}', [PendaftaranKPController::class, 'approve_koordinator']);
     Route::put('/perdaftarankp-koordinator/tolak/{id}', [PendaftaranKPController::class, 'tolak_koordinator']);
+});
+
+// PLP
+
+Route::group(['middleware' => ['auth:web', 'cekrole:12']], function(){
+
+    // INVENTARIS
+    Route::get('/inventaris/peminjaman-plp', [PeminjamanPLPController::class, 'index'])->name('peminjamanplp');
+    Route::get('/inventaris/setuju-plp/{id}', [PeminjamanPLPController::class, 'setujuplp']);
+    Route::get('/inventaris/tolak-plp/{id}', [PeminjamanPLPController::class, 'ditolakplp']);
+    Route::get('/inventaris/kembali-plp/{id}', [PeminjamanPLPController::class, 'kembaliplp']);
+    Route::get('/inventaris/riwayat', [RiwayatController::class, 'riwayatplp'])->name('riwayatplp');
+    Route::get('/inventaris/stok-plp', [BarangController::class, 'indexplp'])->name('stokplp');
+    Route::post('/inventaris/stokbaru-plp', [BarangController::class, 'createplp'])->name('stokbaruplp');
+    Route::get('/inventaris/tambahbarang-plp', [BarangController::class, 'addbarangplp'])->name('tambahbarangplp');
+    Route::delete('/inventaris/deletebarang-plp/{id}', [BarangController::class, 'destroyplp'])->name('deletebarangplp');
+    Route::get('/inventaris/editbarang-plp/{id}', [BarangController::class, 'editplp'])->name('editbarangplp');
+    Route::put('/inventaris/updatebarang-plp/{id}', [BarangController::class, 'updateplp'])->name('updatebarangplp');
+
+    
+    
 });
 
 

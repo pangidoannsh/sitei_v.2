@@ -1,16 +1,16 @@
 @extends('layouts.main')
 
 @section('title')
-    SITEI | Tambah Staff Jurusan
+    SITEI | Tambah PLP
 @endsection
 
 @section('sub-title')
-Tambah Staff Jurusan
+Tambah PLP
 @endsection
 
 @section('content')
 
-<form action="{{url ('/user/create')}}" method="POST">
+<form action="{{url ('/plp/store')}}" method="POST">
         @csrf
 <div>
     <div class="row">

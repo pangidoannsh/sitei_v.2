@@ -112,10 +112,20 @@
               <li><a href="/statistik" class="dropdown-item mb-1 {{Request::is ('statistik*') ? 'text-success' : '' }}">Statistik</a></li>
             </ul>
               <li class="nav-item">
-                <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }} " aria-current="page" href="/inventaris/peminjamanmhs">Inventaris</a>
+                <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }} " aria-current="page" href="/inventaris/peminjaman-dosen">Inventaris</a>
               </li>
           </li>
 
+          @endif
+
+          {{-- Menu PLP --}}
+
+          @if (Str::length(Auth::guard('web')->user()) > 0)        
+          @if (Auth::guard('web')->user()->role_id == 12 )           
+            <li class="nav-item">
+              <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }} " aria-current="page" href="/inventaris/peminjaman-plp">Inventaris</a>
+            </li>
+          @endif                
           @endif
 
           {{-- Menu KP/TA Mahasiswa --}}
@@ -195,6 +205,9 @@
                 <a class="nav-link {{Request::is ('prodi*') ? 'text-success' : '' }}" aria-current="page" href="/prodi/riwayat">Riwayat</a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{Request::is ('inventaris*') ? 'text-success' : '' }}" aria-current="page" href="/inventaris/peminjamanadm">Inventaris</a>
           </li>
           
           @endif

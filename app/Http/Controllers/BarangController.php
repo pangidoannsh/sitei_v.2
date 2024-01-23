@@ -30,6 +30,20 @@ class BarangController extends Controller
         ]);
     }
 
+    public function indexplp()
+    {
+        $jumlah_barang = Barang::all()->count();
+        $jumlah_riwayat = Peminjaman::where('status', 'Selesai')->count();
+        $jumlah_pinjaman = Peminjaman::whereIn('status', ['usulan','Disetujui'])->count();
+        return view('inventaris.barangplp.index', [
+            'barang' => Barang::all(),
+            'jumlah_barang' => $jumlah_barang,
+            'jumlah_riwayat' => $jumlah_riwayat,
+            'jumlah_pinjaman' => $jumlah_pinjaman
+            
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,8 +60,23 @@ class BarangController extends Controller
         return redirect('/inventaris/stok')->with('message', 'Barang Berhasil Ditambahkan');
     }
 
+    public function createplp()
+    {
+        $barang = Barang::create([
+            'kode_barang' => request('kode_barang'),
+            'nama_barang' => request('nama_barang'),
+            'jumlah' => request('jumlah'),
+        ]); 
+        // return redirect()->route('stok');
+        return redirect('/inventaris/stok-plp')->with('message', 'Barang Berhasil Ditambahkan');
+    }
+
     public function addbarang(){
         return view('inventaris.barang.create');
+    }
+
+    public function addbarangplp(){
+        return view('inventaris.barangplp.create');
     }
     /**
      * Store a newly created resource in storage.
@@ -80,6 +109,12 @@ class BarangController extends Controller
         return view('inventaris.barang.edit', compact('barang'));
     }
 
+    public function editplp($id)
+    {
+        $barang = Barang::findOrFail($id);
+        return view('inventaris.barangplp.edit', compact('barang'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -94,6 +129,13 @@ class BarangController extends Controller
         return redirect(route('stok'))->with('message', 'Barang Berhasil Diubah');
     }
 
+    public function updateplp(Request $request, $id)
+    {
+        $barang = Barang::find($id);
+        $barang->update($request->all());
+        return redirect(route('stokplp'))->with('message', 'Barang Berhasil Diubah');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -101,6 +143,14 @@ class BarangController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $barang = Barang::find($id);
+        $barang->delete();
+
+        return redirect()->back();
+    }
+
+    public function destroyplp($id)
     {
         $barang = Barang::find($id);
         $barang->delete();

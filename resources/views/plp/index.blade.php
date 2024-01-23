@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    SITEI| Daftar Staff Jurusan
+    SITEI| Daftar PLP
 @endsection
 
 @section('sub-title')
-    Daftar Staff Jurusan
+    Daftar PLP
 @endsection
 
 @section('content')
@@ -36,9 +36,9 @@
           <td>{{$plp->username}}</td>
           <td>{{$plp->nama}}</td>
           <td>{{$plp->email}}</td>
-          <td></td>
+          <td>{{$plp->role->role_akses}}</td>
           <td>        
-            <a href="/plp/edit/{{$plp->id}}" class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>
+            <a href="{{ url('/plp/edit/'.$plp->id)}}" class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>
           </td>
         </tr>
     @endforeach

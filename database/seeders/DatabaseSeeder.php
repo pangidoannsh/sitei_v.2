@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Jam;
+use App\Models\PLP;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Dosen;
@@ -365,6 +366,14 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Edi Susilo, S.Pd., M.Kom., M.Eng',
             'nama_singkat' => 'ED',
             'email' => 'edisusilo.lecturer@unri.ac.id',
+        ]);
+
+        User::create([
+            'role_id' => 12,
+            'username' => 'jatwoko',
+            'nama' => 'Jatwoko',
+            'email' => 'jatwoko@gmail.com',
+            'password' => bcrypt('123456'),
         ]);
 
         Dosen::create([                       

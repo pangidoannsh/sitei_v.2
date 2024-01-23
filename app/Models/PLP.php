@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Role;
 use App\Models\Prodi;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 // use Illuminate\Foundation\Auth\User as Authenticatable;

@@ -1,28 +1,27 @@
 @extends('layouts.main')
 
 @section('title')
-    SITEI | Edit Staff Jurusan
+    SITEI | PLP
 @endsection
 
 @section('sub-title')
-Edit Staff Jurusan
+Edit PLP
 @endsection
 
 @section('content')
 
 <div class="container">
-  <a href="/user" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+  <a href="/plp" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
 </div>
 
-<form action="/user/edit/{{$user->id}}" method="POST">
-        @method('put')
+<form action="{{ url ('/plp/update/'.$plp->id) }}" method="POST">
         @csrf
 <div>
     <div class="row">
         <div class="col">
         <div class="mb-3 field">
             <label class="form-label">Username</label>
-            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $user->username) }}">
+            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $plp->username) }}">
             @error('username')
               <div class="invalid-feedback">
                   {{$message}}
@@ -32,7 +31,7 @@ Edit Staff Jurusan
 
         <div class="mb-3 field">
             <label class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $user->nama) }}">
+            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $plp->nama) }}">
             @error('nama')
               <div class="invalid-feedback">
                   {{$message}}
@@ -43,7 +42,7 @@ Edit Staff Jurusan
         <div class="col-md">
         <div class="mb-3 field">
             <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $plp->email) }}">
             @error('email')
               <div class="invalid-feedback">
                   {{$message}}
@@ -56,7 +55,7 @@ Edit Staff Jurusan
             <select name="role_id" class="form-select @error('role_id') is-invalid @enderror">
                 <option value="">-Pilih-</option>
                 @foreach ($roles as $role)
-                    <option value="{{$role->id}}" {{old('role_id',  $user->role_id) == $role->id ? 'selected' : null}}>{{$role->role_akses}}</option>
+                    <option value="{{$role->id}}" {{old('role_id',  $plp->role_id) == $role->id ? 'selected' : null}}>{{$role->role_akses}}</option>
                 @endforeach
             </select>
             @error('role_id')
@@ -69,9 +68,8 @@ Edit Staff Jurusan
         <button type="submit" class="btn btn-success float-right mt-4">Ubah</button>
     </form>
 
-    <form method="POST" action="/reset-password/user/{{$user->id}}" class="reset-password">
+    <form method="POST" action="{{ url('/reset-password/plp/'.$plp->id) }}" class="reset-password">
         @csrf
-        @method('PUT')
         <button class="btn btn-secondary mx-4 float-end mt-4" type="submit">Reset Password</button>
         </form>
 

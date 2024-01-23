@@ -30,8 +30,7 @@ class LoginController extends Controller
             return redirect('persetujuan-kp-skripsi');
         }elseif ($user->role_id == 11) {
             return redirect('persetujuan-kp-skripsi');
-        }
-         else {
+        }else {
             return redirect('/persetujuan-kp-skripsi');
         }
         
@@ -39,6 +38,8 @@ class LoginController extends Controller
         $user = Auth::guard('web')->user();
         if ($user->role_id == 1) {
             return redirect('/form');
+        } elseif ($user->role_id == 12) {
+            return redirect('/inventaris/peminjaman-plp');
         } else {
             return redirect('/persetujuan/admin/index');
         }

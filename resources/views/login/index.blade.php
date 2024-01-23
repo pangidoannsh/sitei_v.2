@@ -231,8 +231,8 @@
       <div class="col-12 text-center">
         <div>
           <span>Dikembangkan oleh</span>
-          <a class="pengembang" href="/developer" target="_blank">Prodi Teknik Informatika</a> <br>
-         <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/fahril-hadi"><small> Fahril Hadi</small></a> | <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti"><small>Rahul Ilsa Tajri Mukhti</small></a> |
+          <a class="pengembang" href="/developer" target="_blank">Tim Prodi Teknik Informatika</a> <br>
+         <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="https://fahrilhadi.com"><small> Fahril Hadi</small></a> | <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti"><small>Rahul Ilsa Tajri Mukhti</small></a> |
       <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi"><small>M. Seprinaldi</small></a>
         </div>
         <div class="mt-3">

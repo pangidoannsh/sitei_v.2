@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\plp;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PLPController extends Controller
 {
@@ -59,7 +64,7 @@ class PLPController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect('/user')->with('message', 'Data Berhasil Ditambahkan!');
+        return redirect('/plp')->with('message', 'Data Berhasil Ditambahkan!');
     }
 
     /**
@@ -79,12 +84,12 @@ class PLPController extends Controller
      * @param  \App\Models\plp  $plp
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('plp.edit', [
-            'user' => $user,
-            'roles' => Role::all()
-        ]);
+        $plp = PLP::find($id);
+        $roles = Role::all(); // Adjust with your actual Role model
+
+        return view('plp.edit', compact('plp', 'roles'));
     }
 
     /**
@@ -94,25 +99,18 @@ class PLPController extends Controller
      * @param  \App\Models\plp  $plp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PLP $user)
+    public function update(Request $request, $id)
     {
-        $rules = [
-            'role_id' => ['required'],
-            'nama' => ['required'],
-        ];
+        $plp = PLP::find($id)->update([
+            'role_id' => $request->role_id,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'nama' => $request->nama,
+            'email' => $request->email,
+        ]);
 
-        if ($request->username != $user->username) {
-            $rules['username'] = 'required|unique:users';
-        } elseif ($request->email != $user->email) {
-            $rules['email'] = 'required|unique:users|email';
-        }
-
-        $validated = $request->validate($rules);
-
-        PLP::where('id', $user->id)
-            ->update($validated);
-
-        return redirect('/user')->with('message', 'Data Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Data berhasil diubah')->showConfirmButton('Ok', '#28a745');
+        return redirect('/plp');
     }
 
     /**
