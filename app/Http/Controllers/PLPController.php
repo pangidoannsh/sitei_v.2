@@ -21,7 +21,7 @@ class PLPController extends Controller
     public function index()
     {
         return view('plp.index', [
-            'plp' => PLP::all(),
+            'plp' => User::where('role_id',12)->get(),
             'roles' => Role::all(),
             'prodis' => Prodi::all(),
         ]);
@@ -86,8 +86,8 @@ class PLPController extends Controller
      */
     public function edit($id)
     {
-        $plp = PLP::find($id);
-        $roles = Role::all(); // Adjust with your actual Role model
+        $plp = User::find($id);
+        $roles = Role::where('id', 12)->get(); // Adjust with your actual Role model
 
         return view('plp.edit', compact('plp', 'roles'));
     }
@@ -101,7 +101,7 @@ class PLPController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plp = PLP::find($id)->update([
+        $plp = User::find($id)->update([
             'role_id' => $request->role_id,
             'username' => $request->username,
             'password' => Hash::make($request->password),

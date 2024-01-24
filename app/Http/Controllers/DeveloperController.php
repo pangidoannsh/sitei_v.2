@@ -34,8 +34,8 @@ class DeveloperController extends Controller
     }
 
     public function index(){
-        $developers = Developer::all();
-        return view('developer.index', compact('developers'));
+        // $developers = Developer::all();
+        return view('developer.index');
     }
 
     /**

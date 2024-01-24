@@ -1409,7 +1409,7 @@ class PendaftaranSkripsiController extends Controller
         $penjadwalanSempro->mahasiswa_nim = $skripsi->mahasiswa_nim;
         $penjadwalanSempro->prodi_id = $skripsi->prodi_id;
         $penjadwalanSempro->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
-        $penjadwalanSempro->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
+        $penjadwalanSempro->pembimbingdua_nip = $skripsi->pembimbing_2_nip ?? null;
         $penjadwalanSempro->judul_proposal = $skripsi->judul_skripsi;
         $penjadwalanSempro->save();
 

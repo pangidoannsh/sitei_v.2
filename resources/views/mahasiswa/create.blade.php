@@ -106,7 +106,7 @@
             @enderror
         </div>
 
-        <div class="mb-3 field">
+        <!-- <div class="mb-3 field">
             <label for="role_id" class="form-label">Status</label>
             <select name="role_id" class="form-select @error('role_id') is-invalid @enderror">
                 <option value="">-Belum Dipilih-</option>
@@ -119,7 +119,8 @@
                 {{$message}}
             </div>
             @enderror
-        </div>
+        </div> -->
+
         <button type="submit" class="btn btn-success float-right mt-4">Tambah</button>
         </div>
     </div>

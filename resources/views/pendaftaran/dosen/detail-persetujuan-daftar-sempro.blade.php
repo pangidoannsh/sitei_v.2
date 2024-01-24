@@ -77,19 +77,19 @@
       <div class="row">
         <div class="col-6">
            <p class="card-title text-secondary text-sm " >KRS Semester Berjalan</p>
-        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->krs_berjalan_sempro )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->krs_berjalan )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >Kartu Hasil Studi</p>
-        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->khs_kpti_10 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->khs )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >Log Book</p>
         <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->logbook )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         </div>
         <div class="col-6">
           <p class="card-title text-secondary text-sm " >Proposal</p>
-        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->proposal )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->naskah )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >STI-30</p>
         <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_30 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         <p class="card-title text-secondary text-sm " >STI-31</p>
-        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_31_sempro )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text  text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_31 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
         </div>
       </div>
      

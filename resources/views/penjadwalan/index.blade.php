@@ -20,15 +20,15 @@
 
 @if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
     
-<!-- <div>
-<a href="{{url ('/form-kp/create')}}" class="btn kp btn-success mb-4">+ KP</a>
+<div>
+<!-- <a href="{{url ('/form-kp/create')}}" class="btn kp btn-success mb-4">+ KP</a>
 <a href="{{url('/form-sempro/create')}}" class="btn sempro btn-success mb-4">+ Sempro</a>
-<a href="{{url('/form-skripsi/create')}}" class="btn skripsi btn-success mb-4">+ Skripsi</a>
-<a href="#ModalClear" data-toggle="modal" class="btn skripsi btn-danger float-right mb-4"><span class="fa-solid fa-trash"></span></a>
+<a href="{{url('/form-skripsi/create')}}" class="btn skripsi btn-success mb-4">+ Skripsi</a> -->
+<!-- <a href="#ModalClear" data-toggle="modal" class="btn skripsi btn-danger float-right mb-4"><span class="fa-solid fa-trash"></span></a>
 <a href="{{url('/jadwalkan?download=true')}}" class="btn skripsi btn-success float-right mb-4" style="margin-right:10px;"><span class="fa-solid fa-download"></span></a>
 <a href="{{url('/jadwalkan')}}" class="btn jadwalkan btn-success float-right mb-4" style="margin-right:10px;">JADWALKAN</a>
-</a>
-</div> -->
+</a> -->
+</div>
 
 <div class="modal fade" id="ModalClear">
   <div class="modal-dialog modal-dialog-centered">
@@ -68,19 +68,18 @@
   <span class="px-2">|</span>      
   <li><a href="/riwayat-penjadwalan" class="px-1">Riwayat Penjadwalan (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li> -->
 
-  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
-  <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan (<span></span>)</a></li>
-    <span class="px-2">|</span> 
-    @endif
-    
+ @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+ <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
+    <span class="px-2">|</span>
+     @endif
     <li><a href="/form" class="breadcrumb-item active fw-bold text-success px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
     <span class="px-2">|</span> 
  
-    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span></span>)</a></li> 
+    <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodikp }}</span>)</a></li> 
     <span class="px-2">|</span>
-    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span></span>)</a></li>
+    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a></li>
     <span class="px-2">|</span>
-    <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span></span>)</a></li>
+    <li><a href="/prodi/riwayat" class="px-1">Riwayat (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a></li>
     @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
     <span class="px-2">|</span>
     <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan</a></li>
@@ -89,9 +88,14 @@
 
 </ol>
 
-
-
 <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
+  @if (Auth::guard('web')->user()->role_id == 2 || Auth::guard('web')->user()->role_id == 3 || Auth::guard('web')->user()->role_id == 4 )
+  <div>
+    <a href="{{url ('/form-kp/create')}}" class="btn kp btn-success mb-4">+ KP</a>
+<a href="{{url('/form-sempro/create')}}" class="btn sempro btn-success mb-4">+ Sempro</a>
+<a href="{{url('/form-skripsi/create')}}" class="btn skripsi btn-success mb-4">+ Skripsi</a>
+  </div>
+  @endif
   <thead class="table-dark">
     <tr>      
         <th class="text-center" scope="col">NIM</th>

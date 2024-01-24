@@ -277,7 +277,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     //RESET PASSWORD 
     Route::put('/reset-password/mahasiswa/{id}', [MahasiswaController::class, 'reset_password']);
     Route::put('/reset-password/dosen/{id}', [DosenController::class, 'reset_password']);
-    Route::post('/reset-password/plp/{id}', [UserController::class, 'reset_password']);
+    Route::put('/reset-password/user/{id}', [UserController::class, 'reset_password']);
 });
 
 

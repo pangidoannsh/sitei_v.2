@@ -1352,21 +1352,6 @@
                                   </div>
                                   </div>                        
                     
-                    @elseif($total_nilai < 55)
-                              <a href="#ModalApprove5"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>  
-                              <div class="modal fade"id="ModalApprove5">
-                                  <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                      <div class="modal-body">
-                                       <div class="container px-5 pt-5 pb-2 text-center">
-                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
-                                        <h5 >Nilai Seminar belum Mencukupi</h5>
-                                         <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
-                                       </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  </div> 
                    
 
                     @elseif($sempro->penjadwalan_sempro->status_seminar > 0)
@@ -1386,6 +1371,43 @@
                                   </div>
 
                     @elseif($nilaipenguji1 !== null && $nilaipenguji2 !== null && $nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga_nip == null || $nilaipenguji1 !== null && $nilaipenguji2 !== null && $nilaipenguji3 !== null && $sempro->penjadwalan_sempro->pengujitiga_nip !== null)
+
+                    @if($total_nilai < 60)
+                              <a href="#ModalGagal"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Gagal Seminar</a> 
+                              
+                              <div class="modal fade"id="ModalGagal">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                        <div class="container px-5 pt-5 pb-2">
+                                          <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                         <div class="row text-center">
+                                              <div class="col-4">
+                                              </div>
+                                              <div class="col-2">
+                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                              </div>
+                                              <div class="col-2">
+                                               <form action="/penilaian-sempro/gagal/{{$penjadwalan->id}}" method="POST">
+                                          @method('put')
+                                          @csrf
+                                          <button type="submit" class="btn btn-danger">Gagal</button>
+                                        </form>
+                                              </div>
+                                              <div class="col-4">
+                                              </div>
+                                            </div>
+                                        
+                                         
+                                        </div>
+                                      </div>
+                                        
+                                    
+                                    </div>
+                                  </div>
+                                    </div>
+                              @else
                               <a href="#ModalApprove7"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a> 
                               
                               <div class="modal fade"id="ModalApprove7">
@@ -1420,6 +1442,7 @@
                                     </div>
                                   </div>
                                     </div>
+                                    @endif
                    
                     @endif
 

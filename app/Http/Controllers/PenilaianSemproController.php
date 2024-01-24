@@ -24,10 +24,13 @@ class PenilaianSemproController extends Controller
 
         $dosenss = PenjadwalanKP::where('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->orWhere('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->get();
 
+        // $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $dosen->mahasiswa_nim )->latest('created_at')->first();
+
         return view('penilaiansempro.index', [
             'penjadwalan_sempros' => $dosen,
             'penjadwalan_skripsis' => $dosens,
             'penjadwalan_kps' => $dosenss,
+            // 'proposal' => $pendaftaran_skripsi,
         ]);
     }
 

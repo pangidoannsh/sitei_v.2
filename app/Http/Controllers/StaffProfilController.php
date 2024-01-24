@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StaffProfilController extends Controller
 {
@@ -33,12 +35,18 @@ class StaffProfilController extends Controller
             $user->password = Hash::make(request('password'));
 
             if ($user->save()) {
-                return redirect('/form')->with('message', 'Password Berhasil Diedit!');
+                // return redirect('/form')->with('message', 'Password Berhasil Diedit!');
+                Alert::success('Berhasil!', 'Password diperbarui!')->showConfirmButton('Ok', '#28a745');
+                return redirect('/persetujuan/admin/index');
             } else {
-                return back()->with('message', 'Password Salah!');
+                // return back()->with('message', 'Password Salah!');
+                Alert::error('Gagal!', 'Password Salah!')->showConfirmButton('Ok', '#dc3545');
+                 return  back();
             }            
         } else {
-            return back()->with('message', 'Password Salah!');
+            // return back()->with('message', 'Password Salah!');
+            Alert::error('Gagal!', 'Password Salah!')->showConfirmButton('Ok', '#dc3545');
+                 return  back();
         }
     }
 }

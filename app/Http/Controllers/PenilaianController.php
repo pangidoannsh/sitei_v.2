@@ -242,7 +242,7 @@ class PenilaianController extends Controller
 
     }
 
-    public function indexpembimbing()
+    public function indexpembimbing(PenjadwalanSempro $sempro)
     {        
         
         $dosen = PenjadwalanSempro::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu','<>', null)->
@@ -282,6 +282,8 @@ class PenilaianController extends Controller
         $jml_riwayat_sidang = PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->count();
 
         $jml_riwayat_kp = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->count();
+
+        // $sempro = PenjadwalanSempro::find($id);
 
         return view('penilaian.index-pembimbing', [
             'penjadwalan_sempros' => $dosen,

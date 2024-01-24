@@ -20,11 +20,7 @@ Daftar Bimbingan Skripsi
 </div>
 @endif
 
- @foreach ($pendaftaran_skripsi as $skripsi)
 
-@php
-$tanggalSelesaiSempro = $skripsi->tgl_semproselesai;
-@endphp
 
 
 <div class="container card p-4">
@@ -52,6 +48,7 @@ $tanggalSelesaiSempro = $skripsi->tgl_semproselesai;
 
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
+    <p class="alert-secondary p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Mahasiswa yang LEWAT BATAS, Anda berhak menghapus mahasiswa tersebut dari daftar bimbingan (Sudah tidak masuk remunerasi/SKSR)</p>
     <tr>      
         <th class="text-center px-0" scope="col">No.</th>
         <th class="text-center" scope="col">NIM</th>
@@ -66,8 +63,13 @@ $tanggalSelesaiSempro = $skripsi->tgl_semproselesai;
   </thead>
   <tbody>
 
-   
+    @foreach ($pendaftaran_skripsi as $skripsi)
+
+@php
+$tanggalSelesaiSempro = $skripsi->tgl_semproselesai ?? null;
+@endphp
 <div></div>
+
         <tr>        
             <td class="text-center px-1 py-2">{{$loop->iteration}}</td>                             
             <td class="text-center px-1 py-2">{{$skripsi->mahasiswa->nim}}</td>                             
@@ -229,6 +231,8 @@ $tanggalSelesaiSempro = $skripsi->tgl_semproselesai;
 
 
 @endsection
+<br>
+<br>
 
 @section('footer')
 <section class="bg-dark p-1">

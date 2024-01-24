@@ -150,7 +150,7 @@
           </div>
           <div class="vl mt-3"></div>
           <div class="mt-4 caption">
-            <h4>Sistem Informasi Teknik Elektro <br> dan Informatika</h4>
+            <h4 class="text-left">Sistem Informasi Teknik Elektro <br> dan Informatika</h4>
           </div>
           </div>
 
@@ -232,8 +232,8 @@
         <div>
           <span>Dikembangkan oleh</span>
           <a class="pengembang" href="/developer" target="_blank">Tim Prodi Teknik Informatika</a> <br>
-         <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="https://fahrilhadi.com"><small> Fahril Hadi</small></a> | <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti"><small>Rahul Ilsa Tajri Mukhti</small></a> |
-      <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi"><small>M. Seprinaldi</small></a>
+         <!-- <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="https://fahrilhadi.com"><small> Fahril Hadi</small></a> | <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/rahul-ilsa-tajri-mukhti"><small>Rahul Ilsa Tajri Mukhti</small></a> |
+      <a class="text-muted text-decoration-none" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi"><small>M. Seprinaldi</small></a> -->
         </div>
         <div class="mt-3">
           <small> Copyright &copy; 2023 - {{ now()->year }}. All Rights Reserved.</small>

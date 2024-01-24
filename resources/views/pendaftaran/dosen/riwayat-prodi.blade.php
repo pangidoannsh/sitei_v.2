@@ -48,7 +48,7 @@
     <li><a href="/persetujuan/admin/index" class=" px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
     <span class="px-2">|</span> 
     @endif
-      <li><a href="/form" class="px-1">Seminar (<span></span>)</a></li>
+      <li><a href="/form" class="px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
     <span class="px-2">|</span> 
     <li><a href="/kerja-praktek/admin/index" class="px-1">Data KP (<span>{{ $jml_prodi_kp }}</span>)</a></li>
       

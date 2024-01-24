@@ -73,6 +73,12 @@ class PenjadwalanSempro extends Model
     {
         return $this->belongsTo(Dosen::class, 'pengujitiga_nip', 'nip');
     }
+    
+    
+    public function pendaftaranskripsi()
+    {
+        return $this->belongsTo(PendaftaranSkripsi::class, 'mahasiswa_nim', 'mahasiswa_nim');
+    }
 
     public function dosen()
     {

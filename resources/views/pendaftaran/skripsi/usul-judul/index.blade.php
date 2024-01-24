@@ -698,7 +698,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
 @if($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' )
 <div class="container">
     <div class="alert alert-danger" role="alert"> 
-        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Seminar Proposal Ulang!</span>
+        <i class="fas fa-exclamation-triangle fw-bold"></i> <span class="pl-2 fw-bold">{{$pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Daftar Sempro Ulang!</span>
         
     </div>
 </div>

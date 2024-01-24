@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MahasiswaProfilController extends Controller
 {
@@ -33,12 +35,17 @@ class MahasiswaProfilController extends Controller
             $mahasiswa->password = Hash::make(request('password'));
 
             if ($mahasiswa->save()) {
-                return redirect('/seminar')->with('message', 'Password Berhasil Diedit!');
+                Alert::success('Berhasil!', 'Password diperbarui!')->showConfirmButton('Ok', '#28a745');
+                return redirect('/kp-skripsi');
             } else {
-                return back()->with('message', 'Password Salah!');
+                // return back()->with('message', 'Password Salah!');
+                 Alert::error('Gagal!', 'Password Salah!')->showConfirmButton('Ok', '#dc3545');
+                 return  back();
             }        
         } else {
-            return back()->with('message', 'Password Salah!');
+            // return back()->with('message', 'Password Salah!');
+            Alert::error('Gagal!', 'Password Salah!')->showConfirmButton('Ok', '#dc3545');
+            return  back();
         }
     }
 }

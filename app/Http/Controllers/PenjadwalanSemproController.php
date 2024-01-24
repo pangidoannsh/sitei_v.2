@@ -51,8 +51,8 @@ class PenjadwalanSemproController extends Controller
                 'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get()->sortBy('nama'),
                 'dosens' => Dosen::all(),
                 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-                'jamsels' => JamSel::all()->sortBy('id'),
-                'jamkams' => JamKam::all()->sortBy('id'),                
+                // 'jamsels' => JamSel::all()->sortBy('id'),
+                // 'jamkams' => JamKam::all()->sortBy('id'),                
             ]);
         }        
         if (auth()->user()->role_id == 3) {            
@@ -61,8 +61,8 @@ class PenjadwalanSemproController extends Controller
                 'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
                 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-                'jamsels' => JamSel::all()->sortBy('id'),
-                'jamkams' => JamKam::all()->sortBy('id'),                       
+                // 'jamsels' => JamSel::all()->sortBy('id'),
+                // 'jamkams' => JamKam::all()->sortBy('id'),                       
             ]);
         }        
         if (auth()->user()->role_id == 4) {            
@@ -71,8 +71,8 @@ class PenjadwalanSemproController extends Controller
                 'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
                 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'), 
-                'jamsels' => JamSel::all()->sortBy('id'),
-                'jamkams' => JamKam::all()->sortBy('id'),                    
+                // 'jamsels' => JamSel::all()->sortBy('id'),
+                // 'jamkams' => JamKam::all()->sortBy('id'),                    
             ]);
         }        
     }
@@ -120,8 +120,8 @@ class PenjadwalanSemproController extends Controller
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),
             'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-            'jamsels' => JamSel::all()->sortBy('id'),
-            'jamkams' => JamKam::all()->sortBy('id'),
+            // 'jamsels' => JamSel::all()->sortBy('id'),
+            // 'jamkams' => JamKam::all()->sortBy('id'),
         ]);
     }
 
@@ -213,8 +213,8 @@ class PenjadwalanSemproController extends Controller
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),
             'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-            'jamsels' => JamSel::all()->sortBy('id'),
-            'jamkams' => JamKam::all()->sortBy('id'),
+            // 'jamsels' => JamSel::all()->sortBy('id'),
+            // 'jamkams' => JamKam::all()->sortBy('id'),
         ]);
     }
 
@@ -372,7 +372,7 @@ public function gagal($id, PendaftaranSkripsi $pendaftaranid)
 {
     $jadwal = PenjadwalanSempro::find($id);
 
-    $jadwal->status_seminar = null;
+    $jadwal->status_seminar = 1;
     $jadwal->save();
 
     // $pendaftaran_skripsi = PendaftaranSkripsi::whereNotNull('mahasiswa_nim',  PenjadwalanSempro::find($mahasiswa_nim) )->latest('created_at')->first();
@@ -382,9 +382,10 @@ public function gagal($id, PendaftaranSkripsi $pendaftaranid)
     $pendaftaran_skripsi->status_skripsi = 'DAFTAR SEMPRO ULANG';
     $pendaftaran_skripsi->keterangan = 'Belum Lulus Seminar Proposal';
     $pendaftaran_skripsi->tgl_semproselesai = Carbon::now();
+    $pendaftaran_skripsi->alasan = 'Anda belum lulus Seminar Proposal';
     $pendaftaran_skripsi->save();
 
-    Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+    Alert::success('Berhasil!', 'Seminar telah selesai')->showConfirmButton('Ok', '#dc3545');
         return back();
 }
 

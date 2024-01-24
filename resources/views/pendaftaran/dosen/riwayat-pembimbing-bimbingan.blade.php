@@ -230,7 +230,7 @@
             <p>1. {{$sempro->pengujisatu->nama_singkat}}</p>
             <p>2. {{$sempro->pengujidua->nama_singkat}}</p>
             @if ($sempro->pengujitiga == !null)
-            <p>3. {{$sempro->pengujitiga->nama_singkat}}</p>                               
+            <p>3. {{$sempro->penilaian->presentasi}}</p>                               
             @endif
           </td> 
            @if ($sempro->status_seminar == 1)

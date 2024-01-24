@@ -53,8 +53,8 @@ class PenjadwalanSkripsiController extends Controller
                 'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
                 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-                'jamsels' => JamSel::all()->sortBy('id'),
-                'jamkams' => JamKam::all()->sortBy('id'),                      
+                // 'jamsels' => JamSel::all()->sortBy('id'),
+                // 'jamkams' => JamKam::all()->sortBy('id'),                      
             ]);
         }        
         if (auth()->user()->role_id == 3) {            
@@ -63,8 +63,8 @@ class PenjadwalanSkripsiController extends Controller
                 'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
                 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-                'jamsels' => JamSel::all()->sortBy('id'),
-                'jamkams' => JamKam::all()->sortBy('id'),                      
+                // 'jamsels' => JamSel::all()->sortBy('id'),
+                // 'jamkams' => JamKam::all()->sortBy('id'),                      
             ]);
         }        
         if (auth()->user()->role_id == 4) {            
@@ -73,8 +73,8 @@ class PenjadwalanSkripsiController extends Controller
                 'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
                 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-                'jamsels' => JamSel::all()->sortBy('id'),
-                'jamkams' => JamKam::all()->sortBy('id'),               
+                // 'jamsels' => JamSel::all()->sortBy('id'),
+                // 'jamkams' => JamKam::all()->sortBy('id'),               
             ]);
         }        
     }
@@ -126,8 +126,8 @@ class PenjadwalanSkripsiController extends Controller
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),
             'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-            'jamsels' => JamSel::all()->sortBy('id'),
-            'jamkams' => JamKam::all()->sortBy('id'),
+            // 'jamsels' => JamSel::all()->sortBy('id'),
+            // 'jamkams' => JamKam::all()->sortBy('id'),
         ]);
     }
 
@@ -221,8 +221,8 @@ class PenjadwalanSkripsiController extends Controller
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'),
             'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
-            'jamsels' => JamSel::all()->sortBy('id'),
-            'jamkams' => JamKam::all()->sortBy('id'),
+            // 'jamsels' => JamSel::all()->sortBy('id'),
+            // 'jamkams' => JamKam::all()->sortBy('id'),
         ]);
     }
 
