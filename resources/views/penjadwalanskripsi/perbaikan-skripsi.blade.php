@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>STI-16 Lembar Kontrol Perbaikan Skripsi</title>
     @php
@@ -18,14 +19,14 @@
         /*design table 1*/
         .table1 {
             font-family: Arial, sans-serif;
-            font-size:13px;
+            font-size: 13px;
             color: #232323;
             border-collapse: collapse;
             border: 1px solid #999;
             padding: 8px 20px;
-            margin-top:30px;
-            margin-left:auto;
-            margin-right:auto;
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         table tr .text2 {
@@ -56,7 +57,7 @@
         @page {
             size: A4 portrait;
             margin: 1cm;
-            padding: 0; // you can set margin and padding 0 
+            padding: 0; // you can set margin and padding 0
         }
 
         body {
@@ -86,7 +87,6 @@
             right: 73%;
             transform: translate(-50%, -50%);
         }
-
     </style>
 </head>
 
@@ -140,7 +140,8 @@
         <table width="100%" style="text-align:center; margin-top:0px;">
             <tr>
                 <td style="font-size:12pt; text-decoration: underline;">
-                    <strong>LEMBAR KONTROL PERBAIKAN SKRIPSI</strong> </td>
+                    <strong>LEMBAR KONTROL PERBAIKAN SKRIPSI</strong>
+                </td>
             </tr>
         </table>
 
@@ -155,121 +156,134 @@
                         <strong style="border:1px solid #000; padding:4px">STI-16</strong>
                     @endif
                 </td>
-            </tr>         
+            </tr>
         </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-5px; line-height: 1.5">
-        <tr class="text2">
-            <td width="27%">Nama Mahasiswa</td>
-            <td>:</td>
-            <td width="70%">{{$penjadwalan->mahasiswa->nama}}</td>
-        </tr>
-        <tr>
-            <td width="27%">NIM</td>
-            <td>:</td>
-            <td width="70%">{{$penjadwalan->mahasiswa->nim}}</td>
-        </tr>
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-5px; line-height: 1.5">
+            <tr class="text2">
+                <td width="27%">Nama Mahasiswa</td>
+                <td>:</td>
+                <td width="70%">{{ $penjadwalan->mahasiswa->nama }}</td>
+            </tr>
+            <tr>
+                <td width="27%">NIM</td>
+                <td>:</td>
+                <td width="70%">{{ $penjadwalan->mahasiswa->nim }}</td>
+            </tr>
 
-        <tr>
-            <td width="27%">Judul Skripsi</td>
-            <td>:</td>
-            <td>{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}</td>
-        </tr>
-        <tr>
-            <td width="27%">Tanggal Sidang</td>
-            <td>:</td>
-            <td width="70%">{{Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y')}}</td>
-        </tr>
-    </table>
+            <tr>
+                <td width="27%">Judul Skripsi</td>
+                <td>:</td>
+                <td>{{ $penjadwalan->revisi_skripsi != null ? $penjadwalan->revisi_skripsi : $penjadwalan->judul_skripsi }}
+                </td>
+            </tr>
+            <tr>
+                <td width="27%">Tanggal Sidang</td>
+                <td>:</td>
+                <td width="70%">{{ Carbon::parse($penjadwalan->tanggal)->translatedFormat('l, d F Y') }}</td>
+            </tr>
+        </table>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top: -10px;">
-        <tr>
-            <td width="27%">Dosen Penguji ( @if ($penjadwalan->pengujisatu_nip == $penilaianpenguji->penguji->nip)1 @elseif ($penjadwalan->pengujidua_nip == $penilaianpenguji->penguji->nip) 2 @elseif ($penjadwalan->pengujitiga_nip == $penilaianpenguji->penguji->nip) 3 @endif)</td>
-            <td>:</td>
-            <td width="70%">{{$penilaianpenguji->penguji->nama}}</td>
-        </tr>
-    </table>
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top: -10px;">
+            <tr>
+                <td width="27%">Dosen Penguji ( @if ($penjadwalan->pengujisatu_nip == $penilaianpenguji->penguji->nip)
+                        1
+                    @elseif ($penjadwalan->pengujidua_nip == $penilaianpenguji->penguji->nip)
+                        2
+                    @elseif ($penjadwalan->pengujitiga_nip == $penilaianpenguji->penguji->nip)
+                        3
+                    @endif)</td>
+                <td>:</td>
+                <td width="70%">{{ $penilaianpenguji->penguji->nama }}</td>
+            </tr>
+        </table>
 
-    <!-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
+        <!-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
         <tr class="text2">
             <td width="70%" style="font-size:10px"><i>*coret yang tidak perlu</i></td>
         </tr>
     </table> -->
 
-    <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:-10px;">
-        <tr>
-            <th class="table1" style="padding: 5px" width="10px">No</th>
-            <th class="table1" style="padding: 5px">Saran/Perbaikan</th>
-            <th class="table1" style="padding: 5px" width="10px">Paraf Pembimbing</th>
-        </tr>
-        <tr>
-            <td class="table1" style="padding: 5px; text-align:center;">1</td>  
-            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah1}}</td>                
-            <td class="table1" style="padding: 5px"></td>                        
-        </tr>
-        
-        <tr>
-            <td class="table1" style="padding: 5px; text-align:center;">2</td>  
-            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah2}}</td>              
-            <td class="table1" style="padding: 5px"></td>   
-        </tr>
-        
-        <tr>
-            <td class="table1" style="padding: 5px; text-align:center;">3</td>  
-            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah3}}</td>                
-            <td class="table1" style="padding: 5px"></td>                        
-        </tr>  
+        <table width="100%" class="table1" style="font-family: Arial, sans-serif; margin-top:-10px;">
+            <tr>
+                <th class="table1" style="padding: 5px" width="10px">No</th>
+                <th class="table1" style="padding: 5px">Saran/Perbaikan</th>
+                <th class="table1" style="padding: 5px" width="10px">Paraf Pembimbing</th>
+            </tr>
+            <tr>
+                <td class="table1" style="padding: 5px; text-align:center;">1</td>
+                <td class="table1" style="padding: 5px">{{ $penilaianpenguji->revisi_naskah1 }}</td>
+                <td class="table1" style="padding: 5px"></td>
+            </tr>
 
-        <tr>
-            <td class="table1" style="padding: 5px; text-align:center;">4</td>  
-            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah4}}</td>
-            <td class="table1" style="padding: 5px"></td>                        
-        </tr>  
+            <tr>
+                <td class="table1" style="padding: 5px; text-align:center;">2</td>
+                <td class="table1" style="padding: 5px">{{ $penilaianpenguji->revisi_naskah2 }}</td>
+                <td class="table1" style="padding: 5px"></td>
+            </tr>
 
-        <tr>
-            <td class="table1" style="padding: 5px; text-align:center;">5</td>  
-            <td class="table1" style="padding: 5px">{{$penilaianpenguji->revisi_naskah5}}</td>               
-            <td class="table1" style="padding: 5px"></td>                        
-        </tr>           
-    </table>
+            <tr>
+                <td class="table1" style="padding: 5px; text-align:center;">3</td>
+                <td class="table1" style="padding: 5px">{{ $penilaianpenguji->revisi_naskah3 }}</td>
+                <td class="table1" style="padding: 5px"></td>
+            </tr>
 
-    <table width="100%" style="font-family: Arial, sans-serif; margin-top:-20px;">
-        <tr>
-            <td width="60%" align="right">
-                <!-- Disini untuk perintah Qr code -->
-            </td>
-            <td class="text" style="text-align: left;">
-                <div class="container">
-                    <p>Pekanbaru, {{Carbon::parse($penjadwalan->tanggal)->translatedFormat('d F Y')}} </p>
-                    <p style="margin-top:-10px;">Dosen Penguji</p>
-                    <div class="ttd">
-                        <img src="data:img/png;base64, {!! $qrcode !!}">
+            <tr>
+                <td class="table1" style="padding: 5px; text-align:center;">4</td>
+                <td class="table1" style="padding: 5px">{{ $penilaianpenguji->revisi_naskah4 }}</td>
+                <td class="table1" style="padding: 5px"></td>
+            </tr>
+
+            <tr>
+                <td class="table1" style="padding: 5px; text-align:center;">5</td>
+                <td class="table1" style="padding: 5px">{{ $penilaianpenguji->revisi_naskah5 }}</td>
+                <td class="table1" style="padding: 5px"></td>
+            </tr>
+        </table>
+
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-20px;">
+            <tr>
+                <td width="60%" align="right">
+                    <!-- Disini untuk perintah Qr code -->
+                </td>
+                <td class="text" style="text-align: left;">
+                    <div class="container">
+                        <p>Pekanbaru, {{ Carbon::parse($penjadwalan->tanggal)->translatedFormat('d F Y') }} </p>
+                        <p style="margin-top:-10px;">Dosen Penguji</p>
+                        <div class="ttd">
+                            <img src="data:img/png;base64, {!! $qrcode !!}">
+                        </div>
+                        <br><br><br><br><br><br>
+                        <strong
+                            style="text-decoration: underline; ">{{ $penilaianpenguji->penguji->nama }}</strong><br>NIP.
+                        {{ $penilaianpenguji->penguji->nip }}
                     </div>
-                    <br><br><br><br><br><br>
-                    <strong style="text-decoration: underline; ">{{$penilaianpenguji->penguji->nama}}</strong><br>NIP. {{$penilaianpenguji->penguji->nip}}
-                </div>
-                <br>
-            </td>
-        </tr>
-    </table>
+                    <br>
+                </td>
+            </tr>
+        </table>
 
-    <!--<table width="100%">-->
-    <!--    <tr>-->
-    <!--        <td style="font-size:10px;"><i>*catatan:</i></td>  -->
-    <!--    </tr>-->
-        
-    <!--    <tr>-->
-    <!--    <td style="font-size:10px;"><i><b>Dosen penguji disarankan langsung membubuhkan tanda tangan pada lembar perbaikan</b></i></td>                -->
-    <!--    </tr>-->
-        
-    <!--    <tr>-->
-    <!--    <td style="font-size:10px;"><i>Lembar ini dapat diminta langsung oleh mahasiswa ke Admin Prodi pasca Sidang Skripsi</i></td>                        -->
-    <!--    </tr>   -->
-    <!--</table>-->
-</div>
+        <!--<table width="100%">-->
+        <!--    <tr>-->
+        <!--        <td style="font-size:10px;"><i>*catatan:</i></td>  -->
+        <!--    </tr>-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <!--    <tr>-->
+        <!--    <td style="font-size:10px;"><i><b>Dosen penguji disarankan langsung membubuhkan tanda tangan pada lembar perbaikan</b></i></td>                -->
+        <!--    </tr>-->
+
+        <!--    <tr>-->
+        <!--    <td style="font-size:10px;"><i>Lembar ini dapat diminta langsung oleh mahasiswa ke Admin Prodi pasca Sidang Skripsi</i></td>                        -->
+        <!--    </tr>   -->
+        <!--</table>-->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

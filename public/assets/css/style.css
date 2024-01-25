@@ -337,6 +337,12 @@ a:hover .custom-tooltip {
     color: #CE8854;
 } */
 
+@media screen and (max-width: 768px) {
+    .cardskripsi {
+    margin-bottom: 50px;
+    }
+}
+
 .kpindex:hover img {
     transform: scale(1.01);
     background-color: #e1ff00;
@@ -1075,6 +1081,10 @@ table thead tr th {
 
 footer {
     margin-top: 20px;
+}
+
+.footer-usulan-detail-kp {
+    padding-top: 300px !important;
 }
 
 footer strong {
