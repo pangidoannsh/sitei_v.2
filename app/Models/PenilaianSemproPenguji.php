@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
+use App\Models\PenjadwalanSempro;
+use App\Models\PendaftaranSkripsi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PenilaianSemproPenguji extends Model
 {
@@ -48,6 +52,11 @@ class PenilaianSemproPenguji extends Model
     public function penjadwalan_sempro()
     {
         return $this->belongsTo(PenjadwalanSempro::class);
+    }
+    
+    public function pendaftaranskripsi()
+    {
+        return $this->belongsTo(PendaftaranSkripsi::class);
     }
 
     public function penguji()

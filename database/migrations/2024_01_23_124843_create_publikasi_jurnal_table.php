@@ -16,11 +16,13 @@ class CreatePublikasiJurnalTable extends Migration
     {
         Schema::create('publikasi_jurnal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penjadwalan_skripsi_id');
+            $table->foreignId('pendaftaran_skripsi_id');
+            $table->foreignId('penjadwalan_skripsi_id')->nullable();
+            $table->foreignId('mahasiswa_nim')->nullable();
             $table->string('indeksasi_jurnal')->nullable();
             $table->string('judul_jurnal')->nullable();
             $table->string('status_publikasi_jurnal')->nullable();
-            $table->string('nilai');
+            $table->string('nilai')->nullable();
             $table->timestamps();
         });
     }

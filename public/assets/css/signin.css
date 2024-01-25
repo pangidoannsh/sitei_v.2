@@ -26,13 +26,13 @@ h2 {
 }
 
 .btn-login {
-    /* background-color: #00923f; */
+    background-color: #00923f;
     height: 45px;
     color: white;
     font-size: medium;
 }
 
 .btn-login:hover {
-    /* background-color: #047334; */
+    background-color: #028a3d;
     color: white;
 }

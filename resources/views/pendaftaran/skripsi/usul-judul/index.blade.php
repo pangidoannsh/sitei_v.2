@@ -830,7 +830,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
             <a href="/daftar-sempro/detail/{{($skripsi->id)}}" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" ><i class="fas fa-info-circle"></i> <span class="custom-tooltip">Lihat Detail</span></a>
             
                 @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' )
-                <a href="/jadwal" class="badge p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Jadwal"><img height="25" width="25" src="/assets/img/calendar.png"  alt="..." class="zoom-image"></a>
+                <a href="/jadwal/mahasiswa" class="badge p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Jadwal"><img height="25" width="25" src="/assets/img/calendar.png"  alt="..." class="zoom-image"></a>
                 @endif
                 @if ($skripsi->status_skripsi == 'SEMPRO SELESAI' )
                 <a href="/seminar" class="badge btn btn-dark p-1 mb-1" data-bs-toggle="tooltip" ><i class="fas fa-history"></i> <span class="custom-tooltip">Riwayat Seminar</span></a>
@@ -1201,7 +1201,7 @@ $tanggalPerpanjangan1 = $pendaftaran_skripsi->tgl_disetujui_perpanjangan1;
              
 
                 @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN')
-                <a href="/jadwal" class="badge p-1" data-bs-toggle="tooltip" title="Lihat Jadwal"><img height="25" width="25" src="/assets/img/calendar.png"  alt="..." class="zoom-image"></a>
+                <a href="/jadwal/mahasiswa" class="badge p-1" data-bs-toggle="tooltip" title="Lihat Jadwal"><img height="25" width="25" src="/assets/img/calendar.png"  alt="..." class="zoom-image"></a>
                 @endif
 
 

@@ -13,6 +13,7 @@ use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
+use App\Models\PublikasiJurnal;
 use App\Models\PenjadwalanSempro;
 use App\Models\PendaftaranSkripsi;
 use App\Models\PenjadwalanSkripsi;
@@ -198,11 +199,16 @@ class PenjadwalanSkripsiController extends Controller
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $edit->mahasiswa_nim )->latest('created_at')->first();
         // $pendaftaran_skripsi = PendaftaranSkripsi::whereNotNull('mahasiswa_nim',  PenjadwalanSempro::find($mahasiswa_nim) )->latest('created_at')->first();
 
+        $pendaftaran_skripsi->penjadwalan_skripsi_id = $edit->id;
         $pendaftaran_skripsi->status_skripsi = 'SIDANG DIJADWALKAN';
         $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
         $pendaftaran_skripsi->tgl_disetujui_jadwal_sidang = Carbon::now();
         $pendaftaran_skripsi->update();
-
+        
+        
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $edit->mahasiswa_nim)->latest('created_at')->first();
+        $jurnal->penjadwalan_skripsi_id = $edit->id;
+        $jurnal->update();
 
 
         // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
@@ -587,6 +593,18 @@ class PenjadwalanSkripsiController extends Controller
         } else {
             return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Catatan Berhasil ditambah!');
         }
+        
+    }
+    
+    public function nilaijurnal(Request $request, $id)
+    {    
+        $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
+        $jurnal = PublikasiJurnal::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)->get();
+        $jurnal->nilai = $request->nilai;        
+        $jurnal->update();
+
+        Alert::success('Berhasil!', 'Nilai berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
+        return back();
         
     }
 

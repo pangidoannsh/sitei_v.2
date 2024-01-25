@@ -106,7 +106,15 @@ Edit Penilaian Sidang Skripsi
         <h5 class="text-bold">Perbaikan Penguji (Sempro)</h5>
   <hr class="border border-success">
 
-  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
+  <!-- <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
+
+  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p> -->
+
+         <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
         <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujisatu->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
         <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
@@ -114,6 +122,7 @@ Edit Penilaian Sidang Skripsi
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
         <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujitiga->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
         @endif
+
             
 
     </div>
@@ -121,14 +130,14 @@ Edit Penilaian Sidang Skripsi
       <h5 class="text-bold">Publikasi Jurnal</h5>
         <hr class="border border-success">
 
-        <!-- <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
-        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->indeksasi_jurnal}}</p>
-        @if ($skripsi->penjadwalan_skripsi->indeksasi_jurnal !== 'Tanpa Jurnal')
+        <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
+        <p class="card-text text-start" >{{$jurnal->indeksasi_jurnal}}</p>
+        @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
         <p class="card-title text-secondary text-sm" >Judul Jurnal</p>
-        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->judul_jurnal}}</p>
+        <p class="card-text text-start" >{{$jurnal->judul_jurnal}}</p>
         <p class="card-title text-secondary text-sm" >Status Publikasi Jurnal</p>
-        <p class="card-text text-start" >{{$skripsi->penjadwalan_skripsi->status_publikasi_jurnal}}</p>
-        @endif -->
+        <p class="card-text text-start" >{{$jurnal->status_publikasi_jurnal}}</p>
+        @endif
     </div>
   </div>
 </div>
@@ -1211,7 +1220,7 @@ Edit Penilaian Sidang Skripsi
                                                     </td>
                                                 </tr>
 
-                                                <tr>
+                                                <!-- <tr>
                                                     <td colspan="2">Total Nilai Penguji</td>
                                                     <td class="bg-success text-center">45</td>
                                                     <td class="text-center">{{ $nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_angka : '-' }}
@@ -1235,9 +1244,9 @@ Edit Penilaian Sidang Skripsi
                                                     <td class="text-center" colspan="3">
                                                         <h3 class="text-bold">
                                                         @if ($nilaipenguji1 == '' && $nilaipenguji2 == '' && $nilaipenguji3 == '')
-                                          -
+                                          - -->
                                           @else
-                                              <?php
+                                              <!-- <?php
                                                 $nilai_masuk=0;
                                                 if(!empty($nilaipenguji1)){
                                                   $nilai_masuk=$nilai_masuk+1;
@@ -1261,12 +1270,12 @@ Edit Penilaian Sidang Skripsi
                                                   $penguji3=0;
                                                 }
                                                 $nilaitotalpenguji=round(($penguji1+$penguji2+$penguji3)/$nilai_masuk);
-                                                ?>
+                                                ?> -->
                                             {{ $nilaitotalpenguji }}
                                           @endif
-                                                        </h3>
+                                                        <!-- </h3>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -1338,7 +1347,7 @@ Edit Penilaian Sidang Skripsi
                                                     </td>
                                                 </tr>
 
-                                                <tr>
+                                                <!-- <tr>
                                                     <td colspan="2">Total Nilai Pembimbing</td>
                                                     <td class="bg-success text-center">55</td>
                                                     <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_angka : '-' }}
@@ -1358,9 +1367,9 @@ Edit Penilaian Sidang Skripsi
                                                     <td class="text-center" colspan="2">
                                                         <h3 class="text-bold">
                                                         @if ($nilaipembimbing1 == '' && $nilaipembimbing2 == '')
-                                          -
+                                          - -->
                                           @else
-                                              <?php
+                                              <!-- <?php
                                                 $nilai_masuk1=0;
                                                 
                                                 if(!empty($nilaipembimbing1)){
@@ -1378,12 +1387,12 @@ Edit Penilaian Sidang Skripsi
                                                   $pembimbing2=0;
                                                 }
                                                 $nilaitotalpembimbing = round(($pembimbing1+$pembimbing2)/$nilai_masuk1);
-                                              ?>
-                                          {{ $nilaitotalpembimbing }}
+                                              ?> -->
+                                          <!-- {{ $nilaitotalpembimbing }}
                                           @endif
                                                         </h3>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
 
                                             </tbody>
                                         </table>
@@ -1523,11 +1532,28 @@ Edit Penilaian Sidang Skripsi
                               <div class="mb-3 gridratakiri">
                                 <label class="form-label">Catatan</label>
                                 <input type="text" name="catatan" class="form-control" value="{{ $skripsi->penjadwalan_skripsi->catatan != null ? $skripsi->penjadwalan_skripsi->catatan : '' }}">
+                                <button type="submit" class="btn btn-success my-3">+ Catatan</button>
                               </div>                                            
-                              <button type="submit" class="btn btn-success float-left">+ Catatan</button>
                         </form>
                         @else
                         @endif
+                        
+                        @if ($total_nilai <= 60)
+                        <div class="mb-3 gridratakiri">
+                          <form action="/nilaijurnal/create/{{$skripsi->penjadwalan_skripsi->id}}" method="POST">
+                        @method('put')
+                        @csrf
+                      <div class="fw-bold mb-2">Input Nilai Jurnal</div>                       
+                      <input type="number" name="nilai" class="form-control" value="{{ $jurnal->nilai != null ? $jurnal->nilai : '' }}" min="0" max="100">  
+                      </div>
+                    <button type="submit" class="btn  btn-success">+ Nilai</button>
+                </div>
+                </form>
+                </div>
+                        @else
+                        @endif
+
+
 
                          @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
                                     <a href="#ModalApprove1"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>  

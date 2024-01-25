@@ -98,10 +98,12 @@
         <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->logbook )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
               <p class="card-title text-secondary text-sm " >Bukti Pasang Desain Poster</p>
         <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->pasang_poster )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
-       
+       @if($skripsi->url_poster !== null)
         <p class="card-title text-secondary text-sm" >URL Poster Skripsi</p>
-        <!-- <a href="{{ url($skripsi->url_poster) }}">{{$skripsi->url_poster}}</a> -->
         <p class="card-text text-start text-primary" ><a formtarget="_blank" target="_blank" href="https://{{$skripsi->url_poster}}">{{$skripsi->url_poster}}</a> </p>
+        @else
+
+        @endif
           <p class="card-title text-secondary text-sm " >STI-30</p>
         <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_30_skripsi )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p> 
       

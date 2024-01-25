@@ -146,6 +146,7 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
     Route::get('/profil-mhs/editpasswordmhs', [MahasiswaProfilController::class, 'editpswmhs']);
     Route::put('/profil-mhs/editpasswordmhs', [MahasiswaProfilController::class, 'updatepswmhs']);
     Route::get('/jadwal', [PenjadwalanController::class, 'jadwal_mahasiswa']);    
+    Route::get('/jadwal/mahasiswa', [PenjadwalanController::class, 'seminar_mahasiswa']);    
     Route::get('/seminar', [PenjadwalanController::class, 'riwayat_mahasiswa']);
 
 
@@ -443,6 +444,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/perbaikan-skripsi/{id}', [PenjadwalanSkripsiController::class, 'perbaikan']);
     Route::post('/revisi-skripsi/create/{id}', [PenjadwalanSkripsiController::class, 'revisiskripsi']);
     Route::post('/catatanskripsi/create/{id}', [PenjadwalanSkripsiController::class, 'catatanskripsi']);
+    Route::put('/nilaijurnal/create/{id}', [PenjadwalanSkripsiController::class, 'nilaijurnal']);
 
 
 

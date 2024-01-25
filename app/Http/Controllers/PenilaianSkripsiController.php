@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PublikasiJurnal;
 use App\Models\PenjadwalanSempro;
-use App\Models\PenjadwalanSkripsi;
 use App\Models\PendaftaranSkripsi;
+use App\Models\PenjadwalanSkripsi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use App\Models\PenilaianSkripsiPenguji;
 use App\Models\PenilaianSemproPenguji;
+use App\Models\PenilaianSkripsiPenguji;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\PenilaianSkripsiPembimbing;
+
 
 class PenilaianSkripsiController extends Controller
 {
@@ -28,12 +30,14 @@ class PenilaianSkripsiController extends Controller
     public function create($id)
     {       
         
-        $id = Crypt::decryptString($id);  
+         $id = Crypt::decryptString($id);  
         $penjadwalan = PenjadwalanSkripsi::find($id);
         $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
         $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
         
         $penjadwalan_sempro = PenjadwalanSempro::find($id);
+
+        $jurnal = PublikasiJurnal::where('penjadwalan_skripsi_id', $penjadwalan->id)->first();
                  
         
         if ($ceknilaipenguji1 == null) {
@@ -74,7 +78,7 @@ class PenilaianSkripsiController extends Controller
             $nilaipembimbing2 = '';
         } else {
             $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
-        }   
+        }
 
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
 
@@ -90,6 +94,7 @@ class PenilaianSkripsiController extends Controller
             'nilaipembimbing1' => $nilaipembimbing1,
             'nilaipembimbing2' => $nilaipembimbing2,
             'naskah' => $pendaftaran_skripsi,
+            'jurnal' => $jurnal,
         ]);        
     }
 
@@ -177,14 +182,18 @@ class PenilaianSkripsiController extends Controller
         return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
     }
 
-    public function edit($id)
+    public function edit( $id, PenjadwalanSempro $sempro_id)
     {
         $id = Crypt::decryptString($id);  
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
 
-        $penjadwalan_sempro = PenjadwalanSempro::find($id);
+ 
+        $penjadwalan_sempro = PenjadwalanSkripsi::find($sempro_id);
         $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
 
+        $jurnal = PublikasiJurnal::where('penjadwalan_skripsi_id', $id)->first();
+
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('penjadwalan_sempro_id', $sempro_id)->latest('created_at')->first();
 
         if ($cari_penguji == 0) {
             return view('penilaianskripsi.edit', [
@@ -239,7 +248,7 @@ class PenilaianSkripsiController extends Controller
 
             // $daftar = 
 
-            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+            
 
             return view('penilaianskripsi.edit', [
                 'skripsi' => PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->first(),
@@ -254,6 +263,7 @@ class PenilaianSkripsiController extends Controller
                 'nilaipembimbing1' => $nilaipembimbing1,
                 'nilaipembimbing2' => $nilaipembimbing2,
                 'naskah' => $pendaftaran_skripsi,
+                'jurnal' => $jurnal,
             ]);
         }
     }
@@ -364,6 +374,11 @@ class PenilaianSkripsiController extends Controller
         }
         
         $penilaian->update();
+        
+
+        // $jurnal = PublikasiJurnal::where('penjadwalan_skripsi_id', $id)->get();
+        // $jurnal->nilai = $request->nilai;    
+        // $jurnal->update();
 
         // return redirect('/penilaian')->with('message', 'Nilai Berhasil Diedit!');
         Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');

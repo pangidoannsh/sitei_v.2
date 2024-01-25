@@ -224,7 +224,7 @@ class PenilaianSemproController extends Controller
             $sempro = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
             
 
-            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $sempro->mahasiswa_nim )->latest('created_at')->first();
+            $pendaftaran_skripsi = PendaftaranSkripsi::where('penjadwalan_sempro_id', $id )->latest('created_at')->first();
 
             return view('penilaiansempro.edit', [
                 'sempro' => $sempro,

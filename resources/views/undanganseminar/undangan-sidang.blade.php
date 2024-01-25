@@ -380,8 +380,18 @@
             <!-- <td class="table1">1</td>   -->
             <td class="table1">{{$penjadwalan->mahasiswa->nama}}</td>                
             <td class="table1">{{$penjadwalan->judul_skripsi}}</td>                        
-            <td class="table1">{{$penjadwalan->pembimbingsatu->nama_singkat}} <br>{{$penjadwalan->pembimbingdua->nama_singkat}}</td>                        
-            <td class="table1">{{$penjadwalan->pengujisatu->nama_singkat}} <br>{{$penjadwalan->pengujidua->nama_singkat}} <br>{{$penjadwalan->pengujitiga->nama_singkat}}</td>                        
+            <td class="table1">{{$penjadwalan->pembimbingsatu->nama_singkat}} <br>
+            @if($penjadwalan->pembimbingdua != null)
+            {{$penjadwalan->pembimbingdua->nama_singkat}}
+            @else
+            @endif
+            </td>                        
+            <td class="table1">{{$penjadwalan->pengujisatu->nama_singkat}} <br>{{$penjadwalan->pengujidua->nama_singkat}} <br>
+            @if($penjadwalan->pembimbingdua != null)
+            {{$penjadwalan->pengujitiga->nama_singkat}}
+            @else
+            @endif
+            </td>                        
             <td class="table1">{{$penjadwalan->waktu}} WIB</td>                        
         </tr>
         

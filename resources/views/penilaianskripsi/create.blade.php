@@ -107,13 +107,13 @@
         <h5 class="text-bold">Perbaikan Penguji (Sempro)</h5>
   <hr class="border border-success">
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
-        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujisatu->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
-        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
-        @if ($sempro->pengujitiga == !null)
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
+        
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
-        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujitiga->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
-        @endif
+        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
+       
         
         
       </div>
@@ -121,14 +121,14 @@
         <h5 class="text-bold">Publikasi Jurnal</h5>
         <hr class="border border-success">
         
-        <!-- <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
-        <p class="card-text text-start" >{{$skripsi->indeksasi_jurnal}}</p>
-        @if ($skripsi->indeksasi_jurnal !== 'Tanpa Jurnal')
+        <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
+        <p class="card-text text-start" >{{$jurnal->indeksasi_jurnal}}</p>
+        @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
         <p class="card-title text-secondary text-sm" >Judul Jurnal</p>
-        <p class="card-text text-start" >{{$skripsi->judul_jurnal}}</p>
+        <p class="card-text text-start" >{{$jurnal->judul_jurnal}}</p>
         <p class="card-title text-secondary text-sm" >Status Publikasi Jurnal</p>
-        <p class="card-text text-start" >{{$skripsi->status_publikasi_jurnal}}</p>
-        @endif -->
+        <p class="card-text text-start" >{{$jurnal->status_publikasi_jurnal}}</p>
+        @endif
       </div>
     </div>
   </div>

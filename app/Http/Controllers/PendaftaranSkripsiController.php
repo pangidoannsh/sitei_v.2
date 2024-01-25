@@ -12,16 +12,17 @@ use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
+use App\Models\PublikasiJurnal;
 use App\Models\PenjadwalanSempro;
 use App\Models\KapasitasBimbingan;
 use App\Models\PendaftaranSkripsi;
-use App\Models\PenjadwalanSkripsi;
 
+use App\Models\PenjadwalanSkripsi;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PenilaianSkripsiPenguji;
-use Illuminate\Notifications\Notifiable;
 
+use Illuminate\Notifications\Notifiable;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\PenilaianSkripsiPembimbing;
 use App\Notifications\NotifPendaftaranSkripsi;
@@ -536,15 +537,20 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->khs = str_replace('public/', '', $request->file('khs')->store('public/file'));
         $skripsi->toefl = str_replace('public/', '', $request->file('toefl')->store('public/file'));
         $skripsi->logbook = str_replace('public/', '', $request->file('logbook')->store('public/file'));
-        $skripsi->pasang_poster = str_replace('public/', '', $request->file('pasang_poster')->store('public/file'));
         
         $skripsi->url_poster = $request->url_poster;
         $skripsi->sti_30 = str_replace('public/', '', $request->file('sti_30')->store('public/file'));
         // $skripsi->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
 
-         if ($request->hasFile('sti_31')) {
-        $skripsi->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
+         if ($request->hasFile('sti_10')) {
         $skripsi->sti_10 = str_replace('public/', '', $request->file('sti_10')->store('public/file'));
+        }
+        
+        if ($request->hasFile('sti_31')) {
+        $skripsi->sti_31 = str_replace('public/', '', $request->file('sti_31')->store('public/file'));
+        }
+        if ($request->hasFile('pasang_poster')) {
+        $skripsi->pasang_poster = str_replace('public/', '', $request->file('pasang_poster')->store('public/file'));
         }
        
         
@@ -553,6 +559,19 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->status_skripsi = 'DAFTAR SIDANG';
         $skripsi->keterangan = 'Menunggu persetujuan Pembimbing 1';
         $skripsi->update();
+
+
+        $jurnal = new PublikasiJurnal();
+        $jurnal->pendaftaran_skripsi_id = $skripsi->id;
+        $jurnal->mahasiswa_nim = $skripsi->mahasiswa_nim;
+        $jurnal->indeksasi_jurnal = $request->indeksasi_jurnal;
+        $jurnal->judul_jurnal = $request->judul_jurnal;
+        $jurnal->status_publikasi_jurnal = $request->status_publikasi_jurnal;
+
+        if ($request->indeksasi_jurnal && $request->judul_jurnal && $request->status_publikasi_jurnal) {
+            $jurnal->save();
+        }
+        
 
         
         Alert::success('Berhasil!', 'Daftar Sidang Diusulkan')->showConfirmButton('Ok', '#28a745');

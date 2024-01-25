@@ -191,6 +191,7 @@ class PenjadwalanSemproController extends Controller
         
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $edit->mahasiswa_nim )->latest('created_at')->first();
 
+        $pendaftaran_skripsi->penjadwalan_sempro_id = $edit->id;
         $pendaftaran_skripsi->status_skripsi = 'SEMPRO DIJADWALKAN';
         $pendaftaran_skripsi->jenis_usulan = 'Seminar Proposal';
         $pendaftaran_skripsi->keterangan = 'Seminar Proposal Dijadwalkan';

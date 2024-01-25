@@ -1282,14 +1282,16 @@
                                 <label class="form-label">Catatan 3</label>
                                 <input type="text" name="catatan3" class="form-control" value="{{ $sempro->penjadwalan_sempro->catatan3 != null ? $sempro->penjadwalan_sempro->catatan3 : '' }}">
                               </div>              
+                              <div>
                               <button type="submit" class="btn btn-success mb-5 float-left">+ Catatan</button>
+                              </div>
                         </form>
                                     @else
                                     
                                     @endif
 
 
-                                    @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
+                          @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)   
                                     <a href="#ModalApprove1"  data-toggle="modal" class="btn btn-lg btn-danger float-right">Selesai Seminar</a>  
                                   <div class="modal fade"id="ModalApprove1">
                                   <div class="modal-dialog modal-dialog-centered">
@@ -1351,7 +1353,21 @@
                                     </div>
                                   </div>
                                   </div>                        
-                    
+                    @elseif($nilaipenguji1 == null)
+                              <a href="#ModalApprove10"  data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
+                              <div class="modal fade"id="ModalApprove10">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-body">
+                                       <div class="container px-5 pt-5 pb-2 text-center">
+                                        <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                        <h5><b>Anda</b> belum melakukan Input Nilai</h5>
+                                        <button type="button" class="btn mt-3 btn-secondary" data-dismiss="modal">Kembali</button>
+                                       </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div> 
                    
 
                     @elseif($sempro->penjadwalan_sempro->status_seminar > 0)

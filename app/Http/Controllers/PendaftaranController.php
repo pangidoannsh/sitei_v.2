@@ -444,8 +444,13 @@ class PendaftaranController extends Controller
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
 
+                //JUMLAH SEMINAR
+                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+                'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+                'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+
                 //JUMLAH KP
-                'jml_prodikp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
+                'jml_prodikp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->where('status_kp','<>', 'KP SELESAI')->orderBy('created_at', 'desc')->count(),
                 //JUMLAH SKRIPSI
                 'jml_prodiskripsi' => PendaftaranSkripsi::where('prodi_id', '1')->where('status_skripsi','<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi','<>', 'USULKAN JUDUL ULANG')->where('status_skripsi','<>', 'LULUS')->orderBy('updated_at', 'desc')->count(),
 
@@ -464,7 +469,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.admin.kerja-praktek', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->where('status_kp','<>', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
-                  //JUMLAH PERSETUJUAN
+                   //JUMLAH PERSETUJUAN
             'jml_persetujuan_kp' =>   PendaftaranKP::where('prodi_id', '2')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
@@ -472,8 +477,13 @@ class PendaftaranController extends Controller
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
 
+                //JUMLAH SEMINAR
+                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+                'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+                'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+
                 //JUMLAH KP
-                'jml_prodikp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
+                'jml_prodikp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->where('status_kp','<>', 'KP SELESAI')->orderBy('created_at', 'desc')->count(),
                 //JUMLAH SKRIPSI
                 'jml_prodiskripsi' => PendaftaranSkripsi::where('prodi_id', '2')->where('status_skripsi','<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi','<>', 'USULKAN JUDUL ULANG')->where('status_skripsi','<>', 'LULUS')->orderBy('updated_at', 'desc')->count(),
 
@@ -485,7 +495,6 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 1)->count(),
                'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 1)->count(),
                'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 3)->count(),
-
             ]);
         }  
 
@@ -582,12 +591,17 @@ class PendaftaranController extends Controller
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '1')->where('status_skripsi','<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi','<>', 'USULKAN JUDUL ULANG')->where('status_skripsi','<>', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 //JUMLAH PERSETUJUAN
-            'jml_persetujuan_kp' =>   PendaftaranKP::where('prodi_id', '3')
+            'jml_persetujuan_kp' =>   PendaftaranKP::where('prodi_id', '1')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
-            'jml_persetujuan_skripsi' =>   PendaftaranSkripsi::where('prodi_id', '3')
+            'jml_persetujuan_skripsi' =>   PendaftaranSkripsi::where('prodi_id', '1')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
+
+                //JUMLAH SEMINAR
+                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+                'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+                'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 1)->count(),
 
                 //JUMLAH KP
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
@@ -608,13 +622,18 @@ class PendaftaranController extends Controller
             return view('pendaftaran.admin.skripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '2')->where('status_skripsi','<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi','<>', 'USULKAN JUDUL ULANG')->where('status_skripsi','<>', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
-                //JUMLAH PERSETUJUAN
+               //JUMLAH PERSETUJUAN
             'jml_persetujuan_kp' =>   PendaftaranKP::where('prodi_id', '2')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
             'jml_persetujuan_skripsi' =>   PendaftaranSkripsi::where('prodi_id', '2')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
+
+                //JUMLAH SEMINAR
+                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+                'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+                'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 2)->count(),
 
                 //JUMLAH KP
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
@@ -681,13 +700,18 @@ class PendaftaranController extends Controller
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '1')
                 ->get()->sortBy('update_at'),
 
-                 //JUMLAH PERSETUJUAN
+                  //JUMLAH PERSETUJUAN
             'jml_persetujuan_kp' =>   PendaftaranKP::where('prodi_id', '1')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
             'jml_persetujuan_skripsi' =>   PendaftaranSkripsi::where('prodi_id', '1')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
+
+                //JUMLAH SEMINAR
+                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+                'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 1)->count(),
+                'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 1)->count(),
 
                 //JUMLAH KP
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
@@ -713,13 +737,18 @@ class PendaftaranController extends Controller
                  'pendaftaran_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Admin Prodi')->where('prodi_id', '2')
                 ->get()->sortBy('update_at'),
 
-                 //JUMLAH PERSETUJUAN
+                  //JUMLAH PERSETUJUAN
             'jml_persetujuan_kp' =>   PendaftaranKP::where('prodi_id', '2')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
             'jml_persetujuan_skripsi' =>   PendaftaranSkripsi::where('prodi_id', '2')
                 ->where('keterangan', 'Menunggu persetujuan Admin Prodi')
                 ->orderBy('created_at', 'desc')->count(),
+
+                //JUMLAH SEMINAR
+                'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+                'jml_sempro' => PenjadwalanSempro::where('status_seminar', '0')->where('prodi_id', 2)->count(),
+                'jml_sidang' => PenjadwalanSkripsi::where('status_seminar', '0')->where('prodi_id', 2)->count(),
 
                 //JUMLAH KP
                 'jml_prodikp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan','<>', 'Nilai KP Telah Keluar')->where('status_kp','<>', 'USULAN KP DITOLAK')->where('status_kp','<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),

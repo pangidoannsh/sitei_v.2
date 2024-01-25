@@ -48,7 +48,7 @@ Daftar Bimbingan Skripsi
 
           <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
   <thead class="table-dark">
-    <p class="alert-secondary p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Mahasiswa yang LEWAT BATAS, Anda berhak menghapus mahasiswa tersebut dari daftar bimbingan (Sudah tidak masuk remunerasi/SKSR)</p>
+    <p class="alert-danger p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Mahasiswa yang LEWAT BATAS, Anda berhak menghapus mahasiswa tersebut dari daftar bimbingan (Sudah tidak masuk remunerasi/SKSR)</p>
     <tr>      
         <th class="text-center px-0" scope="col">No.</th>
         <th class="text-center" scope="col">NIM</th>
@@ -66,7 +66,7 @@ Daftar Bimbingan Skripsi
     @foreach ($pendaftaran_skripsi as $skripsi)
 
 @php
-$tanggalSelesaiSempro = $skripsi->tgl_semproselesai ?? null;
+$tanggalSelesaiSempro ?? '' == $skripsi->tgl_semproselesai ?? null;
 @endphp
 <div></div>
 
@@ -231,8 +231,7 @@ $tanggalSelesaiSempro = $skripsi->tgl_semproselesai ?? null;
 
 
 @endsection
-<br>
-<br>
+
 
 @section('footer')
 <section class="bg-dark p-1">
@@ -296,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var formatTanggalTerakhirDaftar = tanggalTerakhirDaftarSeminar.format('dddd, D MMMM YYYY');
         document.getElementById("timer-batas-daftar-sidang").textContent = formatTanggalTerakhirDaftar;
     }
-    hitungWaktuBatas("{{ $tanggalSelesaiSempro }}");
+    hitungWaktuBatas("{{ $tanggalSelesaiSempro ?? ''}}");
 
 </script>
 
