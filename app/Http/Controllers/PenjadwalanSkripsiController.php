@@ -206,9 +206,9 @@ class PenjadwalanSkripsiController extends Controller
         $pendaftaran_skripsi->update();
         
         
-        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $edit->mahasiswa_nim)->latest('created_at')->first();
-        $jurnal->penjadwalan_skripsi_id = $edit->id;
-        $jurnal->update();
+        // $jurnal = PublikasiJurnal::where('mahasiswa_nim', $edit->mahasiswa_nim)->latest('created_at')->first();
+        // $jurnal->penjadwalan_skripsi_id = $edit->id;
+        // $jurnal->update();
 
 
         // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');

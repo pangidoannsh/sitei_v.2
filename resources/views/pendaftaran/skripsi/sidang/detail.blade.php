@@ -80,7 +80,7 @@
         <!-- <p class="card-title text-secondary text-sm " >STI-11</p>
         <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_11 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p> -->
         <p class="card-title text-secondary text-sm " >Naskah Skripsi</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->naskah_skripsi )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->naskah )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
            
           </div>
           <div class="col-lg-3 col-md-12">
@@ -103,7 +103,7 @@
         <p class="card-title text-secondary text-sm" >URL Poster Skripsi</p>
         <p class="card-text text-start text-primary" ><a formtarget="_blank" target="_blank" href="https://{{$skripsi->url_poster ?? ''}}">{{$skripsi->url_poster}}</a> </p>
           <p class="card-title text-secondary text-sm " >STI-30</p>
-        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_30_skripsi )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p> 
+        <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$skripsi->sti_30 )}}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p> 
       
           </div>
           <div class="col-lg-3 col-md-12">

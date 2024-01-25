@@ -81,7 +81,7 @@ Edit Penilaian Sidang Skripsi
         <p class="card-text text-start" >{{ $skripsi->penjadwalan_skripsi->revisi_skripsi != null ? $skripsi->penjadwalan_skripsi->revisi_skripsi : $skripsi->penjadwalan_skripsi->judul_skripsi }}</p>
 
         <p class="card-title text-secondary text-sm" >Naskah</p>
-      <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
+      <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="{{asset('storage/' .$naskah->naskah )}}" class="badge bg-dark px-3 py-2">Buka</a></p>
     </div>
     <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
          <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
@@ -96,7 +96,6 @@ Edit Penilaian Sidang Skripsi
     </div>
   </div>
 </div>
-
  @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujisatu_nip ||
     auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujidua_nip ||
     auth()->user()->nip == $skripsi->penjadwalan_skripsi->pengujitiga_nip)
@@ -105,16 +104,7 @@ Edit Penilaian Sidang Skripsi
     <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
         <h5 class="text-bold">Perbaikan Penguji (Sempro)</h5>
   <hr class="border border-success">
-
-  <!-- <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
-        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
-  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
-        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p>
-
-  <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
-        <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="" class="badge bg-dark px-3 py-2">Buka</a></p> -->
-
-         <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
+ <p class="card-title text-secondary text-sm " >Perbaikan Penguji 1</p>
         <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujisatu->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 2</p>
         <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujidua->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
@@ -122,14 +112,14 @@ Edit Penilaian Sidang Skripsi
   <p class="card-title text-secondary text-sm " >Perbaikan Penguji 3</p>
         <p class="card-text  text-start" ><a formtarget="_blank" target="_blank" href="/perbaikan-pengujisempro/{{Crypt::encryptString($sempro->id)}}/{{$sempro->pengujitiga->nip}}" class="badge bg-dark px-3 py-2">Buka</a></p>
         @endif
-
-            
-
-    </div>
-    <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
-      <h5 class="text-bold">Publikasi Jurnal</h5>
+       
+        
+        
+      </div>
+      <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+        <h5 class="text-bold">Publikasi Jurnal</h5>
         <hr class="border border-success">
-
+        
         <p class="card-title text-secondary text-sm" >Indeksasi Jurnal</p>
         <p class="card-text text-start" >{{$jurnal->indeksasi_jurnal}}</p>
         @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
@@ -138,10 +128,10 @@ Edit Penilaian Sidang Skripsi
         <p class="card-title text-secondary text-sm" >Status Publikasi Jurnal</p>
         <p class="card-text text-start" >{{$jurnal->status_publikasi_jurnal}}</p>
         @endif
+      </div>
     </div>
   </div>
-</div>
-@endif
+  @endif
 
 
 @if (auth()->user()->nip == $skripsi->penjadwalan_skripsi->pembimbingsatu_nip ||
