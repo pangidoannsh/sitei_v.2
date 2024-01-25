@@ -2,19 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Jam;
-use App\Models\PLP;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\Barang;
-use App\Models\JamKam;
-use App\Models\JamSel;
 use App\Models\Ruangan;
-use App\Models\JamKPKam;
-use App\Models\JamKPSel;
-use App\Models\StatusKP;
 use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
 use Illuminate\Database\Seeder;
@@ -551,144 +544,6 @@ class DatabaseSeeder extends Seeder
             'nama_ruangan' => 'Lab Jarkom',
             'kode_ruangan' => 'J01',
         ]);
-
-        JamKPKam::create([
-            'jam_tersedia' => '13.00-13.30'
-        ]
-        );
-
-        JamKPKam::create([
-            'jam_tersedia' => '13.45-14.15'
-        ]
-        );
-
-        JamKPKam::create([
-            'jam_tersedia' => '14.30-15.00'
-        ]
-        );
-
-        JamKPKam::create([
-            'jam_tersedia' => '15.15-15.45'
-        ]
-        );
-
-        JamKPSel::create([
-            'jam_tersedia' => '08.00-08.30'
-        ]
-        );
-
-        JamKPSel::create([
-            'jam_tersedia' => '08.45-09.15'
-        ]
-        );
-
-        JamKPSel::create([
-            'jam_tersedia' => '09.30-10.00'
-        ]
-        );
-
-        JamKPSel::create([
-            'jam_tersedia' => '10.15-10.45'
-        ]
-        );
-
-        JamKPSel::create([
-            'jam_tersedia' => '11.00-11.30'
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '08.00-08.30',
-            'keterangan' => '0',
-            'hari' => '0',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '08.45-09.15',
-            'keterangan' => '0',
-            'hari' => '0',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '09.30-10.00',
-            'keterangan' => '0',
-            'hari' => '0',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '10.15-10.45',
-            'keterangan' => '0',
-            'hari' => '0',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '11.00-11.30',
-            'keterangan' => '0',
-            'hari' => '0',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '13.00-13.30',
-            'keterangan' => '0',
-            'hari' => '1',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '13.45-14.15',
-            'keterangan' => '0',
-            'hari' => '1',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '14.30-15.00',
-            'keterangan' => '0',
-            'hari' => '1',
-        ]
-        );
-
-        Jam::create([
-            'jam_tersedia' => '15.15-15.45',
-            'keterangan' => '0',
-            'hari' => '1',
-        ]
-        );
-
-        JamKam::create([
-            'jam_tersedia' => '13.00-14.00'
-        ]
-        );
-
-        JamKam::create([
-            'jam_tersedia' => '14.30-15.30'
-        ]
-        );
-
-        JamKam::create([
-            'jam_tersedia' => '16.00-17.00'
-        ]
-        );
-
-        JamSel::create([
-            'jam_tersedia' => '08.00-09.00'
-        ]
-        );
-
-        JamSel::create([
-            'jam_tersedia' => '09.30-10.30'
-        ]
-        );
-
-        JamSel::create([
-            'jam_tersedia' => '11.00-12.00'
-        ]
-        );
 
         KapasitasBimbingan::create([
             'kapasitas_kp' => '10',
