@@ -33,7 +33,7 @@
                         Auth::guard('dosen')->user()->role_id == 9 ||
                         Auth::guard('dosen')->user()->role_id == 10 ||
                         Auth::guard('dosen')->user()->role_id == 11)
-                    <li><a href="/form" class="px-1">Seminar
+                    <li><a href="/prodi/kp-skripsi/seminar" class="px-1">Seminar
                         (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
                     <span class="px-2">|</span>
                     <li><a href="/kerja-praktek/admin/index" class="px-1">Data

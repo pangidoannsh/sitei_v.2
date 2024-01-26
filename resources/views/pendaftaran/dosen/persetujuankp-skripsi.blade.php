@@ -30,15 +30,15 @@
 
             <span class="px-2">|</span>
             <li>
-                <a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span></span>) </a>
+                <a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a>
             </li>
 
             <span class="px-2">|</span>
-            <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span></span>)</a></li>
+            <li><a href="/pembimbing/kerja-praktek" class="px-1">Bimbingan KP (<span>{{ $jml_prodi_kp }}</span>)</a></li>
             <span class="px-2">|</span>
-            <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span></span>)</a></li>
+            <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_prodi_skripsi }}</span>) </a></li>
             <span class="px-2">|</span>
-            <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span></span>)</a></li>
+            <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
 
 
 

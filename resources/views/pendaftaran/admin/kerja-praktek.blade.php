@@ -13,7 +13,6 @@
 @endsection
 
 @section('content')
-
     @if (session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('message') }}
@@ -23,38 +22,51 @@
     <div class="container card p-4">
 
         <ol class="breadcrumb col-lg-12">
-
             @if (Str::length(Auth::guard('web')->user()) > 0)
-                @if (Auth::guard('web')->user()->role_id == 1 ||
-                        Auth::guard('web')->user()->role_id == 2 ||
+                @if (Auth::guard('web')->user()->role_id == 2 ||
                         Auth::guard('web')->user()->role_id == 3 ||
                         Auth::guard('web')->user()->role_id == 4)
-                    @if (Auth::guard('web')->user()->role_id == 2 ||
-                            Auth::guard('web')->user()->role_id == 3 ||
-                            Auth::guard('web')->user()->role_id == 4)
-                        <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan
-                                (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
-                        <span class="px-2">|</span>
-                    @endif
-                    <li><a href="/form" class="px-1">Seminar
+                    <li><a href="/persetujuan/admin/index" class="px-1">Persetujuan
+                            (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)</a></li>
+                    <span class="px-2">|</span>
+                @endif
+                <li><a href="/form" class="px-1">Seminar
                         (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
-                    <span class="px-2">|</span>
+                <span class="px-2">|</span>
+
+                @if (Auth::guard('web')->user()->role_id == 1)
                     <li><a href="/kerja-praktek/admin/index" class="breadcrumb-item active fw-bold text-success px-1">Data
-                            KP (<span>{{ $jml_prodi_kp }}</span>)</a></li>
+                            KP
+                            (<span>{{ $jml_prodi_kp }}</span>)</a></li>
                     <span class="px-2">|</span>
-                    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a>
+                    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi
+                            (<span>{{ $jml_prodi_skripsi }}</span>)</a>
                     </li>
                     <span class="px-2">|</span>
                     <li><a href="/prodi/riwayat" class="px-1">Riwayat
                             (<span>{{ $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi }}</span>)</a>
                     </li>
+                @endif
 
-                    @if (Auth::guard('web')->user()->role_id == 2 ||
-                            Auth::guard('web')->user()->role_id == 3 ||
-                            Auth::guard('web')->user()->role_id == 4)
-                        <span class="px-2">|</span>
-                        <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan</a></li>
-                    @endif
+                @if (Auth::guard('web')->user()->role_id == 2 ||
+                        Auth::guard('web')->user()->role_id == 3 ||
+                        Auth::guard('web')->user()->role_id == 4)
+                    <li><a href="/kerja-praktek/admin/index" class="breadcrumb-item active fw-bold text-success px-1">Data
+                            KP (<span>{{ $jml_prodikp }}</span>)</a></li>
+                    <span class="px-2">|</span>
+                    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodiskripsi }}</span>)</a>
+                    </li>
+                    <span class="px-2">|</span>
+                    <li><a href="/prodi/riwayat" class="px-1">Riwayat
+                            (<span>{{ $jml_riwayatkp + $jml_riwayatskripsi + $jml_jadwal_kps + $jml_jadwal_sempros + $jml_jadwal_skripsis }}</span>)</a>
+                    </li>
+                @endif
+
+                @if (Auth::guard('web')->user()->role_id == 2 ||
+                        Auth::guard('web')->user()->role_id == 3 ||
+                        Auth::guard('web')->user()->role_id == 4)
+                    <span class="px-2">|</span>
+                    <li><a href="/kapasitas-bimbingan/index" class="px-1">Kuota Bimbingan</a></li>
                 @endif
             @endif
 
@@ -244,8 +256,6 @@
             </table>
         </div>
     </div>
-
-
 @endsection
 
 @section('footer')
@@ -257,27 +267,58 @@
     </section>
 @endsection
 
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const jumlahProdi = {!! json_encode($jml_prodi_kp) !!};
-            if (jumlahProdi > 0) {
-                Swal.fire({
-                    title: 'Ini adalah halaman Kerja Praktek',
-                    html: `Ada <strong class="text-info"> ${jumlahProdi} Mahasiswa</strong> sedang melaksanakan Kerja Praktek.`,
-                    icon: 'info',
-                    showConfirmButton: true,
-                    confirmButtonColor: '#28a745',
-                });
-            } else {
-                Swal.fire({
-                    title: 'Ini adalah halaman Kerja Praktek',
-                    html: `Belum ada mahasiswa yang melaksanakan Kerja Praktek.`,
-                    icon: 'info',
-                    showConfirmButton: true,
-                    confirmButtonColor: '#28a745',
-                });
-            }
-        });
-    </script>
-@endpush()
+@if (Auth::guard('web')->user()->role_id == 1)
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const jumlahProdi = {!! json_encode($jml_prodi_kp) !!};
+                if (jumlahProdi > 0) {
+                    Swal.fire({
+                        title: 'Ini adalah halaman Kerja Praktek',
+                        html: `Ada <strong class="text-info"> ${jumlahProdi} Mahasiswa</strong> sedang melaksanakan Kerja Praktek.`,
+                        icon: 'info',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#28a745',
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Ini adalah halaman Kerja Praktek',
+                        html: `Belum ada mahasiswa yang melaksanakan Kerja Praktek.`,
+                        icon: 'info',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#28a745',
+                    });
+                }
+            });
+        </script>
+    @endpush()
+@endif
+
+@if (Auth::guard('web')->user()->role_id == 2 ||
+        Auth::guard('web')->user()->role_id == 3 ||
+        Auth::guard('web')->user()->role_id == 4)
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const jumlahProdi = {!! json_encode($jml_prodikp) !!};
+                if (jumlahProdi > 0) {
+                    Swal.fire({
+                        title: 'Ini adalah halaman Kerja Praktek',
+                        html: `Ada <strong class="text-info"> ${jumlahProdi} Mahasiswa</strong> sedang melaksanakan Kerja Praktek.`,
+                        icon: 'info',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#28a745',
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Ini adalah halaman Kerja Praktek',
+                        html: `Belum ada mahasiswa yang melaksanakan Kerja Praktek.`,
+                        icon: 'info',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#28a745',
+                    });
+                }
+            });
+        </script>
+    @endpush()
+@endif

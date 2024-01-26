@@ -24,12 +24,12 @@
         <ol class="breadcrumb col-lg-12">
 
             <li>
-                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan (<span></span>)</a>
+                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)</a>
             </li>
 
             <span class="px-2">|</span>
 
-            <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span></span>) </a></li>
+            <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_seminar_sempro + $jml_seminar_skripsi }}</span>) </a></li>
             <span class="px-2">|</span>
             <li><a href="/pembimbing/kerja-praktek" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan KP
                     (<span>{{ $jml_kp }}</span>)</a></li>
