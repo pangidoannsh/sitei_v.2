@@ -62,7 +62,7 @@
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center" scope="col">Nama</th>
                         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
-                        <th class="text-center" scope="col">Jenis Usulan</th>
+                        <!-- <th class="text-center" scope="col">Jenis Usulan</th> -->
                         <th class="text-center" scope="col">Status Skripsi</th>
                         <th class="text-center" scope="col">Tanggal Penting</th>
                         <th class="text-center" scope="col">Keterangan</th>
@@ -77,7 +77,7 @@
                             <td class="text-center px-1 py-2 ">{{ $loop->iteration }}</td>
                             <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
                             <td class="text-center px-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
-                            <td class="text-center px-1 py-2">{{ $skripsi->jenis_usulan }}</td>
+                            <!-- <td class="text-center px-1 py-2">{{ $skripsi->jenis_usulan }}</td> -->
                             @if (
                                 $skripsi->status_skripsi == 'USULAN JUDUL' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO' ||

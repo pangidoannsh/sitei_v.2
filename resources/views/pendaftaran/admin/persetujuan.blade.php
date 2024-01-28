@@ -66,7 +66,7 @@
                         <th class="text-center" scope="col">Tanggal Usulan</th>
                         <th class="text-center" scope="col">Batas</th>
                         <th class="text-center" scope="col">Keterangan</th>
-                        <th class="text-center" scope="col">Aksi</th>
+                        <th class="text-center" scope="col" style="padding-left: 50px; ">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -371,7 +371,6 @@
 
                             <td class="text-center px-1 py-2"> {{ $skripsi->keterangan }}</td>
 
-
                             <!-- USUL JUDUL  -->
                             @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'JUDUL DISETUJUI')
                                 @if ($skripsi->keterangan == 'Menunggu persetujuan Admin Prodi' && $skripsi->status_skripsi == 'USULAN JUDUL')
@@ -402,10 +401,8 @@
                                 @endif
                             @endif
 
-
-
                             <!-- DAFTAR SEMPRO -->
-                            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' || $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
+                            @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Admin Prodi')
                                 <td class="text-center px-1 py-2">
                                     <div class="row py-2 py-md-0">
                                         <div class="col-lg-3 col-12 py-2 py-md-0">
@@ -421,13 +418,14 @@
                                         <div class="col-lg-3 col-12 py-2 py-md-0">
                                             <form action="/daftar-sempro/admin/approve/{{ $skripsi->id }}"
                                                 class="setujui-sempro-admin" data-bs-toggle="tooltip"
-                                                title="Setujui & Tandai Terjadwal" method="POST">
+                                                title="Setujui" method="POST">
                                                 @method('put')
                                                 @csrf
                                                 <button class="btn btn-success badge p-1 "><i
                                                         class="fas fa-check-circle"></i></button>
                                             </form>
                                         </div>
+                                    </div>
                                 </td>
                             @endif
 
@@ -455,36 +453,9 @@
                                                         class="fas fa-check-circle"></i></button>
                                             </form>
                                         </div>
-                                </td>
-                            @endif
-
-                            <!-- MENUNGGU JADWAL SIDANG -->
-                            @if ($skripsi->keterangan == 'Menunggu Jadwal Sidang Skripsi' && $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
-                                <td class="text-center px-1 py-2">
-                                    <div class="row py-2 py-md-0">
-                                        <div class="col-lg-3 col-12 py-2 py-md-0">
-                                            <button onclick="tolakTungguSidangAdmin({{ $skripsi->id }})"
-                                                class="btn btn-danger badge p-1 " data-bs-toggle="tooltip"
-                                                title="Tolak"><i class="fas fa-times-circle"></i></button>
-                                        </div>
-                                        <div class="col-lg-3 col-12 py-2 py-md-0">
-                                            <a href="/persetujuan/admin/detail/sidang/{{ $skripsi->id }}"
-                                                class="badge btn btn-info p-1" data-bs-toggle="tooltip"
-                                                title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
-                                        </div>
-                                        <div class="col-lg-3 col-12 py-2 py-md-0">
-                                            <form action="/daftar-tunggu-sidang/admin/approve/{{ $skripsi->id }}"
-                                                class="setujui-tunggu-sidang-admin" data-bs-toggle="tooltip"
-                                                title="Setujui & Tandai Terjadwal" method="POST">
-                                                @method('put')
-                                                @csrf
-                                                <button class="btn btn-success badge p-1 "><i
-                                                        class="fas fa-check-circle"></i></button>
-                                            </form>
                                         </div>
                                 </td>
                             @endif
-
                         </tr>
                     @endforeach
 

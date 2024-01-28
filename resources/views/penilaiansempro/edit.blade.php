@@ -1735,7 +1735,7 @@
                                         $sempro->penjadwalan_sempro->pengujitiga_nip !== null))
                                 @if ($total_nilai < 60)
                                     <a href="#ModalGagal" data-toggle="modal"
-                                        class="btn mt-5 btn-lg btn-danger float-right">Gagal Seminar</a>
+                                        class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
 
                                     <div class="modal fade"id="ModalGagal">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -1743,8 +1743,8 @@
                                                 <div class="modal-body">
                                                     <div class="container px-5 pt-5 pb-2">
                                                         <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
-                                                        <div class="row text-center">
+                                                        <p class="text-center">Mahasiswa Belum Lulus Seminar. Data tidak bisa dikembalikan!</p>
+                                                        <div class="row mb-3 text-center">
                                                             <div class="col-4">
                                                             </div>
                                                             <div class="col-2">
@@ -1758,7 +1758,7 @@
                                                                     @method('put')
                                                                     @csrf
                                                                     <button type="submit"
-                                                                        class="btn btn-danger">Gagal</button>
+                                                                        class="btn btn-danger">Selesai</button>
                                                                 </form>
                                                             </div>
                                                             <div class="col-4">
@@ -1775,7 +1775,7 @@
                                     </div>
                                 @else
                                     <a href="#ModalApprove7" data-toggle="modal"
-                                        class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
+                                        class="btn mt-5 btn-lg btn-success float-right">Selesai Seminar</a>
 
                                     <div class="modal fade"id="ModalApprove7">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -1783,8 +1783,8 @@
                                                 <div class="modal-body">
                                                     <div class="container px-5 pt-5 pb-2">
                                                         <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                                        <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
-                                                        <div class="row text-center">
+                                                        <p class="text-center">Mahasiswa Lulus Seminar. Data tidak bisa dikembalikan!</p>
+                                                        <div class="row mb-3 text-center">
                                                             <div class="col-4">
                                                             </div>
                                                             <div class="col-2">
@@ -1826,8 +1826,7 @@
 
         </div>
         </div>
-        <!-- </div> -->
-        <!-- /.card -->
+
         </div>
 
 

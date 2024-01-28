@@ -583,8 +583,7 @@
                                     class="mt-2 text-muted text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y') }}</span>
                             @endif
                             @if (
-                                $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2' ||
-                                    $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' ||
+                                $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' ||
                                     $pendaftaran_skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')
                                 <span class="mt-2 text-danger"> Batas Daftar Sidang<br></span>
                                 <strong class="mt-2 text-danger"><strong class="text-bold"
@@ -819,17 +818,13 @@
 
 
 
-        @if ($pendaftaran_skripsi->status_skripsi == 'USULAN JUDUL DITOLAK')
+        @if ($pendaftaran_skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $pendaftaran_skripsi->status_skripsi == 'USULKAN JUDUL ULANG')
             <div class="container">
                 <div class="alert alert-danger" role="alert">
                     <i class="fas fa-exclamation-triangle fw-bold"></i> <span
                         class="pl-2 fw-bold">{{ $pendaftaran_skripsi->alasan }}</span>, <span>Silahkan Usulkan Judul
                         Skripsi Ulang!</span>
                 </div>
-            </div>
-            <div class="container">
-                <a href="/usuljudul/create" class="btn btn-success px-3 py-2 mb-3"><i class="fas fa-plus-circle"></i>
-                    Usulkan KP Ulang</a>
             </div>
         @endif
 

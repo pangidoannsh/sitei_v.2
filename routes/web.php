@@ -358,6 +358,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/selesaisempro/pembimbing/approve/{id}', [PendaftaranSkripsiController::class, 'approveselesaisempro_pemb']);
     Route::put('/selesaisempro/pembimbing/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakselesaisempro_pemb']);
 
+    Route::put('/lewat-batas-sidang/hapus/{id}', [PendaftaranSkripsiController::class, 'lewat_batas_sidang']);
+
     Route::put('/selesaisidang/pembimbing/approve/{id}', [PendaftaranSkripsiController::class, 'approveselesaisidang_pemb']);
     Route::put('/selesaisidang/pembimbing/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakselesaisidang_pemb']);
 

@@ -2014,7 +2014,21 @@ class PendaftaranSkripsiController extends Controller
  
          Alert::success('Disetujui!', 'Bukti Penyerahan Buku Skripsi disetujui')->showConfirmButton('Ok', '#28a745');
         return back();
-       
+ 
+     }
+     
+     public function lewat_batas_sidang(Request $request, $id)
+     {
+         $skripsi = PendaftaranSkripsi::find($id);
+ 
+         $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
+         $skripsi->keterangan = 'Lewat Batas Daftar Sidang Skripsi';
+         $skripsi->alasan = 'Anda Lewat Batas';
+         $skripsi->update();
+ 
+        //  Alert::success('Berhasil!', 'Mahasiswa dihapus dari Daftar Bimbingan')->showConfirmButton('Ok', '#28a745');
+        //  return back();
+         return back()->with('message', 'Berhasil! Satu mahasiswa dihapus dari Daftar Bimbingan Anda.');
  
      }
 

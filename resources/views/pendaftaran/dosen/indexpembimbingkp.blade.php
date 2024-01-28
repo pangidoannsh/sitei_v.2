@@ -60,6 +60,7 @@
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center" scope="col">Nama</th>
                         <th class="text-center" scope="col">Status KP</th>
+                        <th class="text-center" scope="col">Tanggal Usulan</th>
                         <th class="text-center" scope="col">Tanggal Penting</th>
                         <th class="text-center" scope="col">Keterangan</th>
                         <th class="text-center" scope="col">Aksi</th>
@@ -93,6 +94,7 @@
                             <td class="text-center px-1 py-2">{{ $kp->mahasiswa->nim }}</td>
                             <td class="text-center px-1 py-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
 
+                            
                             @if (
                                 $kp->status_kp == 'USULAN KP' ||
                                     $kp->status_kp == 'SURAT PERUSAHAAN' ||
@@ -119,6 +121,31 @@
                                     $kp->status_kp == 'DAFTAR SEMINAR KP ULANG')
                                 <td class="text-center px-1 py-2 bg-danger">{{ $kp->status_kp }}</td>
                             @endif
+
+                            <!-- Tanggal Usulan -->
+                            @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA')
+                                <td class="text-center px-1 py-2">
+                                    {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y') }}</td>
+                            @endif
+
+                            @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'KP DISETUJUI')
+                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y') }}
+                                </td>
+                            @endif
+
+                            @if (
+                                $kp->status_kp == 'DAFTAR SEMINAR KP' ||
+                                    $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' ||
+                                    $kp->status_kp == 'DAFTAR SEMINAR KP ULANG' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' || $kp->status_kp == 'SEMINAR KP SELESAI')
+                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y') }}
+                                </td>
+                            @endif
+                            @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' || $kp->status_kp == 'KP SELESAI')
+                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_kpti10)->translatedFormat('l, d F Y') }}
+                                </td>
+                            @endif
+
+                            <!-- Tanggal Penting -->
 
                             @if ($kp->status_kp == 'USULAN KP')
                                 <td class="text-center px-1 py-2"> <small> Tanggal Usulan: <br></small>

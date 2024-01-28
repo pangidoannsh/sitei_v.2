@@ -105,9 +105,13 @@
                                         href="{{ asset('storage/' . $skripsi->sti_30) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
                             <p class="card-title text-secondary text-sm ">STI-31</p>
+                            @if($skripsi->sti_31 != null)
                             <p class="card-text  text-start"><span><a formtarget="_blank" target="_blank"
                                         href="{{ asset('storage/' . $skripsi->sti_31) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+                            @else
+                            <p class="card-text  text-start"><span>-</span></p>
+                            @endif
                         </div>
                     </div>
 

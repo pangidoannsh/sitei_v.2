@@ -67,7 +67,7 @@
                         <th class="text-center" scope="col">Tanggal Usulan</th>
                         <th class="text-center" scope="col">Batas</th>
                         <th class="text-center" scope="col">Keterangan</th>
-                        <th class="text-center" scope="col" style="padding-left: 50px; padding-right:50px;">Aksi</th>
+                        <th class="text-center " scope="col" style="padding-left: 50px; padding-right:50px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

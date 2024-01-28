@@ -390,9 +390,16 @@
                 <td class="table1">{{ $penjadwalan->mahasiswa->nama }}</td>
                 <td class="table1">{{ $penjadwalan->judul_proposal }}</td>
                 <td class="table1">{{ $penjadwalan->pembimbingsatu->nama_singkat }}
-                    <br>{{ $penjadwalan->pembimbingdua->nama_singkat }}</td>
+                    <br>
+                    @if($penjadwalan->pembimbingdua != null)
+                    {{ $penjadwalan->pembimbingdua->nama_singkat }}
+                    @endif
+                </td>
                 <td class="table1">{{ $penjadwalan->pengujisatu->nama_singkat }}
-                    <br>{{ $penjadwalan->pengujidua->nama_singkat }} <br>{{ $penjadwalan->pengujitiga->nama_singkat }}
+                    <br>{{ $penjadwalan->pengujidua->nama_singkat }} <br>
+                    @if($penjadwalan->pengujitiga != null)
+                    {{ $penjadwalan->pengujitiga->nama_singkat }}
+                    @endif
                 </td>
                 <td class="table1">{{ $penjadwalan->waktu }} WIB</td>
             </tr>
