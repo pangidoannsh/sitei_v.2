@@ -36,10 +36,10 @@
                     <li><a href="/prodi/kp-skripsi/seminar" class="px-1">Seminar
                         (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>)</a></li>
                     <span class="px-2">|</span>
-                    <li><a href="/kerja-praktek/admin/index" class="px-1">Data
+                    <li><a href="/kerja-praktek" class="px-1">Data
                             KP (<span>{{ $jml_prodi_kp }}</span>)</a></li>
                     <span class="px-2">|</span>
-                    <li><a href="/sidang/admin/index" class="px-1">Data Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a>
+                    <li><a href="/skripsi" class="px-1">Data Skripsi (<span>{{ $jml_prodi_skripsi }}</span>)</a>
                     </li>
                     <span class="px-2">|</span>
                     <li><a href="/prodi/riwayat" class="breadcrumb-item active fw-bold text-success px-1">Riwayat

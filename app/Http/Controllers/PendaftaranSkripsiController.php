@@ -345,7 +345,7 @@ class PendaftaranSkripsiController extends Controller
             'krs_berjalan' => 'required|mimes:pdf|max:200',
             'khs' => 'required|mimes:pdf|max:200',
             'logbook' => 'required|mimes:pdf|max:200',
-            'naskah' => 'required|mimes:pdf|max:1024',
+            'naskah' => 'required|mimes:pdf|max:5120',
             'sti_30' => 'required|mimes:pdf|max:200',          
             'sti_31' => 'nullable|mimes:pdf|max:200',          
         ]);
@@ -522,7 +522,7 @@ class PendaftaranSkripsiController extends Controller
             'sti_10' => 'nullable|mimes:pdf|max:200',  
             'url_poster'=>'nullable',          
             'sti_30' => 'required|mimes:pdf|max:200',           
-            'sti_31' => 'nullable|mimes:pdf|max:200',           
+            'sti_31' => 'nullable|mimes:pdf|max:200',          
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -562,13 +562,23 @@ class PendaftaranSkripsiController extends Controller
 
 
         $jurnal = new PublikasiJurnal();
+
+        $request->validate([           
+            'file_jurnal' => 'nullable|mimes:pdf',           
+        ]);
+
+        if ($request->hasFile('file_jurnal')) {
+        $jurnal->file_jurnal = str_replace('public/', '', $request->file('file_jurnal')->store('public/file'));
+        }
+
         $jurnal->pendaftaran_skripsi_id = $skripsi->id;
         $jurnal->mahasiswa_nim = $skripsi->mahasiswa_nim;
+        $jurnal->link_jurnal = $request->link_jurnal;
         $jurnal->indeksasi_jurnal = $request->indeksasi_jurnal;
         $jurnal->judul_jurnal = $request->judul_jurnal;
         $jurnal->status_publikasi_jurnal = $request->status_publikasi_jurnal;
 
-        if ($request->indeksasi_jurnal && $request->judul_jurnal && $request->status_publikasi_jurnal) {
+        if ($request->file_jurnal && $request->judul_jurnal && $request->status_publikasi_jurnal) {
             $jurnal->save();
         }
         

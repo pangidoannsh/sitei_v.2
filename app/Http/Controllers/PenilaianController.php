@@ -264,7 +264,8 @@ class PenilaianController extends Controller
         $jml_riwayat_kp = PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 1)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 1)->count();
 
         // $sempro = PenjadwalanSempro::find($id);
-
+        //KOORDINATOR KP SKRIPSI
+        if (auth()->user()->role_id == 6) {
         return view('penilaian.index-pembimbing', [
             'penjadwalan_sempros' => $dosen,
             'penjadwalan_skripsis' => $dosens,
@@ -272,18 +273,275 @@ class PenilaianController extends Controller
             'jml_seminar_kp' => $jml_seminar_kp,
             'jml_sempro' => $jml_sempro,
             'jml_sidang' => $jml_sidang,
-            'jml_riwayat_kp' => $jml_riwayat_kp,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
             'jml_riwayat_sempro' => $jml_riwayat_sempro,
             'jml_riwayat_sidang' => $jml_riwayat_sidang,
 
             //JUMLAH PERSETUJUAN KP
-            'jml_persetujuan_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            ->orWhere('keterangan', 'Menunggu persetujuan Program Studi')->where('prodi_id', 1)
                 ->orderBy('status_kp', 'desc')->count(),
                 'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
             //JUMLAH PERSETUJUAN SKRIPSI
-            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')
-                ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            ->orWhere('keterangan', 'Menunggu persetujuan Program Studi')->where('prodi_id', 1)
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
+                ->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
+            //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
+            'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 1)->count(),
+            //JUMLAH KP
+            'jml_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH SKRIPSI
+            'jml_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH RIWAYAT KP
+            'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
+            //JUMLAH RIWAYAT SKRIPSI
+            'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
+        ]);
+    }
+        if (auth()->user()->role_id == 7) {
+        return view('penilaian.index-pembimbing', [
+            'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
+            'jml_seminar_kp' => $jml_seminar_kp,
+            'jml_sempro' => $jml_sempro,
+            'jml_sidang' => $jml_sidang,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
+
+            //JUMLAH PERSETUJUAN KP
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            ->orWhere('keterangan', 'Menunggu persetujuan Program Studi')->where('prodi_id', 2)
+                ->orderBy('status_kp', 'desc')->count(),
+                'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH PERSETUJUAN SKRIPSI
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            ->orWhere('keterangan', 'Menunggu persetujuan Program Studi')->where('prodi_id', 2)
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
+                ->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 2)->count(),
+            //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
+            'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 2)->count(),
+            //JUMLAH KP
+            'jml_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH SKRIPSI
+            'jml_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH RIWAYAT KP
+            'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
+            //JUMLAH RIWAYAT SKRIPSI
+            'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
+        ]);
+    }
+        if (auth()->user()->role_id == 8) {
+        return view('penilaian.index-pembimbing', [
+            'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
+            'jml_seminar_kp' => $jml_seminar_kp,
+            'jml_sempro' => $jml_sempro,
+            'jml_sidang' => $jml_sidang,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
+
+            //JUMLAH PERSETUJUAN KP
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            ->orWhere('keterangan', 'Menunggu persetujuan Program Studi')->where('prodi_id', 3)
+                ->orderBy('status_kp', 'desc')->count(),
+                'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH PERSETUJUAN SKRIPSI
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            ->orWhere('keterangan', 'Menunggu persetujuan Program Studi')->where('prodi_id', 3)
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
+                ->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 3)->count(),
+            //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
+            'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 3)->count(),
+            //JUMLAH KP
+            'jml_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH SKRIPSI
+            'jml_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH RIWAYAT KP
+            'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
+            //JUMLAH RIWAYAT SKRIPSI
+            'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
+        ]);
+    }
+        if (auth()->user()->role_id == 9) {
+        return view('penilaian.index-pembimbing', [
+            'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
+            'jml_seminar_kp' => $jml_seminar_kp,
+            'jml_sempro' => $jml_sempro,
+            'jml_sidang' => $jml_sidang,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
+
+            //JUMLAH PERSETUJUAN KP
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            ->orWhere('keterangan', 'Menunggu persetujuan Koordinator KP')->where('prodi_id', 1)
+                ->orderBy('status_kp', 'desc')->count(),
+                'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH PERSETUJUAN SKRIPSI
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            ->orWhere('keterangan', 'Menunggu persetujuan Koordinator Skripsi')->where('prodi_id', 1)
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
+                ->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 1)->count(),
+            //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
+            'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 1)->count(),
+            //JUMLAH KP
+            'jml_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH SKRIPSI
+            'jml_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH RIWAYAT KP
+            'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
+            //JUMLAH RIWAYAT SKRIPSI
+            'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
+        ]);
+    }
+        if (auth()->user()->role_id == 10) {
+        return view('penilaian.index-pembimbing', [
+            'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
+            'jml_seminar_kp' => $jml_seminar_kp,
+            'jml_sempro' => $jml_sempro,
+            'jml_sidang' => $jml_sidang,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
+
+            //JUMLAH PERSETUJUAN KP
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            ->orWhere('keterangan', 'Menunggu persetujuan Koordinator KP')->where('prodi_id', 2)
+                ->orderBy('status_kp', 'desc')->count(),
+                'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH PERSETUJUAN SKRIPSI
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            ->orWhere('keterangan', 'Menunggu persetujuan Koordinator Skripsi')->where('prodi_id', 2)
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
+                ->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 2)->count(),
+            //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
+            'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 2)->count(),
+            //JUMLAH KP
+            'jml_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH SKRIPSI
+            'jml_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH RIWAYAT KP
+            'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
+            //JUMLAH RIWAYAT SKRIPSI
+            'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
+        ]);
+    }
+        if (auth()->user()->role_id == 11) {
+        return view('penilaian.index-pembimbing', [
+            'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
+            'jml_seminar_kp' => $jml_seminar_kp,
+            'jml_sempro' => $jml_sempro,
+            'jml_sidang' => $jml_sidang,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
+
+            //JUMLAH PERSETUJUAN KP
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            ->orWhere('keterangan', 'Menunggu persetujuan Koordinator KP')->where('prodi_id', 3)
+                ->orderBy('status_kp', 'desc')->count(),
+                'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH PERSETUJUAN SKRIPSI
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            ->orWhere('keterangan', 'Menunggu persetujuan Koordinator Skripsi')->where('prodi_id', 3)
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
+                ->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 1)->where('prodi_id', 3)->count(),
+            //JUMLAH RIWAYAT PERSETUJUAN SEMINAR
+            'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 3)->where('prodi_id', 3)->count(),
+            //JUMLAH KP
+            'jml_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH SKRIPSI
+            'jml_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
+            ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
+
+            //JUMLAH RIWAYAT KP
+            'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
+            //JUMLAH RIWAYAT SKRIPSI
+            'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
+                ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
+        ]);
+    }
+
+        if (auth()->user()->nip > 0) {
+        return view('penilaian.index-pembimbing', [
+            'penjadwalan_sempros' => $dosen,
+            'penjadwalan_skripsis' => $dosens,
+            'penjadwalan_kps' => $dosenss,
+            'jml_seminar_kp' => $jml_seminar_kp,
+            'jml_sempro' => $jml_sempro,
+            'jml_sidang' => $jml_sidang,
+            'jml_riwayat_seminar_kp' => $jml_riwayat_kp,
+            'jml_riwayat_sempro' => $jml_riwayat_sempro,
+            'jml_riwayat_sidang' => $jml_riwayat_sidang,
+
+            //JUMLAH PERSETUJUAN KP
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+                ->orderBy('status_kp', 'desc')->count(),
+                'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),
+            //JUMLAH PERSETUJUAN SKRIPSI
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
                 ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
                 ->orderBy('status_skripsi', 'desc')->count(),
             //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
@@ -299,17 +557,14 @@ class PenilaianController extends Controller
             'jml_bimbinganskripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('status_skripsi', 'desc')
             ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('status_skripsi', 'desc')->count(),
 
-            //JUMLAH RIWAYAT SEMINAR
-            'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->count(),
-            'jml_riwayat_seminar_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
-            'jml_riwayat_seminar_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->count(),
-
             //JUMLAH RIWAYAT KP
             'jml_riwayat_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->count(),
             //JUMLAH RIWAYAT SKRIPSI
             'jml_riwayat_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')
                 ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->count(),
         ]);
+    }
+
     }
 
 

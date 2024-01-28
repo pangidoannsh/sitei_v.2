@@ -169,16 +169,17 @@ class PenilaianSemproController extends Controller
         $id = Crypt::decryptString($id);  
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
 
-        $penjadwalan = PenjadwalanSempro::find($id);
+        
         $pembimbing = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->get();
+
+       
 
         if ($cari_penguji == 0) {
             return view('penilaiansempro.edit', [
                 'sempro' => PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->where('pembimbing_nip', auth()->user()->nip)->first(),
             ]);
         } else {
-
-            $penjadwalan = PenjadwalanSempro::find($id);            
+          $penjadwalan = PenjadwalanSempro::find($id);
             $pembimbing = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $id)->get();
             $ceknilaipenguji1 = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
 
@@ -223,8 +224,7 @@ class PenilaianSemproController extends Controller
             }
             $sempro = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->first();
             
-
-            $pendaftaran_skripsi = PendaftaranSkripsi::where('penjadwalan_sempro_id', $id )->latest('created_at')->first();
+            $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
 
             return view('penilaiansempro.edit', [
                 'sempro' => $sempro,
@@ -243,6 +243,8 @@ class PenilaianSemproController extends Controller
 
     public function update_pembimbing(Request $request, $id)
     {
+        $penjadwalan_sempro = PenjadwalanSempro::find($id);
+
         $request->validate([
             'penguasaan_dasar_teori' => 'required',
             'tingkat_penguasaan_materi' => 'required',
@@ -253,7 +255,7 @@ class PenilaianSemproController extends Controller
             'total_nilai_huruf' => 'required',
         ]);
 
-        $edit = PenilaianSemproPembimbing::where('id', $id)->where('pembimbing_nip', auth()->user()->nip)->first();
+        $edit = PenilaianSemproPembimbing::where('penjadwalan_sempro_id', $penjadwalan_sempro->id)->where('pembimbing_nip', auth()->user()->nip)->first();
         $edit->penguasaan_dasar_teori = $request->penguasaan_dasar_teori;
         $edit->tingkat_penguasaan_materi = $request->tingkat_penguasaan_materi;
         $edit->tinjauan_pustaka = $request->tinjauan_pustaka;
@@ -270,6 +272,8 @@ class PenilaianSemproController extends Controller
 
     public function update_penguji(Request $request, $id)
     {
+        $penjadwalan_sempro = PenjadwalanSempro::find($id);
+
         $rules = [
             'presentasi' => 'required',
             'tingkat_penguasaan_materi' => 'required',
@@ -300,34 +304,35 @@ class PenilaianSemproController extends Controller
             $rules['revisi_naskah5'] = 'required';
         }
 
-        $validatedData = $request->validate($rules);        
-        $penilaian = PenilaianSemproPenguji::where('id', $id)->where('penguji_nip', auth()->user()->nip)->first();
-        $penilaian->presentasi = $validatedData['presentasi'];
-        $penilaian->tingkat_penguasaan_materi = $validatedData['tingkat_penguasaan_materi'];
-        $penilaian->keaslian = $validatedData['keaslian'];
-        $penilaian->ketepatan_metodologi = $validatedData['ketepatan_metodologi'];
-        $penilaian->penguasaan_dasar_teori = $validatedData['penguasaan_dasar_teori'];
-        $penilaian->kecermatan_perumusan_masalah = $validatedData['kecermatan_perumusan_masalah'];
-        $penilaian->tinjauan_pustaka = $validatedData['tinjauan_pustaka'];
-        $penilaian->tata_tulis = $validatedData['tata_tulis'];
-        $penilaian->sumbangan_pemikiran = $validatedData['sumbangan_pemikiran'];
-        $penilaian->total_nilai_angka = $validatedData['total_nilai_angka'];
-        $penilaian->total_nilai_huruf = $validatedData['total_nilai_huruf'];
+        // $validatedData = $request->validate($rules);        
+        $penilaian = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $penjadwalan_sempro->id)->where('penguji_nip', auth()->user()->nip)->first();
+        $penilaian->presentasi = $request['presentasi'];
+        $penilaian->tingkat_penguasaan_materi = $request['tingkat_penguasaan_materi'];
+        $penilaian->keaslian = $request['keaslian'];
+        $penilaian->ketepatan_metodologi = $request['ketepatan_metodologi'];
+        $penilaian->penguasaan_dasar_teori = $request['penguasaan_dasar_teori'];
+        $penilaian->kecermatan_perumusan_masalah = $request['kecermatan_perumusan_masalah'];
+        $penilaian->tinjauan_pustaka = $request['tinjauan_pustaka'];
+        $penilaian->tata_tulis = $request['tata_tulis'];
+        $penilaian->sumbangan_pemikiran = $request['sumbangan_pemikiran'];
+        $penilaian->total_nilai_angka = $request['total_nilai_angka'];
+        $penilaian->total_nilai_huruf = $request['total_nilai_huruf'];
+
 
         if ($request->revisi_naskah1) {
-            $penilaian->revisi_naskah1 = $validatedData['revisi_naskah1'];
+            $penilaian->revisi_naskah1 = $request['revisi_naskah1'];
         }
         if ($request->revisi_naskah2) {
-            $penilaian->revisi_naskah2 = $validatedData['revisi_naskah2'];
+            $penilaian->revisi_naskah2 = $request['revisi_naskah2'];
         }
         if ($request->revisi_naskah3) {
-            $penilaian->revisi_naskah3 = $validatedData['revisi_naskah3'];
+            $penilaian->revisi_naskah3 = $request['revisi_naskah3'];
         }
         if ($request->revisi_naskah4) {
-            $penilaian->revisi_naskah4 = $validatedData['revisi_naskah4'];
+            $penilaian->revisi_naskah4 = $request['revisi_naskah4'];
         }
         if ($request->revisi_naskah5) {
-            $penilaian->revisi_naskah5 = $validatedData['revisi_naskah5'];
+            $penilaian->revisi_naskah5 = $request['revisi_naskah5'];
         }
         $penilaian->update();
 

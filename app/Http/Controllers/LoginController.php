@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class LoginController extends Controller
 {
@@ -47,7 +51,10 @@ class LoginController extends Controller
         return redirect('/kp-skripsi');
     }
 
-    return redirect('/')->with('loginError', 'Login Gagal!');
+    
+    Alert::error('Login Gagal!', 'Silahkan masukan NIP/NIM dan Password yang benar.')->showConfirmButton('Ok', '#dc3545');     
+    //  return redirect('/')->with('loginError', 'Login Gagal!');
+     return back()->with('loginError', 'Login Gagal!');
 }
 
     public function logout()

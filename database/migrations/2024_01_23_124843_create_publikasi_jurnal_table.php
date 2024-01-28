@@ -19,8 +19,10 @@ class CreatePublikasiJurnalTable extends Migration
             $table->foreignId('pendaftaran_skripsi_id');
             $table->foreignId('penjadwalan_skripsi_id')->nullable();
             $table->foreignId('mahasiswa_nim')->nullable();
-            $table->string('indeksasi_jurnal')->nullable();
             $table->string('judul_jurnal')->nullable();
+            $table->string('file_jurnal')->nullable();
+            $table->string('link_jurnal')->nullable();
+            $table->string('indeksasi_jurnal')->nullable();
             $table->string('status_publikasi_jurnal')->nullable();
             $table->string('nilai')->nullable();
             $table->timestamps();

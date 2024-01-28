@@ -397,12 +397,14 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::get('/penilaian-kp/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'create']);
     Route::post('/penilaian-kp-pembimbing/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'store_pembimbing']);
     Route::post('/penilaian-kp-penguji/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'store_penguji']);
+    
+    Route::post('/penilaian-kp-penguji-pembimbing-sama/create/{penjadwalan_kp:id}', [PenilaianKPController::class, 'store_pembimbing_penguji_sama']);
     Route::get('/penilaian-kp/edit/{penjadwalan_kp:id}', [PenilaianKPController::class, 'edit']);
     Route::put('/penilaian-kp-penguji/edit/{penilaian_kp_penguji:id}', [PenilaianKPController::class, 'update_penguji']);
     Route::put('/penilaian-kp-pembimbing/edit/{penilaian_kp_pembimbing:id}', [PenilaianKPController::class, 'update_pembimbing']);
     
-    Route::put('/penilaian-kp-penguji/edit/sama/{penilaian_kp_penguji:id}', [PenilaianKPController::class, 'update_penguji_sama']);
-    Route::put('/penilaian-kp-pembimbing/edit/sama/{penilaian_kp_pembimbing:id}', [PenilaianKPController::class, 'update_pembimbing_sama']);
+    Route::put('/penilaian-kp-pembimbing-penguji/edit/sama/{penilaian_kp_penguji:penjadwalan_kp_id}', [PenilaianKPController::class, 'update_pembimbing_penguji_sama']);
+
    
     Route::put('/penilaian-kp/approve/{id}', [PenjadwalanKPController::class, 'approve']);
     Route::get('/riwayat-penilaian-kp', [PenilaianKPController::class, 'riwayat']);
@@ -419,7 +421,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::post('/penilaian-sempro-penguji/create/{penjadwalan_sempro:id}', [PenilaianSemproController::class, 'store_penguji']);
     Route::get('/penilaian-sempro/edit/{penjadwalan_sempro:id}', [PenilaianSemproController::class, 'edit']);
     Route::put('/penilaian-sempro-pembimbing/edit/{penilaian_sempro_pembimbing:id}', [PenilaianSemproController::class, 'update_pembimbing']);
-    Route::put('/penilaian-sempro-penguji/edit/{penilaian_sempro_penguji:id}', [PenilaianSemproController::class, 'update_penguji']);
+    Route::put('/penilaian-sempro-penguji/edit/{penjadwalan_sempro_id:id}', [PenilaianSemproController::class, 'update_penguji']);
 
 
     Route::put('/penilaian-sempro/approve/{id}', [PenjadwalanSemproController::class, 'approve']);

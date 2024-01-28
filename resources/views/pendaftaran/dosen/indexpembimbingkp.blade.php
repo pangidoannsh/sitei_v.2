@@ -24,20 +24,30 @@
         <ol class="breadcrumb col-lg-12">
 
             <li>
-                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)</a>
+                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan  @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                        Auth::guard('dosen')->user()->role_id == 7 ||
+                        Auth::guard('dosen')->user()->role_id == 8 ||
+                        Auth::guard('dosen')->user()->role_id == 9 ||
+                        Auth::guard('dosen')->user()->role_id == 10 ||
+                        Auth::guard('dosen')->user()->role_id == 11 )
+                       (<span>  {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }} </span>)
+                      @endif
+                    @if(Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == null)
+                        (<span> {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }} </span>)
+                    @endif</a>
             </li>
 
             <span class="px-2">|</span>
 
-            <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_seminar_sempro + $jml_seminar_skripsi }}</span>) </a></li>
+            <li><a href="/kp-skripsi/seminar-pembimbing-penguji" class="px-1">Seminar (<span>{{ $jml_seminar_kp + $jml_sempro + $jml_sidang }}</span>) </a></li>
             <span class="px-2">|</span>
             <li><a href="/pembimbing/kerja-praktek" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan KP
-                    (<span>{{ $jml_kp }}</span>)</a></li>
+                    (<span>{{ $jml_bimbingankp }}</span>)</a></li>
             <span class="px-2">|</span>
-            <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_skripsi }}</span>)</a></li>
+            <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_bimbingan_skripsi }}</span>)</a></li>
             <span class="px-2">|</span>
             <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat
-                    (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
+                    (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li>
 
         </ol>
 
@@ -247,7 +257,7 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const waitingApprovalCount = {!! json_encode($jml_kp) !!};
+            const waitingApprovalCount = {!! json_encode($jml_bimbingankp) !!};
 
             const totalKuota = {!! json_encode($kapasitas_bimbingan_kp) !!};
             const sisaKuota = totalKuota - waitingApprovalCount;

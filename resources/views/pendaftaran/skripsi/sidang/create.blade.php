@@ -9,6 +9,10 @@
 @endsection
 
 @section('content')
+<div class="container">
+            <a href="/usuljudul/index" class="btn btn-success py-1 px-2 mb-4"><i class="fas fa-arrow-left fa-xs"></i> Kembali
+                <a>
+        </div>
     @foreach ($pendaftaran_skripsi as $skripsi)
         <form action="/daftar-sidang/create/{{ $skripsi->id }}" method="POST" enctype="multipart/form-data">
             @method('put')
@@ -20,7 +24,8 @@
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="formFile" class="form-label float-start">Resume Turnitin<span
-                                        class="text-danger">*</span> </label>
+                                        class="text-danger">*</span> <small class="text-secondary">(.pdf | Maks. 200 kb)
+                            </small></label>
                                 <input name="resume_turnitin"
                                     class="form-control @error('resume_turnitin') is-invalid @enderror"
                                     value="{{ old('resume_turnitin') }}" type="file" id="formFile" autofocus required>
@@ -140,11 +145,6 @@
                             </div>
                         @enderror
                     </div>
-
-
-
-                </div>
-                <div class="col-lg-6 col-md-12">
                     <div class="mb-3">
                         <label for="formFile" class="form-label float-start">STI-30/Bukti Mengumpulkan Syarat Daftar
                             Sidang<span class="text-danger">*</span> <small class="text-secondary">(Format .pdf | Maks.
@@ -158,6 +158,11 @@
                             </div>
                         @enderror
                     </div>
+                    
+
+
+                </div>
+                <div class="col-lg-6 col-md-12">
                     <div class="mb-3">
                         <label for="formFile" class="form-label float-start">STI-10/Surat Persetujuan Publikasi Skripsi
                             <small class="text-secondary">(Format .pdf | Maks. 200 KB) </small></label>
@@ -207,6 +212,29 @@
                     </div>
 
                     <!-- //JURNALL -->
+
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label float-start">File Jurnal/Artikel <small class="text-secondary">(Format .pdf | Maks. 200 KB) </small></label>
+                        <input name="file_jurnal" class="form-control @error('file_jurnal') is-invalid @enderror"
+                            value="{{ old('file_jurnal') }}" type="file" id="formFile">
+
+                        @error('file_jurnal')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3 field">
+                        <label class="form-label float-start">URL Jurnal</label>
+                        <input type="text" name="link_jurnal"
+                            class="form-control @error('link_jurnal') is-invalid @enderror"
+                            value="{{ old('link_jurnal') }}">
+                        @error('link_jurnal')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div class="mb-3 field">
                         <label for="indeksasi_jurnal" class="form-label">Indeksasi Jurnal</label>
                         <select name="indeksasi_jurnal"

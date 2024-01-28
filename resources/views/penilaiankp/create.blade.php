@@ -900,7 +900,7 @@
                     <div class="tab-content p-5" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel"
                             aria-labelledby="home-tab">
-                            <form action="/penilaian-kp-penguji/create/{{ $kp->id }}" method="POST">
+                            <form action="/penilaian-kp-penguji-pembimbing-sama/create/{{ $kp->id }}" method="POST">
                                 @csrf
                                 <div class="mb-3 gridratakiri ">
                                     <label for="presentasi" class="col-form-label">1). Presentasi</label>

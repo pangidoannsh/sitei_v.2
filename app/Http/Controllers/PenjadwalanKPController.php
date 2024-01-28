@@ -52,7 +52,7 @@ class PenjadwalanKPController extends Controller
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
-                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                // 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
                 // 'jamkpsels' => JamKPSel::all()->sortBy('id'),
                 // 'jamkpkams' => JamKPKam::all()->sortBy('id'),
             ]);
@@ -62,7 +62,7 @@ class PenjadwalanKPController extends Controller
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'),
-                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                // 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
                 // 'jamkpsels' => JamKPSel::all()->sortBy('id'),
                 // 'jamkpkams' => JamKPKam::all()->sortBy('id'),           
             ]);
@@ -72,7 +72,7 @@ class PenjadwalanKPController extends Controller
                 'prodis' => Prodi::all(),
                 'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get()->sortBy('nama'),
                 'dosens' => Dosen::all()->sortBy('nama'), 
-                'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+                // 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
                 // 'jamkpsels' => JamKPSel::all()->sortBy('id'),
                 // 'jamkpkams' => JamKPKam::all()->sortBy('id'),           
             ]);
@@ -116,7 +116,7 @@ class PenjadwalanKPController extends Controller
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'), 
-            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            // 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
             // 'jamkpsels' => JamKPSel::all()->sortBy('id'),
             // 'jamkpkams' => JamKPKam::all()->sortBy('id'),  
         ]);
@@ -186,7 +186,7 @@ class PenjadwalanKPController extends Controller
             'prodis' => Prodi::all(),
             'mahasiswas' => Mahasiswa::all()->sortBy('nama'),
             'dosens' => Dosen::all()->sortBy('nama'), 
-            'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
+            // 'ruangans' => Ruangan::all()->sortBy('nama_ruangan'),
             // 'jamkpsels' => JamKPSel::all()->sortBy('id'),
             // 'jamkpkams' => JamKPKam::all()->sortBy('id'),  
         ]);

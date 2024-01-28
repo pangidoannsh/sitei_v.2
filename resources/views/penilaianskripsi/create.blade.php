@@ -29,7 +29,7 @@
         <div class="row shadow-sm rounded">
             <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
                 <h5 class="text-bold">Mahasiswa</h5>
-                <hr class="border border-success">
+                <hr>
                 <p class="card-title text-secondary text-sm ">Nama</p>
                 <p class="card-text text-start">{{ $skripsi->mahasiswa->nama }}</p>
                 <p class="card-title text-secondary text-sm ">NIM</p>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white ">
                 <h5 class="text-bold">Dosen Pembimbing</h5>
-                <hr class="border border-success">
+                <hr>
                 @if ($skripsi->pembimbingdua_nip == null)
                     <p class="card-title text-secondary text-sm">Nama</p>
                     <p class="card-text text-start">{{ $skripsi->pembimbingsatu->nama }}</p>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-lg-4 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
                 <h5 class="text-bold">Dosen Penguji</h5>
-                <hr class="border border-success">
+                <hr>
 
                 <p class="card-title text-secondary text-sm">Nama Penguji 1</p>
                 <p class="card-text text-start">{{ $skripsi->pengujisatu->nama }}</p>
@@ -76,19 +76,24 @@
         <div class="row shadow-sm rounded">
             <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
                 <h5 class="text-bold">Judul Skripsi</h5>
-                <hr class="border border-success">
+                <hr>
 
                 <p class="card-title text-secondary text-sm">Judul</p>
                 <p class="card-text text-start">
                     {{ $skripsi->revisi_skripsi != null ? $skripsi->revisi_skripsi : $skripsi->judul_skripsi }}</p>
-
-                <p class="card-title text-secondary text-sm">Naskah</p>
+                 <p class="card-title text-secondary text-sm">Naskah</p>
                 <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                         href="{{ asset('storage/' . $naskah->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
+               <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
+                        <p class="card-text  text-start mb-2"><a formtarget="_blank" target="_blank"
+                                href="{{ asset('storage/' . $jurnal->file_jurnal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                @endif
+                
             </div>
             <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
                 <h5 class="text-bold">Jadwal Sidang Skripsi</h5>
-                <hr class="border border-success">
+                <hr>
 
                 <p class="card-title text-secondary text-sm">Hari/Tanggal</p>
                 <p class="card-text text-start">{{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}</p>
@@ -106,36 +111,56 @@
             <div class="row rounded shadow-sm">
                 <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
                     <h5 class="text-bold">Perbaikan Penguji (Sempro)</h5>
-                    <hr class="border border-success">
+                    <hr>
                     <p class="card-title text-secondary text-sm ">Perbaikan Penguji 1</p>
-                    <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href=""
+                    <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                            href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujisatu->nip }}"
                             class="badge bg-dark px-3 py-2">Buka</a></p>
                     <p class="card-title text-secondary text-sm ">Perbaikan Penguji 2</p>
-                    <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href=""
+                    <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                            href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujidua->nip }}"
                             class="badge bg-dark px-3 py-2">Buka</a></p>
-
-                    <p class="card-title text-secondary text-sm ">Perbaikan Penguji 3</p>
-                    <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href=""
-                            class="badge bg-dark px-3 py-2">Buka</a></p>
+                    @if ($sempro->pengujitiga == !null)
+                        <p class="card-title text-secondary text-sm ">Perbaikan Penguji 3</p>
+                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                                href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujitiga->nip }}"
+                                class="badge bg-dark px-3 py-2">Buka</a></p>
+                    @endif
 
 
 
                 </div>
                 <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
                     <h5 class="text-bold">Publikasi Jurnal</h5>
-                    <hr class="border border-success">
-
-                    <p class="card-title text-secondary text-sm">Indeksasi Jurnal</p>
-                    <p class="card-text text-start">{{ $jurnal->indeksasi_jurnal }}</p>
-                    @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                        <p class="card-title text-secondary text-sm">Indeksasi Jurnal</p>
+                        <p class="card-text text-start">{{ $jurnal->indeksasi_jurnal }}</p>
+                        @if($jurnal->file_jurnal != null)
                         <p class="card-title text-secondary text-sm">Judul Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->judul_jurnal }}</p>
+                        <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
+                        <p class="card-text  text-start mb-2"><a formtarget="_blank" target="_blank"
+                                href="{{ asset('storage/' . $jurnal->file_jurnal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                        @else
+                        @endif
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
                         <p class="card-title text-secondary text-sm">Status Publikasi Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->status_publikasi_jurnal }}</p>
+                        <p class="card-title text-secondary text-sm">URL Jurnal</p>
+                        <p class="card-text text-start"><a class="text-dark" formtarget="_blank" target="_blank"
+                                    href="https://{{ $jurnal->link_jurnal ?? '' }}">{{ $jurnal->link_jurnal }} <i class="fas fa-external-link-alt"></i></a> </p>
                     @endif
+                        </div>
+                    </div>
+   
                 </div>
             </div>
         </div>
+        
     @endif
 
 

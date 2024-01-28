@@ -339,7 +339,7 @@ a:hover .custom-tooltip {
 
 @media screen and (max-width: 768px) {
     .cardskripsi {
-    margin-bottom: 50px;
+        margin-bottom: 50px;
     }
 }
 
@@ -460,12 +460,12 @@ hr {
     user-select: none;
 }
 
-table tbody tr td {
+/* table tbody tr td {
     line-height: 16px;
 }
 table thead tr th {
     line-height: 16px;
-}
+} */
 
 .biru span {
     color: #035aa6;

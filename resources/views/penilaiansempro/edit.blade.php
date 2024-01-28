@@ -91,8 +91,7 @@
                 </p>
 
                 <p class="card-title text-secondary text-sm">Proposal</p>
-                <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href=""
-                        class="badge bg-dark px-3 py-2">Buka</a></p>
+                <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href="{{ asset('storage/' . $proposal->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
 
             </div>
             <div class="col-lg-6 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
@@ -457,7 +456,7 @@
             auth()->user()->nip == $sempro->penjadwalan_sempro->pengujidua_nip ||
             auth()->user()->nip == $sempro->penjadwalan_sempro->pengujitiga_nip)
 
-        <form action="/penilaian-sempro-penguji/edit/{{ $sempro->id }}" method="POST">
+        <form action="/penilaian-sempro-penguji/edit/{{ $sempro->penjadwalan_sempro_id }}" method="POST">
             @method('put')
             @csrf
             <div class="card card-success card-tabs">

@@ -1087,7 +1087,7 @@
             </ul>
             <div class="tab-content p-5" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form action="/penilaian-kp-penguji/edit/sama/{{ $kp->id }}" method="POST">
+                    <form action="/penilaian-kp-pembimbing-penguji/edit/sama/{{ $kp->penjadwalan_kp_id }}" method="POST">
                         @method('put')
                         @csrf
                         <div class="mb-3 gridratakiri ">

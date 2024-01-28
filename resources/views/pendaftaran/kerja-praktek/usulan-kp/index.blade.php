@@ -879,7 +879,7 @@
                                             class="fas fa-info-circle"></i></a>
 
                                     @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')
-                                        <a href="/jadwal" class="badge" data-bs-toggle="tooltip"
+                                        <a href="/jadwal/mahasiswa" class="badge" data-bs-toggle="tooltip"
                                             title="Lihat Jadwal"><img height="25" width="25"
                                                 src="/assets/img/calendar.png" alt="..." class="zoom-image"></a>
                                     @endif

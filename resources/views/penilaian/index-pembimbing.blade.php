@@ -28,7 +28,18 @@
 
         <ol class="breadcrumb col-lg-12">
             <li>
-                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>) </a>
+                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan 
+                    @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                        Auth::guard('dosen')->user()->role_id == 7 ||
+                        Auth::guard('dosen')->user()->role_id == 8 ||
+                        Auth::guard('dosen')->user()->role_id == 9 ||
+                        Auth::guard('dosen')->user()->role_id == 10 ||
+                        Auth::guard('dosen')->user()->role_id == 11 )
+                       (<span>  {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }} </span>)
+                      @endif
+                    @if(Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == null)
+                        (<span> {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }} </span>)
+                    @endif </a>
             </li>
             <span class="px-2">|</span>
             <li>
@@ -42,7 +53,7 @@
             <span class="px-2">|</span>
             <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_bimbinganskripsi }}</span>)</a></li>
             <span class="px-2">|</span>
-            <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_seminar_sempro + $jml_riwayat_seminar_skripsi + $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
+            <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang + $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
 
         </ol>
 

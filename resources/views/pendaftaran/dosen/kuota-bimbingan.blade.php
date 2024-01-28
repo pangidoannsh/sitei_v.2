@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables2">
+            <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables3">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center" scope="col">No.</th>

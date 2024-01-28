@@ -35,11 +35,10 @@ class PenilaianSkripsiController extends Controller
         $pembimbing = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->get();
         $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
         
-        $penjadwalan_sempro = PenjadwalanSempro::find($id);
+        $penjadwalan_sempro = PenjadwalanSempro::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
 
-        $jurnal = PublikasiJurnal::where('penjadwalan_skripsi_id', $penjadwalan->id)->first();
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
                  
-        
         if ($ceknilaipenguji1 == null) {
             $nilaipenguji1 = '';
         } else {
@@ -95,6 +94,7 @@ class PenilaianSkripsiController extends Controller
             'nilaipembimbing2' => $nilaipembimbing2,
             'naskah' => $pendaftaran_skripsi,
             'jurnal' => $jurnal,
+            
         ]);        
     }
 
@@ -182,7 +182,7 @@ class PenilaianSkripsiController extends Controller
         return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
     }
 
-    public function edit( $id, PenjadwalanSempro $sempro_id)
+    public function edit( $id)
     {
         $id = Crypt::decryptString($id);  
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
@@ -191,8 +191,8 @@ class PenilaianSkripsiController extends Controller
         $penjadwalan_skripsi = PenjadwalanSkripsi::find($id);
         $penjadwalan_sempro = PenjadwalanSkripsi::where('mahasiswa_nim', $penjadwalan_skripsi->mahasiswa_nim)->latest('created_at')->first();
 
-
-        // $jurnal = PublikasiJurnal::where('mahasiswa_nim', $penjadwalan_skripsi->mahasiswa_nim)->latest('created_at')->first();
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $penjadwalan_skripsi->mahasiswa_nim)->latest('created_at')->first();
+        
 
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan_skripsi->mahasiswa_nim)->latest('created_at')->first();
 
@@ -264,7 +264,7 @@ class PenilaianSkripsiController extends Controller
                 'nilaipembimbing1' => $nilaipembimbing1,
                 'nilaipembimbing2' => $nilaipembimbing2,
                 'naskah' => $pendaftaran_skripsi,
-                // 'jurnal' => $jurnal,
+                'jurnal' => $jurnal,
             ]);
         }
     }
