@@ -30,7 +30,7 @@
                         Kembali <a>
                 @endif
                 @if (Str::length(Auth::guard('web')->user()) > 0)
-                    <a href="/kp-skripsi/prodi/riwayat" class="btn btn-success py-1 px-2 mb-3"><i
+                    <a href="/prodi/riwayat" class="btn btn-success py-1 px-2 mb-3"><i
                             class="fas fa-arrow-left fa-xs"></i> Kembali <a>
                 @endif
             </div>
@@ -86,6 +86,7 @@
                             <h5 class="text-bold">Nilai Skripsi</h5>
                             <hr>
 
+                            @if($jurnal == null)
                             <p class="card-title  text-secondary text-sm">Nilai Angka</p>
                             <p class="card-text text-start"> <span class=" fs-5 fw-bold">
                                     @if (
@@ -182,6 +183,106 @@
                                     @endif
                                 </span>
                             </p>
+                            @endif
+                            
+                            @if($jurnal !== null)
+                            <p class="card-title  text-secondary text-sm">Nilai Angka</p>
+                            <p class="card-text text-start"> <span class=" fs-5 fw-bold">
+                                    @if (
+                                        $nilaipenguji1 == '' &&
+                                            $nilaipenguji2 == '' &&
+                                            $nilaipenguji3 == '' &&
+                                            $nilaipembimbing1 == '' &&
+                                            $nilaipembimbing2 == '')
+                                        -
+                                    @else
+                                        <?php
+                                        $nilai_masuk = 0;
+                                        if (!empty($nilaipenguji1)) {
+                                            $nilai_masuk = $nilai_masuk + 1;
+                                            $penguji1 = $nilaipenguji1->total_nilai_angka;
+                                        } else {
+                                            $penguji1 = 0;
+                                        }
+                                        if (!empty($nilaipenguji2)) {
+                                            $nilai_masuk = $nilai_masuk + 1;
+                                            $penguji2 = $nilaipenguji2->total_nilai_angka;
+                                        } else {
+                                            $penguji2 = 0;
+                                        }
+                                        if (!empty($nilaipenguji3)) {
+                                            $nilai_masuk = $nilai_masuk + 1;
+                                            $penguji3 = $nilaipenguji3->total_nilai_angka;
+                                        } else {
+                                            $penguji3 = 0;
+                                        }
+                                        $nilaitotalpenguji = round(($penguji1 + $penguji2 + $penguji3) / $nilai_masuk);
+                                        $nilai_masuk = 0;
+                                        
+                                        if (!empty($nilaipembimbing1)) {
+                                            $nilai_masuk = $nilai_masuk + 1;
+                                            $pembimbing1 = $nilaipembimbing1->total_nilai_angka;
+                                        } else {
+                                            $pembimbing1 = 0;
+                                        }
+                                        if (!empty($nilaipembimbing2)) {
+                                            $nilai_masuk = $nilai_masuk + 1;
+                                            $pembimbing2 = $nilaipembimbing2->total_nilai_angka;
+                                        } else {
+                                            $pembimbing2 = 0;
+                                        }
+                                        if ($nilai_masuk == 0) {
+                                            $nilai_masuk = 1;
+                                        }
+                                        $nilaitotalpembimbing = round(($pembimbing1 + $pembimbing2) / $nilai_masuk);
+                                        $nilai_masuk_akhir = 0;
+                                        if ($nilaitotalpenguji != 0) {
+                                            $nilai_masuk_akhir = $nilai_masuk_akhir + 1;
+                                            $penguji = $nilaitotalpenguji;
+                                        } else {
+                                            $penguji = 0;
+                                        }
+                                        if ($nilaitotalpembimbing != 0) {
+                                            $nilai_masuk_akhir = $nilai_masuk_akhir + 1;
+                                            $pembimbing = $nilaitotalpembimbing;
+                                        } else {
+                                            $pembimbing = 0;
+                                        }
+                                        $total_nilai = $penguji + $pembimbing;
+                                        ?>
+                                    @if ($total_nilai + $jurnal->nilai > 99)
+                                        100
+                                    @else
+                                        {{ $jurnal->nilai + $total_nilai}}
+                                    @endif
+                                    @endif
+                                </span>
+                            </p>
+
+                            <p class="card-title  text-secondary text-sm">Nilai Huruf</p>
+                            <p class="card-text text-start"><span class=" fs-5 fw-bold">
+                                     @if ($total_nilai + $jurnal->nilai >= 85)
+                                        A
+                                    @elseif ($total_nilai + $jurnal->nilai >= 80)
+                                        A-
+                                    @elseif ($total_nilai + $jurnal->nilai >= 75)
+                                        B+
+                                    @elseif ($total_nilai + $jurnal->nilai >= 70)
+                                        B
+                                    @elseif ($total_nilai + $jurnal->nilai >= 65)
+                                        B-
+                                    @elseif ($total_nilai + $jurnal->nilai >= 60)
+                                        C+
+                                    @elseif ($total_nilai + $jurnal->nilai >= 55)
+                                        C
+                                    @elseif ($total_nilai + $jurnal->nilai >= 40)
+                                        D
+                                    @else
+                                        E
+                                    @endif
+                                </span>
+                            </p>
+                            @endif
 
                         </div>
                     </div>
@@ -200,12 +301,12 @@
                                         style="border-radius:20px;">{{ $skripsi->status_skripsi }}</span></p>
                             @endif
                             @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DISETUJUI')
-                                <p class="card-title text-secondary text-sm ">Status KP</p>
+                                <p class="card-title text-secondary text-sm ">Status Skripsi</p>
                                 <p class="card-text text-start"><span class="badge p-2 bg-info text-bold pr-3 pl-3"
                                         style="border-radius:20px;">{{ $skripsi->status_skripsi }}</span></p>
                             @endif
                             @if ($skripsi->status_skripsi == 'SKRIPSI SELESAI' || $skripsi->status_skripsi == 'LULUS')
-                                <p class="card-title text-secondary text-sm ">Status KP</p>
+                                <p class="card-title text-secondary text-sm ">Status Skripsi</p>
                                 <p class="card-text text-start"><span class="badge p-2 bg-info text-bold pr-3 pl-3"
                                         style="border-radius:20px;">{{ $skripsi->status_skripsi }}</span></p>
                             @endif

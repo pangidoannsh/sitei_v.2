@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user.index', [
-            'users' => User::all(),
+            'users' => User::where('id', '<', 5)->get(),
             'roles' => Role::all(),
             'prodis' => Prodi::all(),
         ]);
@@ -97,4 +97,88 @@ class UserController extends Controller
         return  back();
 
     }
+
+    //PLP
+
+    public function plp_index()
+    {
+        return view('plp.index', [
+            'plp' => User::where('role_id',12)->get(),
+            'roles' => Role::all(),
+            'prodis' => Prodi::all(),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function plp_create()
+    {
+        return view('plp.create', [
+            'roles' => Role::where('id', 12)->get(),
+            'prodis' => Prodi::all(),
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function plp_store(Request $request)
+    {
+         $request->validate([
+            'role_id' => ['required'],
+            'username' => ['required', 'unique:users'],
+            'password' => ['required', 'min:3', 'max:255'],
+            'nama' => ['required'],
+            'email' => ['required', 'unique:users', 'email'],
+        ]);
+
+        User::create([
+            'role_id' => $request->role_id,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'nama' => $request->nama,
+            'email' => $request->email,
+        ]);
+
+        return redirect('/plp')->with('message', 'Data Berhasil Ditambahkan!');
+    }
+
+    public function plp_edit(User $user)
+    {
+        return view('plp.edit', [
+            'user' => $user,
+            'roles' => Role::all()
+        ]);
+    }
+
+    public function plp_update(Request $request, User $user)
+    {
+        $rules = [
+            'role_id' => ['required'],
+            'nama' => ['required'],
+        ];
+
+        if ($request->username != $user->username) {
+            $rules['username'] = 'required|unique:users';
+        } elseif ($request->email != $user->email) {
+            $rules['email'] = 'required|unique:users|email';
+        }
+
+        $validated = $request->validate($rules);
+
+        User::where('id', $user->id)
+            ->update($validated);
+
+        return redirect('/user')->with('message', 'Data Berhasil Diubah!');
+    }
+
+
+
+
 }

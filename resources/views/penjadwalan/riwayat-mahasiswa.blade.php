@@ -132,9 +132,11 @@
                             <a formtarget="_blank" target="_blank"
                                 href="/perbaikan-pengujiskripsi/{{ Crypt::encryptString($skripsi->id) }}/{{ $skripsi->pengujidua->nip }}"
                                 class="badge bg-warning mt-1 p-2"style="border-radius:20px;">Perbaikan Penguji 2</a>
+                                @if ($skripsi->pengujitiga == !null)
                             <a formtarget="_blank" target="_blank"
                                 href="/perbaikan-pengujiskripsi/{{ Crypt::encryptString($skripsi->id) }}/{{ $skripsi->pengujitiga->nip }}"
                                 class="badge bg-success mt-1 p-2"style="border-radius:20px;">Perbaikan Penguji 3</a>
+                                @endif
                         </td>
                     </tr>
                 @endforeach

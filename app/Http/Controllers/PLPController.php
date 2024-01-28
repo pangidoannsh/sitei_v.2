@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\plp;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Prodi;
@@ -35,7 +34,7 @@ class PLPController extends Controller
     public function create()
     {
         return view('plp.create', [
-            'roles' => Role::all(),
+            'roles' => Role::where('id', 12)->get(),
             'prodis' => Prodi::all(),
         ]);
     }
@@ -56,7 +55,7 @@ class PLPController extends Controller
             'email' => ['required', 'unique:users', 'email'],
         ]);
 
-        PLP::create([
+        User::create([
             'role_id' => $request->role_id,
             'username' => $request->username,
             'password' => Hash::make($request->password),

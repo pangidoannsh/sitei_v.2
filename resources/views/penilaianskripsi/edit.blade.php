@@ -138,25 +138,27 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
+                        @if($jurnal != null)
                         <p class="card-title text-secondary text-sm">Indeksasi Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->indeksasi_jurnal }}</p>
-                        @if($jurnal->file_jurnal != null)
                         <p class="card-title text-secondary text-sm">Judul Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->judul_jurnal }}</p>
                         <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
                         <p class="card-text  text-start mb-2"><a formtarget="_blank" target="_blank"
                                 href="{{ asset('storage/' . $jurnal->file_jurnal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
                         @else
+                        <p class="card-title text-secondary text-sm">Indeksasi Jurnal</p>
+                        <p class="card-text text-start">Tanpa Jurnal</p>
                         @endif
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
+                         @if($jurnal != null)
                         <p class="card-title text-secondary text-sm">Status Publikasi Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->status_publikasi_jurnal }}</p>
                         <p class="card-title text-secondary text-sm">URL Jurnal</p>
                         <p class="card-text text-start"><a class="text-dark" formtarget="_blank" target="_blank"
                                     href="https://{{ $jurnal->link_jurnal ?? '' }}">{{ $jurnal->link_jurnal }} <i class="fas fa-external-link-alt"></i></a> </p>
-                    @endif
+                        @endif
                         </div>
                     </div>
 
@@ -2421,7 +2423,7 @@
                 </tbody>
             </table>
 
-            @if ($total_nilai <= 80)
+            @if ($total_nilai <= 60)
                 <form action="/catatanskripsi/create/{{ $skripsi->penjadwalan_skripsi->id }}" method="POST">
                     @csrf
                     <div class="mb-3 gridratakiri">
@@ -2434,7 +2436,7 @@
             @else
             @endif
 
-            @if ($total_nilai <= 80)
+            @if ($total_nilai <= 60)
                 <div class="mb-3 gridratakiri">
                     <form action="/nilaijurnal/create/{{ $jurnal->penjadwalan_skripsi_id }}" method="POST">
                         @method('put')
@@ -2521,20 +2523,38 @@
                 </div>
             </div>
         </div>
-    @elseif($total_nilai <= 55)
-        <a href="#ModalApprove5" data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai
+    @elseif($total_nilai <= 60)
+        <a href="#ModalApprove7" data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai
             Seminar</a>
-        <div class="modal fade"id="ModalApprove5">
+
+        <div class="modal fade"id="ModalApprove7">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content shadow-sm">
                     <div class="modal-body">
-                        <div class="container px-5 pt-5 pb-2 text-center">
-                            <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
-                            <h5>Nilai Seminar Belum Mencukupi</h5>
-                            <button type="button" class="btn mt-3 btn-secondary"
-                                data-dismiss="modal">Kembali</button>
+                        <div class="container px-5 pt-5 pb-2">
+                            <h3 class="text-center">Apakah Anda Yakin?</h3>
+                            <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Tidak</button>
+                                </div>
+                                <div class="col-2">
+                                    <form action="/penilaian-skripsi/tolak/{{ $penjadwalan->id }}" method="POST">
+                                        @method('put')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"> Selesai</button>
+                                    </form>
+                                </div>
+                                <div class="col-4">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -2598,7 +2618,7 @@
             </div>
         </div>
     @else
-        <a href="#ModalApprove7" data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai
+        <a href="#ModalApprove7" data-toggle="modal" class="btn mt-5 btn-lg btn-success float-right">Selesai
             Seminar</a>
 
         <div class="modal fade"id="ModalApprove7">

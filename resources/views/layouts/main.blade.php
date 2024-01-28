@@ -307,9 +307,9 @@
                                                     class="dropdown-item mb-1 {{ Request::is('user*') ? 'text-success' : '' }}">Staff
                                                     Jurusan</a></li>
                                             <li>
-                                            {{-- <li><a href="/plp"
+                                             <li><a href="/plp"
                                                     class="dropdown-item mb-1 {{ Request::is('plp*') ? 'text-success' : '' }}">PLP</a>
-                                            </li> --}}
+                                            </li> 
                                             <li>
                                                 <a href="/role"
                                                     class="dropdown-item mb-1 {{ Request::is('role*') ? 'text-success' : '' }}">Hak
@@ -320,9 +320,6 @@
                                                     Studi</a></li>
                                             <li><a href="/konsentrasi"
                                                     class="dropdown-item mb-1 {{ Request::is('konsentrasi*') ? 'text-success' : '' }}">Konsentrasi</a>
-                                            </li>
-                                            <li><a href="/ruangan"
-                                                    class="dropdown-item mb-1 {{ Request::is('ruangan*') ? 'text-success' : '' }}">Ruangan</a>
                                             </li>
                                         </ul>
                                     </li>

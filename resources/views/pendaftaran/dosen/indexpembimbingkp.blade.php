@@ -125,11 +125,11 @@
                             <!-- Tanggal Usulan -->
                             @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA')
                                 <td class="text-center px-1 py-2">
-                                    {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y') }}</td>
+                                    {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat(' d F Y') }}</td>
                             @endif
 
                             @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK' || $kp->status_kp == 'KP DISETUJUI')
-                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y') }}
+                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_balasan)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
@@ -137,35 +137,33 @@
                                 $kp->status_kp == 'DAFTAR SEMINAR KP' ||
                                     $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' ||
                                     $kp->status_kp == 'DAFTAR SEMINAR KP ULANG' || $kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI' || $kp->status_kp == 'SEMINAR KP DIJADWALKAN' || $kp->status_kp == 'SEMINAR KP SELESAI')
-                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y') }}
+                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' || $kp->status_kp == 'KP SELESAI')
-                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_kpti10)->translatedFormat('l, d F Y') }}
+                                <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_kpti10)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             <!-- Tanggal Penting -->
 
                             @if ($kp->status_kp == 'USULAN KP')
-                                <td class="text-center px-1 py-2"> <small> Tanggal Usulan: <br></small>
-                                    {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y') }}</td>
+                                <td class="text-center px-1 py-2"> </td>
                             @endif
                             @if ($kp->status_kp == 'USULAN KP DITERIMA')
                                 <td class="text-center px-1 py-2"> <small> Tanggal Diterima:
-                                        <br></small>{{ Carbon::parse($kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($kp->status_kp == 'SURAT PERUSAHAAN' || $kp->status_kp == 'SURAT PERUSAHAAN DITOLAK')
-                                <td class="text-center px-1 py-2"> <small>Tanggal Usulan:
-                                        <br></small>{{ Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y') }}
+                                <td class="text-center px-1 py-2"> 
                                 </td>
                             @endif
 
                             @if ($kp->status_kp == 'KP DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small>Tanggal Disetujui:
-                                        <br></small>{{ Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($kp->tgl_disetujui_balasan)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
@@ -173,33 +171,31 @@
                                 $kp->status_kp == 'DAFTAR SEMINAR KP' ||
                                     $kp->status_kp == 'DAFTAR SEMINAR KP DITOLAK' ||
                                     $kp->status_kp == 'DAFTAR SEMINAR KP ULANG')
-                                <td class="text-center px-1 py-2"> <small>Tanggal Usulan:
-                                        <br></small>{{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y') }}
+                                <td class="text-center px-1 py-2">
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small>Tanggal Disetujui:
-                                        <br></small>{{ Carbon::parse($kp->tgl_created_semkp_kaprodi)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($kp->tgl_created_semkp_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')
                                 <td class="text-center px-1 py-2"> <small>Tanggal Dijadwalkan:
-                                        <br></small>{{ Carbon::parse($kp->tgl_dijadwalkan)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($kp->tgl_dijadwalkan)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'SEMINAR KP SELESAI')
                                 <td class="text-center px-1 py-2"> <small>Tanggal Selesai:
-                                        <br></small>{{ Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK')
-                                <td class="text-center px-1 py-2"> <small>Tanggal Usulan:
-                                        <br></small>{{ Carbon::parse($kp->tgl_created_kpti10)->translatedFormat('l, d F Y') }}
+                                <td class="text-center px-1 py-2">
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'KP SELESAI')
                                 <td class="text-center px-1 py-2"> <small>Tanggal Selesai:
-                                        <br></small>{{ Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($kp->tgl_selesai_semkp)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 

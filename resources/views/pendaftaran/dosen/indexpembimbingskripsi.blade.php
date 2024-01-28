@@ -174,8 +174,7 @@
 
                             <!-- Tanggal Penting -->
                             @if ($skripsi->status_skripsi == 'USULAN JUDUL')
-                                <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
-                                        <br></small>{{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat(' d F Y') }}
+                                <td class="text-center px-1 py-2">
                                 </td>
                             @endif
 
@@ -189,8 +188,7 @@
                                 $skripsi->status_skripsi == 'DAFTAR SEMPRO' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')
-                                <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
-                                        <br></small>{{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat(' d F Y') }}
+                                <td class="text-center px-1 py-2">
                                 </td>
                             @endif
 
@@ -273,8 +271,7 @@
                                 $skripsi->status_skripsi == 'DAFTAR SIDANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
-                                <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
-                                        <br></small>{{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat(' d F Y') }}
+                                <td class="text-center px-1 py-2"> 
                                 </td>
                             @endif
 

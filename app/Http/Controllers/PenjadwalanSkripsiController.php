@@ -337,6 +337,9 @@ class PenjadwalanSkripsiController extends Controller
         }
 
         $nilaipembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingsatu_nip)->first();
+        $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
+
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
 
         if ($penjadwalan->pembimbingdua_nip == null) {
             return view('penjadwalanskripsi.cek-nilai', [
@@ -347,6 +350,8 @@ class PenjadwalanSkripsiController extends Controller
                 'nilaipenguji2' => $nilaipenguji2,
                 'nilaipenguji3' => $nilaipenguji3,
                 'nilaipembimbing1' => $nilaipembimbing1,
+                'nilaipembimbing2' => $nilaipembimbing2,
+                'jurnal' => $jurnal,
             ]);
         } else {
             $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
@@ -360,6 +365,7 @@ class PenjadwalanSkripsiController extends Controller
                 'nilaipenguji3' => $nilaipenguji3,
                 'nilaipembimbing1' => $nilaipembimbing1,
                 'nilaipembimbing2' => $nilaipembimbing2,
+                'jurnal' => $jurnal,
             ]);
         }
     }
@@ -417,14 +423,25 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 1;
         $jadwal->update();
 
-         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
-
-        $pendaftaran_skripsi->status_skripsi = 'SIDANG SELESAI';
-        $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Selesai';
-        $pendaftaran_skripsi->tgl_selesai_sidang = Carbon::now();
-        $pendaftaran_skripsi->update();
-
         Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
+        return back();
+    }
+    
+    public function tolak($id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);
+        $jadwal->status_seminar = 3;
+        $jadwal->update();
+
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $pendaftaran_skripsi->keterangan = 'Belum Lulus Seminar Sidang Skripsi';
+        $pendaftaran_skripsi->tgl_semproselesai = Carbon::now();
+        $pendaftaran_skripsi->alasan = 'Anda belum lulus Seminar Sidang Skripsi';
+        $pendaftaran_skripsi->save();
+
+        Alert::success('Berhasil', 'Seminar telah Selesai')->showConfirmButton('Ok', '#dc3545');
         return back();
     }
 
@@ -456,6 +473,13 @@ class PenjadwalanSkripsiController extends Controller
         $jadwal->status_seminar = 3;
         $jadwal->update();
 
+         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->status_skripsi = 'SIDANG SELESAI';
+        $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Selesai';
+        $pendaftaran_skripsi->tgl_selesai_sidang = Carbon::now();
+        $pendaftaran_skripsi->update();
+
         // return redirect('/riwayat-koordinator')->with('message', 'Berita Acara Disetujui!');
         Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
     return back();
@@ -469,7 +493,7 @@ class PenjadwalanSkripsiController extends Controller
 
         // return redirect('/riwayat-koordinator')->with('message', 'Berita Acara Ditolak!');
         Alert::error('Berhasil', 'Berita acara berhasil ditolak')->showConfirmButton('Ok', '#dc3545');
-    return back();
+        return back();
     }
 
     public function riwayat()

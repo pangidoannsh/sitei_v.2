@@ -140,6 +140,7 @@
 
                             <!-- <td class="text-center">{{ $skripsi->jenis_usulan }}</td>    -->
                             <!-- USUL JUDUL  -->
+                            
 
                             @if ($skripsi->status_skripsi == 'LULUS')
                                 <td class="text-center bg-info">{{ $skripsi->status_skripsi }}</td>
@@ -150,7 +151,7 @@
                             <!-- USUL JUDUL  -->
                             @if ($skripsi->status_skripsi == 'LULUS')
                                 <td class="text-center">
-                                    <a href="/bukti-buku-skripsi/riwayat/detail/{{ $skripsi->id }}"
+                                    <a href="/kp-skripsi/riwayat/pembimbing/bukti-buku-skripsi/{{ $skripsi->id }}"
                                         class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i
                                             class="fas fa-info-circle"></i></a>
                                 </td>

@@ -1834,11 +1834,30 @@
                                     Auth::guard('dosen')->user()->role_id == 10 ||
                                     Auth::guard('dosen')->user()->role_id == 11)
                                 <td class="text-center px-1 py-2">
-                                    <div class="col-12 py-2 py-md-0 col-lg-12">
-                                        <a href="/penilaian-skripsi/cek-nilai/{{ Crypt::encryptString($skripsi->id) }}"
+                                    <div class="row ml-0 ml-md-4">
+                            <div class="col-lg-3 col-12 py-2 py-md-0">
+                                <form action="/persetujuanskripsi-koordinator/tolak/{{ $skripsi->id }}"
+                                    class="tolak-persetujuan-sidang-koordinator" method="POST">
+                                    @method('put')
+                                    @csrf
+                                    <button class="btn btn-danger badge p-1 " data-bs-toggle="tooltip"
+                                        title="Tolak"><i class="fas fa-times-circle"></i></button>
+                                </form>
+                            </div>
+                            <div class="col-lg-3 col-12 py-2 py-md-0">
+                                <a href="/penilaian-skripsi/cek-nilai/{{ Crypt::encryptString($skripsi->id) }}"
                                             class="badge btn btn-info p-1" data-bs-toggle="tooltip"
                                             title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
-                                    </div>
+                            </div>
+                            <div class="col-lg-3 col-12 py-2 py-md-0">
+                                <form action="/persetujuanskripsi-koordinator/approve/{{ $skripsi->id }}"
+                                    class="setujui-persetujuan-sidang-koordinator" method="POST">
+                                    @method('put')
+                                    @csrf
+                                    <button class="btn btn-success badge p-1 " data-bs-toggle="tooltip"
+                                        title="Setujui"><i class="fas fa-check-circle"></i></button>
+                                </form>
+                            </div>
                                 </td>
                             @endif
                         @endif
@@ -1848,11 +1867,30 @@
                                     Auth::guard('dosen')->user()->role_id == 7 ||
                                     Auth::guard('dosen')->user()->role_id == 8)
                                 <td class="text-center px-1 py-2">
-                                    <div class="col-12 py-2 py-md-0 col-lg-12">
-                                        <a href="/penilaian-skripsi/cek-nilai/{{ Crypt::encryptString($skripsi->id) }}"
+                                    <div class="row ml-0 ml-md-4">
+                            <div class="col-lg-3 col-12 py-2 py-md-0">
+                                <form action="/persetujuanskripsi-kaprodi/tolak/{{ $skripsi->id }}"
+                                    class="tolak-persetujuan-sidang-kaprodi" method="POST">
+                                    @method('put')
+                                    @csrf
+                                    <button class="btn btn-danger badge p-1 " data-bs-toggle="tooltip"
+                                        title="Tolak"><i class="fas fa-times-circle"></i></button>
+                                </form>
+                            </div>
+                            <div class="col-lg-3 col-12 py-2 py-md-0">
+                                 <a href="/penilaian-skripsi/cek-nilai/{{ Crypt::encryptString($skripsi->id) }}"
                                             class="badge btn btn-info p-1" data-bs-toggle="tooltip"
                                             title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
-                                    </div>
+                            </div>
+                            <div class="col-lg-3 col-12 py-2 py-md-0">
+                                <form action="/persetujuanskripsi-kaprodi/approve/{{ $skripsi->id }}"
+                                    class="setujui-persetujuan-sidang-kaprodi" method="POST">
+                                    @method('put')
+                                    @csrf
+                                    <button class="btn btn-success badge p-1 " data-bs-toggle="tooltip"
+                                        title="Setujui"><i class="fas fa-check-circle"></i></button>
+                                </form>
+                            </div>
                                 </td>
                             @endif
                         @endif
@@ -3356,6 +3394,79 @@
                 Swal.fire({
                     title: 'Lulus Skripsi!',
                     text: "Apakah Anda Yakin?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Setuju'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+            
+            // PERSETUJUAN SIDANG KOORDINATOR DAN KAPRODI
+            $('.tolak-persetujuan-sidang-koordinator').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Tolak Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data Akan dikembalikan ke Ketua Penguji",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Tolak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+
+            $('.setujui-persetujuan-sidang-koordinator').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Setujui Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data tidak bisa dikembalikan",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Setuju'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+            
+            $('.tolak-persetujuan-sidang-kaprodi').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Tolak Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data Akan dikembalikan ke Ketua Penguji",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Tolak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+
+            $('.setujui-persetujuan-sidang-kaprodi').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Setujui Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data tidak bisa dikembalikan",
                     icon: 'question',
                     showCancelButton: true,
                     cancelButtonText: 'Batal',

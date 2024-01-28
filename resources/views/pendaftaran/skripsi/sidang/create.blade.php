@@ -239,7 +239,7 @@
                         <label for="indeksasi_jurnal" class="form-label">Indeksasi Jurnal</label>
                         <select name="indeksasi_jurnal"
                             class="form-select @error('indeksasi_jurnal') is-invalid @enderror">
-                            <option value="Tanpa Jurnal">Tanpa Jurnal</option>
+                            <option value="">Tanpa Jurnal</option>
                             <option value="Q1">Q1</option>
                             <option value="Q2">Q2</option>
                             <option value="Q3">Q3</option>

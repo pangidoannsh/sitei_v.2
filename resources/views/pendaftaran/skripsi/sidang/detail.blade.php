@@ -81,8 +81,6 @@
                             <p class="card-text text-start"> <span><a formtarget="_blank" target="_blank"
                                         href="{{ asset('storage/' . $skripsi->sti_9) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
-                            <!-- <p class="card-title text-secondary text-sm " >STI-11</p>
-            <p class="card-text text-start" ><span><a formtarget="_blank" target="_blank" href="{{ asset('storage/' . $skripsi->sti_11) }}" class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p> -->
                             <p class="card-title text-secondary text-sm ">Naskah Skripsi</p>
                             <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
                                         href="{{ asset('storage/' . $skripsi->naskah) }}"
@@ -113,30 +111,52 @@
                             <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
                                         href="{{ asset('storage/' . $skripsi->logbook) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
-                            <p class="card-title text-secondary text-sm ">Bukti Pasang Desain Poster</p>
-                            <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
-                                        href="{{ asset('storage/' . $skripsi->pasang_poster) }}"
-                                        class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
-
-                            <p class="card-title text-secondary text-sm">URL Poster Skripsi</p>
-                            <p class="card-text text-start text-primary"><a formtarget="_blank" target="_blank"
-                                    href="https://{{ $skripsi->url_poster ?? '' }}">{{ $skripsi->url_poster }}</a> </p>
                             <p class="card-title text-secondary text-sm ">STI-30</p>
+                            @if($skripsi->sti_30 != null)
                             <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
                                         href="{{ asset('storage/' . $skripsi->sti_30) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+                            @else
+                            <p class="card-text text-start"><span>-</span></p>
+                            @endif
+
+                            <p class="card-title text-secondary text-sm ">Bukti Pasang Desain Poster</p>
+                            @if($skripsi->pasang_poster != null)
+                            <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
+                                        href="{{ asset('storage/' . $skripsi->pasang_poster) }}"
+                                        class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+                            @else
+                            <p class="card-text text-start"><span>-</span></p>
+                            @endif
+
+                            <p class="card-title text-secondary text-sm">URL Poster Skripsi</p>
+                            @if($skripsi->url_poster != null)
+                            <p class="card-text text-start text-primary"><a formtarget="_blank" target="_blank"
+                                    href="https://{{ $skripsi->url_poster ?? '' }}">{{ $skripsi->url_poster }}</a> </p>
+                            @else
+                            <p class="card-text text-start"><span>-</span></p>
+                            @endif
+                            
 
                         </div>
                         <div class="col-lg-3 col-md-12">
 
                             <p class="card-title text-secondary text-sm ">STI-10</p>
+                             @if($skripsi->sti_10 != null)
                             <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
                                         href="{{ asset('storage/' . $skripsi->sti_10) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+                            @else
+                            <p class="card-text text-start"><span>-</span></p>
+                            @endif
                             <p class="card-title text-secondary text-sm ">STI-31</p>
+                            @if($skripsi->sti_31 != null)
                             <p class="card-text text-start"><span><a formtarget="_blank" target="_blank"
-                                        href="{{ asset('storage/' . $skripsi->sti_31_skripsi) }}"
+                                        href="{{ asset('storage/' . $skripsi->sti_31) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
+                            @else
+                            <p class="card-text text-start"><span>-</span></p>
+                            @endif
                         </div>
                     </div>
                 </div>

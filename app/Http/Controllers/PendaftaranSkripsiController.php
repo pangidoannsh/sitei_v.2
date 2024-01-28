@@ -987,6 +987,8 @@ class PendaftaranSkripsiController extends Controller
         $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
 
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
+
        return view('pendaftaran.dosen.detail-laporan-skripsi-pemb', [
                 'pendaftaran_skripsi' =>  PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('id', $id)->where('pembimbing_2_nip', Auth::user()->nip)->get(),
 
@@ -996,6 +998,7 @@ class PendaftaranSkripsiController extends Controller
             'nilaipenguji1' => $nilai_penguji1, 
             'nilaipenguji2' => $nilai_penguji2, 
             'nilaipenguji3' => $nilai_penguji3,
+            'jurnal' => $jurnal,
             ]);
     }
     
@@ -1022,6 +1025,8 @@ class PendaftaranSkripsiController extends Controller
         $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
 
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
+
        return view('pendaftaran.skripsi.laporan-skripsi.detail-riwayat-pemb', [
                 'pendaftaran_skripsi' =>  PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('id', $id)->where('pembimbing_2_nip', Auth::user()->nip)->get(),
 
@@ -1031,6 +1036,7 @@ class PendaftaranSkripsiController extends Controller
             'nilaipenguji1' => $nilai_penguji1, 
             'nilaipenguji2' => $nilai_penguji2, 
             'nilaipenguji3' => $nilai_penguji3,
+            'jurnal' => $jurnal,
             ]);
     }
 
@@ -1058,6 +1064,7 @@ class PendaftaranSkripsiController extends Controller
         $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
 
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
 
         return view('pendaftaran.skripsi.laporan-skripsi.detail', [
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
@@ -1065,7 +1072,8 @@ class PendaftaranSkripsiController extends Controller
             'nilaipembimbing2' => $nilai_pembimbing2,
             'nilaipenguji1' => $nilai_penguji1, 
             'nilaipenguji2' => $nilai_penguji2, 
-            'nilaipenguji3' => $nilai_penguji3, 
+            'nilaipenguji3' => $nilai_penguji3,
+            'jurnal' => $jurnal, 
         ]);
     }
        
@@ -1092,6 +1100,7 @@ class PendaftaranSkripsiController extends Controller
         $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
 
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
 
         return view('pendaftaran.skripsi.laporan-skripsi.detail-riwayat-prodi', [
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
@@ -1100,6 +1109,7 @@ class PendaftaranSkripsiController extends Controller
             'nilaipenguji1' => $nilai_penguji1, 
             'nilaipenguji2' => $nilai_penguji2, 
             'nilaipenguji3' => $nilai_penguji3, 
+            'jurnal' => $jurnal, 
         ]);
     }
 

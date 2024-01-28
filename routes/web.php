@@ -16,9 +16,9 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\UsulanController;
 use App\Http\Controllers\RiwayatController;
-use App\Http\Controllers\RuanganController;
+// use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\DeveloperController;
-use App\Http\Controllers\JadwalkanController;
+// use App\Http\Controllers\JadwalkanController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\DosenProfilController;
@@ -29,7 +29,7 @@ use App\Http\Controllers\PenilaianKPController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\StaffProfilController;
 use App\Http\Controllers\PendaftaranKPController;
-//Murdillah
+
 use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\CountdownTimerController;
 use App\Http\Controllers\MahasiswaProfilController;
@@ -179,16 +179,16 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
 Route::group(['middleware' => ['auth:web']], function () {
 
     //Murdillah
-    Route::get('/ruangan', [RuanganController::class, 'index']);
-    Route::get('/ruangan/create', [RuanganController::class, 'create']);
-    Route::post('/ruangan/create', [RuanganController::class, 'store']);
-    Route::get('/ruangan/edit/{ruangan:id}', [RuanganController::class, 'edit']);
-    Route::put('/ruangan/edit/{ruangan:id}', [RuanganController::class, 'update']);
-    Route::delete('/ruangan/{ruangan:id}', [RuanganController::class, 'destroy']);
+    // Route::get('/ruangan', [RuanganController::class, 'index']);
+    // Route::get('/ruangan/create', [RuanganController::class, 'create']);
+    // Route::post('/ruangan/create', [RuanganController::class, 'store']);
+    // Route::get('/ruangan/edit/{ruangan:id}', [RuanganController::class, 'edit']);
+    // Route::put('/ruangan/edit/{ruangan:id}', [RuanganController::class, 'update']);
+    // Route::delete('/ruangan/{ruangan:id}', [RuanganController::class, 'destroy']);
     
-    Route::get('/jadwalkan', [JadwalkanController::class, 'index']);
-    Route::get('/jadwalkan/create', [JadwalkanController::class, 'create']);
-    Route::post('/jadwalkan/create', [JadwalkanController::class, 'store']);
+    // Route::get('/jadwalkan', [JadwalkanController::class, 'index']);
+    // Route::get('/jadwalkan/create', [JadwalkanController::class, 'create']);
+    // Route::post('/jadwalkan/create', [JadwalkanController::class, 'store']);
 
 
     Route::get('/kp-skripsi/persetujuan/perpanjangan-revisi/{id}', [PendaftaranSkripsiController::class, 'detailpersetujuan_perpanjangan_revisi']);
@@ -267,20 +267,18 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::put('/user/edit/{user:id}', [UserController::class, 'update']);
     Route::delete('/user/{user:id}', [UserController::class, 'destroy']);
     
-
-    Route::get('/plp', [PLPController::class, 'index']);
-    Route::get('/plp/create', [PLPController::class, 'create']);
-    Route::post('/plp/store', [PLPController::class, 'store']);
-    Route::get('/plp/edit/{id}', [PLPController::class, 'edit']);
-    Route::post('/plp/update/{id}', [PLPController::class, 'update']);
-
+    Route::get('/plp', [UserController::class, 'plp_index']);
+    Route::get('/plp/create', [UserController::class, 'plp_create']);
+    Route::post('/plp/create', [UserController::class, 'plp_store']);
+    Route::get('/plp/edit/{user:id}', [UserController::class, 'plp_edit']);
+    Route::put('/plp/edit/{user:id}', [UserController::class, 'plp_update']);
+    
 
     //RESET PASSWORD 
     Route::put('/reset-password/mahasiswa/{id}', [MahasiswaController::class, 'reset_password']);
     Route::put('/reset-password/dosen/{id}', [DosenController::class, 'reset_password']);
     Route::put('/reset-password/user/{id}', [UserController::class, 'reset_password']);
 });
-
 
 
 Route::group(['middleware' => ['auth:dosen']], function () {
@@ -443,6 +441,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/penilaian-skripsi-pembimbing/edit/{penilaian_skripsi_pembimbing:id}', [PenilaianSkripsiController::class, 'update_pembimbing']);
     Route::put('/penilaian-skripsi-penguji/edit/{penilaian_skripsi_penguji:id}', [PenilaianSkripsiController::class, 'update_penguji']);    
     Route::put('/penilaian-skripsi/approve/{id}', [PenjadwalanSkripsiController::class, 'approve']);
+    Route::put('/penilaian-skripsi/tolak/{id}', [PenjadwalanSkripsiController::class, 'tolak']);
     Route::get('/riwayat-penilaian-skripsi', [PenilaianSkripsiController::class, 'riwayat']);
     Route::get('/nilai-skripsi/{id}', [PenjadwalanSkripsiController::class, 'nilaiskripsi']);
     Route::get('/perbaikan-skripsi/{id}', [PenjadwalanSkripsiController::class, 'perbaikan']);

@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ url('/plp/store') }}" method="POST">
+    <form action="{{ url('/plp/create') }}" method="POST">
         @csrf
         <div>
             <div class="row">
