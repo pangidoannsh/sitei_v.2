@@ -65,7 +65,9 @@ class MahasiswaController extends Controller
             'angkatan' => $request->angkatan,
         ]);
 
-        return redirect('/mahasiswa')->with('message', 'Data Berhasil Ditambahkan!');
+        // return redirect('/mahasiswa')->with('message', 'Data Berhasil Ditambahkan!');
+         Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
     public function edit(Mahasiswa $mahasiswa)
@@ -107,7 +109,9 @@ class MahasiswaController extends Controller
         // }
 
         Mahasiswa::destroy($mahasiswa->id);
-        return redirect('/mahasiswa')->with('message', 'Data Berhasil Dihapus!');
+        // return redirect('/mahasiswa')->with('message', 'Data Berhasil Dihapus!');
+         Alert::success('Berhasil!', 'Data Berhasil Dihapus!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
     public function reset_password(Request $request, $id)

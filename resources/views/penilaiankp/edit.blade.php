@@ -962,28 +962,7 @@
                     </div>
                 </div>
             </div>
-        @elseif(
-            ($nilaipembimbing->total_nilai_angka +
-                $nilaipenguji->total_nilai_angka +
-                $nilaipembimbing->nilai_pembimbing_lapangan) /
-                3 <
-                60)
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right"
-                data-bs-toggle="modal" data-bs-target="#ModalApprove4">Selesai Seminar</button>
-            <div class="modal fade"id="ModalApprove4">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content shadow-sm">
-                        <div class="modal-body">
-                            <div class="container px-5 pt-5 pb-2 text-center">
-                                <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
-                                <h5>Nilai Seminar Belum Mencukupi</h5>
-                                <button type="button" class="btn mt-3 btn-secondary"
-                                    data-bs-dismiss="modal">Kembali</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         @elseif($penjadwalan->status_seminar > 0)
             <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right"
                 data-bs-toggle="modal" data-bs-target="#ModalApprove5">Selesai Seminar</button>
@@ -1002,7 +981,7 @@
                 </div>
             </div>
         @else
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right"
+            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
                 data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
 
             <div class="modal fade"id="ModalApprove6">
@@ -1665,28 +1644,7 @@
                     </div>
                 </div>
             </div>
-        @elseif(
-            ($nilaipembimbing->total_nilai_angka +
-                $nilaipenguji->total_nilai_angka +
-                $nilaipembimbing->nilai_pembimbing_lapangan) /
-                3 <
-                60)
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right"
-                data-bs-toggle="modal" data-bs-target="#ModalApprove4">Selesai Seminar</button>
-            <div class="modal fade"id="ModalApprove4">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content shadow-sm">
-                        <div class="modal-body">
-                            <div class="container px-5 pt-5 pb-2 text-center">
-                                <h1 class="text-danger"><i class="fas fa-exclamation-triangle fa-lg"></i> </h1>
-                                <h5>Nilai Seminar Belum Mencukupi</h5>
-                                <button type="button" class="btn mt-3 btn-secondary"
-                                    data-bs-dismiss="modal">Kembali</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       
         @elseif($penjadwalan->status_seminar > 0)
             <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
                 data-bs-toggle="modal" data-bs-target="#ModalApprove5">Seminar telah Selesai <i
@@ -1706,7 +1664,7 @@
                 </div>
             </div>
         @else
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right"
+            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
                 data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
 
             <div class="modal fade"id="ModalApprove6">

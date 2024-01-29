@@ -693,7 +693,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
     {
         $request->validate([                                           
             'judul_laporan' => 'required',
-            'laporan_kp' => 'required|mimes:pdf|max:1024',
+            'laporan_kp' => 'required|mimes:pdf|max:5120',
             'kpti_11' => 'required|mimes:pdf|max:200',
             'sti_31' => 'nullable|mimes:pdf|max:200',
         ]);

@@ -9,7 +9,12 @@
 @endsection
 
 @section('content')
-    <form action="{{ url('/plp/create') }}" method="POST">
+
+    <div class="container">
+        <a href="/plp" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+    </div>
+
+    <form action="{{ url('/user/create') }}" method="POST"  enctype="multipart/form-data">
         @csrf
         <div>
             <div class="row">

@@ -47,7 +47,9 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect('/user')->with('message', 'Data Berhasil Ditambahkan!');
+        // return redirect('/user')->with('message', 'Data Berhasil Ditambahkan!');
+        Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
     public function edit(User $user)
@@ -76,13 +78,17 @@ class UserController extends Controller
         User::where('id', $user->id)
             ->update($validated);
 
-        return redirect('/user')->with('message', 'Data Berhasil Diubah!');
+        // return redirect('/user')->with('message', 'Data Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Data Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
     public function destroy(User $user)
     {
         User::destroy($user->id);
-        return redirect('/user')->with('message', 'Data Berhasil Dihapus!');
+        // return redirect('/user')->with('message', 'Data Berhasil Dihapus!');
+        Alert::success('Berhasil!', 'Data Berhasil Dihapus!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
     public function reset_password(Request $request, $id)
@@ -108,12 +114,6 @@ class UserController extends Controller
             'prodis' => Prodi::all(),
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function plp_create()
     {
         return view('plp.create', [
@@ -122,12 +122,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function plp_store(Request $request)
     {
          $request->validate([
@@ -146,7 +140,9 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect('/plp')->with('message', 'Data Berhasil Ditambahkan!');
+        // return redirect('/plp')->with('message', 'Data Berhasil Ditambahkan!');
+        Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
     public function plp_edit(User $user)
@@ -175,7 +171,10 @@ class UserController extends Controller
         User::where('id', $user->id)
             ->update($validated);
 
-        return redirect('/user')->with('message', 'Data Berhasil Diubah!');
+        // return redirect('/user')->with('message', 'Data Berhasil Diubah!');
+
+        Alert::success('Berhasil!', 'Data Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        return  back();
     }
 
 

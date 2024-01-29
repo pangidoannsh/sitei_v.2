@@ -52,11 +52,15 @@ class DosenController extends Controller
                 'email' => $request->email,
             ]);
 
-            return redirect('/dosen')->with('message', 'Data Berhasil Ditambahkan!');
+            // return redirect('/dosen')->with('message', 'Data Berhasil Ditambahkan!');
+        Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+        return  redirect('/dosen');
         } else {
             $cari = Dosen::where('role_id', $request->role_id)->get();
             if ($cari->count() > 0) {
-                return redirect('/dosen')->with('loginError', 'Jabatan Sudah Ada!');
+                // return redirect('/dosen')->with('loginError', 'Jabatan Sudah Ada!');
+                Alert::error('Gagal', 'Jabatan Sudah Ada!')->showConfirmButton('Ok', '#dc3545');
+                 return  back();
             } else {
                 Dosen::create([
                     'role_id' => $request->role_id,
@@ -68,7 +72,8 @@ class DosenController extends Controller
                     'email' => $request->email,
                 ]);
 
-                return redirect('/dosen')->with('message', 'Data Berhasil Ditambahkan!');
+                Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+                return  redirect('/dosen');
             }
         }
     }
@@ -103,7 +108,9 @@ class DosenController extends Controller
         Dosen::where('id', $dosen->id)
             ->update($validated);
 
-        return redirect('/dosen')->with('message', 'Data Berhasil Diubah!');
+        // return redirect('/dosen')->with('message', 'Data Berhasil Diubah!');
+        Alert::success('Berhasil!', 'Data Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        return  redirect('/dosen');
     }
 
     public function destroy(Dosen $dosen)
@@ -113,7 +120,9 @@ class DosenController extends Controller
         }
 
         Dosen::destroy($dosen->id);
-        return redirect('/dosen')->with('message', 'Data Berhasil Dihapus!');
+        // return redirect('/dosen')->with('message', 'Data Berhasil Dihapus!');
+        Alert::success('Berhasil!', 'Data Berhasil Dihapus!')->showConfirmButton('Ok', '#28a745');
+        return  redirect('/dosen');
     }
 
     public function reset_password(Request $request, $id)
