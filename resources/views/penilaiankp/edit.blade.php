@@ -616,7 +616,7 @@
                                 <div class="fw-bold mb-2">Input Nilai :</div>
                                 <input type="number" name="nilai_pembimbing_lapangan" class="form-control"
                                     value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}"
-                                    min="0" max="100">
+                                    min="0" max="100" step="1">
                             </div>
                             <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
                         </div>
@@ -962,25 +962,51 @@
                     </div>
                 </div>
             </div>
-        
-        @elseif($penjadwalan->status_seminar > 0)
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right"
-                data-bs-toggle="modal" data-bs-target="#ModalApprove5">Selesai Seminar</button>
-            <div class="modal fade"id="ModalApprove5">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content shadow-sm">
-                        <div class="modal-body">
-                            <div class="container px-5 pt-5 pb-2 text-center">
-                                <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
-                                <h5>Seminar telah disetujui</h5>
-                                <button type="button" class="btn mt-3 btn-secondary"
-                                    data-bs-dismiss="modal">Kembali</button>
+       
+           @elseif(($nilaipembimbing->total_nilai_angka +
+                        $nilaipenguji->total_nilai_angka +
+                        $nilaipembimbing->nilai_pembimbing_lapangan) /
+                        3 <=
+                        55 && $penjadwalan->status_seminar == 0)
+            <a href="#ModalApprove7" data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai
+            Seminar</a>
+
+        <div class="modal fade"id="ModalApprove7">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content shadow-sm">
+                    <div class="modal-body">
+                        <div class="container px-5 pt-5 pb-2">
+                            <h3 class="text-center">Apakah Anda Yakin?</h3>
+                            <p class="text-center">Mahasiswa belum lulus seminar, Data Tidak Bisa Dikembalikan!</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Tidak</button>
+                                </div>
+                                <div class="col-2">
+                                    <form action="/penilaian-kp/tolak/{{ $penjadwalan->id }}" method="POST">
+                                        @method('put')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"> Selesai</button>
+                                    </form>
+                                </div>
+                                <div class="col-4">
+                                </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
-        @else
+        </div>
+         @elseif(($nilaipembimbing->total_nilai_angka +
+                        $nilaipenguji->total_nilai_angka +
+                        $nilaipembimbing->nilai_pembimbing_lapangan) /
+                        3 >=
+                        55 && $penjadwalan->status_seminar == 0)
             <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
                 data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
 
@@ -990,7 +1016,7 @@
                         <div class="modal-body">
                             <div class="container px-5 pt-5 pb-2">
                                 <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                <p class="text-center">Mahasiswa Lulus Seminar, Data Tidak Bisa Dikembalikan!</p>
                                 <div class="row text-center">
                                     <div class="col-4">
                                     </div>
@@ -1299,14 +1325,14 @@
 
 
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <form action="/penilaian-kp-pembimbing/edit/sama/{{ $kp->id }}" method="POST">
+                    <form action="/penilaian-kp-pembimbing-penguji/edit/sama/{{ $kp->penjadwalan_kp_id }}" method="POST">
                         @method('put')
                         @csrf
                         <div class="mb-3 gridratakiri">
                             <div class="fw-bold mb-2">Input Nilai :</div>
                             <input type="number" name="nilai_pembimbing_lapangan" class="form-control"
                                 value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}"
-                                min="0" max="100">
+                                min="0" max="100" step="1">
                         </div>
                         @if ($penjadwalan->status_seminar == '0')
                             <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
@@ -1645,25 +1671,50 @@
                 </div>
             </div>
        
-        @elseif($penjadwalan->status_seminar > 0)
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
-                data-bs-toggle="modal" data-bs-target="#ModalApprove5">Seminar telah Selesai <i
-                    class="fas fa-check fa-lg"></i> </button>
-            <div class="modal fade"id="ModalApprove5">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content shadow-sm">
-                        <div class="modal-body">
-                            <div class="container px-5 pt-5 pb-2 text-center">
-                                <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
-                                <h5>Seminar telah disetujui</h5>
-                                <button type="button" class="btn mt-3 btn-secondary"
-                                    data-bs-dismiss="modal">Kembali</button>
+           @elseif(($nilaipembimbing->total_nilai_angka +
+                        $nilaipenguji->total_nilai_angka +
+                        $nilaipembimbing->nilai_pembimbing_lapangan) /
+                        3 <=
+                        55 && $penjadwalan->status_seminar == 0)
+            <a href="#ModalApprove7" data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai
+            Seminar</a>
+
+        <div class="modal fade"id="ModalApprove7">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content shadow-sm">
+                    <div class="modal-body">
+                        <div class="container px-5 pt-5 pb-2">
+                            <h3 class="text-center">Apakah Anda Yakin?</h3>
+                            <p class="text-center">Mahasiswa belum lulus seminar, Data Tidak Bisa Dikembalikan!</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Tidak</button>
+                                </div>
+                                <div class="col-2">
+                                    <form action="/penilaian-kp/tolak/{{ $penjadwalan->id }}" method="POST">
+                                        @method('put')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"> Selesai</button>
+                                    </form>
+                                </div>
+                                <div class="col-4">
+                                </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
-        @else
+        </div>
+         @elseif(($nilaipembimbing->total_nilai_angka +
+                        $nilaipenguji->total_nilai_angka +
+                        $nilaipembimbing->nilai_pembimbing_lapangan) /
+                        3 >=
+                        55 && $penjadwalan->status_seminar == 0)
             <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
                 data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
 
@@ -1673,7 +1724,7 @@
                         <div class="modal-body">
                             <div class="container px-5 pt-5 pb-2">
                                 <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                <p class="text-center">Data Tidak Bisa Dikembalikan!</p>
+                                <p class="text-center">Mahasiswa Lulus Seminar, Data Tidak Bisa Dikembalikan!</p>
                                 <div class="row text-center">
                                     <div class="col-4">
                                     </div>

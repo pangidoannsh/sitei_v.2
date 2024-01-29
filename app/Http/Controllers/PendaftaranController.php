@@ -51,17 +51,15 @@ class PendaftaranController extends Controller
                 'jml_sidang' => PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->count(),
 
             //JUMLAH PERSETUJUAN KP
-            'jml_persetujuan_kp' => PendaftaranKP::where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')
-                ->orWhere('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
+            'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
                 ->orderBy('status_kp', 'desc')->count(),
 
             //JUMLAH PERSETUJUAN SKRIPSI
-            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('keterangan', 'Menunggu persetujuan Koordinator Program Studi')
-                ->orWhere('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
+            'jml_persetujuan_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 1')
                 ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing 2')
                 ->orderBy('status_skripsi', 'desc')->count(),
             //JUMLAH PERSETUJUAN SEMINAR SKRIPSI
-            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
+            'jml_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->count(),
 
              //JUMLAH KP
                 'jml_bimbingankp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('status_kp', 'desc')->count(),

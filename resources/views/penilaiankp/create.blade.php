@@ -613,7 +613,7 @@
                                         <div class="fw-bold mb-2">Input Nilai :</div>
                                         <input type="number" name="nilai_pembimbing_lapangan" class="form-control"
                                             value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}"
-                                            min="0" max="100">
+                                            min="0" max="100" step="1">
                                     </div>
                                     <button type="submit" class="btn btn-lg btn-success float-right">Simpan</button>
                                 </div>
@@ -1141,13 +1141,13 @@
                             </form>
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <form action="/penilaian-kp-pembimbing/create/{{ $kp->id }}" method="POST">
+                            <form action="/penilaian-kp-penguji-pembimbing-sama/create/{{ $kp->id }}" method="POST">
                                 @csrf
                                 <div class="mb-3 gridratakiri">
                                     <div class="fw-bold mb-2">Input Nilai :</div>
                                     <input type="number" name="nilai_pembimbing_lapangan" class="form-control"
                                         value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}"
-                                        min="0" max="100">
+                                        min="0" max="100" step="1">
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-success float-right">Simpan</button>
                         </div>

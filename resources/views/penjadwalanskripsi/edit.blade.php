@@ -252,7 +252,7 @@
                                                         </div>
                                                         <div class="col-6 text-start">
                                                             <button type="submit"
-                                                                class="btn p-2 px-3 btn-success ">Jadwalkan</button>
+                                                                class="btn p-2 px-3 btn-success ">Ya</button>
                                                         </div>
 
                                                     </div>
@@ -525,7 +525,7 @@
                                                         </div>
                                                         <div class="col-6 text-start">
                                                             <button type="submit"
-                                                                class="btn p-2 px-3 btn-success ">Jadwalkan</button>
+                                                                class="btn p-2 px-3 btn-success ">Ya</button>
                                                         </div>
 
                                                     </div>
@@ -545,6 +545,9 @@
         @endif
     @endif
 
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

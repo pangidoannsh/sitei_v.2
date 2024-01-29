@@ -268,6 +268,25 @@ class PenjadwalanKPController extends Controller
         // return redirect('/kp-skripsi/riwayat-penilaian-kp');
         return back();
     }
+    
+    public function tolak($id)
+    {
+        $jadwal = PenjadwalanKP::find($id);
+        $jadwal->status_seminar = 1;
+        $jadwal->update();
+
+        $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_kp->status_kp = 'USULKAN KP ULANG';
+        $pendaftaran_kp->keterangan = 'Anda belum Lulus Seminar KP';
+        $pendaftaran_kp->alasan = 'Nilai Seminar belum mencukupi';
+        $pendaftaran_kp->update();
+
+        Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#dc3545');
+        // return redirect('/kp-skripsi/riwayat-penilaian-kp');
+        return back();
+    }
+
 
     public function riwayat()
     {

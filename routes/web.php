@@ -410,6 +410,7 @@ Route::group(['middleware' => ['auth:dosen']], function () {
 
    
     Route::put('/penilaian-kp/approve/{id}', [PenjadwalanKPController::class, 'approve']);
+    Route::put('/penilaian-kp/tolak/{id}', [PenjadwalanKPController::class, 'tolak']);
     Route::get('/riwayat-penilaian-kp', [PenilaianKPController::class, 'riwayat']);
     Route::get('/nilai-kp/{id}', [PenjadwalanKPController::class, 'nilaikp']);
     Route::get('/perbaikan-kp/{id}', [PenjadwalanKPController::class, 'perbaikan']);

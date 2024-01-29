@@ -133,7 +133,7 @@
                                 <label class="form-label">Tanggal</label>
                                 <input type="date" name="tanggal"
                                     class="form-control @error('tanggal') is-invalid @enderror"
-                                    value="{{ old('tanggal') }}">
+                                    value="{{ old('tanggal') }}" required>
                                 @error('tanggal')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -148,7 +148,7 @@
                                 <input type="time" name="waktu"
                                     class="form-control @error('waktu') is-invalid @enderror" value="{{ old('waktu') }}">
                                 @error('waktu')
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" required>
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -160,7 +160,7 @@
                                 <input type="text" name="lokasi"
                                     class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}">
                                 @error('lokasi')
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" required>
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -208,7 +208,7 @@
                     <div class="mb-3 field">
                         <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
                         <select name="pengujisatu_nip" id="penguji1"
-                            class="form-select @error('pengujisatu_nip') is-invalid @enderror">
+                            class="form-select @error('pengujisatu_nip') is-invalid @enderror" required>
                             <option value="">-Pilih-</option>
                             @foreach ($dosens as $dosen)
                                 <option value="{{ $dosen->nip }}"
@@ -226,7 +226,7 @@
                     <div class="mb-3 field">
                         <label for="pengujidua_nip" class="form-label">Penguji Dua</label>
                         <select name="pengujidua_nip" id="penguji2"
-                            class="form-select @error('pengujidua_nip') is-invalid @enderror">
+                            class="form-select @error('pengujidua_nip') is-invalid @enderror" required>
                             <option value="">-Pilih-</option>
                             @foreach ($dosens as $dosen)
                                 <option value="{{ $dosen->nip }}"
@@ -264,6 +264,10 @@
             </div>
         </div>
     </form>
+
+    <br>
+    <br>
+    <br>
 @endsection
 
 @section('footer')

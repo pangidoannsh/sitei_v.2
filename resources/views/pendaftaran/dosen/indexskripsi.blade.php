@@ -117,13 +117,13 @@
 
                             @if ($skripsi->status_skripsi == 'USULAN JUDUL')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
@@ -132,48 +132,48 @@
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_sempro_admin)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_sempro_admin)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Dijadwalkan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_jadwalsempro)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_jadwalsempro)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
                             @if ($skripsi->status_skripsi == 'SEMPRO SELESAI')
                                 <td class="text-center px-1 py-2"> <small> Tanggal Selesai:
-                                        <br></small>{{ Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_perpanjangan1_kaprodi)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_perpanjangan1_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_perpanjangan2_kaprodi)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_perpanjangan2_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
@@ -182,37 +182,37 @@
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                              @if ($skripsi->status_skripsi == 'SIDANG SELESAI')
                                 <td class="text-center px-1 py-2"> <small> Tanggal Selesai:
-                                        <br></small>{{ Carbon::parse($skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}
+                                        <br></small>{{ Carbon::parse($skripsi->tgl_selesai_sidang)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'SIDANG DIJADWALKAN')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Dijadwalkan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_jadwal_sidang)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Disetujui:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
@@ -220,7 +220,7 @@
                                 $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI' ||
                                     $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
                                 <td class="text-center px-1 py-2"> <small class="text-muted"> Tanggal Usulan:
-                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y') }}
+                                    </small><br>{{ Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 

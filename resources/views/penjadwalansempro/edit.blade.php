@@ -88,7 +88,7 @@
                                         <label class="form-label">Tanggal</label>
                                         <input type="date" name="tanggal"
                                             class="form-control @error('tanggal') is-invalid @enderror"
-                                            value="{{ old('tanggal', $sempro->tanggal) }}">
+                                            value="{{ old('tanggal', $sempro->tanggal) }}" required>
                                         @error('tanggal')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -101,7 +101,7 @@
                                         <label class="form-label">Waktu</label>
                                         <input type="time" name="waktu"
                                             class="form-control @error('waktu') is-invalid @enderror"
-                                            value="{{ old('waktu', $sempro->waktu) }}">
+                                            value="{{ old('waktu', $sempro->waktu) }}" required>
                                         @error('waktu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -115,7 +115,7 @@
                             <div class="mb-3 field">
                                 <label class="form-label">Ruangan</label>
                                 <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror"
-                                    value="{{ old('lokasi', $sempro->lokasi) }}">
+                                    value="{{ old('lokasi', $sempro->lokasi) }}" required>
                                 @error('lokasi')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -169,7 +169,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
                                 <select name="pengujisatu_nip" id="penguji1"
-                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -187,7 +187,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujidua_nip" class="form-label">Penguji Dua</label>
                                 <select name="pengujidua_nip" id="penguji2"
-                                    class="form-select @error('pengujidua_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujidua_nip') is-invalid @enderror" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -239,7 +239,7 @@
                                                         </div>
                                                         <div class="col-6 text-start">
                                                             <button type="submit"
-                                                                class="btn p-2 px-3 btn-success ">Jadwalkan</button>
+                                                                class="btn p-2 px-3 btn-success ">Ya</button>
                                                         </div>
 
                                                     </div>
@@ -341,7 +341,7 @@
                                         <label class="form-label">Tanggal</label>
                                         <input type="date" name="tanggal"
                                             class="form-control @error('tanggal') is-invalid @enderror"
-                                            value="{{ old('tanggal', $sempro->tanggal) }}">
+                                            value="{{ old('tanggal', $sempro->tanggal) }}" required>
                                         @error('tanggal')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -354,7 +354,7 @@
                                         <label class="form-label">Waktu</label>
                                         <input type="time" name="waktu"
                                             class="form-control @error('waktu') is-invalid @enderror"
-                                            value="{{ old('waktu', $sempro->waktu) }}">
+                                            value="{{ old('waktu', $sempro->waktu) }}" required>
                                         @error('waktu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -370,7 +370,7 @@
 
                                 <select name="lokasi" id="lokasi"
                                     class="form-select @error('lokasi') is-invalid @enderror"
-                                    value="{{ old('lokasi', $sempro->lokasi) }}">
+                                    value="{{ old('lokasi', $sempro->lokasi) }}" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($ruangans as $ruangan)
                                         <option value="{{ $ruangan->nama_ruangan }}"
@@ -458,7 +458,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujidua_nip" class="form-label">Penguji Dua</label>
                                 <select name="pengujidua_nip" id="penguji2"
-                                    class="form-select @error('pengujidua_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujidua_nip') is-invalid @enderror" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -476,7 +476,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujitiga_nip" class="form-label">Penguji Tiga</label>
                                 <select name="pengujitiga_nip" id="penguji3"
-                                    class="form-select @error('pengujitiga_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujitiga_nip') is-invalid @enderror" required>
                                     <option value="1">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -510,7 +510,7 @@
                                                         </div>
                                                         <div class="col-6 text-start">
                                                             <button type="submit"
-                                                                class="btn p-2 px-3 btn-success ">Jadwalkan</button>
+                                                                class="btn p-2 px-3 btn-success ">Ya</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -532,6 +532,9 @@
         @endif
     @endif
 
+    <br>
+<br>
+<br>
 @endsection
 
 @section('footer')

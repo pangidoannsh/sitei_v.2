@@ -76,8 +76,12 @@
                         <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                                 href="{{ asset('storage/' . $kp->kpti_11) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
                         <p class="card-title text-secondary text-sm">STI-31/Surat Persetujuan Sertifikat Pendamping</p>
+                        @if($kp->sti_31 != null)
                         <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                                 href="{{ asset('storage/' . $kp->sti_31) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                        @else
+                        <p class="card-text text-start">-</p>
+                        @endif
                     </div>
                     <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
                         <h5 class="text-bold">Keterangan Pendaftaran</h5>

@@ -219,6 +219,20 @@ class PenilaianKPController extends Controller
         $penilaianPembimbing->pembimbing_nip = auth()->user()->nip;
         $penilaianPembimbing->penjadwalan_kp_id = $penilaian->penjadwalan_kp_id;
 
+        if ($request->nilai_pembimbing_lapangan) {
+            $penilaianPembimbing->nilai_pembimbing_lapangan = $request->nilai_pembimbing_lapangan;
+        }
+
+        if ($request->catatan1) {
+            $penilaianPembimbing->catatan1 = $request['catatan1'];
+        }
+        if ($request->catatan2) {
+            $penilaianPembimbing->catatan2 = $request['catatan2'];
+        }
+        if ($request->catatan3) {
+            $penilaianPembimbing->catatan3 = $request['catatan3'];
+        }
+
         $penilaianPembimbing->presentasi = $penilaian->presentasi;    
         $penilaianPembimbing->materi = $penilaian->materi;
         $penilaianPembimbing->tanya_jawab = $penilaian->tanya_jawab;
@@ -236,15 +250,19 @@ class PenilaianKPController extends Controller
         $decrypted = Crypt::decryptString($id);
         $cari_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', auth()->user()->nip)->count();
 
+         $penjadwalan = PenjadwalanKP::find($decrypted);  
+        $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+
         if ($cari_pembimbing == 0) {            
             return view('penilaiankp.edit', [
                 'kp' => PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', auth()->user()->nip)->first(),
+                'laporan_kp' => $pendaftaran_kp,
   
             ]);
         } 
         else {
                         
-            $penjadwalan = PenjadwalanKP::find($decrypted);        
+                 
             $ceknilaipenguji = PenilaianKPPenguji::where('penjadwalan_kp_id' , $decrypted)->where('penguji_nip', $penjadwalan->penguji_nip)->first();
 
             if ($ceknilaipenguji == null) {
@@ -266,7 +284,7 @@ class PenilaianKPController extends Controller
             $kp = PenilaianKPPembimbing::where('penjadwalan_kp_id', $decrypted)->where('pembimbing_nip', auth()->user()->nip)->first();
             $kpp = PenilaianKPPenguji::where('penjadwalan_kp_id', $decrypted)->where('penguji_nip', auth()->user()->nip)->first();
 
-            $pendaftaran_kp = PendaftaranKP::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+            
 
             return view('penilaiankp.edit', [
                 'kp' => $kp,                           
@@ -426,11 +444,21 @@ class PenilaianKPController extends Controller
 
         $penilaian = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->where('penguji_nip', auth()->user()->nip)->first();
 
-        $penilaian->presentasi = $request->presentasi;
-        $penilaian->materi = $request->materi;
-        $penilaian->tanya_jawab = $request->tanya_jawab;        
-        $penilaian->total_nilai_angka = $request->total_nilai_angka;
-        $penilaian->total_nilai_huruf = $request->total_nilai_huruf;
+        if ($request->presentasi) {
+            $penilaian->presentasi = $request['presentasi'];
+        }
+        if ($request->materi) {
+            $penilaian->materi = $request['materi'];
+        }
+        if ($request->tanya_jawab) {
+            $penilaian->tanya_jawab = $request['tanya_jawab'];
+        }
+        if ($request->total_nilai_angka) {
+            $penilaian->total_nilai_angka = $request['total_nilai_angka'];
+        }
+        if ($request->total_nilai_huruf) {
+            $penilaian->total_nilai_huruf = $request['total_nilai_huruf'];
+        }
 
         if ($request->revisi_naskah1) {
             $penilaian->revisi_naskah1 = $request['revisi_naskah1'];
@@ -452,11 +480,21 @@ class PenilaianKPController extends Controller
 
         $penilaianPembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->where('pembimbing_nip' , auth()->user()->nip)->first();
 
-        $penilaianPembimbing->presentasi = $penilaian->presentasi;
-        $penilaianPembimbing->materi = $penilaian->materi;
-        $penilaianPembimbing->tanya_jawab = $penilaian->tanya_jawab;                
-        $penilaianPembimbing->total_nilai_angka = $penilaian->total_nilai_angka;
-        $penilaianPembimbing->total_nilai_huruf = $penilaian->total_nilai_huruf; 
+        if ($request->presentasi) {
+            $penilaianPembimbing->presentasi = $request['presentasi'];
+        }
+        if ($request->materi) {
+            $penilaianPembimbing->materi = $request['materi'];
+        }
+        if ($request->tanya_jawab) {
+            $penilaianPembimbing->tanya_jawab = $request['tanya_jawab'];
+        }
+        if ($request->total_nilai_angka) {
+            $penilaianPembimbing->total_nilai_angka = $request['total_nilai_angka'];
+        }
+        if ($request->total_nilai_huruf) {
+            $penilaianPembimbing->total_nilai_huruf = $request['total_nilai_huruf'];
+        }
 
         if ($request->nilai_pembimbing_lapangan){
         $penilaianPembimbing->nilai_pembimbing_lapangan = $request->nilai_pembimbing_lapangan; 

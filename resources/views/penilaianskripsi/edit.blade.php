@@ -2446,7 +2446,7 @@
                         <div class="fw-bold mb-2">Input Nilai Jurnal</div>
                         <input type="number" name="nilai" class="form-control"
                             value="{{ $jurnal->nilai != null ? $jurnal->nilai : '' }}" min="0"
-                            max="100">
+                            max="100" step="1">
                 </div>
                 <button type="submit" class="btn  btn-success">+ Nilai</button>
         </div>

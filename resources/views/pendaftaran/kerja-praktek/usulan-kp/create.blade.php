@@ -21,8 +21,8 @@
     @endif
 
     @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-        <div class="container-fluid">
-            <form action="{{ url('/usulankp/create') }}" method="POST" enctype="multipart/form-data">
+        <div class="container-fluid ">
+            <form action="{{ url('/usulankp/create') }}" class="mahasiswa-usulan" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="container ">
@@ -119,40 +119,18 @@
                         @enderror
                     </div>
 
-                    <a href="#ModalApprove" data-toggle="modal" class="btn mt-4 btn-lg btn-success float-right">Usulkan
-                        KP</a>
-                    <div class="modal fade"id="ModalApprove">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content shadow-sm">
-                                <div class="modal-body">
-                                    <div class="container px-5 pt-5 pb-2">
-                                        <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                        <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda Kirim.
-                                        </p>
-                                        <div class="row text-center">
-                                            <div class="col-3">
-                                            </div>
-                                            <div class="col-3">
-                                                <button type="button" class="btn p-2 px-3 btn-secondary"
-                                                    data-dismiss="modal">Tidak</button>
-                                            </div>
-                                            <div class="col-3">
-                                                <button type="submit" class="btn btn-success py-2 px-3">Usulkan</button>
-                                            </div>
-                                            <div class="col-3">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <button  type="submit" class="btn mt-4 btn-lg btn-success float-right" title="Usulkan KP">Usulkan</button>
+                                        
                 </div>
             </form>
         </div>
     @endif
+<br>
+<br>
+<br>
+<br>
 @endsection
+
 
 @section('footer')
     <section class="bg-dark p-1">
@@ -166,15 +144,23 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#mhs').select2();
+        $('.mahasiswa-usulan').submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Jika belum, silahkan cek kembali data yang akan Anda kirim.",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Tidak',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Kirim'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.currentTarget.submit();
+                }
+            });
         });
-
-        $(document).ready(function() {
-            $('#pembimbing').select2();
-        });
-
-        $(document).ready(function() {
-            $('#penguji').select2();
-        });
+    });
     </script>
 @endpush

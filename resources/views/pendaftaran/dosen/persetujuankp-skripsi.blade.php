@@ -172,19 +172,19 @@
 
                             @if ($kp->status_kp == 'USULAN KP')
                                 <td class="text-center px-1 py-2">
-                                    {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat('l, d F Y') }}</td>
+                                    {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat(' d F Y') }}</td>
                             @endif
                             @if ($kp->status_kp == 'SURAT PERUSAHAAN')
                                 <td class="text-center px-1 py-2">
-                                    {{ Carbon::parse($kp->tgl_created_balasan)->translatedFormat('l, d F Y') }}</td>
+                                    {{ Carbon::parse($kp->tgl_created_balasan)->translatedFormat(' d F Y') }}</td>
                             @endif
                             @if ($kp->status_kp == 'DAFTAR SEMINAR KP')
                                 <td class="text-center px-1 py-2">
-                                    {{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y') }}</td>
+                                    {{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat(' d F Y') }}</td>
                             @endif
                             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN')
                                 <td class="text-center px-1 py-2">
-                                    {{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat('l, d F Y') }}</td>
+                                    {{ Carbon::parse($kp->tgl_created_semkp)->translatedFormat(' d F Y') }}</td>
                             @endif
 
                             <!-- MULAI -->
@@ -871,33 +871,33 @@
 
                 @if ($skripsi->status_skripsi == 'USULAN JUDUL')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat(' d F Y') }}</td>
                 @endif
 
                 @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat(' d F Y') }}</td>
                 @endif
                 @if ($skripsi->status_skripsi == 'PERPANJANGAN 1')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat(' d F Y') }}</td>
                 @endif
                 @if ($skripsi->status_skripsi == 'PERPANJANGAN 2')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat(' d F Y') }}</td>
                 @endif
                 @if ($skripsi->status_skripsi == 'DAFTAR SIDANG')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat(' d F Y') }}</td>
                 @endif
 
                 @if ($skripsi->status_skripsi == 'PERPANJANGAN REVISI')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_revisi)->translatedFormat(' d F Y') }}</td>
                 @endif
                 @if ($skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')
                     <td class="text-center px-1 py-2">
-                        {{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('l, d F Y') }}</td>
+                        {{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat(' d F Y') }}</td>
                 @endif
 
                 <!-- BATAS PERSETUJUAN -->
@@ -1793,7 +1793,7 @@
                         <td class="bg-warning text-center px-1 py-2">Seminar {{ $skripsi->jenis_seminar }}</td>
                         <!-- <td class="text-center px-1 py-2">{{ $skripsi->prodi->nama_prodi }}</td>           -->
                         <td class="text-center px-1 py-2">
-                            {{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}</td>
+                            {{ Carbon::parse($skripsi->tanggal)->translatedFormat(' d F Y') }}</td>
                         <td class="text-center px-1 py-2">-</td>
                         @if (Str::length(Auth::guard('dosen')->user()) > 0)
                             @if (Auth::guard('dosen')->user()->role_id == 9 ||
