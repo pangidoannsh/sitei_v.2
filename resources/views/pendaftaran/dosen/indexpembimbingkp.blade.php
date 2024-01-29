@@ -59,8 +59,8 @@
                         <th class="text-center  px-0" scope="col">No.</th>
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center" scope="col">Nama</th>
-                        <th class="text-center" scope="col">Status KP</th>
-                        <th class="text-center" scope="col">Tanggal Usulan</th>
+                        <th class="text-center" scope="col">Status</th>
+                        {{-- <th class="text-center" scope="col">Tanggal Usulan</th> --}}
                         <th class="text-center" scope="col">Tanggal Penting</th>
                         <th class="text-center" scope="col">Keterangan</th>
                         <th class="text-center" scope="col">Aksi</th>
@@ -123,7 +123,7 @@
                             @endif
 
                             <!-- Tanggal Usulan -->
-                            @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA')
+                            {{-- @if ($kp->status_kp == 'USULAN KP' || $kp->status_kp == 'USULAN KP DITERIMA')
                                 <td class="text-center px-1 py-2">
                                     {{ Carbon::parse($kp->tgl_created_usulan)->translatedFormat(' d F Y') }}</td>
                             @endif
@@ -143,7 +143,7 @@
                             @if ($kp->status_kp == 'BUKTI PENYERAHAN LAPORAN' || $kp->status_kp == 'BUKTI PENYERAHAN LAPORAN DITOLAK' || $kp->status_kp == 'KP SELESAI')
                                 <td class="text-center px-1 py-2">{{ Carbon::parse($kp->tgl_created_kpti10)->translatedFormat(' d F Y') }}
                                 </td>
-                            @endif
+                            @endif --}}
 
                             <!-- Tanggal Penting -->
 

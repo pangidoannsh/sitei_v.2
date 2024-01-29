@@ -70,6 +70,9 @@ Route::get('/developer', [DeveloperController::class, 'index']);
 Route::get('/developer/fahril-hadi', [DeveloperController::class, 'fahril']);
 Route::get('/developer/m-seprinaldi', [DeveloperController::class, 'naldi']);
 Route::get('/developer/rahul-ilsa-tajri-mukhti', [DeveloperController::class, 'rahul']);
+Route::get('/developer/ahmad-fajri', [DeveloperController::class, 'ahmad']);
+Route::get('/developer/yabes-maychel', [DeveloperController::class, 'yabes']);
+Route::get('/developer/yasmine', [DeveloperController::class, 'yasmine']);
 
 Route::group(['middleware' => ['guest:web,dosen,mahasiswa']], function () {
     Route::get('/', [LoginController::class, 'index']);

@@ -139,8 +139,13 @@
 @section('footer')
     <section class="bg-dark p-1">
         <div class="container">
-            <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold"
-                    formtarget="_blank" target="_blank" href="#">( Ahmad Fajri )</a></p>
+            <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <small> <span
+                        class="text-success fw-bold">(</span><a class="text-success fw-bold" formtarget="_blank"
+                        target="_blank" href="/developer/ahmad-fajri">Ahmad Fajri, </a>
+                    <a class="text-success" formtarget="_blank" target="_blank"
+                        href="/developer/yabes-maychel">Yabes Maychel </a> <span
+                        class="text-success">&</span>
+                    <a class="text-success" formtarget="_blank" target="_blank" href="/developer/yasmine"> Yasmine R.A.S Vadri</a><span class="text-success fw-bold">)</span></small></p>
         </div>
     </section>
 @endsection

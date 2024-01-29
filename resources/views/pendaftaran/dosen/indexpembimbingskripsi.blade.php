@@ -68,8 +68,8 @@
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center fw-bold" scope="col">Nama</th>
                         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
-                        <th class="text-center" scope="col">Status Skripsi</th>
-                        <th class="text-center" scope="col">Tanggal Usulan</th>
+                        <th class="text-center" scope="col">Status</th>
+                        {{-- <th class="text-center" scope="col">Tanggal Usulan</th> --}}
                         <th class="text-center" scope="col">Tanggal Penting</th>
                         <th class="text-center" scope="col">Keterangan</th>
                         <th class="text-center" scope="col">Aksi</th>
@@ -127,7 +127,7 @@
 
                             <!-- TANGGAL USULAN -->
                             
-                            @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'JUDUL DISETUJUI')
+                            {{-- @if ($skripsi->status_skripsi == 'USULAN JUDUL' || $skripsi->status_skripsi == 'JUDUL DISETUJUI')
                                 <td class="text-center px-1 py-2">{{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y') }}
                                 </td>
                             @endif
@@ -169,7 +169,7 @@
                                     $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
                                 <td class="text-center px-1 py-2">{{ Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y') }}
                                 </td>
-                            @endif
+                            @endif --}}
 
 
                             <!-- Tanggal Penting -->
@@ -621,5 +621,3 @@
         }, 5000);
     </script>
 @endpush()
-
-
