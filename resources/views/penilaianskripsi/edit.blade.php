@@ -86,9 +86,11 @@
                 <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                         href="{{ asset('storage/' . $naskah->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
                 @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
+                @if($jurnal != null)
                <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
                         <p class="card-text  text-start mb-2"><a formtarget="_blank" target="_blank"
                                 href="{{ asset('storage/' . $jurnal->file_jurnal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                @endif
                 @endif
                 
             </div>
@@ -116,16 +118,16 @@
                     <hr>
                     <p class="card-title text-secondary text-sm ">Perbaikan Penguji 1</p>
                     <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
-                            href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujisatu->nip }}"
+                            href="/perbaikan-pengujisempro/{{ Crypt::encryptString($penjadwalan_sempro_id) }}/{{ $sempro->pengujisatu->nip }}"
                             class="badge bg-dark px-3 py-2">Buka</a></p>
                     <p class="card-title text-secondary text-sm ">Perbaikan Penguji 2</p>
                     <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
-                            href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujidua->nip }}"
+                            href="/perbaikan-pengujisempro/{{ Crypt::encryptString($penjadwalan_sempro_id) }}/{{ $sempro->pengujidua->nip }}"
                             class="badge bg-dark px-3 py-2">Buka</a></p>
                     @if ($sempro->pengujitiga == !null)
                         <p class="card-title text-secondary text-sm ">Perbaikan Penguji 3</p>
                         <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
-                                href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujitiga->nip }}"
+                                href="/perbaikan-pengujisempro/{{ Crypt::encryptString($penjadwalan_sempro_id) }}/{{ $sempro->pengujitiga->nip }}"
                                 class="badge bg-dark px-3 py-2">Buka</a></p>
                     @endif
 

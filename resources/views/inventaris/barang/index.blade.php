@@ -31,7 +31,7 @@
             <li class="breadcrumb-item"><a class="breadcrumb-item" href="{{ route('riwayatadm') }}">Riwayat Pinjaman
                     ({{ $jumlah_riwayat }})</a></li>
             <span class="px-2">|</span>
-            <li class="breadcrumb-item active fw-bold text-black"><a href="{{ route('stok') }}">Daftar Barang
+            <li class="breadcrumb-item active fw-bold"><a class="text-success" href="{{ route('stok') }}">Daftar Barang
                     ({{ $jumlah_barang }})</a></li>
 
         </ol>

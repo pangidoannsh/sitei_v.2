@@ -21,7 +21,7 @@
 
         <ol class="breadcrumb col-lg-12">
 
-            <li class="breadcrumb-item active fw-bold text-black"><a href="{{ route('peminjamanadm') }}">Daftar Pinjaman
+            <li class="breadcrumb-item fw-bold "><a class="text-success" href="{{ route('peminjamanadm') }}">Daftar Pinjaman
                     ({{ $jumlah_pinjaman }})</a></li>
             <span class="px-2">|</span>
             <li class="breadcrumb-item"><a class="breadcrumb-item " href="{{ route('riwayatadm') }}">Riwayat Pinjaman

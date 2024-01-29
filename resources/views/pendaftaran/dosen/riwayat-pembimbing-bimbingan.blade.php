@@ -115,7 +115,7 @@
                         <tr>
                             <!-- <td class="text-center">{{ $loop->iteration }}</td>                              -->
                             <td class="text-center">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $kp->mahasiswa->nama }}</td>
                             <!-- <td class="text-center">{{ $kp->mahasiswa->konsentrasi->nama_konsentrasi }}</td>            -->
                             <!-- <td class="text-center">{{ $kp->jenis_usulan }}</td>                       -->
                             <td class="text-center bg-info">{{ $kp->status_kp }}</td>
@@ -135,7 +135,7 @@
                         <tr>
                             <!-- <td class="text-center">{{ $loop->iteration }}</td>-->
                             <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $skripsi->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <!-- <td class="text-center">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td>-->
 
                             <!-- <td class="text-center">{{ $skripsi->jenis_usulan }}</td>    -->
@@ -198,7 +198,7 @@
                     @foreach ($penjadwalan_kps as $kp)
                         <tr>
                             <td class="text-center">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $kp->mahasiswa->nama }}</td>
                             <td class="bg-primary text-center">{{ $kp->jenis_seminar }}</td>
                             <td class="text-center">{{ $kp->prodi->nama_prodi }}</td>
                             <td class="text-center">{{ Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y') }}</td>
@@ -237,7 +237,7 @@
                     @foreach ($penjadwalan_sempros as $sempro)
                         <tr>
                             <td class="text-center">{{ $sempro->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $sempro->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $sempro->mahasiswa->nama }}</td>
                             <td class="bg-success text-center">{{ $sempro->jenis_seminar }}</td>
                             <td class="text-center">{{ $sempro->prodi->nama_prodi }}</td>
                             <td class="text-center">{{ Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y') }}
@@ -301,7 +301,7 @@
                     @foreach ($penjadwalan_skripsis as $skripsi)
                         <tr>
                             <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $skripsi->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <td class="bg-warning text-center">{{ $skripsi->jenis_seminar }}</td>
                             <td class="text-center">{{ $skripsi->prodi->nama_prodi }}</td>
                             <td class="text-center">{{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}

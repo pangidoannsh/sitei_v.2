@@ -16,14 +16,14 @@
     <div class="container card p-4">
 
         <ol class="breadcrumb col-lg-12">
-            {{-- <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black" href="/form">Jadwal</a></li>       
+            {{-- <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-success" href="/form">Jadwal</a></li>       
     <li class="breadcrumb-item"><a href="/riwayat-penjadwalan">Riwayat Penjadwalan</a></li> --}}
 
             <li class="breadcrumb-item"><a class="breadcrumb-item" href="{{ route('peminjamandsn') }}">Daftar Pinjam
                     ({{ $jumlah_pinjaman }})</a></li>
 
             <span class="px-2">|</span>
-            <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black"
+            <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-success"
                     href="{{ route('riwayatdsn') }}">Riwayat Pinjam ({{ $jumlah_riwayat }})</a></li>
 
 

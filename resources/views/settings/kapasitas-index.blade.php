@@ -35,7 +35,7 @@
                             {{ $kp->kapasitas_skripsi }}
                         </td>
                         <td class="text-center">
-                            <a href="/kapasitas-bimbingan/edit/{{ $kp->id }}" class="badge bg-warning"><i
+                            <a href="/kapasitas-bimbingan/edit/{{ $kp->id }}" class="badge p-2 bg-warning"><i
                                     class="fas fa-pen"></i></a>
                         </td>
                     </tr>

@@ -84,10 +84,12 @@
                  <p class="card-title text-secondary text-sm">Naskah</p>
                 <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                         href="{{ asset('storage/' . $naskah->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
-                @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
+               @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
+                @if($jurnal != null)
                <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
                         <p class="card-text  text-start mb-2"><a formtarget="_blank" target="_blank"
                                 href="{{ asset('storage/' . $jurnal->file_jurnal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                @endif
                 @endif
                 
             </div>
@@ -127,33 +129,33 @@
                                 class="badge bg-dark px-3 py-2">Buka</a></p>
                     @endif
 
-
-
                 </div>
                 <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
                     <h5 class="text-bold">Publikasi Jurnal</h5>
                     <hr>
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
+                        @if($jurnal != null)
                         <p class="card-title text-secondary text-sm">Indeksasi Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->indeksasi_jurnal }}</p>
-                        @if($jurnal->file_jurnal != null)
                         <p class="card-title text-secondary text-sm">Judul Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->judul_jurnal }}</p>
                         <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
                         <p class="card-text  text-start mb-2"><a formtarget="_blank" target="_blank"
                                 href="{{ asset('storage/' . $jurnal->file_jurnal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
                         @else
+                        <p class="card-title text-secondary text-sm">Indeksasi Jurnal</p>
+                        <p class="card-text text-start">Tanpa Jurnal</p>
                         @endif
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            @if ($jurnal->indeksasi_jurnal !== 'Tanpa Jurnal')
+                         @if($jurnal != null)
                         <p class="card-title text-secondary text-sm">Status Publikasi Jurnal</p>
                         <p class="card-text text-start">{{ $jurnal->status_publikasi_jurnal }}</p>
                         <p class="card-title text-secondary text-sm">URL Jurnal</p>
                         <p class="card-text text-start"><a class="text-dark" formtarget="_blank" target="_blank"
                                     href="https://{{ $jurnal->link_jurnal ?? '' }}">{{ $jurnal->link_jurnal }} <i class="fas fa-external-link-alt"></i></a> </p>
-                    @endif
+                        @endif
                         </div>
                     </div>
    

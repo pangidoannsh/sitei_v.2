@@ -114,7 +114,7 @@
                         <tr>
                             <!-- <td class="text-center">{{ $loop->iteration }}</td>                              -->
                             <td class="text-center">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $kp->mahasiswa->nama }}</td>
                             <!-- <td class="text-center">{{ $kp->mahasiswa->konsentrasi->nama_konsentrasi }}</td>            -->
                             <!-- <td class="text-center">{{ $kp->jenis_usulan }}</td>                       -->
                             <td class="text-center bg-info">{{ $kp->status_kp }}</td>
@@ -134,7 +134,7 @@
                         <tr>
                             <!-- <td class="text-center">{{ $loop->iteration }}</td>-->
                             <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $skripsi->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <!-- <td class="text-center">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td>-->
 
                             <!-- <td class="text-center">{{ $skripsi->jenis_usulan }}</td>    -->
@@ -164,7 +164,7 @@
         </div>
     </div>
 
-    <div class="container card p-4 mt-5">
+    <div class="container card p-4 my-5">
         <div class="container-fluid">
             <!-- <hr class="pt-1 mt-2 bg-dark"> -->
 
@@ -175,7 +175,7 @@
                 </div>
             </div>
 
-            <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables2">
+            <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables5">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center" scope="col">NIM</th>
@@ -196,7 +196,7 @@
                     @foreach ($penjadwalan_kps as $kp)
                         <tr>
                             <td class="text-center">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $kp->mahasiswa->nama }}</td>
                             <td class="bg-primary text-center">{{ $kp->jenis_seminar }}</td>
                             <td class="text-center">{{ $kp->prodi->nama_prodi }}</td>
                             <td class="text-center">{{ Carbon::parse($kp->tanggal)->translatedFormat('l, d F Y') }}</td>
@@ -235,7 +235,7 @@
                     @foreach ($penjadwalan_sempros as $sempro)
                         <tr>
                             <td class="text-center">{{ $sempro->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $sempro->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $sempro->mahasiswa->nama }}</td>
                             <td class="bg-success text-center">{{ $sempro->jenis_seminar }}</td>
                             <td class="text-center">{{ $sempro->prodi->nama_prodi }}</td>
                             <td class="text-center">{{ Carbon::parse($sempro->tanggal)->translatedFormat('l, d F Y') }}
@@ -299,7 +299,7 @@
                     @foreach ($penjadwalan_skripsis as $skripsi)
                         <tr>
                             <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
-                            <td class="text-center">{{ $skripsi->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <td class="bg-warning text-center">{{ $skripsi->jenis_seminar }}</td>
                             <td class="text-center">{{ $skripsi->prodi->nama_prodi }}</td>
                             <td class="text-center">{{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}
@@ -365,7 +365,78 @@
 
 
         </div>
+        </div>
 
+
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+                @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                        Auth::guard('dosen')->user()->role_id == 7 ||
+                        Auth::guard('dosen')->user()->role_id == 8 ||
+                        Auth::guard('dosen')->user()->role_id == 9 ||
+                        Auth::guard('dosen')->user()->role_id == 10 ||
+                        Auth::guard('dosen')->user()->role_id == 11)
+        <div class="container card p-4 mb-5">
+            
+            <div class="mb-4 rounded bg-light">
+                <div class="p-2 pt-3">
+                    <h5 class="">Riwayat Persetujuan</h5>
+                    <hr>
+                </div>
+            </div>
+
+            <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables4">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center" scope="col">NIM</th>
+                    <th class="text-center" scope="col">Nama</th>
+                    <th class="text-center" scope="col">Seminar</th>
+                    <th class="text-center" scope="col">Prodi</th>
+                    <th class="text-center" scope="col">Tanggal</th>
+                    <th class="text-center" scope="col">Waktu</th>
+                    <th class="text-center" scope="col">Lokasi</th>
+                    <th class="text-center" scope="col">Pembimbing</th>
+                    <th class="text-center" scope="col">Penguji</th>
+                    <th class="text-center" scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach ($penjadwalan_skripsis as $skripsi)
+                    <tr>
+                        <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
+                        <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
+                        <td class="bg-warning text-center">{{ $skripsi->jenis_seminar }}</td>
+                        <td class="text-center">{{ $skripsi->prodi->nama_prodi }}</td>
+                        <td class="text-center">{{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}</td>
+                        <td class="text-center">{{ $skripsi->waktu }}</td>
+                        <td class="text-center">{{ $skripsi->lokasi }}</td>
+                        <td class="text-center">
+                            <p>1. {{ $skripsi->pembimbingsatu->nama_singkat }}</p>
+                            @if ($skripsi->pembimbingdua == !null)
+                                <p>2. {{ $skripsi->pembimbingdua->nama_singkat }}</p>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <p>1. {{ $skripsi->pengujisatu->nama_singkat }}</p>
+                            <p>2. {{ $skripsi->pengujidua->nama_singkat }}</p>
+                            @if ($skripsi->pengujitiga == !null)
+                                <p>3. {{ $skripsi->pengujitiga->nama_singkat }}</p>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <a href="/penilaian-skripsi/cek-nilai/{{ Crypt::encryptString($skripsi->id) }}"
+                                class="badge bg-success p-2"style="border-radius:20px;">Berita Acara</a>
+                        </td>
+                    </tr>
+                @endforeach
+
+            </tbody>
+        </table>
+
+
+        </div>
+        @endif
+        @endif
 
 
     @endsection
@@ -388,19 +459,21 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const waitingApprovalCount = {!! json_encode(
+            document.addEventListener('DOMContentLoaded', function() {  
+                const Semua = {!! json_encode(
                     $jml_riwayat_prodi_kp + $jml_riwayat_prodi_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_skripsi,
                 ) !!};
-                if (waitingApprovalCount > 0) {
+                
+                if (Semua > 0) {
                     Swal.fire({
                         title: 'Ini adalah halaman Riwayat',
-                        html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> yang telah selesai KP, Skripsi, dan Seminar.`,
+                        html: `Ada <strong class="text-info"> ${Semua} Mahasiswa</strong> yang telah selesai KP, Skripsi dan Seminar`,
                         icon: 'info',
                         showConfirmButton: true,
                         confirmButtonColor: '#28a745',
                     });
-                } else {
+                } 
+                else {
                     Swal.fire({
                         title: 'Ini adalah halaman Riwayat',
                         html: `Belum ada mahasiswa yang selesai KP, Skripsi, dan Seminar.`,

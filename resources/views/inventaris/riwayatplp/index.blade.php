@@ -20,7 +20,7 @@
             <li class="breadcrumb-item"><a href="{{ route('peminjamanplp') }}">Daftar Pinjaman ({{ $jumlah_pinjaman }})</a>
             </li>
             <span class="px-2">|</span>
-            <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-black"
+            <li class="breadcrumb-item"><a class="breadcrumb-item active fw-bold text-success"
                     href="{{ route('riwayatplp') }}">Riwayat Pinjaman ({{ $jumlah_riwayat }})</a></li>
             <span class="px-2">|</span>
             <li class="breadcrumb-item"><a href="{{ route('stokplp') }}"> Daftar Barang ({{ $jumlah_barang }})</a></li>

@@ -24,7 +24,8 @@
         <ol class="breadcrumb col-lg-12">
 
             <li>
-                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan  @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                <a href="/persetujuan-kp-skripsi" class="px-1">Persetujuan 
+                    @if (Auth::guard('dosen')->user()->role_id == 6 ||
                         Auth::guard('dosen')->user()->role_id == 7 ||
                         Auth::guard('dosen')->user()->role_id == 8 ||
                         Auth::guard('dosen')->user()->role_id == 9 ||
@@ -34,7 +35,7 @@
                       @endif
                     @if(Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == null)
                         (<span> {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }} </span>)
-                    @endif</a>
+                    @endif </a>
             </li>
 
             <span class="px-2">|</span>
@@ -85,14 +86,11 @@
                         @endphp
 
 
-
-
-
                         <div></div>
                         <tr>
                             <td class="text-center px-1 py-2">{{ $loop->iteration }}</td>
                             <td class="text-center px-1 py-2">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center px-1 py-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
 
                             
                             @if (

@@ -14,10 +14,6 @@
 
 @section('content')
 
-
-
- 
-
     <div class="container card p-4">
 
         <ol class="breadcrumb col-lg-12">
@@ -84,7 +80,7 @@
                         <tr>
                             <td class="text-center px-1 py-2">{{ $loop->iteration }}</td>
                             <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
-                            <td class="text-center px-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <!-- <td class="text-center px-1 py-2">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td>            -->
 
                             @if (

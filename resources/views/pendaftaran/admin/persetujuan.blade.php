@@ -103,7 +103,7 @@
                         <tr>
                             <!-- <td class="text-center px-1 py-2">{{ $loop->iteration }}</td> -->
                             <td class="text-center px-1 py-2">{{ $kp->mahasiswa_nim }}</td>
-                            <td class="text-center px-1 py-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
 
                             <!-- <td class="text-center px-1 py-2">{{ $kp->jenis_usulan }}</td>       -->
 
@@ -286,7 +286,7 @@
                         <tr>
                             <!--<td class="text-center px-1 py-2">{{ $loop->iteration }}</td>                             -->
                             <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
-                            <td class="text-center px-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <!-- <td class="text-center px-1 py-2">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td> -->
                             <!-- <td class="text-center px-1 py-2">{{ $skripsi->jenis_usulan }}</td>          -->
                             <!-- USUL JUDUL  -->

@@ -81,8 +81,8 @@
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center" scope="col">Nama</th>
                         <!-- <th class="text-center" scope="col">Konsentrasi</th>-->
-                        <th class="text-center" scope="col">Jenis Usulan</th>
-                        <th class="text-center" scope="col">Status KP</th>
+                        <!-- <th class="text-center" scope="col">Jenis Usulan</th> -->
+                        <th class="text-center" scope="col">Status</th>
                         <th class="text-center" scope="col">Tanggal Penting</th>
                         <th class="text-center" scope="col">Keterangan</th>
                         <th class="text-center" scope="col">Aksi</th>
@@ -95,10 +95,10 @@
                         <tr>
                             <td class="text-center p-2">{{ $loop->iteration }}</td>
                             <td class="text-center p-2">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center p-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $kp->mahasiswa->nama }}</td>
                             <!-- <td class="text-center p-2">{{ $kp->konsentrasi->nama_konsentrasi }}</td>                    -->
 
-                            <td class="text-center p-2">{{ $kp->jenis_usulan }}</td>
+                            <!-- <td class="text-center p-2">{{ $kp->jenis_usulan }}</td> -->
 
                             @if (
                                 $kp->status_kp == 'USULAN KP' ||

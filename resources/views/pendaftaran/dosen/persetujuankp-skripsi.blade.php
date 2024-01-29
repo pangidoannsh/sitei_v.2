@@ -151,7 +151,7 @@
                         <tr>
                             <!-- <td class="text-center">{{ $loop->iteration }}</td>-->
                             <td class="text-center px-1 py-2">{{ $kp->mahasiswa->nim }}</td>
-                            <td class="text-center px-1 py-2 fw-bold  ">{{ $kp->mahasiswa->nama }}</td>
+                            <td class="text-left pl-3 pr-1 fw-bold">{{ $kp->mahasiswa->nama }}</td>
                             @if (
                                 $kp->status_kp == 'USULAN KP' ||
                                     $kp->status_kp == 'SURAT PERUSAHAAN' ||
@@ -841,7 +841,7 @@
             <tr>
                 <!-- <td class="text-center px-1 py-2">{{ $loop->iteration }}</td>                              -->
                 <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
-                <td class="text-center px-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
+                <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                 <!-- <td class="text-center px-1 py-2">{{ $skripsi->jenis_usulan }}</td>          -->
 
                 @if (
@@ -1789,7 +1789,7 @@
                 @foreach ($penjadwalan_skripsis as $skripsi)
                     <tr>
                         <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
-                        <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nama }}</td>
+                        <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                         <td class="bg-warning text-center px-1 py-2">Seminar {{ $skripsi->jenis_seminar }}</td>
                         <!-- <td class="text-center px-1 py-2">{{ $skripsi->prodi->nama_prodi }}</td>           -->
                         <td class="text-center px-1 py-2">
