@@ -396,7 +396,7 @@
                 </td>
                 <td class="table1">{{ $penjadwalan->pengujisatu->nama_singkat }}
                     <br>{{ $penjadwalan->pengujidua->nama_singkat }} <br>
-                    @if ($penjadwalan->pembimbingdua != null)
+                    @if ($penjadwalan->pengujitiga != null)
                         {{ $penjadwalan->pengujitiga->nama_singkat }}
                     @else
                     @endif

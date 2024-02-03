@@ -221,7 +221,7 @@ class PenjadwalanKPController extends Controller
         
         if(auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4){
         $validated["waktu"] = $request->waktu;
-        $validated['dibuat_oleh'] = auth()->user()->username;
+        $validated['dibuat_oleh'] = auth()->user()->nama;
         PenjadwalanKP::where('id', $penjadwalan_kp->id)
             ->update($validated);
         }
@@ -392,6 +392,7 @@ class PenjadwalanKPController extends Controller
         $pdf->loadView('penjadwalankp.perbaikan-kp',compact('penjadwalan','qrcode','penilaianpenguji', 'pdf'));
         
         return $pdf->stream('KPTI/TE-9 Lembar Perbaikan Seminar Kerja Praktek.pdf', array("Attachment" => false)); 
+        
     }
 
     public function perbaikanpengujikp($id, $penguji)

@@ -31,7 +31,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $konsentrasi->nama_konsentrasi }}</td>
                         <td>
-                            <a href="/konsentrasi/edit/{{ $konsentrasi->id }}" class="badge bg-warning"><i
+                            <a href="/konsentrasi/edit/{{ $konsentrasi->id }}" class="badge p-2 bg-warning"><i
                                     class="fas fa-pen"></i></a>
                         </td>
                     </tr>
@@ -40,6 +40,9 @@
         </table>
 
     </div>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

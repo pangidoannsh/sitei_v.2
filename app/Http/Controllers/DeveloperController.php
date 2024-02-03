@@ -6,15 +6,42 @@ use App\Models\Role;
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\Developer;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
 use App\Http\Controllers\Controller;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DeveloperController extends Controller
 {
+
+    public function halamanbaru()
+    {
+        // $pendaftaran_kp = PendaftaranKP::find($id);
+        // $mahasiswa_kp = PendaftaranKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim);
+        return view('developer.halamanbaru'
+        );
+    }
+
+    // public function store(Request $request)
+    // {
+    //     $validatedData = validate([
+    //         'nama' => 'required',
+                         
+    //     ]);
+
+    //     Developer::create([
+    //         'nama' => $request->nama,                                          
+    //     ]);
+
+
+    //     Alert::success('Berhasil!', 'Data Berhasil disimpan')->showConfirmButton('Ok', '#28a745');
+    //     return redirect('/developer');
+    // }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +58,20 @@ class DeveloperController extends Controller
     public function rahul()
     {
         return view('developer.rahul');
+    }
+    
+    public function ahmad()
+    {
+        return view('developer.ahmad');
+    }
+    public function yasmine()
+    {
+        return view('developer.yasmine');
+    }
+    
+    public function yabes()
+    {
+        return view('developer.yabes');
     }
 
     public function index(){

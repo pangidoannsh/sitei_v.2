@@ -442,9 +442,27 @@
                         @endif
                         Seminar : <strong>Seminar Proposal</strong><br>
                         Hasil :
-                        @if ($penjadwalan->pembimbingdua_nip == null && $penjadwalan->pengujitiga_nip == null)
+                        @if ($nilaipembimbing1 == null && $penjadwalan->pengujitiga_nip == null)
+                            @if (
+                                $nilaipembimbing2->total_nilai_angka +
+                                    ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka) / 2 >=
+                                    60)
+                                <strong>LULUS</strong>
+                            @else
+                                <strong>TIDAK LULUS</strong>
+                            @endif
+                        @elseif ($penjadwalan->pembimbingdua_nip == null && $penjadwalan->pengujitiga_nip == null)
                             @if (
                                 $nilaipembimbing1->total_nilai_angka +
+                                    ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka) / 2 >=
+                                    60)
+                                <strong>LULUS</strong>
+                            @else
+                                <strong>TIDAK LULUS</strong>
+                            @endif
+                        @elseif ($nilaipembimbing1 == null && $penjadwalan->pengujitiga_nip == null)
+                            @if (
+                                $nilaipembimbing2->total_nilai_angka +
                                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka) / 2 >=
                                     60)
                                 <strong>LULUS</strong>
@@ -454,6 +472,26 @@
                         @elseif ($penjadwalan->pembimbingdua_nip != null && $penjadwalan->pengujitiga_nip != null)
                             @if (
                                 ($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
+                                    ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) /
+                                        3 >=
+                                    60)
+                                <strong>LULUS</strong>
+                            @else
+                                <strong>TIDAK LULUS</strong>
+                            @endif
+                        @elseif ($nilaipembimbing1 == null)
+                            @if (
+                                $nilaipembimbing2->total_nilai_angka +
+                                    ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) /
+                                        3 >=
+                                    60)
+                                <strong>LULUS</strong>
+                            @else
+                                <strong>TIDAK LULUS</strong>
+                            @endif
+                        @elseif ($nilaipembimbing2 == null)
+                            @if (
+                                $nilaipembimbing1->total_nilai_angka +
                                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) /
                                         3 >=
                                     60)
@@ -471,7 +509,7 @@
                             @else
                                 <strong>TIDAK LULUS</strong>
                             @endif
-                        @elseif ($penjadwalan->pengujitiga_nip == null)
+                        @elseif ($penjadwalan->pengujitiga_nip == null && $nilaipembimbing1 != null && $nilaipembimbing2 != null)
                             @if (
                                 ($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka) / 2 >=

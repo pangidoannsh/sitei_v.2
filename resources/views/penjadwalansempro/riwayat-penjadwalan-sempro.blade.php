@@ -45,7 +45,9 @@
                     <td>{{ $sempro->waktu }}</td>
                     <td>{{ $sempro->lokasi }}</td>
                     <td>
+                        @if ($sempro->pembimbingsatu == !null)
                         <p>1. {{ $sempro->pembimbingsatu->nama }}</p>
+                        @endif
                         @if ($sempro->pembimbingdua == !null)
                             <p>2. {{ $sempro->pembimbingdua->nama }}</p>
                         @endif
@@ -64,6 +66,9 @@
             @endforeach
         </tbody>
     </table>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

@@ -94,6 +94,9 @@
             </div>
         </form>
     @endforeach
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

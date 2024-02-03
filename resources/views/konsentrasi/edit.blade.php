@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+<div class="container">
+        <a href="/konsentrasi" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+    </div>
     <div class="col-lg-6">
         <form action="/konsentrasi/edit/{{ $konsentrasi->id }}" method="POST">
             @method('put')

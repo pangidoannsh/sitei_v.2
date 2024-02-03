@@ -198,7 +198,7 @@
             <tr>
                 <td width="27%">Dosen Pembimbing</td>
                 <td>:</td>
-                <td width="70%">1. {{ $penjadwalan->pembimbingsatu->nama }}</td>
+                <td width="70%">1. {{ $penjadwalan->pembimbingsatu->nama ?? '-' }}</td>
             </tr>
         </table>
 

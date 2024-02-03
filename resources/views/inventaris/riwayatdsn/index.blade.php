@@ -80,6 +80,9 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

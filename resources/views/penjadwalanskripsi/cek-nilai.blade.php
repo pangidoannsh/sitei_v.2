@@ -732,7 +732,7 @@
 
             <table class="table table-bordered table-responsive-md">
                 <tbody>
-                    @if($jurnal == null)
+                    @if($jurnal-mahasiswa_nim == null)
                     <tr>
                         <td style="width: 250px">NILAI AKHIR</td>
                         <td class="bg-success text-center">
@@ -855,7 +855,7 @@
                     </tr>
                     @endif
 
-                    @if($jurnal !== null)
+                    @if($jurnal-mahasiswa_nim !== null)
                     <tr>
                         <td style="width: 250px">NILAI SEMENTARA</td>
                         <td class="bg-success text-center">

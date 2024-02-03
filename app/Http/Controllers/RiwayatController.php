@@ -77,8 +77,8 @@ class RiwayatController extends Controller
     public function riwayatmhs(){
         // $pinjaman = Peminjaman::where('user_id', auth()->user()->id)->where('status', 'Selesai')->latest()->get();
         $jumlah_barang = Barang::all()->count();
-        $jumlah_riwayat = Peminjaman::whereIn('status', ['Selesai','Ditolak'])->count();
-        $jumlah_pinjaman = Peminjaman::whereIn('status', ['usulan','Disetujui'])->count();
+        $jumlah_riwayat = Peminjaman::where('user_id', auth()->user()->id)->whereIn('status', ['Selesai', 'Ditolak'])->count();
+        $jumlah_pinjaman = Peminjaman::where('user_id', auth()->user()->id)->whereIn('status', ['usulan','Disetujui'])->count();
         $pinjaman = Peminjaman::where('peminjamen.user_id', auth()->user()->id )->whereIn("peminjamen.status", ["Selesai","Ditolak"])->leftJoin("barangs as barang_satu", "peminjamen.barang_satu", "=", "barang_satu.id")
             ->leftJoin("barangs as barang_dua", "peminjamen.barang_dua", "=", "barang_dua.id")
             ->leftJoin("barangs as barang_tiga", "peminjamen.barang_tiga", "=", "barang_tiga.id")
@@ -110,8 +110,8 @@ class RiwayatController extends Controller
     public function riwayatdsn(){
         // $pinjaman = Peminjaman::where('user_id', auth()->user()->id)->where('status', 'Selesai')->latest()->get();
         $jumlah_barang = Barang::all()->count();
-        $jumlah_riwayat = Peminjaman::whereIn('status', ['Selesai','Ditolak'])->count();
-        $jumlah_pinjaman = Peminjaman::whereIn('status', ['usulan','Disetujui'])->count();
+        $jumlah_riwayat = Peminjaman::where('user_id', auth()->user()->id)->whereIn('status', ['Selesai', 'Ditolak'])->count();
+        $jumlah_pinjaman = Peminjaman::where('user_id', auth()->user()->id)->whereIn('status', ['usulan','Disetujui'])->count();
         $pinjaman = Peminjaman::where('peminjamen.user_id', auth()->user()->id )->whereIn("peminjamen.status", ["Selesai","Ditolak"])->leftJoin("barangs as barang_satu", "peminjamen.barang_satu", "=", "barang_satu.id")
             ->leftJoin("barangs as barang_dua", "peminjamen.barang_dua", "=", "barang_dua.id")
             ->leftJoin("barangs as barang_tiga", "peminjamen.barang_tiga", "=", "barang_tiga.id")

@@ -389,7 +389,7 @@
                 <!-- <td class="table1">1</td>   -->
                 <td class="table1">{{ $penjadwalan->mahasiswa->nama }}</td>
                 <td class="table1">{{ $penjadwalan->judul_proposal }}</td>
-                <td class="table1">{{ $penjadwalan->pembimbingsatu->nama_singkat }}
+                <td class="table1">{{ $penjadwalan->pembimbingsatu->nama_singkat ?? '' }}
                     <br>
                     @if($penjadwalan->pembimbingdua != null)
                     {{ $penjadwalan->pembimbingdua->nama_singkat }}

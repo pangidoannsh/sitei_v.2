@@ -104,7 +104,7 @@
           </li> --}}
 
                                 <li class="nav-item dropdown baru">
-                                    <a id="dropdownSubMenu1" href="/persetujuan-kp-skripsi" aria-current="page"
+                                    <a id="dropdownSubMenu1" href="" aria-current="page"
                                         aria-haspopup="true" aria-expanded="false"
                                         class="nav-link dropdown-toggle">KP/Skripsi</a>
                                     <ul aria-labelledby="dropdownSubMenu1"
@@ -295,7 +295,7 @@
                                             aria-current="page" href="/inventaris/peminjamanadm">Inventaris</a>
                                     </li>
                                     <li class="nav-item dropdown baru">
-                                        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown"
+                                        <a id="dropdownSubMenu1" href="" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false"
                                             class="nav-link dropdown-toggle">Data Jurusan</a>
                                         <ul aria-labelledby="dropdownSubMenu1"
@@ -328,7 +328,7 @@
                                         Auth::guard('web')->user()->role_id == 3 ||
                                         Auth::guard('web')->user()->role_id == 4)
                                     <li class="nav-item dropdown baru">
-                                        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown"
+                                        <a id="dropdownSubMenu1" href="" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false"
                                             class="nav-link  dropdown-toggle">Data Pengguna</a>
                                         <ul aria-labelledby="dropdownSubMenu1"
@@ -346,7 +346,7 @@
 
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown"
+                                <a class="nav-link dropdown-toggle " href="" id="navbarDropdown"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     @if (Str::length(Auth::guard('dosen')->user()) > 0)
                                         {{ Auth::guard('dosen')->user()->nama }}

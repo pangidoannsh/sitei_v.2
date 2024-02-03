@@ -404,18 +404,18 @@
                             <!-- DAFTAR SEMPRO -->
                             @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO' && $skripsi->keterangan == 'Menunggu persetujuan Admin Prodi')
                                 <td class="text-center px-1 py-2">
-                                    <div class="row py-2 py-md-0">
-                                        <div class="col-lg-3 col-12 py-2 py-md-0">
+                                    <div class="row ml-0 ml-md-4">
+                                        <div class="col-lg-3 col-md-12 py-2 py-md-0">
                                             <button onclick="tolakSemproAdmin({{ $skripsi->id }})"
                                                 class="btn btn-danger badge p-1 " data-bs-toggle="tooltip"
                                                 title="Tolak"><i class="fas fa-times-circle"></i></button>
                                         </div>
-                                        <div class="col-lg-3 col-12 py-2 py-md-0">
+                                        <div class="col-lg-3 col-md-12 py-2 py-md-0">
                                             <a href="/persetujuan/admin/detail/sempro/{{ $skripsi->id }}"
                                                 class="badge btn btn-info p-1" data-bs-toggle="tooltip"
                                                 title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
                                         </div>
-                                        <div class="col-lg-3 col-12 py-2 py-md-0">
+                                        <div class="col-lg-3 col-md-12 py-2 py-md-0">
                                             <form action="/daftar-sempro/admin/approve/{{ $skripsi->id }}"
                                                 class="setujui-sempro-admin" data-bs-toggle="tooltip"
                                                 title="Setujui" method="POST">
@@ -466,7 +466,9 @@
         </div>
     </div>
 
-
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

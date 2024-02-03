@@ -129,7 +129,7 @@ class PenjadwalanSemproController extends Controller
     {
         $rules = [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',   
+            'pembimbingsatu_nip' => 'nullable',   
             'pengujisatu_nip' => 'required',         
             'pengujidua_nip' => 'required',         
             // 'pengujitiga_nip' => 'required',         
@@ -243,7 +243,7 @@ class PenjadwalanSemproController extends Controller
         }
 
         $validated = $request->validate($rules);
-        $validated['dibuat_oleh'] = auth()->user()->username;
+        $validated['dibuat_oleh'] = auth()->user()->nama;
 
         $edit = PenjadwalanSempro::find($penjadwalan_sempro->id);
         $edit->mahasiswa_nim = $validated['mahasiswa_nim'];
@@ -524,10 +524,13 @@ public function gagal($id, PendaftaranSkripsi $pendaftaranid)
         $penjadwalan_sempro->update();
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
         if ($cari_penguji == 0) {
-            return redirect('/penilaian-sempro/create/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');
+             Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+                return redirect('/penilaian-sempro/create/' . Crypt::encryptString($id));
         } else {
 
-            return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');
+            // return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');
+            Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+                return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id));
         }
         
     }

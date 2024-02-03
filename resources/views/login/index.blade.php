@@ -23,27 +23,123 @@
 
 </head>
 <style>
-    .d-flex-container {
-        display: flex;
-        align-items: center;
-    }
 
-
-    .vl {
-        border-left: 2px solid green;
-        height: 70px;
-        margin-top: 2px;
-    }
-
-    h4 {
-        margin-top: 0;
-    }
     
 
 
+    @media only screen and (max-width: 425px) {
+
+
+        .green-background {
+            display: none !important;
+        }
+
+        .bungkus{
+            justify-content: center;
+            align-items: center;
+        }
+
+        .vl {
+            border-left: 2px solid green;
+            height: 70px;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+
+        .caption h4 {
+            font-size: 20px;
+        }
+          .gambar img{
+        margin-top: -30px;
+        }
+
+        .container{
+            margin-top: 100px;
+        }
+
+        .footer{
+            margin-bottom: 20px;
+        }
+
+        .pengembang {
+        color: #212529;
+        }
+
+        .pengembang:hover {
+            color: #28a745;
+        }
+
+    }
+
     @media only screen and (max-width: 768px) {
+        .green-background {
+            display: none !important;
+        }
 
+        .gambar img{
+        margin-top: -25px;
+        }
 
+        .bungkus{
+            justify-content: center;
+            align-items: center
+        }
+
+        .vl {
+            border-left: 2px solid green;
+            height: 70px;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+
+        .pengembang {
+        color: #212529;
+        }
+
+        .pengembang:hover {
+            color: #28a745;
+        }
+
+   
+      
+ 
+    }
+
+    @media only screen and (max-width: 992px) {
+        .green-background {
+            display: none !important;
+        }
+
+        /* .gambar img{
+        margin-top: -25px;
+        } */
+
+        .bungkus{
+            justify-content: center;
+            align-items: center
+        }
+
+        .vl {
+            border-left: 2px solid green;
+            height: 70px;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+
+        .pengembang {
+        color: #212529;
+        }
+
+        .pengembang:hover {
+            color: #28a745;
+        }
+
+   
+      
+ 
+    }
+
+    @media only screen and (min-width: 1024px) {
         .green-background {
             display: none !important;
         }
@@ -58,43 +154,61 @@
         .caption h4 {
             font-size: 20px;
         }
-          .gambar img{
-        margin-top: -5px;
-    }
 
-    .container{
-        margin-top: 100px;
-    }
+        /* .container {
+            margin-top: 100px;
+        } */
 
-    .footer{
-        margin-bottom: 20px;
-    }
-
-    }
-
-    @media only screen and (max-width: 992px) {
-        .green-background {
-            display: none !important;
+        .footer {
+            margin-bottom: 20px;
         }
 
-   
-      
- 
-    }
-
-         .d-flex {
-            margin-left : 6px;
-        }
-
-    .pengembang {
+        .pengembang {
         color: #212529;
+        }
+
+        .pengembang:hover {
+            color: #28a745;
+        }
+
+        .green-background {
+        background-color: #28a745;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        }
+
+        /* .carousel-column {
+            padding: 0;
+        } */
+
+        .login-column {
+            padding: 0 15px;
+        }
+
+        .kotak-masuk {
+            border-radius: 10px;
+        }
+
+        .hr-line-dashed {
+            border-top: 1px dashed #e7eaec;
+            color: #ffffff;
+            background-color: #6b9080;
+            height: 1px;
+            margin: 30px 0;
+        }
+
+        /* Add more styles as needed for responsiveness at 1024px and below */
     }
 
-    .pengembang:hover {
-        color: #28a745;
-    }
+    /* .d-flex {
+        margin-left : 6px;
+    } */
 
-    .green-background {
+    
+
+    /* .green-background {
         background-color: #28a745;
         height: 100vh;
         display: flex;
@@ -112,7 +226,7 @@
 
     .kotak-masuk {
         border-radius: 10px;
-    }
+    } */
 
     .hr-line-dashed {
         border-top: 1px dashed #e7eaec;
@@ -125,24 +239,24 @@
     
 </style>
 
-<body class="bg-white" style="background: radial-gradient(circle at top left, #ffffff, #f1faee);">
+<body style="background: radial-gradient(circle at top left, #ffffff, #f1faee);">
 
-<div class="container">
+<div class="container bg-white shadow">
 
-    <div class="row shadow-sm rounded">
+    <div class="row border border-success rounded justify-content-center align-items-center">
 
-    <div class="col-lg-8 col-md-12 bg-success shadow" >
+    <div class="col-xl-8 col-lg-7 col-md-12" >
 
     <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="assets/img/qq.jpg" class="d-block" width="100%" alt="..." >
+      <img src="assets/img/sistem.png" class="d-block" width="100%" alt="..." >
     </div>
     <div class="carousel-item">
-      <img src="assets/img/q.jpg" class="d-block" width="100%" alt="..." >
+      <img src="assets/img/sistem2.png" class="d-block" width="100%" alt="..." >
     </div>
     <div class="carousel-item">
-      <img src="assets/img/qqq.jpg" class="d-block" width="100%" alt="..." >
+      <img src="assets/img/sistem3.png" class="d-block" width="100%" alt="..." >
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -157,7 +271,7 @@
 
     </div>
 
-    <div class="col-lg-4 col-md-12 bg-white" style="border-radius: 0px;">
+    <div class="col-xl-4 col-lg-5 rounded col-md-12 bg-white">
 
      <div class="px-5 pt-5">
                     <main class="w-100">
@@ -165,7 +279,7 @@
                         <form class="form-login" action="/" method="POST" class="text-center mt-5">
                             @csrf
                                
-                            <div class="d-flex ml-5">
+                            <div class="d-flex bungkus ml-5">
                                 <div class="gambar p-3 mt-3">
                                     <img src="assets/dist/img/unri.png" alt="logo_unri" width="65" height="65">
                                 </div>

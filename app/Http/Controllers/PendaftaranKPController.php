@@ -133,6 +133,7 @@ class PendaftaranKPController extends Controller
 
         return redirect('/usulankp/index');
     }
+    
 
     public function kapasitas_index()
     {
@@ -172,14 +173,14 @@ public function kapasitasbimbingan_store(Request $request, $id)
     public function createusulankp_ulang()
     {
         return view('pendaftaran.kerja-praktek.usulan-kp.create-ulang', [
-            'dosens' => Dosen::all(), 
-            'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->get(),
+            'dosens' => Dosen::all(),
+            'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first(),
             
         ]);
     }
     
 
-    public function storeusulankp_ulang(Request $request, $id)
+    public function storeusulankp_ulang(Request $request)
     {
         
         $request->validate([                                           
@@ -192,23 +193,47 @@ public function kapasitasbimbingan_store(Request $request, $id)
             'tanggal_rencana' => 'required',
                          
         ]);
+       
+  
+        $dosen = Dosen::where('nip', $request->dosen_pembimbing_nip)->first();
 
-        $kp = PendaftaranKP::find($id);
-        $kp->dosen_pembimbing_nip = $request->dosen_pembimbing_nip;
-        $kp->nama_perusahaan = $request->nama_perusahaan;
-        $kp->alamat_perusahaan = $request->alamat_perusahaan;
-        $kp->bidang_usaha = $request->bidang_usaha;
-        $kp->tanggal_rencana = $request->tanggal_rencana;
+        $kapasitasBimbingan = KapasitasBimbingan::value('kapasitas_kp');
+        
+        $jumlahBimbinganSaatIni = $dosen->pendaftaran_kp()
+            ->where('status_kp', '!=', 'USULAN KP DITOLAK')
+            ->where('status_kp', '!=', 'USULKAN KP ULANG')
+            ->where('keterangan', '!=', 'Nilai KP Telah Keluar')
+            ->count();
 
-        $kp->jenis_usulan = 'Usulan Kerja Praktek';
-        $kp->tgl_created_usulankp = Carbon::now();
-        $kp->status_kp = 'USULAN KP';
-        $kp->keterangan = 'Menunggu persetujuan Pembimbing';
-        $kp->update();
+        if ($jumlahBimbinganSaatIni >= $kapasitasBimbingan) {
+            Alert::warning('Pembimbing Penuh', 'Silahkan Usulkan Pembimbing Lain!')
+                    ->showConfirmButton('Ok', '#dc3545')
+                    ->footer('<a class="btn btn-info p-2 px-3" href="/kuota-bimbingan/kp">Cek Kuota Pembimbing</a>');
 
-        Alert::success('Berhasil!', 'Data berhasil ditambahkan')->showConfirmButton('Ok', '#28a745');
+            return  back();
+        }
+
+        PendaftaranKP::create([
+            'mahasiswa_nim' => auth()->user()->nim,               
+            'prodi_id' => auth()->user()->prodi_id,   
+            'konsentrasi_id' => auth()->user()->konsentrasi_id,              
+            'krs_berjalan' =>str_replace('public/', '', $request->file('krs_berjalan')->store('public/file')),                    
+            // 'transkip_nilai' =>$request->file('transkip_nilai')->store('file'),                        
+            'transkip_nilai' =>str_replace('public/', '', $request->file('transkip_nilai')->store('public/file')),                        
+            'dosen_pembimbing_nip' =>$request->dosen_pembimbing_nip,   
+            'nama_perusahaan' => $request->nama_perusahaan,
+            'alamat_perusahaan' => $request->alamat_perusahaan,
+            'bidang_usaha' => $request->bidang_usaha,
+            'tanggal_rencana' => $request->tanggal_rencana,
+            
+            'keterangan' => 'Menunggu persetujuan Admin Prodi',
+            'tgl_created_usulankp' => Carbon::now(),
+
+        ]);
+
+        Alert::success('Berhasil!', 'Berhasil disimpan')->showConfirmButton('Ok', '#28a745');
+
         return redirect('/usulankp/index');
-
     }
 
 
@@ -1214,6 +1239,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
             $penjadwalanKP->pembimbing_nip = $kp->dosen_pembimbing_nip;
             $penjadwalanKP->penguji_nip = $kp->dosen_pembimbing_nip;
             $penjadwalanKP->judul_kp = $kp->judul_laporan;
+            $penjadwalanKP->dibuat_oleh = auth()->user()->nama;
             $penjadwalanKP->save();
 
         Alert::success('Disetujui', 'Seminar KP disetujui!')->showConfirmButton('Ok', '#28a745');

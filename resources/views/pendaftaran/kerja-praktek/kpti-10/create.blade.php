@@ -10,7 +10,7 @@
 
 @section('content')
     @foreach ($pendaftaran_kp as $kp)
-        <form action="/kpti10-kp/create/{{ $kp->id }}" method="POST" enctype="multipart/form-data">
+        <form action="/kpti10-kp/create/{{ $kp->id }}" class="mahasiswa-usulan" method="POST" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div>
@@ -41,34 +41,7 @@
                             @enderror
                         </div>
 
-                        <a href="#ModalApprove" data-toggle="modal"
-                            class="btn mt-4 btn-lg btn-success float-right">Kirim</a>
-                        <div class="modal fade"id="ModalApprove">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content shadow-sm">
-                                    <div class="modal-body">
-                                        <div class="container px-5 pt-5 pb-2">
-                                            <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                            <p class="text-center">Jika belum, silahkan cek kembali Data yang akan Anda
-                                                Kirim.</p>
-                                            <div class="row text-center">
-                                                <div class="col-3">
-                                                </div>
-                                                <div class="col-3">
-                                                    <button type="button" class="btn p-2 px-3 btn-secondary"
-                                                        data-dismiss="modal">Tidak</button>
-                                                </div>
-                                                <div class="col-3">
-                                                    <button type="submit" class="btn btn-success py-2 px-3">Kirim</button>
-                                                </div>
-                                                <div class="col-3">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <button  type="submit" class="btn mt-4 btn-lg btn-success float-right" title="Kirim Bukti Penyerahan Laporan">Kirim</button>
 
 
                     </div>
@@ -76,6 +49,9 @@
             </div>
         </form>
     @endforeach
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')
@@ -86,3 +62,27 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+        $('.mahasiswa-usulan').submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Jika belum, silahkan periksa kembali data yang akan Anda kirim.",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Kembali',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Kirim'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.currentTarget.submit();
+                }
+            });
+        });
+    });
+    </script>
+@endpush

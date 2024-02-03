@@ -11,18 +11,13 @@
     @media screen and (max-width: 768px) {}
 </style>
 @section('content')
-    @if ($skripsi == null)
-        <div class="container">
-            <a href="/kp-skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-        </div>
-    @else
         <div class="container">
             <a href="/usuljudul/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali
                 <a>
         </div>
-    @endif
 
-    <form action="{{ url('/usuljudul/create') }}" class="mahasiswa-usulan" method="POST" enctype="multipart/form-data">
+@if($skripsi->status_skripsi == 'USULKAN JUDUL ULANG' || $skripsi->status_skripsi == 'USULAN JUDUL DITOLAK')
+    <form action="{{ url('/usuljudul-ulang/create') }}" class="mahasiswa-usulan" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
             <div class="row">
@@ -123,6 +118,9 @@
         </div>
     </form>
 
+    @else
+    <p class="alert-warning p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Anda telah melakukan Usulan Judul</p>
+    @endif
 <br>
 <br>
 <br>

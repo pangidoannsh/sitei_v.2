@@ -75,7 +75,9 @@
                         <td class="text-center">{{ $sempro->waktu }}</td>
                         <td class="text-center">{{ $sempro->lokasi }}</td>
                         <td class="text-center">
+                            @if ($sempro->pembimbingsatu == !null)
                             <p>1. {{ $sempro->pembimbingsatu->nama_singkat }}</p>
+                            @endif
                             @if ($sempro->pembimbingdua == !null)
                                 <p>2. {{ $sempro->pembimbingdua->nama_singkat }}</p>
                             @endif
@@ -113,7 +115,9 @@
                         <td class="text-center">{{ $skripsi->waktu }}</td>
                         <td class="text-center">{{ $skripsi->lokasi }}</td>
                         <td class="text-center">
+                            @if ($skripsi->pembimbingsatu == !null)
                             <p>1. {{ $skripsi->pembimbingsatu->nama_singkat }}</p>
+                            @endif
                             @if ($skripsi->pembimbingdua == !null)
                                 <p>2. {{ $skripsi->pembimbingdua->nama_singkat }}</p>
                             @endif
@@ -144,6 +148,9 @@
             </tbody>
         </table>
     </div>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

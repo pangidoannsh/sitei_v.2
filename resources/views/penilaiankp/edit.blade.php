@@ -115,18 +115,6 @@
                                             <div class="radio1 d-inline">
                                                 <hr>
 
-                                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('presentasi', $kp->presentasi) == $nilai ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-             <br> -->
-
                                                 <input type="radio"
                                                     class="btn-check @error('presentasi') is-invalid @enderror"
                                                     name="presentasi" id="presentasi1" value="2" onclick="hasil()"
@@ -175,18 +163,6 @@
                                             <div class="radio1 d-inline">
                                                 <hr>
 
-                                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai2 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('materi') is-invalid @enderror" name="materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('materi', $kp->materi) == $nilai2 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-             <br> -->
-
                                                 <input type="radio"
                                                     class="btn-check @error('materi') is-invalid @enderror" name="materi"
                                                     id="materi1" value="2" onclick="hasil()"
@@ -233,18 +209,6 @@
                                             <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
                                             <div class="radio1 d-inline">
                                                 <hr>
-
-                                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai3 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tanya_jawab', $kp->tanya_jawab) == $nilai3 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-                <br> -->
 
                                                 <input type="radio"
                                                     class="btn-check @error('tanya_jawab') is-invalid @enderror"
@@ -420,18 +384,6 @@
                                 <div class="radio1 d-inline">
                                     <hr>
 
-                                    <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai11 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat11_{{ $i }}" value="{{ $nilai11 }}" onclick="setBulatValue11({{ $nilai11 }})" {{ old('presentasi', $kp->presentasi) == $nilai11 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat11_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-                <br> -->
-
                                     <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror"
                                         name="presentasi" id="presentasi1" value="2" onclick="hasil()"
                                         {{ old('presentasi', $kp->presentasi) == '2' ? 'checked' : null }}>
@@ -471,17 +423,6 @@
                                 <div class="radio1 d-inline">
                                     <hr>
 
-                                    <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai12 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('materi') is-invalid @enderror" name="materi" id="tombol_bulat12_{{ $i }}" value="{{ $nilai12 }}" onclick="setBulatValue12({{ $nilai12 }})" {{ old('materi', $kp->materi) == $nilai12 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat12_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-                <br> -->
 
                                     <input type="radio" class="btn-check @error('materi') is-invalid @enderror"
                                         name="materi" id="materi1" value="2" onclick="hasil()"
@@ -522,17 +463,6 @@
                                 <div class="radio1 d-inline">
                                     <hr>
 
-                                    <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai13 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tombol_bulat13_{{ $i }}" value="{{ $nilai13 }}" onclick="setBulatValue13({{ $nilai13 }})" {{ old('tanya_jawab', $kp->tanya_jawab) == $nilai13 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat13_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-                <br> -->
 
                                     <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror"
                                         name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()"
@@ -1086,13 +1016,10 @@
                     <button class="nav-link btn-success" id="lima-tab" data-bs-toggle="tab" data-bs-target="#lima"
                         type="button" role="tab" aria-controls="lima" aria-selected="false">Berita Acara</button>
                 </li>
-                <!-- <li class="nav-item" role="presentation">
-        <button class="nav-link btn-successtext-light bg-success" id="enam-tab" data-bs-toggle="tab" data-bs-target="#enam" type="button" role="tab" aria-controls="enam" aria-selected="false">Contact</button>
-      </li> -->
             </ul>
             <div class="tab-content p-5" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form action="/penilaian-kp-pembimbing-penguji/edit/sama/{{ $kp->penjadwalan_kp_id }}" method="POST">
+                    <form action="/penilaian-kp-pembimbing-penguji/edit/sama/{{ $kp->penjadwalan_kp_id }}" class="simpan-nilai" method="POST">
                         @method('put')
                         @csrf
                         <div class="mb-3 gridratakiri ">
@@ -1100,42 +1027,30 @@
                             <div class="radio1 d-inline">
                                 <hr>
 
-                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-                @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror" name="presentasi" id="tombol_bulat_{{ $i }}" value="{{ $nilai }}" onclick="setBulatValue({{ $nilai }})" {{ old('presentasi', $kp->presentasi) == $nilai ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-                <br> -->
-
                                 <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror"
                                     name="presentasi" id="presentasi1" value="2" onclick="hasil()"
-                                    {{ old('presentasi', $kpp->presentasi) == '2' ? 'checked' : null }}>
+                                    {{ old('presentasi', $kpp->presentasi) == '2' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-danger fw-normal" for="presentasi1">Sangat Kurang
                                     Baik</label>
 
                                 <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror"
                                     name="presentasi" id="presentasi2" value="4" onclick="hasil()"
-                                    {{ old('presentasi', $kpp->presentasi) == '4' ? 'checked' : null }}>
+                                    {{ old('presentasi', $kpp->presentasi) == '4' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-warning fw-normal " for="presentasi2">Kurang Baik</label>
 
                                 <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror"
                                     name="presentasi" id="presentasi3" value="6" onclick="hasil()"
-                                    {{ old('presentasi', $kpp->presentasi) == '6' ? 'checked' : null }}>
+                                    {{ old('presentasi', $kpp->presentasi) == '6' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-info fw-normal " for="presentasi3">Biasa</label>
 
                                 <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror"
                                     name="presentasi" id="presentasi4" value="8" onclick="hasil()"
-                                    {{ old('presentasi', $kpp->presentasi) == '8' ? 'checked' : null }}>
+                                    {{ old('presentasi', $kpp->presentasi) == '8' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-primary fw-normal " for="presentasi4">Baik</label>
 
                                 <input type="radio" class="btn-check @error('presentasi') is-invalid @enderror"
                                     name="presentasi" id="presentasi5" value="10" onclick="hasil()"
-                                    {{ old('presentasi', $kpp->presentasi) == '10' ? 'checked' : null }}>
+                                    {{ old('presentasi', $kpp->presentasi) == '10' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-success fw-normal " for="presentasi5">Sangat Baik</label>
 
                             </div>
@@ -1150,42 +1065,29 @@
                             <label for="materi" class="col-form-label">2). Materi</label>
                             <div class="radio1 d-inline">
                                 <hr>
-
-                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai2 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('materi') is-invalid @enderror" name="materi" id="tombol_bulat2_{{ $i }}" value="{{ $nilai2 }}" onclick="setBulatValue2({{ $nilai2 }})" {{ old('materi', $kp->materi) == $nilai2 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat2_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-             <br> -->
-
                                 <input type="radio" class="btn-check @error('materi') is-invalid @enderror"
                                     name="materi" id="materi1" value="2" onclick="hasil()"
-                                    {{ old('materi', $kpp->materi) == '2' ? 'checked' : null }}>
+                                    {{ old('materi', $kpp->materi) == '2' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-danger fw-normal" for="materi1">Sangat Kurang Baik</label>
 
                                 <input type="radio" class="btn-check @error('materi') is-invalid @enderror"
                                     name="materi" id="materi2" value="4" onclick="hasil()"
-                                    {{ old('materi', $kpp->materi) == '4' ? 'checked' : null }}>
+                                    {{ old('materi', $kpp->materi) == '4' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-warning fw-normal " for="materi2">Kurang Baik</label>
 
                                 <input type="radio" class="btn-check @error('materi') is-invalid @enderror"
                                     name="materi" id="materi3" value="6" onclick="hasil()"
-                                    {{ old('materi', $kpp->materi) == '6' ? 'checked' : null }}>
+                                    {{ old('materi', $kpp->materi) == '6' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-info fw-normal " for="materi3">Biasa</label>
 
                                 <input type="radio" class="btn-check @error('materi') is-invalid @enderror"
                                     name="materi" id="materi4" value="8" onclick="hasil()"
-                                    {{ old('materi', $kpp->materi) == '8' ? 'checked' : null }}>
+                                    {{ old('materi', $kpp->materi) == '8' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-primary fw-normal " for="materi4">Baik</label>
 
                                 <input type="radio" class="btn-check @error('materi') is-invalid @enderror"
                                     name="materi" id="materi5" value="10" onclick="hasil()"
-                                    {{ old('materi', $kpp->materi) == '10' ? 'checked' : null }}>
+                                    {{ old('materi', $kpp->materi) == '10' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-success fw-normal " for="materi5">Sangat Baik</label>
 
                             </div>
@@ -1200,43 +1102,30 @@
                             <label for="tanya_jawab" class="col-form-label">3). Tanya Jawab</label>
                             <div class="radio1 d-inline">
                                 <hr>
-
-                                <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-           @for ($i = 1; $i <= 10; $i++)
-    @php
-        $nilai3 = ($i / 10) * 10;
-    @endphp
-                <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror" name="tanya_jawab" id="tombol_bulat3_{{ $i }}" value="{{ $nilai3 }}" onclick="setBulatValue3({{ $nilai3 }})" {{ old('tanya_jawab', $kp->tanya_jawab) == $nilai3 ? 'checked' : null }}>
-                <label class="btn tombol text-sm ml-1 shadow-sm btn-secondary fw-normal" for="tombol_bulat3_{{ $i }}">{{ $i }}</label>
-    @endfor
-                </div>
-
-                <br> -->
-
                                 <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror"
                                     name="tanya_jawab" id="tanya_jawab1" value="2" onclick="hasil()"
-                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '2' ? 'checked' : null }}>
+                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '2' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-danger fw-normal" for="tanya_jawab1">Sangat Kurang
                                     Baik</label>
 
                                 <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror"
                                     name="tanya_jawab" id="tanya_jawab2" value="4" onclick="hasil()"
-                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '4' ? 'checked' : null }}>
+                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '4' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-warning fw-normal " for="tanya_jawab2">Kurang Baik</label>
 
                                 <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror"
                                     name="tanya_jawab" id="tanya_jawab3" value="6" onclick="hasil()"
-                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '6' ? 'checked' : null }}>
+                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '6' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-info fw-normal " for="tanya_jawab3">Biasa</label>
 
                                 <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror"
                                     name="tanya_jawab" id="tanya_jawab4" value="8" onclick="hasil()"
-                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '8' ? 'checked' : null }}>
+                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '8' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-primary fw-normal " for="tanya_jawab4">Baik</label>
 
                                 <input type="radio" class="btn-check @error('tanya_jawab') is-invalid @enderror"
                                     name="tanya_jawab" id="tanya_jawab5" value="10" onclick="hasil()"
-                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '10' ? 'checked' : null }}>
+                                    {{ old('tanya_jawab', $kpp->tanya_jawab) == '10' ? 'checked' : null }} required>
                                 <label class="btn tombol btn-success fw-normal " for="tanya_jawab5">Sangat Baik</label>
 
                             </div>
@@ -1325,14 +1214,13 @@
 
 
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <form action="/penilaian-kp-pembimbing-penguji/edit/sama/{{ $kp->penjadwalan_kp_id }}" method="POST">
+                    <form action="/penilaian-kp-pembimbing-penguji/edit/sama/{{ $kp->penjadwalan_kp_id }}" class="simpan-nilai" method="POST">
                         @method('put')
                         @csrf
                         <div class="mb-3 gridratakiri">
                             <div class="fw-bold mb-2">Input Nilai :</div>
                             <input type="number" name="nilai_pembimbing_lapangan" class="form-control"
-                                value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}"
-                                min="0" max="100" step="1">
+                                value="{{ $kp->nilai_pembimbing_lapangan != null ? $kp->nilai_pembimbing_lapangan : '' }}" min="0" max="100" step="1" required>
                         </div>
                         @if ($penjadwalan->status_seminar == '0')
                             <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
@@ -1368,7 +1256,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <table class="table table-bordered">
-                                    <thead>
+                                    <thead class="bg-secondary">
                                         <tr>
                                             <th class="text-center" style="width: 50px">#</th>
                                             <th style="width: 200px">Penilaian Penguji</th>
@@ -1429,7 +1317,7 @@
 
                             <div class="col-lg-6">
                                 <table class="table table-bordered">
-                                    <thead>
+                                    <thead class="bg-secondary">
                                         <tr>
                                             <th class="text-center" style="width: 50px">#</th>
                                             <th style="width: 200px">Penilaian Pembimbing</th>
@@ -1501,7 +1389,7 @@
                                 <tr>
                                     <td class="text-center">1</td>
                                     <td>Nilai Seminar</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if ($nilaipenguji != '' && $nilaipenguji->total_nilai_angka !== null)
                                             <i class="fas fa-check fa-lg "></i>
                                         @else
@@ -1513,7 +1401,7 @@
                                 <tr>
                                     <td class="text-center">2</td>
                                     <td>Nilai Pembimbing Lapangan</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if ($nilaipembimbing != '' && $nilaipembimbing->nilai_pembimbing_lapangan !== null)
                                             <i class="fas fa-check fa-lg "></i>
                                         @else
@@ -1525,7 +1413,7 @@
                                 <tr>
                                     <td class="text-center">3</td>
                                     <td>Nilai Pembimbing KP</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if ($nilaipembimbing != '' && $nilaipembimbing->total_nilai_angka !== null)
                                             <i class="fas fa-check fa-lg "></i>
                                         @else
@@ -1535,8 +1423,8 @@
                                 </tr>
 
                                 <tr>
-                                    <td colspan="2">Total Angka</td>
-                                    <td class="text-bold">
+                                    <td  class="text-center fw-bold" colspan="2">Total Angka</td>
+                                    <td class="text-bold text-center">
                                         @if ($nilaipembimbing == '' || $nilaipenguji == '')
                                             -
                                         @else
@@ -1546,8 +1434,8 @@
     </tr>
 
     <tr>
-        <td colspan="2">Total Huruf</td>
-        <td class="text-bold">
+        <td  class="text-center fw-bold" colspan="2">Total Huruf</td>
+        <td class="text-bold text-center">
             @if ($nilaipembimbing == '' || $nilaipenguji == '')
                 -
             @else
@@ -1676,81 +1564,24 @@
                         $nilaipembimbing->nilai_pembimbing_lapangan) /
                         3 <=
                         55 && $penjadwalan->status_seminar == 0)
-            <a href="#ModalApprove7" data-toggle="modal" class="btn mt-5 btn-lg btn-danger float-right">Selesai
-            Seminar</a>
-
-        <div class="modal fade"id="ModalApprove7">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content shadow-sm">
-                    <div class="modal-body">
-                        <div class="container px-5 pt-5 pb-2">
-                            <h3 class="text-center">Apakah Anda Yakin?</h3>
-                            <p class="text-center">Mahasiswa belum lulus seminar, Data Tidak Bisa Dikembalikan!</p>
-                            <div class="row text-center">
-                                <div class="col-4">
-                                </div>
-                                <div class="col-2">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Tidak</button>
-                                </div>
-                                <div class="col-2">
-                                    <form action="/penilaian-kp/tolak/{{ $penjadwalan->id }}" method="POST">
+                                    <form action="/penilaian-kp/tolak/{{ $penjadwalan->id }}" class="gagal-seminar" method="POST">
                                         @method('put')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger"> Selesai</button>
+                                        <button type="submit" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-danger float-right">Selesai Seminar</button>
                                     </form>
-                                </div>
-                                <div class="col-4">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+                              
          @elseif(($nilaipembimbing->total_nilai_angka +
                         $nilaipenguji->total_nilai_angka +
                         $nilaipembimbing->nilai_pembimbing_lapangan) /
                         3 >=
                         55 && $penjadwalan->status_seminar == 0)
-            <button type="button" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right"
-                data-bs-toggle="modal" data-bs-target="#ModalApprove6">Selesai Seminar</button>
-
-            <div class="modal fade"id="ModalApprove6">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content shadow-sm">
-                        <div class="modal-body">
-                            <div class="container px-5 pt-5 pb-2">
-                                <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                <p class="text-center">Mahasiswa Lulus Seminar, Data Tidak Bisa Dikembalikan!</p>
-                                <div class="row text-center">
-                                    <div class="col-4">
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Tidak</button>
-                                    </div>
-                                    <div class="col-2">
-                                        <form action="/penilaian-kp/approve/{{ $penjadwalan->id }}" method="POST">
+            
+                                        <form action="/penilaian-kp/approve/{{ $penjadwalan->id }}" class="selesai-seminar" method="POST">
                                             @method('put')
                                             @csrf
-                                            <button type="submit" class="btn btn-success"> Selesai</button>
+                                            <button type="submit" style="margin-bottom: 20px;" class="btn mt-5 mb-5 btn-lg btn-success float-right">Selesai Seminar</button>
                                         </form>
-                                    </div>
-                                    <div class="col-4">
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
+                                    
         @endif
     </div>
 
@@ -1761,8 +1592,6 @@
     </div>
     </div>
     </div>
-    <!-- <div class="tab-pane fade" id="enam" role="tabpanel" aria-labelledby="enam-tab">6</div>
-    </div> -->
     </div>
 
 
@@ -1788,101 +1617,6 @@
     </section>
 @endsection
 
-
-
-<!-- NILAI ANGKA PENGUJI  -->
-
-@push('scripts')
-    <script>
-        function setBulatValue(value) {
-            // Setiap radio dengan nama 'presentasi' akan di-set checked sesuai dengan korelasi nilai
-            document.querySelectorAll('input[name="presentasi"]').forEach(function(radio) {
-                radio.checked = (parseFloat(radio.value) <= parseFloat(value));
-                if (radio.checked) {
-                    // Panggil script hasil() dengan nilai yang sesuai
-                    hasil();
-                }
-            });
-        }
-    </script>
-@endpush()
-
-@push('scripts')
-    <script>
-        function setBulatValue2(value) {
-            // Setiap radio dengan nama 'materi' akan di-set checked sesuai dengan korelasi nilai
-            document.querySelectorAll('input[name="materi"]').forEach(function(radio) {
-                radio.checked = (parseFloat(radio.value) <= parseFloat(value));
-                if (radio.checked) {
-                    // Panggil script hasil() dengan nilai yang sesuai
-                    hasil();
-                }
-            });
-        }
-    </script>
-@endpush()
-
-@push('scripts')
-    <script>
-        function setBulatValue3(value) {
-            // Setiap radio dengan nama 'tanya_jawab' akan di-set checked sesuai dengan korelasi nilai
-            document.querySelectorAll('input[name="tanya_jawab"]').forEach(function(radio) {
-                radio.checked = (parseFloat(radio.value) <= parseFloat(value));
-                if (radio.checked) {
-                    // Panggil script hasil() dengan nilai yang sesuai
-                    hasil();
-                }
-            });
-        }
-    </script>
-@endpush()
-
-<!-- NILAI ANGKA PEMBIMBING -->
-
-@push('scripts')
-    <script>
-        function setBulatValue11(value) {
-            // Setiap radio dengan nama 'presentasi' akan di-set checked sesuai dengan korelasi nilai
-            document.querySelectorAll('input[name="presentasi"]').forEach(function(radio) {
-                radio.checked = (parseFloat(radio.value) <= parseFloat(value));
-                if (radio.checked) {
-                    // Panggil script hasil() dengan nilai yang sesuai
-                    hasil();
-                }
-            });
-        }
-    </script>
-@endpush()
-
-@push('scripts')
-    <script>
-        function setBulatValue12(value) {
-            // Setiap radio dengan nama 'materi' akan di-set checked sesuai dengan korelasi nilai
-            document.querySelectorAll('input[name="materi"]').forEach(function(radio) {
-                radio.checked = (parseFloat(radio.value) <= parseFloat(value));
-                if (radio.checked) {
-                    // Panggil script hasil() dengan nilai yang sesuai
-                    hasil();
-                }
-            });
-        }
-    </script>
-@endpush()
-
-@push('scripts')
-    <script>
-        function setBulatValue13(value) {
-            // Setiap radio dengan nama 'tanya_jawab' akan di-set checked sesuai dengan korelasi nilai
-            document.querySelectorAll('input[name="tanya_jawab"]').forEach(function(radio) {
-                radio.checked = (parseFloat(radio.value) <= parseFloat(value));
-                if (radio.checked) {
-                    // Panggil script hasil() dengan nilai yang sesuai
-                    hasil();
-                }
-            });
-        }
-    </script>
-@endpush()
 
 
 @push('scripts')
@@ -1975,6 +1709,78 @@
                 $('input[name="total_nilai_angka"]').val(total_angka | nilai_pembimbing_kp1 | nilai_pembimbing_lapangan1);
             }
         }
+    </script>
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+        $('.simpan-nilai').submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Silahkan periksa kembali data yang akan Anda kirim.",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Kembali',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Simpan'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.currentTarget.submit();
+                }
+            });
+        });
+    });
+    </script>
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+        $('.selesai-seminar').submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Mahasiswa Lulus Seminar, Data tidak bisa dikembalikan.",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Kembali',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Selesai'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.currentTarget.submit();
+                }
+            });
+        });
+    });
+    </script>
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+        $('.gagal-seminar').submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Mahasiswa Belum Lulus Seminar, Data tidak bisa dikembalikan.",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Kembali',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Selesai'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.currentTarget.submit();
+                }
+            });
+        });
+    });
     </script>
 @endpush
 

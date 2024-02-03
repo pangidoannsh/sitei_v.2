@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 
 @section('title')
@@ -9,20 +10,16 @@
 @endsection
 
 @section('content')
-    @if ($kp == null)
-        <div class="container">
-            <a href="/kp-skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-        </div>
-    @else
+
         <div class="container">
             <a href="/usulankp/index" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali
                 <a>
         </div>
-    @endif
 
 @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-        <div class="container-fluid ">
-            <form action="{{ url('/usulankp/create') }}" class="mahasiswa-usulan" method="POST" enctype="multipart/form-data">
+@if($pendaftaran_kp->status_kp == 'USULKAN KP ULANG' || $pendaftaran_kp->status_kp == 'USULAN KP DITOLAK')
+        <div class="container-fluid">
+            <form action="{{ url('/usulankp-ulang/create') }}" class="mahasiswa-usulan" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="container ">
@@ -124,8 +121,10 @@
                 </div>
             </form>
         </div>
+     @else
+    <p class="alert-warning p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Anda telah melakukan Usulan KP</p>
     @endif
-<br>
+    @endif
 <br>
 <br>
 <br>

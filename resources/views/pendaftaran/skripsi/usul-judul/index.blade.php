@@ -471,7 +471,7 @@
                         <div class="col">
                             <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
                             <span
-                                class="mt-2 text-muted text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_usuljudul_created)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-muted text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_created_usuljudul)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col ">
 
@@ -491,12 +491,12 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col ">
                             <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
                             <span
-                                class="mt-2 text-muted text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_sempro_created)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-muted text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_created_sempro)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
 
@@ -512,7 +512,7 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
@@ -535,7 +535,7 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-2 text-danger"> Batas Daftar Sempro<br></span>
@@ -561,12 +561,12 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
 
@@ -609,12 +609,12 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-2 text-danger"> Batas Daftar Sidang<br></span>
@@ -630,12 +630,12 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 text-muted"> Tanggal diusulkan <br></span>
@@ -651,12 +651,12 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                         </div>
@@ -669,17 +669,17 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
+                        </div>
+                        <div class="col">
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
+                            <span
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
-                        </div>
-                        <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
-                            <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                         </div>
@@ -691,17 +691,17 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 text-danger"> Batas Unggah <br></span>
@@ -715,17 +715,17 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 text-muted"> Tanggal Usulan <br></span>
@@ -742,17 +742,17 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                          <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 text-danger"> Batas Unggah Penyerahan Buku Skripsi <br></span>
@@ -769,17 +769,17 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
+                        </div>
+                       <div class="col">
+                          <span class="mt-0 "> Tanggal Selesai <br></span>
+                            <span
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
-                        </div>
-                        <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
-                            <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-0 text-muted"> Tanggal Usulan <br></span>
@@ -793,22 +793,22 @@
                         <div class="col">
                             <span class="mt-0 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
+                        </div>
+                       <div class="col">
+                          <span class="mt-0 "> Tanggal Selesai <br></span>
+                            <span
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sempro)->translatedFormat('l, d F Y') }}</span>
-                        </div>
-                        <div class="col">
-                            <span class="mt-0 "> Tanggal disetujui <br></span>
-                            <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sidang)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
                             <span class="mt-2 "> Tanggal disetujui <br></span>
                             <span
-                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sti_17)->translatedFormat('l, d F Y') }}</span>
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_sti_17_koordinator)->translatedFormat('l, d F Y') }}</span>
                         </div>
                     </div>
                 @endif
@@ -1000,7 +1000,7 @@
                                         data-bs-toggle="tooltip" title="Lihat Detail"><i
                                             class="fas fa-info-circle"></i></a>
                                     @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG')
-                                        <a href="/usuljudul/create" class="badge p-1  mb-1" data-bs-toggle="tooltip"
+                                        <a href="/usuljudul-ulang/create" class="badge p-1  mb-1" data-bs-toggle="tooltip"
                                             title="Usul Judul Ulang"><img height="25" width="25"
                                                 src="/assets/img/add.png" alt="..." class="zoom-image"></a>
                                         <!-- <a href="/usuljudul-ulang/create/{{ $skripsi->id }}" class="badge p-1  mb-1" data-bs-toggle="tooltip" title="Daftar Seminar Proposal"><img height="25" width="25" src="/assets/img/add.png"  alt="..." class="zoom-image"></a> -->
@@ -1790,8 +1790,8 @@
         </div>
     </div>
     <br>
-
-
+    <br>
+    <br>
 
 
 

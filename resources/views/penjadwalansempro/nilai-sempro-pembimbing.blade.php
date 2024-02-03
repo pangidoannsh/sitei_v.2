@@ -103,6 +103,7 @@
 </head>
 
 <body>
+    
     <div class="isi">
 
         <table width="100%" style="margin-bottom: 0%">
@@ -192,7 +193,7 @@
             <tr>
                 <td width="25%">Dosen Pembimbing 1</td>
                 <td>:</td>
-                <td width="70%">{{ $penjadwalan->pembimbingsatu->nama }}</td>
+                <td width="70%">{{ $penjadwalan->pembimbingsatu->nama ?? '-' }}</td>
             </tr>
             <tr>
                 <td width="25%">Dosen Pembimbing 2</td>
@@ -204,7 +205,7 @@
                 @endif
             </tr>
         </table>
-
+        @if($penilaianpembimbing !== null )
         <table class="tablesti6" width="95%" style="font-family: Arial, sans-serif; line-height: 1.5">
             <tr>
                 <td>Aspek Penilaian</td>
@@ -261,6 +262,8 @@
                 <td>{{ $penilaianpembimbing->total_nilai_angka }}</td>
             </tr>
         </table>
+
+        
 
         <!--<table class="table2" style="font-family: Arial, sans-serif; text-align:center; margin-left:10px;">-->
         <!--    <tr>-->
@@ -354,6 +357,11 @@
                 </td>
             </tr>
         </table>
+        @else
+        <div class="justify-content-center" style="text-align: center;">
+            <small style="background-color: yellow; padding: 4px;"> <small style="color: red;">*</small>Pembimbing bersangkutan tidak hadir Seminar</small>
+        </div>
+        @endif
 
         <!--<table width="100%">-->
         <!--    <tr>-->
@@ -365,6 +373,8 @@
         <!--    </tr>-->
         <!--</table>-->
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

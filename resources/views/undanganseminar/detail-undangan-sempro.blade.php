@@ -426,7 +426,7 @@
                         <span style="margin-top:10px; display: inline-block;">Judul Proposal Skripsi :</span> <br>
                         <strong
                             style="max-width: 450px; margin-bottom:10px; display: inline-block;">{{ $penjadwalan->judul_proposal }}</strong><br>
-                        Pembimbing 1 : <strong>{{ $penjadwalan->pembimbingsatu->nama }}</strong><br>
+                        Pembimbing 1 : <strong>{{ $penjadwalan->pembimbingsatu->nama ?? '-' }}</strong><br>
                         Pembimbing 2 :
                         @if ($penjadwalan->pembimbingdua_nip != null)
                             <strong>{{ $penjadwalan->pembimbingdua->nama }}</strong><br>

@@ -236,7 +236,7 @@
 
             <tr>
                 <td width="60%">PEMBIMBING 1 &nbsp; ({{ $penjadwalan->pembimbingsatu->nama }}) </td>
-                <td>: &nbsp; {{ $nilaipembimbing1->total_nilai_angka }} </td>
+                <td>: &nbsp; {{ $nilaipembimbing1->total_nilai_angka ?? '-'}} </td>
             </tr>
 
             <tr>
@@ -292,8 +292,8 @@
 
             <tr>
                 @if ($penjadwalan->pengujitiga_nip != null)
-                    <td>PENGUJI 3 &nbsp; ({{ $penjadwalan->pengujitiga->nama }})</td>
-                    <td>: &nbsp; {{ $nilaipenguji3->total_nilai_angka }} </td>
+                    <td>PENGUJI 3 &nbsp; ({{ $penjadwalan->pengujitiga->nama ?? '-' }})</td>
+                    <td>: &nbsp; {{ $nilaipenguji3->total_nilai_angka ?? '-' }} </td>
                 @else
                     <td>PENGUJI 3 &nbsp; (-)</td>
                     <td>: &nbsp; - </td>

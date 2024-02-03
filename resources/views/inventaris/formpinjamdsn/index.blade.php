@@ -169,6 +169,9 @@
             });
         }, 2000);
     </script>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

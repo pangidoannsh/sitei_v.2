@@ -431,7 +431,7 @@
                             <div class="col">
                                 <span class="mt-3 text-secondary"> Tanggal Diusulkan <br></span>
                                 <span
-                                    class="mt-3 text-secondary  text-bold">{{ Carbon::parse($pendaftaran_kp->tgl_created_usulan)->translatedFormat('l, d F Y') }}</span>
+                                    class="mt-3 text-secondary  text-bold">{{ Carbon::parse($pendaftaran_kp->tgl_created_usulankp)->translatedFormat('l, d F Y') }}</span>
                             </div>
                             <div class="col">
                             </div>
@@ -623,7 +623,7 @@
                             <div class="col">
                                 <span class="mt-3  "> Tanggal disetujui <br></span>
                                 <span
-                                    class="mt-3  text-bold">{{ Carbon::parse($pendaftaran_kp->tgl_disetujui_kpti_10)->translatedFormat('l, d F Y') }}</span>
+                                    class="mt-3  text-bold">{{ Carbon::parse($pendaftaran_kp->tgl_disetujui_kpti_10_kaprodi)->translatedFormat('l, d F Y') }}</span>
                             </div>
                         </div>
                     @endif
@@ -640,10 +640,10 @@
                         <i class="fas fa-exclamation-triangle pr-2"></i><span
                             class="fw-bold">{{ $pendaftaran_kp->alasan }}</span>, Silahkan Usulkan KP ulang!
                     </div>
-                    <div class="container">
+                    <!-- <div class="container">
                         <a href="" class="btn btn-success px-3 py-2 mb-3"><i class="fas fa-plus-circle"></i>
                             Usulkan KP Ulang</a>
-                    </div>
+                    </div> -->
                 @endif
                 @if ($pendaftaran_kp->status_kp == 'USULKAN KP ULANG')
                     <div class="alert alert-danger" role="alert">
@@ -690,56 +690,7 @@
                 @endif
 
 
-            </div>
-        @endif
-        <!-- <div class="container">
-        <a  type="button"  data-toggle="modal" class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail" data-target="#GFG"><i class="fas fa-info-circle"></i></a>
-      
-            <div class="modal fade" id="GFG">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content ">
-                    <div class="modal-header bg-secondary justify-content-center">
-                            <h5 class="modal-title ">
-                                Pesan
-                            </h5>
-      
-                        </div>
-                        <div class="modal-body ">
-                            <form action="/perpanjangan1-skripsi/create/{{ $pendaftaran_kp->id }}" method="POST" enctype="multipart/form-data">
-                                @method('put')
-                                        @csrf
-                                    <div>
-                                    <div class="row">
-                                    <div class="col">
-                                     <div class="mb-3">
-                                            <label for="formFile" class="form-label float-start">STI-22/Surat Pernyataan Perpanjangan Skripsi <small class="text-secondary">( Format .pdf .jpeg .png .jpg | Maks. 200 KB ) </small></label>
-                                            <input name="sti_22_p1" class="form-control @error('sti_22_p1') is-invalid @enderror" value="{{ old('sti_22_p1') }}" type="file" id="formFile" required autofocus>
-
-                                            @error('sti_22_p1')
-        <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-    @enderror
-                                    </div>
-
-                                        
-                                        <button type="submit" class="btn btn-success  mt-4 float-end">Kirim</button>
-
-                                                
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>
-                        <div class="modal-footer ">
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-    </div> -->
+            </div>        @endif
 
         <div class="card p-4">
 
@@ -821,7 +772,7 @@
                                             class="fas fa-info-circle"></i></a>
 
                                     @if ($kp->status_kp == 'USULAN KP DITOLAK' || $kp->status_kp == 'USULKAN KP ULANG')
-                                        <a href="/usulankp/create" class="badge " data-bs-toggle="tooltip"
+                                        <a href="/usulankp-ulang/create" class="badge " data-bs-toggle="tooltip"
                                             title="Daftar KP Ulang"><img height="25" width="25"
                                                 src="/assets/img/add.png" alt="..." class="zoom-image"></a>
                                         <!-- <a href="/usulankp/create" class="badge btn btn-success p-1" data-bs-toggle="tooltip" title="Daftar KP Ulang"><i class="fas fa-folder-plus"></i></a> -->

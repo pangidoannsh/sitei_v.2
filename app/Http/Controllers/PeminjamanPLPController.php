@@ -13,7 +13,7 @@ class PeminjamanPLPController extends Controller
     {
         $jumlah_barang = Barang::all()->count();
         $jumlah_riwayat = Peminjaman::whereIn('status', ['Selesai', 'Ditolak'])->count();
-        $jumlah_pinjaman = Peminjaman::whereIn('status', ['usulan', 'Disetujui'])->count();
+        $jumlah_pinjaman = Peminjaman::where('user_id', auth()->user()->id)->whereIn('status', ['usulan','Disetujui'])->count();
         $pinjamans = Peminjaman::whereIn("peminjamen.status", ["Usulan", "Disetujui"])->leftJoin("barangs as barang_satu", "peminjamen.barang_satu", "=", "barang_satu.id")
             ->leftJoin("barangs as barang_dua", "peminjamen.barang_dua", "=", "barang_dua.id")
             ->leftJoin("barangs as barang_tiga", "peminjamen.barang_tiga", "=", "barang_tiga.id")

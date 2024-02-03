@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KonsentrasiController extends Controller
 {
@@ -28,7 +30,9 @@ class KonsentrasiController extends Controller
         Konsentrasi::create([
             'nama_konsentrasi' => $request->nama_konsentrasi,
         ]);
-        return redirect('/konsentrasi')->with('message', 'Data Berhasil Ditambahkan!');
+        // return redirect('/konsentrasi')->with('message', 'Data Berhasil Ditambahkan!');
+        Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+        return  redirect('/konsentrasi');
     }
 
     public function edit(Konsentrasi $konsentrasi)
@@ -48,9 +52,13 @@ class KonsentrasiController extends Controller
             Konsentrasi::where('id', $konsentrasi->id)
                 ->update($validated);
 
-            return redirect('/konsentrasi')->with('message', 'Data Berhasil Diubah!');
+            // return redirect('/konsentrasi')->with('message', 'Data Berhasil Diubah!');
+            Alert::success('Berhasil!', 'Data Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+        return  redirect('/konsentrasi');
         } else {
-            return redirect('/konsentrasi')->with('message', 'Data Berhasil Diubah!');
+            // return redirect('/konsentrasi')->with('message', 'Data Berhasil Diubah!');
+            Alert::success('Berhasil!', 'Data Berhasil diubah!')->showConfirmButton('Ok', '#28a745');
+        return  redirect('/konsentrasi');
         }
     }
 

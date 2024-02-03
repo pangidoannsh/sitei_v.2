@@ -177,7 +177,7 @@
             <tr>
                 <td width="27%">Dosen Pembimbing 1</td>
                 <td>:</td>
-                <td width="70%">{{ $penjadwalan->pembimbingsatu->nama }}</td>
+                <td width="70%">{{ $penjadwalan->pembimbingsatu->nama ?? '-' }}</td>
             </tr>
 
             <tr>
@@ -232,31 +232,31 @@
             </tr>
             <tr>
                 <td class="table1" style="padding: 5px; text-align: center;">1</td>
-                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah1 }}</td>
+                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah1 ?? '-' }}</td>
                 <td class="table1"></td>
             </tr>
 
             <tr>
                 <td class="table1" style="padding: 5px; text-align: center;">2</td>
-                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah2 }}</td>
+                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah2 ?? '-' }}</td>
                 <td class="table1"></td>
             </tr>
 
             <tr>
                 <td class="table1" style="padding: 5px; text-align: center;">3</td>
-                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah3 }}</td>
+                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah3 ?? '-' }}</td>
                 <td class="table1"></td>
             </tr>
 
             <tr>
                 <td class="table1" style="padding: 5px; text-align: center;">4</td>
-                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah4 }}</td>
+                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah4 ?? '-' }}</td>
                 <td class="table1"></td>
             </tr>
 
             <tr>
                 <td class="table1" style="padding: 5px; text-align: center;">5</td>
-                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah5 }}</td>
+                <td class="table1" style="padding: 5px;">{{ $penilaianpenguji->revisi_naskah5 ?? '-' }}</td>
                 <td class="table1"></td>
             </tr>
         </table>

@@ -121,7 +121,8 @@ class PenilaianSemproController extends Controller
             'penjadwalan_sempro_id' => $request['penjadwalan_sempro_id'] = $id,
         ]);
 
-        return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
+        Alert::success('Berhasil', 'Nilai Berhasil Diinput!')->showConfirmButton('Ok', '#28a745');
+        return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id));
 
     }
 
@@ -160,7 +161,9 @@ class PenilaianSemproController extends Controller
         $penilaian->penjadwalan_sempro_id = $id;
         $penilaian->save();        
 
-        return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
+        Alert::success('Berhasil', 'Nilai Berhasil Diinput!')->showConfirmButton('Ok', '#28a745');
+        return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id));
+        // return redirect('/penilaian-sempro/edit/' . Crypt::encryptString($id))->with('message', 'Nilai Berhasil Diinput!');
     }
 
     public function edit($id)
@@ -266,7 +269,6 @@ class PenilaianSemproController extends Controller
         $edit->update();
 
         Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
-        
         return  back();
     }
 

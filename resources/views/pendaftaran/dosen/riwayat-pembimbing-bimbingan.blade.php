@@ -189,7 +189,7 @@
                         <th class="text-center" scope="col">Lokasi</th>
                         <th class="text-center" scope="col">Pembimbing</th>
                         <th class="text-center" scope="col">Penguji</th>
-                        <th class="text-center" scope="col">Hasil</th>
+                        <!-- <th class="text-center" scope="col">Hasil</th> -->
                         <th class="text-center" scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -210,26 +210,28 @@
                             <td class="text-center">
                                 <p>{{ $kp->penguji->nama_singkat }}</p>
                             </td>
-                            @if ($kp->status_seminar == 1)
+                            <!-- @if ($kp->status_seminar == 1)
                                 <td class="text-center">Lulus</td>
                             @else
                                 <td class="text-center">Belum Lulus</td>
-                            @endif
+                            @endif -->
 
                             <td class="text-center">
-                                <!-- <a formtarget="_blank" target="_blank" href="/nilai-kp/{{ Crypt::encryptString($kp->id) }}" class="badge bg-success mt-1 p-2"style="border-radius:20px;">Nilai Penguji</a>
-                @if ($kp->penguji_nip == auth()->user()->nip)
-    <a formtarget="_blank" target="_blank" href="/perbaikan-kp/{{ Crypt::encryptString($kp->id) }}" class="badge bg-info mt-1 p-2"style="border-radius:20px;">Perbaikan</a>
-                  <a formtarget="_blank" target="_blank" href="/nilai-kp/{{ Crypt::encryptString($kp->id) }}" class="badge bg-success mt-1 p-2"style="border-radius:20px;">Form Nilai</a>
-    @endif -->
+                                 @if ($kp->penguji_nip == auth()->user()->nip)
+                                <a formtarget="_blank" target="_blank"
+                                    href="/perbaikan-kp/{{ Crypt::encryptString($kp->id) }}"
+                                    class="badge bg-info p-2"style="border-radius:20px;">Perbaikan</a>
+                                <a formtarget="_blank" target="_blank" href="/nilai-kp/{{ Crypt::encryptString($kp->id) }}"
+                                    class="badge bg-success mt-2 p-2"style="border-radius:20px;">Form Nilai</a>
+                            @endif
+                            @if ($kp->pembimbing_nip == auth()->user()->nip)
                                 <a formtarget="_blank" target="_blank"
                                     href="/perbaikan-pengujikp/{{ Crypt::encryptString($kp->id) }}/{{ $kp->penguji->nip }}"
-                                    class="badge bg-info mt-1 p-2"style="border-radius:20px;">Perbaikan Penguji</a>
-                                @if ($kp->status_seminar == 1)
-                                    <a formtarget="_blank" target="_blank"
-                                        href="/beritaacara-kp/{{ Crypt::encryptString($kp->id) }}"
-                                        class="badge bg-danger mt-1 p-2"style="border-radius:20px;">Berita Acara</a>
-                                @endif
+                                    class="badge bg-info p-2"style="border-radius:20px;">Perbaikan Penguji</a>
+                                <a formtarget="_blank" target="_blank"
+                                    href="/beritaacara-kp/{{ Crypt::encryptString($kp->id) }}"
+                                    class="badge bg-danger mt-2 p-2"style="border-radius:20px;">Berita Acara</a>
+                            @endif
                             </td>
                         </tr>
                     @endforeach
@@ -245,7 +247,9 @@
                             <td class="text-center">{{ $sempro->waktu }}</td>
                             <td class="text-center">{{ $sempro->lokasi }}</td>
                             <td class="text-center">
+                                @if ($sempro->pembimbingsatu == !null)
                                 <p>1. {{ $sempro->pembimbingsatu->nama_singkat }}</p>
+                                @endif
                                 @if ($sempro->pembimbingdua == !null)
                                     <p>2. {{ $sempro->pembimbingdua->nama_singkat }}</p>
                                 @endif
@@ -257,22 +261,27 @@
                                     <p>3. {{ $sempro->pengujitiga->nama_singkat }}</p>
                                 @endif
                             </td>
-                            @if ($sempro->status_seminar == 1)
+                            <!-- @if ($sempro->status_seminar == 1)
                                 <td class="text-center">Lulus</td>
                             @else
                                 <td class="text-center">Belum Lulus</td>
-                            @endif
+                            @endif -->
 
                             <td class="text-center">
-                                <!-- <a formtarget="_blank" target="_blank" href="/nilai-sempro/{{ Crypt::encryptString($sempro->id) }}" class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a> -->
+                               <a formtarget="_blank" target="_blank"
+                                href="/nilai-sempro/{{ Crypt::encryptString($sempro->id) }}" class="badge bg-success p-2"
+                                style="border-radius:20px;">Lihat Nilai</a> <br>
 
-                                <!-- @if (
-                                    $sempro->pengujisatu_nip == auth()->user()->nip ||
-                                        $sempro->pengujidua_nip == auth()->user()->nip ||
-                                        $sempro->pengujitiga_nip == auth()->user()->nip)
-    <a formtarget="_blank" target="_blank" href="/perbaikan-sempro/{{ Crypt::encryptString($sempro->id) }}" class="badge bg-primary p-2 my-1" style="border-radius:20px;">Perbaikan</a>
-    @endif -->
+                            @if (
+                                $sempro->pengujisatu_nip == auth()->user()->nip ||
+                                    $sempro->pengujidua_nip == auth()->user()->nip ||
+                                    $sempro->pengujitiga_nip == auth()->user()->nip)
+                                <a formtarget="_blank" target="_blank"
+                                    href="/perbaikan-sempro/{{ Crypt::encryptString($sempro->id) }}"
+                                    class="badge bg-primary p-2 my-1" style="border-radius:20px;">Perbaikan</a>
+                            @endif
 
+                            @if ($sempro->pembimbingsatu_nip == auth()->user()->nip || $sempro->pembimbingdua_nip == auth()->user()->nip)
                                 <a formtarget="_blank" target="_blank"
                                     href="/perbaikan-pengujisempro/{{ Crypt::encryptString($sempro->id) }}/{{ $sempro->pengujisatu->nip }}"
                                     class="badge bg-danger p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji 1</a>
@@ -285,14 +294,13 @@
                                         class="badge bg-success p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji
                                         3</a>
                                 @endif
+                            @endif
 
-
-
-                                @if ($sempro->status_seminar == 1)
-                                    <a formtarget="_blank" target="_blank"
-                                        href="/penilaian-sempro/beritaacara-sempro/{{ Crypt::encryptString($sempro->id) }}"
-                                        class="badge bg-warning p-2 mt-1" style="border-radius:20px;">Berita Acara</a>
-                                @endif
+                            @if ($sempro->pengujisatu_nip == auth()->user()->nip)
+                                <a formtarget="_blank" target="_blank"
+                                    href="/penilaian-sempro/beritaacara-sempro/{{ Crypt::encryptString($sempro->id) }}"
+                                    class="badge bg-warning p-2" style="border-radius:20px;">Berita Acara</a>
+                            @endif
 
                             </td>
                         </tr>
@@ -309,7 +317,9 @@
                             <td class="text-center">{{ $skripsi->waktu }}</td>
                             <td class="text-center">{{ $skripsi->lokasi }}</td>
                             <td class="text-center">
+                                @if ($skripsi->pembimbingsatu == !null)
                                 <p>1. {{ $skripsi->pembimbingsatu->nama_singkat }}</p>
+                                @endif
                                 @if ($skripsi->pembimbingdua == !null)
                                     <p>2. {{ $skripsi->pembimbingdua->nama_singkat }}</p>
                                 @endif
@@ -322,7 +332,7 @@
                                 @endif
                             </td>
 
-                            @if ($skripsi->status_seminar == 3)
+                            <!-- @if ($skripsi->status_seminar == 3)
                                 <td class="text-center">Lulus</td>
                             @elseif ($skripsi->status_seminar == 2)
                                 <td class="text-center">Menunggu persetujuan Koordinator Program Studi</td>
@@ -330,15 +340,22 @@
                                 <td class="text-center">Menunggu persetujuan Koordinator Skripsi</td>
                             @else
                                 <td class="text-center">Belum Lulus</td>
-                            @endif
+                            @endif -->
 
                             <td class="text-center">
-                                <!-- <a formtarget="_blank" target="_blank" href="/nilai-skripsi/{{ Crypt::encryptString($skripsi->id) }}" class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a> -->
+                               <a formtarget="_blank" target="_blank"
+                                href="/nilai-skripsi/{{ Crypt::encryptString($skripsi->id) }}"
+                                class="badge bg-success p-2" style="border-radius:20px;">Lihat Nilai</a>
+                            @if (
+                                $skripsi->pengujisatu_nip == auth()->user()->nip ||
+                                    $skripsi->pengujidua_nip == auth()->user()->nip ||
+                                    $skripsi->pengujitiga_nip == auth()->user()->nip)
+                                <a formtarget="_blank" target="_blank"
+                                    href="/perbaikan-skripsi/{{ Crypt::encryptString($skripsi->id) }}"
+                                    class="badge bg-primary p-2 my-1" style="border-radius:20px;">Perbaikan</a>
+                            @endif
 
-                                <!-- <a formtarget="_blank" target="_blank" href="/perbaikan-skripsi/{{ Crypt::encryptString($skripsi->id) }}" class="badge bg-primary p-2 my-1" style="border-radius:20px;">Perbaikan</a> -->
-
-
-
+                            @if ($skripsi->pembimbingsatu_nip == auth()->user()->nip || $skripsi->pembimbingdua_nip == auth()->user()->nip)
                                 <a formtarget="_blank" target="_blank"
                                     href="/perbaikan-pengujiskripsi/{{ Crypt::encryptString($skripsi->id) }}/{{ $skripsi->pengujisatu->nip }}"
                                     class="badge bg-danger p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji 1</a>
@@ -351,12 +368,13 @@
                                         class="badge bg-success p-2 mt-1" style="border-radius:20px;">Perbaikan Penguji
                                         3</a>
                                 @endif
+                            @endif
 
-                                @if ($skripsi->status_seminar == 3)
-                                    <a formtarget="_blank" target="_blank"
-                                        href="/penilaian-skripsi/beritaacara-skripsi/{{ Crypt::encryptString($skripsi->id) }}"
-                                        class="badge bg-warning p-2 mt-1" style="border-radius:20px;">Berita Acara</a>
-                                @endif
+                            @if ($skripsi->pengujisatu_nip == auth()->user()->nip)
+                                <a formtarget="_blank" target="_blank"
+                                    href="/penilaian-skripsi/beritaacara-skripsi/{{ Crypt::encryptString($skripsi->id) }}"
+                                    class="badge bg-warning p-2" style="border-radius:20px;">Berita Acara</a>
+                            @endif
                             </td>
                         </tr>
                     @endforeach
@@ -366,7 +384,9 @@
             </table>
 
         </div>
-
+<br>
+<br>
+<br>
     @endsection
     
 

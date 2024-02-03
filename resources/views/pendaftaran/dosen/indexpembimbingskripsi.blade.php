@@ -170,7 +170,9 @@
 
                             <!-- Tanggal Penting -->
                             @if ($skripsi->status_skripsi == 'USULAN JUDUL')
-                                <td class="text-center px-1 py-2">
+                                <td class="text-center px-1 py-2"><small> Tanggal Usulan:
+                                        <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_created_usuljudul)->translatedFormat('d F Y') }}
                                 </td>
                             @endif
 
@@ -184,7 +186,9 @@
                                 $skripsi->status_skripsi == 'DAFTAR SEMPRO' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')
-                                <td class="text-center px-1 py-2">
+                                <td class="text-center px-1 py-2"><small> Tanggal Usulan:
+                                        <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
 
@@ -216,7 +220,10 @@
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN 1' || $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK')
-                                <td class="text-center px-1 py-2"> <small> Selesai Sempro:
+                                <td class="text-center px-1 py-2"><small> Tanggal Usulan:
+                                        <br></small>
+                                {{ Carbon::parse($skripsi->tgl_created_perpanjangan1)->translatedFormat('d F Y') }}    
+                                <small> Selesai Sempro:
                                         <br></small>{{ Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
@@ -240,7 +247,10 @@
                             @endif
 
                             @if ($skripsi->status_skripsi == 'PERPANJANGAN 2' || $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK')
-                                <td class="text-center px-1 py-2"> <small> Selesai Sempro:
+                                <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
+                                        <br></small>
+                                {{ Carbon::parse($skripsi->tgl_created_perpanjangan2)->translatedFormat('d F Y') }}
+                                    <small> Selesai Sempro:
                                         <br></small>{{ Carbon::parse($skripsi->tgl_semproselesai)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
@@ -267,7 +277,9 @@
                                 $skripsi->status_skripsi == 'DAFTAR SIDANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
-                                <td class="text-center px-1 py-2"> 
+                                <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
+                                        <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('d F Y') }}
                                 </td>
                             @endif
 
@@ -369,14 +381,13 @@
                                                     <div class="container px-5 pt-5 pb-2">
                                                         <h3 class="text-center">Apakah Anda Yakin?</h3>
                                                         <p class="text-center">Mahasiswa akan dihapus dari Daftar Bimbingan Anda. Data tidak bisa dikembalikan!</p>
-                                                        <div class="row mb-3 text-center">
-                                                            <div class="col-4">
-                                                            </div>
-                                                            <div class="col-2">
+                                                        <div class="row mb-3 justify-content-center text-center">
+                                                           
+                                                            <div class="col-3">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Tidak</button>
                                                             </div>
-                                                            <div class="col-2">
+                                                            <div class="col-3">
                                                                 <form
                                                                     action="/lewat-batas-sidang/hapus/{{ $skripsi->id }}"
                                                                     method="POST">
@@ -386,8 +397,7 @@
                                                                         class="btn btn-danger">Hapus</button>
                                                                 </form>
                                                             </div>
-                                                            <div class="col-4">
-                                                            </div>
+                                                           
                                                         </div>
 
 
@@ -438,14 +448,13 @@
                                                     <div class="container px-5 pt-5 pb-2">
                                                         <h3 class="text-center">Apakah Anda Yakin?</h3>
                                                         <p class="text-center">Mahasiswa akan dihapus dari Daftar Bimbingan Anda. Data tidak bisa dikembalikan!</p>
-                                                        <div class="row mb-3 text-center">
-                                                            <div class="col-4">
-                                                            </div>
-                                                            <div class="col-2">
+                                                         <div class="row mb-3 justify-content-center text-center">
+                                                           
+                                                            <div class="col-3">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Tidak</button>
                                                             </div>
-                                                            <div class="col-2">
+                                                            <div class="col-3">
                                                                 <form
                                                                     action="/lewat-batas-sidang/hapus/{{ $skripsi->id }}"
                                                                     method="POST">
@@ -455,8 +464,7 @@
                                                                         class="btn btn-danger">Hapus</button>
                                                                 </form>
                                                             </div>
-                                                            <div class="col-4">
-                                                            </div>
+                                                           
                                                         </div>
 
 
@@ -491,14 +499,13 @@
                                                     <div class="container px-5 pt-5 pb-2">
                                                         <h3 class="text-center">Apakah Anda Yakin?</h3>
                                                         <p class="text-center">Mahasiswa akan dihapus dari Daftar Bimbingan Anda. Data tidak bisa dikembalikan!</p>
-                                                        <div class="row mb-3 text-center">
-                                                            <div class="col-4">
-                                                            </div>
-                                                            <div class="col-2">
+                                                         <div class="row mb-3 justify-content-center text-center">
+                                                           
+                                                            <div class="col-3">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Tidak</button>
                                                             </div>
-                                                            <div class="col-2">
+                                                            <div class="col-3">
                                                                 <form
                                                                     action="/lewat-batas-sidang/hapus/{{ $skripsi->id }}"
                                                                     method="POST">
@@ -508,8 +515,7 @@
                                                                         class="btn btn-danger">Hapus</button>
                                                                 </form>
                                                             </div>
-                                                            <div class="col-4">
-                                                            </div>
+                                                           
                                                         </div>
 
 
@@ -555,6 +561,9 @@
             </table>
         </div>
     </div>
+<br>
+    <br>
+    <br>
 @endsection
 
 
@@ -607,6 +616,7 @@
         });
     </script>
 @endpush()
+
 
 @push('scripts')
     <script>

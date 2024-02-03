@@ -143,7 +143,7 @@ class PendaftaranSkripsiController extends Controller
         return view('pendaftaran.skripsi.usul-judul.create-ulang', [
             'dosens' => Dosen::all(), 
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->get(),
-            'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', Auth::user()->nim)->get(),
+            'skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first(),
         ]);
     }
     public function store_ulang_usuljudul(Request $request)
@@ -1450,6 +1450,7 @@ class PendaftaranSkripsiController extends Controller
         $penjadwalanSempro->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
         $penjadwalanSempro->pembimbingdua_nip = $skripsi->pembimbing_2_nip ?? null;
         $penjadwalanSempro->judul_proposal = $skripsi->judul_skripsi;
+        $penjadwalanSempro->dibuat_oleh = auth()->user()->username;
         $penjadwalanSempro->save();
 
         Alert::success('Disetujui!', 'Daftar Sempro Disetujui')->showConfirmButton('Ok', '#28a745');

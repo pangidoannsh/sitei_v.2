@@ -67,6 +67,9 @@
 
         </tbody>
     </table>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')

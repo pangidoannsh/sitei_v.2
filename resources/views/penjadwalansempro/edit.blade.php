@@ -125,46 +125,35 @@
                         </div>
                         <div class="col-md">
                             <div class="mb-3 field">
-                                <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
-
-                                <input type="hidden" name="pembimbingsatu_nip" class="form-control"
-                                    value="{{ old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip ?? '') }}" readonly>
-                                <input class="form-control disable" value="{{ $sempro->pembimbingsatu->nama }}" readonly>
-
-                                <!-- <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
-                    <option value="">-Pilih-</option>
+                <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
+                <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
+                    <option value="">-Belum Dipilih-</option>
                     @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                </select> -->
-                                @error('pembimbingsatu_nip')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                        <option value="{{$dosen->nip}}" {{old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
+                    @endforeach
+                </select>
+                @error('pembimbingsatu_nip')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
 
-                            <div class="mb-3 field">
-                                <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
-
-                                <input type="hidden" name="pembimbingdua_nip" class="form-control"
-                                    value="{{ old('pembimbingdua_nip', $sempro->pembimbingdua_nip ?? '') }}" readonly>
-                                <input class="form-control disable"
-                                    value="{{ $sempro->pembimbingdua_nip != null ? $sempro->pembimbingdua->nama : '' }}"
-                                    readonly>
-
-                                <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
-                    <option value="1">-Pilih-</option>
+            <div class="mb-3 field">
+                <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua
+                </label>
+                <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
+                    <option value="">-Belum Dipilih-</option>
                     @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $sempro->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                </select> -->
-                                @error('pembimbingdua_nip')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                        <option value="{{$dosen->nip}}" {{old('pembimbingdua_nip', $sempro->pembimbingdua_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
+                    @endforeach
+                </select>
+                @error('pembimbingdua_nip')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
 
                             <div class="mb-3 field">
                                 <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
@@ -365,77 +354,49 @@
                             </div>
 
 
-                            <div class="mb-3 field">
-                                <label for="lokasi" class="form-label">Lokasi</label>
-
-                                <select name="lokasi" id="lokasi"
-                                    class="form-select @error('lokasi') is-invalid @enderror"
+                             <div class="mb-3 field">
+                                <label class="form-label">Ruangan</label>
+                                <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror"
                                     value="{{ old('lokasi', $sempro->lokasi) }}" required>
-                                    <option value="">-Pilih-</option>
-                                    @foreach ($ruangans as $ruangan)
-                                        <option value="{{ $ruangan->nama_ruangan }}"
-                                            {{ old('lokasi') == $ruangan->id ? 'selected' : null }}>
-                                            {{ $ruangan->nama_ruangan }}</option>
-                                    @endforeach
-                                </select>
-
-                                <!-- <select name="lokasi" id="lokasi" class="form-select @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $sempro->lokasi) }}">
-                    <option value="">-Pilih-</option>
-                    @foreach ($ruangans as $ruangan)
-    <option value="{{ $ruangan->nama_ruangan }}" {{ old('lokasi', $sempro->lokasi) == $ruangan->id ? 'selected' : null }}>{{ $ruangan->nama_ruangan }}</option>
-    @endforeach
-                </select> -->
-
-                                <!-- <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $sempro->lokasi) }}"> -->
                                 @error('lokasi')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                           
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="mb-3 field">
-                                <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
-
-                                <input type="hidden" name="pembimbingsatu_nip" class="form-control"
-                                    value="{{ old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip ?? '') }}" readonly>
-                                <input class="form-control disable" value="{{ $sempro->pembimbingsatu->nama }}" readonly>
-
-                                <!-- <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
-                    <option value="">-Pilih-</option>
+                <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
+                <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
+                    <option value="">-Belum Dipilih-</option>
                     @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                </select> -->
-                                @error('pembimbingsatu_nip')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                        <option value="{{$dosen->nip}}" {{old('pembimbingsatu_nip', $sempro->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
+                    @endforeach
+                </select>
+                @error('pembimbingsatu_nip')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
 
-                            <div class="mb-3 field">
-                                <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
-
-                                <input type="hidden" name="pembimbingdua_nip" class="form-control"
-                                    value="{{ old('pembimbingdua_nip', $sempro->pembimbingdua_nip ?? '') }}" readonly>
-                                <input class="form-control disable"
-                                    value="{{ $sempro->pembimbingdua_nip != null ? $sempro->pembimbingdua->nama : '' }}"
-                                    readonly>
-
-                                <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
-                    <option value="1">-Pilih-</option>
+            <div class="mb-3 field">
+                <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua
+                </label>
+                <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
+                    <option value="">-Belum Dipilih-</option>
                     @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $sempro->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                </select> -->
-                                @error('pembimbingdua_nip')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                        <option value="{{$dosen->nip}}" {{old('pembimbingdua_nip', $sempro->pembimbingdua_nip) == $dosen->nip ? 'selected' : null}}>{{$dosen->nama}}</option>
+                    @endforeach
+                </select>
+                @error('pembimbingdua_nip')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
 
                             <div class="mb-3 field">
                                 <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
@@ -477,7 +438,7 @@
                                 <label for="pengujitiga_nip" class="form-label">Penguji Tiga</label>
                                 <select name="pengujitiga_nip" id="penguji3"
                                     class="form-select @error('pengujitiga_nip') is-invalid @enderror" required>
-                                    <option value="1">-Pilih-</option>
+                                    <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
                                             {{ old('pengujitiga_nip', $sempro->pengujitiga_nip) == $dosen->nip ? 'selected' : null }}>
@@ -491,36 +452,9 @@
                                 @enderror
                             </div>
 
-                            @if ($semprop->keterangan == 'Menunggu Jadwal Seminar Proposal')
-                                <a href="#ModalApprove" data-toggle="modal"
-                                    class="btn mt-4 btn-lg btn-success float-right">Jadwalkan</a>
-                                <div class="modal fade"id="ModalApprove">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content shadow-sm">
-                                            <div class="modal-body">
-                                                <div class="container text-center px-5 pt-5 pb-2">
-                                                    <h3 class="text-center">Apakah Anda Yakin?</h3>
-                                                    <p class="text-center">Status Mahasiswa akan di Jadwalkan Seminar
-                                                        Proposal.</p>
-                                                    <div class="row text-center">
 
-                                                        <div class="col-6 text-end">
-                                                            <button type="button" class="btn p-2 px-3 btn-secondary"
-                                                                data-dismiss="modal">Tidak</button>
-                                                        </div>
-                                                        <div class="col-6 text-start">
-                                                            <button type="submit"
-                                                                class="btn p-2 px-3 btn-success ">Ya</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
                                 <button type="submit" class="btn btn-lg btn-success float-right mt-4">Perbarui</button>
-                            @endif
+
 
                         </div>
 
@@ -551,6 +485,30 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+        $('.simpan-jadwal').submit(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Silahkan periksa kembali data yang akan Anda kirim.",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Kembali',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Simpan'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.currentTarget.submit();
+                }
+            });
+        });
+    });
+    </script>
+@endpush
 
 @push('scripts')
     <script>

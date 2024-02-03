@@ -251,6 +251,9 @@
             </tbody>
         </table>
     </div>
+<br>
+<br>
+<br>
 @endsection
 
 @section('footer')
