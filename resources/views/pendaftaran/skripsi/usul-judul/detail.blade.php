@@ -81,6 +81,14 @@
                         <!-- <p class="card-title text-secondary text-sm" >NIP</p>
             <p class="card-text  text-start" >{{ $skripsi->dosen_pembimbing2->nip }}</p> -->
                     @endif
+                    @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
+                        <p class="card-title text-secondary text-sm ">STI/TE-1 Surat Permohonan Pengajuan Topik Skripsi</p>
+                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                                href="/surat-permohonan-pengajuan-topik-skripsi/{{ $skripsi->id }}" class="badge bg-dark px-3 py-2">Lihat</a></p>
+                        <p class="card-title text-secondary text-sm ">STI/TE-2 Form Pengajuan Topik Skripsi</p>
+                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                                href="/form-pengajuan-topik-skripsi/{{ $skripsi->id }}" class="badge bg-dark px-3 py-2">Lihat</a></p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -115,12 +123,12 @@
                                 style="border-radius:20px;">{{ $skripsi->status_skripsi }}</span></p>
                     @endif
                     @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
-                        <p class="card-title text-secondary text-sm ">Status KP</p>
+                        <p class="card-title text-secondary text-sm ">Status Skripsi</p>
                         <p class="card-text  text-start"><span class="badge p-2 bg-info text-bold px-3"
                                 style="border-radius:20px;">{{ $skripsi->status_skripsi }}</span></p>
                     @endif
                     @if ($skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' || $skripsi->status_skripsi == 'USULKAN JUDUL ULANG')
-                        <p class="card-title text-secondary text-sm ">Status KP</p>
+                        <p class="card-title text-secondary text-sm ">Status Skripsi</p>
                         <p class="card-text  text-start"><span class="badge p-2 bg-danger text-bold px-3"
                                 style="border-radius:20px;">{{ $skripsi->status_skripsi }}</span></p>
                     @endif

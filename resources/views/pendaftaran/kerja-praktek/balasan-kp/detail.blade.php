@@ -59,6 +59,14 @@
                         <hr>
                         <p class="card-title text-secondary text-sm">Nama</p>
                         <p class="card-text text-start">{{ $kp->dosen_pembimbingkp->nama }}</p>
+                        <p class="card-title text-secondary text-sm">KPTI-1 Surat Permohonan KP</p>
+                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                            href="/surat-permohonan-kp/{{ $kp->id }}" class="badge bg-dark px-3 py-2">Buka</a>
+                        </p>
+                        <p class="card-title text-secondary text-sm">KPTI-2 Form Permohonan KP</p>
+                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                            href="/form-permohonan-kp/{{ $kp->id }}" class="badge bg-dark px-3 py-2">Buka</a>
+                        </p>
                     </div>
                 </div>
         </div>

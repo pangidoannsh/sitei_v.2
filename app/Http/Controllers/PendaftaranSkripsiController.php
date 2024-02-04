@@ -19,12 +19,14 @@ use App\Models\PendaftaranSkripsi;
 
 use App\Models\PenjadwalanSkripsi;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PenilaianSkripsiPenguji;
 
+use App\Models\PenilaianSkripsiPenguji;
 use Illuminate\Notifications\Notifiable;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\PenilaianSkripsiPembimbing;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Notifications\NotifPendaftaranSkripsi;
 
 
@@ -277,7 +279,47 @@ class PendaftaranSkripsiController extends Controller
             ]);
         } 
 
+    
     }
+
+    // Surat Permohonan Pengajuan Topik Skripsi
+
+    public function suratpermohonanpengajuantopikskripsi($id){
+        $pendaftaran_skripsi = PendaftaranSkripsi::findOrFail($id);
+
+        $kaprodi1 = Dosen::where('role_id', '6')->first();
+        $kaprodi2 = Dosen::where('role_id', '7')->first();
+        $kaprodi3 = Dosen::where('role_id', '8')->first();
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-surat-permohonan-pengajuan-topik-skripsi').'/'. $pendaftaran_skripsi->id));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        $pdf->loadView('pendaftaran.skripsi.usul-judul.surat-permohonan-pengajuan-topik-skripsi',compact('pendaftaran_skripsi','kaprodi1','kaprodi2','kaprodi3','qrcode','pdf'));
+        
+        return $pdf->stream('KPTI-1 Surat Permohonan KP.pdf', array("Attachment" => false));
+    }
+
+    public function formpengajuantopikskripsi($id){
+        $pendaftaran_skripsi = PendaftaranSkripsi::findOrFail($id);
+        $pembimbing = PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', auth()->user()->nip)->
+        orWhere('id', $id)->where('pembimbing_2_nip', auth()->user()->nip)->first();
+        $kaprodi1 = Dosen::where('role_id', '6')->first();
+        $kaprodi2 = Dosen::where('role_id', '7')->first();
+        $kaprodi3 = Dosen::where('role_id', '8')->first();
+        $koor1 = Dosen::where('role_id', '9')->first();
+        $koor2 = Dosen::where('role_id', '10')->first();
+        $koor3 = Dosen::where('role_id', '11')->first();
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-form-pengajuan-topik-skripsi').'/'. $pendaftaran_skripsi->id));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        $pdf->loadView('pendaftaran.skripsi.usul-judul.form-pengajuan-topik-skripsi',compact('pendaftaran_skripsi','pembimbing','qrcode', 'pdf', 'kaprodi1', 'kaprodi2', 'kaprodi3', 'koor1', 'koor2', 'koor3'));
+        
+        return $pdf->stream('STI/TE-2 Form Pengajuan Topik Skripsi.pdf', array("Attachment" => false));
+    }
+
+
+
     //DETAIL PERSETUJUAN DOSEN
     public function detailpersetujuan_usulanjudul($id)
     {

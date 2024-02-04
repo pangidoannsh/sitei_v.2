@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendaftaranKP;
+use App\Models\PendaftaranSkripsi;
 use App\Models\PenilaianKP;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
@@ -23,15 +25,43 @@ class QRController extends Controller
             'penjadwalan' => $penjadwalan,            
         ]);
     }
-    public function suratpermohonankp($id)
+
+    public function detail_surat_permohonan_kp($id)
     {        
         $pendaftaran_kp = PendaftaranKP::findorfail($id);
 
-        return view('pendaftaran.kerja-praktek.usulan-kp.suratpermohonan-kp-data', [
+        return view('pendaftaran.kerja-praktek.balasan-kp.detail-surat-permohonan-kp', [
             'pendaftaran_kp' => $pendaftaran_kp,            
         ]);
     }
+
     
+    public function detail_form_permohonan_kp($id)
+    {        
+        $pendaftaran_kp = PendaftaranKP::findorfail($id);
+        
+        return view('pendaftaran.kerja-praktek.balasan-kp.detail-form-permohonan-kp', [
+            'pendaftaran_kp' => $pendaftaran_kp,            
+        ]);
+    }
+
+    public function detailsuratpermohonanpengajuantopikskripsi($id)
+    {        
+        $pendaftaran_skripsi = PendaftaranSkripsi::findorfail($id);
+        
+        return view('pendaftaran.skripsi.usul-judul.detail-surat-permohonan-pengajuan-topik-skripsi', [
+            'pendaftaran_skripsi' => $pendaftaran_skripsi,            
+        ]);
+    }
+
+    public function detailformpengajuantopikskripsi($id)
+    {        
+        $pendaftaran_skripsi = PendaftaranSkripsi::findorfail($id);
+        
+        return view('pendaftaran.skripsi.usul-judul.detail-form-pengajuan-topik-skripsi', [
+            'pendaftaran_skripsi' => $pendaftaran_skripsi,            
+        ]);
+    }
     
     public function detailsempro($id)
     {        
