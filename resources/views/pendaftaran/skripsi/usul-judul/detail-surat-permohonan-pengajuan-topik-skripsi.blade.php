@@ -424,7 +424,7 @@
                         Nama Mahasiswa : <strong>{{ $pendaftaran_skripsi->mahasiswa->nama }}</strong><br>
                         Nomor Induk Mahasiswa : <strong>{{ $pendaftaran_skripsi->mahasiswa->nim }}</strong><br>
                         Tanggal Disetujui :
-                        <strong>{{ Carbon::parse($pendaftaran_skripsi->tanggal)->translatedFormat('l, d F Y') }}</strong>
+                        <strong>{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</strong>
                     </div>
                     <div class="card-footer">
                         Jika terdapat ketidaksesuaian isi surat dengan QR Code dan surat, dapat dilaporkan ke
@@ -434,8 +434,6 @@
             </div>
         </div>
     </div>
-
-
 
 
 

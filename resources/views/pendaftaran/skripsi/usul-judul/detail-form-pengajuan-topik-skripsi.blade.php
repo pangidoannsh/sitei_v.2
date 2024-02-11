@@ -429,10 +429,11 @@
                         @endif
                         @if ($pendaftaran_skripsi->dosen_pembimbing2 !== null)
                         Pembimbing 1 : <strong>{{ $pendaftaran_skripsi->dosen_pembimbing1->nama }}</strong><br>
-                        Pembimbing 2 : <strong>{{ $pendaftaran_skripsi->dosen_pembimbing2->nama }}</strong><br>
+                        Pembimbing 2 : <strong>{{ $pendaftaran_skripsi->dosen_pembimbing2->nama }}</strong>
                         @endif
+                        <br>
                         Tanggal Disetujui :
-                        <strong>{{ Carbon::parse($pendaftaran_skripsi->tanggal)->translatedFormat('l, d F Y') }}</strong>
+                        <strong>{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</strong>
                     </div>
                     <div class="card-footer">
                         Jika terdapat ketidaksesuaian isi surat dengan QR Code dan surat, dapat dilaporkan ke

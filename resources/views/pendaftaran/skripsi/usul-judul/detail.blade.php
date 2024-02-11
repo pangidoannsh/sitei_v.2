@@ -21,20 +21,11 @@
     @endif
     <div class="container">
         @if (Str::length(Auth::guard('dosen')->user()) > 0)
-            @if (Auth::guard('dosen')->user()->role_id == 9 ||
-                    Auth::guard('dosen')->user()->role_id == 10 ||
-                    Auth::guard('dosen')->user()->role_id == 11)
+
                 <a href="/skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-            @endif
+
         @endif
 
-        @if (Str::length(Auth::guard('dosen')->user()) > 0)
-            @if (Auth::guard('dosen')->user()->role_id == 6 ||
-                    Auth::guard('dosen')->user()->role_id == 7 ||
-                    Auth::guard('dosen')->user()->role_id == 8)
-                <a href="/skripsi" class="btn btn-success py-1 px-2 mb-3"><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
-            @endif
-        @endif
 
         @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
             @if (Auth::guard('mahasiswa')->user())
@@ -81,17 +72,33 @@
                         <!-- <p class="card-title text-secondary text-sm" >NIP</p>
             <p class="card-text  text-start" >{{ $skripsi->dosen_pembimbing2->nip }}</p> -->
                     @endif
-                    @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
-                        <p class="card-title text-secondary text-sm ">STI/TE-1 Surat Permohonan Pengajuan Topik Skripsi</p>
-                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
-                                href="/surat-permohonan-pengajuan-topik-skripsi/{{ $skripsi->id }}" class="badge bg-dark px-3 py-2">Lihat</a></p>
-                        <p class="card-title text-secondary text-sm ">STI/TE-2 Form Pengajuan Topik Skripsi</p>
-                        <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
-                                href="/form-pengajuan-topik-skripsi/{{ $skripsi->id }}" class="badge bg-dark px-3 py-2">Lihat</a></p>
-                    @endif
                 </div>
             </div>
         </div>
+
+        @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
+        <div class="container">
+            <div class="row rounded shadow-sm">
+                <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-start">
+                    <h5 class="text-bold">Laporan Skripsi</h5>
+                    <hr>
+                <p class="card-title text-secondary text-sm">Judul Skripsi</p>
+                    <p class="card-text text-start"><span>{{ $skripsi->judul_skripsi ?? '-' }}</span></p>
+                </div>
+                <div class="col-lg-6 col-md-12 px-4 py-3 mb-2 bg-white rounded-end">
+                    <h5 class="text-bold">Persetujuan Pengajuan Skripsi</h5>
+                    <hr>
+                    <p class="card-title text-secondary text-sm ">STI/TE-1 - Surat Permohonan Pengajuan Topik Skripsi</p>
+                        <p class="card-text  text-start"><button onclick="window.open('/surat-permohonan-pengajuan-topik-skripsi/{{ $skripsi->id }}', '_blank')" class="badge bg-dark px-2 py-1">Buka</button>
+                        </p>
+                        <p class="card-title text-secondary text-sm ">STI/TE-2 - Form Pengajuan Topik Skripsi</p>
+                        <p class="card-text text-start">
+                            <button onclick="window.open('/form-pengajuan-topik-skripsi/{{ $skripsi->id }}', '_blank')" class="badge bg-dark px-2 py-1">Buka</button>
+                        </p>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <div class="container">
             <div class="row rounded shadow-sm">

@@ -29,6 +29,7 @@ use App\Http\Controllers\PenilaianKPController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\StaffProfilController;
 use App\Http\Controllers\PendaftaranKPController;
+use App\Http\Controllers\StatistikController;
 
 use App\Http\Controllers\PenjadwalanKPController;
 use App\Http\Controllers\CountdownTimerController;
@@ -65,6 +66,11 @@ Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
 Route::get('/detail-undangan-kp/{id}', [QRController::class, 'detail_undangan_kp']);
 Route::get('/detail-undangan-sempro/{id}', [QRController::class, 'detail_undangan_sempro']);
 Route::get('/detail-undangan-sidang/{id}', [QRController::class, 'detail_undangan_sidang']);
+
+Route::get('/detail-surat-permohonan-pengajuan-topik-skripsi/{id}', [QRController::class, 'detailsuratpermohonanpengajuantopikskripsi']);
+Route::get('/detail-form-pengajuan-topik-skripsi/{id}', [QRController::class, 'detailformpengajuantopikskripsi']);
+Route::get('/detail-surat-permohonan-kp/{id}', [QRController::class, 'detail_surat_permohonan_kp']);
+Route::get('/detail-form-permohonan-kp/{id}', [QRController::class, 'detail_form_permohonan_kp']);
 
 Route::get('/developer', [DeveloperController::class, 'index']);
 Route::get('/developer/fahril-hadi', [DeveloperController::class, 'fahril']);
@@ -545,6 +551,13 @@ Route::group(['middleware' => ['auth:web,dosen']], function(){
 });
 
 Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){    
+    Route::get('/surat-permohonan-kp/{id}', [PendaftaranKPController::class, 'suratpermohonankp']);
+    
+    Route::get('/form-permohonan-kp/{id}', [PendaftaranKPController::class, 'formpermohonankp']);
+    
+    Route::get('/surat-permohonan-pengajuan-topik-skripsi/{id}', [PendaftaranSkripsiController::class, 'suratpermohonanpengajuantopikskripsi']);
+    
+    Route::get('/form-pengajuan-topik-skripsi/{id}', [PendaftaranSkripsiController::class, 'formpengajuantopikskripsi']);
 
  Route::get('/kpti10-kp/detail/{id}', [PendaftaranKPController::class, 'detailkpti_10']);
  Route::get('/kpti10-kp/detail/riwayat/{id}', [PendaftaranKPController::class, 'detail_riwayat_prodi_kpti_10']);
@@ -554,8 +567,16 @@ Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){
     Route::get('/bukti-buku-skripsi/detail/{id}', [PendaftaranSkripsiController::class, 'detailbukti_buku_skripsi']);
     Route::get('/bukti-buku-skripsi/riwayat/detail/{id}', [PendaftaranSkripsiController::class, 'detail_riwayat_prodi_bukti_buku_skripsi']);
 
-    Route::get('/statistik', [PendaftaranController::class, 'kuotabimbingan']);
+    Route::get('/statistik', [StatistikController::class, 'index']);
+
+    Route::get('/statistik/bimbingan-kp', [StatistikController::class, 'bimbingan_kp']);
+
+    Route::get('/statistik/bimbingan-skripsi', [StatistikController::class, 'bimbingan_skripsi']);
+
     Route::get('/detail/kuota-bimbingan/kp/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_kp']);
+    Route::get('/detail/lulus-bimbingan/kp/{nip}', [StatistikController::class, 'detail_lulus_bimbingan_kp']);
+    Route::get('/detail/lulus-bimbingan/skripsi/{nip}', [StatistikController::class, 'detail_lulus_bimbingan_skripsi']);
+
     Route::get('/detail/kuota-bimbingan/skripsi/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_skripsi']);
     Route::get('/kuota-bimbingan/kp', [PendaftaranController::class, 'kuotabimbingan_kp']);
     Route::get('/kuota-bimbingan/skripsi', [PendaftaranController::class, 'kuotabimbingan_skripsi']);
@@ -734,15 +755,6 @@ Route::group(['middleware' => ['auth:dosen,mahasiswa']], function () {
     Route::get('/balasan-kp/detail/{id}', [PendaftaranKPController::class, 'detailbalasankp']);
     // Route::get('/usulan-semkp/detail/{id}', [PendaftaranKPController::class, 'detailusulansemkp']);
     
-    Route::get('/surat-permohonan-kp/{id}', [PendaftaranKPController::class, 'suratpermohonankp']);
-    Route::get('/detail-surat-permohonan-kp/{id}', [QRController::class, 'detail_surat_permohonan_kp']);
-    Route::get('/form-permohonan-kp/{id}', [PendaftaranKPController::class, 'formpermohonankp']);
-    Route::get('/detail-form-permohonan-kp/{id}', [QRController::class, 'detail_form_permohonan_kp']);
-    
-    Route::get('/surat-permohonan-pengajuan-topik-skripsi/{id}', [PendaftaranSkripsiController::class, 'suratpermohonanpengajuantopikskripsi']);
-    Route::get('/detail-surat-permohonan-pengajuan-topik-skripsi/{id}', [QRController::class, 'detailsuratpermohonanpengajuantopikskripsi']);
-    Route::get('/form-pengajuan-topik-skripsi/{id}', [PendaftaranSkripsiController::class, 'formpengajuantopikskripsi']);
-    Route::get('/detail-form-pengajuan-topik-skripsi/{id}', [QRController::class, 'detailformpengajuantopikskripsi']);
 
     Route::get('/balasan-kp/index', [PendaftaranKPController::class, 'indexbalasan']);
     Route::get('/balasan-kp/create', [PendaftaranKPController::class, 'create']);

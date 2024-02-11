@@ -217,21 +217,17 @@
             </tr>
         </table>
 
-
-
-
-
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:100px;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:180px;">
             <tr>
                 <td class="text" style="text-align: left;">
                     <div class="container">
                         <p>Mengetahui,</p>
                         @if ($pendaftaran_skripsi->mahasiswa->prodi->id == 1)
-                            <p>Koordinator Prodi Teknik Elektro D3</p>
+                            <p style="margin-top:-10px;">Koordinator Prodi Teknik Elektro D3</p>
                         @elseif ($pendaftaran_skripsi->mahasiswa->prodi->id == 2)
-                            <p>Koordinator Prodi Teknik Elektro S1</p>
+                            <p style="margin-top:-10px;">Koordinator Prodi Teknik Elektro S1</p>
                         @else
-                            <p>Koordinator Prodi Teknik Informatika</p>
+                            <p style="margin-top:-10px;">Koordinator Prodi Teknik Informatika</p>
                         @endif
 
                         <div class="ttd">
@@ -253,9 +249,9 @@
                     <br>
                 </td>
                 <td class="text" style="text-align: left;">
-                    <div class="container">
-                        <p>Pekanbaru, {{ Carbon::parse($pendaftaran_skripsi->tanggal)->translatedFormat('d F Y') }} </p>
-                        <p>Mahasiswa Ybs</p>
+                    <div class="container" style="float: right; margin-top:-180px;">
+                        <p style="">Pekanbaru, {{ Carbon::parse($pendaftaran_skripsi->tgl_created_usuljudul)->translatedFormat('d F Y') }} </p>
+                        <p style="margin-top:-10px;">Mahasiswa Ybs</p>
                         <div class="ttd">
                             <img src="data:img/png;base64, {!! $qrcode !!}">
                         </div>

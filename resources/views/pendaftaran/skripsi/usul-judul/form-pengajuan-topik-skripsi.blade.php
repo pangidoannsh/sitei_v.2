@@ -97,10 +97,10 @@
 <body>
     <div class="isi">
 
-        <table width="100%" style="margin-bottom: 0%">
+        <table width="100%" style="margin-top: -10px">
             <tr>
                 <td>
-                    <div class="logo">
+                    <div class="logo" style="margin-top: -10px">
                         <img id="img" src="https://live.staticflickr.com/65535/51644220143_f5dba04544_o_d.png"
                             width="110" height="110">
                     </div>
@@ -141,7 +141,7 @@
             </table>
         </table>
 
-        <table width="100%" style="text-align:center; margin-top:0px;">
+        <table width="100%" style="text-align:center; margin-top: -15px;">
             <tr>
                 <td style="font-size:12pt;text-decoration: underline;">
                     <strong>FORM PENGAJUAN TOPIK SKRIPSI</strong>
@@ -163,19 +163,21 @@
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:10px; line-height: 1.5; border-collapse: collapse; border: 1px solid black;">
+        <div style="margin: 1px; border: 1px solid black; padding: 1px;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-2px; line-height: 1.5; border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%"><strong>A. Diisi oleh mahasiswa</strong></td>
             </tr>
         </table>
+        <hr style="margin-top: -5px; border: 0.5px solid black">
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px; line-height: 1.5; border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%">Yang bertanda tangan di bawah ini :</td>
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5; border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td style="padding-left: 50px;">Nama</td>
                 <td>:</td>
@@ -193,23 +195,23 @@
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5; border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%">Mengajukan proposal skripsi dengan topik : {{ $pendaftaran_skripsi->judul_skripsi }}.</td>
             </tr>
         </table>
 
         <div style="width: 100%;">
-            <table style="float: right; font-family: Arial, sans-serif; margin-top: 0px;">
+            <table style="float: right; font-family: Arial, sans-serif; margin-top: -10px; border-collapse: collapse; border: none;">
                 <tr>
                     <td class="text" style="text-align: left;">
                         <div class="container">
-                            <p>Pekanbaru, {{ Carbon::parse($pendaftaran_skripsi->tanggal)->translatedFormat('d F Y') }} </p>
-                            <p>Mahasiswa,</p>
-                            <div class="ttd">
-                                <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                            <p>Pekanbaru, {{ Carbon::parse($pendaftaran_skripsi->tgl_created_usuljudul)->translatedFormat('d F Y') }} </p>
+                            <p style="margin-top: -12px;">Mahasiswa,</p>
+                            <div class="ttd" style="margin-top: -10px;">
+                                <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                             </div>
-                            <br><br><br><br><br>
+                            <br><br><br>
                             <strong style="text-decoration: underline;">{{ $pendaftaran_skripsi->mahasiswa->nama }}</strong><br>NIM.{{ $pendaftaran_skripsi->mahasiswa->nim }}
                         </div>
                         <br>
@@ -218,23 +220,28 @@
             </table>
         </div>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:300px; line-height: 1.5; border-collapse: collapse; border: 1px solid black;">
+<div class="container" >
+    <hr style="margin-top: 135px; border: 0.5px solid black">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px; line-height: 1.5; border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%"><strong>B. Disetujui oleh Calon Dosen Pembimbing Skripsi</strong></td>
             </tr>
         </table>
+    <hr style="margin-top: -5px; border: 0.5px solid black">
+</div>
+
         <div style="width: 100%;">
-            <table style="font-family: Arial, sans-serif; margin-top: 0px;">
+            <table style="font-family: Arial, sans-serif; margin-top: -30px;">
                 <tr>
                     <td class="text" style="text-align: left;">
                         <td class="text" style="text-align: left;">
                             <div class="container">
                                 <p>Tanda Tangan</p>
-                                <p>Dosen Pembimbing 1,</p>
-                                <div class="ttd">
-                                    <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                                <p style="margin-top: -15px;">Dosen Pembimbing 1,</p>
+                                <div class="ttd" style="margin-top: -10px;">
+                                    <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                                 </div>
-                                <br><br><br><br><br>
+                                <br><br><br>
                                 <strong style="text-decoration: underline;">{{ $pendaftaran_skripsi->dosen_pembimbing1->nama }}</strong><br>NIP.{{ $pendaftaran_skripsi->dosen_pembimbing1->nip }}
                             </div>
                             <br>
@@ -244,22 +251,22 @@
             </table>
         </div>
         <div style="width: 100%;">
-            <table style="float:right; font-family: Arial, sans-serif; margin-top: -215px;">
+            <table style="float:right; font-family: Arial, sans-serif; margin-top: -170px;">
                 <tr>
                     <td class="text" style="text-align: left;">
                         <div class="container">
                             @if ($pendaftaran_skripsi->dosen_pembimbing2 == null)
                             <p>Tanda Tangan</p>
-                            <p>Dosen Pembimbing 2,</p>
-                            <br><br><br><br><br>
+                            <p style="margin-top: -15px;">Dosen Pembimbing 2,</p>
+                            <br><br><br>
                             <strong >..........................</strong><br>NIP. ..........................
                         @elseif($pendaftaran_skripsi->dosen_pembimbing2 !== null)
                             <p>Tanda Tangan</p>
-                            <p>Dosen Pembimbing 2,</p>
-                            <div class="ttd">
-                                <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                            <p style="margin-top: -15px;">Dosen Pembimbing 2,</p>
+                            <div class="ttd" style="margin-top: -10px;">
+                                <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                             </div>
-                            <br><br><br><br><br>
+                            <br><br><br>
                             <strong style="text-decoration: underline;">{{ $pendaftaran_skripsi->dosen_pembimbing2->nama }}</strong><br>NIP.{{ $pendaftaran_skripsi->dosen_pembimbing2->nip }}
                         @endif
                         </div>
@@ -268,24 +275,27 @@
                 </tr>
             </table>
         </div>
-
-        <table width="100%" style="font-family: Arial, sans-serif; padding-top:155px; line-height: 1.5; border-collapse: collapse; border: 1px solid black;">
+<div class="container" >
+    <hr style="margin-top: -20px; border: 0.5px solid black">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px; line-height: 1.5; border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%"><strong>C. Disetujui oleh Koordinator Skripsi</strong></td>
             </tr>
         </table>
-        <table width="100%" style="font-family: Arial, sans-serif; ">
+    <hr style="margin-top: -5px; border: 0.5px solid black">
+</div>
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top: -20px; border-collapse: collapse; border: none;">
             <tr>
                 <div style="width: 100%; ">
-                    <table style="font-family: Arial, sans-serif; ">
+                    <table style="font-family: Arial, sans-serif; border-collapse: collapse; border: none;">
                         <tr>
                             <td class="text" style="text-align: left;">
                                 <div class="container">
-                                    <p>Tanda Tangan Koordinator Skripsi</p>
-                                    <div class="ttd">
-                                        <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                                    <p style="margin-top: 0px;">Tanda Tangan Koordinator Skripsi</p>
+                                    <div class="ttd" style="margin-top: -10px;">
+                                        <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                                     </div>
-                                    <br><br><br><br><br>
+                                    <br><br><br>
                                     @if ($pendaftaran_skripsi->mahasiswa->prodi->id == 1)
                                     <strong
                                         style="text-decoration: underline;">{{ $koor1->nama }}</strong><br>NIP.{{ $koor1->nip }}
@@ -303,7 +313,7 @@
                     </table>
                 </div>
                 <div style="width: 100%; ">
-                    <table style="float: right; font-family: Arial, sans-serif; margin-top:-170px; ">
+                    <table style="float: right; font-family: Arial, sans-serif; margin-top:-130px; border-collapse: collapse; border: none;">
                         <tr>
                             <td>Tipe Topik Skripsi</td>
                         </tr>
@@ -320,26 +330,27 @@
                 </div>
             </tr>
         </table>
+</div>
 
         <div style="width: 100%;">
-            <table style="float: right; font-family: Arial, sans-serif; margin-top: 70px;">
+            <table style="float: right; font-family: Arial, sans-serif; margin-top:-10px;  border-collapse: collapse; border: none;">
                 <tr>
                     <td class="text" style="text-align: left;">
                         <div class="container">
                             <p>Mengetahui,</p>
                             @if ($pendaftaran_skripsi->mahasiswa->prodi->id == 1)
-                                <p>Program Studi Teknik Elektro D3</p>
+                                <p style="margin-top: -10px;">Program Studi Teknik Elektro D3</p>
                             @elseif ($pendaftaran_skripsi->mahasiswa->prodi->id == 2)
-                                <p>Program Studi Teknik Elektro S1</p>
+                                <p style="margin-top: -10px;">Program Studi Teknik Elektro S1</p>
                             @else
-                                <p>Program Studi Teknik Informatika</p>
+                                <p style="margin-top: -10px;">Program Studi Teknik Informatika</p>
                             @endif
-                            <p>Koordinator,</p>
+                            <p style="margin-top: -10px;">Koordinator,</p>
     
-                            <div class="ttd">
-                                <img src="data:img/png;base64, {!! $qrcode !!}">
+                            <div class="ttd" style="margin-top: -10px;">
+                                <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                             </div>
-                            <br><br><br><br><br><br>
+                            <br><br><br>
                             @if ($pendaftaran_skripsi->mahasiswa->prodi->id == 1)
                                 <strong
                                     style="text-decoration: underline;">{{ $kaprodi1->nama }}</strong><br>NIP.{{ $kaprodi1->nip }}

@@ -5,11 +5,11 @@
 @endphp
 
 @section('title')
-    SITEI | Daftar Beban Bimbingan Skripsi
+    SITEI | Daftar Selesai Bimbingan Kerja Praktek
 @endsection
 
 @section('sub-title')
-    Daftar Beban Bimbingan Skripsi
+    Daftar Selesai Bimbingan Kerja Praktek
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
 
         <ol class="breadcrumb col-lg-12">
 
-            <h5 class="">Data Bimbingan <span class="fw-bold fs-5">{{ $dosen->nama }} </span></h5>
+            <h5 class="pt-2">Data Lulus Bimbingan <span class="fw-bold fs-5">{{ $dosen->nama }} </span></h5>
 
         </ol>
 
@@ -54,51 +54,16 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
                             <td class="text-center">{{ $skripsi->mahasiswa->nama }}</td>
-                            <td class="text-center ">{{ $skripsi->mahasiswa->prodi->nama_prodi }}</td>
-                            <td class="text-center">{{ $skripsi->mahasiswa->konsentrasi->nama_konsentrasi }}</td>
-                            @if (
-                                $skripsi->status_skripsi == 'USULAN JUDUL' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SIDANG' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN REVISI' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN 1' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN 2' ||
-                                    $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')
-                                <td class="text-center px-1 py-2 bg-secondary">{{ $skripsi->status_skripsi }}</td>
-                            @endif
-                            @if (
-                                $skripsi->status_skripsi == 'JUDUL DISETUJUI' ||
-                                    $skripsi->status_skripsi == 'SEMPRO SELESAI' ||
-                                    $skripsi->status_skripsi == 'SIDANG SELESAI' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN 1 DISETUJUI' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN 2 DISETUJUI' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' ||
-                                    $skripsi->status_skripsi == 'SKRIPSI SELESAI' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI')
-                                <td class="text-center px-1 py-2 bg-info">{{ $skripsi->status_skripsi }}</td>
-                            @endif
-                            @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' || $skripsi->status_skripsi == 'SIDANG DIJADWALKAN')
-                                <td class="text-center px-1 py-2 bg-success">{{ $skripsi->status_skripsi }}</td>
-                            @endif
-                            @if (
-                                $skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' ||
-                                    $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN 2 DITOLAK' ||
-                                    $skripsi->status_skripsi == 'PERPANJANGAN REVISI DITOLAK' ||
-                                    $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
-                                <td class="text-center px-1 py-2 bg-danger">{{ $skripsi->status_skripsi }}</td>
-                            @endif
-                            <!-- DURASI -->
 
-                                @php
+                            <td class="text-center ">{{ $skripsi->mahasiswa->prodi->nama_prodi }}</td>
+
+                            <td class="text-center">{{ $skripsi->mahasiswa->konsentrasi->nama_konsentrasi }}</td>
+                                <td class="text-center px-1 py-2 bg-info">{{ $skripsi->status_skripsi }}</td>
+                        
+                            <!-- DURASI -->
+                            @php
                                 $tanggalMulaiSkripsi = Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi);
-                                $tanggalSelesai= Carbon::now();
+                                $tanggalSelesai= Carbon::parse($skripsi->tgl_disetujui_sti_17_koordinator);
 
                                 $durasiSkripsi = $tanggalMulaiSkripsi ? $tanggalMulaiSkripsi->diffInMonths($tanggalSelesai) : null;
                                 $bulan = $durasiSkripsi ? floor($durasiSkripsi) : null;
@@ -108,12 +73,14 @@
                             <td class="text-center px-1 py-2">
                                        <b> {{ $bulan ?? 0}} </b> <small>Bulan</small> <b> {{ $hari }} </b> <small>Hari</small>
                                 </td>
+
                         </tr>
                     @endforeach
                 </tbody>
 
 
             </table>
+            
         </div>
     </div>
     <br>

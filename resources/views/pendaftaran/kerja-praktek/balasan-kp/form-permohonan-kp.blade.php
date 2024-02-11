@@ -97,7 +97,7 @@
 <body>
     <div class="isi">
 
-        <table width="100%" style="margin-bottom: 0%">
+        <table width="100%" style="margin-top: -25px">
             <tr>
                 <td>
                     <div class="logo">
@@ -130,8 +130,9 @@
                     </center>
                 </td>
             </tr>
-
-            <table width="600px" style="text-align:center;">
+        </table>
+            
+            <table width="600px" style="text-align:center; margin-top : -10px;">
                 <tr>
                     <td>
                         <hr style="margin: 1px; border: 2px solid black">
@@ -141,7 +142,7 @@
             </table>
         </table>
 
-        <table width="100%" style="text-align:center; margin-top:0px;">
+        <table width="100%" style="text-align:center; margin-top: -5px;">
             <tr>
                 <td style="font-size:12pt;text-decoration: underline;">
                     <strong>FORM PERMOHONAN KP</strong>
@@ -163,38 +164,40 @@
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:10px; line-height: 1.5; border-collapse: collapse; border: 1px solid black;">
+        <div style="margin: 1px; border: 1px solid black; padding: 1px; padding-bottom: 75px;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5;  border-collapse: collapse; border: none;">
             <tr class="text2">
-                <td width="27%"><strong>A. Diisi oleh mahasiswa</strong></td>
-                <td width="20%"><strong>Rencana KP :</strong> {{ Carbon::parse($pendaftaran_kp->tanggal_mulai)->translatedFormat('d F Y') }}</td>
+                <td width="35%"><strong>A. Diisi oleh mahasiswa</strong></td>
+                <td width="30%"><strong>Rencana KP :</strong> {{ Carbon::parse($pendaftaran_kp->tanggal_mulai)->translatedFormat('d F Y') }}</td>
                 <td width="15%"><strong>s.d</strong></td>
             </tr>
         </table>
+        <hr style="margin-top: -5px; border: 0.5px solid black">
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px; line-height: 1;  border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%">Yang bertanda tangan di bawah ini :</td>
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.15;  border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td style="padding-left: 50px;">Nama</td>
                 <td>:</td>
-                <td width="70%">{{ $pendaftaran_kp->mahasiswa->nama }}</td>
+                <td width="80%">{{ $pendaftaran_kp->mahasiswa->nama }}</td>
             </tr>
             <tr>
                 <td style="padding-left: 50px;">NIM</td>
                 <td>:</td>
-                <td width="70%">{{ $pendaftaran_kp->mahasiswa->nim }}</td>
+                <td width="80%">{{ $pendaftaran_kp->mahasiswa->nim }}</td>
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-5px; line-height: 1.5;  border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%">Mengajukan Kerja Praktek bidang {{ $pendaftaran_kp->mahasiswa->konsentrasi->nama_konsentrasi }}.</td>
             </tr>
-            <tr class="text2">
+            <tr class="text2" style="margin-top:-10px; line-height: 1;">
                 <td >Sebagai bahan pertimbangan, Saya lampirkan 
                     @if ($pendaftaran_kp->mahasiswa->prodi->id == 1)
                         <strong>KPTE-1</strong>
@@ -216,13 +219,13 @@
 
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.15;  border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%">Apabila permohonan ini diizinkan, saya mengusulkan perusahaan berikut agar dapat disetujui sebagai tempat pelaksanaan Kerja Praktek tersebut.</td>
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:0px; line-height: 1.15;  border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="50%" style="padding-left: 50px;">Nama Perusahaan/Instansi</td>
                 <td width="5%">:</td>
@@ -241,17 +244,17 @@
         </table>
 
         <div style="width: 100%;">
-            <table style="float: right; font-family: Arial, sans-serif; margin-top: 0px;">
+            <table style="float: right; font-family: Arial, sans-serif; margin-top: 0px;  border-collapse: collapse; border: none;">
                 <tr>
                     <td class="text" style="text-align: left;">
                         <div class="container">
-                            <p>Pekanbaru, {{ Carbon::parse($pendaftaran_kp->tanggal)->translatedFormat('d F Y') }} </p>
-                            <p>Pemohon,</p>
-                            <div class="ttd">
-                                <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                            <p style="margin-top: 4px;">Pekanbaru, {{ Carbon::parse($pendaftaran_kp->tgl_created_usulankp)->translatedFormat('d F Y') }} </p>
+                            <p style="margin-top: -14px;">Pemohon,</p>
+                            <div class="ttd" style="margin-top: -10px;">
+                                <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                             </div>
-                            <br><br><br><br><br>
-                            <strong style="text-decoration: underline;">{{ $pendaftaran_kp->mahasiswa->nama }}</strong><br>NIM.{{ $pendaftaran_kp->mahasiswa->nim }}
+                            <br><br><br>
+                            <strong style="text-decoration: underline; ">{{ $pendaftaran_kp->mahasiswa->nama }}</strong><br>NIM.{{ $pendaftaran_kp->mahasiswa->nim }}
                         </div>
                         <br>
                     </td>
@@ -259,30 +262,33 @@
             </table>
         </div>
 
-        <table width="100%" style="font-family: Arial, sans-serif; padding-top:185px; line-height: 1.5; border-collapse: collapse; border: 1px solid black;">
+<div style="padding-top:115px;">
+<hr style="margin-bottom: -5px; border: 0.5px solid black">
+        <table width="100%" style="font-family: Arial, sans-serif; line-height: 1.5;  border-collapse: collapse; border: none;">
             <tr class="text2">
-                <td width="27%"><strong>B. Diisi oleh Calon Dosen Pembimbing KP</strong></td>
+                <td><strong >B. Diisi oleh Calon Dosen Pembimbing KP</strong></td>
             </tr>
         </table>
-        <table width="100%" style="font-family: Arial, sans-serif; ">
+        <hr style="margin-top: -5px; border: 0.5px solid black">
+        <table width="100%" style="font-family: Arial, sans-serif;  border-collapse: collapse; border: none;">
             <tr>
                 <td class="text" style="text-align: left;">
                     <div class="container">
-                        <p>Catatan :</p>
+                        <p style="margin-top: -10px;">Catatan :</p>
                     <br>
                 </td>
-                <div style="width: 100%; ">
-                    <table style="float: right; font-family: Arial, sans-serif; ">
+                <div style="width: 100%; margin-top: -30px;">
+                    <table style="float: right; font-family: Arial, sans-serif;  border-collapse: collapse; border: none;">
                         <tr>
                             <td class="text" style="text-align: left;">
                                 <div class="container">
-                                    <p>Tanda Tangan</p>
-                                    <p>Dosen Pembimbing KP,</p>
-                                    <div class="ttd">
-                                        <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                                    <p style="margin-top: 10px;">Tanda Tangan</p>
+                                    <p style="margin-top: -15px;">Dosen Pembimbing KP,</p>
+                                    <div class="ttd" style="margin-top: -10px;">
+                                        <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                                     </div>
-                                    <br><br><br><br><br>
-                                    <strong style="text-decoration: underline;">{{ $pendaftaran_kp->dosen_pembimbingkp->nama }}</strong><br>NIP.{{ $pendaftaran_kp->dosen_pembimbing_nip }}
+                                    <br><br><br>
+                                    <strong style="text-decoration: underline; ">{{ $pendaftaran_kp->dosen_pembimbingkp->nama }}</strong><br>NIP.{{ $pendaftaran_kp->dosen_pembimbing_nip }}
                                 </div>
                                 <br>
                             </td>
@@ -291,35 +297,38 @@
                 </div>
             </tr>
         </table>
-
-        <table width="100%" style="font-family: Arial, sans-serif; padding-top:155px; line-height: 1.5; border-collapse: collapse; border: 1px solid black;">
+</div>
+<div style="padding-top:50px;">
+<hr style="margin-bottom: -5px; border: 0.5px solid black">
+        <table width="100%" style="font-family: Arial, sans-serif; line-height: 1.5;  border-collapse: collapse; border: none;">
             <tr class="text2">
                 <td width="27%"><strong>C. Disetujui oleh Koordinator KP</strong></td>
             </tr>
         </table>
-        <table width="100%" style="font-family: Arial, sans-serif; ">
+        <hr style="margin-top: -5px; border: 0.5px solid black">
+        
+        <table width="100%" style="font-family: Arial, sans-serif;   border-collapse: collapse; border: none;">
             <tr>
                 <td class="text" style="text-align: left;">
-                    <div class="container">
-                        <p>Catatan :</p>
+                        <p style="margin-top: -10px;">Catatan :</p>
                     <br>
                 </td>
-                <div style="width: 100%; ">
-                    <table style="float: right; font-family: Arial, sans-serif; ">
+                <div style="width: 100%; " >
+                    <table style="float: right; font-family: Arial, sans-serif;  border-collapse: collapse; border: none;">
                         <tr>
                             <td class="text" style="text-align: left;">
-                                <div class="container">
+                                <div class="container" >
                                     @if ($pendaftaran_kp->mahasiswa->prodi->id == 1)
-                                            <p>Tanda Tangan Koor. Skripsi dan KP <br> Teknik Elektro D3</p>
+                                            <p style="margin-top: -15px;">Tanda Tangan Koor. Skripsi dan KP <br> Teknik Elektro D3</p>
                                         @elseif ($pendaftaran_kp->mahasiswa->prodi->id == 2)
-                                            <p>Tanda Tangan Koor. Skripsi dan KP <br> Teknik Elektro S1</p>
+                                            <p style="margin-top: -15px;">Tanda Tangan Koor. Skripsi dan KP <br> Teknik Elektro S1</p>
                                         @else
-                                            <p>Tanda Tangan Koor. Skripsi dan KP <br> Teknik Informatika S1</p>
+                                            <p style="margin-top: -15px;">Tanda Tangan Koor. Skripsi dan KP <br> Teknik Informatika S1</p>
                                     @endif
-                                    <div class="ttd">
-                                        <img width="70px" height="70px" src="data:img/png;base64, {!! $qrcode !!}">
+                                    <div class="ttd" style="margin-top: -10px;">
+                                        <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                                     </div>
-                                    <br><br><br><br><br>
+                                    <br><br><br>
                                     @if ($pendaftaran_kp->mahasiswa->prodi->id == 1)
                                     <strong
                                         style="text-decoration: underline;">{{ $koor1->nama }}</strong><br>NIP.{{ $koor1->nip }}
@@ -336,27 +345,27 @@
                         </tr>
                     </table>
                 </div>
+                
             </tr>
         </table>
+    </div>
+        </div>
 
-        <div style="width: 100%;">
-            <table style="float: right; font-family: Arial, sans-serif; margin-top: 180px; margin-right:-33%;">
-                <tr>
-                    <td class="text" style="text-align: left;">
-                        <div class="container">
-                            <p>Mengetahui,</p>
+        <div class="container" style="float: right; font-family: Arial, sans-serif; padding-top: -100px; font-size: 13px;">
+
+        <p style="margin-top: 2px;">Mengetahui,</p>
                             @if ($pendaftaran_kp->mahasiswa->prodi->id == 1)
-                                <p>Koordinator Program Studi <br> Teknik Elektro D3</p>
+                                <p style="margin-top: -10px;">Koordinator Program Studi <br> Teknik Elektro D3</p>
                             @elseif ($pendaftaran_kp->mahasiswa->prodi->id == 2)
-                                <p>Koordinator Program Studi <br> Teknik Elektro S1</p>
+                                <p style="margin-top: -10px;">Koordinator Program Studi <br> Teknik Elektro S1</p>
                             @else
-                                <p>Koordinator Program Studi <br> Teknik Informatika S1</p>
+                                <p style="margin-top: -10px;">Koordinator Program Studi <br> Teknik Informatika S1</p>
                             @endif
     
-                            <div class="ttd">
-                                <img src="data:img/png;base64, {!! $qrcode !!}">
+                            <div class="ttd" style="margin-top: -10px;">
+                                <img width="55px" height="55px" src="data:img/png;base64, {!! $qrcode !!}">
                             </div>
-                            <br><br><br><br><br><br>
+                            <br><br><br>
                             @if ($pendaftaran_kp->mahasiswa->prodi->id == 1)
                                 <strong
                                     style="text-decoration: underline;">{{ $kaprodi1->nama }}</strong><br>NIP.{{ $kaprodi1->nip }}
@@ -367,15 +376,9 @@
                                 <strong
                                     style="text-decoration: underline;">{{ $kaprodi3->nama }}</strong><br>NIP.{{ $kaprodi3->nip }}
                             @endif
-    
-                        </div>
-                        <br>
-                    </td>
-                </tr>
-            </table>
+
         </div>
 
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
