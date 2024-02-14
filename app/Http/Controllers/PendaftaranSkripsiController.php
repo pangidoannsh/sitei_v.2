@@ -572,7 +572,7 @@ class PendaftaranSkripsiController extends Controller
         $jurnal->file_jurnal = str_replace('public/', '', $request->file('file_jurnal')->store('public/file'));
         }
 
-        $jurnal->pendaftaran_skripsi_id = $skripsi->id;
+        // $jurnal->pendaftaran_skripsi_id = $skripsi->id;
         $jurnal->mahasiswa_nim = $skripsi->mahasiswa_nim;
         $jurnal->link_jurnal = $request->link_jurnal;
         $jurnal->indeksasi_jurnal = $request->indeksasi_jurnal;
@@ -1679,11 +1679,13 @@ class PendaftaranSkripsiController extends Controller
         $penjadwalanSkripsi->prodi_id = $skripsi->prodi_id;
         $penjadwalanSkripsi->pembimbingsatu_nip = $skripsi->pembimbing_1_nip;
         $penjadwalanSkripsi->pembimbingdua_nip = $skripsi->pembimbing_2_nip;
-
+        
+        if ($penjadwalan_sempro !== null) {
         $penjadwalanSkripsi->pengujisatu_nip = $penjadwalan_sempro->pengujisatu_nip;
         $penjadwalanSkripsi->pengujidua_nip = $penjadwalan_sempro->pengujidua_nip;
         $penjadwalanSkripsi->pengujitiga_nip = $penjadwalan_sempro->pengujitiga_nip;
-        
+        }
+        $penjadwalanSkripsi->dibuat_oleh = auth()->user()->nama;
         $penjadwalanSkripsi->judul_skripsi = $skripsi->judul_skripsi;
         $penjadwalanSkripsi->save();
 

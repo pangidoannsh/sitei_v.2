@@ -36,6 +36,9 @@ class PenilaianSkripsiController extends Controller
         $ceknilaipenguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', $penjadwalan->pengujisatu_nip)->first();
         
         $penjadwalan_sempro = PenjadwalanSempro::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+        if ($penjadwalan_sempro !== null) {
+        $penjadwalan_sempro = PenjadwalanSempro::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
+        }
 
         $jurnal = PublikasiJurnal::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim )->latest('created_at')->first();
                  
@@ -191,9 +194,12 @@ class PenilaianSkripsiController extends Controller
        $penjadwalan = PenjadwalanSkripsi::find($id);
         $penjadwalan_sem = PenjadwalanSkripsi::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim)->latest('created_at')->first();
         $mahasiswa_sem = PenjadwalanSempro::where('mahasiswa_nim', $penjadwalan_sem->mahasiswa_nim)->latest('created_at')->first();
+        if ($mahasiswa_sem !== null) {
         $penjadwalan_sempro = PenjadwalanSkripsi::where('mahasiswa_nim', $mahasiswa_sem->mahasiswa_nim)->latest('created_at')->first();
-        
         $penjadwalan_sempro_id = $mahasiswa_sem->id;
+        }
+        
+        // $penjadwalan_sempro = PenjadwalanSkripsi::where('mahasiswa_nim', $mahasiswa_sem->mahasiswa_nim)->latest('created_at')->first();
 
         $jurnal = PublikasiJurnal::where('mahasiswa_nim', $penjadwalan->mahasiswa_nim)->latest('created_at')->first();
         
@@ -254,9 +260,9 @@ class PenilaianSkripsiController extends Controller
             } else {
                 $nilaipembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan->pembimbingdua_nip)->first();
             }
-
-
-            return view('penilaianskripsi.edit', [
+            
+            if ($mahasiswa_sem !== null) {
+         return view('penilaianskripsi.edit', [
                 'skripsi' => PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->first(),
                 'pembimbing' => $pembimbing,
                 'pembimbingnilai' => $pembimbingnilai,
@@ -271,6 +277,24 @@ class PenilaianSkripsiController extends Controller
                 'naskah' => $pendaftaran_skripsi,
                 'jurnal' => $jurnal,
             ]);
+        }
+            if ($mahasiswa_sem == null) {
+            return view('penilaianskripsi.edit', [
+                'skripsi' => PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->first(),
+                'pembimbing' => $pembimbing,
+                'pembimbingnilai' => $pembimbingnilai,
+                'sempro' => $mahasiswa_sem,
+                // 'penjadwalan_sempro_id' => $penjadwalan_sempro_id,
+                'penjadwalan' => $penjadwalan,
+                'nilaipenguji1' => $nilaipenguji1,
+                'nilaipenguji2' => $nilaipenguji2,
+                'nilaipenguji3' => $nilaipenguji3,
+                'nilaipembimbing1' => $nilaipembimbing1,
+                'nilaipembimbing2' => $nilaipembimbing2,
+                'naskah' => $pendaftaran_skripsi,
+                'jurnal' => $jurnal,
+            ]);
+        }
         }
     }
 

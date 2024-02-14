@@ -16,16 +16,37 @@
     <script src="{{ $chart->cdn() }}"></script>
 
     {{ $chart->script() }}
+
+    <script src="{{ $chart2->cdn() }}"></script>
+
+    {{ $chart2->script() }}
+    
+    <script src="{{ $chart3->cdn() }}"></script>
+
+    {{ $chart3->script() }}
+    
+    <script src="{{ $chart4->cdn() }}"></script>
+
+    {{ $chart4->script() }}
+    
+    <script src="{{ $chart5->cdn() }}"></script>
+
+    {{ $chart5->script() }}
 @endsection
 
+<style>
+    .larapex-chart-texts text {
+    margin: 10px; /* Atur margin label menjadi 10px */
+}
+</style>
 @section('content')
     @if (session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('message') }}
         </div>
     @endif
-
-    <div class="container card p-4">
+<section class ="mb-5">
+    <div class="container card p-4 mb-5">
 
         <ol class="breadcrumb col-lg-12">
 
@@ -43,19 +64,28 @@
         <div class="container-fluid">
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                {!! $chart->container() !!}
+        <div class="p-0">{!! $chart->container() !!}
+            </div>
+
+            <div class="p-0">{!! $chart2->container() !!}
+            </div>
+
+            <div class="p-0">{!! $chart2->container() !!}
+            </div>
+
+            <div class="p-0">{!! $chart3->container() !!}
+            </div>
+
+            <div class="p-0">{!! $chart4->container() !!}
             </div>
             
-            <div class="col-lg-6">
-                {!! $chart2->container() !!}
+            <div class="p-0">{!! $chart5->container() !!}
             </div>
-            
-        </div>
+
             
         </div>
 
+</section>
            
         </div>
     </div>

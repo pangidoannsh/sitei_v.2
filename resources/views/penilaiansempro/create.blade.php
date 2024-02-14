@@ -972,7 +972,7 @@
                                 <div class="mb-3 gridratakiri">
                                     <div class="fw-bold mb-2">Perbaikan 1</div>
                                     <input type="text" name="revisi_naskah1" class="form-control"
-                                        value="{{ $sempro->revisi_naskah1 != null ? $sempro->revisi_naskah1 : '' }}">
+                                        value="{{ $sempro->revisi_naskah1 != null ? $sempro->revisi_naskah1 : '' }}" required>
                                 </div>
 
                                 <div class="mb-3 gridratakiri">
@@ -1018,7 +1018,7 @@
                             <div class="mb-3 gridratakiri">
                                 <label class="form-label">Judul Baru</label>
                                 <input type="text" name="revisi_proposal" class="form-control"
-                                    value="{{ $sempro->revisi_proposal != null ? $sempro->revisi_proposal : '' }}">
+                                    value="{{ $sempro->revisi_proposal != null ? $sempro->revisi_proposal : '' }}" required>
                             </div>
                             <button type="submit" class="btn btn-lg btn-success float-right">Perbarui</button>
                         </form>

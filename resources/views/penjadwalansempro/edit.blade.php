@@ -220,7 +220,7 @@
                                                     <h3 class="text-center">Apakah Anda Yakin?</h3>
                                                     <p class="text-center">Status Mahasiswa akan di Jadwalkan Seminar
                                                         Proposal.</p>
-                                                    <div class="row text-center">
+                                                    <div class="row text-center justify-content-center">
 
                                                         <div class="col-6 text-end">
                                                             <button type="button" class="btn p-2 px-3 btn-secondary"

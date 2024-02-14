@@ -12,6 +12,8 @@
     Statistik Bimbingan Kerja Praktek
 @endsection
 
+
+
 @section('content')
     @if (session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,10 +23,11 @@
 
     <div class="container card p-4">
 
+
         <ol class="breadcrumb col-lg-12">
 
             <li>
-                <a href="/statistik" class="px-1">Statisktik</a>
+                <a href="/statistik" class="px-1">Statistik</a>
             </li>
 
             <span class="px-2">|</span>
@@ -129,7 +132,7 @@
 
             @foreach ($pendaftaranKP as $pendaftaran)
                 @php
-                    $tanggalMulaiKP = $pendaftaran->tgl_disetujui_balasan ? \Carbon\Carbon::parse($pendaftaran->tgl_disetujui_balasan) : null;
+                    $tanggalMulaiKP = $pendaftaran->tanggal_mulai ? \Carbon\Carbon::parse($pendaftaran->tanggal_mulai) : null;
                     $tanggalSelesai = $pendaftaran->tgl_disetujui_kpti_10_koordinator ? \Carbon\Carbon::parse($pendaftaran->tgl_disetujui_kpti_10_koordinator) : null;
                     $totalMhs = $pendaftaranKP->count();
 

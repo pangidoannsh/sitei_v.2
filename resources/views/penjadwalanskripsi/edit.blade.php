@@ -140,16 +140,16 @@
                         <div class="col-md">
                             <div class="mb-3 field">
                                 <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
-                                <input type="hidden" name="pembimbingsatu_nip" class="form-control"
+                                <!-- <input type="hidden" name="pembimbingsatu_nip" class="form-control"
                                     value="{{ old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip ?? '') }}" readonly>
-                                <input class="form-control disable" value="{{ $skripsi->pembimbingsatu->nama }}" readonly>
+                                <input class="form-control disable" value="{{ $skripsi->pembimbingsatu->nama }}" readonly> -->
 
-                                <!-- <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
+                                <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
                         <option value="">-Pilih-</option>
                         @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                    </select> -->
+                            <option value="{{ $dosen->nip }}" {{ old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
+                            @endforeach
+                                            </select>
                                 @error('pembimbingsatu_nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -159,18 +159,22 @@
 
                             <div class="mb-3 field">
                                 <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
+                                @if($skripsi->pembimbingdua_nip == null)
                                 <input type="hidden" name="pembimbingdua_nip" class="form-control"
                                     value="{{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '') }}" readonly>
                                 <input class="form-control disable"
                                     value="{{ $skripsi->pembimbingdua_nip != null ? $skripsi->pembimbingdua->nama : '' }}"
                                     readonly>
+                                @else
 
-                                <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
-                        <option value="1">-Pilih-</option>
-                        @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                    </select> -->
+                                <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
+                                  <option value="1">-Pilih-</option>
+                                 @foreach ($dosens as $dosen)
+                                <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
+                                @endforeach
+                                                </select>
+                                @endif
+                                
                                 @error('pembimbingdua_nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -402,17 +406,17 @@
                         <div class="col-md">
                             <div class="mb-3 field">
                                 <label for="pembimbingsatu_nip" class="form-label">Pembimbing Satu</label>
-                                <input type="hidden" name="pembimbingsatu_nip" class="form-control"
+                                <!-- <input type="hidden" name="pembimbingsatu_nip" class="form-control"
                                     value="{{ old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip ?? '') }}" readonly>
                                 <input class="form-control disable" value="{{ $skripsi->pembimbingsatu->nama }}"
-                                    readonly>
+                                    readonly> -->
 
-                                <!-- <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
+                                <select name="pembimbingsatu_nip" id="pembimbing1" class="form-select @error('pembimbingsatu_nip') is-invalid @enderror">
                         <option value="">-Pilih-</option>
                         @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                    </select> -->
+                            <option value="{{ $dosen->nip }}" {{ old('pembimbingsatu_nip', $skripsi->pembimbingsatu_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
+                            @endforeach
+                                            </select>
                                 @error('pembimbingsatu_nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -422,18 +426,22 @@
 
                             <div class="mb-3 field">
                                 <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
+                                @if($skripsi->pembimbingdua_nip == null)
                                 <input type="hidden" name="pembimbingdua_nip" class="form-control"
                                     value="{{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '') }}" readonly>
                                 <input class="form-control disable"
                                     value="{{ $skripsi->pembimbingdua_nip != null ? $skripsi->pembimbingdua->nama : '' }}"
                                     readonly>
+                                @else
 
-                                <!-- <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
-                        <option value="1">-Pilih-</option>
-                        @foreach ($dosens as $dosen)
-    <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
-    @endforeach
-                    </select> -->
+                                <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
+                                  <option value="1">-Pilih-</option>
+                                 @foreach ($dosens as $dosen)
+                                <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
+                                @endforeach
+                                                </select>
+                                @endif
+
                                 @error('pembimbingdua_nip')
                                     <div class="invalid-feedback">
                                         {{ $message }}

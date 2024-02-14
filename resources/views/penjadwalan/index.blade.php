@@ -247,9 +247,20 @@
 
                 @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
                     <td class="text-center">
-                        <a href="/form-skripsi/edit/{{ Crypt::encryptString($skripsi->id) }}"
-                            class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>
+                        <!-- @if($skripsi->waktu == null)
+                                            <a href="/form-skripsi/edit/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-success p-2 mb-2"> Tambah Jadwal<a> <br>
+                                        @else
+                                            <a href="/form-skripsi/edit/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-warning p-2 mb-2"> Edit<a><br>
+                                        @endif
 
+                                        @if($skripsi->waktu != null)
+                                            <a href="/form-skripsi/undur/admin/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-danger p-2">Reschedule<a>
+                                        @endif -->
+                                        <a href="/form-skripsi/edit/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-warning mt-2 p-2"><i class="fas fa-pen"></i></a>
                     </td>
                 @endif
                 </tr>

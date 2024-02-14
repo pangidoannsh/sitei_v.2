@@ -523,6 +523,12 @@ public function gagal($id, PendaftaranSkripsi $pendaftaranid)
         $penjadwalan_sempro->revisi_proposal = $request->revisi_proposal;
         $penjadwalan_sempro->update();
         $cari_penguji = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
+
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan_sempro->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->judul_skripsi = $penjadwalan_sempro->revisi_proposal;
+        $pendaftaran_skripsi->update();
+
         if ($cari_penguji == 0) {
              Alert::success('Berhasil', 'Nilai Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
                 return redirect('/penilaian-sempro/create/' . Crypt::encryptString($id));

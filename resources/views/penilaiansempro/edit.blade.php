@@ -48,13 +48,13 @@
                 <hr>
                 @if ($sempro->penjadwalan_sempro->pembimbingdua_nip == null)
                     <p class="card-title text-secondary text-sm">Nama</p>
-                    <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pembimbingsatu->nama }}</p>
+                    <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pembimbingsatu->nama ?? '-'}}</p>
                 @elseif($sempro->penjadwalan_sempro->pembimbingdua_nip !== null)
                     <p class="card-title text-secondary text-sm">Nama Pembimbing 1</p>
                     <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pembimbingsatu->nama ?? '-' }}</p>
 
                     <p class="card-title text-secondary text-sm">Nama Pembimbing 2</p>
-                    <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pembimbingdua->nama }}</p>
+                    <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pembimbingdua->nama ?? '-' }}</p>
                 @endif
 
             </div>
@@ -64,12 +64,12 @@
                 <hr>
 
                 <p class="card-title text-secondary text-sm">Nama Penguji 1</p>
-                <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pengujisatu->nama }}</p>
+                <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pengujisatu->nama ?? '-' }}</p>
 
 
 
                 <p class="card-title text-secondary text-sm">Nama Penguji 2</p>
-                <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pengujidua->nama }}</p>
+                <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pengujidua->nama ?? '-' }}</p>
                 @if ($sempro->penjadwalan_sempro->pengujitiga != null)
                     <p class="card-title text-secondary text-sm">Nama Penguji 3</p>
                     <p class="card-text text-start">{{ $sempro->penjadwalan_sempro->pengujitiga->nama }}</p>
@@ -400,9 +400,7 @@
             auth()->user()->nip == $sempro->penjadwalan_sempro->pengujidua_nip ||
             auth()->user()->nip == $sempro->penjadwalan_sempro->pengujitiga_nip)
 
-        <form action="/penilaian-sempro-penguji/edit/{{ $sempro->penjadwalan_sempro_id }}" class="simpan-nilai-penguji" method="POST">
-            @method('put')
-            @csrf
+        
             <div class="card card-success card-tabs">
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
@@ -436,6 +434,9 @@
 
                         <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
                             aria-labelledby="custom-tabs-one-home-tab">
+                        <form action="/penilaian-sempro-penguji/edit/{{ $sempro->penjadwalan_sempro_id }}" class="simpan-nilai-penguji" method="POST">
+                        @method('put')
+                        @csrf
 
                             <div class="mb-3 gridratakiri">
                                 <label for="presentasi" class="col-form-label">1). Presentasi</label>
@@ -862,18 +863,19 @@
                                 <button type="submit"
                                     class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
                             @endif
-
-
-
+                        </form>
                         </div>
 
                         <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
                             aria-labelledby="custom-tabs-one-profile-tab">
+                        <form action="/penilaian-sempro-penguji/edit/{{ $sempro->penjadwalan_sempro_id }}" class="simpan-nilai-penguji" method="POST">
+                        @method('put')
+                        @csrf
 
                             <div class="mb-3 gridratakiri">
                                 <div class="fw-bold mb-2">Perbaikan 1</div>
                                 <input type="text" name="revisi_naskah1" class="form-control"
-                                    value="{{ $sempro->revisi_naskah1 != null ? $sempro->revisi_naskah1 : '' }}">
+                                    value="{{ $sempro->revisi_naskah1 != null ? $sempro->revisi_naskah1 : '' }}" required>
                             </div>
 
                             <div class="mb-3 gridratakiri">
@@ -923,7 +925,7 @@
                     <div class="mb-3 gridratakiri">
                         <label class="form-label">Judul Baru</label>
                         <input type="text" name="revisi_proposal" class="form-control"
-                            value="{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : '' }}">
+                            value="{{ $sempro->penjadwalan_sempro->revisi_proposal != null ? $sempro->penjadwalan_sempro->revisi_proposal : '' }}" required>
                     </div>
 
                     @if ($penjadwalan->status_seminar == '0')
@@ -1436,7 +1438,7 @@
                                     <div class="mb-3 gridratakiri">
                                         <label class="form-label">Catatan 1</label>
                                         <input type="text" name="catatan1" class="form-control"
-                                            value="{{ $sempro->penjadwalan_sempro->catatan1 != null ? $sempro->penjadwalan_sempro->catatan1 : '' }}">
+                                            value="{{ $sempro->penjadwalan_sempro->catatan1 != null ? $sempro->penjadwalan_sempro->catatan1 : '' }}" required>
                                     </div>
                                     <div class="mb-3 gridratakiri">
                                         <label class="form-label">Catatan 2</label>
@@ -1476,7 +1478,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga == !null)
+                            @elseif($nilaipenguji2 == '' && $nilaipenguji3 == '' && $sempro->penjadwalan_sempro->pengujitiga == !null)
                                 <a href="#ModalApprove2" data-toggle="modal"
                                     class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
                                 <div class="modal fade"id="ModalApprove2">
@@ -1494,7 +1496,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @elseif($nilaipenguji2 == null)
+                            @elseif($nilaipenguji2 == null && $sempro->penjadwalan_sempro->pengujidua !== null)
                                 <a href="#ModalApprove3" data-toggle="modal"
                                     class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
                                 <div class="modal fade"id="ModalApprove3">
@@ -1531,7 +1533,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                               
                             @elseif($nilaipenguji1 == null)
                                 <a href="#ModalApprove10" data-toggle="modal"
                                     class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>

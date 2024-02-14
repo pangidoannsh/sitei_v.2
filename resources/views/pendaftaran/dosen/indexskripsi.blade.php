@@ -278,7 +278,7 @@
                                         @endphp
 
                             <td class="text-center px-1 py-2">
-                                       {{ $bulan ?? 0}} <small>Bulan</small> {{ $hari }} <small>Hari</small>
+                                       {{ $bulan ?? 0}} <small>Bulan</small> <br> {{ $hari }} <small>Hari</small>
                                 </td>
 
 

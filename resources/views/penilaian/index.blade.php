@@ -157,8 +157,19 @@
                                         Auth::guard('dosen')->user()->role_id == 10 ||
                                         Auth::guard('dosen')->user()->role_id == 11)
                                     <td class="text-center">
+                                        <!-- @if($sempro->waktu == null)
                                         <a href="/form-sempro/edit/koordinator/{{ Crypt::encryptString($sempro->id) }}"
-                                            class="badge bg-warning p-2"> <i class="fas fa-pen"></i><a>
+                                            class="badge bg-success p-2 mb-2">Tambah Jadwal<a><br>
+                                        @else
+                                            <a href="/form-sempro/edit/koordinator/{{ Crypt::encryptString($sempro->id) }}"
+                                            class="badge bg-warning p-2 mb-2">Edit<a><br>
+                                        @endif
+                                            <a href="/form-sempro/edit/koordinator/{{ Crypt::encryptString($sempro->id) }}"
+                                            class="badge bg-danger p-2">Reschedule<a> -->
+
+                                            <a href="/form-sempro/edit/koordinator/{{ Crypt::encryptString($sempro->id) }}"
+                                            class="badge bg-warning mt-2 p-2"><i class="fas fa-pen"></i></a>
+
                                     </td>
                                 @endif
                             @endif
@@ -173,7 +184,11 @@
                             <td class="text-left pl-3 pr-1 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <td class="bg-warning text-center">{{ $skripsi->jenis_seminar }}</td>
                             <td class="text-center">{{ $skripsi->prodi->nama_prodi }}</td>
-                            <td class="text-center">{{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}
+                            <td class="text-center">
+                                @if($skripsi->tanggal != null)
+                                {{ Carbon::parse($skripsi->tanggal)->translatedFormat('l, d F Y') }}
+                                @endif
+                                
                             </td>
                             <td class="text-center">{{ $skripsi->waktu }}</td>
                             <td class="text-center">{{ $skripsi->lokasi }}</td>
@@ -204,8 +219,23 @@
                                         Auth::guard('dosen')->user()->role_id == 10 ||
                                         Auth::guard('dosen')->user()->role_id == 11)
                                     <td class="text-center">
+
+                                     <!-- @if($skripsi->waktu == null)
+                                            <a href="/form-skripsi/edit/koordinator/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-success p-2 mb-2"> Tambah Jadwal<a> <br>
+                                        @else
+                                            <a href="/form-skripsi/edit/koordinator/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-warning p-2 mb-2"> Edit<a><br>
+                                        @endif
+
+                                        @if($skripsi->waktu == null)
+                                            <a href="/form-skripsi/undur/koordinator/{{ Crypt::encryptString($skripsi->id) }}"
+                                            class="badge bg-danger p-2">Reschedule<a>
+                                        @endif -->
+
                                         <a href="/form-skripsi/edit/koordinator/{{ Crypt::encryptString($skripsi->id) }}"
-                                            class="badge bg-warning p-2"> <i class="fas fa-pen"></i><a>
+                                            class="badge bg-warning mt-2 p-2"><i class="fas fa-pen"></i></a>
+                                            
                                     </td>
                                 @endif
                             @endif

@@ -13,12 +13,15 @@ use App\Charts\DataKPChart;
 use App\Models\Konsentrasi;
 use App\Models\PermohonanKP;
 use Illuminate\Http\Request;
+use App\Charts\StatusKPChart;
 use App\Models\PendaftaranKP;
 use App\Models\PenjadwalanKP;
+use App\Charts\AngkatanKPChart;
 use App\Models\KapasitasBimbingan;
 use App\Models\PendaftaranSkripsi;
 use App\Models\PenilaianKPPenguji;
 use Illuminate\Support\Facades\URL;
+use App\Charts\AngkatanSkripsiChart;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PenilaianKPPembimbing;
@@ -31,7 +34,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class StatistikController extends Controller
 {
     
-    public function index(DataBimbinganSkripsiChart $chart, DataKPChart $chart2)   
+    public function index(DataBimbinganSkripsiChart $chart, StatusKPChart $chart2, DataKPChart $chart3 , AngkatanKPChart $chart4 , AngkatanSkripsiChart $chart5)   
     {
 
         // $chart = $this->chartService->buildChart();
@@ -51,6 +54,9 @@ class StatistikController extends Controller
 return view('pendaftaran.statistik.index', [
     'chart' => $chart->build(),
     'chart2' => $chart2->buildChart2(),
+    'chart3' => $chart3->buildChart3(),
+    'chart4' => $chart4->buildChart4(),
+    'chart5' => $chart5->buildChart5(),
     // 'rerata_kp' => $BimbinganKP,
     // 'jumlah_selesai' => $mahasiswa,
 ]);

@@ -3409,78 +3409,7 @@
                 })
             });
             
-            // PERSETUJUAN SIDANG KOORDINATOR DAN KAPRODI
-            $('.tolak-persetujuan-sidang-koordinator').submit(function(event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Tolak Seminar Sidang Skripsi?',
-                    text: "Apakah Anda Yakin? Data Akan dikembalikan ke Ketua Penguji",
-                    icon: 'question',
-                    showCancelButton: true,
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#dc3545',
-                    cancelButtonColor: 'grey',
-                    confirmButtonText: 'Tolak'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        event.currentTarget.submit();
-                    }
-                })
-            });
-
-            $('.setujui-persetujuan-sidang-koordinator').submit(function(event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Setujui Seminar Sidang Skripsi?',
-                    text: "Apakah Anda Yakin? Data tidak bisa dikembalikan",
-                    icon: 'question',
-                    showCancelButton: true,
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: 'grey',
-                    confirmButtonText: 'Setuju'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        event.currentTarget.submit();
-                    }
-                })
-            });
             
-            $('.tolak-persetujuan-sidang-kaprodi').submit(function(event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Tolak Seminar Sidang Skripsi?',
-                    text: "Apakah Anda Yakin? Data Akan dikembalikan ke Ketua Penguji",
-                    icon: 'question',
-                    showCancelButton: true,
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#dc3545',
-                    cancelButtonColor: 'grey',
-                    confirmButtonText: 'Tolak'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        event.currentTarget.submit();
-                    }
-                })
-            });
-
-            $('.setujui-persetujuan-sidang-kaprodi').submit(function(event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Setujui Seminar Sidang Skripsi?',
-                    text: "Apakah Anda Yakin? Data tidak bisa dikembalikan",
-                    icon: 'question',
-                    showCancelButton: true,
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: 'grey',
-                    confirmButtonText: 'Setuju'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        event.currentTarget.submit();
-                    }
-                })
-            });
 
 
 
@@ -3559,3 +3488,94 @@
         </script>
     @endforeach
 @endpush()
+
+
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+            @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                    Auth::guard('dosen')->user()->role_id == 7 ||
+                    Auth::guard('dosen')->user()->role_id == 8 ||
+                    Auth::guard('dosen')->user()->role_id == 9 ||
+                    Auth::guard('dosen')->user()->role_id == 10 ||
+                    Auth::guard('dosen')->user()->role_id == 11)
+@push('scripts')
+@foreach ($penjadwalan_skripsis as $skripsi)
+        <script>
+
+            // PERSETUJUAN SIDANG KOORDINATOR DAN KAPRODI
+            $('.tolak-persetujuan-sidang-koordinator').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Tolak Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data Akan dikembalikan ke Ketua Penguji",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Tolak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+
+            $('.setujui-persetujuan-sidang-koordinator').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Setujui Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data tidak bisa dikembalikan",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Setuju'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+            
+            $('.tolak-persetujuan-sidang-kaprodi').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Tolak Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data Akan dikembalikan ke Ketua Penguji",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Tolak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+
+            $('.setujui-persetujuan-sidang-kaprodi').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Setujui Seminar Sidang Skripsi?',
+                    text: "Apakah Anda Yakin? Data tidak bisa dikembalikan",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Setuju'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.currentTarget.submit();
+                    }
+                })
+            });
+        </script>
+    @endforeach
+@endpush()
+
+@endif
+@endif

@@ -205,10 +205,9 @@ class PenjadwalanSkripsiController extends Controller
         $pendaftaran_skripsi->update();
         
         
-        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $edit->mahasiswa_nim)->latest('created_at')->first();
-        $jurnal->penjadwalan_skripsi_id = $edit->id;
-        $jurnal->update();
-
+        // $jurnal = PublikasiJurnal::where('mahasiswa_nim', $edit->mahasiswa_nim)->latest('created_at')->first();
+        // $jurnal->penjadwalan_skripsi_id = $edit->id;
+        // $jurnal->update();
 
         // return redirect('/form')->with('message', 'Jadwal Berhasil Diubah!');
         Alert::success('Berhasil!', 'Jadwal Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
@@ -256,7 +255,7 @@ class PenjadwalanSkripsiController extends Controller
         }
 
         $validated = $request->validate($rules);
-        $validated['dibuat_oleh'] = auth()->user()->username;
+        $validated['dibuat_oleh'] = auth()->user()->nama;
 
         $edit = PenjadwalanSkripsi::find($penjadwalan_skripsi->id);
         $edit->mahasiswa_nim = $validated['mahasiswa_nim'];
@@ -302,6 +301,12 @@ class PenjadwalanSkripsiController extends Controller
         $pendaftaran_skripsi->keterangan = 'Sidang Skripsi Dijadwalkan';
         $pendaftaran_skripsi->tgl_disetujui_jadwal_sidang = Carbon::now();
         $pendaftaran_skripsi->update();
+
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $edit->mahasiswa_nim)->latest('created_at')->first();
+        if ($jurnal !== null) {
+        $jurnal->penjadwalan_skripsi_id = $edit->id;
+        $jurnal->update();
+        }
 
 
 
@@ -596,11 +601,21 @@ class PenjadwalanSkripsiController extends Controller
         $penjadwalan_skripsi->revisi_skripsi = $request->revisi_skripsi;
         $penjadwalan_skripsi->update();
         $cari_penguji = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $id)->where('penguji_nip', auth()->user()->nip)->count();
+
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $penjadwalan_skripsi->mahasiswa_nim )->latest('created_at')->first();
+
+        $pendaftaran_skripsi->judul_skripsi = $penjadwalan_skripsi->revisi_skripsi;
+        $pendaftaran_skripsi->update();
+
         if ($cari_penguji == 0) {
-            return redirect('/penilaian-skripsi/create/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');
+            // return redirect('/penilaian-skripsi/create/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');            
+            Alert::success('Berhasil', 'Judul Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+                return redirect('/penilaian-skripsi/create/' . Crypt::encryptString($id));
         } else {
 
-            return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');
+            // return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id))->with('message', 'Judul Berhasil Diubah!');
+            Alert::success('Berhasil', 'Judul Berhasil Diubah!')->showConfirmButton('Ok', '#28a745');
+                return redirect('/penilaian-skripsi/edit/' . Crypt::encryptString($id));
         }
         
     }

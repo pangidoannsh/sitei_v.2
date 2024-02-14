@@ -151,7 +151,7 @@
                             @endif
                             @if ($kp->status_kp == 'DAFTAR SEMINAR KP DISETUJUI')
                                 <td class="text-center px-1 py-2"><small class="text-muted"> Tanggal Disetujui: </small>
-                                    <br>{{ Carbon::parse($kp->tgl_created_semkp_kaprodi)->translatedFormat(' d F Y') }}
+                                    <br>{{ Carbon::parse($kp->tgl_disetujui_semkp_kaprodi)->translatedFormat(' d F Y') }}
                                 </td>
                             @endif
                             @if ($kp->status_kp == 'SEMINAR KP DIJADWALKAN')
@@ -179,7 +179,7 @@
 
                             <!-- DURASI -->
                             @php
-                                $tanggalMulaiKP = Carbon::parse($kp->tgl_disetujui_balasan);
+                                $tanggalMulaiKP = Carbon::parse($kp->tanggal_mulai);
 
                                 $tanggalSelesai = Carbon::now();
 
@@ -189,7 +189,7 @@
                             @endphp
 
                             <td class="text-center px-1 py-2">
-                                         {{ $bulan ?? 0}} <small>Bulan</small> {{ $hari }} <small>Hari</small>
+                                         {{ $bulan ?? 0}} <small>Bulan</small> <br> {{ $hari }} <small>Hari</small>
                                 </td>
 
 

@@ -61,7 +61,7 @@
 
                             <!-- DURASI -->
                             @php
-                                $tanggalMulaiKP = Carbon::parse($kp->tgl_disetujui_balasan);
+                                $tanggalMulaiKP = Carbon::parse($kp->tanggal_mulai);
 
                                 $tanggalSelesai = Carbon::parse($kp->tgl_disetujui_kpti_10_koordinator);
 

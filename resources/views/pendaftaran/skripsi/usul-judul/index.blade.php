@@ -1029,10 +1029,23 @@
                                     || $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
                                 <td class="text-center">
+                                    @if (
+                                $skripsi->status_skripsi == 'DAFTAR SEMPRO' ||
+                                    $skripsi->status_skripsi == 'SEMPRO DIJADWALKAN' ||
+                                    $skripsi->status_skripsi == 'SEMPRO SELESAI' ||
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
                                     <a href="/daftar-sempro/detail/{{ $skripsi->id }}"
                                         class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip"><i
                                             class="fas fa-info-circle"></i> <span class="custom-tooltip">Lihat
                                             Detail</span></a>
+                                    @endif
+                                    @if (
+                                    $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' 
+                                    || $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK')
+                                    <a href="/daftar-sidang/detail/{{ $skripsi->id }}" class="badge btn btn-info p-1 mb-1"
+                                     data-bs-toggle="tooltip"><i class="fas fa-info-circle"></i> <span
+                                    class="custom-tooltip">Lihat Detail</span></a>
+                                    @endif
 
                                     @if ($skripsi->status_skripsi == 'SEMPRO DIJADWALKAN')
                                         <a href="/jadwal/mahasiswa" class="badge p-1 mb-1" data-bs-toggle="tooltip"
