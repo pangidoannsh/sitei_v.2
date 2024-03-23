@@ -45,27 +45,37 @@
         };
         document.onmousedown = mousedwn
     </script> -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!--pusher-->
+@if(Route::current()->getName() === 'showQrCode')
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script src="/vendor/laravel-echo/laravel-echo.js"></script> <!-- Sesuaikan dengan path Laravel Echo Anda -->
+
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('9d8ea81e3cc141416745', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(resp) {
+      var attendance = resp.data;
+
+      // Filter data absensi berdasarkan kelas mahasiswa
+      if (attendance.class_id === '{{ $mataKuliah->id }}') {
+        // Memperbarui tampilan data absensi sesuai dengan data yang diterima
+        notif(attendance);
+      }
+    });
+  </script>
+@endif
     
-        <style>
-        .dropdown-menu {
-    border-left: 0.01px solid rgba(0, 0, 0, 0.05);
-    border-right: 0.01px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 0.01px solid rgba(0, 0, 0, 0.05);
-    border-top: 0.01px solid rgba(0, 0, 0, 0.05);
-    /* border: none; */
-    box-shadow: none;
-}
-
-.dropdown-menu li:hover {
-    background-color: rgba(41, 52, 47, 0.05);
-}
-
-.dropdown-menu form li:hover {
-    background-color: rgba(41, 52, 47, 0.05);
-}
-
-
-@media screen and (max-width: 768px) {
+    
+<style>
+  @media screen and (max-width: 768px) {
     .cardskripsi {
         margin-bottom: 50px;
     }
@@ -109,9 +119,63 @@ form li button:hover {
       color: #192f59 !important;
     background-color: white !important;
     }
+    
+    #datatablesriwayatseminar_length,
+    #datatablesriwayatseminar_filter {
+        display: none;
+    }
+    
+    #datatablesriwayatkpdanskripsi_length,
+    #datatablesriwayatkpdanskripsi_filter {
+        display: none;
+    }
+    
+    #datatablesbimbinganskripsi_length,
+    #datatablesbimbinganskripsi_filter {
+        display: none;
+    }
+    
+    #datatablesbimbingankp_length,
+    #datatablesbimbingankp_filter {
+        display: none;
+    }
+    
+    #datatablesjadwalseminarpembimbingpenguji_length,
+    #datatablesjadwalseminarpembimbingpenguji_filter {
+        display: none;
+    }
+    
+    #datatablespersetujuankpskripsi_length,
+    #datatablespersetujuankpskripsi_filter {
+        display: none;
+    }
+    
+    #datatablesriwayatseminardibatalkan_length,
+    #datatablesriwayatseminardibatalkan_filter {
+        display: none;
+    }
+    
+    #datatablesriwayatseminarprodi_length,
+    #datatablesriwayatseminarprodi_filter {
+        display: none;
+    }
+    
+    #datatablesMataKuliah_length,
+    #datatablesMataKuliah_filter {
+        display: none;
+    }
 
+    #datatablesSemester_length,
+    #datatablesSemester_filter {
+        display: none;
+    }
+
+    #datatablesAbsensi_length,
+    #datatablesAbsensi_filter{
+      display: none;
+    }
+    
     </style>
-
 
 
 </head>
@@ -212,6 +276,22 @@ form li button:hover {
                                     <a  class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }} "
                                         aria-current="page" href="/inventaris/peminjaman-dosen">INVENTARIS</a>
                                 </li>
+
+                                @if (Auth::guard('dosen')->check())
+            @if (in_array(Auth::guard('dosen')->user()->role_id, [5, 6, 7, 8]))
+                <li class="nav-item dropdown baru">
+                    <a id="dropdownSubMenu3" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">MATA KULIAH</a>
+                    <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow" style="border-radius: 10px;">
+                        <li><a href="/absensi" class="dropdown-item mb-1 nav-link {{ Request::is('absensi') ? 'text-success' : '' }} {{ Request::is('absensi/riwayat-absensi') ? 'text-success' : '' }} {{ Request::is('absensi/ruangan-absensi') ? 'text-success' : '' }} ">Absensi</a></li>
+                        @if (Auth::guard('dosen')->check() && in_array(Auth::guard('dosen')->user()->role_id, [5, 6, 7, 8]))
+                            <li><a href="/matakuliah" class="dropdown-item mb-1 nav-link {{ Request::is('matakuliah') ? 'text-success' : '' }} {{ Request::is('matakuliah/riwayat') ? 'text-success' : '' }} ">Pengelola</a></li>
+                        @endif
+                    </ul>
+                </li>
+            @else
+                <li><a href="/absensi" class="nav-link  {{ Request::is('absensi') ? 'text-success' : '' }} {{ Request::is('absensi/riwayat-absensi') ? 'text-success' : '' }} {{ Request::is('daftar-perkuliahan/*') ? 'text-success' : '' }} {{ Request::is('absensi/ruangan-absensi*') ? 'text-success' : '' }} ">ABSENSI</a></li>
+            @endif
+        @endif
 
                             @endif
 
@@ -504,6 +584,21 @@ form li button:hover {
                         </ul>
 								@endif          
 							@endif  
+
+                             @if (Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->role_id, [1]))
+                <li class="nav-item dropdown baru">
+                    <a id="dropdownSubMenu3" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">ABSENSI</a>
+                    <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow" style="border-radius: 10px;">
+                        <li><a class="dropdown-item mb-1 nav-link {{ Request::is('matakuliah') ? 'text-success' : '' }} {{ Request::is('matakuliah/create') ? 'text-success' : '' }} {{ Request::is('matakuliah/riwayat') ? 'text-success' : '' }}" href="/matakuliah">Mata Kuliah</a></li>
+                        {{-- <li><a class="dropdown-item mb-1 nav-link {{ Request::is('absensistatistikadmin') ? 'text-success' : '' }}  {{ Request::is('absensistatistik/statistik-ruangan') ? 'text-success' : '' }} {{ Request::is('absensistatistik/detail-statistik/*') ? 'text-success' : '' }}" href="/absensistatistikadmin" >Statistik Perkuliahan</a></li> --}}
+                        <li><a class="dropdown-item mb-1 nav-link {{ Request::is('gedung') ? 'text-success' : '' }} " href="/gedung" >Gedung</a></li>
+                    </ul>
+                </li>
+            @elseif(Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->role_id, [2, 3, 4, 5]))
+                <li class="nav-item baru">
+                    <a class="nav-link {{ Request::is('matakuliah') ? 'text-success' : '' }} {{ Request::is('matakuliah/create') ? 'text-success' : '' }} {{ Request::is('matakuliah/edit') ? 'text-success' : '' }} {{ Request::is('matakuliah/riwayat') ? 'text-success' : '' }} {{ Request::is('matakuliah/ruangan-absensi') ? 'text-success' : '' }} " href="/matakuliah">ABSENSI</a>
+                </li>
+            @endif
                         </ul>
 
                         <ul class="navbar-nav ml-auto">
@@ -778,8 +873,289 @@ $(document).ready(function() {
             });
         </script>
 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#datatablesMataKuliah').DataTable({
+                    "lengthMenu": [50, 100, 150, 200, 250],
+                    "language": {
+                        "sProcessing": "Sedang memproses...",
+                        "sLengthMenu": "Tampilkan _MENU_ entri",
+                        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Cari:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Pertama",
+                            "sPrevious": "Sebelumnya",
+                            "sNext": "Selanjutnya",
+                            "sLast": "Terakhir"
+                        }
+                    }
+                });
+        
+                // Event listener untuk perubahan pada filter status
+                $('#statusFilterRiwayatKPSkripsiProdi').on('change', function() {
+                    var status = $(this).val();
+                    // Lakukan filtering berdasarkan status yang dipilih
+                    filterByStatus(status);
+                });
+        
+                function filterByStatus(status) {
+                    // Lakukan filtering menggunakan DataTables
+                    table.column(3).search(status ? '^' + status + '$' : '', true, false).draw();
+                }
+
+                // Event listener untuk perubahan pada filter status Mobile
+                $('#statusFilterMobileRiwayatKPSkripsiProdi').on('change', function() {
+                    var status = $(this).val();
+                    // Lakukan filtering berdasarkan status yang dipilih Mobile
+                    filterByStatusMobileRiwayatKPSkripsiProdi(status);
+                });
+        
+                function filterByStatusMobileRiwayatKPSkripsiProdi(status) {
+                    // Lakukan filtering menggunakan DataTables Mobile
+                    table.column(3).search(status ? '^' + status + '$' : '', true, false).draw();
+                }
+                
+                // Filter Prodi
+                $('#prodiFilterMatakuliahProdi').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Prodi:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(3).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(3).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
 
 
+                // Filter Prodi Mobile
+                $('#prodiFilterMobileMatakuliahProdi').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(3).search(val).draw();
+                    } else {
+                        table.column(3).search('').draw();
+                    }
+                });
+
+                  $('#semesterFilterRiwayatMatakuliah').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(5).search(val).draw(); 
+                } else {
+                    table.column(5).search('').draw(); 
+                }
+            });
+
+             $('#semesterFilterRiwayatMatakuliahKajur').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(6).search(val).draw(); 
+                } else {
+                    table.column(6).search('').draw(); 
+                }
+            });
+
+                // Event handler untuk panjang menu
+                $('#lengthMenuMatakuliahProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                // Event handler untuk panjang menu Mobile
+                $('#lengthMenuMobileMatakuliahProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                // Filter Pencarian
+                $('#searchFilterMatakuliahSkripsiProdi').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+
+                // Filter Pencarian Mobile
+                $('#searchFilterMobileMatakuliahProdi').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+
+                $('#datatables2_length').after($('.filter'));
+              
+            // Filter Prodi Mobile
+                $('#semesterFilterMobileProdi').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(5).search(val).draw();
+                    } else {
+                        table.column(5).search('').draw();
+                    }
+                });
+
+                // Filter Prodi MobileKajur
+                $('#semesterFilterMobileProdiKajur').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(6).search(val).draw();
+                    } else {
+                        table.column(6).search('').draw();
+                    }
+                });
+            });
+        </script>
+        
+
+         <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#datatablesSemester').DataTable({
+                    "lengthMenu": [50, 100, 150, 200, 250],
+                    "language": {
+                        "sProcessing": "Sedang memproses...",
+                        "sLengthMenu": "Tampilkan _MENU_ entri",
+                        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Cari:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Pertama",
+                            "sPrevious": "Sebelumnya",
+                            "sNext": "Selanjutnya",
+                            "sLast": "Terakhir"
+                        }
+                    }
+                });
+        
+                // Event listener untuk perubahan pada filter status
+                $('#statusFilterRiwayatKPSkripsiProdi').on('change', function() {
+                    var status = $(this).val();
+                    // Lakukan filtering berdasarkan status yang dipilih
+                    filterByStatus(status);
+                });
+        
+                function filterByStatus(status) {
+                    // Lakukan filtering menggunakan DataTables
+                    table.column(3).search(status ? '^' + status + '$' : '', true, false).draw();
+                }
+
+                // Event listener untuk perubahan pada filter status Mobile
+                $('#statusFilterMobileRiwayatKPSkripsiProdi').on('change', function() {
+                    var status = $(this).val();
+                    // Lakukan filtering berdasarkan status yang dipilih Mobile
+                    filterByStatusMobileRiwayatKPSkripsiProdi(status);
+                });
+        
+                function filterByStatusMobileRiwayatKPSkripsiProdi(status) {
+                    // Lakukan filtering menggunakan DataTables Mobile
+                    table.column(3).search(status ? '^' + status + '$' : '', true, false).draw();
+                }
+                
+                // Filter Prodi
+                $('#semesterFilterRiwayat').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(6).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(6).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+
+                // Filter Prodi Mobile
+                $('#semesterFilterMobileProdi').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(6).search(val).draw();
+                    } else {
+                        table.column(6).search('').draw();
+                    }
+                });
+
+                // Event handler untuk panjang menu
+                $('#lengthMenuRiwayatSemester').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                // Event handler untuk panjang menu Mobile
+                $('#lengthMenuMobileSemesterProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                // Filter Pencarian
+                $('#searchFilterSemesterRiwayatProdi').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+
+                // Filter Pencarian Mobile
+                $('#searchFilterMobileRiwayatSemester').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+
+                // Tambahkan filter jenis seminar, bulan, dan tahun di samping tombol Tampilkan
+                $('#datatables2_length').after($('.filter'));
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#datatablesAbsensi').DataTable({
+                    "lengthMenu": [50, 100, 150, 200, 250],
+                    "language": {
+                        "sProcessing": "Sedang memproses...",
+                        "sLengthMenu": "Tampilkan _MENU_ entri",
+                        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Cari:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Pertama",
+                            "sPrevious": "Sebelumnya",
+                            "sNext": "Selanjutnya",
+                            "sLast": "Terakhir"
+                        }
+                    }
+                });
+            });
+        </script>
+
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <!-- Bootstrap 4 -->
         <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->
