@@ -23,6 +23,16 @@
                     </div>
                 @enderror
             </div>
+            <div class="mb-3 field">
+                <label class="form-label">Visi</label>
+                <input type="text" name="visi" class="form-control @error('visi') is-invalid @enderror"
+                    value="{{ old('visi') }}">
+                @error('visi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
             <button type="submit" class="btn submitprodi btn-success mb-5">Tambah</button>
 

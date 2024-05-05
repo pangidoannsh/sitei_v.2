@@ -10,15 +10,24 @@
 
 @section('content')
     <div class="col-lg-6">
-        <form action="/prodi/edit/{{ $prodi->id }}" method="POST">
-            @method('put')
+        <form action="{{ route('prodi.update',$prodi->id) }}" method="POST">
             @csrf
 
             <div class="mb-3 field">
                 <label class="form-label">Program Studi</label>
                 <input type="text" name="nama_prodi" class="form-control @error('nama_prodi') is-invalid @enderror"
-                    value="{{ old('nama_prodi', $prodi->nama_prodi) }}">
+                    value="{{ $prodi->nama_prodi }}">
                 @error('nama_prodi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3 field">
+                <label class="form-label">Visi</label>
+                <input type="text" name="visi" class="form-control @error('visi') is-invalid @enderror"
+                    value="{{ $prodi->visi }}">
+                @error('visi')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

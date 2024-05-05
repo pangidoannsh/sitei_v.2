@@ -22,7 +22,7 @@
                     <div class="mb-3 field">
                         <label class="form-label">NIP</label>
                         <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror"
-                            value="{{ old('nip', $dosen->nip) }}">
+                            value="{{ old('nip', $dosen->nip) }}"@if ($dosen->id) readonly @endif>
                         @error('nip')
                             <div class="invalid-feedback">
                                 {{ $message }}

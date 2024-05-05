@@ -84,6 +84,9 @@
                  <p class="card-title text-secondary text-sm">Naskah</p>
                 <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                         href="{{ asset('storage/' . $naskah->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                <p class="card-title text-secondary text-sm">Proposal</p>
+                <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                        href="{{ asset('storage/' . $naskah->naskah_proposal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
                @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
                 @if($jurnal != null)
                <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
@@ -2113,7 +2116,7 @@
                                                 @if ($total_nilai == 0)
                                                     -
                                                 @else
-                                                    @if ($total_nilai >= 60)
+                                                    @if ($total_nilai >= 55)
                                                         LULUS
                                                     @else
                                                         TIDAK LULUS
@@ -2151,6 +2154,45 @@
                                     </div>
                                 </div>
                             </div>
+                           
+                            @elseif ($nilaipembimbing1 == null && $skripsi->pembimbingsatu !== null)
+                            <a href="#ModalApprove1" data-toggle="modal"
+                                class="btn btn-lg btn-danger float-right">Selesai Seminar</a>
+                            <div class="modal fade"id="ModalApprove1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                        <div class="modal-body">
+                                            <div class="container p-5 text-center">
+                                                <h1 class="text-danger"><i
+                                                        class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                                <h5><b>Pembimbing 1</b> belum melakukan Input Nilai</h5>
+                                                <button type="button" class="btn mt-3 btn-secondary"
+                                                    data-dismiss="modal">Kembali</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            @elseif ($nilaipembimbing2 == null && $skripsi->pembimbingdua !== null)
+                            <a href="#ModalApprove1" data-toggle="modal"
+                                class="btn btn-lg btn-danger float-right">Selesai Seminar</a>
+                            <div class="modal fade"id="ModalApprove1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content shadow-sm">
+                                        <div class="modal-body">
+                                            <div class="container p-5 text-center">
+                                                <h1 class="text-danger"><i
+                                                        class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                                <h5><b>Pembimbing 2</b> belum melakukan Input Nilai</h5>
+                                                <button type="button" class="btn mt-3 btn-secondary"
+                                                    data-dismiss="modal">Kembali</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @elseif($nilaipenguji2 == null && $nilaipenguji3 == null)
                             <a href="#ModalApprove2" data-toggle="modal"
                                 class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
@@ -2169,7 +2211,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @elseif($nilaipenguji2 == null)
+                        @elseif($nilaipenguji2 == null && $skripsi->pengujidua !== null)
                             <a href="#ModalApprove3" data-toggle="modal"
                                 class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
                             <div class="modal fade"id="ModalApprove3">
@@ -2205,28 +2247,10 @@
                                     </div>
                                 </div>
                             </div>
-                        @elseif($total_nilai <= 55)
-                            <a href="#ModalApprove5" data-toggle="modal"
-                                class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
-                            <div class="modal fade"id="ModalApprove5">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content shadow-sm">
-                                        <div class="modal-body">
-                                            <div class="container px-5 pt-5 pb-2 text-center">
-                                                <h1 class="text-danger"><i
-                                                        class="fas fa-exclamation-triangle fa-lg"></i> </h1>
-                                                <h5>Nilai Seminar Belum Mencukupi</h5>
-                                                <button type="button" class="btn mt-3 btn-secondary"
-                                                    data-dismiss="modal">Kembali</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @elseif($nilaipenguji1 == null)
-                                <a href="#ModalApprove10" data-toggle="modal"
+                         @elseif($nilaipenguji1 == null )
+                                <a href="#ModalApprove7" data-toggle="modal"
                                     class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
-                                <div class="modal fade"id="ModalApprove10">
+                                <div class="modal fade"id="ModalApprove7">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -2241,26 +2265,34 @@
                                         </div>
                                     </div>
                                 </div>
-                        @elseif($skripsi->status_seminar > 0)
-                            <a href="#ModalApprove6" data-toggle="modal"
-                                class="btn mt-5 btn-lg btn-success float-right">Seminar telah Selesai <i
-                                    class="fas fa-check fa-lg"></i> </a>
-                            <div class="modal fade"id="ModalApprove6">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content shadow-sm">
-                                        <div class="modal-body">
-                                            <div class="container px-5 pt-5 pb-2 text-center">
-                                                <h1 class="text-success"><i class="fas fa-check-circle fa-lg"></i> </h1>
-                                                <h5>Seminar telah disetujui</h5>
-                                                <button type="button" class="btn mt-3 btn-secondary"
-                                                    data-dismiss="modal">Kembali</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @else
                                 
+                            @elseif($total_nilai < 55 && $skripsi->status_seminar == 0)
+                                                                <form
+                                                                    action="/penilaian-skripsi/tolak/{{ $penjadwalan->id }}" class="gagal-seminar"
+                                                                    method="POST">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <button type="submit"
+                                                                        class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</button>
+                                                                </form>
+                                                        
+                            
+                            @elseif($total_nilai >= 55 && $skripsi->status_seminar == 0)
+                                
+                                                                <form
+                                                                    action="/penilaian-skripsi/approve/{{ $penjadwalan->id }}" class="selesai-seminar"
+                                                                    method="POST">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <button type="submit"
+                                                                        class="btn mt-5 btn-lg btn-success float-right">Selesai Seminar</button>
+                                                                </form>
+                                                           
+                            @elseif($skripsi->status_seminar == 3)
+                            <div class="float-end mt-5">
+                            <span class="text-danger">*</span><span>Seminar Selesai</span>
+                            </div>
+
                             @endif
                         </div>
 
@@ -2557,7 +2589,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2567,6 +2600,44 @@
     });
     </script>
 @endpush
+
+<!-- @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.simpan-nilai-pembimbin').submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    text: "Silahkan periksa kembali data yang akan Anda kirim.",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Kembali',
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Simpan',
+                    allowOutsideClick: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Nilai berhasil disimpan!',
+                            // text: "Silahkan periksa kembali data yang akan Anda kirim.",ss
+                            icon: 'success',
+                            confirmButtonColor: '#28a745',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                        }).then(() => {
+                            submitForm();
+                        });
+                    }
+                });
+            });
+            function submitForm() {
+                $('.simpan-nilai-pembimbing').off('submit').submit();
+            }
+        });
+    </script>
+@endpush -->
+
 
 @push('scripts')
     <script>
@@ -2581,7 +2652,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2605,7 +2677,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2629,7 +2702,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();

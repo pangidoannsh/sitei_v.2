@@ -71,8 +71,158 @@
 
 
         </ol>
+        
+        @php
+        
+        $jenis_seminar = [];
 
-        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
+        // Ambil jenis seminar dari data seminar KP dan tambahkan ke dalam array
+        foreach ($penjadwalan_kps as $kp) {
+            $jenis_seminar[] = $kp->jenis_seminar;
+        }
+
+        // Ambil jenis seminar dari data seminar Sempro dan tambahkan ke dalam array
+        foreach ($penjadwalan_sempros as $sempro) {
+            $jenis_seminar[] = $sempro->jenis_seminar;
+        }
+
+        // Ambil jenis seminar dari data seminar Skripsi dan tambahkan ke dalam array
+        foreach ($penjadwalan_skripsis as $skripsi) {
+            $jenis_seminar[] = $skripsi->jenis_seminar;
+        }
+
+        // Hilangkan duplikasi jenis seminar
+        $jenis_seminar = array_unique($jenis_seminar);
+
+        // Tetapkan semua jenis seminar yang diinginkan
+        $all_jenis_seminar = ['Seminar KP', 'Seminar Proposal', 'Sidang Skripsi'];
+
+        // Gabungkan semua jenis seminar yang ada dengan semua jenis seminar yang diinginkan
+        $jenis_seminar = array_merge($all_jenis_seminar, $jenis_seminar);
+
+        // Hilangkan duplikasi lagi (jika diperlukan)
+        $jenis_seminar = array_unique($jenis_seminar);
+
+        @endphp
+
+        @if (Auth::guard('web')->user()->role_id == 1)
+            @php
+            // Tetapkan semua Prodi yang diinginkan
+            $all_prodi = ['Teknik Elektro D3', 'Teknik Elektro S1', 'Teknik Informatika S1']; // Ganti dengan daftar Prodi yang sesuai dengan aplikasi Anda
+
+            // Inisialisasi array untuk daftar Prodi
+            $prodi_list = [];
+
+            // Ambil data Prodi dari pendaftaran seminar KP dan tambahkan ke dalam array
+            foreach ($penjadwalan_kps as $kp) {
+                $prodi_list[] = $kp->prodi->nama_prodi;
+            }
+
+            // Ambil data Prodi dari pendaftaran seminar Proposal dan tambahkan ke dalam array
+            foreach ($penjadwalan_sempros as $sempro) {
+                $prodi_list[] = $sempro->prodi->nama_prodi;
+            }
+
+            // Ambil data Prodi dari pendaftaran seminar Proposal dan tambahkan ke dalam array
+            foreach ($penjadwalan_skripsis as $skripsi) {
+                $prodi_list[] = $skripsi->prodi->nama_prodi;
+            }
+
+            // Hilangkan duplikasi data Prodi
+            $prodi_list = array_unique($prodi_list);
+
+            // Gabungkan semua Prodi yang ada dengan semua Prodi yang diinginkan
+            $prodi_list = array_merge($all_prodi, $prodi_list);
+
+            // Hilangkan duplikasi lagi (jika diperlukan)
+            $prodi_list = array_unique($prodi_list);
+
+            // Urutkan data Prodi
+            sort($prodi_list);
+            @endphp
+        @endif
+
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuJadwalSeminarAdminProdi">Tampilkan</label>
+                    <select id="lengthMenuJadwalSeminarAdminProdi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="input-group ml-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="seminarFilterJadwalSeminarAdminProdi">Seminar</label>
+                    <select id="seminarFilterJadwalSeminarAdminProdi" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($jenis_seminar as $jenis)
+                            <option value="{{ $jenis }}" class="text-capitalize">{{ $jenis }}</option>
+                        @endforeach
+                    </select>                   
+                </div>
+                @if (Auth::guard('web')->user()->role_id == 1)
+                <div class="input-group ml-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="prodiFilterJadwalSeminarAdminProdi">Prodi</label>
+                    <select id="prodiFilterJadwalSeminarAdminProdi" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($prodi_list as $prodi)
+                            <option value="{{ $prodi }}" class="text-capitalize">{{ $prodi }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+                @endif
+            </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterJadwalSeminarAdminProdi">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterJadwalSeminarAdminProdi" placeholder="">
+            </div>
+        </div>
+
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileJadwalSeminarAdminProdi">Tampilkan</label>
+                <select id="lengthMenuMobileJadwalSeminarAdminProdi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+            <div class="input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="seminarFilterMobileJadwalSeminarAdminProdi">Seminar</label>
+                <select id="seminarFilterMobileJadwalSeminarAdminProdi" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                    <option value="" selected>Semua</option>
+                    @foreach ($jenis_seminar as $jenis)
+                        <option value="{{ $jenis }}" class="text-capitalize">{{ $jenis }}</option>
+                    @endforeach
+                </select>                    
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            @if (Auth::guard('web')->user()->role_id == 1)
+            <div class="input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="prodiFilterMobileJadwalSeminarAdminProdi">Prodi</label>
+                <select id="prodiFilterMobileJadwalSeminarAdminProdi" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                    <option value="" selected>Semua</option>
+                    @foreach ($prodi_list as $prodi)
+                        <option value="{{ $prodi }}" class="text-capitalize">{{ $prodi }}</option>
+                    @endforeach
+                </select>                    
+            </div>
+            @endif
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileJadwalSeminarAdminProdi">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" style="width: 83px;" id="searchFilterMobileJadwalSeminarAdminProdi" placeholder="">
+            </div>
+        </div>
+
+        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatablesjadwalseminaradminprodi">
             @if (Auth::guard('web')->user()->role_id == 2 ||
                     Auth::guard('web')->user()->role_id == 3 ||
                     Auth::guard('web')->user()->role_id == 4)
@@ -83,6 +233,11 @@
                 <!--</div>-->
             @endif
             <thead class="table-dark">
+                @if (session()->has('message'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                               <i class="fas fa-check fs-4 fa-lg"></i> {{ session('message') }} 
+                            </div>
+                        @endif
                 <tr>
                     <th class="text-center" scope="col">NIM</th>
                     <th class="text-center" scope="col">Nama</th>
@@ -135,8 +290,21 @@
 
                 @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
                     <td class="text-center">
-                        <a href="/form-kp/edit/{{ Crypt::encryptString($kp->id) }}" class="badge bg-warning p-2"><i
-                                class="fas fa-pen"></i></a>
+                        <!-- <a href="/form-kp/edit/{{ Crypt::encryptString($kp->id) }}" class="badge bg-warning p-2"><i
+                                class="fas fa-pen"></i></a> -->
+
+                                @if($kp->waktu == null)
+                                            <a href="/form-kp/edit/{{ Crypt::encryptString($kp->id) }}"
+                                            class="badge bg-success p-2 mb-2"> Tambah Jadwal<a> <br>
+                                        @else
+                                            <a href="/form-kp/edit/{{ Crypt::encryptString($kp->id) }}"
+                                            class="badge bg-warning p-2 mb-2"> Edit<a><br>
+                                        @endif
+
+                                        <!-- @if($kp->waktu != null)
+                                            <a href="/form-kp/undur/admin/{{ Crypt::encryptString($kp->id) }}"
+                                            class="badge bg-danger p-2">Reschedule<a>
+                                        @endif -->
 
                     </td>
                 @endif
@@ -193,8 +361,23 @@
 
                 @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
                     <td class="text-center">
-                        <a href="/form-sempro/edit/{{ Crypt::encryptString($sempro->id) }}"
-                            class="badge bg-warning p-2"><i class="fas fa-pen"></i></a>
+                        <!-- <a href="/form-sempro/edit/{{ Crypt::encryptString($sempro->id) }}"
+                            class="badge bg-warning p-2"><i class="fas fa-pen"></i></a> -->
+
+                            @if($sempro->waktu == null)
+                                            <a href="/form-sempro/edit/{{ Crypt::encryptString($sempro->id) }}"
+                                            class="badge bg-success p-2 mb-2"> Tambah Jadwal<a> <br>
+                                        @else
+                                            <a href="/form-sempro/edit/{{ Crypt::encryptString($sempro->id) }}"
+                                            class="badge bg-warning p-2 mb-2"> Edit<a><br>
+                                        @endif
+
+                                        @if($sempro->waktu != null)
+                                            <!-- <a href="/sempro/undur/admin/{{ $sempro->id }}"
+                                            class="badge bg-danger p-2">Reschedule<a> -->
+                                            <button onclick="undurSempro({{ $sempro->id }})"
+                                        class="btn btn-danger badge p-2 " data-bs-toggle="tooltip" title="Batalkan Jadwal Sempro">Batalkan Jadwal</button>
+                                        @endif
                     </td>
                 @endif
                 </tr>
@@ -247,7 +430,7 @@
 
                 @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
                     <td class="text-center">
-                        <!-- @if($skripsi->waktu == null)
+                        @if($skripsi->waktu == null)
                                             <a href="/form-skripsi/edit/{{ Crypt::encryptString($skripsi->id) }}"
                                             class="badge bg-success p-2 mb-2"> Tambah Jadwal<a> <br>
                                         @else
@@ -256,11 +439,9 @@
                                         @endif
 
                                         @if($skripsi->waktu != null)
-                                            <a href="/form-skripsi/undur/admin/{{ Crypt::encryptString($skripsi->id) }}"
-                                            class="badge bg-danger p-2">Reschedule<a>
-                                        @endif -->
-                                        <a href="/form-skripsi/edit/{{ Crypt::encryptString($skripsi->id) }}"
-                                            class="badge bg-warning mt-2 p-2"><i class="fas fa-pen"></i></a>
+                                            <button onclick="undurSidang({{ $skripsi->id }})"
+                                        class="btn btn-danger badge p-2 " data-bs-toggle="tooltip" title="Batalkan Jadwal Sidang">Batalkan Jadwal</button>
+                                        @endif
                     </td>
                 @endif
                 </tr>
@@ -313,5 +494,140 @@
                 });
             }
         });
+    </script>
+@endpush()
+
+
+@push('scripts')
+    @foreach ($penjadwalan_sempros as $sempro)
+        <script>
+            function undurSempro(id) {
+                Swal.fire({
+                    title: 'Batalkan Jadwal Sempro',
+                    text: 'Apakah Anda Yakin?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Ya',
+                    confirmButtonColor: '#dc3545'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+
+                            title: 'Batalkan Jadwal Sempro',
+                            html: `
+                        <form id="myForm"  action="/sempro/undur/admin/${id}" method="POST">
+                        @method('put')
+                           @csrf
+                            <label for="alasan">Alasan dibatalkan jadwal :</label>
+                            <textarea class="form-control @error('alasan') is-invalid @enderror" value="{{ old('alasan') }}" name="alasan" rows="4" cols="50" autofocus required></textarea>
+                            @error('alasan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <br>
+                            <button type="submit"  class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                      
+                    `,
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                        });
+                    }
+                });
+            }
+
+        </script>
+    @endforeach
+@endpush()
+
+@push('scripts')
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        var alasanValue = document.querySelector('textarea[name="alasan"]').value;
+
+        var newAction = "/sempro/undur/admin" + encodeURIComponent(alasanValue);
+
+        this.setAttribute('action', newAction);
+
+        this.submit();
+    });
+</script>
+@endpush()
+
+
+@push('scripts')
+    @foreach ($penjadwalan_skripsis as $skripsi)
+        <script>
+            function undurSidang(id) {
+                Swal.fire({
+                    title: 'Batalkan Jadwal Sidang',
+                    text: 'Apakah Anda Yakin?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Ya',
+                    confirmButtonColor: '#dc3545'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+
+                            title: 'Batalkan Jadwal Sidang',
+                            html: `
+                        <form id="myFormSidang"  action="/sidang/undur/admin/${id}" method="POST">
+                        @method('put')
+                           @csrf
+                            <label for="alasan">Alasan dibatalkan jadwal :</label>
+                            <textarea class="form-control @error('alasan') is-invalid @enderror" value="{{ old('alasan') }}" name="alasan" rows="4" cols="50" autofocus required></textarea>
+                            @error('alasan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <br>
+                            <button type="submit"  class="btn btn-danger p-2 px-3">Kirim</button>
+                            <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                        </form>
+                      
+                    `,
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                        });
+                    }
+                });
+            }
+
+        </script>
+    @endforeach
+@endpush()
+
+@push('scripts')
+<script>
+    document.getElementById('myFormSidang').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        var alasanValue = document.querySelector('textarea[name="alasan"]').value;
+
+        var newAction = "/sidang/undur/admin" + encodeURIComponent(alasanValue);
+
+        this.setAttribute('action', newAction);
+
+        this.submit();
+    });
+</script>
+@endpush()
+
+
+@push('scripts')
+    <script>
+        window.setTimeout(function() {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function() {
+                $(this).remove();
+            });
+        }, 5000);
     </script>
 @endpush()

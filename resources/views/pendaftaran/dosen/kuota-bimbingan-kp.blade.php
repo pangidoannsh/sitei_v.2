@@ -26,7 +26,7 @@
             <table class="table table-responsive-lg rounded table-bordered table-striped" width="100%" id="datatables">
                 <thead class="table-dark">
                     <tr>
-                        <th class="text-center" scope="col">No.</th>
+                        <!--<th class="text-center" scope="col">No.</th>-->
                         <th class="text-center" scope="col">Kode Dosen</th>
                         <th class="text-center" scope="col">Nama Dosen</th>
                         <th class="text-center" scope="col">Total Bimbingan KP</th>
@@ -37,7 +37,7 @@
                     @foreach ($dosen as $dosen)
                         <div></div>
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <!--<td class="text-center">{{ $loop->iteration }}</td>-->
                             <td class="text-center">{{ $dosen->nama_singkat }}</td>
                             <td>{{ $dosen->nama }}</td>
                             <td class="text-center @if ($dosen->pendaftaran_k_p_count >= $kapasitas->kapasitas_skripsi) bg-danger @endif bg-info">

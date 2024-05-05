@@ -209,7 +209,7 @@
                                 @enderror
                             </div>
 
-                            @if ($semprop->keterangan == 'Menunggu Jadwal Seminar Proposal')
+                            @if ($semprop->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
                                 <a href="#ModalApprove" data-toggle="modal"
                                     class="btn mt-4 btn-lg btn-success float-right">Jadwalkan</a>
                                 <div class="modal fade"id="ModalApprove">
@@ -401,7 +401,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
                                 <select name="pengujisatu_nip" id="penguji1"
-                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -437,7 +437,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujitiga_nip" class="form-label">Penguji Tiga</label>
                                 <select name="pengujitiga_nip" id="penguji3"
-                                    class="form-select @error('pengujitiga_nip') is-invalid @enderror" required>
+                                    class="form-select @error('pengujitiga_nip') is-invalid @enderror">
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -453,7 +453,7 @@
                             </div>
 
 
-                               @if ($semprop->keterangan == 'Menunggu Jadwal Seminar Proposal')
+                               @if ($semprop->status_skripsi == 'DAFTAR SEMPRO DISETUJUI')
                                 <a href="#ModalApprove2" data-toggle="modal"
                                     class="btn mt-4 btn-lg btn-success float-right">Jadwalkan</a>
                                 <div class="modal fade"id="ModalApprove2">

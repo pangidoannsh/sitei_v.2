@@ -520,6 +520,31 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        Ruangan::create([
+            'nama_ruangan' => 'C314',
+            'kode_ruangan' => 'C01',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan' => 'C315',
+            'kode_ruangan' => 'C02',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan' => 'Lab RPL',
+            'kode_ruangan' => 'R01',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan' => 'RC1TI',
+            'kode_ruangan' => 'R02',
+        ]);
+
+        Ruangan::create([
+            'nama_ruangan' => 'Lab Jarkom',
+            'kode_ruangan' => 'J01',
+        ]);
+
         KapasitasBimbingan::create([
             'kapasitas_kp' => '10',
             'kapasitas_skripsi' => '10',
@@ -583,6 +608,8 @@ class DatabaseSeeder extends Seeder
             'nama_barang' => 'Kunci C314',
             'jumlah' => 1
         ]);
+        
+        DistribusiDokumenSeeder::seed();
               
     }
 }

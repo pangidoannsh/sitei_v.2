@@ -16,8 +16,84 @@
     <a href="{{ url('/user/create') }}" class="btn staff btn-success mb-4">+ Staff</a>
 
     <div class="container card p-4">
+        
+        @php
+            $role_list = [];
 
-        <table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%" id="datatables">
+            // Ambil role akses dari setiap tendik/users
+            foreach ($users as $user) {
+                // Pastikan role akses tidak null
+                if ($user->role_id !== null) {
+                    $role_list[] = $user->role->role_akses;
+                }
+            }
+
+            // Hapus duplikat role akses
+            $role_list = array_unique($role_list);
+
+            // Urutkan role akses
+            sort($role_list);
+        @endphp
+
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuDaftarTendikAdminJurusan">Tampilkan</label>
+                    <select id="lengthMenuDaftarTendikAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="input-group ml-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="roleFilterDaftarTendikAdminJurusan">Jabatan</label>
+                    <select id="roleFilterDaftarTendikAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($role_list as $role)
+                            <option value="{{ $role }}">{{ $role }}</option>
+                        @endforeach
+                    </select>                    
+                </div>                                          
+            </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterDaftarTendikAdminJurusan">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1"  id="searchFilterDaftarTendikAdminJurusan" placeholder="">
+            </div>
+        </div>
+
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileDaftarTendikAdminJurusan">Tampilkan</label>
+                <select id="lengthMenuMobileDaftarTendikAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+            <div class="input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="roleFilterMobileDaftarTendikAdminJurusan">Jabatan</label>
+                <select id="roleFilterMobileDaftarTendikAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 83px;">
+                    <option value="" selected>Semua</option>
+                    @foreach ($role_list as $role)
+                        <option value="{{ $role }}">{{ $role }}</option>
+                    @endforeach
+                </select>                    
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileDaftarTendikAdminJurusan">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileDaftarTendikAdminJurusan" placeholder="">
+            </div>
+        </div>
+
+        <table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%" id="datatablesdaftartendikadmjurusan">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">#</th>

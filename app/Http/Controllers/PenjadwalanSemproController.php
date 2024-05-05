@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use \PDF;
+use Carbon\Carbon;
 use App\Models\Dosen;
 use App\Models\Prodi;
-use App\Models\Mahasiswa;
-use App\Models\Ruangan;
-use App\Models\JamSel;
 use App\Models\JamKam;
+use App\Models\JamSel;
+use App\Models\Ruangan;
+use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
+use App\Models\BatalSeminar;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
-use \PDF;
 use App\Models\PenjadwalanSempro;
+use App\Models\PendaftaranSkripsi;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSemproPenguji;
-use App\Models\PenilaianSemproPembimbing;
-use App\Models\PendaftaranSkripsi;
-use Carbon\Carbon;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\PenilaianSemproPembimbing;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PenjadwalanSemproController extends Controller
 {
@@ -132,20 +134,20 @@ class PenjadwalanSemproController extends Controller
             'pembimbingsatu_nip' => 'nullable',   
             'pengujisatu_nip' => 'required',         
             'pengujidua_nip' => 'required',         
-            // 'pengujitiga_nip' => 'required',         
+            'pengujitiga_nip' => 'nullable',         
             'prodi_id' => 'required',                           
             'judul_proposal' => 'required',
         ];        
 
         if ($request->pembimbingdua_nip) {
             if ($penjadwalan_sempro->pembimbingdua_nip != $request->pembimbingdua_nip) {
-                $rules['pembimbingdua_nip'] = 'required';
+                $rules['pembimbingdua_nip'] = 'nullable';
             }
         }
 
         if ($request->pengujitiga_nip) {
             if ($penjadwalan_sempro->pengujitiga_nip != $request->pengujitiga_nip) {
-                $rules['pengujitiga_nip'] = 'required';
+                $rules['pengujitiga_nip'] = 'nullable';
             }
         }
 
@@ -222,23 +224,23 @@ class PenjadwalanSemproController extends Controller
     {
         $rules = [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',   
+            'pembimbingsatu_nip' => 'nullable',   
             'pengujisatu_nip' => 'required',         
             'pengujidua_nip' => 'required',         
-            'pengujitiga_nip' => 'required',         
+            'pengujitiga_nip' => 'nullable',         
             'prodi_id' => 'required',                           
             'judul_proposal' => 'required',
         ];        
 
         if ($request->pembimbingdua_nip) {
             if ($penjadwalan_sempro->pembimbingdua_nip != $request->pembimbingdua_nip) {
-                $rules['pembimbingdua_nip'] = 'required';
+                $rules['pembimbingdua_nip'] = 'nullable';
             }
         }
 
         if ($request->pengujitiga_nip) {
             if ($penjadwalan_sempro->pengujitiga_nip != $request->pengujitiga_nip) {
-                $rules['pengujitiga_nip'] = 'required';
+                $rules['pengujitiga_nip'] = 'nullable';
             }
         }
 
@@ -397,6 +399,92 @@ public function gagal($id, PendaftaranSkripsi $pendaftaranid)
         $jadwal->update();
 
         return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Disetujui!');
+    }
+    
+    public function undur_sempro_admin(Request $request, $id)
+    {
+        $jadwal = PenjadwalanSempro::find($id);
+        
+
+    $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+    $pendaftaran_skripsi->status_skripsi = 'DAFTAR SEMPRO DISETUJUI';
+    $pendaftaran_skripsi->keterangan = 'Jadwal Sempro Dibatalkan';
+    $pendaftaran_skripsi->save();
+
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $batal_seminar = new BatalSeminar();
+        $batal_seminar->penjadwalan_sempro_id = $jadwal->id;
+        $batal_seminar->mahasiswa_nim = $jadwal->mahasiswa_nim;
+        $batal_seminar->prodi_id = $jadwal->prodi_id;
+        $batal_seminar->pembimbingsatu_nip = $pendaftaran_skripsi->pembimbing_1_nip;
+        $batal_seminar->pembimbingdua_nip = $pendaftaran_skripsi->pembimbing_2_nip ?? null;
+        $batal_seminar->pengujisatu_nip = $jadwal->pengujisatu_nip;
+        $batal_seminar->pengujidua_nip = $jadwal->pengujidua_nip ?? null;
+        $batal_seminar->pengujitiga_nip = $jadwal->pengujitiga_nip ?? null;
+        $batal_seminar->judul_skripsi = $pendaftaran_skripsi->judul_skripsi;
+        $batal_seminar->jenis_seminar = $jadwal->jenis_seminar;
+        $batal_seminar->tanggal = $jadwal->tanggal;
+        $batal_seminar->waktu = $jadwal->waktu;
+        $batal_seminar->lokasi = $jadwal->lokasi;
+        $batal_seminar->alasan = $request->alasan;
+        $batal_seminar->dibuat_oleh = auth()->user()->username;
+        $batal_seminar->save();
+
+        $jadwal->tanggal = null;
+        $jadwal->waktu = null;
+        $jadwal->lokasi = null;
+        $jadwal->update();
+
+
+        // return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Disetujui!');
+        return back()->with('message', 'Seminar berhasil dibatalkan!');
+    }
+    
+    public function undur_sempro_koordinator(Request $request, $id)
+    {
+        $jadwal = PenjadwalanSempro::find($id);
+        
+
+    $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+    $pendaftaran_skripsi->status_skripsi = 'DAFTAR SEMPRO DISETUJUI';
+    $pendaftaran_skripsi->keterangan = 'Jadwal Sempro Dibatalkan';
+    $pendaftaran_skripsi->save();
+
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $batal_seminar = new BatalSeminar();
+        $batal_seminar->penjadwalan_sempro_id = $jadwal->id;
+        $batal_seminar->mahasiswa_nim = $jadwal->mahasiswa_nim;
+        $batal_seminar->prodi_id = $jadwal->prodi_id;
+        $batal_seminar->pembimbingsatu_nip = $pendaftaran_skripsi->pembimbing_1_nip;
+        $batal_seminar->pembimbingdua_nip = $pendaftaran_skripsi->pembimbing_2_nip ?? null;
+        $batal_seminar->pengujisatu_nip = $jadwal->pengujisatu_nip;
+        $batal_seminar->pengujidua_nip = $jadwal->pengujidua_nip ?? null;
+        $batal_seminar->pengujitiga_nip = $jadwal->pengujitiga_nip ?? null;
+        $batal_seminar->judul_skripsi = $pendaftaran_skripsi->judul_skripsi;
+        $batal_seminar->jenis_seminar = $jadwal->jenis_seminar;
+        $batal_seminar->tanggal = $jadwal->tanggal;
+        $batal_seminar->waktu = $jadwal->waktu;
+        $batal_seminar->lokasi = $jadwal->lokasi;
+        $batal_seminar->alasan = $request->alasan;
+        $batal_seminar->dibuat_oleh = auth()->user()->nama;
+        $batal_seminar->save();
+
+        $jadwal->tanggal = null;
+        $jadwal->waktu = null;
+        $jadwal->lokasi = null;
+        $jadwal->update();
+
+
+        // return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Disetujui!');
+        return back()->with('message', 'Seminar berhasil dibatalkan!');
     }
 
     public function tolak_koordinator($id)

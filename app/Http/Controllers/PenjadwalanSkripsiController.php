@@ -11,6 +11,7 @@ use App\Models\JamSel;
 use App\Models\Ruangan;
 use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
+use App\Models\BatalSeminar;
 use Illuminate\Http\Request;
 use App\Models\PenjadwalanKP;
 use App\Models\PublikasiJurnal;
@@ -136,23 +137,23 @@ class PenjadwalanSkripsiController extends Controller
     {
         $rules = [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',   
+            'pembimbingsatu_nip' => 'nullable',   
             'pengujisatu_nip' => 'required',         
             'pengujidua_nip' => 'required',         
-            // 'pengujitiga_nip' => 'required',  
+            'pengujitiga_nip' => 'nullable',  
             'prodi_id' => 'required',                           
             'judul_skripsi' => 'required',
         ];        
 
         if ($request->pembimbingdua_nip) {
             if ($penjadwalan_skripsi->pembimbingdua_nip != $request->pembimbingdua_nip) {
-                $rules['pembimbingdua_nip'] = 'required';
+                $rules['pembimbingdua_nip'] = 'nullable';
             }
         }
 
         if ($request->pengujitiga_nip) {
             if ($penjadwalan_skripsi->pengujitiga_nip != $request->pengujitiga_nip) {
-                $rules['pengujitiga_nip'] = 'required';
+                $rules['pengujitiga_nip'] = 'nullable';
             }
         }
 
@@ -234,23 +235,23 @@ class PenjadwalanSkripsiController extends Controller
     {
         $rules = [
             'mahasiswa_nim' => 'required',
-            'pembimbingsatu_nip' => 'required',   
+            'pembimbingsatu_nip' => 'nullable',   
             'pengujisatu_nip' => 'required',         
             'pengujidua_nip' => 'required',         
-            'pengujitiga_nip' => 'required',  
+            'pengujitiga_nip' => 'nullable',  
             'prodi_id' => 'required',                           
             'judul_skripsi' => 'required',
         ];        
 
         if ($request->pembimbingdua_nip) {
             if ($penjadwalan_skripsi->pembimbingdua_nip != $request->pembimbingdua_nip) {
-                $rules['pembimbingdua_nip'] = 'required';
+                $rules['pembimbingdua_nip'] = 'nullable';
             }
         }
 
         if ($request->pengujitiga_nip) {
             if ($penjadwalan_skripsi->pengujitiga_nip != $request->pengujitiga_nip) {
-                $rules['pengujitiga_nip'] = 'required';
+                $rules['pengujitiga_nip'] = 'nullable';
             }
         }
 
@@ -422,11 +423,100 @@ class PenjadwalanSkripsiController extends Controller
         }
     }
 
+    public function undur_sidang_admin(Request $request, $id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);
+        
+
+    $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+    $pendaftaran_skripsi->status_skripsi = 'DAFTAR SIDANG DISETUJUI';
+    $pendaftaran_skripsi->keterangan = 'Jadwal Sidang Dibatalkan';
+    $pendaftaran_skripsi->save();
+
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $batal_seminar = new BatalSeminar();
+        $batal_seminar->penjadwalan_skripsi_id = $jadwal->id;
+        $batal_seminar->mahasiswa_nim = $jadwal->mahasiswa_nim;
+        $batal_seminar->prodi_id = $jadwal->prodi_id;
+        $batal_seminar->pembimbingsatu_nip = $pendaftaran_skripsi->pembimbing_1_nip;
+        $batal_seminar->pembimbingdua_nip = $pendaftaran_skripsi->pembimbing_2_nip ?? null;
+        $batal_seminar->pengujisatu_nip = $jadwal->pengujisatu_nip;
+        $batal_seminar->pengujidua_nip = $jadwal->pengujidua_nip ?? null;
+        $batal_seminar->pengujitiga_nip = $jadwal->pengujitiga_nip ?? null;
+        $batal_seminar->judul_skripsi = $pendaftaran_skripsi->judul_skripsi;
+        $batal_seminar->jenis_seminar = $jadwal->jenis_seminar;
+        $batal_seminar->tanggal = $jadwal->tanggal;
+        $batal_seminar->waktu = $jadwal->waktu;
+        $batal_seminar->lokasi = $jadwal->lokasi;
+        $batal_seminar->alasan = $request->alasan;
+        $batal_seminar->dibuat_oleh = auth()->user()->username;
+        $batal_seminar->save();
+
+        $jadwal->tanggal = null;
+        $jadwal->waktu = null;
+        $jadwal->lokasi = null;
+        $jadwal->update();
+
+        // return redirect('/persetujuan-koordinator')->with('message', 'Berita Acara Disetujui!');
+        return back()->with('message', 'Seminar berhasil dibatalkan!');
+    }
+    
+    public function undur_sidang_koordinator(Request $request, $id)
+    {
+        $jadwal = PenjadwalanSkripsi::find($id);
+        
+
+    $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
+
+    $pendaftaran_skripsi->status_skripsi = 'DAFTAR SIDANG DISETUJUI';
+    $pendaftaran_skripsi->keterangan = 'Jadwal Sidang Dibatalkan';
+    $pendaftaran_skripsi->save();
+
+        $request->validate([                                           
+            'alasan' => 'required',
+        ]);
+
+        $batal_seminar = new BatalSeminar();
+        $batal_seminar->penjadwalan_skripsi_id = $jadwal->id;
+        $batal_seminar->mahasiswa_nim = $jadwal->mahasiswa_nim;
+        $batal_seminar->prodi_id = $jadwal->prodi_id;
+        $batal_seminar->pembimbingsatu_nip = $pendaftaran_skripsi->pembimbing_1_nip;
+        $batal_seminar->pembimbingdua_nip = $pendaftaran_skripsi->pembimbing_2_nip ?? null;
+        $batal_seminar->pengujisatu_nip = $jadwal->pengujisatu_nip;
+        $batal_seminar->pengujidua_nip = $jadwal->pengujidua_nip ?? null;
+        $batal_seminar->pengujitiga_nip = $jadwal->pengujitiga_nip ?? null;
+        $batal_seminar->judul_skripsi = $pendaftaran_skripsi->judul_skripsi;
+        $batal_seminar->jenis_seminar = $jadwal->jenis_seminar;
+        $batal_seminar->tanggal = $jadwal->tanggal;
+        $batal_seminar->waktu = $jadwal->waktu;
+        $batal_seminar->lokasi = $jadwal->lokasi;
+        $batal_seminar->alasan = $request->alasan;
+        $batal_seminar->dibuat_oleh = auth()->user()->nama;
+        $batal_seminar->save();
+
+        $jadwal->tanggal = null;
+        $jadwal->waktu = null;
+        $jadwal->lokasi = null;
+        $jadwal->update();
+
+        return back()->with('message', 'Seminar berhasil dibatalkan!');
+    }
+
     public function approve($id)
     {
         $jadwal = PenjadwalanSkripsi::find($id);
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $jadwal->mahasiswa_nim)->latest('created_at')->first();
         $jadwal->status_seminar = 1;
+        if($jurnal != null && $jurnal->nilai == null){
+            Alert::error('Gagal', 'Silahkan isi nilai jurnal terlebih dahulu!')->showConfirmButton('Ok', '#dc3545');
+            return  back();
+        }else {
         $jadwal->update();
+        }
 
         Alert::success('Berhasil!', 'Seminar Telah Selesai')->showConfirmButton('Ok', '#28a745');
         return back();
@@ -434,9 +524,20 @@ class PenjadwalanSkripsiController extends Controller
     
     public function tolak($id)
     {
+
         $jadwal = PenjadwalanSkripsi::find($id);
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $jadwal->mahasiswa_nim)->latest('created_at')->first();
         $jadwal->status_seminar = 3;
-        $jadwal->update();
+        if ($jadwal->catatan == null) {
+            Alert::error('Gagal', 'Silahkan isi catatan/alasan terlebih dahulu!')->showConfirmButton('Ok', '#dc3545');
+            return  back();
+        }else if($jurnal != null && $jurnal->nilai == null){
+            Alert::error('Gagal', 'Silahkan isi nilai jurnal terlebih dahulu!')->showConfirmButton('Ok', '#dc3545');
+            return  back();
+        }else {
+            $jadwal->update();
+        }
+        
 
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $jadwal->mahasiswa_nim )->latest('created_at')->first();
 

@@ -25,6 +25,19 @@
         <div class="container">
             @if (Str::length(Auth::guard('dosen')->user()) > 0)
                 <a href="/skripsi" class="btn btn-success py-1 px-2 mb-3 "><i class="fas fa-arrow-left fa-xs"></i> Kembali <a>
+        <!-- TOMBOL SPESIAL -->
+        @if (Str::length(Auth::guard('dosen')->user()) > 0)
+            @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                    Auth::guard('dosen')->user()->role_id == 7 ||
+                    Auth::guard('dosen')->user()->role_id == 8)
+            @if ($skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
+
+            <button type="button" class="btn btn-danger py-1 px-2 mb-3 " onclick="revisiSpesial({{ $skripsi->id }})"><i class="fas fa-stopwatch"></i> Tambah Waktu Revisi</button>
+
+            @endif
+            @endif
+            @endif
+
             @endif
             @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
                 @if (Auth::guard('mahasiswa')->user())
@@ -214,6 +227,30 @@
                     @endif
                     <p class="card-title text-secondary text-sm">Keterangan</p>
                     <p class="card-text text-start"><span>{{ $skripsi->keterangan }}</span></p>
+                    
+                    @if (Str::length(Auth::guard('dosen')->user()) > 0)
+                @if (Auth::guard('dosen')->user()->role_id == 6 ||
+                        Auth::guard('dosen')->user()->role_id == 7 ||
+                        Auth::guard('dosen')->user()->role_id == 8)
+                    @if ($skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
+                    <!-- <p class="card-title text-secondary text-sm">Tambah Waktu Perpanjangan Revisi (Spesial)</p> <br>
+                    <button onclick="revisiSpesial({{ $skripsi->id }})"
+                                            class="btn btn-success px-2 py-1 " data-bs-toggle="tooltip" title="Tolak">Tambah waktu</button> -->
+                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="..." class="rounded me-2" alt="...">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                    </div>
+
+                    @endif
+                    @endif
+                    @endif
                 </div>
             </div>
         </div>
@@ -346,7 +383,7 @@
                     }
                 });
             }
-
+    
 
             $('.setujui-sidang-kaprodi').submit(function(event) {
                 event.preventDefault();
@@ -396,6 +433,103 @@
                     }
                 });
             }
+
+
+    function revisiSpesial(id) {
+                Swal.fire({
+                   title: 'Perpanjang masa revisi?',
+                text: 'Silahkan klik Ya untuk menambahkan waktu perpanjangan revisi.',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Tidak',
+                confirmButtonText: 'Ya',
+                confirmButtonColor: '#28a745',
+                allowOutsideClick: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                       Swal.fire({
+                        title: 'Tambah masa Revisi',
+                        html: `
+                            <div class="px-5">
+                            <form id="reasonForm" action="/perpanjang-revisi/spesial/kaprodi/{{$skripsi->id}}" method="POST">
+                                @method('put')
+                                @csrf
+                                <label for="tgl_revisi_spesial">Silahkan masukan waktu :</label>
+                                <input type="date" class="form-control" id="tgl_revisi_spesial" name="tgl_revisi_spesial" required min="{{ date('Y-m-d') }}">
+                                <br>
+                                <button type="submit" class="btn btn-success p-2 px-3">Kirim</button>
+                                <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+                            </form>
+                        </div>
+                        `,
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        });
+                    }
+                });
+            }
+        
+        // TOMBOL SPESIAL
+@if (Str::length(Auth::guard('dosen')->user()) > 0)
+    @if (Auth::guard('dosen')->user()->role_id == 6 ||
+            Auth::guard('dosen')->user()->role_id == 7 ||
+            Auth::guard('dosen')->user()->role_id == 8)
+    @if ($skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
+
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const id = '$skripsi'; 
+        //     Swal.fire({
+        //         title: 'Perpanjang masa revisi?',
+        //         text: 'Silahkan klik Ya untuk menambahkan waktu perpanjangan revisi.',
+        //         icon: 'question',
+        //         showCancelButton: true,
+        //         cancelButtonText: 'Tidak',
+        //         confirmButtonText: 'Ya',
+        //         confirmButtonColor: '#28a745',
+        //         allowOutsideClick: false,
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             Swal.fire({
+        //                 title: 'Tambah masa Revisi',
+        //                 html: `
+        //                     <div class="px-5">
+        //                     <form id="reasonForm" action="/perpanjang-revisi/spesial/kaprodi/{{$skripsi->id}}" method="POST">
+        //                         @method('put')
+        //                         @csrf
+        //                         <label for="tgl_revisi_spesial">Silahkan masukan waktu :</label>
+        //                         <input type="date" class="form-control" id="tgl_revisi_spesial" name="tgl_revisi_spesial" required min="{{ date('Y-m-d') }}">
+        //                         <br>
+        //                         <button type="submit" class="btn btn-success p-2 px-3">Kirim</button>
+        //                         <button type="button" onclick="Swal.close();" class="btn btn-secondary p-2 px-3">Batal</button>
+        //                     </form>
+        //                 </div>
+        //                 `,
+        //                 showCancelButton: false,
+        //                 showConfirmButton: false,
+        //                 allowOutsideClick: false,
+        //             });
+        //         }
+        //     });
+        // });
+                        
+
+        @endif
+        @endif
+        @endif
+
+        
+
         </script>
     @endforeach
+@endpush()
+
+
+
+@push('scripts')
+    <script>
+    var inputTanggal = document.getElementById('tgl_revisi_spesial');
+    var tanggalSaatIni = new Date().toISOString().split('T')[0];
+    inputTanggal.setAttribute('min', tanggalSaatIni);
+    </script>
 @endpush()

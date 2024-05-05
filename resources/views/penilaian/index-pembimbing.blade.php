@@ -35,10 +35,10 @@
                         Auth::guard('dosen')->user()->role_id == 9 ||
                         Auth::guard('dosen')->user()->role_id == 10 ||
                         Auth::guard('dosen')->user()->role_id == 11 )
-                       (<span>  {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }} </span>)
+                       (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)
                       @endif
                     @if(Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == null)
-                        (<span> {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }} </span>)
+                        (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)
                     @endif </a>
             </li>
             <span class="px-2">|</span>
@@ -54,12 +54,103 @@
             <li><a href="/pembimbing/skripsi" class="px-1">Bimbingan Skripsi (<span>{{ $jml_bimbinganskripsi }}</span>)</a></li>
             <span class="px-2">|</span>
             <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat (<span>{{ $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang + $jml_riwayat_kp + $jml_riwayat_skripsi }}</span>)</a></li>
-            <span class="px-2">|</span>
-            <li><a href="/statistik" class="px-1">Statistik</a></li>
+           <span class="px-2">|</span>
+                    <li><a href="/statistik" class="px-1">Statistik (All)</a></li>
 
         </ol>
+        
+        @php
+        
+        $jenis_seminar = [];
 
-        <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatables">
+        // Ambil jenis seminar dari data seminar KP dan tambahkan ke dalam array
+        foreach ($penjadwalan_kps as $kp) {
+            $jenis_seminar[] = $kp->jenis_seminar;
+        }
+
+        // Ambil jenis seminar dari data seminar Sempro dan tambahkan ke dalam array
+        foreach ($penjadwalan_sempros as $sempro) {
+            $jenis_seminar[] = $sempro->jenis_seminar;
+        }
+
+        // Ambil jenis seminar dari data seminar Skripsi dan tambahkan ke dalam array
+        foreach ($penjadwalan_skripsis as $skripsi) {
+            $jenis_seminar[] = $skripsi->jenis_seminar;
+        }
+
+        // Hilangkan duplikasi jenis seminar
+        $jenis_seminar = array_unique($jenis_seminar);
+
+        // Tetapkan semua jenis seminar yang diinginkan
+        $all_jenis_seminar = ['Seminar KP', 'Seminar Proposal', 'Sidang Skripsi'];
+
+        // Gabungkan semua jenis seminar yang ada dengan semua jenis seminar yang diinginkan
+        $jenis_seminar = array_merge($all_jenis_seminar, $jenis_seminar);
+
+        // Hilangkan duplikasi lagi (jika diperlukan)
+        $jenis_seminar = array_unique($jenis_seminar);
+
+        @endphp
+
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuJadwalSeminarPembimbingPenguji">Tampilkan</label>
+                    <select id="lengthMenuJadwalSeminarPembimbingPenguji" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="input-group ml-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="seminarFilterJadwalSeminarPembimbingPenguji">Seminar</label>
+                    <select id="seminarFilterJadwalSeminarPembimbingPenguji" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($jenis_seminar as $jenis)
+                            <option value="{{ $jenis }}" class="text-capitalize">{{ $jenis }}</option>
+                        @endforeach
+                    </select>                   
+                </div>
+            </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterJadwalSeminarPembimbingPenguji">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterJadwalSeminarPembimbingPenguji" placeholder="">
+            </div>
+        </div>
+
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileJadwalSeminarPembimbingPenguji">Tampilkan</label>
+                <select id="lengthMenuMobileJadwalSeminarPembimbingPenguji" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+            <div class="input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="seminarFilterMobileJadwalSeminarPembimbingPenguji">Seminar</label>
+                <select id="seminarFilterMobileJadwalSeminarPembimbingPenguji" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                    <option value="" selected>Semua</option>
+                    @foreach ($jenis_seminar as $jenis)
+                        <option value="{{ $jenis }}" class="text-capitalize">{{ $jenis }}</option>
+                    @endforeach
+                </select>                    
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileJadwalSeminarPembimbingPenguji">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileJadwalSeminarPembimbingPenguji" placeholder="">
+            </div>
+        </div>
+
+        <table class="table table-responsive-lg table-bordered table-striped" style="width:100%" id="datatablesjadwalseminarpembimbingpenguji">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">NIM</th>
@@ -140,6 +231,9 @@
                                 @endif
                             </td>
                             <td class="text-center">
+                                <!-- <a href="/daftar-sempro/detail/pembimbing/{{ $sempro->pendaftaranskripsi->mahasiswa_nim}}"
+                                            class="badge bg-info my-2 px-2 py-2"><i class="fas fa-info-circle"></i></a> <br> -->
+
                                 @if ($sempro->penilaian(Auth::user()->nip, $sempro->id) == false)
                                     @if ($sempro->status_seminar == '0')
                                         <a href="/penilaian-sempro/create/{{ Crypt::encryptString($sempro->id) }}"

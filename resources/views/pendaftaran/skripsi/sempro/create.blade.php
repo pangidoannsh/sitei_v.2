@@ -29,10 +29,10 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Naskah Proposal<span class="text-danger">*</span>
                                 <small class="text-secondary">( Format .pdf | Maks. 5 MB ) </small> </label>
-                            <input name="naskah" class="form-control @error('naskah') is-invalid @enderror"
-                                value="{{ old('naskah') }}" type="file" id="formFile" required autofocus>
+                            <input name="naskah_proposal" class="form-control @error('naskah_proposal') is-invalid @enderror"
+                                value="{{ old('naskah_proposal') }}" type="file" id="formFile" required autofocus>
 
-                            @error('naskah')
+                            @error('naskah_proposal')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

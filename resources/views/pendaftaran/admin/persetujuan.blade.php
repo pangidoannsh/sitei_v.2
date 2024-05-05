@@ -54,8 +54,80 @@
         </ol>
 
         <div class="container-fluid">
+            
+            @php
+                // Kumpulkan semua status KP
+                $all_statuses = [];
+                foreach ($pendaftaran_kp as $kp) {
+                    $all_statuses[] = $kp->status_kp;
+                }
+                foreach ($pendaftaran_skripsi as $skripsi) {
+                    $all_statuses[] = $skripsi->status_skripsi;
+                }
+                // Hapus duplikat status dan urutkan
+                $unique_statuses = array_unique($all_statuses);
+                sort($unique_statuses);
+            @endphp
 
-            <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
+            <!-- Desktop Version -->
+            <div class="d-none d-md-flex justify-content-between mb-3 filter">
+                <div class="d-flex align-items-center">
+                    <div class="dataTables_length input-group" style="width: max-content;">
+                        <label class="pt-2 pr-2" for="lengthMenuPersetujuanKpSkripsiAdmin">Tampilkan</label>
+                        <select id="lengthMenuPersetujuanKpSkripsiAdmin" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                            <option value="200">200</option>
+                            <option value="250">250</option>
+                        </select>
+                    </div>
+                    <div class="input-group ml-3" style="width: max-content;">
+                        <label class="pt-2 pr-2" for="statusFilterPersetujuanKpSkripsiAdmin">Status</label>
+                        <select id="statusFilterPersetujuanKpSkripsiAdmin" class="custom-select custom-select-md rounded-3 py-1" style="width: 83px;">
+                            <option value="">Semua</option>
+                            @foreach ($unique_statuses as $status)
+                                <option value="{{ $status }}">{{ $status }}</option>
+                            @endforeach
+                        </select>                    
+                    </div>
+                </div>
+                <div class="dataTables_filter input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="searchFilterPersetujuanKpSkripsiAdmin">Cari</label>
+                    <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterPersetujuanKpSkripsiAdmin" placeholder="">
+                </div>
+            </div>
+
+            <!-- Tablet & Mobile Version -->
+            <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuMobilePersetujuanKpSkripsiAdmin">Tampilkan</label>
+                    <select id="lengthMenuMobilePersetujuanKpSkripsiAdmin" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="statusFilterMobilePersetujuanKpSkripsiAdmin">Status</label>
+                    <select id="statusFilterMobilePersetujuanKpSkripsiAdmin" class="custom-select custom-select-md rounded-3 py-1" style="width: 83px;">
+                        <option value="">Semua</option>
+                        @foreach ($unique_statuses as $status)
+                            <option value="{{ $status }}">{{ $status }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+                <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="searchFilterMobilePersetujuanKpSkripsiAdmin">Cari</label>
+                    <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobilePersetujuanKpSkripsiAdmin" placeholder="">
+                </div>
+            </div>
+
+            <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatablespersetujuankpskripsiadmin">
                 <thead class="table-dark">
                     <tr>
                         <!-- <th class="text-center p-2" scope="col">No.</th> -->

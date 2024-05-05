@@ -67,7 +67,7 @@ class MahasiswaController extends Controller
 
         // return redirect('/mahasiswa')->with('message', 'Data Berhasil Ditambahkan!');
          Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
-        return  back();
+        return redirect('/mahasiswa');
     }
 
     public function edit(Mahasiswa $mahasiswa)
@@ -78,13 +78,14 @@ class MahasiswaController extends Controller
             'konsentrasis' => Konsentrasi::all(),
         ]);
     }
-
+    
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
         $rules = [
             'prodi_id' => ['required'],
             'nama' => ['required'],
             'angkatan' => ['required'],
+            'konsentrasi_id' => ['required'], // Menambahkan validasi untuk konsentrasi_id
         ];
 
         if ($mahasiswa->nim != $request->nim) {
@@ -98,9 +99,32 @@ class MahasiswaController extends Controller
         Mahasiswa::where('id', $mahasiswa->id)
             ->update($validated);
 
-        Alert::success('Berhasil!', 'Data berhasill diubah')->showConfirmButton('Ok', '#28a745');
+        Alert::success('Berhasil!', 'Data berhasil diubah')->showConfirmButton('Ok', '#28a745');
         return redirect('/mahasiswa');
     }
+
+    // public function update(Request $request, Mahasiswa $mahasiswa)
+    // {
+    //     $rules = [
+    //         'prodi_id' => ['required'],
+    //         'nama' => ['required'],
+    //         'angkatan' => ['required'],
+    //     ];
+
+    //     if ($mahasiswa->nim != $request->nim) {
+    //         $rules['nim'] = 'required|unique:mahasiswa';
+    //     } elseif ($mahasiswa->email != $request->email) {
+    //         $rules['email'] = 'required|unique:mahasiswa';
+    //     }
+
+    //     $validated = $request->validate($rules);
+
+    //     Mahasiswa::where('id', $mahasiswa->id)
+    //         ->update($validated);
+
+    //     Alert::success('Berhasil!', 'Data berhasill diubah')->showConfirmButton('Ok', '#28a745');
+    //     return redirect('/mahasiswa');
+    // }
 
     public function destroy(Mahasiswa $mahasiswa)
     {

@@ -10,18 +10,20 @@ use App\Models\Prodi;
 use App\Models\StatusKP;
 use App\Models\Mahasiswa;
 use App\Models\Konsentrasi;
+use App\Models\BatalSeminar;
 use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
 use App\Models\PublikasiJurnal;
 use App\Models\PenjadwalanSempro;
 use App\Models\KapasitasBimbingan;
-use App\Models\PendaftaranSkripsi;
 
+use App\Models\PendaftaranSkripsi;
 use App\Models\PenjadwalanSkripsi;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Models\PenilaianSkripsiPenguji;
 use Illuminate\Notifications\Notifiable;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -49,10 +51,15 @@ class PendaftaranSkripsiController extends Controller
     {
         $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->latest('created_at')->first();
         $skripsi = PendaftaranSkripsi::where('mahasiswa_nim', Auth::user()->nim)->get();
+        
+        $batal_sempro = BatalSeminar::where('mahasiswa_nim', Auth::user()->nim)->where('jenis_seminar', 'Seminar Proposal')->latest('created_at')->first();
+        $batal_sidang = BatalSeminar::where('mahasiswa_nim', Auth::user()->nim)->where('jenis_seminar', 'Sidang Skripsi')->latest('created_at')->first();
 
         return view('pendaftaran.skripsi.usul-judul.index', [
             'pendaftaran_skripsi' => $pendaftaran_skripsi,
             'skripsi' => $skripsi,
+            'batal_sempro' => $batal_sempro,
+            'batal_sidang' => $batal_sidang,
         ]);
     }
 
@@ -346,7 +353,7 @@ class PendaftaranSkripsiController extends Controller
             'krs_berjalan' => 'required|mimes:pdf|max:200',
             'khs' => 'required|mimes:pdf|max:200',
             'logbook' => 'required|mimes:pdf|max:200',
-            'naskah' => 'required|mimes:pdf|max:5120',
+            'naskah_proposal' => 'required|mimes:pdf|max:5120',
             'sti_30' => 'required|mimes:pdf|max:200',          
             'sti_31' => 'nullable|mimes:pdf|max:200',          
         ]);
@@ -355,7 +362,7 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->krs_berjalan = str_replace('public/', '', $request->file('krs_berjalan')->store('public/file'));
         $skripsi->khs = str_replace('public/', '', $request->file('khs')->store('public/file'));
         $skripsi->logbook = str_replace('public/', '', $request->file('logbook')->store('public/file'));
-        $skripsi->naskah = str_replace('public/', '', $request->file('naskah')->store('public/file'));
+        $skripsi->naskah_proposal = str_replace('public/', '', $request->file('naskah_proposal')->store('public/file'));
         $skripsi->sti_30 = str_replace('public/', '', $request->file('sti_30')->store('public/file'));
 
         if ($request->hasFile('sti_31')) {
@@ -442,6 +449,80 @@ class PendaftaranSkripsiController extends Controller
         if (auth()->user()->nim > 0) {     
             return view('pendaftaran.skripsi.sempro.detail', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('mahasiswa_nim', Auth::user()->nim)->get(),            
+            ]);
+        } 
+
+    }
+    public function detailsempro_seminar($mahasiswa_nim)
+    
+    {
+        //ADMIN
+        if (auth()->user()->role_id == 1) {     
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->get(),
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 2) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 3) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 4) {  
+            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' =>  PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '3')->get(),
+            ]);
+        } 
+
+        //DOSEN
+
+        if (auth()->user()->role_id == 5 ) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->get(),
+            ]);
+        }
+       
+        if (auth()->user()->role_id == 6) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 7) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 8) {     
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '3')->get(),
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 9) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 10) {            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 11) {  
+            
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '3')->get(),
+            ]);
+        } 
+        if (auth()->user()->nim > 0) {     
+            return view('pendaftaran.skripsi.sempro.detail-seminar', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('mahasiswa_nim', $mahasiswa_nim)->where('mahasiswa_nim', Auth::user()->nim)->get(),            
             ]);
         } 
 
@@ -1010,6 +1091,7 @@ class PendaftaranSkripsiController extends Controller
          $penjadwalan_skripsi = PenjadwalanSkripsi::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim)->latest('created_at')->first();
 
 
+        if ($penjadwalan_skripsi !== null) {
         $nilai_pembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingsatu_nip)->latest('created_at')->first();
         
@@ -1026,18 +1108,29 @@ class PendaftaranSkripsiController extends Controller
         $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
 
+        }
+
         $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
 
+         if ($penjadwalan_skripsi == null) {
        return view('pendaftaran.skripsi.laporan-skripsi.detail-riwayat-pemb', [
                 'pendaftaran_skripsi' =>  PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('id', $id)->where('pembimbing_2_nip', Auth::user()->nip)->get(),
-
-                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            'jadwal_skripsi' => $penjadwalan_skripsi,
+            'jurnal' => $jurnal,
+            ]);
+        }
+       
+            return view('pendaftaran.skripsi.laporan-skripsi.detail-riwayat-pemb', [
+            'pendaftaran_skripsi' =>  PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('id', $id)->where('pembimbing_2_nip', Auth::user()->nip)->get(),
+            'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
             'nilaipembimbing1' => $nilai_pembimbing1,
             'nilaipembimbing2' => $nilai_pembimbing2,
             'nilaipenguji1' => $nilai_penguji1, 
             'nilaipenguji2' => $nilai_penguji2, 
             'nilaipenguji3' => $nilai_penguji3,
             'jurnal' => $jurnal,
+            'jadwal_skripsi' => $penjadwalan_skripsi,
             ]);
     }
 
@@ -1084,8 +1177,8 @@ class PendaftaranSkripsiController extends Controller
 
          $penjadwalan_skripsi = PenjadwalanSkripsi::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim)->latest('created_at')->first();
 
-
-        $nilai_pembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        if ($penjadwalan_skripsi != null) {
+             $nilai_pembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingsatu_nip)->latest('created_at')->first();
         
         $nilai_pembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
@@ -1101,7 +1194,17 @@ class PendaftaranSkripsiController extends Controller
         $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
         ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
 
-        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
+    }
+    $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
+       
+        if ($penjadwalan_skripsi == null) {
+        return view('pendaftaran.skripsi.laporan-skripsi.detail-riwayat-prodi', [
+            'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            'jadwal_skripsi' => $penjadwalan_skripsi,
+            'jurnal' => $jurnal, 
+
+        ]);
+        }
 
         return view('pendaftaran.skripsi.laporan-skripsi.detail-riwayat-prodi', [
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
@@ -1111,7 +1214,77 @@ class PendaftaranSkripsiController extends Controller
             'nilaipenguji2' => $nilai_penguji2, 
             'nilaipenguji3' => $nilai_penguji3, 
             'jurnal' => $jurnal, 
+            'jadwal_skripsi' => $penjadwalan_skripsi,
         ]);
+
+    }
+    
+    public function beritaacarafinal($id)
+    {
+
+        $id = Crypt::decryptString($id);
+        $pendaftaran_skripsi = PendaftaranSkripsi::find($id);
+        $penjadwalan_skripsi = PenjadwalanSkripsi::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim)->latest('created_at')->first();
+        $kaprodi1 = Dosen::where('role_id','6')->first();
+        $kaprodi2 = Dosen::where('role_id','7')->first();
+        $kaprodi3 = Dosen::where('role_id','8')->first();
+        $visi1 = Prodi::where('id','1')->first();
+        $visi2 = Prodi::where('id','2')->first();
+        $visi3 = Prodi::where('id','3')->first();
+
+        if ($penjadwalan_skripsi != null) {
+        $nilai_pembimbing1 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingsatu_nip)->latest('created_at')->first();
+        
+        $nilai_pembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingdua_nip)->latest('created_at')->first();
+
+        
+        $nilai_penguji1 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('penguji_nip', $penjadwalan_skripsi->pengujisatu_nip)->latest('created_at')->first();
+        
+        $nilai_penguji2 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('penguji_nip', $penjadwalan_skripsi->pengujidua_nip)->latest('created_at')->first();
+        
+        $nilai_penguji3 = PenilaianSkripsiPenguji::where('penjadwalan_skripsi_id', $penjadwalan_skripsi->id)
+        ->where('penguji_nip', $penjadwalan_skripsi->pengujitiga_nip)->latest('created_at')->first();
+        }
+
+        $jurnal = PublikasiJurnal::where('mahasiswa_nim', $pendaftaran_skripsi->mahasiswa_nim )->latest('created_at')->first();
+        
+        if ($penjadwalan_skripsi != null) {
+        if ($penjadwalan_skripsi->pembimbingdua_nip == null) {
+
+            $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-skripsi-final').'/'. $penjadwalan_skripsi->id));
+            $qrcodee = base64_encode(QrCode::format('svg')->size(20)->errorCorrection('H')->generate(URL::to('/detail-skripsi-final').'/'. $penjadwalan_skripsi->id));
+            $qrcodeee = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate(URL::to('/detail-skripsi-final').'/'. $penjadwalan_skripsi->id));
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+            $pdf->loadView('penjadwalanskripsi.beritaacara-final',compact('visi1','visi2','visi3','pendaftaran_skripsi','penjadwalan_skripsi','jurnal','qrcode', 'qrcodee', 'qrcodeee', 'pdf','nilai_pembimbing1','nilai_penguji1','nilai_penguji2','nilai_penguji3','kaprodi1', 'kaprodi2', 'kaprodi3'));
+        
+            return $pdf->stream('Surat Keterangan Berita Acara Sidang.pdf', array("Attachment" => false));
+            
+        } else {
+            $nilai_pembimbing2 = PenilaianSkripsiPembimbing::where('penjadwalan_skripsi_id', $id)->where('pembimbing_nip', $penjadwalan_skripsi->pembimbingdua_nip)->first();
+
+            $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(URL::to('/detail-skripsi-final').'/'. $penjadwalan_skripsi->id));
+            $qrcodee = base64_encode(QrCode::format('svg')->size(20)->errorCorrection('H')->generate(URL::to('/detail-skripsi-final').'/'. $penjadwalan_skripsi->id));
+            $qrcodeee = base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate(URL::to('/detail-skripsi-final').'/'. $penjadwalan_skripsi->id));
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+            $pdf->loadView('penjadwalanskripsi.beritaacara-final',compact('visi1','visi2','visi3','pendaftaran_skripsi','penjadwalan_skripsi','jurnal','qrcode', 'qrcodee', 'qrcodeee', 'pdf','nilai_pembimbing1','nilai_penguji1','nilai_penguji2','nilai_penguji3','nilai_pembimbing2','kaprodi1', 'kaprodi2', 'kaprodi3'));
+        
+            return $pdf->stream('Surat Keterangan Berita Acara Sidang.pdf', array("Attachment" => false));    
+        }
+        }else {
+
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf->loadView('penjadwalanskripsi.beritaacara-final',compact('visi1','visi2','visi3','pendaftaran_skripsi','penjadwalan_skripsi', 'pdf','kaprodi1', 'kaprodi2', 'kaprodi3'));
+
+            return $pdf->stream('Surat Keterangan Berita Acara Sidang.pdf', array("Attachment" => false));
+
+            // return '<div style="text-align: center; padding-top: 150px; font-size: 30px; font-weight: bold; color: red;">Data Seminar Tidak Ditemukan!</div>';
+        }
     }
 
      public function createbukti_buku_skripsi($id)
@@ -1126,7 +1299,7 @@ class PendaftaranSkripsiController extends Controller
         $request->validate([         
             'sti_17' => 'required|mimes:pdf|max:200',           
             'sti_29' => 'nullable|mimes:pdf|max:200',           
-            'naskah' => 'required|mimes:pdf|max:200',           
+            'naskah' => 'required|mimes:pdf|max:10240',           
         ]);
 
         $skripsi = PendaftaranSkripsi::find($id);
@@ -1652,9 +1825,9 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Ditolak Koordinator Skripsi';
         $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sidang_pemb1 = null;
-        $skripsi->tgl_created_sidang_pemb2 = null;
-        $skripsi->tgl_created_sidang_admin = null;
+        $skripsi->tgl_disetujui_sidang_pemb1 = null;
+        $skripsi->tgl_disetujui_sidang_pemb2 = null;
+        $skripsi->tgl_disetujui_sidang_admin = null;
         $skripsi->update();
 
         Alert::error('Ditolak!', 'Daftar Sidang Skripsi ditolak')->showConfirmButton('Ok', '#dc3545');
@@ -1703,10 +1876,10 @@ class PendaftaranSkripsiController extends Controller
         $skripsi->status_skripsi = 'DAFTAR SIDANG DITOLAK';
         $skripsi->keterangan = 'Ditolak Koordinator Program Studi';
         $skripsi->alasan = $request->alasan;
-        $skripsi->tgl_created_sidang_pemb1 = null;
-        $skripsi->tgl_created_sidang_pemb2 = null;
-        $skripsi->tgl_created_sidang_admin = null;
-        $skripsi->tgl_created_sidang_koordinator = null;
+        $skripsi->tgl_disetujui_sidang_pemb1 = null;
+        $skripsi->tgl_disetujui_sidang_pemb2 = null;
+        $skripsi->tgl_disetujui_sidang_admin = null;
+        $skripsi->tgl_disetujui_sidang_koordinator = null;
         $skripsi->update();
 
         Alert::error('Ditolak!', 'Daftar Sidang Skripsi ditolak')->showConfirmButton('Ok', '#dc3545');
@@ -2056,7 +2229,7 @@ class PendaftaranSkripsiController extends Controller
  
          $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
          $skripsi->keterangan = 'Lewat Batas Daftar Sidang Skripsi';
-         $skripsi->alasan = 'Anda Lewat Batas';
+         $skripsi->alasan = 'Anda dihapus pembimbing dari bimbingannya karena Lewat Batas Daftar Sidang Skripsi';
          $skripsi->update();
  
         //  Alert::success('Berhasil!', 'Mahasiswa dihapus dari Daftar Bimbingan')->showConfirmButton('Ok', '#28a745');
@@ -2064,7 +2237,216 @@ class PendaftaranSkripsiController extends Controller
          return back()->with('message', 'Berhasil! Satu mahasiswa dihapus dari Daftar Bimbingan Anda.');
  
      }
+     
+     public function lewat_batas_penyerahan_skripsi(Request $request, $id)
+     {
+         $skripsi = PendaftaranSkripsi::find($id);
+ 
+         $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
+         $skripsi->keterangan = 'Lewat Batas Penyerahan Buku Skripsi';
+         $skripsi->alasan = 'Anda dihapus pembimbing dari bimbingannya karena lewat batas penyerahan buku skripsi';
+         $skripsi->update();
 
+         return back()->with('message', 'Berhasil! Satu mahasiswa dihapus dari Daftar Bimbingan Anda.');
+ 
+     }
 
+     public function lewat_batas_revisi_spesial(Request $request, $id)
+     {
+         $skripsi = PendaftaranSkripsi::find($id);
+ 
+         $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
+         $skripsi->keterangan = 'Lewat Batas Penyerahan Buku Skripsi';
+         $skripsi->alasan = 'Anda dihapus pembimbing dari bimbingannya karena lewat batas setelah diberi perpanjangan masa revisi buku skripsi oleh Kaprodi';
+         $skripsi->update();
+
+         return back()->with('message', 'Berhasil! Satu mahasiswa dihapus dari Daftar Bimbingan Anda.');
+ 
+     }
+
+ public function pop_up_lewat_batas_skripsi(Request $request, $id)
+{
+
+    //LEWAT BATAS DAFTAR SEMPRO
+    // if (auth()->user()->role_id == 5) {
+    //     $skripsis = PendaftaranSkripsi::whereNull('tgl_created_sempro')
+    //                             ->where('status_skripsi', 'JUDUL DISETUJUI')
+    //                             ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 9 || auth()->user()->role_id == 6) {
+    //     $skripsis = PendaftaranSkripsi::whereNull('tgl_created_sempro')
+    //                             ->where('status_skripsi', 'JUDUL DISETUJUI')
+    //                             ->where('prodi_id', '1')
+    //                             ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 10 || auth()->user()->role_id == 7) {
+    //    $skripsis = PendaftaranSkripsi::whereNull('tgl_created_sempro')
+    //                             ->where('status_skripsi', 'JUDUL DISETUJUI')
+    //                             ->where('prodi_id', '2')
+    //                             ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 11 || auth()->user()->role_id == 8) {
+    //     $skripsis = PendaftaranSkripsi::whereNull('tgl_created_sempro')
+    //                             ->where('status_skripsi', 'JUDUL DISETUJUI')
+    //                             ->where('prodi_id', '3')
+    //                             ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+    //                             ->get();
+    // }
+    
+    if (auth()->user()->nip > 0 || auth()->user()->role_id > 0) {
+        $skripsis = PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->get();
+    }
+
+        foreach ($skripsis as $skripsi) {
+        $skripsi->status_skripsi = 'USULKAN JUDUL ULANG';
+        $skripsi->keterangan = 'Batas Waktu Daftar Seminar Proposal Habis';
+        $skripsi->alasan = 'Anda melewati batas waktu Daftar Seminar Proposal';
+        $skripsi->update();
+    }
+
+    // LEWAT BATAS PENYERAHAN LAPORAN
+
+    // if (auth()->user()->role_id == 5) {
+    //     $skripsis2 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'SIDANG SELESAI')
+    //                             ->where('tgl_created_revisi', null)
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 9 || auth()->user()->role_id == 6) {
+    //     $skripsis2 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'SIDANG SELESAI')
+    //                             ->where('tgl_created_revisi', null)
+    //                             ->where('prodi_id', '1')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 10 || auth()->user()->role_id == 7) {
+    //    $skripsis2 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'SIDANG SELESAI')
+    //                             ->where('tgl_created_revisi', null)
+    //                             ->where('prodi_id', '2')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 11 || auth()->user()->role_id == 8) {
+    //     $skripsis2 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'SIDANG SELESAI')
+    //                             ->where('tgl_created_revisi', null)
+    //                             ->where('prodi_id', '3')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+    //                             ->get();
+    // }
+
+    if (auth()->user()->nip > 0 || auth()->user()->role_id > 0) {
+        $skripsis2 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->get();
+    }
+
+        foreach ($skripsis2 as $skripsi2) {
+        $skripsi2->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi2->keterangan = 'Batas Waktu Penyerahan Buku Skripsi Habis';
+        $skripsi2->alasan = 'Anda melewati batas waktu Penyerahan Buku Skripsi';
+        $skripsi2->update();
+    }
+
+    // LEWAT BATAS PENYERAHAN LAPORAN
+
+    // if (auth()->user()->role_id == 5) {
+    //     $skripsis3 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+    //                             ->where('prodi_id', '1')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 9 || auth()->user()->role_id == 6) {
+    //     $skripsis3 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+    //                             ->where('prodi_id', '1')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 10 || auth()->user()->role_id == 7) {
+    //    $skripsis3 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+    //                             ->where('prodi_id', '2')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+    //                             ->get();
+    // }
+    // if (auth()->user()->role_id == 11 || auth()->user()->role_id == 8) {
+    //     $skripsis3 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+    //                             ->where('prodi_id', '3')
+    //                             ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+    //                             ->get();
+    // }
+    
+    if (auth()->user()->nip > 0 || auth()->user()->role_id > 0) {
+        $skripsis3 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->get();
+    }
+
+        foreach ($skripsis3 as $skripsi3) {
+        $skripsi3->status_skripsi = 'DAFTAR SIDANG ULANG';
+        $skripsi3->keterangan = 'Batas Waktu Penyerahan Buku Skripsi Habis';
+        $skripsi3->alasan = 'Anda melewati batas waktu Penyerahan Buku Skripsi';
+        $skripsi3->update();
+    }
+    
+    // if (auth()->user()->nip > 0 || auth()->user()->role_id > 0) {
+    //     $skripsi4 = PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+    //                             ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+    //                             ->where('tgl_revisi_spesial', '<', now())
+    //                             ->get();
+    // }
+
+    //     foreach ($skripsi4 as $skripsi4) {
+    //     $skripsi4->status_skripsi = 'USULKAN JUDUL ULANG';
+    //     $skripsi4->keterangan = 'Batas Waktu Penyerahan Buku Skripsi Habis';
+    //     $skripsi4->alasan = 'Anda melewati limit Pengerjaan Skripsi';
+    //     $skripsi4->update();
+    // }
+    
+    return back()->with('message', 'Mahasiswa yang lewat batas dikembalikan ke status skripsi yang seharusnya.');
+}
+
+public function spesial_kaprodi(Request $request, $id)
+     {
+        $request->validate([                                           
+            'tgl_revisi_spesial' => 'required',
+        ]);
+
+         $skripsi = PendaftaranSkripsi::find($id);
+ 
+         $skripsi->jenis_usulan = 'Pepanjangan Revisi Skripsi';
+         $skripsi->status_skripsi = 'PERPANJANGAN REVISI DISETUJUI';
+         $skripsi->keterangan = 'Masa Revisi diperpanjang Koordinator Prodi';
+         $skripsi->tgl_revisi_spesial = $request->tgl_revisi_spesial;
+         $skripsi->update();
+
+        Alert::success('Berhasil!', 'Perpanjangan Revisi berhasil ditambah')->showConfirmButton('Ok', '#28a745');
+        return redirect('/perpanjangan-revisi/detail/'. $skripsi->id);
+ 
+     }
 
 }

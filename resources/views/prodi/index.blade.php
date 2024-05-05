@@ -16,12 +16,53 @@
     <a href="{{ url('/prodi/create') }}" class="btn prodi btn-success mb-4">+ Program Studi</a>
 
     <div class="container card p-4">
+        
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuDaftarProgramStudiAdminJurusan">Tampilkan</label>
+                    <select id="lengthMenuDaftarProgramStudiAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>                          
+            </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterDaftarProgramStudiAdminJurusan">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1"  id="searchFilterDaftarProgramStudiAdminJurusan" placeholder="">
+            </div>
+        </div>
 
-        <table class="table text-center table-bordered table-striped" style="width:100%" id="datatables">
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileDaftarProgramStudiAdminJurusan">Tampilkan</label>
+                <select id="lengthMenuMobileDaftarProgramStudiAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileDaftarProgramStudiAdminJurusan">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileDaftarProgramStudiAdminJurusan" placeholder="">
+            </div>
+        </div>
+
+        <table class="table text-center table-bordered table-striped" style="width:100%" id="datatablesdaftarprodiadmjurusan">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">#</th>
                     <th class="text-center" scope="col">Program Studi</th>
+                    <th class="text-center" scope="col">Visi</th>
                     <th class="text-center" scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -30,6 +71,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $prodi->nama_prodi }}</td>
+                        <td>{{ Str::limit($prodi->visi, 30, '...') }}</td>
                         <td>
                             <a href="/prodi/edit/{{ $prodi->id }}" class="badge bg-warning p-2"><i
                                     class="fas fa-pen"></i></a>

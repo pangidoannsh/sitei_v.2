@@ -117,7 +117,7 @@
                                 <div class="mb-3 field">
                                     <label for="penguji_nip" class="form-label">Penguji</label>
                                     <select name="penguji_nip" id="penguji"
-                                        class="form-select @error('penguji_nip') is-invalid @enderror">
+                                        class="form-select @error('penguji_nip') is-invalid @enderror" required>
                                         <option value="">-Pilih-</option>
                                         @foreach ($dosens as $dosen)
                                             <option value="{{ $dosen->nip }}"
@@ -310,7 +310,7 @@
                                 <div class="mb-3 field">
                                     <label for="penguji_nip" class="form-label">Penguji</label>
                                     <select name="penguji_nip" id="penguji"
-                                        class="form-select @error('penguji_nip') is-invalid @enderror">
+                                        class="form-select @error('penguji_nip') is-invalid @enderror" required>
                                         <option value="">-Pilih-</option>
                                         @foreach ($dosens as $dosen)
                                             <option value="{{ $dosen->nip }}"

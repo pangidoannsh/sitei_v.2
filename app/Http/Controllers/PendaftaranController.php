@@ -7,14 +7,15 @@ use App\Models\User;
 use App\Models\Dosen;
 use App\Models\UsulanKP;
 use App\Models\Mahasiswa;
+use App\Models\BatalSeminar;
 use App\Models\PermohonanKP;
 use Illuminate\Http\Request;
 use App\Models\PendaftaranKP;
 use App\Models\PenjadwalanKP;
 use App\Models\PenjadwalanSempro;
 use App\Models\KapasitasBimbingan;
-use App\Models\PendaftaranSkripsi;
 
+use App\Models\PendaftaranSkripsi;
 use App\Models\PenilaianKPPenguji;
 use App\Models\PenjadwalanSkripsi;
 use Illuminate\Support\Facades\URL;
@@ -83,6 +84,26 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
 
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
         ]);
     }
         if (auth()->user()->role_id == 6) {
@@ -129,6 +150,26 @@ class PendaftaranController extends Controller
                 'jml_riwayat_sidang' => PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->count(),
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
+
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
         ]);
     }
@@ -177,6 +218,26 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
 
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
         ]);
     }
         if (auth()->user()->role_id == 8) {
@@ -223,6 +284,26 @@ class PendaftaranController extends Controller
                 'jml_riwayat_sidang' => PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->count(),
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
+
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
         ]);
     }
@@ -271,6 +352,26 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
 
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
         ]);
     }
         if (auth()->user()->role_id == 10) {
@@ -318,6 +419,26 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
 
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
         ]);
     }
         if (auth()->user()->role_id == 11) {
@@ -364,12 +485,42 @@ class PendaftaranController extends Controller
                 'jml_riwayat_sidang' => PenjadwalanSkripsi::where('pembimbingsatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pembimbingdua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujisatu_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujidua_nip', Auth::user()->nip)->where('status_seminar', 3)->orWhere('pengujitiga_nip', Auth::user()->nip)->where('status_seminar', 3)->count(),
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
+            
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
         ]);
     }
         if (auth()->user()->nip > 0 ) {
         return view('pendaftaran.dosen.indexpembimbingkp', [
             'pendaftaran_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->orderBy('updated_at', 'desc')->get(),
+
+            'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('dosen_pembimbing_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
            //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('penguji_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->orWhere('pembimbing_nip', Auth::user()->nip)->where('status_seminar', 0)->where('waktu', '<>', null)->count(),
@@ -410,11 +561,22 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_kp' => KapasitasBimbingan::value('kapasitas_kp'),
 
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+            
+
         ]);
     }
 
     }
-    public function pendaftaran_skripsi_pembimbing(DataBimbinganSkripsiChart $chart)
+    public function pendaftaran_skripsi_pembimbing()
     {
 
         if (auth()->user()->role_id == 5) {
@@ -463,6 +625,139 @@ class PendaftaranController extends Controller
                 'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
         ]);
     }
@@ -518,6 +813,139 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
 
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
+
         ]);
     }
     
@@ -571,6 +999,139 @@ class PendaftaranController extends Controller
                 'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
         ]);
     }
@@ -626,6 +1187,139 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
 
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
+
         ]);
     }
     
@@ -679,6 +1373,139 @@ class PendaftaranController extends Controller
                 'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
         ]);
     }
@@ -734,6 +1561,139 @@ class PendaftaranController extends Controller
                 'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
         ]);
     }
@@ -796,6 +1756,140 @@ class PendaftaranController extends Controller
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
 
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
+                                
+
         ]);
     }
     
@@ -803,9 +1897,6 @@ class PendaftaranController extends Controller
         return view('pendaftaran.dosen.indexpembimbingskripsi', [
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('pembimbing_1_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('updated_at', 'desc')
                 ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('status_skripsi', '<>', 'LULUS')->orderBy('updated_at', 'desc')->get(),
-
-         
-
 
            //JUMLAH PERSETUJUAN KP
             'jml_persetujuan_kp' => PendaftaranKP::where('dosen_pembimbing_nip', Auth::user()->nip)->where('keterangan', 'Menunggu persetujuan Pembimbing')
@@ -854,6 +1945,139 @@ class PendaftaranController extends Controller
                 'jml_riwayat_persetujuan_seminar' => PenjadwalanSkripsi::where('status_seminar', 2)->where('prodi_id', 1)->count(),
 
             'kapasitas_bimbingan_skripsi' => KapasitasBimbingan::value('kapasitas_skripsi'),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_1_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->orWhereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('pembimbing_2_nip', Auth::user()->nip)
+            //                     ->where('tgl_revisi_spesial', '<', now())
+            //                     ->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_1_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('pembimbing_2_nip', Auth::user()->nip)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_1_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('pembimbing_2_nip', Auth::user()->nip)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
         ]);
     }
@@ -1128,6 +2352,11 @@ class PendaftaranController extends Controller
     }
     public function detail_perpanjangan_1_admin($id)
     {
+        if (auth()->user()->role_id == 1) {
+            return view('pendaftaran.admin.detail-perpanjangan-1', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            ]);
+        }
         if (auth()->user()->role_id == 2) {
             return view('pendaftaran.admin.detail-perpanjangan-1', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('prodi_id', '1')->get(),
@@ -1147,6 +2376,11 @@ class PendaftaranController extends Controller
     }
     public function detail_perpanjangan_2_admin($id)
     {
+        if (auth()->user()->role_id == 1) {
+            return view('pendaftaran.admin.detail-perpanjangan-2', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            ]);
+        }
         if (auth()->user()->role_id == 2) {
             return view('pendaftaran.admin.detail-perpanjangan-2', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('prodi_id', '1')->get(),
@@ -1211,6 +2445,22 @@ class PendaftaranController extends Controller
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->count(),
 
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+                                    ->where('status_kp', 'KP DISETUJUI')
+                                    ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+                                    
+                'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+                                    ->where('status_kp', 'SEMINAR KP SELESAI')
+                                    ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
             ]);
         }
         if (auth()->user()->role_id == 2) {
@@ -1244,6 +2494,26 @@ class PendaftaranController extends Controller
                 'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 1)->count(),
                 'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 3)->count(),
 
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+                                    ->where('status_kp', 'KP DISETUJUI')
+                                    ->where('prodi_id', '1')
+                                    ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+                                    
+                'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+                                    ->where('status_kp', 'SEMINAR KP SELESAI')
+                                    ->where('prodi_id', '1')
+                                    ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
             ]);
         }
         if (auth()->user()->role_id == 3) {
@@ -1276,6 +2546,26 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 1)->count(),
                 'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 1)->count(),
                 'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 3)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+                                    ->where('status_kp', 'KP DISETUJUI')
+                                    ->where('prodi_id', '2')
+                                    ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+                                    
+                'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+                                    ->where('status_kp', 'SEMINAR KP SELESAI')
+                                    ->where('prodi_id', '2')
+                                    ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
             ]);
         }
 
@@ -1309,6 +2599,26 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 1)->count(),
                 'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 1)->count(),
                 'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 3)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+                                    ->where('status_kp', 'KP DISETUJUI')
+                                    ->where('prodi_id', '3')
+                                    ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+                                    
+                'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+                                    ->where('status_kp', 'SEMINAR KP SELESAI')
+                                    ->where('prodi_id', '3')
+                                    ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
             ]);
         }
@@ -1367,6 +2677,50 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->count(),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->get(),
             ]);
         }
         if (auth()->user()->role_id == 2) {
@@ -1399,6 +2753,60 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 1)->count(),
                 'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '1')->where('status_seminar', 1)->count(),
                 'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '1')->where('status_seminar', 3)->count(),
+
+                'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->get(),
             ]);
         }
         if (auth()->user()->role_id == 3) {
@@ -1431,6 +2839,60 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 1)->count(),
                 'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '2')->where('status_seminar', 1)->count(),
                 'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '2')->where('status_seminar', 3)->count(),
+
+                'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->get(),
             ]);
         }
 
@@ -1464,6 +2926,60 @@ class PendaftaranController extends Controller
                 'jml_jadwal_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 1)->count(),
                 'jml_jadwal_sempros' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 1)->count(),
                 'jml_jadwal_skripsis' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 3)->count(),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+
+            'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->get(),
             ]);
         }
     }
@@ -1655,6 +3171,42 @@ class PendaftaranController extends Controller
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('id', $id)->get(),
         ]);
     }
+    
+    public function detailsempro_pemb_seminar($id)
+    {
+        if (auth()->user()->role_id == 1) {
+            return view('pendaftaran.dosen.detaildaftarsempro-pemb', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
+            ]);
+        }
+
+        if (auth()->user()->role_id == 2) {
+            return view('pendaftaran.dosen.detaildaftarsempro-pemb', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 3) {
+            return view('pendaftaran.dosen.detaildaftarsempro-pemb', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 4) {
+
+            return view('pendaftaran.dosen.detaildaftarsempro-pemb', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('prodi_id', '3')->get(),
+            ]);
+        }
+        //DOSEN
+        if (auth()->user()->nip > 0) {
+            return view('pendaftaran.dosen.detaildaftarsempro-pemb', [
+                'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)
+                    ->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('id', $id)->get(),
+            ]);
+        }
+        return view('pendaftaran.dosen.detaildaftarsempro-pemb', [
+            'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->where('pembimbing_1_nip', Auth::user()->nip)->orWhere('pembimbing_2_nip', Auth::user()->nip)->where('id', $id)->get(),
+        ]);
+    }
     public function detailsidang_pemb($id)
     {
         if (auth()->user()->role_id == 1) {
@@ -1694,6 +3246,14 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
 
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
+
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->orderBy('tanggal', 'ASC')->count(),
                 'jml_sempro' => PenjadwalanSempro::where('status_seminar', 0)->where('waktu', '<>', null)->count(),
@@ -1715,11 +3275,29 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
             ]);
         }
         if (auth()->user()->role_id == 6) {
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->count(),
@@ -1742,11 +3320,31 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 1)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('prodi_id', '1')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('prodi_id', '1')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
             ]);
         }
         if (auth()->user()->role_id == 7) {
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->count(),
@@ -1769,11 +3367,32 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 2)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('prodi_id', '2')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('prodi_id', '2')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
             ]);
         }
         if (auth()->user()->role_id == 8) {
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->count(),
@@ -1796,12 +3415,32 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 3)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('prodi_id', '3')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('prodi_id', '3')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
             ]);
         }
 
         if (auth()->user()->role_id == 9) {
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->count(),
@@ -1824,11 +3463,32 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 1)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('prodi_id', '1')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('prodi_id', '1')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
             ]);
         }
         if (auth()->user()->role_id == 10) {
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->count(),
@@ -1852,18 +3512,37 @@ class PendaftaranController extends Controller
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 2)->count(),
 
+            'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('prodi_id', '2')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+            
+            'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('prodi_id', '2')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
+
 
             ]);
         }
         if (auth()->user()->role_id == 11) {
             return view('pendaftaran.dosen.indexkp', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('updated_at', 'desc')->get(),
+                
+                'batas_kp' => PendaftaranKP::whereNull('judul_laporan')
+                                ->where('status_kp', 'KP DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+                                ->orWhereNull('kpti_10')
+                                ->where('status_kp', 'SEMINAR KP SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->count(),
                 'jml_sempro' => PenjadwalanSempro::where('prodi_id', '3')->where('status_seminar', 0)->count(),
                 'jml_sidang' => PenjadwalanSkripsi::where('prodi_id', '3')->where('status_seminar', 0)->count(),
-
 
                 //JUMLAH KP PRODI
                 'jml_prodi_kp' => PendaftaranKP::where('prodi_id', '3')->where('keterangan', '<>', 'Nilai KP Telah Keluar')->where('status_kp', '<>', 'USULAN KP DITOLAK')->where('status_kp', '<>', 'USULKAN KP ULANG')->orderBy('created_at', 'desc')->count(),
@@ -1880,6 +3559,18 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 3)->count(),
+                
+                'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 3)->count(),
+
+                'status_daftar1' => PendaftaranKP::whereNull('judul_laporan')
+                ->where('status_kp', 'KP DISETUJUI')
+                ->where('prodi_id', '3')
+                ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())->count(),
+                
+                'status_daftar2' => PendaftaranKP::whereNull('kpti_10')
+                ->where('status_kp', 'SEMINAR KP SELESAI')
+                ->where('prodi_id', '3')
+                ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())->count(),
 
             ]);
         }
@@ -1893,6 +3584,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::all(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 1)->get(),
@@ -1929,6 +3621,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '1')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '1')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 1)->get(),
@@ -1986,6 +3679,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '2')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '2')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 1)->get(),
@@ -2033,6 +3727,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '3')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '3')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 1)->get(),
@@ -2086,6 +3781,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::all(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('status_seminar', 1)->get(),
@@ -2123,6 +3819,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '1')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '1')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 1)->get(),
@@ -2161,6 +3858,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '2')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '2')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 1)->get(),
@@ -2197,6 +3895,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '3')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '3')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 1)->get(),
@@ -2234,6 +3933,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '1')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '1')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '1')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '1')->where('status_seminar', 1)->get(),
@@ -2270,6 +3970,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '2')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '2')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '2')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '2')->where('status_seminar', 1)->get(),
@@ -2306,6 +4007,7 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.riwayat-prodi', [
                 'pendaftaran_kp' => PendaftaranKP::where('prodi_id', '3')->where('status_kp', 'KP SELESAI')->orderBy('updated_at', 'desc')->get(),
 
+                'batal_seminar' => BatalSeminar::where('prodi_id', '3')->get(),
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('prodi_id', '3')->where('status_skripsi', 'LULUS')->orderBy('updated_at', 'desc')->get(),
 
                 'penjadwalan_kps' => PenjadwalanKP::where('prodi_id', '3')->where('status_seminar', 1)->get(),
@@ -3009,6 +4711,32 @@ class PendaftaranController extends Controller
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->orderBy('updated_at', 'desc')->get(),
 
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial', '<>', null)
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
+
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->orderBy('tanggal', 'ASC')->count(),
                 'jml_sempro' => PenjadwalanSempro::where('status_seminar', 0)->where('waktu', '<>', null)->count(),
@@ -3030,11 +4758,72 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->count(),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+            
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
             ]);
         }
         if (auth()->user()->role_id == 6) {
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('prodi_id', '1')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('prodi_id', '1')
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->count(),
@@ -3057,11 +4846,77 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 1)->count(),
+
+                'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('prodi_id', '1')
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
             ]);
         }
         if (auth()->user()->role_id == 7) {
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('prodi_id', '2')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('prodi_id', '2')
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->count(),
@@ -3084,11 +4939,77 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 2)->count(),
+
+                'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('prodi_id', '2')
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
             ]);
         }
         if (auth()->user()->role_id == 8) {
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('prodi_id', '3')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('prodi_id', '3')
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('waktu', '<>', null)->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->count(),
@@ -3111,12 +5032,79 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 3)->count(),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('prodi_id', '3')
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
             ]);
         }
 
         if (auth()->user()->role_id == 9) {
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('prodi_id', '1')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('prodi_id', '1')
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 1)->orderBy('tanggal', 'ASC')->count(),
@@ -3138,11 +5126,77 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 1)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 1)->count(),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '1')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('prodi_id', '1')
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
             ]);
         }
         if (auth()->user()->role_id == 10) {
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('prodi_id', '2')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial',null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('prodi_id', '2')
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 2)->orderBy('tanggal', 'ASC')->count(),
@@ -3164,11 +5218,78 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 2)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 2)->count(),
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial',null)
+                                ->where('prodi_id', '2')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('prodi_id', '2')
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
+
             ]);
         }
         if (auth()->user()->role_id == 11) {
             return view('pendaftaran.dosen.indexskripsi', [
                 'pendaftaran_skripsi' => PendaftaranSkripsi::where('status_skripsi', '<>', 'LULUS')->where('status_skripsi', '<>', 'USULAN JUDUL DITOLAK')->where('status_skripsi', '<>', 'USULKAN JUDUL ULANG')->where('prodi_id', '3')->orderBy('updated_at', 'desc')->get(),
+
+                'batas_skripsi' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->orWhereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                // ->orWhereNull('tgl_created_sti_17')
+                                // ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                // ->where('tgl_revisi_spesial','<>', null)
+                                // ->where('prodi_id', '3')
+                                // ->where('tgl_revisi_spesial', '<', now())
+                                ->get(),
 
                 //JUMLAH SEMINAR
                 'jml_seminar_kp' => PenjadwalanKP::where('status_seminar', '0')->where('prodi_id', 3)->orderBy('tanggal', 'ASC')->count(),
@@ -3191,6 +5312,43 @@ class PendaftaranController extends Controller
                 'jml_riwayat_seminar_kp' => PenjadwalanKP::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_sempro' => PenjadwalanSempro::where('status_seminar', '1')->where('prodi_id', 3)->count(),
                 'jml_riwayat_skripsi' => PenjadwalanSkripsi::where('status_seminar', '3')->where('prodi_id', 3)->count(),
+
+
+            'status_daftar1' => PendaftaranSkripsi::whereNull('tgl_created_sempro')
+                                ->where('status_skripsi', 'JUDUL DISETUJUI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_disetujui_usuljudul_kaprodi', '<', now()->subMonths(6)->subDay())->count(),
+
+            'status_daftar2' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('tgl_created_revisi', null)
+                                ->where('status_skripsi', 'SIDANG SELESAI')
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(1)->subDay())
+                                ->orWhereNull('tgl_disetujui_sti_17_koordinator')
+                                ->where('status_skripsi', 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                ->where('tgl_created_revisi','<>', null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_revisi_spesial', null)
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())
+                                ->count(),
+            
+            'status_daftar3' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+                                ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+                                ->where('tgl_revisi_spesial',null)
+                                ->where('prodi_id', '3')
+                                ->where('tgl_selesai_sidang', '<', now()->subMonths(2)->subDay())->count(),
+            // 'status_daftar4' => PendaftaranSkripsi::whereNull('tgl_created_sti_17')
+            //                     ->where('status_skripsi', 'PERPANJANGAN REVISI DISETUJUI')
+            //                     ->where('tgl_revisi_spesial','<>', null)
+            //                     ->where('prodi_id', '3')
+            //                     ->where('tgl_revisi_spesial', '<', now())->count(),
+                                
+
             ]);
         }
     }

@@ -16,7 +16,7 @@ class DosenController extends Controller
     public function index()
     {
         return view('dosen.index', [
-            'dosens' => Dosen::all()
+            'dosens' => Dosen::orderByRaw('ISNULL(role_id), role_id ASC, nip ASC')->get()
         ]);
     }
 

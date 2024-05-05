@@ -91,7 +91,7 @@
                 </p>
 
                 <p class="card-title text-secondary text-sm">Proposal</p>
-                <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href="{{ asset('storage/' . $proposal->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                <p class="card-text  text-start"><a formtarget="_blank" target="_blank" href="{{ asset('storage/' . $proposal->naskah_proposal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
 
             </div>
             <div class="col-lg-6 col-md-12 bg-white rounded-end px-4 py-3 mb-2">
@@ -863,14 +863,10 @@
                                 <button type="submit"
                                     class="btn btn-lg btnsimpan btn-success float-right">Perbarui</button>
                             @endif
-                        </form>
                         </div>
 
                         <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
                             aria-labelledby="custom-tabs-one-profile-tab">
-                        <form action="/penilaian-sempro-penguji/edit/{{ $sempro->penjadwalan_sempro_id }}" class="simpan-nilai-penguji" method="POST">
-                        @method('put')
-                        @csrf
 
                             <div class="mb-3 gridratakiri">
                                 <div class="fw-bold mb-2">Perbaikan 1</div>
@@ -1419,7 +1415,7 @@
                                                 @if ($nilaitotalpenguji == '' && $nilaitotalpembimbing == '')
                                                     -
                                                 @else
-                                                    @if ($total_nilai >= 60)
+                                                    @if ($total_nilai >= 55)
                                                         LULUS
                                                     @else
                                                         TIDAK LULUS
@@ -1431,7 +1427,7 @@
                                 </tbody>
                             </table>
 
-                            @if ($total_nilai < 60)
+                            @if ($total_nilai < 55)
                                 <form action="/catatansempro/create/{{ $sempro->penjadwalan_sempro->id }}" class="simpan-catatan"
                                     method="POST">
                                     @csrf
@@ -1461,7 +1457,7 @@
 
                             @if ($nilaipembimbing1 == null && $nilaipembimbing2 == null)
                                 <a href="#ModalApprove1" data-toggle="modal"
-                                    class="btn btn-lg btn-danger float-right">Selesai Seminar</a>
+                                    class="btn btn-lg btn-danger mt-5 float-right">Selesai Seminar</a>
                                 <div class="modal fade"id="ModalApprove1">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -1478,7 +1474,47 @@
                                         </div>
                                     </div>
                                 </div>
-                            @elseif($nilaipenguji2 == '' && $nilaipenguji3 == '' && $sempro->penjadwalan_sempro->pengujitiga == !null)
+                            
+                                @elseif ($nilaipembimbing1 == null && $sempro->penjadwalan_sempro->pembimbingsatu == !null)
+                                <a href="#ModalApprove1" data-toggle="modal"
+                                    class="btn btn-lg btn-danger mt-5 float-right">Selesai Seminar</a>
+                                <div class="modal fade"id="ModalApprove1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="container px-5 pt-5 pb-2 text-center">
+                                                    <h1 class="text-danger"><i
+                                                            class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                                    <h5><b>Pembimbing 1</b> belum melakukan Input Nilai</h5>
+                                                    <button type="button" class="btn mt-3 btn-secondary"
+                                                        data-dismiss="modal">Kembali</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                @elseif ($nilaipembimbing2 == null && $sempro->penjadwalan_sempro->pembimbingdua == !null)
+                                <a href="#ModalApprove1" data-toggle="modal"
+                                    class="btn btn-lg btn-danger mt-5 float-right">Selesai Seminar</a>
+                                <div class="modal fade"id="ModalApprove1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="container px-5 pt-5 pb-2 text-center">
+                                                    <h1 class="text-danger"><i
+                                                            class="fas fa-exclamation-triangle fa-lg"></i> </h1>
+                                                    <h5><b>Pembimbing 2</b> belum melakukan Input Nilai</h5>
+                                                    <button type="button" class="btn mt-3 btn-secondary"
+                                                        data-dismiss="modal">Kembali</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @elseif($nilaipenguji2 == null && $nilaipenguji3 == null && $sempro->penjadwalan_sempro->pengujitiga == !null)
                                 <a href="#ModalApprove2" data-toggle="modal"
                                     class="btn mt-5 btn-lg btn-danger float-right">Selesai Seminar</a>
                                 <div class="modal fade"id="ModalApprove2">
@@ -1553,7 +1589,7 @@
                                     </div>
                                 </div>
                                 
-                            @elseif($total_nilai < 60 && $sempro->penjadwalan_sempro->status_seminar == 0)
+                            @elseif($total_nilai < 55 && $sempro->penjadwalan_sempro->status_seminar == 0)
                                                                 <form
                                                                     action="/penilaian-sempro/gagal/{{ $penjadwalan->id }}" class="gagal-seminar"
                                                                     method="POST">
@@ -1564,7 +1600,7 @@
                                                                 </form>
                                                         
                             
-                            @elseif($total_nilai >= 60 && $sempro->penjadwalan_sempro->status_seminar == 0)
+                            @elseif($total_nilai >= 55 && $sempro->penjadwalan_sempro->status_seminar == 0)
                                 
                                                                 <form
                                                                     action="/penilaian-sempro/approve/{{ $penjadwalan->id }}" class="selesai-seminar"

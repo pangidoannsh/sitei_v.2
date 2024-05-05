@@ -327,10 +327,53 @@ a:hover .custom-tooltip {
 .atas ul li a:hover {
     color: #36c482;
 }
+.dropdown-menu {
+    border-left: 0.01px solid rgba(0, 0, 0, 0.05);
+    border-right: 0.01px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 0.01px solid rgba(0, 0, 0, 0.05);
+    border-top: 0.01px solid rgba(0, 0, 0, 0.05);
+    /* border: none; */
+    box-shadow: none;
+}
+
+.dropdown-menu li:hover {
+    background-color: rgba(41, 52, 47, 0.05);
+}
+
+.dropdown-menu form li:hover {
+    background-color: rgba(41, 52, 47, 0.05);
+}
+
+/* .atas ul li a:focus{
+    color: #36c482;
+}
+.nav-link::after{
+    color: #36c482;
+}
+.active{
+    color: #CE8854;
+} */
 
 @media screen and (max-width: 768px) {
     .cardskripsi {
         margin-bottom: 50px;
+    }
+    .dropdown-menu form li i {
+        margin-left: -15px;
+    }
+    .navbar-collapse {
+        /*background: rgba(0, 0, 0, 0.05);*/
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .dropdown-menu {
+        background: radial-gradient(circle at top left, #ffffff, #e5e5e5);
+    }
+    .navbar-nav li a {
+        text-align: center;
+    }
+    .navbar-nav li button {
+        text-align: center;
     }
 }
 
@@ -487,17 +530,6 @@ table thead tr th {
 }
 
 @media screen and (max-width: 768px) {
-
-    .filter {
-            flex-direction: column;
-            align-items: stretch;
-            margin-bottom: 20px;
-        }
-    
-        .filter .input-group {
-            width: 100%;
-            margin-bottom: 10px;
-        }
     .anak-judul h4 {
         font-size: 16px;
     }

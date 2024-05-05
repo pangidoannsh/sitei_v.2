@@ -23,10 +23,12 @@ class ProdiController extends Controller
     {
         $request->validate([
             'nama_prodi' => ['required', 'unique:prodi'],
+            'visi' => ['required'],
         ]);
 
         Prodi::create([
             'nama_prodi' => $request->nama_prodi,
+            'visi' => $request->visi,
         ]);
         return redirect('/prodi')->with('message', 'Data Berhasil Ditambahkan!');
     }
@@ -38,20 +40,28 @@ class ProdiController extends Controller
         ]);
     }
 
-    public function update(Request $request, Prodi $prodi)
+    public function update(Request $request, $id)
     {
-        if ($request->nama_prodi != $prodi->nama_prodi) {
-            $validated = $request->validate([
-                'nama_prodi' => ['required', 'unique:prodi'],
-            ]);
+        Prodi::findOrFail($id)->update([
+            'nama_prodi' => $request->nama_prodi,
+            'visi' => $request->visi,
+        ]);
+        
+        return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
 
-            Prodi::where('id', $prodi->id)
-                ->update($validated);
+        // if ($request->nama_prodi != $prodi->nama_prodi) {
+        //     $validated = $request->validate([
+        //         'nama_prodi' => ['required', 'unique:prodi'],
+        //         'visi' => ['required'],
+        //     ]);
 
-            return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
-        } else {
-            return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
-        }
+        //     Prodi::where('id', $prodi->id)
+        //         ->update($validated);
+
+        //     return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
+        // } else {
+        //     return redirect('/prodi')->with('message', 'Data Berhasil Diubah!');
+        // }
     }
 
     public function destroy(Prodi $prodi)

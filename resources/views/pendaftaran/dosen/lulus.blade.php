@@ -172,7 +172,7 @@
             <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
                 <thead class="table-dark">
                     <tr>
-                        <th class="text-center px-0" scope="col">No.</th>
+                        <!--<th class="text-center px-0" scope="col">No.</th>-->
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center" scope="col">Nama</th>
                         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
@@ -187,7 +187,7 @@
                     @foreach ($pendaftaran_skripsi as $skripsi)
                         <div></div>
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <!--<td class="text-center">{{ $loop->iteration }}</td>-->
                             <td class="text-center">{{ $skripsi->mahasiswa->nim }}</td>
                             <td class="text-center">{{ $skripsi->mahasiswa->nama }}</td>
                             <!-- <td class="text-center">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td>                    -->

@@ -108,7 +108,7 @@
 
                             <p class="card-title text-secondary text-sm">Laporan KP</p>
                             <p class="card-text lh-1 text-start"><a formtarget="_blank" target="_blank"
-                                    href="{{ asset('storage/' . $kp->kpti_10) }}"
+                                    href="{{ asset('storage/' . $kp->laporan_akhir) }}"
                                     class="badge bg-dark rounded py-2 px-3">Buka</a></p>
 
 

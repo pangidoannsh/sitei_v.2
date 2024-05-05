@@ -215,13 +215,10 @@
     <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="assets/img/sistem.png" class="d-block" width="100%" alt="..." >
+      <img src="slideshow/slide_jte_1-min.jpg" class="d-block" width="100%" alt="..." >
     </div>
-    <div class="carousel-item">
-      <img src="assets/img/sistem2.png" class="d-block" width="100%" alt="..." >
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/sistem3.png" class="d-block" width="100%" alt="..." >
+    <div class="carousel-item ">
+      <img src="slideshow/slide_jte_2-min.jpg" class="d-block" width="100%" alt="..." >
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -248,7 +245,7 @@
                                 </div>
                                 <div class="vl mt-4 p-2"></div>
                                 <div class="mt-4 caption">
-                                    <h4 class="text-left">Sistem Informasi <br> Teknik Elektro <br> dan Informatika</h4>
+                                    <h4 class="text-left">Sistem Informasi<br>Teknik Elektro<br>dan Informatika</h4>
                                 </div>
                             </div>
                             
@@ -315,14 +312,14 @@
                             <button class="w-100 btn btn-lg btn-success btn-login mt-4 rounded-1"
                                 type="submit">Masuk</button>
                         </form>
-                        <small class="kecil d-block text-center mt-3">Belum memiliki akun? <br>Silahkan hubungi Admin
-                            Prodi<br></small>
+                        <small class="kecil d-block text-center mt-3">Belum Punya Akun atau Lupa Password<br>(Hubungi Admin
+                            Prodi)<br></small>
 
                         <div class="hr-line-dashed mt-2 mb-2"></div>
 
                         <div class="footer text-center">
                             <small>Dikembangkan oleh</small> <br>
-                            <a class="pengembang" href="/developer" target="_blank"> <small>Tim Prodi Teknik Informatika</small></a>
+                            <a class="pengembang" href="/developer" target="_blank"><b><small>Tim Prodi Teknik Informatika</small></b></a>
                             <div class="mt-2">
                                 <small class="text-center"style="color: #98A2B3;">2023 - {{ now()->year }} © SITEI
                                     Universitas Riau</small>

@@ -182,6 +182,31 @@
                             <p class="mt-2"> PENYERAHAN BUKU SKRIPSI </p>
                         </li>
                     @endif
+                    @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')
+                        <li class="step active">
+                            <div><i class="fas fa-check"></i>
+                            </div>
+                            <p class="mt-2"> USUL JUDUL</p>
+
+                        </li>
+
+                        <li class="step aktip">
+                            <div><i class="fas "></i>
+                            </div>
+                            <p class="mt-2">SEMPRO </p>
+
+                        </li>
+                        <li class="step ">
+                            <div><i class="fas "></i>
+                            </div>
+                            <p class="mt-2">SIDANG </p>
+                        </li>
+                        <li class="step ">
+                            <div><i class="fas "></i>
+                            </div>
+                            <p class="mt-2"> PENYERAHAN BUKU SKRIPSI </p>
+                        </li>
+                    @endif
 
                     @if ($pendaftaran_skripsi->status_skripsi == 'SEMPRO SELESAI')
                         <li class="step active">
@@ -530,6 +555,7 @@
 
                 @if (
                     $pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
+                    $pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' ||
                         $pendaftaran_skripsi->status_skripsi == 'JUDUL DISETUJUI')
                     <div class="row biru mb-4">
                         <div class="col">
@@ -602,8 +628,7 @@
                     </div>
                 @endif
 
-                @if (
-                    $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' || $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
+                @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
                         $pendaftaran_skripsi->status_skripsi == 'SEMPRO SELESAI')
                     <div class="row biru mb-4">
                         <div class="col">
@@ -620,6 +645,27 @@
                             <span class="mt-2 text-danger"> Batas Daftar Sidang<br></span>
                             <strong class="mt-2 text-danger"><strong class="text-bold"
                                     id="timer-batas-daftar-sidang"></strong></strong>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                @endif
+                @if (
+                    $pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG ULANG')
+                    <div class="row biru mb-4">
+                        <div class="col">
+                            <span class="mt-0 "> Tanggal disetujui <br></span>
+                            <span
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_disetujui_usuljudul_kaprodi)->translatedFormat('l, d F Y') }}</span>
+                        </div>
+                        <div class="col">
+                            <span class="mt-0 "> Tanggal Selesai <br></span>
+                            <span
+                                class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_semproselesai)->translatedFormat('l, d F Y') }}</span>
+                        </div>
+                        <div class="col">
+                            <span class="mt-2 text-danger"> Batas Daftar Sidang<br></span>
+                            <strong class="mt-2 text-danger">{{ Carbon::parse($pendaftaran_skripsi->updated_at)->addMonths(1)->translatedFormat('l, d F Y')}}</strong>
                         </div>
                         <div class="col">
                         </div>
@@ -756,8 +802,12 @@
                         </div>
                         <div class="col">
                             <span class="mt-0 text-danger"> Batas Unggah Penyerahan Buku Skripsi <br></span>
+                            @if ($pendaftaran_skripsi->tgl_revisi_spesial == null)
                             <strong class="mt-2 text-danger"><strong class="text-bold"
                                     id="timer-batas-buku-skripsi"></strong></strong>
+                            @else
+                            <strong class="mt-2 text-danger">{{ Carbon::parse($pendaftaran_skripsi->tgl_revisi_spesial)->translatedFormat('l, d F Y') }}</strong>
+                            @endif
                         </div>
                     </div>
                 @endif
@@ -782,9 +832,34 @@
                                 class="mt-2 text-bold">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->translatedFormat('l, d F Y') }}</span>
                         </div>
                         <div class="col">
+                            @if ($pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI')
                             <span class="mt-0 text-muted"> Tanggal Usulan <br></span>
-                            <span
-                                class="mt-2 fw-bold text-muted">{{ Carbon::parse($pendaftaran_skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y') }}</span>
+                            <span class="mt-2 fw-bold text-muted">{{ Carbon::parse($pendaftaran_skripsi->tgl_created_sti_17)->translatedFormat('l, d F Y') }}</span>
+                            @endif
+                            @if ($pendaftaran_skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                            <span class="mt-0 text-danger"> Batas Unggah Buku Skripsi <br></span>
+
+                                @if(Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->addMonths(1) < now() && $pendaftaran_skripsi->tgl_revisi_spesial == null && $pendaftaran_skripsi->tgl_created_revisi == null || Carbon::parse($pendaftaran_skripsi->tgl_revisi_spesial) < now() && $pendaftaran_skripsi->tgl_revisi_spesial !== null && $pendaftaran_skripsi->tgl_created_revisi == null)
+                                    <span class="mt-2 fw-bold text-danger">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->addMonths(1)->translatedFormat('d F Y')}}</span>
+                                    
+                                    @elseif(Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->addMonths(2) < now() && $pendaftaran_skripsi->tgl_revisi_spesial == null && $pendaftaran_skripsi->tgl_created_revisi !== null || Carbon::parse($pendaftaran_skripsi->tgl_revisi_spesial) < now() && $pendaftaran_skripsi->tgl_revisi_spesial !== null && $pendaftaran_skripsi->tgl_created_revisi !== null)
+                                    <span class="mt-2 fw-bold text-danger">{{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->addMonths(2)->translatedFormat('d F Y')}}</span>
+                                    @elseif($pendaftaran_skripsi->tgl_revisi_spesial == null && $pendaftaran_skripsi->tgl_created_revisi == null)
+                                    <span class="mt-2 fw-bold text-danger">
+                                    {{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->addMonths(1)->translatedFormat('d F Y')}}
+                                    </span>
+                                    @elseif($pendaftaran_skripsi->tgl_revisi_spesial == null && $pendaftaran_skripsi->tgl_created_revisi !== null)
+                                    <span class="mt-2 fw-bold text-danger">
+                                    {{ Carbon::parse($pendaftaran_skripsi->tgl_selesai_sidang)->addMonths(2)->translatedFormat('d F Y')}}
+                                    </span>
+                                    @elseif($pendaftaran_skripsi->tgl_revisi_spesial !== null )
+                                    <span class="mt-2 fw-bold text-danger">
+                                    {{ Carbon::parse($pendaftaran_skripsi->tgl_revisi_spesial)->translatedFormat('d F Y')}}
+                                    </span>
+                                    
+                                    @endif
+
+                            @endif
                         </div>
                     </div>
                 @endif
@@ -837,6 +912,30 @@
 
                 </div>
             </div>
+        @endif
+
+        @if($batal_sempro != null)
+        @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SEMPRO DISETUJUI' || $pendaftaran_skripsi->keterangan == 'Daftar Sempro Dibatalkan')
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle fw-bold"></i>  <span class="pl-2">Jadwal Sempro dibatalkan.</span> <span
+                        class="fw-bold">{{ $batal_sempro->alasan }}</span>, <span> Sempro akan dijadwalkan ulang.</span>
+
+                </div>
+            </div>
+        @endif
+        @endif
+        
+        @if($batal_sidang != null)
+        @if ($pendaftaran_skripsi->status_skripsi == 'DAFTAR SIDANG DISETUJUI' || $pendaftaran_skripsi->keterangan == 'Daftar Sidang Dibatalkan')
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle fw-bold"></i>  <span class="pl-2">Jadwal Sidang dibatalkan.</span> <span
+                        class="fw-bold">{{ $batal_sidang->alasan }}</span>, <span> Sidang akan dijadwalkan ulang.</span>
+
+                </div>
+            </div>
+        @endif
         @endif
         <!-- @if ($pendaftaran_skripsi->status_skripsi == 'SEMPRO SELESAI')
     <div class="container">
@@ -965,6 +1064,7 @@
                                 $skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' ||
                                     $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG'
                                     || $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK'||
                                     $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' ||
@@ -978,6 +1078,7 @@
                                 $skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' ||
                                     $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' ||
                                     $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG' ||
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' ||
                                     $skripsi->status_skripsi == 'DAFTAR SIDANG ULANG'
                                     || $skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK' ||
                                     $skripsi->status_skripsi == 'PERPANJANGAN 1 DITOLAK' ||
@@ -993,8 +1094,7 @@
                                 $skripsi->status_skripsi == 'USULAN JUDUL' ||
                                     $skripsi->status_skripsi == 'JUDUL DISETUJUI' ||
                                     $skripsi->status_skripsi == 'USULAN JUDUL DITOLAK' ||
-                                    $skripsi->status_skripsi == 'USULKAN JUDUL ULANG' ||
-                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG')
+                                    $skripsi->status_skripsi == 'USULKAN JUDUL ULANG')
                                 <td class="text-center">
                                     <a href="/usuljudul/detail/{{ $skripsi->id }}" class="badge btn btn-info p-1 mb-1"
                                         data-bs-toggle="tooltip" title="Lihat Detail"><i
@@ -1011,7 +1111,22 @@
                                                 width="25" src="/assets/img/add.png" alt="..."
                                                 class="zoom-image"></a>
                                     @endif
-                                    @if ($skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG')
+                                   
+
+                                </td>
+                            @endif
+                            
+                            @if (
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' ||
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG')
+                                <td class="text-center">
+                                    <a href="/daftar-sempro/detail/{{ $skripsi->id }}"
+                                        class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip"><i
+                                            class="fas fa-info-circle"></i> <span class="custom-tooltip">Lihat
+                                            Detail</span></a>
+                                    @if (
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK' ||
+                                    $skripsi->status_skripsi == 'DAFTAR SEMPRO ULANG')
                                         <a href="/daftar-sempro/create/{{ $skripsi->id }}" class="badge p-1  mb-1"
                                             data-bs-toggle="tooltip" title="Daftar Seminar Proposal"><img height="25"
                                                 width="25" src="/assets/img/add.png" alt="..."

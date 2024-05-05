@@ -305,6 +305,8 @@ class PenilaianSemproController extends Controller
         if ($request->revisi_naskah5) {
             $rules['revisi_naskah5'] = 'required';
         }
+        
+        
 
         // $validatedData = $request->validate($rules);        
         $penilaian = PenilaianSemproPenguji::where('penjadwalan_sempro_id', $penjadwalan_sempro->id)->where('penguji_nip', auth()->user()->nip)->first();

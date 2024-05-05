@@ -737,6 +737,80 @@ public function kapasitasbimbingan_store(Request $request, $id)
             ]);
         } 
     }
+    public function detailusulansemkp_seminar($mahasiswa_nim)
+    {
+        //ADMIN
+        if (auth()->user()->role_id == 1) {     
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->get(),
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 2) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 3) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 4) {  
+            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' =>  PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '3')->get(),
+                // 'penjadwalan_kp' => PenjadwalanKP::where('prodi_id', '3')->get(),
+            ]);
+        } 
+
+        //DOSEN
+
+        if (auth()->user()->role_id == 5 ) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->get(),
+            ]);
+        }
+       
+        if (auth()->user()->role_id == 6) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 7) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 8) {     
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '3')->get(),
+            ]);
+        } 
+       
+        if (auth()->user()->role_id == 9) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '1')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 10) {            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '2')->get(),
+            ]);
+        }
+        if (auth()->user()->role_id == 11) {  
+            
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' =>  PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('prodi_id', '3')->get(),
+            ]);
+        } 
+        //MAHASISWA
+        if (auth()->user()->nim > 0) {     
+            return view('pendaftaran.kerja-praktek.usulan-semkp.detail-seminar', [
+                'pendaftaran_kp' => PendaftaranKP::where('mahasiswa_nim', $mahasiswa_nim)->where('mahasiswa_nim', Auth::user()->nim)->get(),          
+            ]);
+        } 
+    }
 
     public function createsemkp($id)
     {
@@ -796,7 +870,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
 
         $request->validate([                                         
             'kpti_10' => 'required|mimes:pdf|max:200',
-            'laporan_akhir' => 'required|mimes:pdf|max:1024',
+            'laporan_akhir' => 'required|mimes:pdf|max:5120',
         ]);
 
         $kp = PendaftaranKP::find($id);
@@ -817,7 +891,7 @@ public function kapasitasbimbingan_store(Request $request, $id)
         $pendaftaran_kp = PendaftaranKP::find($id);
 
         $penjadwalan_kp = PenjadwalanKP::where('mahasiswa_nim', $pendaftaran_kp->mahasiswa_nim)->latest('created_at')->first();
-        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
+        $nilai_pembimbing = PenilaianKPPembimbing::where('penjadwalan_kp_id', $penjadwalan_kp->id)->where('pembimbing_nip', $penjadwalan_kp->pembimbing_nip)->latest('created_at')->first();
         $nilai_penguji = PenilaianKPPenguji::where('penjadwalan_kp_id', $penjadwalan_kp->id)->latest('created_at')->first();
 
 
@@ -1394,6 +1468,165 @@ public function kapasitasbimbingan_store(Request $request, $id)
         Alert::success('Disetujui', 'Nilai KP Telah Keluar!')->showConfirmButton('Ok', '#28a745');
         return  back();
     }
+    
+    public function lewat_batas_balasan(Request $request, $id)
+     {
+         $kp = PendaftaranKP::find($id);
+ 
+         $kp->status_kp = 'USULKAN KP ULANG';
+         $kp->keterangan = 'Belum unggah Surat Balasan Perusahaan';
+         $kp->alasan = 'Anda dihapus Koordinator KP dari Data KP';
+         $kp->update();
+ 
+        //  Alert::success('Berhasil!', 'Mahasiswa dihapus dari Daftar Bimbingan')->showConfirmButton('Ok', '#28a745');
+        //  return back();
+         return back()->with('message', 'Berhasil! Satu mahasiswa dihapus dari Data Kerja Praktek.');
+ 
+     }
 
+     public function pop_up_lewat_batas_kp(Request $request, $id)
+{
+
+    if (auth()->user()->role_id == 5 || auth()->user()->role_id == 1) {
+        $kps = PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+            ->get();
+    }
+    if (auth()->user()->role_id == 9 || auth()->user()->role_id == 6 || auth()->user()->role_id == 2) {
+        $kps = PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            // ->where('prodi_id', '1')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+            ->get();
+    }
+    if (auth()->user()->role_id == 10 || auth()->user()->role_id == 7 || auth()->user()->role_id == 3) {
+       $kps = PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            // ->where('prodi_id', '2')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+            ->get();
+    }
+    if (auth()->user()->role_id == 11 || auth()->user()->role_id == 8 || auth()->user()->role_id == 4) {
+        $kps = PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            // ->where('prodi_id', '3')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+            ->get();
+    }
+
+        foreach ($kps as $kp) {
+        $kp->status_kp = 'USULKAN KP ULANG';
+        $kp->keterangan = 'Batas Waktu Daftar Seminar KP Habis';
+        $kp->alasan = 'Anda melewati batas waktu Daftar Seminar KP';
+        $kp->tgl_disetujui_usulankp_admin = null;
+        $kp->tgl_disetujui_usulankp_pembimbing = null;
+        $kp->tgl_disetujui_usulankp_koordinator = null;
+        $kp->tgl_disetujui_usulankp_kaprodi = null;
+        $kp->surat_balasan = null;
+        $kp->tgl_disetujui_balasan = null;
+        $kp->update();
+    }
+    
+    if (auth()->user()->role_id == 5 || auth()->user()->role_id == 1) {
+        $kps2 = PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+            ->get();
+    }
+    if (auth()->user()->role_id == 9 || auth()->user()->role_id == 6 || auth()->user()->role_id == 2) {
+        $kps2 = PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            // ->where('prodi_id', '1')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+            ->get();
+    }
+    if (auth()->user()->role_id == 10 || auth()->user()->role_id == 7 || auth()->user()->role_id == 3) {
+       $kps2 = PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            // ->where('prodi_id', '2')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+            ->get();
+    }
+    if (auth()->user()->role_id == 11 || auth()->user()->role_id == 8 || auth()->user()->role_id == 4) {
+        $kps2 = PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            // ->where('prodi_id', '3')
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+            ->get();
+    }
+
+        foreach ($kps2 as $kpp) {
+        $kpp->status_kp = 'USULKAN KP ULANG';
+        $kpp->keterangan = 'Batas Waktu Penyerahan Laporan Habis';
+        $kpp->alasan = 'Anda melewati batas waktu Penyerahan Laporan';
+        $kpp->tgl_disetujui_usulankp_admin = null;
+        $kpp->tgl_disetujui_usulankp_pembimbing = null;
+        $kpp->tgl_disetujui_usulankp_koordinator = null;
+        $kpp->tgl_disetujui_usulankp_kaprodi = null;
+        $kpp->surat_balasan = null;
+        $kpp->tgl_disetujui_balasan = null;
+        $kpp->judul_laporan = null;
+        $kpp->tgl_disetujui_semkp_admin = null;
+        $kpp->tgl_disetujui_semkp_pembimbing = null;
+        $kpp->tgl_disetujui_semkp_koordinator = null;
+        $kpp->tgl_disetujui_semkp_kaprodi = null;
+        $kpp->update();
+    }
+
+    return back()->with('message', 'Mahasiswa yang lewat batas dikembalikan ke status kp yang seharusnya.');
+}
+
+
+public function pop_up_lewat_batas_kp_pembimbing(){
+     if (auth()->user()->nip > 0) {
+        $kps = PendaftaranKP::whereNull('judul_laporan')
+            ->where('status_kp', 'KP DISETUJUI')
+            ->where('tanggal_mulai', '<', now()->subMonths(3)->subDay())
+            ->get();
+    }
+
+        foreach ($kps as $kp) {
+        $kp->status_kp = 'USULKAN KP ULANG';
+        $kp->keterangan = 'Batas Waktu Daftar Seminar KP Habis';
+        $kp->alasan = 'Anda melewati batas waktu Daftar Seminar KP';
+        $kp->tgl_disetujui_usulankp_admin = null;
+        $kp->tgl_disetujui_usulankp_pembimbing = null;
+        $kp->tgl_disetujui_usulankp_koordinator = null;
+        $kp->tgl_disetujui_usulankp_kaprodi = null;
+        $kp->surat_balasan = null;
+        $kp->tgl_disetujui_balasan = null;
+        $kp->update();
+    }
+
+    if (auth()->user()->nip > 0){
+        $kps2 = PendaftaranKP::whereNull('kpti_10')
+            ->where('status_kp', 'SEMINAR KP SELESAI')
+            // ->where('dosen_pembimbing_nip', Auth::user()->nip)
+            ->where('tgl_selesai_semkp', '<', now()->subMonths(1)->subDay())
+            ->get();
+    }
+
+        foreach ($kps2 as $kpp) {
+        $kpp->status_kp = 'USULKAN KP ULANG';
+        $kpp->keterangan = 'Batas Waktu Penyerahan Laporan Habis';
+        $kpp->alasan = 'Anda melewati batas waktu Penyerahan Laporan';
+        $kpp->tgl_disetujui_usulankp_admin = null;
+        $kpp->tgl_disetujui_usulankp_pembimbing = null;
+        $kpp->tgl_disetujui_usulankp_koordinator = null;
+        $kpp->tgl_disetujui_usulankp_kaprodi = null;
+        $kpp->surat_balasan = null;
+        $kpp->tgl_disetujui_balasan = null;
+        $kpp->judul_laporan = null;
+        $kpp->tgl_disetujui_semkp_admin = null;
+        $kpp->tgl_disetujui_semkp_pembimbing = null;
+        $kpp->tgl_disetujui_semkp_koordinator = null;
+        $kpp->tgl_disetujui_semkp_kaprodi = null;
+        $kpp->update();
+    }
+
+    return back()->with('message', 'Mahasiswa yang lewat batas dikembalikan ke status kp yang seharusnya.');
+
+}
 
 }

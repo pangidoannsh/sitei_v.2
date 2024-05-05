@@ -104,7 +104,7 @@
                             <h5 class="text-bold">Nilai Skripsi</h5>
                             <hr>
 
-                            @if($jurnal == null)
+                            @if($jurnal == null && $jadwal_skripsi != null)
                             <p class="card-title  text-secondary text-sm">Nilai Angka</p>
                             <p class="card-text text-start"> <span class=" fs-5 fw-bold">
                                     @if (
@@ -201,9 +201,8 @@
                                     @endif
                                 </span>
                             </p>
-                            @endif
                             
-                            @if($jurnal !== null)
+                            @elseif($jurnal !== null && $jadwal_skripsi != null)
                             <p class="card-title  text-secondary text-sm">Nilai Angka</p>
                             <p class="card-text text-start"> <span class=" fs-5 fw-bold">
                                     @if (
@@ -300,6 +299,13 @@
                                     @endif
                                 </span>
                             </p>
+                            @else
+                            <p class="card-title  text-secondary text-sm">Nilai Angka</p>
+                            <p class="card-text text-start"> <span>
+                                    Data Seminar tidak ditemukan </span>
+                            <p class="card-title  text-secondary text-sm">Nilai Huruf</p>
+                            <p class="card-text text-start"> <span>
+                                    Data Seminar tidak ditemukan </span>
                             @endif
 
                         </div>

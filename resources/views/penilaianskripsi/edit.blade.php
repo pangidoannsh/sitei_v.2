@@ -85,6 +85,9 @@
                 <p class="card-title text-secondary text-sm">Naskah</p>
                 <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
                         href="{{ asset('storage/' . $naskah->naskah) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
+                <p class="card-title text-secondary text-sm">Proposal</p>
+                <p class="card-text  text-start"><a formtarget="_blank" target="_blank"
+                        href="{{ asset('storage/' . $naskah->naskah_proposal) }}" class="badge bg-dark px-3 py-2">Buka</a></p>
                 @if (auth()->user()->nip == $skripsi->pembimbingsatu_nip || auth()->user()->nip == $skripsi->pembimbingdua_nip)
                 @if($jurnal != null)
                <p class="card-title text-secondary text-sm">File Jurnal/Artikel</p>
@@ -1920,7 +1923,7 @@
                                 @if ($nilaitotalpenguji == '' && $nilaitotalpembimbing == '')
                                     -
                                 @else
-                                    @if ($total_nilai >= 60)
+                                    @if ($total_nilai >= 55)
                                         LULUS
                                     @else
                                         TIDAK LULUS
@@ -2043,7 +2046,7 @@
                                 @if ($nilaitotalpenguji == '' && $nilaitotalpembimbing == '')
                                     -
                                 @else
-                                    @if ($total_nilai >= 60)
+                                    @if ($total_nilai >= 55)
                                         LULUS
                                     @else
                                         TIDAK LULUS
@@ -2110,11 +2113,11 @@
                 </tbody>
             </table>
 
-            @if ($total_nilai <= 55)
+            @if ($total_nilai < 55)
                 <form action="/catatanskripsi/create/{{ $skripsi->penjadwalan_skripsi->id }}" class="simpan-catatan" method="POST">
                     @csrf
                     <div class="mb-3 gridratakiri">
-                        <label class="form-label">Catatan</label>
+                        <label class="form-label">Catatan (Alasan tidak lulus)</label>
                         <input type="text" name="catatan" class="form-control"
                             value="{{ $skripsi->penjadwalan_skripsi->catatan != null ? $skripsi->penjadwalan_skripsi->catatan : '' }}" required>
                         <button type="submit" class="btn btn-success my-3">+ Catatan</button>
@@ -2269,7 +2272,7 @@
                                     </div>
                                 </div>
                                 
-                            @elseif($total_nilai < 60 && $skripsi->penjadwalan_skripsi->status_seminar == 0)
+                            @elseif($total_nilai < 55 && $skripsi->penjadwalan_skripsi->status_seminar == 0)
                                                                 <form
                                                                     action="/penilaian-skripsi/tolak/{{ $penjadwalan->id }}" class="gagal-seminar"
                                                                     method="POST">
@@ -2280,7 +2283,7 @@
                                                                 </form>
                                                         
                             
-                            @elseif($total_nilai >= 60 && $skripsi->penjadwalan_skripsi->status_seminar == 0)
+                            @elseif($total_nilai >= 55 && $skripsi->penjadwalan_skripsi->status_seminar == 0)
                                 
                                                                 <form
                                                                     action="/penilaian-skripsi/approve/{{ $penjadwalan->id }}" class="selesai-seminar"
@@ -2610,7 +2613,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2634,7 +2638,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2658,7 +2663,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2683,7 +2689,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2707,7 +2714,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Simpan'
+                confirmButtonText: 'Simpan',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2731,7 +2739,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Selesai'
+                confirmButtonText: 'Selesai',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();
@@ -2755,7 +2764,8 @@
                 cancelButtonText: 'Kembali',
                 confirmButtonColor: '#dc3545',
                 cancelButtonColor: 'grey',
-                confirmButtonText: 'Selesai'
+                confirmButtonText: 'Selesai',
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.currentTarget.submit();

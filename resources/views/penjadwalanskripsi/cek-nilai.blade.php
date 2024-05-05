@@ -497,60 +497,6 @@
                                             @endif
                                         </td>
                                     </tr>
-
-                                    <!-- <tr>
-                                                        <td colspan="2">Total Nilai Penguji</td>
-                                                        <td class="bg-success text-center">45</td>
-                                                        <td class="text-center">{{ $nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_angka : '-' }}
-                                                        </td>
-                                                        <td class="text-center">{{ $nilaipenguji2 != '' ? $nilaipenguji2->total_nilai_angka : '-' }}
-                                                        </td>
-                                                        <td class="text-center">{{ $nilaipenguji3 != '' ? $nilaipenguji3->total_nilai_angka : '-' }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">Nilai Huruf Penguji</td>
-                                                        <td class="text-center">{{ $nilaipenguji1 != '' ? $nilaipenguji1->total_nilai_huruf : '-' }}
-                                                        </td>
-                                                        <td class="text-center">{{ $nilaipenguji2 != '' ? $nilaipenguji2->total_nilai_huruf : '-' }}
-                                                        </td>
-                                                        <td class="text-center">{{ $nilaipenguji3 != '' ? $nilaipenguji3->total_nilai_huruf : '-' }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">Rata Rata Nilai Penguji</td>
-                                                        <td class="text-center" colspan="3">
-                                                            <h3 class="text-bold">
-                                                            @if ($nilaipenguji1 == '' && $nilaipenguji2 == '' && $nilaipenguji3 == '')
-    - -->
-                                @else
-                                    <!-- <?php
-                                    $nilai_masuk = 0;
-                                    if (!empty($nilaipenguji1)) {
-                                        $nilai_masuk = $nilai_masuk + 1;
-                                        $penguji1 = $nilaipenguji1->total_nilai_angka;
-                                    } else {
-                                        $penguji1 = 0;
-                                    }
-                                    if (!empty($nilaipenguji2)) {
-                                        $nilai_masuk = $nilai_masuk + 1;
-                                        $penguji2 = $nilaipenguji2->total_nilai_angka;
-                                    } else {
-                                        $penguji2 = 0;
-                                    }
-                                    if (!empty($nilaipenguji3)) {
-                                        $nilai_masuk = $nilai_masuk + 1;
-                                        $penguji3 = $nilaipenguji3->total_nilai_angka;
-                                    } else {
-                                        $penguji3 = 0;
-                                    }
-                                    $nilaitotalpenguji = round(($penguji1 + $penguji2 + $penguji3) / $nilai_masuk);
-                                    ?> -->
-                                    {{ $nilaitotalpenguji }}
-        @endif
-        <!-- </h3>
-                                                        </td>
-                                                    </tr> -->
         </tbody>
         </table>
             </div>
@@ -682,57 +628,13 @@
                         </td>
                     </tr>
 
-                    <!-- <tr>
-                                                        <td colspan="2">Total Nilai Pembimbing</td>
-                                                        <td class="bg-success text-center">55</td>
-                                                        <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_angka : '-' }}
-                                                        </td>
-                                                        <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_angka : '-' }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">Nilai Huruf Pembimbing</td>
-                                                        <td class="text-center">{{ $nilaipembimbing1 != '' ? $nilaipembimbing1->total_nilai_huruf : '-' }}
-                                                        </td>
-                                                        <td class="text-center">{{ $nilaipembimbing2 != '' ? $nilaipembimbing2->total_nilai_huruf : '-' }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">Rata Rata Nilai Pembimbing</td>
-                                                        <td class="text-center" colspan="2">
-                                                            <h3 class="text-bold">
-                                                            @if ($nilaipembimbing1 == '' && $nilaipembimbing2 == '')
-    - -->
-                @else
-                    <!-- <?php
-                    $nilai_masuk1 = 0;
-                    
-                    if (!empty($nilaipembimbing1)) {
-                        $nilai_masuk1 = $nilai_masuk1 + 1;
-                        $pembimbing1 = $nilaipembimbing1->total_nilai_angka;
-                    } else {
-                        $pembimbing1 = 0;
-                    }
-                    if (!empty($nilaipembimbing2)) {
-                        $nilai_masuk1 = $nilai_masuk1 + 1;
-                        $pembimbing2 = $nilaipembimbing2->total_nilai_angka;
-                    } else {
-                        $pembimbing2 = 0;
-                    }
-                    $nilaitotalpembimbing = round(($pembimbing1 + $pembimbing2) / $nilai_masuk1);
-                    ?> -->
-                    <!-- {{ $nilaitotalpembimbing }}
-    @endif
-                                                            </h3>
-                                                        </td>
-                                                    </tr> -->
 
                 </tbody>
             </table>
 
             <table class="table table-bordered table-responsive-md">
                 <tbody>
-                    @if($jurnal-mahasiswa_nim == null)
+                    @if($jurnal == null)
                     <tr>
                         <td style="width: 250px">NILAI AKHIR</td>
                         <td class="bg-success text-center">
@@ -855,7 +757,7 @@
                     </tr>
                     @endif
 
-                    @if($jurnal-mahasiswa_nim !== null)
+                    @if($jurnal !== null)
                     <tr>
                         <td style="width: 250px">NILAI SEMENTARA</td>
                         <td class="bg-success text-center">
@@ -1246,6 +1148,10 @@
 
         <!-- footer -->
     </div>
+    
+    <br>
+    <br>
+    <br>
 @endsection
 
 @section('footer')

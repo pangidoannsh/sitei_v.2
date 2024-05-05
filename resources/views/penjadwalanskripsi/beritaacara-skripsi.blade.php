@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>STI-15 Berita Acara Sidang Skripsi</title>
+    <title>STI/TE-15 Berita Acara Sidang Skripsi</title>
     @php
         use Carbon\Carbon;
         $now = \Carbon\Carbon::now();
@@ -205,7 +207,7 @@
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px; line-height: 1.5">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:2px; line-height: 1.5">
             <tr>
                 <td width="20%">Nama</td>
                 <td>: &nbsp; {{ $penjadwalan->mahasiswa->nama }} </td>
@@ -235,7 +237,7 @@
 
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
             <tr class="text2">
                 <td>Hasil sidang memutuskan bahwa mahasiswa tersebut di atas dinyatakan :</td>
             </tr>
@@ -246,9 +248,9 @@
             @if (
                 $nilaipembimbing1->total_nilai_angka +
                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka) / 2 >=
-                    60)
+                    55)
 
-                <table width="100%" style="font-family: Arial, sans-serif; ">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px; ">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong> (
@@ -342,16 +344,16 @@
                     </tr>
                 </table>
 
-                <table width="100%" style="font-family: Arial, sans-serif; ">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; ">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
                             .............................................................................
                         </td>
                     </tr>
-                </table>
+                </table> --}}
             @else
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong>()</strong>
@@ -363,9 +365,9 @@
                             dinyatakan BATAL dan mahasiswa yang bersangkutan harus melakukan sidang ulang.
                         </td>
                     </tr>
-                </table>
+                </table> --}}
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
@@ -380,9 +382,9 @@
                 ($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) /
                         3 >=
-                    60)
+                    55)
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong> (
@@ -476,16 +478,16 @@
                     </tr>
                 </table>
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
                             .............................................................................
                         </td>
                     </tr>
-                </table>
+                </table> --}}
             @else
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong>()</strong>
@@ -497,9 +499,9 @@
                             dinyatakan BATAL dan mahasiswa yang bersangkutan harus melakukan sidang ulang.
                         </td>
                     </tr>
-                </table>
+                </table> --}}
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
@@ -514,9 +516,9 @@
                 $nilaipembimbing1->total_nilai_angka +
                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka + $nilaipenguji3->total_nilai_angka) /
                         3 >=
-                    60)
+                    55)
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong> (
@@ -610,16 +612,16 @@
                     </tr>
                 </table>
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
                             .............................................................................
                         </td>
                     </tr>
-                </table>
+                </table> --}}
             @else
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong>()</strong>
@@ -631,9 +633,9 @@
                             dinyatakan BATAL dan mahasiswa yang bersangkutan harus melakukan sidang ulang.
                         </td>
                     </tr>
-                </table>
+                </table> --}}
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
@@ -646,9 +648,9 @@
             @if (
                 ($nilaipembimbing1->total_nilai_angka + $nilaipembimbing2->total_nilai_angka) / 2 +
                     ($nilaipenguji1->total_nilai_angka + $nilaipenguji2->total_nilai_angka) / 2 >=
-                    60)
+                    55)
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong> (
@@ -742,16 +744,16 @@
                     </tr>
                 </table>
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
                             .............................................................................
                         </td>
                     </tr>
-                </table>
+                </table> --}}
             @else
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                {{-- <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>LULUS</strong> dengan nilai angka
                             <strong>()</strong>
@@ -763,9 +765,9 @@
                             dinyatakan BATAL dan mahasiswa yang bersangkutan harus melakukan sidang ulang.
                         </td>
                     </tr>
-                </table>
+                </table> --}}
 
-                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+                <table width="100%" style="font-family: Arial, sans-serif; margin-top:-10px;">
                     <tr class="text2">
                         <td>-&nbsp;<strong>TIDAK LULUS</strong> dengan alasan sebagai berikut :
                             <br>
@@ -776,7 +778,7 @@
             @endif
         @endif
 
-        <table width="100%" style="font-family: Arial, sans-serif; margin-top:-15px;">
+        <table width="100%" style="font-family: Arial, sans-serif; margin-top:3px;">
             <tr>
                 <td><strong>Pengujian Sidang Skripsi:</strong></td>
             </tr>
@@ -827,15 +829,16 @@
             </tr>
 
             <tr>
+                @if ($penjadwalan->pengujitiga_nip != null)
                 <td class="table1">5</td>
-                @if ($penjadwalan->pengujitiga_nip != null)
-                    <td class="table1">{{ $penjadwalan->pengujitiga->nama }}</td>
-                @else
-                    <td class="table1">-</td>
-                @endif
+                <td class="table1">{{ $penjadwalan->pengujitiga->nama }}</td>
                 <td class="table1">Penguji 3</td>
-                @if ($penjadwalan->pengujitiga_nip != null)
-                    <td class="table1"><img src="data:img/png;base64, {!! $qrcodee !!}"></td>
+                <td class="table1"><img src="data:img/png;base64, {!! $qrcodee !!}"></td>
+                @else
+                <td class="table1">5</td>
+                <td class="table1">-</td>
+                <td class="table1">Penguji 3</td>
+                <td class="table1"></td>
                 @endif
             </tr>
         </table>
@@ -881,7 +884,7 @@
             </tr>
         </table>
 
-        <table width="100%" style="font-family: Arial, sans-serif; position: absolute; margin-top:-188px;">
+        <table width="100%" style="font-family: Arial, sans-serif; position: absolute; margin-top:-180px;">
             <tr>
                 <td width="55%" align="right">
                 </td>
@@ -946,7 +949,7 @@
             </tr>
         </table>
 
-        <table width="100%" style="margin-top:0px;">
+        <table width="100%" style="margin-top:220px;">
             <tr>
                 <td>
                     <div class="logo2" style="margin-top: 60px;">
@@ -1318,3 +1321,4 @@
 </body>
 
 </html>
+

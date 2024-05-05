@@ -96,7 +96,7 @@
                                         <label class="form-label">Tanggal</label>
                                         <input type="date" name="tanggal"
                                             class="form-control @error('tanggal') is-invalid @enderror"
-                                            value="{{ old('tanggal', $skripsi->tanggal) }}">
+                                            value="{{ old('tanggal', $skripsi->tanggal) }}" required>
                                         @error('tanggal')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -109,7 +109,7 @@
                                         <label class="form-label">Waktu</label>
                                         <input type="time" name="waktu"
                                             class="form-control @error('waktu') is-invalid @enderror"
-                                            value="{{ old('waktu', $skripsi->waktu) }}">
+                                            value="{{ old('waktu', $skripsi->waktu) }}" required>
                                         @error('waktu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -124,7 +124,7 @@
                             <div class="mb-3 field">
                                 <label class="form-label">Ruangan</label>
                                 <input type="text" name="lokasi"
-                                    class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi',$skripsi->lokasi) }}">
+                                    class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi',$skripsi->lokasi) }}" required>
                                 @error('lokasi')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -159,13 +159,7 @@
 
                             <div class="mb-3 field">
                                 <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
-                                @if($skripsi->pembimbingdua_nip == null)
-                                <input type="hidden" name="pembimbingdua_nip" class="form-control"
-                                    value="{{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '') }}" readonly>
-                                <input class="form-control disable"
-                                    value="{{ $skripsi->pembimbingdua_nip != null ? $skripsi->pembimbingdua->nama : '' }}"
-                                    readonly>
-                                @else
+                                
 
                                 <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
                                   <option value="1">-Pilih-</option>
@@ -173,7 +167,6 @@
                                 <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
                                 @endforeach
                                                 </select>
-                                @endif
                                 
                                 @error('pembimbingdua_nip')
                                     <div class="invalid-feedback">
@@ -185,7 +178,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
                                 <select name="pengujisatu_nip" id="penguji1"
-                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"
@@ -363,7 +356,7 @@
                                         <label class="form-label">Tanggal</label>
                                         <input type="date" name="tanggal"
                                             class="form-control @error('tanggal') is-invalid @enderror"
-                                            value="{{ old('tanggal', $skripsi->tanggal) }}">
+                                            value="{{ old('tanggal', $skripsi->tanggal) }}" required>
                                         @error('tanggal')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -376,7 +369,7 @@
                                         <label class="form-label">Waktu</label>
                                         <input type="time" name="waktu"
                                             class="form-control @error('waktu') is-invalid @enderror"
-                                            value="{{ old('waktu', $skripsi->waktu) }}">
+                                            value="{{ old('waktu', $skripsi->waktu) }}" required>
                                         @error('waktu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -390,7 +383,7 @@
                             <div class="mb-3 field">
                                 <label class="form-label">Ruangan</label>
                                 <input type="text" name="lokasi"
-                                    class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi',$skripsi->lokasi) }}">
+                                    class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi',$skripsi->lokasi) }}" required>
                                 @error('lokasi')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -426,13 +419,6 @@
 
                             <div class="mb-3 field">
                                 <label for="pembimbingdua_nip" class="form-label">Pembimbing Dua</label>
-                                @if($skripsi->pembimbingdua_nip == null)
-                                <input type="hidden" name="pembimbingdua_nip" class="form-control"
-                                    value="{{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip ?? '') }}" readonly>
-                                <input class="form-control disable"
-                                    value="{{ $skripsi->pembimbingdua_nip != null ? $skripsi->pembimbingdua->nama : '' }}"
-                                    readonly>
-                                @else
 
                                 <select name="pembimbingdua_nip" id="pembimbing2" class="form-select @error('pembimbingdua_nip') is-invalid @enderror">
                                   <option value="1">-Pilih-</option>
@@ -440,7 +426,6 @@
                                 <option value="{{ $dosen->nip }}" {{ old('pembimbingdua_nip', $skripsi->pembimbingdua_nip) == $dosen->nip ? 'selected' : null }}>{{ $dosen->nama }}</option>
                                 @endforeach
                                                 </select>
-                                @endif
 
                                 @error('pembimbingdua_nip')
                                     <div class="invalid-feedback">
@@ -452,7 +437,7 @@
                             <div class="mb-3 field">
                                 <label for="pengujisatu_nip" class="form-label">Penguji Satu</label>
                                 <select name="pengujisatu_nip" id="penguji1"
-                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror">
+                                    class="form-select @error('pengujisatu_nip') is-invalid @enderror" required>
                                     <option value="">-Pilih-</option>
                                     @foreach ($dosens as $dosen)
                                         <option value="{{ $dosen->nip }}"

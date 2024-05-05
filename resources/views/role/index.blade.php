@@ -16,8 +16,48 @@
     <a href="{{ url('/role/create') }}" class="btn role btn-success mb-4">+ Hak Akses</a>
 
     <div class="container card p-4">
+        
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuDaftarHakAksesAdminJurusan">Tampilkan</label>
+                    <select id="lengthMenuDaftarHakAksesAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>                          
+            </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterDaftarHakAksesAdminJurusan">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1"  id="searchFilterDaftarHakAksesAdminJurusan" placeholder="">
+            </div>
+        </div>
 
-        <table class="table text-center table-bordered table-striped" style="width:100%" id="datatables">
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileDaftarHakAksesAdminJurusan">Tampilkan</label>
+                <select id="lengthMenuMobileDaftarHakAksesAdminJurusan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileDaftarHakAksesAdminJurusan">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileDaftarHakAksesAdminJurusan" placeholder="">
+            </div>
+        </div>
+
+        <table class="table text-center table-bordered table-striped" style="width:100%" id="datatablesdaftarhakaksesadmjurusan">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">#</th>

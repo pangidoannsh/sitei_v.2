@@ -31,6 +31,10 @@
             <li><a href="/statistik/bimbingan-kp" class="px-1">Bimbingan KP</a></li>
             <span class="px-2">|</span>
             <li><a href="/statistik/bimbingan-skripsi" class="breadcrumb-item active fw-bold text-success px-1">Bimbingan Skripsi</a></li>
+            <span class="px-2">|</span>
+            <li><a href="/statistik/riwayat-kp" class="px-1">Riwayat KP</a></li>
+            <span class="px-2">|</span>
+            <li><a href="/statistik/judul-skripsi-terdaftar" class="px-1">Riwayat Skripsi</a></li>
 
         </ol>
 
@@ -41,9 +45,49 @@
                     <h5 class="">Daftar Beban Bimbingan Skripsi</h5>
                     <hr>
                 </div>
+        </div>
+        
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuDaftarBebanBimbinganSkripsi">Tampilkan</label>
+                    <select id="lengthMenuDaftarBebanBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
             </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterDaftarBebanBimbinganSkripsi">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1"  id="searchFilterDaftarBebanBimbinganSkripsi" placeholder="">
+            </div>
+        </div>
 
-        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables3">
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileDaftarBebanBimbinganSkripsi">Tampilkan</label>
+                <select id="lengthMenuMobileDaftarBebanBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileDaftarBebanBimbinganSkripsi">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileDaftarBebanBimbinganSkripsi" placeholder="">
+            </div>
+        </div>
+
+        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatablesdaftarbebanbimbinganskripsi">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center" scope="col">No.</th>
@@ -53,6 +97,7 @@
                         <th class="text-center" scope="col">Pembimbing 1</th>
                         <th class="text-center" scope="col">Pembimbing 2</th>
                         <th class="text-center" scope="col">Total Bimbingan</th>
+                        <th class="text-center" scope="col">Rerata Membimbing</th>
                         <th class="text-center" scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -71,6 +116,32 @@
                             <td class="text-center @if ($dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count >= $kapasitas->kapasitas_skripsi) bg-danger @endif bg-info">
                                 <b>{{ $dosen->pendaftaran_skripsi1_count + $dosen->pendaftaran_skripsi2_count }}</b>
                             </td>
+                            
+                            <td class="text-center bg-info">
+                                @php
+                                    $pendaftaranSkripsi1 = $dosen->pendaftaranSkripsi1()->whereNotIn('status_skripsi', ['LULUS', 'USULAN JUDUL DITOLAK', 'USULKAN JUDUL ULANG'])->get();
+                                    $pendaftaranSkripsi2 = $dosen->pendaftaranSkripsi2()->whereNotIn('status_skripsi', ['LULUS', 'USULAN JUDUL DITOLAK', 'USULKAN JUDUL ULANG'])->get();
+                                    $pendaftaranSkripsi = $pendaftaranSkripsi1->merge($pendaftaranSkripsi2);
+                                    $totalBulan = 0;
+                                    $totalHari = 0;
+                                    $totalMhs = $pendaftaranSkripsi->count();
+                                    if ($totalMhs > 0) {
+                                        foreach ($pendaftaranSkripsi as $pendaftaran) {
+                                            $tanggalMulaiSkripsi = $pendaftaran->tgl_disetujui_usuljudul_kaprodi ? \Carbon\Carbon::parse($pendaftaran->tgl_disetujui_usuljudul_kaprodi) : null;
+                                            $tanggalSelesai = $pendaftaran->tgl_disetujui_sti_17_koordinator ? \Carbon\Carbon::parse($pendaftaran->tgl_disetujui_sti_17_koordinator) : null;
+                                            $durasiSkripsi = $tanggalMulaiSkripsi ? $tanggalMulaiSkripsi->diffInMonths($tanggalSelesai) : null;
+                                            $bulan = $durasiSkripsi ? floor($durasiSkripsi) : null;
+                                            $hari = $tanggalMulaiSkripsi ? $tanggalMulaiSkripsi->addMonths($bulan)->diffInDays($tanggalSelesai) : null;
+                                            if ($durasiSkripsi !== null) {
+                                                $totalBulan += $bulan / $totalMhs;
+                                                $totalHari += $hari / $totalMhs;
+                                            }
+                                        }
+                                    }
+                                @endphp
+                                <b>{{ round($totalBulan) }}</b> <small>Bulan</small> <br> <b>{{ round($totalHari) }}</b> <small>Hari</small>
+                            </td>
+                            
                             <td class="text-center">
                                 <a href="/detail/kuota-bimbingan/skripsi/{{ $dosen->nip }}"
                                     class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i
@@ -98,9 +169,49 @@
                     <h5 class="">Daftar Lulus Bimbingan Skripsi</h5>
                     <hr>
                 </div>
+        </div>
+            
+            <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuDaftarLulusBimbinganSkripsi">Tampilkan</label>
+                    <select id="lengthMenuDaftarLulusBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
             </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterDaftarLulusBimbinganSkripsi">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1"  id="searchFilterDaftarLulusBimbinganSkripsi" placeholder="">
+            </div>
+        </div>
 
-        <table class="table table-responsive-lg rounded table-bordered table-striped" width="100%" id="datatables2">
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileDaftarLulusBimbinganSkripsi">Tampilkan</label>
+                <select id="lengthMenuMobileDaftarLulusBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileDaftarLulusBimbinganSkripsi">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileDaftarLulusBimbinganSkripsi" placeholder="">
+            </div>
+        </div>
+
+        <table class="table table-responsive-lg rounded table-bordered table-striped" width="100%" id="datatablesdaftarlulusbimbinganskripsi">
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center" scope="col">No.</th>
@@ -153,7 +264,7 @@
                 @endphp
             @endforeach
             <td class="text-center bg-info">
-                   <b> {{ round($totalBulan) }} </b> <small>Bulan</small> <b> {{ round($totalHari) }} </b> <small>Hari</small>
+                   <b> {{ round($totalBulan) }} </b> <small>Bulan</small> <br> <b> {{ round($totalHari) }} </b> <small>Hari</small>
             </td>
 
             <td class="text-center">

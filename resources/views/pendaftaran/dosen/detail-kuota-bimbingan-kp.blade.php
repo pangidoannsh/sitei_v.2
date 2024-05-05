@@ -37,7 +37,7 @@
             <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
                 <thead class="table-dark">
                     <tr>
-                        <th class="text-center px-0" scope="col">No.</th>
+                        <!--<th class="text-center px-0" scope="col">No.</th>-->
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center" scope="col">Nama</th>
                         <th class="text-center" scope="col">Program Studi</th>
@@ -51,7 +51,7 @@
                     @foreach ($pendaftaran_kp as $kp)
                         <div></div>
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <!--<td class="text-center">{{ $loop->iteration }}</td>-->
                             <td class="text-center">{{ $kp->mahasiswa->nim }}</td>
                             <td class="text-center">{{ $kp->mahasiswa->nama }}</td>
 
@@ -96,7 +96,7 @@
                             @endphp
 
                             <td class="text-center px-1 py-2">
-                                         {{ $bulan ?? 0}} <small>Bulan</small> {{ $hari }} <small>Hari</small>
+                                         <b>{{ $bulan ?? 0}} </b> <small>Bulan</small> <br> <b>{{ $hari }} </b> <small>Hari</small>
                                 </td>
                         </tr>
                     @endforeach

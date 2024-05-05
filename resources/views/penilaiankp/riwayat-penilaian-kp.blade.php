@@ -18,7 +18,7 @@
     <table class="table text-center table-bordered table-striped" id="datatables">
         <thead class="table-dark">
             <tr>
-                <th class="text-center" scope="col">#</th>
+                <!--<th class="text-center" scope="col">#</th>-->
                 <th class="text-center" scope="col">NIM</th>
                 <th class="text-center" scope="col">Nama</th>
                 <th class="text-center" scope="col">Seminar</th>
@@ -33,7 +33,7 @@
         <tbody>
             @foreach ($penjadwalan_kps as $kp)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <!--<td>{{ $loop->iteration }}</td>-->
                     <td>{{ $kp->mahasiswa->nim }}</td>
                     <td>{{ $kp->mahasiswa->nama }}</td>
                     <td>{{ $kp->jenis_seminar }}</td>

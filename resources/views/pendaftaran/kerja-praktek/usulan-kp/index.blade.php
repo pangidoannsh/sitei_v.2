@@ -449,9 +449,10 @@
                                 <span
                                     class="mt-3  text-bold">{{ Carbon::parse($pendaftaran_kp->tgl_disetujui_usulankp_kaprodi)->translatedFormat('l, d F Y') }}</span>
                             </div>
-                            <div class="col"> <span class="mt-3 text-danger"> Batas Unggah <br></span>
+                            <div class="col"> 
+                                <!-- <span class="mt-3 text-danger"> Batas Unggah <br></span>
                                 <strong class="mt-3 text-danger"><strong class="text-bold"
-                                        id="timer-batas-balasan"></strong><br></strong>
+                                        id="timer-batas-balasan"></strong><br></strong> -->
                             </div>
                             <div class="col">
                             </div>

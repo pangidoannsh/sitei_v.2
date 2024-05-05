@@ -22,7 +22,7 @@
                     <div class="mb-3 field">
                         <label class="form-label">Username</label>
                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                            value="{{ old('username', $user->username) }}">
+                            value="{{ old('username', $user->username) }}"@if ($user->id) readonly @endif>
                         @error('username')
                             <div class="invalid-feedback">
                                 {{ $message }}

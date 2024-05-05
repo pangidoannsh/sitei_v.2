@@ -108,7 +108,7 @@
                         <div class="col-6">
                             <p class="card-title text-secondary text-sm ">Proposal</p>
                             <p class="card-text  text-start"><span><a formtarget="_blank" target="_blank"
-                                        href="{{ asset('storage/' . $skripsi->naskah) }}"
+                                        href="{{ asset('storage/' . $skripsi->naskah_proposal) }}"
                                         class="badge bg-dark pr-3 p-2 pl-3">Buka</a></span></p>
                             <p class="card-title text-secondary text-sm ">STI/TE-30</p>
                             <p class="card-text  text-start"><span><a formtarget="_blank" target="_blank"

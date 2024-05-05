@@ -25,10 +25,10 @@
                         Auth::guard('dosen')->user()->role_id == 9 ||
                         Auth::guard('dosen')->user()->role_id == 10 ||
                         Auth::guard('dosen')->user()->role_id == 11 )
-                       (<span>  {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }} </span>)
+                       (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi + $jml_persetujuan_seminar }}</span>)
                       @endif
                     @if(Auth::guard('dosen')->user()->role_id == 5 || Auth::guard('dosen')->user()->role_id == null)
-                        (<span> {{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }} </span>)
+                        (<span>{{ $jml_persetujuan_kp + $jml_persetujuan_skripsi }}</span>)
                     @endif</a>
             </li>
 
@@ -42,18 +42,16 @@
             <span class="px-2">|</span>
             <li><a href="/pembimbing-penguji/riwayat-bimbingan" class="px-1">Riwayat
                     (<span>{{ $jml_riwayat_kp + $jml_riwayat_skripsi + $jml_riwayat_seminar_kp + $jml_riwayat_sempro + $jml_riwayat_sidang }}</span>)</a></li>
+            <span class="px-2">|</span>
+                    <li><a href="/statistik" class="px-1">Statistik (All)</a></li>
 
         </ol>
 
 
 
         <div class="container-fluid">
-
-
-
-            <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables">
-                <thead class="table-dark">
-                    <p class="alert-warning p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Mahasiswa yang
+            
+            <p class="alert-warning p-2"><i class="fas fa-exclamation-triangle px-2 fw-bold"></i> Mahasiswa yang
                         LEWAT BATAS, Anda berhak menghapus mahasiswa tersebut dari daftar bimbingan (Sudah tidak masuk
                         remunerasi/SKSR)</p>
                         @if (session()->has('message'))
@@ -61,8 +59,83 @@
                                 {{ session('message') }}
                             </div>
                         @endif
+                        
+            @php
+                // Kumpulkan semua status Skripsi
+                $all_statuses = [];
+                foreach ($pendaftaran_skripsi as $skripsi) {
+                    $all_statuses[] = $skripsi->status_skripsi;
+                }
+                // Hapus duplikat status dan urutkan
+                $unique_statuses = array_unique($all_statuses);
+                sort($unique_statuses);
+            @endphp
+
+            <!-- Desktop Version -->
+            <div class="d-none d-md-flex justify-content-between mb-3 filter">
+                <div class="d-flex align-items-center">
+                    <div class="dataTables_length input-group" style="width: max-content;">
+                        <label class="pt-2 pr-2" for="lengthMenuBimbinganSkripsi">Tampilkan</label>
+                        <select id="lengthMenuBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                            <option value="200">200</option>
+                            <option value="250">250</option>
+                        </select>
+                    </div>
+                    <div class="input-group ml-3" style="width: max-content;">
+                        <label class="pt-2 pr-2" for="statusFilterBimbinganSkripsi">Status</label>
+                        <select id="statusFilterBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 83px;">
+                            <option value="">Semua</option>
+                            @foreach ($unique_statuses as $status)
+                                <option value="{{ $status }}">{{ $status }}</option>
+                            @endforeach
+                        </select>                    
+                    </div>
+                </div>
+                <div class="dataTables_filter input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="searchFilterBimbinganSkripsi">Cari</label>
+                    <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterBimbinganSkripsi" placeholder="">
+                </div>
+            </div>
+
+            <!-- Tablet & Mobile Version -->
+            <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuMobileBimbinganSkripsi">Tampilkan</label>
+                    <select id="lengthMenuMobileBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="statusFilterMobileBimbinganSkripsi">Status</label>
+                    <select id="statusFilterMobileBimbinganSkripsi" class="custom-select custom-select-md rounded-3 py-1" style="width: 83px;">
+                        <option value="">Semua</option>
+                        @foreach ($unique_statuses as $status)
+                            <option value="{{ $status }}">{{ $status }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+                <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="searchFilterMobileBimbinganSkripsi">Cari</label>
+                    <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileBimbinganSkripsi" placeholder="">
+                </div>
+            </div>
+
+
+
+            <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatablesbimbinganskripsi">
+                <thead class="table-dark">
+                    
                     <tr>
-                        <th class="text-center px-0" scope="col">No.</th>
+                        <!--<th class="text-center px-0" scope="col">No.</th>-->
                         <th class="text-center" scope="col">NIM</th>
                         <th class="text-center fw-bold" scope="col">Nama</th>
                         <!-- <th class="text-center" scope="col">Konsentrasi</th> -->
@@ -81,7 +154,7 @@
                         <div></div>
 
                         <tr>
-                            <td class="text-center px-1 py-2">{{ $loop->iteration }}</td>
+                            <!--<td class="text-center px-1 py-2">{{ $loop->iteration }}</td>-->
                             <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
                             <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
                             <!-- <td class="text-center px-1 py-2">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td>            -->
@@ -202,6 +275,16 @@
                                 <td class="text-center px-1 py-2"><small> Tanggal Usulan:
                                         <br></small>
                                     {{ Carbon::parse($skripsi->tgl_created_sempro)->translatedFormat(' d F Y') }}
+                                    @if($skripsi->status_skripsi == 'DAFTAR SEMPRO DITOLAK')
+                                    <br>
+                                      @if(Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->addMonths(6) < now())
+                                    <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Daftar Sempro : <br></small>
+                                    <span class="text-danger">{{ Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->addMonths(6)->translatedFormat('d F Y')}}</span>
+                                    @else
+                                    <small class="text-dark"> Batas Daftar Sempro: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_disetujui_usuljudul_kaprodi)->addMonths(6)->translatedFormat('d F Y')}}
+                                    @endif
+                                    @endif
                                 </td>
                             @endif
 
@@ -293,6 +376,32 @@
                                 <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
                                         <br></small>
                                     {{ Carbon::parse($skripsi->tgl_created_sidang)->translatedFormat('d F Y') }}
+                                    <br>
+                                    @if ($skripsi->status_skripsi == 'DAFTAR SIDANG DITOLAK')
+
+                                    @if(Carbon::parse($skripsi->tgl_semproselesai)->addMonths(6) < now() && $skripsi->tgl_disetujui_perpanjangan1_kaprodi == null && $skripsi->tgl_disetujui_perpanjangan2_kaprodi == null)
+                                    <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Daftar Sidang: <br></small>
+                                    <span class="text-danger">{{ Carbon::parse($skripsi->tgl_semproselesai)->addMonths(6)->translatedFormat('d F Y')}}</span>
+                                    @elseif($skripsi->tgl_disetujui_perpanjangan1_kaprodi == null && $skripsi->tgl_disetujui_perpanjangan2_kaprodi == null)
+                                    <small class="text-dark"> Batas Daftar Sidang: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_semproselesai)->addMonths(6)->translatedFormat('d F Y')}}
+                                    
+                                    @elseif(Carbon::parse($skripsi->tgl_semproselesai)->addMonths(9) < now() && $skripsi->tgl_disetujui_perpanjangan1_kaprodi !== null && $skripsi->tgl_disetujui_perpanjangan2_kaprodi == null)
+                                    <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Daftar Sidang: <br></small>
+                                    <span class="text-danger">{{ Carbon::parse($skripsi->tgl_semproselesai)->addMonths(9)->translatedFormat('d F Y')}}</span>
+                                    @elseif($skripsi->tgl_disetujui_perpanjangan1_kaprodi !== null && $skripsi->tgl_disetujui_perpanjangan2_kaprodi == null)
+                                    <small class="text-dark"> Batas Daftar Sidang: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_semproselesai)->addMonths(9)->translatedFormat('d F Y')}}
+                                    
+                                    @elseif(Carbon::parse($skripsi->tgl_semproselesai)->addMonths(12) < now() && $skripsi->tgl_disetujui_perpanjangan1_kaprodi !== null && $skripsi->tgl_disetujui_perpanjangan2_kaprodi !== null)
+                                    <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Daftar Sidang: <br></small>
+                                    <span class="text-danger">{{ Carbon::parse($skripsi->tgl_semproselesai)->addMonths(12)->translatedFormat('d F Y')}}</span>
+                                    @elseif($skripsi->tgl_disetujui_perpanjangan1_kaprodi !== null && $skripsi->tgl_disetujui_perpanjangan2_kaprodi !== null)
+                                    <small class="text-dark"> Batas Daftar Sidang: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_semproselesai)->addMonths(12)->translatedFormat('d F Y')}}
+                                    @endif
+
+                                    @endif
                                 </td>
                             @endif
 
@@ -310,7 +419,7 @@
                                     <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Penyerahan Skripsi: <br></small>
                                     <span class="text-danger">{{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(1)->translatedFormat('d F Y')}}</span>
                                     @else
-                                    <small class="text-dark"> Batas Daftar Sidang: <br></small>
+                                    <small class="text-dark">Batas Penyerahan Skripsi: <br></small>
                                     {{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(1)->translatedFormat('d F Y')}}
                                     @endif
                                 </td>
@@ -332,11 +441,14 @@
                                 <td class="text-center px-1 py-2"> <small> Tanggal Disetujui:
                                         <br></small>{{ Carbon::parse($skripsi->tgl_disetujui_revisi_kaprodi)->translatedFormat(' d F Y') }}
                                         <br>
-                                    @if(Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2) < now())
+                                    @if(Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2) < now() && $skripsi->tgl_revisi_spesial == null || Carbon::parse($skripsi->tgl_revisi_spesial) < now() && $skripsi->tgl_revisi_spesial !== null)
                                     <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Penyerahan Skripsi: <br></small>
                                     <span class="text-danger">{{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2)->translatedFormat('d F Y')}}</span>
+                                    @elseif($skripsi->tgl_revisi_spesial !== null)
+                                    <small class="text-dark"> Batas Penyerahan Skripsi: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_revisi_spesial)->translatedFormat('d F Y')}}
                                     @else
-                                    <small class="text-dark"> Batas Daftar Sidang: <br></small>
+                                    <small class="text-dark"> Batas Penyerahan Skripsi: <br></small>
                                     {{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2)->translatedFormat('d F Y')}}
                                     @endif
                                 </td>
@@ -347,6 +459,25 @@
                                     $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
                                 <td class="text-center px-1 py-2"> <small> Tanggal Usulan:
                                         <br></small>{{ Carbon::parse($skripsi->tgl_created_sti_17)->translatedFormat(' d F Y') }}
+                                        <br>
+                                    @if(Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(1) < now() && $skripsi->tgl_revisi_spesial == null && $skripsi->tgl_created_revisi == null || Carbon::parse($skripsi->tgl_revisi_spesial) < now() && $skripsi->tgl_revisi_spesial !== null && $skripsi->tgl_created_revisi == null)
+                                    <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Penyerahan Skripsi: <br></small>
+                                    <span class="text-danger">{{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(1)->translatedFormat('d F Y')}}</span>
+                                    
+                                    @elseif(Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2) < now() && $skripsi->tgl_revisi_spesial == null && $skripsi->tgl_created_revisi !== null || Carbon::parse($skripsi->tgl_revisi_spesial) < now() && $skripsi->tgl_revisi_spesial !== null && $skripsi->tgl_created_revisi !== null)
+                                    <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lewat Batas Penyerahan Skripsi: <br></small>
+                                    <span class="text-danger">{{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2)->translatedFormat('d F Y')}}</span>
+                                    @elseif($skripsi->tgl_revisi_spesial == null && $skripsi->tgl_created_revisi == null)
+                                    <small class="text-dark"> Batas Penyerahan Skripsi: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(1)->translatedFormat('d F Y')}}
+                                    @elseif($skripsi->tgl_revisi_spesial == null && $skripsi->tgl_created_revisi !== null)
+                                    <small class="text-dark"> Batas Penyerahan Skripsi: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2)->translatedFormat('d F Y')}}
+                                    @elseif($skripsi->tgl_revisi_spesial !== null )
+                                    <small class="text-dark"> Batas Penyerahan Skripsi: <br></small>
+                                    {{ Carbon::parse($skripsi->tgl_revisi_spesial)->translatedFormat('d F Y')}}
+                                    
+                                    @endif
                                 </td>
                             @endif
 
@@ -361,7 +492,7 @@
                                         @endphp
 
                             <td class="text-center px-1 py-2">
-                                      {{ $bulan ?? 0}} <small>Bulan</small> <br> {{ $hari }} <small>Hari</small>
+                                      <b>{{ $bulan ?? 0}} </b> <small>Bulan</small> <br> <b>{{ $hari }} </b> <small>Hari</small>
                                 </td>
 
 
@@ -447,7 +578,6 @@
                                                     </div>
                                                 </div>
 
-
                                             </div>
                                         </div>
                                     </div>
@@ -469,6 +599,47 @@
                                     <a href="/daftar-sidang/detail/pembimbing/{{ $skripsi->id }}"
                                         class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i
                                             class="fas fa-info-circle"></i></a>
+                                @if ($skripsi->status_skripsi == 'DAFTAR SIDANG ULANG' && $skripsi->keterangan == 'Batas Waktu Penyerahan Buku Skripsi Habis')
+                                    <br>
+                                    <a href="#ModalSidangUlang" data-toggle="modal"
+                                        class="badge btn btn-danger p-2 mt-2"><i class="fas fa-trash fa-lg"></i></a>
+
+                                    <div class="modal fade"id="ModalSidangUlang">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="container px-5 pt-5 pb-2">
+                                                        <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                                        <p class="text-center">Mahasiswa akan dihapus dari Daftar Bimbingan Anda. Data tidak bisa dikembalikan!</p>
+                                                         <div class="row mb-3 justify-content-center text-center">
+                                                           
+                                                            <div class="col-3">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tidak</button>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <form
+                                                                    action="/lewat-batas-penyerahan-skripsi/hapus/{{ $skripsi->id }}"
+                                                                    method="POST">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Hapus</button>
+                                                                </form>
+                                                            </div>
+                                                           
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+
                                 </td>
                             @endif
                             @if (
@@ -581,6 +752,48 @@
                                     <a href="/kp-skripsi/pembimbing/perpanjangan-revisi/{{ $skripsi->id }}"
                                         class="badge btn btn-info p-1" data-bs-toggle="tooltip" title="Lihat Detail"><i
                                             class="fas fa-info-circle"></i></a>
+
+                                    @if($skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' && Carbon::parse($skripsi->tgl_revisi_spesial) < now() && $skripsi->tgl_revisi_spesial !== null)
+                                    <br>
+                                    <a href="#ModalRevisiSpesial" data-toggle="modal"
+                                        class="badge btn btn-danger p-2 mt-2"><i class="fas fa-trash fa-lg"></i></a>
+
+                                    <div class="modal fade"id="ModalRevisiSpesial">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="container px-5 pt-5 pb-2">
+                                                        <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                                        <p class="text-center">Mahasiswa akan dihapus dari Daftar Bimbingan Anda. Data tidak bisa dikembalikan!</p>
+                                                        <div class="row mb-3 justify-content-center text-center">
+                                                           
+                                                            <div class="col-3">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tidak</button>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <form
+                                                                    action="/lewat-batas-revisi-spesial/hapus/{{ $skripsi->id }}"
+                                                                    method="POST">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Hapus</button>
+                                                                </form>
+                                                            </div>
+                                                           
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+
+
                                 </td>
                             @endif
                             @if (
@@ -591,6 +804,47 @@
                                     <a href="/kp-skripsi/pembimbing/bukti-buku-skripsi/{{ $skripsi->id }}"
                                         class="badge btn btn-info p-1 mb-1" data-bs-toggle="tooltip"
                                         title="Lihat Detail"><i class="fas fa-info-circle"></i></a>
+
+                                        @if(Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(1) < now() && $skripsi->tgl_revisi_spesial == null && $skripsi->tgl_created_revisi == null || Carbon::parse($skripsi->tgl_revisi_spesial) < now() && $skripsi->tgl_revisi_spesial !== null && $skripsi->tgl_created_revisi == null || Carbon::parse($skripsi->tgl_selesai_sidang)->addMonths(2) < now() && $skripsi->tgl_revisi_spesial == null && $skripsi->tgl_created_revisi !== null || Carbon::parse($skripsi->tgl_revisi_spesial) < now() && $skripsi->tgl_revisi_spesial !== null && $skripsi->tgl_created_revisi !== null)
+                                    <br>
+                                    <a href="#ModalRevisiSpesial" data-toggle="modal"
+                                        class="badge btn btn-danger p-2 mt-2"><i class="fas fa-trash fa-lg"></i></a>
+
+                                    <div class="modal fade"id="ModalRevisiSpesial">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="container px-5 pt-5 pb-2">
+                                                        <h3 class="text-center">Apakah Anda Yakin?</h3>
+                                                        <p class="text-center">Mahasiswa akan dihapus dari Daftar Bimbingan Anda. Data tidak bisa dikembalikan!</p>
+                                                        <div class="row mb-3 justify-content-center text-center">
+                                                           
+                                                            <div class="col-3">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tidak</button>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <form
+                                                                    action="/lewat-batas-revisi-spesial/hapus/{{ $skripsi->id }}"
+                                                                    method="POST">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Hapus</button>
+                                                                </form>
+                                                            </div>
+                                                           
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+
                                 </td>
                             @endif
 
@@ -623,11 +877,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const waitingApprovalCount = {!! json_encode($jml_bimbingan_skripsi) !!};
+            const batasCount = {!! json_encode($status_daftar1 + $status_daftar2 + $status_daftar3 ) !!};
 
             const totalKuota = {!! json_encode($kapasitas_bimbingan_skripsi) !!};
             const sisaKuota = totalKuota - waitingApprovalCount;
 
-            if (waitingApprovalCount > 0 && waitingApprovalCount < totalKuota) {
+            if (waitingApprovalCount > 0 && waitingApprovalCount < totalKuota && batasCount == 0) {
 
                 Swal.fire({
                     title: 'Ini adalah halaman Bimbingan Skripsi',
@@ -637,16 +892,111 @@
                     showConfirmButton: true,
                     confirmButtonColor: '#28a745',
                 });
-            } else if (waitingApprovalCount >= totalKuota) {
+            } else if (waitingApprovalCount >= totalKuota && batasCount == 0) {
                 Swal.fire({
                     title: 'Ini adalah halaman Bimbingan Skripsi',
                     html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan Skripsi. <br>
-            Kuota Mahasiswa Bimbingan Anda Sudah Penuh!`,
+            Kuota Mahasiswa Bimbingan Anda <strong class="text-danger">Sudah Penuh</strong>!`,
                     icon: 'info',
                     showConfirmButton: true,
                     confirmButtonColor: '#28a745',
                 });
-            } else {
+            }
+            else if (waitingApprovalCount > 0 && waitingApprovalCount < totalKuota && batasCount > 0) {
+               Swal.fire({
+                title: 'Ini adalah halaman Skripsi',
+                html: `Ada <strong class="text-info"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan Skripsi. <br>
+            Anda memiliki sisa <strong class="text-info">${sisaKuota} kuota </strong>Mahasiswa Bimbingan Skripsi.
+                Dan <strong class="text-danger"> ${batasCount} Mahasiswa</strong> Lewat Batas Waktu. <br>
+                
+                @if (Str::length(Auth::guard('dosen')->user()) > 0)
+                    Berikut adalah mahasiswa yang lewat batas waktu : 
+                    <br>
+                    <br>
+                    <div>
+                        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="">
+                        <tbody class="bg-danger">
+                            @foreach ($batas_skripsi as $skripsi)
+                                <tr class="bg-danger ">
+                                    <td class="text-center text-light px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
+                                    <td class="text-left text-light pl-3 pr-1 py-2">{{ $skripsi->mahasiswa->nama }}</td>
+                                    @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
+                                        <td class="text-center px-1 py-2 text-light">Lewat Batas Daftar Seminar Proposal</td>
+                                    @endif
+                                    @if ($skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI' || $skripsi->status_skripsi == 'BUKTI PENYERAHAN BUKU SKRIPSI DITOLAK')
+                                        <td class="text-center px-1 py-2 text-light">Lewat Batas Penyerahan Buku Skripsi</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                            </div>
+                            <br>
+                                @foreach ($batas_skripsi as $skripsi)
+                                <form action="/lewat-batas-skripsi/hapus/{{ $skripsi->id }}" method="POST">
+                                @endforeach
+                                    @method('put')
+                                    @csrf
+                                    <button type="submit" class="btn px-4 py-2 fw-bold btn-success">OK</button>
+                                </form>
+                                @endif
+                                `,
+                icon: 'info',
+                showConfirmButton: false,
+                confirmButtonColor: '#28a745',
+                width: '800px',
+                allowOutsideClick: false,
+            });
+            } 
+            else if (waitingApprovalCount >= totalKuota && batasCount > 0) {
+               Swal.fire({
+                title: 'Ini adalah halaman Skripsi',
+                html: `Ada <strong class="text-danger"> ${waitingApprovalCount} Mahasiswa</strong> bimbingan Anda sedang melaksanakan Skripsi. <br>
+            Kuota Mahasiswa Bimbingan Anda <strong class="text-danger">Sudah Penuh</strong>!
+                Dan <strong class="text-danger"> ${batasCount} Mahasiswa</strong> Lewat Batas Waktu. <br>
+                
+                @if (Str::length(Auth::guard('dosen')->user()) > 0)
+                    Berikut adalah mahasiswa yang lewat batas waktu : 
+                    <br>
+                    <br>
+                    <div>
+                        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="">
+                        <tbody class="bg-danger">
+                            @foreach ($batas_skripsi as $skripsi)
+                                <tr class="bg-danger ">
+                                    <td class="text-center text-light px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
+                                    <td class="text-left text-light pl-3 pr-1 py-2">{{ $skripsi->mahasiswa->nama }}</td>
+                                    @if ($skripsi->status_skripsi == 'JUDUL DISETUJUI')
+                                        <td class="text-center px-1 py-2 text-light">Lewat Batas Daftar Seminar Proposal</td>
+                                    @endif
+                                    @if ($skripsi->status_skripsi == 'SIDANG SELESAI' || $skripsi->status_skripsi == 'PERPANJANGAN REVISI DISETUJUI')
+                                        <td class="text-center px-1 py-2 text-light">Lewat Batas Penyerahan Buku Skripsi</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                            </div>
+                            <br>
+                                @foreach ($batas_skripsi as $skripsi)
+                                <form action="/lewat-batas-skripsi/hapus/{{ $skripsi->id }}" method="POST">
+                                @endforeach
+                                    @method('put')
+                                    @csrf
+                                    <button type="submit" class="btn px-4 py-2 fw-bold btn-success">OK</button>
+                                </form>
+                                @endif
+                                `,
+                icon: 'info',
+                showConfirmButton: false,
+                confirmButtonColor: '#28a745',
+                width: '800px',
+                allowOutsideClick: false,
+            });
+            } 
+             else {
 
                 Swal.fire({
                     title: 'Ini adalah halaman Bimbingan Skripsi',

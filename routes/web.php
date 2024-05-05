@@ -47,12 +47,6 @@ use App\Http\Controllers\PenjadwalanSkripsiController;
 use App\Http\Controllers\PeminjamanMahasiswaController;
 use App\Http\Controllers\PeminjamanPLPController;
 
-use App\Http\Controllers\AbRuanganController;
-use App\Http\Controllers\AbsensiController;
-
-use App\Http\Controllers\GedungController;
-use App\Http\Controllers\MataKuliahController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,10 +58,13 @@ use App\Http\Controllers\MataKuliahController;
 |
 */
 
+include("doc.route.php");
+
 Route::group(['middleware' => 'prevent-back-history'],function(){
 Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);
 Route::get('/detail-sempro/{id}', [QRController::class, 'detailsempro']);
 Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
+Route::get('/detail-skripsi-final/{id}', [QRController::class, 'detailskripsifinal']);
 
 Route::get('/detail-undangan-kp/{id}', [QRController::class, 'detail_undangan_kp']);
 Route::get('/detail-undangan-sempro/{id}', [QRController::class, 'detail_undangan_sempro']);
@@ -101,11 +98,6 @@ Route::group(['middleware' => ['auth:dosen,web,mahasiswa']], function () {
 
 
 Route::group(['middleware' => ['auth:mahasiswa']], function () {
-
-        Route::get('/absensimahasiswa', [AbsensiController::class, 'absensimahasiswa']);
-        Route::get('/absensimahasiswa/detailabsensi/{class_id}', [AbsensiController::class, 'detailabsensi'])->name('detailabsensi');
-        Route::get('/absensimahasiswa/riwayatabsensi', [AbsensiController::class, 'riwayatabsensimahasiswa'])->name('riwayatabsensi');
-
 
     // Route::get('/kp-skripsi', [PendaftaranKPController::class, 'index']);
     // Route::get('/daftar/kerja-praktek', [PendaftaranKPController::class, 'indexkp']);
@@ -197,35 +189,6 @@ Route::group(['middleware' => ['auth:mahasiswa']], function () {
 
 Route::group(['middleware' => ['auth:web']], function () {
 
-        Route::get('/matakuliah/create', [MataKuliahController::class, 'create']);
-        Route::post('matakuliah/create', [MataKuliahController::class, 'store']);
-        Route::get('/matakuliah/edit/{matakuliah:id}', [MatakuliahController::class, 'edit']);
-        Route::put('/matakuliah/edit/{matakuliah:id}', [MataKuliahController::class, 'update']);
-
-        // Route::delete('/matakuliah/{matakuliah:id}',[MataKuliahController::class, 'destroy'])->name('matakuliah.destroy');
-        Route::post('/delete', [MataKuliahController::class, 'destroy']);
-        Route::get('/absensistatistikadmin', [AbsensiController::class, 'absensistatistikadmin'])->name('absensistatistikadmin');
-
-        Route::get('/absensi', [AbsensiController::class, 'index']);
-        // routes/web.php
-        Route::get('/open-absensi/{classId}/{mataKuliahId}', 'AbsensiController@showOpenAbsensi');
-        // web.php
-        Route::get('/qr-code/{classId}', 'QRCodeController@showQRCode')->name('qr-code.show');
-        // Route::delete('/delete/{id}', [AbsensiController::class, 'destroy'])->name('hapus');
-        Route::get('/gedung/create', [GedungController::class, 'create'])->name('create');
-        Route::post('/gedung/create', [GedungController::class, 'store'])->name('store');
-        Route::get('/gedung/edit/{gedung:id}', [GedungController::class, 'edit']);
-        Route::put('/gedung/edit/{gedung:id}', [GedungController::class, 'update']);
-        Route::post('/gedung/delete', [GedungController::class, 'destroy']);
-        Route::get('/gedung/create-ruangan', [AbRuanganController::class, 'create'])->name('create-ruangan');
-        Route::post('/gedung/create-ruangan', [AbRuanganController::class, 'store'])->name('store-ruangan');
-        Route::get('/gedung/edit-ruangan/{ruangan:id}', [AbRuanganController::class, 'edit'])->name('edit-ruangan');
-        Route::put('/gedung/edit-ruangan/{ruangan:id}', [AbRuanganController::class, 'update'])->name('update-ruangan');
-        Route::post('/gedung/ruangan/delete', [AbRuanganController::class, 'destroy']);
-
-
-
-
     //Murdillah
     // Route::get('/ruangan', [RuanganController::class, 'index']);
     // Route::get('/ruangan/create', [RuanganController::class, 'create']);
@@ -298,7 +261,8 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/prodi/create', [ProdiController::class, 'create']);
     Route::post('/prodi/create', [ProdiController::class, 'store']);
     Route::get('/prodi/edit/{prodi:id}', [ProdiController::class, 'edit']);
-    Route::put('/prodi/edit/{prodi:id}', [ProdiController::class, 'update']);
+    Route::post('/update/{id}',[ProdiController::class,'update'])->name('prodi.update');
+    // Route::put('/prodi/edit/{prodi:id}', [ProdiController::class, 'update']);
     Route::delete('/prodi/{prodi:id}', [ProdiController::class, 'destroy']);
 
     Route::get('/konsentrasi', [KonsentrasiController::class, 'index']);
@@ -330,26 +294,6 @@ Route::group(['middleware' => ['auth:web']], function () {
 
 
 Route::group(['middleware' => ['auth:dosen']], function () {
-
-        Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
-        Route::get('/absensi/open-absensi/{id}', [AbsensiController::class, 'showOpenAbsensi'])->name('showQrCode');
-        Route::get('/absensi/open-absensi/{classId}', 'AbsensiController@openAbsensi')->name('absensi');
-        Route::get('/absensi/riwayat-absensi', [AbsensiController::class, 'riwayat'])->name('riwayat-absensi');
-        Route::get('/absensi/riwayat-absensi/{id}', [AbsensiController::class, 'detailriwayat'])->name('detail-riwayat');
-        Route::get('/absensi/ruangan-absensi', [AbRuanganController::class, 'ruanganabsensi'])->name('ruangan-absensi');
-
-        Route::delete('/delete/{id}', [AbsensiController::class, 'destroy'])->name('hapus');
-        Route::get('/search/searchmahasiswa', [MahasiswaController::class, 'searchMahasiswa']);
-        Route::post('/absensi/tambah-manual', [AbsensiController::class, 'tambahAbsensiManual'])->name('tambah_absensi_manual');
-        Route::post('/buka-kelas', [AbsensiController::class, 'bukaKelas'])->name('buka_kelas');
-        // Route::get('/absensi/open-absensi/{id}', 'AbsensiController@showOpenAbsensi')->name('bukaKelas');
-        Route::post('/tutup/{id}', [AbsensiController::class, 'perkuliahan'])->name('tutup');
-        Route::get('/absensistatistik', [AbsensiController::class, 'absensistatistik'])->name('absensistatistik');
-        // Route::get('/absensistatistik/detail-statistik/{class_id}', [AbsensiController::class, 'detailstatistik'])->name('detailStatistik');
-        // Route::get('/absensistatistik/statistik-ruangan', [AbsensiController::class, 'statistikruangan'])->name('statistik-ruangan');
-    Route::get('/absensi/create', [AbsensiController::class, 'create']);
-    Route::get('/detail-absensi', [AbsensiController::class, 'showLastAbsensiDetail'])->name('detail_absensi');
-    Route::get('/absensi/mahasiswa/{perkuliahanId}', [AbsensiController::class, 'getAbsensiMahasiswa']);
     Route::get('/pendaftaran', [PendaftaranController::class, 'pendaftaran_kp_pembimbing']);
     Route::get('/kerja-praktek', [PendaftaranController::class, 'pendaftaran_kp']);
 
@@ -425,6 +369,8 @@ Route::group(['middleware' => ['auth:dosen']], function () {
     Route::put('/selesaisempro/pembimbing/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakselesaisempro_pemb']);
 
     Route::put('/lewat-batas-sidang/hapus/{id}', [PendaftaranSkripsiController::class, 'lewat_batas_sidang']);
+    Route::put('/lewat-batas-revisi-spesial/hapus/{id}', [PendaftaranSkripsiController::class, 'lewat_batas_revisi_spesial']);
+    Route::put('/lewat-batas-penyerahan-skripsi/hapus/{id}', [PendaftaranSkripsiController::class, 'lewat_batas_penyerahan_skripsi']);
 
     Route::put('/selesaisidang/pembimbing/approve/{id}', [PendaftaranSkripsiController::class, 'approveselesaisidang_pemb']);
     Route::put('/selesaisidang/pembimbing/tolak/{id}', [PendaftaranSkripsiController::class, 'tolakselesaisidang_pemb']);
@@ -586,7 +532,8 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/kapasitas-bimbingan/index', [PendaftaranKPController::class, 'kapasitas_index']);
     Route::get('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitas_bimbingan_edit']);
     Route::post('/kapasitas-bimbingan/edit/{id}', [PendaftaranKPController::class, 'kapasitasbimbingan_store']);
-
+    
+    
 });
 
 Route::group(['middleware' => ['auth:web,dosen']], function(){
@@ -607,6 +554,28 @@ Route::group(['middleware' => ['auth:web,dosen']], function(){
     Route::get('/penilaian-skripsi/cek-nilai/{id}', [PenjadwalanSkripsiController::class, 'ceknilai']);
     Route::get('/penilaian-skripsi/draft-ba/{id}', [PenjadwalanSkripsiController::class, 'draft']);
     Route::get('/penilaian-skripsi/beritaacara-skripsi/{id}', [PenjadwalanSkripsiController::class, 'beritaacaraskripsi']);
+    
+
+    Route::put('/sempro/undur/admin/{id}', [PenjadwalanSemproController::class, 'undur_sempro_admin']);
+    Route::post('/sempro/undur/admin/{alasan}', [PenjadwalanSemproController::class, 'undur_sempro_admin']);
+
+    Route::put('/sidang/undur/admin/{id}', [PenjadwalanSkripsiController::class, 'undur_sidang_admin']);
+    Route::post('/sidang/undur/admin/{alasan}', [PenjadwalanSkripsiController::class, 'undur_sidang_admin']);
+    
+    Route::put('/sempro/undur/koordinator/{id}', [PenjadwalanSemproController::class, 'undur_sempro_koordinator']);
+    Route::post('/sempro/undur/koordinator/{alasan}', [PenjadwalanSemproController::class, 'undur_sempro_koordinator']);
+
+    Route::put('/sidang/undur/koordinator/{id}', [PenjadwalanSkripsiController::class, 'undur_sidang_koordinator']);
+    Route::post('/sidang/undur/koordinator/{alasan}', [PenjadwalanSkripsiController::class, 'undur_sidang_koordinator']);
+
+    // LEWAT BATAS
+    Route::put('/lewat-batas-kp/hapus/{id}', [PendaftaranKPController::class, 'pop_up_lewat_batas_kp']);
+    Route::put('/lewat-batas-kp/pembimbing/hapus/{id}', [PendaftaranKPController::class, 'pop_up_lewat_batas_kp_pembimbing']);
+    Route::put('/lewat-batas-skripsi/hapus/{id}', [PendaftaranSkripsiController::class, 'pop_up_lewat_batas_skripsi']);
+    
+    // BERITA ACARA FINAL
+    Route::get('/berita-acara-final/{id}', [PendaftaranSkripsiController::class, 'beritaacarafinal']);
+
 
 });
 
@@ -632,6 +601,10 @@ Route::group(['middleware' => ['auth:web,dosen,mahasiswa']], function(){
     Route::get('/statistik/bimbingan-kp', [StatistikController::class, 'bimbingan_kp']);
 
     Route::get('/statistik/bimbingan-skripsi', [StatistikController::class, 'bimbingan_skripsi']);
+    
+    Route::get('/statistik/judul-skripsi-terdaftar', [StatistikController::class, 'judul_skripsi_terdaftar']);
+    
+    Route::get('/statistik/riwayat-kp', [StatistikController::class, 'riwayat_lokasi_kp']);
 
     Route::get('/detail/kuota-bimbingan/kp/{nip}', [PendaftaranController::class, 'detail_kuota_bimbingan_kp']);
     Route::get('/detail/lulus-bimbingan/kp/{nip}', [StatistikController::class, 'detail_lulus_bimbingan_kp']);
@@ -673,6 +646,8 @@ Route::group(['middleware' =>  ['auth:web']], function(){
 // BATAS
 
 Route::group(['middleware' => ['auth:dosen', 'cekrole:9,10,11']], function(){
+
+    Route::put('/lewat-batas-balasan/hapus/{id}', [PendaftaranKPController::class, 'lewat_batas_balasan']);
 
     Route::get('/developer/create', [DeveloperController::class, 'create']);
     Route::post('/developer/create', [DeveloperController::class, 'store']);
@@ -750,8 +725,6 @@ Route::group(['middleware' => ['auth:web', 'cekrole:12']], function(){
     Route::delete('/inventaris/deletebarang-plp/{id}', [BarangController::class, 'destroyplp'])->name('deletebarangplp');
     Route::get('/inventaris/editbarang-plp/{id}', [BarangController::class, 'editplp'])->name('editbarangplp');
     Route::put('/inventaris/updatebarang-plp/{id}', [BarangController::class, 'updateplp'])->name('updatebarangplp');
-
-    
     
 });
 
@@ -762,7 +735,7 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     Route::put('/usulankp/kaprodi/approve/{id}', [PendaftaranKPController::class, 'approveusulankp_kaprodi']);
     Route::put('/usulankp/kaprodi/tolak/{id}', [PendaftaranKPController::class, 'tolakusulan_kaprodi']);
 
-        Route::get('/persetujuan-kaprodi/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_kaprodi']); 
+    Route::get('/persetujuan-kaprodi/detail/{id}', [PenjadwalanController::class, 'detail_persetujuan_kaprodi']); 
 
     Route::put('/usulan-semkp/kaprodi/approve/{id}', [PendaftaranKPController::class, 'approveusulan_semkp_kaprodi']);
     Route::put('/usulan-semkp/kaprodi/tolak/{id}', [PendaftaranKPController::class, 'tolak_semkp_kaprodi']);
@@ -794,6 +767,8 @@ Route::group(['middleware' => ['auth:dosen', 'cekrole:6,7,8']], function(){
     Route::put('/persetujuansempro-kaprodi/tolak/{id}', [PenjadwalanSemproController::class, 'tolak_kaprodi']);
     Route::put('/persetujuanskripsi-kaprodi/approve/{id}', [PenjadwalanSkripsiController::class, 'approve_kaprodi']);
     Route::put('/persetujuanskripsi-kaprodi/tolak/{id}', [PenjadwalanSkripsiController::class, 'tolak_kaprodi']);
+
+    Route::put('/perpanjang-revisi/spesial/kaprodi/{id}', [PendaftaranSkripsiController::class, 'spesial_kaprodi']);
 });
 
 });
@@ -823,23 +798,6 @@ Route::group(['middleware' => ['auth:dosen,mahasiswa']], function () {
 });
 
 Route::group(['middleware' => ['auth:dosen,web']], function () {
-
-    Route::get('/matakuliah', [MataKuliahController::class, 'index']);
-    Route::get('/matakuliah/riwayat', [MataKuliahController::class, 'riwayat'])->name('riwayat');
-
-    Route::get('/gedung', [GedungController::class, 'index'])->name('gedung');
-    Route::get('/gedung/ruangan', [AbRuanganController::class, 'ruangan'])->name('ruangan');
-    Route::get('/daftar-perkuliahan/{matakuliah_id}', [MataKuliahController::class, 'detailstatistik'])->name('detail.statistik');
-
-    Route::get('/matakuliah/ruangan-absensi', [AbRuanganController::class, 'ruanganabsensiadmin'])->name('ruangan-absensi-admin');
-
-    Route::get('/absensistatistik/detail-statistik/{class_id}', [AbsensiController::class, 'detailstatistik'])->name('detailStatistik');
-    Route::get('/absensistatistik/statistik-ruangan', [AbsensiController::class, 'statistikruangan'])->name('statistik-ruangan');
-    Route::get('/download_pdf/{class_id}', [AbsensiController::class, 'download_pdf'])->name('download_pdf');
-    Route::get('/download_pdf/{matakuliah_id}', [MataKuliahController::class, 'download_pdf'])->name('download_pdf');
-
-    Route::get('/daftar-presensi-mahasiswa/{perkuliahan_id}', [MataKuliahController::class, 'daftarhadir'])->name('daftarhadir');
-        
     Route::get('/usulan/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailusulan_pembimbing']);
     Route::get('/suratperusahaan/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailbalasan_pembimbing']);
     Route::get('/kpti10/detail/pembimbingprodi/{id}', [PendaftaranController::class, 'detailkpti10_pembimbing']);
@@ -854,6 +812,7 @@ Route::group(['middleware' => ['auth:dosen,web']], function () {
     Route::get('/usuljudul/detail/pembimbing/{id}', [PendaftaranController::class, 'detailusuljudul_pembimbing']);
 
     Route::get('/daftar-sempro/detail/pembimbing/{id}', [PendaftaranController::class, 'detailsempro_pemb']);
+    
     Route::get('/daftar-sidang/detail/pembimbing/{id}', [PendaftaranController::class, 'detailsidang_pemb']);
 
     Route::get('/kp-skripsi/persetujuan/usulankp/{id}', [PendaftaranKPController::class, 'detailpersetujuan_usulankp']);

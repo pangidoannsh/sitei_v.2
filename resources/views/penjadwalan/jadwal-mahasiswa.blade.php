@@ -26,7 +26,99 @@
     </ol> -->
 
     <div class="container card p-4">
-        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatables2">
+        
+        @php
+        
+        $jenis_seminar = [];
+
+        // Ambil jenis seminar dari data seminar KP dan tambahkan ke dalam array
+        foreach ($penjadwalan_kps as $kp) {
+            $jenis_seminar[] = $kp->jenis_seminar;
+        }
+
+        // Ambil jenis seminar dari data seminar Sempro dan tambahkan ke dalam array
+        foreach ($penjadwalan_sempros as $sempro) {
+            $jenis_seminar[] = $sempro->jenis_seminar;
+        }
+
+        // Ambil jenis seminar dari data seminar Skripsi dan tambahkan ke dalam array
+        foreach ($penjadwalan_skripsis as $skripsi) {
+            $jenis_seminar[] = $skripsi->jenis_seminar;
+        }
+
+        // Hilangkan duplikasi jenis seminar
+        $jenis_seminar = array_unique($jenis_seminar);
+
+        // Tetapkan semua jenis seminar yang diinginkan
+        $all_jenis_seminar = ['Seminar KP', 'Seminar Proposal', 'Sidang Skripsi'];
+
+        // Gabungkan semua jenis seminar yang ada dengan semua jenis seminar yang diinginkan
+        $jenis_seminar = array_merge($all_jenis_seminar, $jenis_seminar);
+
+        // Hilangkan duplikasi lagi (jika diperlukan)
+        $jenis_seminar = array_unique($jenis_seminar);
+
+        @endphp
+
+        <!-- Desktop Version -->
+        <div class="d-none d-md-flex justify-content-between mb-3 filter">
+            <div class="d-flex align-items-center">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuJadwalSeminarUntukMahasiswa">Tampilkan</label>
+                    <select id="lengthMenuJadwalSeminarUntukMahasiswa" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="input-group ml-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="seminarFilterJadwalSeminarUntukMahasiswa">Seminar</label>
+                    <select id="seminarFilterJadwalSeminarUntukMahasiswa" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($jenis_seminar as $jenis)
+                            <option value="{{ $jenis }}" class="text-capitalize">{{ $jenis }}</option>
+                        @endforeach
+                    </select>                   
+                </div>
+            </div>
+            <div class="dataTables_filter input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterJadwalSeminarUntukMahasiswa">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterJadwalSeminarUntukMahasiswa" placeholder="">
+            </div>
+        </div>
+
+        <!-- Tablet & Mobile Version -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+            <div class="dataTables_length input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="lengthMenuMobileJadwalSeminarUntukMahasiswa">Tampilkan</label>
+                <select id="lengthMenuMobileJadwalSeminarUntukMahasiswa" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="250">250</option>
+                </select>
+            </div>
+            <div class="input-group" style="width: max-content;">
+                <label class="pt-2 pr-2" for="seminarFilterMobileJadwalSeminarUntukMahasiswa">Seminar</label>
+                <select id="seminarFilterMobileJadwalSeminarUntukMahasiswa" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                    <option value="" selected>Semua</option>
+                    @foreach ($jenis_seminar as $jenis)
+                        <option value="{{ $jenis }}" class="text-capitalize">{{ $jenis }}</option>
+                    @endforeach
+                </select>                    
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+            <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                <label class="pt-2 pr-2" for="searchFilterMobileJadwalSeminarUntukMahasiswa">Cari</label>
+                <input type="search" class="form-control form-control-md rounded-3 py-1" id="searchFilterMobileJadwalSeminarUntukMahasiswa" placeholder="">
+            </div>
+        </div>
+        
+        <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="datatablesjadwalseminaruntukmhs">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">NIM</th>
