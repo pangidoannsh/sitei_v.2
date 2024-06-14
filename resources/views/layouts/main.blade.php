@@ -14,9 +14,11 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    {{-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" /> --}}
 
     <!-- <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('/assets/css/mbkm.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/dokumen.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/assets/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/style.css?v=0.001') }}">
@@ -29,235 +31,219 @@
 
     <script src="https://kit.fontawesome.com/9c94b38548.js" crossorigin="anonymous"></script>
 
-    <!-- <script type="text/javascript">
-        function mousedwn(e) {
-            try {
-                if (event.button == 2 || event.button == 3) return false
-            } catch (e) {
-                if (e.which == 3) return false
-            }
-        }
-        document.oncontextmenu = function() {
-            return false
-        };
-        document.ondragstart = function() {
-            return false
-        };
-        document.onmousedown = mousedwn
-    </script> -->
-    
-        <style>
+    <style>
         .dropdown-menu {
-    border-left: 0.01px solid rgba(0, 0, 0, 0.05);
-    border-right: 0.01px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 0.01px solid rgba(0, 0, 0, 0.05);
-    border-top: 0.01px solid rgba(0, 0, 0, 0.05);
-    /* border: none; */
-    box-shadow: none;
-    /*padding-left:20px;*/
-}
+            border-left: 0.01px solid rgba(0, 0, 0, 0.05);
+            border-right: 0.01px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 0.01px solid rgba(0, 0, 0, 0.05);
+            border-top: 0.01px solid rgba(0, 0, 0, 0.05);
+            box-shadow: none;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: rgba(41, 52, 47, 0.05);
+        }
+
+        .dropdown-menu form li:hover {
+            background-color: rgba(41, 52, 47, 0.05);
+        }
 
 
+        @media screen and (max-width: 768px) {
+            .cardskripsi {
+                margin-bottom: 50px;
+            }
 
-.dropdown-menu li:hover {
-    background-color: rgba(41, 52, 47, 0.05);
-}
+            .dropdown-menu form li i {
+                margin-left: -15px;
+            }
 
-.dropdown-menu form li:hover {
-    background-color: rgba(41, 52, 47, 0.05);
-}
+            .navbar-collapse {
+                /*background: rgba(0, 0, 0, 0.05);*/
+                padding-left: 25px;
+                padding-right: 25px;
+            }
 
+            .dropdown-menu {
+                background: radial-gradient(circle at top left, #ffffff, #e5e5e5);
 
-@media screen and (max-width: 768px) {
-    .cardskripsi {
-        margin-bottom: 50px;
-    }
-    .dropdown-menu form li i {
-        margin-left: -15px;
-    }
-     .navbar-collapse {
-        /*background: rgba(0, 0, 0, 0.05);*/
-        padding-left: 25px;
-        padding-right: 25px;
-    } 
-     .dropdown-menu {
-        background: radial-gradient(circle at top left, #ffffff, #e5e5e5);
-        
-    } 
-    .navbar-nav li a {
-        text-align: center;
-    }
-    .navbar-nav li button {
-        text-align: center;
-    }
-  
-}
+            }
 
-.dropdown-item:hover {
-    color: #0c8a4f;
-    background-color: rgba(41, 52, 47, 0.05);
-}
+            .navbar-nav li a {
+                text-align: center;
+            }
 
-form li button:hover {
-    color: #0c8a4f;
-    background-color: rgba(41, 52, 47, 0.05);
-}
-.cursor-default {
-      cursor: default !important;
+            .navbar-nav li button {
+                text-align: center;
+            }
 
-    }
+        }
 
-    .cursor-default:hover {
-      cursor: default !important;
-      color: #192f59 !important;
-    background-color: white !important;
-    }
-    
-    #datatablesriwayatseminar_length,
-    #datatablesriwayatseminar_filter {
-        display: none;
-    }
-    
-    #datatablesriwayatkpdanskripsi_length,
-    #datatablesriwayatkpdanskripsi_filter {
-        display: none;
-    }
-    
-    #datatablesbimbinganskripsi_length,
-    #datatablesbimbinganskripsi_filter {
-        display: none;
-    }
-    
-    #datatablesbimbingankp_length,
-    #datatablesbimbingankp_filter {
-        display: none;
-    }
-    
-    #datatablesjadwalseminarpembimbingpenguji_length,
-    #datatablesjadwalseminarpembimbingpenguji_filter {
-        display: none;
-    }
-    
-    #datatablespersetujuankpskripsi_length,
-    #datatablespersetujuankpskripsi_filter {
-        display: none;
-    }
-    
-    #datatablesriwayatseminardibatalkan_length,
-    #datatablesriwayatseminardibatalkan_filter {
-        display: none;
-    }
-    
-    #datatablesriwayatseminarprodi_length,
-    #datatablesriwayatseminarprodi_filter {
-        display: none;
-    }
-    
-    #datatablesriwayatkpskripsiprodi_length,
-    #datatablesriwayatkpskripsiprodi_filter {
-        display: none;
-    }
-    
-    #datatablesdataskripsiprodi_length,
-    #datatablesdataskripsiprodi_filter {
-        display: none;
-    }
-    
-    #datatablesdatakpprodi_length,
-    #datatablesdatakpprodi_filter {
-        display: none;
-    }
-    
-    #datatablesjadwalseminarprodi_length,
-    #datatablesjadwalseminarprodi_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarlulusbimbinganskripsi_length,
-    #datatablesdaftarlulusbimbinganskripsi_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarbebanbimbinganskripsi_length,
-    #datatablesdaftarbebanbimbinganskripsi_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarselesaibimbingankp_length,
-    #datatablesdaftarselesaibimbingankp_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarbebanbimbingankp_length,
-    #datatablesdaftarbebanbimbingankp_filter {
-        display: none;
-    }
-    
-    #datatablesdataskripsimhsadmin_length,
-    #datatablesdataskripsimhsadmin_filter {
-        display: none;
-    }
-    
-    #datatablesdatakpmhsadmin_length,
-    #datatablesdatakpmhsadmin_filter {
-        display: none;
-    }
-    
-    #datatablesjadwalseminaradminprodi_length,
-    #datatablesjadwalseminaradminprodi_filter {
-        display: none;
-    }
-    
-    #datatablespersetujuankpskripsiadmin_length,
-    #datatablespersetujuankpskripsiadmin_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarmhsadmprodi_length,
-    #datatablesdaftarmhsadmprodi_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarprodiadmjurusan_length,
-    #datatablesdaftarprodiadmjurusan_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarkonsentrasiadmjurusan_length,
-    #datatablesdaftarkonsentrasiadmjurusan_filter {
-        display: none;
-    }
-    
-    #datatablesdaftardosenadmjurusan_length,
-    #datatablesdaftardosenadmjurusan_filter {
-        display: none;
-    }
-    
-    #datatablesdaftartendikadmjurusan_length,
-    #datatablesdaftartendikadmjurusan_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarplpadmjurusan_length,
-    #datatablesdaftarplpadmjurusan_filter {
-        display: none;
-    }
-    
-    #datatablesdaftarhakaksesadmjurusan_length,
-    #datatablesdaftarhakaksesadmjurusan_filter {
-        display: none;
-    }
-    
-    #datatablesjadwalseminaruntukmhs_length,
-    #datatablesjadwalseminaruntukmhs_filter {
-        display: none;
-    }
-    
-    #datatablesjudulskripsiterdaftar_length,
-    #datatablesjudulskripsiterdaftar_filter {
-        display: none;
-    }
+        .dropdown-item:hover {
+            color: #0c8a4f;
+            background-color: rgba(41, 52, 47, 0.05);
+        }
 
+        form li button:hover {
+            color: #0c8a4f;
+            background-color: rgba(41, 52, 47, 0.05);
+        }
+
+        .cursor-default {
+            cursor: default !important;
+
+        }
+
+        .cursor-default:hover {
+            cursor: default !important;
+            color: #192f59 !important;
+            background-color: white !important;
+        }
+
+        #datatablesriwayatseminar_length,
+        #datatablesriwayatseminar_filter {
+            display: none;
+        }
+
+        #datatablesriwayatkpdanskripsi_length,
+        #datatablesriwayatkpdanskripsi_filter {
+            display: none;
+        }
+
+        #datatablesbimbinganskripsi_length,
+        #datatablesbimbinganskripsi_filter {
+            display: none;
+        }
+
+        #datatablesbimbingankp_length,
+        #datatablesbimbingankp_filter {
+            display: none;
+        }
+
+        #datatablesjadwalseminarpembimbingpenguji_length,
+        #datatablesjadwalseminarpembimbingpenguji_filter {
+            display: none;
+        }
+
+        #datatablespersetujuankpskripsi_length,
+        #datatablespersetujuankpskripsi_filter {
+            display: none;
+        }
+
+        #datatablesriwayatseminardibatalkan_length,
+        #datatablesriwayatseminardibatalkan_filter {
+            display: none;
+        }
+
+        #datatablesriwayatseminarprodi_length,
+        #datatablesriwayatseminarprodi_filter {
+            display: none;
+        }
+
+        #datatablesriwayatkpskripsiprodi_length,
+        #datatablesriwayatkpskripsiprodi_filter {
+            display: none;
+        }
+
+        #datatablesdataskripsiprodi_length,
+        #datatablesdataskripsiprodi_filter {
+            display: none;
+        }
+
+        #datatablesdatakpprodi_length,
+        #datatablesdatakpprodi_filter {
+            display: none;
+        }
+
+        #datatablesjadwalseminarprodi_length,
+        #datatablesjadwalseminarprodi_filter {
+            display: none;
+        }
+
+        #datatablesdaftarlulusbimbinganskripsi_length,
+        #datatablesdaftarlulusbimbinganskripsi_filter {
+            display: none;
+        }
+
+        #datatablesdaftarbebanbimbinganskripsi_length,
+        #datatablesdaftarbebanbimbinganskripsi_filter {
+            display: none;
+        }
+
+        #datatablesdaftarselesaibimbingankp_length,
+        #datatablesdaftarselesaibimbingankp_filter {
+            display: none;
+        }
+
+        #datatablesdaftarbebanbimbingankp_length,
+        #datatablesdaftarbebanbimbingankp_filter {
+            display: none;
+        }
+
+        #datatablesdataskripsimhsadmin_length,
+        #datatablesdataskripsimhsadmin_filter {
+            display: none;
+        }
+
+        #datatablesdatakpmhsadmin_length,
+        #datatablesdatakpmhsadmin_filter {
+            display: none;
+        }
+
+        #datatablesjadwalseminaradminprodi_length,
+        #datatablesjadwalseminaradminprodi_filter {
+            display: none;
+        }
+
+        #datatablespersetujuankpskripsiadmin_length,
+        #datatablespersetujuankpskripsiadmin_filter {
+            display: none;
+        }
+
+        #datatablesdaftarmhsadmprodi_length,
+        #datatablesdaftarmhsadmprodi_filter {
+            display: none;
+        }
+
+        #datatablesdaftarprodiadmjurusan_length,
+        #datatablesdaftarprodiadmjurusan_filter {
+            display: none;
+        }
+
+        #datatablesdaftarkonsentrasiadmjurusan_length,
+        #datatablesdaftarkonsentrasiadmjurusan_filter {
+            display: none;
+        }
+
+        #datatablesdaftardosenadmjurusan_length,
+        #datatablesdaftardosenadmjurusan_filter {
+            display: none;
+        }
+
+        #datatablesdaftartendikadmjurusan_length,
+        #datatablesdaftartendikadmjurusan_filter {
+            display: none;
+        }
+
+        #datatablesdaftarplpadmjurusan_length,
+        #datatablesdaftarplpadmjurusan_filter {
+            display: none;
+        }
+
+        #datatablesdaftarhakaksesadmjurusan_length,
+        #datatablesdaftarhakaksesadmjurusan_filter {
+            display: none;
+        }
+
+        #datatablesjadwalseminaruntukmhs_length,
+        #datatablesjadwalseminaruntukmhs_filter {
+            display: none;
+        }
+
+        #datatablesjudulskripsiterdaftar_length,
+        #datatablesjudulskripsiterdaftar_filter {
+            display: none;
+        }
     </style>
 
 
@@ -269,542 +255,7 @@ form li button:hover {
     <div class="wrapper">
 
         <div class="atas">
-            <nav class="navbar navbar-expand-lg main-header fixed-top bayangan">
-                <div class="container judul">
-                    <div class="sia-jte">
-                        <a>
-                            <img src="/assets/dist/img/unri.png" alt="" width="30" height="30"
-                                class="d-inline-block mr-2">
-                        </a>
-                        @if (Str::length(Auth::guard('web')->user()) > 0)
-                            <a class="navbar-brand mt-1 " href="/">SITEI
-                            @elseif (Str::length(Auth::guard('dosen')->user()) > 0)
-                                <a class="navbar-brand mt-1 " href="/persetujuan-kp-skripsi">SITEI
-                                @elseif (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-                                    <a class="navbar-brand mt-1 " href="/">SITEI
-                        @endif
-                        </a>
-                    </div>
-                    
-                    <span class="navbar-toggler navbar-light bg-white border border-white" role="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-bars fs-1 fa-lg"></i>
-                    </span>
-
-                    
-
-                    <div class="collapse navbar-collapse navbar-toggler-collapse rounded-bottom" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
-
-                            {{-- Menu KP/TA Dosen --}}
-
-                            @if (Str::length(Auth::guard('dosen')->user()) > 0)
-
-                            <ul class="navbar-nav">
-                                {{-- PENGUMUMAN --}}
-
-                                @if (in_array(Auth::guard('dosen')->user()->role_id, [5, 6, 7, 8]))
-                                        <li class="nav-item dropdown ">
-                                            <a class="nav-link dropdown-toggle" id="pengumumanDropdown" role="button"
-                                                data-bs-toggle="dropdown" class="nav-link ">
-                                                <span
-                                                    class="fw-bold {{ Request::is('pengumuman*') ? 'text-success' : '' }}">
-                                                    PENGUMUMAN
-                                                </span>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="pengumumanDropdown">
-                                                <li class="nav-item">
-                                                    <a href="{{ route('pengumuman') }}"
-                                                        class="nav-link {{ Request::is('pengumuman') || Request::is('pengumuman/arsip') ? 'text-success' : '' }}">Dosen</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link {{ Request::is('pengumuman/pengelola*') ? 'text-success' : '' }}"
-                                                        href="{{ route('pengumuman.pengelola') }}">Pengelola</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    @else
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
-                                                aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
-                                        </li>
-                                    @endif
-
-                                {{-- END PENGUMUMAN --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    KP/SKRIPSI
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                                <li>
-                                                    <a class="nav-link {{ Request::is('persetujuan-kp-skripsi*') ? 'text-success' : '' }} {{ Request::is('persetujuan-koordinator*') ? 'text-success' : '' }}{{ Request::is('riwayat-koordinator*') ? 'text-success' : '' }}"
-                                                aria-current="page" href="/persetujuan-kp-skripsi">Persetujuan</a>
-                                                </li>
-                                        
-
-                                                <li>
-                                                    <a class="nav-link" href="/pembimbing/skripsi"
-                                                class="dropdown-item mb-1 {{ Request::is('pembimbing/skripsi*') ? 'text-success' : '' }} {{ Request::is('pembimbing/kerja-praktek*') ? 'text-success' : '' }}">Bimbingan</a>
-                                                </li>
-                                            
-
-                                                <li>
-                                                    <a class="nav-link" href="/kp-skripsi/seminar-pembimbing-penguji"
-                                                class="dropdown-item mb-1 {{ Request::is('kp-skripsi*') ? 'text-success' : '' }} ">Seminar</a>
-                                                </li>
-                                                
-                                                <li>
-                                                    <a class="nav-link" href="/pembimbing-penguji/riwayat-bimbingan"
-                                                class="dropdown-item mb-1 {{ Request::is('pembimbing-penguji*') ? 'text-success' : '' }} ">Riwayat</a>
-                                                </li>
-                                                <li><a class="nav-link" href="/statistik"
-                                                class="dropdown-item mb-1 {{ Request::is('statistik*') ? 'text-success' : '' }}">Statistik</a>
-                                                </li>
-                                            @if (Str::length(Auth::guard('dosen')->user()) > 0)
-                                                @if (Auth::guard('dosen')->user()->role_id == 5 ||
-                                                    Auth::guard('dosen')->user()->role_id == 9 ||
-                                                    Auth::guard('dosen')->user()->role_id == 10 ||
-                                                    Auth::guard('dosen')->user()->role_id == 11 ||
-                                                    Auth::guard('dosen')->user()->role_id == 6 ||
-                                                    Auth::guard('dosen')->user()->role_id == 7 ||
-                                                    Auth::guard('dosen')->user()->role_id == 8)
-                                                <li><a class="nav-link" href="/prodi/kp-skripsi/seminar"
-                                                        class="dropdown-item mb-1 {{ Request::is('prodi*') ? 'text-success' : '' }} {{ Request::is('kerja-praktek*') ? 'text-success' : '' }} {{ Request::is('skripsi*') ? 'text-success' : '' }}">Pengelola</a>
-                                                </li>
-                                                @endif
-                                            @endif
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                                
-                                
-                                <li class="nav-item">
-                                    <a  class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }} "
-                                        aria-current="page" href="/inventaris/peminjaman-dosen">INVENTARIS</a>
-                                </li>
-                                
-                                {{-- DistribusiDokumen --}}
-                                @if (in_array(Auth::guard('dosen')->user()->role_id, [5, 6, 7, 8]))
-                                    <li class="nav-item dropdown ">
-                                        <a class="nav-link dropdown-toggle" id="dokumenDropdown" role="button"
-                                            data-bs-toggle="dropdown" class="nav-link ">
-                                            <span
-                                                class="fw-bold {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
-                                                DOKUMEN
-                                            </span>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dokumenDropdown">
-                                            <li class="nav-item">
-                                                <a href="{{ route('doc.index') }}"
-                                                    class="nav-link {{ Request::is('distribusi-dokumen') ? 'text-success' : '' }}">Dosen</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link {{ Request::is('distribusi-dokumen/pengelola*') ? 'text-success' : '' }}"
-                                                    href="{{ route('pengelola') }}">Pengelola</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                @else
-                                    <li class="nav-item dropdown baru">
-                                        <a href="{{ route('doc.index') }}"
-                                            class="nav-link {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
-                                            DOKUMEN
-                                        </a>
-                                    </li>
-                                @endif
-
-                            @endif
-
-                            {{-- Menu PLP --}}
-
-                            @if (Str::length(Auth::guard('web')->user()) > 0)
-                                @if (Auth::guard('web')->user()->role_id == 12)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
-                                            aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a  class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }} "
-                                            aria-current="page" href="/inventaris/peminjaman-plp">INVENTARIS</a>
-                                    </li>
-                                    <li class="nav-item dropdown baru">
-                                        <a href="{{ route('doc.index') }}"
-                                            class="nav-link {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
-                                            DOKUMEN
-                                        </a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            {{-- Menu KP/TA Mahasiswa --}}
-
-                            @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-                             <ul class="navbar-nav">
-                                 <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
-                                            aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
-                                </li>
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    KP/SKRIPSI
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                       <li class="nav-item">
-                                            <a  class="nav-link {{ Request::is('kp-skripsi*') ? 'text-success' : '' }}  {{ Request::is('usulankp*') ? 'text-success' : '' }} {{ Request::is('permohonankp*') ? 'text-success' : '' }} {{ Request::is('balasankp*') ? 'text-success' : '' }} {{ Request::is('seminarkp*') ? 'text-success' : '' }} {{ Request::is('usulan-semkp*') ? 'text-success' : '' }} {{ Request::is('kpti10-kp*') ? 'text-success' : '' }} {{ Request::is('usuljudul*') ? 'text-success' : '' }}  "
-                                                aria-current="page" href="/kp-skripsi">Usulan</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a  class="nav-link {{ Request::is('jadwal*') ? 'text-success' : '' }} "
-                                                aria-current="page" href="/jadwal">Seminar</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a  class="nav-link {{ Request::is('seminar*') ? 'text-success' : '' }} "
-                                                aria-current="page" href="/seminar">Download</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a  class="nav-link {{ Request::is('statistik*') ? 'text-success' : '' }} "
-                                                aria-current="page" href="/statistik">Statistik</a>
-                                        </li>
-                                      
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-
-                                <li class="nav-item">
-                                    <a  class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }} "
-                                        aria-current="page" href="/inventaris/peminjamanmhs">INVENTARIS</a>
-                                </li>
-                                
-                                {{-- DistribusiDokumen --}}
-                                <li class="nav-item dropdown baru">
-                                    <a id="dokumendropdown" href="{{ route('doc.index') }}"
-                                        class="nav-link {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
-                                        DOKUMEN
-                                    </a>
-                                </li>
-
-                            @endif
-
-                            @if (Str::length(Auth::guard('web')->user()) > 0)
-                                @if (Auth::guard('web')->user()->role_id == 2 ||
-                                        Auth::guard('web')->user()->role_id == 3 ||
-                                        Auth::guard('web')->user()->role_id == 4)
-
-                                        <ul class="navbar-nav">
-                                            
-                                            <li class="nav-item">
-                                                <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
-                                                    aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
-                                            </li>
-                                            
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    KP/SKRIPSI
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                      <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('sempro*') ? 'text-success' : '' }}{{ Request::is('daftar-sempro*') ? 'text-success' : '' }}{{ Request::is('persetujuan*') ? 'text-success' : '' }}{{ Request::is('skripsi*') ? 'text-success' : '' }}{{ Request::is('usulan*') ? 'text-success' : '' }}{{ Request::is('daftar-semkp*') ? 'text-success' : '' }}{{ Request::is('suratperusahaan*') ? 'text-success' : '' }}{{ Request::is('usuljudul*') ? 'text-success' : '' }}{{ Request::is('daftar-sidang*') ? 'text-success' : '' }}"
-                                                    aria-current="page"
-                                                    href="/persetujuan/admin/index">Persetujuan</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('form*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/form">Seminar</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('kerja-praktek*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/kerja-praktek/admin/index">Data KP</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('sidang*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/sidang/admin/index">Data Skripsi</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('prodi*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/prodi/riwayat">Riwayat</a>
-                                            </li>
-											<li class="nav-item">
-												<a  class="nav-link {{Request::is ('statistik*') ? 'text-success' : '' }}" aria-current="page" href="/statistik">Statistik</a>
-											</li>
-                                      
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-
-                                    <li class="nav-item">
-                                        <a  class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/inventaris/peminjamanadm">INVENTARIS</a>
-                                    </li>
-                                    
-                                    {{-- DistribusiDokumen --}}
-                                    <li class="nav-item dropdown baru">
-                                        <a id="dokumendropdown" href="{{ route('doc.index') }}"
-                                            class="nav-link {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
-                                            DOKUMEN
-                                        </a>
-                                    </li>
-                                    
-                                @endif
-
-                                @if (Auth::guard('web')->user()->role_id == 1)
-                                <ul class="navbar-nav">
-                                    
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
-                                            aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
-                                    </li>
-                                    
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    KP/SKRIPSI
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                      <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('form*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/form">Seminar</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('kerja-praktek*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/kerja-praktek/admin/index">Data KP</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('sidang*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/sidang/admin/index">Data Skripsi</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a  class="nav-link {{ Request::is('riwayat-penjadwalan*') ? 'text-success' : '' }}"
-                                                    aria-current="page" href="/prodi/riwayat">Riwayat</a>
-                                            </li>
-											<li class="nav-item">
-												<a  class="nav-link {{Request::is ('statistik*') ? 'text-success' : '' }}" aria-current="page" href="/statistik">Statistik</a>
-											</li>
-                                      
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                                
-                                    <li class="nav-item">
-                                        <a  class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/inventaris/peminjamanadm">INVENTARIS</a>
-                                    </li>
-                                    
-                                    {{-- DistribusiDokumen --}}
-                                    <li class="nav-item dropdown baru">
-                                        <a id="dokumendropdown" href="{{ route('doc.index') }}"
-                                            class="nav-link {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
-                                            DOKUMEN
-                                        </a>
-                                    </li>
-
-
-                                    <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    DATA
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                            <li class="nav-item"><a href="/prodi" class="dropdown-item nav-link {{ Request::is('prodi*') ? 'text-success' : '' }}">Program Studi</a></li>
-                                            <li class="nav-item"><a href="/konsentrasi" class="dropdown-item nav-link {{ Request::is('konsentrasi*') ? 'text-success' : '' }}">Konsentrasi</a></li>
-                                            <li class="nav-item"><a href="/semester"class="dropdown-item nav-link  {{ Request::is('semester*') ? 'text-success' : '' }}">Semester (TA)</a></li>
-                                            <li class="nav-item"><a href="/kapasitas-bimbingan/index" class="dropdown-item nav-link  {{ Request::is('kapasitas-bimbingan*') ? 'text-success' : '' }}">Kuota Bimbingan</a></li>
-                                            <li class="nav-item"><a href="/logo"class="dropdown-item nav-link  {{ Request::is('logo*') ? 'text-success' : '' }}">Logo Sertifikat</a></li>
-                                            <li class="nav-item"><a href="#" class="dropdown-item cursor-default nav-link"><b>AKUN</b></a></li>
-                                            <li class="nav-item"><a href="/dosen" class="dropdown-item nav-link {{ Request::is('dosen*') ? 'text-success' : '' }}"><span class="ml-2">- Dosen </span></a></li>
-                                            <li class="nav-item"><a href="/user" class="dropdown-item nav-link {{ Request::is('user*') ? 'text-success' : '' }}"><span class="ml-2">- Tendik </span></a></li>
-                                            <li class="nav-item"><a href="/plp" class="dropdown-item nav-link {{ Request::is('plp*') ? 'text-success' : '' }}"><span class="ml-2">- PLP </span></a></li> 
-                                            <li class="nav-item"><a href="/role" class="dropdown-item nav-link {{ Request::is('role*') ? 'text-success' : '' }}"><span class="ml-2">- Hak Akses </span></a></li>
-                                      
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                                @endif
-                                
-                               
-                                 
-                            @endif
-                            
-
-                            @if (Str::length(Auth::guard('web')->user()) > 0)            
-								@if (Auth::guard('web')->user()->role_id == 2 )
-                                <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    DATA
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                      <li class="nav-item"><a class="nav-link" href="/mahasiswa"
-                                            class="dropdown-item mb-1 {{ Request::is('mahasiswa*') ? 'text-success' : '' }}">Mahasiswa</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-								@endif          
-							@endif
-							
-                            @if (Str::length(Auth::guard('web')->user()) > 0)            
-								@if (Auth::guard('web')->user()->role_id == 3 )
-                                <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    DATA
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                     <li class="nav-item"><a class="nav-link" href="/mahasiswa"
-                                            class="dropdown-item mb-1 {{ Request::is('mahasiswa*') ? 'text-success' : '' }}">Mahasiswa</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-
-								@endif          
-							@endif							
-							
-							@if (Str::length(Auth::guard('web')->user()) > 0)            
-								@if (Auth::guard('web')->user()->role_id == 4 )
-
-                                <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    DATA
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdown">
-                                    
-                                    <li class="nav-item"><a href="/mahasiswa"
-                                            class="dropdown-item nav-link {{ Request::is('mahasiswa*') ? 'text-success' : '' }}">Mahasiswa</a>
-                                        </li>
-										<li class="nav-item"><a href="#" class="dropdown-item cursor-default nav-link"><b>Backup File</b></a> </li> 
-										<li class="nav-item"><a href="https://drive.google.com/drive/folders/1BXXXZdm36DWkm69hI6EZdNznXaGClwL9" target="_blank" class="dropdown-item nav-link"><span class="ml-2">- Seminar KP </span></a></li>     
-										<li class="nav-item"><a href="https://drive.google.com/drive/folders/1CHKVAqnQqgxeONsETBhuQWbasaVcGcdT" target="_blank" class="dropdown-item nav-link"><span class="ml-2">- SemPro </span></a></li>
-										<li class="nav-item"><a href="https://drive.google.com/drive/folders/1BIsESymd0P8k0UBcnDehn70ymNvl4rbi" target="_blank" class="dropdown-item nav-link"><span class="ml-2">- Sidang Skripsi </span></a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-								@endif          
-							@endif  
-                        </ul>
-
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <!--@if (Str::length(Auth::guard('dosen')->user()) > 0)-->
-                                    <!--    {{ Auth::guard('dosen')->user()->nama }}-->
-                                    <!--@elseif (Str::length(Auth::guard('web')->user()) > 0)-->
-                                    <!--    {{ Auth::guard('web')->user()->nama }}-->
-                                    <!--@elseif (Str::length(Auth::guard('mahasiswa')->user()) > 0)-->
-                                    <!--    {{ Auth::guard('mahasiswa')->user()->nama }}-->
-                                    <!--@endif-->
-                                    AKUN
-                                </a>
-                                <div>
-                                    <ul class="dropdown-menu dropdown-menu-end" 
-                                        aria-labelledby="navbarDropdown">
-                                        @if (Str::length(Auth::guard('dosen')->user()) > 0)
-                                            @if (Auth::guard('dosen')->user())
-                                                <li>
-                                                    <a  class="nav-link dropdown-item " href="">
-                                                       <b>{{ Auth::guard('dosen')->user()->nama }}</b>
-                                                    </a>
-                                                </li>
-                                                <hr>
-                                                <li>
-                                                    <a  class="nav-link dropdown-item {{ Request::is('profil-dosen*') ? 'text-success' : '' }}"
-                                                        href="/profil-dosen/editpassworddsn/">
-                                                        Ubah Password
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endif
-
-                                        @if (Str::length(Auth::guard('mahasiswa')->user()) > 0)
-                                            @if (Auth::guard('mahasiswa')->user())
-                                                <li>
-                                                    <a  class="nav-link dropdown-item " href="">
-                                                        <b>{{ Auth::guard('mahasiswa')->user()->nama }}</b>
-                                                    </a>
-                                                </li>
-                                                <hr>
-                                                <li>
-                                                    <a  class="nav-link dropdown-item {{ Request::is('profil-mhs*') ? 'text-success' : '' }}"
-                                                        href="/profil-mhs/editpasswordmhs/">
-                                                        Ubah Password
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endif
-
-                                        @if (Str::length(Auth::guard('web')->user()) > 0)
-                                            @if (Auth::guard('web')->user())
-                                                <li>
-                                                    <a  class="nav-link dropdown-item " href="">
-                                                        <b>{{ Auth::guard('web')->user()->nama }}</b>
-                                                    </a>
-                                                </li>
-                                                <hr>
-                                                <li>
-                                                    <a  class="nav-link dropdown-item {{ Request::is('profil-staff*') ? 'text-success' : '' }}"
-                                                        href="/profil-staff/editpasswordstaff/">
-                                                        Ubah Password
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endif
-
-                                        <form action="/logout" method="POST">
-                                            @csrf
-                                            <li>
-                                                <button type="submit" class="nav-link dropdown-item">
-                                                    Keluar
-                                                </button>
-                                            </li>
-                                        </form>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+            @include('layouts.navbar')
         </div>
 
         <!-- Content Wrapper. Contains page content -->
@@ -835,11 +286,6 @@ form li button:hover {
         <!-- Main Footer -->
 
         @yield('footer')
-        <!-- <div class="footer bg-dark">
-        <div class="container">
-          <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI</p>
-        </div>
-      </div> -->
 
 
         <!-- ./wrapper -->
@@ -870,24 +316,6 @@ form li button:hover {
         <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/rowgroup/1.4.0/js/dataTables.rowGroup.min.js"></script>
 
-
-        {{-- <script type="text/javascript">
-$(document).ready(function() {
-    var table = $('#datatables').DataTable( {
-        "lengthMenu": [ 50, 100, 150, 200, 250 ],
-        buttons: [ 'copy', 'excel','print', 'pdf' ],
-        dom:
-        "<'row'<'col-md-2'l><'col-md-5'B><'col-md-4'f>>" +
-        "<'row'<'col-md-12'tr>>" +
-        "<'row'<'col-md-5'i><'col-md-7'p>>"
-        
-    } );
- 
-    table.buttons().container()
-        .appendTo( '#datatables_wrapper .col-md-5:eq(0)' );
-} );
-</script> --}}
-
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#datatables').DataTable({
@@ -912,7 +340,7 @@ $(document).ready(function() {
                 })
             });
         </script>
-        
+
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#datatables2').DataTable({
@@ -937,7 +365,7 @@ $(document).ready(function() {
                 })
             });
         </script>
-        
+
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#datatables3').DataTable({
@@ -962,7 +390,7 @@ $(document).ready(function() {
                 })
             });
         </script>
-        
+
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#datatables4').DataTable({
@@ -987,7 +415,7 @@ $(document).ready(function() {
                 })
             });
         </script>
-        
+
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#datatables5').DataTable({
@@ -1012,7 +440,7 @@ $(document).ready(function() {
                 })
             });
         </script>
-        
+
         {{-- Tabel view (statistik judul skripsi terdaftar) judul-skripsi-terdaftar.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1087,7 +515,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (jadwal seminar untuk mahasiswa) jadwal-mahasiswa.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1162,7 +590,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar hak akses admin jurusan) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1217,7 +645,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar plp admin jurusan) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1272,7 +700,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar tendik admin jurusan) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1347,7 +775,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar dosen admin jurusan) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1422,7 +850,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar konsentrasi admin jurusan) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1477,7 +905,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar program studi admin jurusan) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1532,7 +960,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar mahasiswa admin prodi) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1607,7 +1035,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (persetujuan kp skripsi admin) persetujuan.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1639,7 +1067,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatusPersetujuanKpSkripsiAdmin(status);
                 });
-        
+
                 function filterByStatusPersetujuanKpSkripsiAdmin(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -1651,7 +1079,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobilePersetujuanKpSkripsiAdmin(status);
                 });
-        
+
                 function filterByStatusMobilePersetujuanKpSkripsiAdmin(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -1686,7 +1114,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (jadwal seminar admin prodi) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1781,7 +1209,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (data kp mahasiswa admin) kerja-praktek.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1805,14 +1233,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterDataKPMahasiswaAdmin').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatus(status);
                 });
-        
+
                 function filterByStatus(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -1824,7 +1252,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileDataKPMahasiswaAdmin(status);
                 });
-        
+
                 function filterByStatusMobileDataKPMahasiswaAdmin(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -1858,7 +1286,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (data skripsi mahasiswa admin) skripsi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1882,14 +1310,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterDataSkripsiMahasiswaAdmin').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatus(status);
                 });
-        
+
                 function filterByStatus(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -1901,7 +1329,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileDataSkripsiMahasiswaAdmin(status);
                 });
-        
+
                 function filterByStatusMobileDataSkripsiMahasiswaAdmin(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -1935,7 +1363,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (daftar beban bimbingan kp) bimbingan-kp.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -1990,7 +1418,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar selesai bimbingan kp) bimbingan-kp.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2045,7 +1473,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar beban bimbingan skripsi) bimbingan-skripsi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2100,7 +1528,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (daftar lulus bimbingan skripsi) bimbingan-skripsi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2155,7 +1583,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (jadwal seminar prodi) index.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2250,7 +1678,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (data kp prodi) indexkp.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2274,14 +1702,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterDataKPProdi').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatusDataKPProdi(status);
                 });
-        
+
                 function filterByStatusDataKPProdi(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2293,7 +1721,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileDataKPProdi(status);
                 });
-        
+
                 function filterByStatusMobileDataKPProdi(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2327,7 +1755,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (data skripsi prodi) indexskripsi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2351,14 +1779,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterDataSkripsiProdi').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatus(status);
                 });
-        
+
                 function filterByStatus(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2370,7 +1798,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileDataSkripsiProdi(status);
                 });
-        
+
                 function filterByStatusMobileDataSkripsiProdi(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2404,7 +1832,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (riwayat kp dan skripsi prodi) riwayat-prodi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2428,14 +1856,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterRiwayatKPSkripsiProdi').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatus(status);
                 });
-        
+
                 function filterByStatus(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(3).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2447,12 +1875,12 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileRiwayatKPSkripsiProdi(status);
                 });
-        
+
                 function filterByStatusMobileRiwayatKPSkripsiProdi(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(3).search(status ? '^' + status + '$' : '', true, false).draw();
                 }
-                
+
                 // Filter Prodi
                 $('#prodiFilterRiwayatKPSkripsiProdi').on('change', function() {
                     var val = $(this).val();
@@ -2501,7 +1929,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (riwayat seminar prodi) riwayat-prodi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2582,18 +2010,19 @@ $(document).ready(function() {
                 });
 
                 // Filter Bulan dan Tahun Mobile
-                $('#bulanFilterMobileRiwayatSeminarProdi, #tahunFilterMobileRiwayatSeminarProdi').on('change', function() {
-                    var bulan = $('#bulanFilterMobileRiwayatSeminarProdi').val();
-                    var tahun = $('#tahunFilterMobileRiwayatSeminarProdi').val();
+                $('#bulanFilterMobileRiwayatSeminarProdi, #tahunFilterMobileRiwayatSeminarProdi').on('change',
+                    function() {
+                        var bulan = $('#bulanFilterMobileRiwayatSeminarProdi').val();
+                        var tahun = $('#tahunFilterMobileRiwayatSeminarProdi').val();
 
-                    if (bulan || tahun) {
-                        // Filter berdasarkan bulan dan tahun
-                        table.column(4).search(bulan + ' ' + tahun, true, false).draw();
-                    } else {
-                        // Jika tidak ada bulan atau tahun yang dipilih, hapus filter
-                        table.column(4).search('').draw();
-                    }
-                });
+                        if (bulan || tahun) {
+                            // Filter berdasarkan bulan dan tahun
+                            table.column(4).search(bulan + ' ' + tahun, true, false).draw();
+                        } else {
+                            // Jika tidak ada bulan atau tahun yang dipilih, hapus filter
+                            table.column(4).search('').draw();
+                        }
+                    });
 
                 // Event handler untuk panjang menu
                 $('#lengthMenuRiwayatSeminarProdi').on('change', function() {
@@ -2624,7 +2053,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (riwayat seminar dibatalkan) riwayat-prodi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2691,32 +2120,34 @@ $(document).ready(function() {
                 });
 
                 // Filter Bulan dan Tahun
-                $('#bulanFilterRiwayatSeminarDibatalkan, #tahunFilterRiwayatSeminarDibatalkan').on('change', function() {
-                    var bulan = $('#bulanFilterRiwayatSeminarDibatalkan').val();
-                    var tahun = $('#tahunFilterRiwayatSeminarDibatalkan').val();
+                $('#bulanFilterRiwayatSeminarDibatalkan, #tahunFilterRiwayatSeminarDibatalkan').on('change',
+                    function() {
+                        var bulan = $('#bulanFilterRiwayatSeminarDibatalkan').val();
+                        var tahun = $('#tahunFilterRiwayatSeminarDibatalkan').val();
 
-                    if (bulan || tahun) {
-                        // Filter berdasarkan bulan dan tahun
-                        table.column(4).search(bulan + ' ' + tahun, true, false).draw();
-                    } else {
-                        // Jika tidak ada bulan atau tahun yang dipilih, hapus filter
-                        table.column(4).search('').draw();
-                    }
-                });
+                        if (bulan || tahun) {
+                            // Filter berdasarkan bulan dan tahun
+                            table.column(4).search(bulan + ' ' + tahun, true, false).draw();
+                        } else {
+                            // Jika tidak ada bulan atau tahun yang dipilih, hapus filter
+                            table.column(4).search('').draw();
+                        }
+                    });
 
                 // Filter Bulan dan Tahun Mobile
-                $('#bulanFilterMobileRiwayatSeminarDibatalkan, #tahunFilterMobileRiwayatSeminarDibatalkan').on('change', function() {
-                    var bulan = $('#bulanFilterMobileRiwayatSeminarDibatalkan').val();
-                    var tahun = $('#tahunFilterMobileRiwayatSeminarDibatalkan').val();
+                $('#bulanFilterMobileRiwayatSeminarDibatalkan, #tahunFilterMobileRiwayatSeminarDibatalkan').on('change',
+                    function() {
+                        var bulan = $('#bulanFilterMobileRiwayatSeminarDibatalkan').val();
+                        var tahun = $('#tahunFilterMobileRiwayatSeminarDibatalkan').val();
 
-                    if (bulan || tahun) {
-                        // Filter berdasarkan bulan dan tahun
-                        table.column(4).search(bulan + ' ' + tahun, true, false).draw();
-                    } else {
-                        // Jika tidak ada bulan atau tahun yang dipilih, hapus filter
-                        table.column(4).search('').draw();
-                    }
-                });
+                        if (bulan || tahun) {
+                            // Filter berdasarkan bulan dan tahun
+                            table.column(4).search(bulan + ' ' + tahun, true, false).draw();
+                        } else {
+                            // Jika tidak ada bulan atau tahun yang dipilih, hapus filter
+                            table.column(4).search('').draw();
+                        }
+                    });
 
                 // Event handler untuk panjang menu
                 $('#lengthMenuRiwayatSeminarDibatalkan').on('change', function() {
@@ -2747,7 +2178,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (persetujuan kp skripsi) persetujuankp-skripsi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2779,7 +2210,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatusPersetujuanKpSkripsi(status);
                 });
-        
+
                 function filterByStatusPersetujuanKpSkripsi(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2791,7 +2222,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobilePersetujuanKpSkripsi(status);
                 });
-        
+
                 function filterByStatusMobilePersetujuanKpSkripsi(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2826,7 +2257,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (jadwal seminar pembimbing penguji) index-pembimbing.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2901,7 +2332,7 @@ $(document).ready(function() {
 
             });
         </script>
-        
+
         {{-- Tabel view (bimbingan kp) indexpembimbingkp.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -2925,14 +2356,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterBimbinganKP').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatusBimbinganKP(status);
                 });
-        
+
                 function filterByStatusBimbinganKP(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2944,7 +2375,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileBimbinganKP(status);
                 });
-        
+
                 function filterByStatusMobileBimbinganKP(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -2978,7 +2409,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (bimbingan skripsi) indexpembimbingskripsi.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -3002,14 +2433,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterBimbinganSkripsi').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatusBimbinganSkripsi(status);
                 });
-        
+
                 function filterByStatusBimbinganSkripsi(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -3021,7 +2452,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileBimbinganSkripsi(status);
                 });
-        
+
                 function filterByStatusMobileBimbinganSkripsi(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -3055,7 +2486,7 @@ $(document).ready(function() {
                 $('#datatables2_length').after($('.filter'));
             });
         </script>
-        
+
         {{-- Tabel view (riwayat kp dan skripsi) riwayat-pembimbing-bimbingan.blade.php --}}
         <script type="text/javascript">
             $(document).ready(function() {
@@ -3079,14 +2510,14 @@ $(document).ready(function() {
                         }
                     }
                 });
-        
+
                 // Event listener untuk perubahan pada filter status
                 $('#statusFilterRiwayatKPSkripsi').on('change', function() {
                     var status = $(this).val();
                     // Lakukan filtering berdasarkan status yang dipilih
                     filterByStatus(status);
                 });
-        
+
                 function filterByStatus(status) {
                     // Lakukan filtering menggunakan DataTables
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -3098,7 +2529,7 @@ $(document).ready(function() {
                     // Lakukan filtering berdasarkan status yang dipilih Mobile
                     filterByStatusMobileRiwayatKPSkripsi(status);
                 });
-        
+
                 function filterByStatusMobileRiwayatKPSkripsi(status) {
                     // Lakukan filtering menggunakan DataTables Mobile
                     table.column(2).search(status ? '^' + status + '$' : '', true, false).draw();
@@ -3236,8 +2667,6 @@ $(document).ready(function() {
             });
         </script>
 
-
-
         <!-- Bootstrap 4 -->
         <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->
@@ -3249,8 +2678,6 @@ $(document).ready(function() {
         <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
         @yield('js')
         @stack('scripts')
-
-
 </body>
 
 </html>

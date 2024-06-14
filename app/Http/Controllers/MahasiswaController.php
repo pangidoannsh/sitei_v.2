@@ -15,19 +15,19 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->role_id == 2) {            
+        if (auth()->user()->role_id == 2) {
             return view('mahasiswa.index', [
-                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),                
+                'mahasiswas' => Mahasiswa::where('prodi_id', 1)->get(),
             ]);
         }
-        if (auth()->user()->role_id == 3) {            
+        if (auth()->user()->role_id == 3) {
             return view('mahasiswa.index', [
-                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),                
+                'mahasiswas' => Mahasiswa::where('prodi_id', 2)->get(),
             ]);
         }
-        if (auth()->user()->role_id == 4) {            
+        if (auth()->user()->role_id == 4) {
             return view('mahasiswa.index', [
-                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),                
+                'mahasiswas' => Mahasiswa::where('prodi_id', 3)->get(),
             ]);
         }
     }
@@ -66,7 +66,7 @@ class MahasiswaController extends Controller
         ]);
 
         // return redirect('/mahasiswa')->with('message', 'Data Berhasil Ditambahkan!');
-         Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
+        Alert::success('Berhasil!', 'Data Berhasil Ditambahkan!')->showConfirmButton('Ok', '#28a745');
         return redirect('/mahasiswa');
     }
 
@@ -78,7 +78,7 @@ class MahasiswaController extends Controller
             'konsentrasis' => Konsentrasi::all(),
         ]);
     }
-    
+
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
         $rules = [
@@ -134,7 +134,7 @@ class MahasiswaController extends Controller
 
         Mahasiswa::destroy($mahasiswa->id);
         // return redirect('/mahasiswa')->with('message', 'Data Berhasil Dihapus!');
-         Alert::success('Berhasil!', 'Data Berhasil Dihapus!')->showConfirmButton('Ok', '#28a745');
+        Alert::success('Berhasil!', 'Data Berhasil Dihapus!')->showConfirmButton('Ok', '#28a745');
         return  back();
     }
 
@@ -149,6 +149,5 @@ class MahasiswaController extends Controller
 
         Alert::success('Berhasil!', 'Password berhasil direset ke NIM Mahasiswa bersangkutan')->showConfirmButton('Ok', '#28a745');
         return  back();
-
     }
 }

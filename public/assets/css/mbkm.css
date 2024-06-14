@@ -1,0 +1,43 @@
+.ellipsis-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+}
+
+.status-danger {
+    background-color: #fecaca;
+    color: #ef4444;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.status-warning {
+    background-color: #fef08a;
+    color: #f59e0b;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.status-success {
+    background-color: #86efac;
+    color: #16a34a;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.mbkm .label {
+    font-size: 12px;
+    color: #9E9E9E;
+}
+
+.mbkm .value {
+    font-size: 14px;
+    color: #424242;
+    font-weight: 600;
+}
+
+.modal-dialog.modal-large {
+    max-width: 800px;
+}
