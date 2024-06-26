@@ -17,8 +17,8 @@
     {{-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" /> --}}
 
     <!-- <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}"> -->
-    <link rel="stylesheet" href="{{ asset('/assets/css/mbkm.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/css/dokumen.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('/assets/css/mbkm.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/dokumen.css') }}"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/assets/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/style.css?v=0.001') }}">
@@ -30,7 +30,7 @@
     <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap4.min.css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/9c94b38548.js" crossorigin="anonymous"></script>
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
         .dropdown-menu {
             border-left: 0.01px solid rgba(0, 0, 0, 0.05);
@@ -245,8 +245,6 @@
             display: none;
         }
     </style>
-
-
 
 </head>
 

@@ -12,6 +12,7 @@ class SuratService
 
         if ($jenis_user == "admin") {
             if ($role_id == 1) {
+
                 $ajuanSurat->where("status", "staf_jurusan")->orWhere(function ($query) {
                     $query->where("status", "diterima")->where("jenis_user", "admin");
                 });

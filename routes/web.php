@@ -65,6 +65,7 @@ use App\Http\Controllers\RekapitulasiController;
 
 include("doc.route.php");
 include("mbkm.route.php");
+include("pr.route.php");
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
     Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);

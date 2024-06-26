@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('mbkm.main')
 
 @php
     use Carbon\Carbon;
@@ -19,7 +19,8 @@
     {{ route('mbkm.staff') }}
     @else
         {{ route('mbkm') }} @endif"
-        class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5" style="width: 120px;"> Kembali </a>
+        class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5"
+        style="width: 120px;"> Kembali </a>
     <form action="{{ route('mbkm.store') }}" method="POST" enctype="multipart/form-data" class="pb-5">
         @csrf
         <div class="d-flex flex-column gap-3 mt-4">

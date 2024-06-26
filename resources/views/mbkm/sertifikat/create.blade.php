@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('mbkm.main')
 
 @php
     $auth = Auth::guard('mahasiswa');

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('mbkm.main')
 
 @php
     use Carbon\Carbon;
@@ -23,7 +23,8 @@
     <div class="container-fluid">
         <div class="container-fluid">
             <a href="{{ Auth::guard('dosen')->check() ? route('mbkm.prodi') : (Auth::guard('mahasiswa')->check() ? route('mbkm') : route('mbkm.staff')) }}"
-                class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5" style="width: 120px; ">Kembali <a>
+                class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5"
+                style="width: 120px; ">Kembali <a>
         </div>
         <div class="card p-4 mbkm">
             <table class="table table-responsive-lg table-bordered table-striped" width="100%" id="unorderer_datatables">
@@ -78,7 +79,9 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5" style="width: 120px;">Kirim</button>
+                                            <button type="submit"
+                                                class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5"
+                                                style="width: 120px;">Kirim</button>
                                         </div>
                                     </form>
                                 </div>

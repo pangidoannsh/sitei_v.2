@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('mbkm.main')
 
 @php
     use Carbon\Carbon;
@@ -23,7 +23,8 @@
     {{ route('mbkm.staff') }}
     @else
         {{ route('mbkm') }} @endif"
-        class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5" style="width: 120px;"> Kembali</a>
+        class="btn btn-success mb-3 d-flex align-items-center justify-content-center fw-bold gap-2 rounded-5"
+        style="width: 120px;"> Kembali</a>
 
     @if ($mbkm->status == 'Usulan pengunduran diri')
         <div class="dokumen-card mb-3">
@@ -242,7 +243,7 @@
             </div>
         </div>
 
-          {{-- Card Konversi --}}
+        {{-- Card Konversi --}}
         @if (!in_array($mbkm->status, ['Mengundurkan diri', 'Usulan', 'Ditolak', 'Disetujui']))
             <div class="col-lg-12 mt-2">
                 <div class="dokumen-card">

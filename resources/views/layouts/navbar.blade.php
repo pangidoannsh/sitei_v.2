@@ -305,46 +305,44 @@
 
                     {{-- Admin Jurusan --}}
                     @if (Auth::guard('web')->user()->role_id == 1)
-                        <ul class="navbar-nav">
-                            {{-- MENU PENGUMUMAN --}}
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
-                                    aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
-                            </li>
-                            {{-- MENU KP/SKRIPSI --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    KP/SKRIPSI
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        {{-- MENU PENGUMUMAN --}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('pengumuman*') ? 'text-success' : '' }} "
+                                aria-current="page" href="{{ route('pengumuman') }}">PENGUMUMAN</a>
+                        </li>
+                        {{-- MENU KP/SKRIPSI --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle " href="" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                KP/SKRIPSI
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('form*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/form">Seminar</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('kerja-praktek*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/kerja-praktek/admin/index">Data
-                                            KP</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('sidang*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/sidang/admin/index">Data
-                                            Skripsi</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('riwayat-penjadwalan*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/prodi/riwayat">Riwayat</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('statistik*') ? 'text-success' : '' }}"
-                                            aria-current="page" href="/statistik">Statistik</a>
-                                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('form*') ? 'text-success' : '' }}"
+                                        aria-current="page" href="/form">Seminar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('kerja-praktek*') ? 'text-success' : '' }}"
+                                        aria-current="page" href="/kerja-praktek/admin/index">Data
+                                        KP</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('sidang*') ? 'text-success' : '' }}"
+                                        aria-current="page" href="/sidang/admin/index">Data
+                                        Skripsi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('riwayat-penjadwalan*') ? 'text-success' : '' }}"
+                                        aria-current="page" href="/prodi/riwayat">Riwayat</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('statistik*') ? 'text-success' : '' }}"
+                                        aria-current="page" href="/statistik">Statistik</a>
+                                </li>
 
-                                </ul>
-                            </li>
-                        </ul>
+                            </ul>
+                        </li>
                         {{-- MENU INVENTARIS --}}
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('inventaris*') ? 'text-success' : '' }}"
@@ -357,6 +355,10 @@
                                 class="nav-link {{ Request::is('distribusi-dokumen*') ? 'text-success' : '' }}">
                                 DOK/ARSIP
                             </a>
+                        </li>
+                        <li class="nav-item baru">
+                            <a class="nav-link {{ Request::is('matakuliah') ? 'text-success' : '' }} {{ Request::is('matakuliah/create') ? 'text-success' : '' }} {{ Request::is('matakuliah/riwayat') ? 'text-success' : '' }} {{ Request::is('matakuliah/ruangan-absensi') ? 'text-success' : '' }}"
+                                href="/matakuliah">ABSENSI</a>
                         </li>
                         {{-- MENU DATA --}}
                         <li class="nav-item dropdown">
@@ -396,6 +398,16 @@
                                     <li class="nav-item"><a href="/role"
                                             class="dropdown-item nav-link {{ Request::is('role*') ? 'text-success' : '' }}"><span
                                                 class="ml-2">- Hak Akses </span></a></li>
+                                    <li class="nav-item">
+                                        <a href="/gedung"
+                                            class="dropdown-item nav-link {{ Request::is('gedung') ? 'text-success' : '' }} 
+                                                        {{ Request::is('gedung/ruangan') ? 'text-success' : '' }} 
+                                                        {{ Request::is('gedung/create') ? 'text-success' : '' }} 
+                                                         {{ Request::is('gedung/edit') ? 'text-success' : '' }} 
+                                                         {{ Request::is('gedung/ruangan') ? 'text-success' : '' }}">
+                                            <span class="ml-2">- Gedung</span>
+                                        </a>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -403,12 +415,7 @@
                     @endif
 
                     {{-- MENU ABSENSI --}}
-                    @if (Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->role_id, [1]))
-                        <li class="nav-item baru">
-                            <a class="nav-link {{ Request::is('matakuliah') ? 'text-success' : '' }} {{ Request::is('matakuliah/create') ? 'text-success' : '' }} {{ Request::is('matakuliah/riwayat') ? 'text-success' : '' }} {{ Request::is('matakuliah/ruangan-absensi') ? 'text-success' : '' }}"
-                                href="/matakuliah">ABSENSI</a>
-                        </li>
-                    @elseif(Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->role_id, [2, 3, 4, 5]))
+                    @if (Auth::guard('web')->check() && in_array(Auth::guard('web')->user()->role_id, [2, 3, 4, 5]))
                         <li class="nav-item baru">
                             <a class="nav-link {{ Request::is('matakuliah') ? 'text-success' : '' }} {{ Request::is('matakuliah/create') ? 'text-success' : '' }} {{ Request::is('matakuliah/edit') ? 'text-success' : '' }} {{ Request::is('matakuliah/riwayat') ? 'text-success' : '' }} {{ Request::is('matakuliah/ruangan-absensi') ? 'text-success' : '' }}"
                                 href="/matakuliah">ABSENSI</a>

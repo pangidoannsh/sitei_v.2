@@ -2,10 +2,14 @@
 
 namespace App\Console;
 
+use AbPerkuliahan;
+use App\Models\AbPerkuliahan as ModelsAbPerkuliahan;
 use App\Models\PendaftaranKP;
 use App\Models\PendaftaranSkripsi;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,7 +25,7 @@ class Kernel extends ConsoleKernel
             Log::info('Scheduler started at ' . now());
 
             $now = Carbon::now();
-            $perkuliahans = \App\Models\Perkuliahan::where('status', 'Perkuliahan Dimulai')->get();
+            $perkuliahans = ModelsAbPerkuliahan::where('status', 'Perkuliahan Dimulai')->get();
 
             foreach ($perkuliahans as $perkuliahan) {
                 Log::info('Checking perkuliahan ID ' . $perkuliahan->id);

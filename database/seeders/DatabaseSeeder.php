@@ -300,6 +300,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1'),
             'angkatan' => '2018',
         ]);
+        Mahasiswa::create([
+            'prodi_id' => 3,
+            'konsentrasi_id' => 4,
+            'nim' => '2007113796',
+            'nama' => 'Pangidoan Nugroho Syahputra Harahap',
+            'email' => 'pangidoan@student.unri.ac.id',
+            'password' => bcrypt('1'),
+            'angkatan' => '2020',
+        ]);
 
         Dosen::create([
             'role_id' => 5,
