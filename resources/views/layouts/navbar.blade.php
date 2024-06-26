@@ -396,6 +396,9 @@
                                     <li class="nav-item"><a href="/role"
                                             class="dropdown-item nav-link {{ Request::is('role*') ? 'text-success' : '' }}"><span
                                                 class="ml-2">- Hak Akses </span></a></li>
+                                    <li class="nav-item"><a href="/gedung" class="dropdown-item nav-link {{ Request::is('gedung') ? 'text-success' : '' }} {{  Request::is('gedung/ruangan') ? 'text-success' : '' }} {{  Request::is('gedung/create') ? 'text-success' : '' }} {{  Request::is('gedung/edit') ? 'text-success' : '' }} {{  Request::is('gedung/ruangan') ? 'text-success' : '' }}"><span
+                                         class="ml-2">- Gedung</a></li>
+
 
                                 </ul>
                             </div>

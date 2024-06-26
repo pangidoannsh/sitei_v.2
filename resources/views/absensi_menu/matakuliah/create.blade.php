@@ -75,6 +75,7 @@
                                 @if (auth()->user()->role_id == 3)
                                     <option value="2">S1 TE A</option>
                                     <option value="3">S1 TE B</option>
+                                    <option value="11">S1 TE C</option>
                                     <option value="9">S1 TE TELKOM</option>
                                     <option value="10">S1 TE POWER</option>
                                 @endif
@@ -84,6 +85,7 @@
                                     <option value="6">S1 TI RPL</option>
                                     <option value="7">S1 TI KCV</option>
                                     <option value="7">S1 TI KBJ</option>
+                                    <option value="12">Teknik Informatika</option>
                                 @endif
                             </select>
                             @error('kelas_id')

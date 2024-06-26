@@ -252,10 +252,10 @@
                                 <a href="{{ route('detail.statistik', ['matakuliah_id' => $mtk->id]) }}"
                                     class="badge bg-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i
                                         class="fas fa-info-circle" aria-hidden="true"></i></a>
-                                <button type="button" class="badge bg-danger border-0 text-center modalDeleted d-inline"
+                                {{-- <button type="button" class="badge bg-danger border-0 text-center modalDeleted d-inline"
                                     title="Hapus" value="{{ $mtk->id }}">
                                     <i class="fas fa-trash-can"></i>
-                                </button>
+                                </button> --}}
                                 <a href="{{ route('download_pdf', ['matakuliah_id' => $mtk->id]) }}"
                                     class="badge bg-success p-1 mb-1" data-bs-toggle="tooltip" title="Download"><i
                                         class="fas fa-download" aria-hidden="true"></i></a>

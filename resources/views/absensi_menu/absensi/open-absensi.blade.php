@@ -463,75 +463,95 @@ var rowNumber = $('#datatables tbody tr').length + 1;
 @endpush --}}
 
 @push('scripts')
-    <script>
-        function fetchAttendanceData() {
-            $.ajax({
-                url: "http://127.0.0.1:8000/api/mahasiswa/getAttendanceData/{{ $perkuliahan->id }}", // Ganti dengan URL endpoint yang sesuai
-                success: function(response) {
-                    // Perbarui tabel dengan data absensi yang baru
-                    updateAttendanceTable(response);
-                    notif(data);
-                },
-                error: function(xhr) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
+<script>
+    var previousAttendanceData = [];
 
-        function notif(data) {
-            console.log(data);
-            Toastify({
-                text: data.message,
-                className: "info",
-                style: {
-                    background: "#3ed33edc",
-                },
-                gravity: "top",
-                position: "right",
-            }).showToast();
-
-            updateAttendanceTable(data.attendanceData);
-        }
-
-        setInterval(fetchAttendanceData, 5000);
-
-        function updateAttendanceTable(data) {
-            var tbody = $('#datatables tbody');
-            tbody.empty();
-
-            $.each(data, function(index, attendance) {
-                var row = '<tr>' +
-                    '<td>' + (index + 1) + '</td>' +
-                    '<td>' + new Date(attendance.attended_at).toISOString().slice(0, 10) + '</td>' +
-                    '<td>' + attendance.student.nim + '</td>' +
-                    '<td>' + attendance.student.nama + '</td>' +
-                    '<td>' + attendance.attended_at.slice(11, 19) + '</td>' +
-                    '<td class="' + getKeteranganClass(attendance.keterangan) + '">' + attendance.keterangan +
-                    '</td>' +
-                    '<td>' +
-                    '<button class="badge bg-danger border-0" onclick="setHapusData(' + attendance.id +
-                    ')" data-toggle="modal" data-target="#konfirmasiHapusModal">' +
-                    '<i class="fa-solid fa-trash" style="color: #ffffff;"></i>' +
-                    '</button>' +
-                    '</td>' +
-                    '</tr>';
-                tbody.append(row);
-            });
-        }
-
-        function getKeteranganClass(keterangan) {
-            if (keterangan === 'Sakit') {
-                return 'bg-danger text-white';
-            } else if (keterangan === 'Izin') {
-                return 'bg-warning text-dark';
-            } else if (keterangan === 'Hadir') {
-                return 'bg-info text-white';
-            } else {
-                return 'bg-secondary text-dark';
+    function fetchAttendanceData() {
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/mahasiswa/getAttendanceData/{{ $perkuliahan->id }}",
+            success: function(response) {
+                updateAttendanceTable(response);
+                checkForNewAttendance(response);
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
             }
+        });
+    }
+
+    function checkForNewAttendance(data) {
+        if (previousAttendanceData.length === 0) {
+            previousAttendanceData = data;
+            return;
         }
-    </script>
+
+        var newAttendances = data.filter(function(item) {
+            return !previousAttendanceData.some(function(prevItem) {
+                return prevItem.id === item.id;
+            });
+        });
+
+        if (newAttendances.length > 0) {
+            newAttendances.forEach(function(attendance) {
+                showNotification(attendance.student.nama + ' baru saja absen');
+            });
+            previousAttendanceData = data;
+        }
+    }
+
+    function showNotification(message) {
+        Toastify({
+            text: message,
+            className: "info",
+            style: {
+                background: "#3ed33edc",
+            },
+            gravity: "top",
+            position: "right",
+            duration: 5000
+        }).showToast();
+    }
+
+    setInterval(fetchAttendanceData, 5000);
+
+    function updateAttendanceTable(data) {
+        var tbody = $('#datatables tbody');
+        tbody.empty();
+
+        $.each(data, function(index, attendance) {
+            var row = '<tr>' +
+                '<td>' + (index + 1) + '</td>' +
+                '<td>' + new Date(attendance.attended_at).toISOString().slice(0, 10) + '</td>' +
+                '<td>' + attendance.student.nim + '</td>' +
+                '<td>' + attendance.student.nama + '</td>' +
+                '<td>' + attendance.attended_at.slice(11, 19) + '</td>' +
+                '<td class="' + getKeteranganClass(attendance.keterangan) + '">' + attendance.keterangan +
+                '</td>' +
+                '<td>' +
+                '<button class="badge bg-danger border-0" onclick="setHapusData(' + attendance.id +
+                ')" data-toggle="modal" data-target="#konfirmasiHapusModal">' +
+                '<i class="fa-solid fa-trash" style="color: #ffffff;"></i>' +
+                '</button>' +
+                '</td>' +
+                '</tr>';
+            tbody.append(row);
+        });
+    }
+
+    function getKeteranganClass(keterangan) {
+        if (keterangan === 'Sakit') {
+            return 'bg-danger text-white';
+        } else if (keterangan === 'Izin') {
+            return 'bg-warning text-dark';
+        } else if (keterangan === 'Hadir') {
+            return 'bg-info text-white';
+        } else {
+            return 'bg-secondary text-dark';
+        }
+    }
+</script>
 @endpush
+
 
 @push('scripts')
     <script>

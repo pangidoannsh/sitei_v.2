@@ -649,6 +649,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('/perbaikan-pengujiskripsi/{id}/{penguji}', [PenjadwalanSkripsiController::class, 'perbaikanpengujiskripsi']);
 
         Route::get('/surat-permohonankp/{id}', [PendaftaranKPController::class, 'kpti_1']);
+        Route::get('/daftar-perkuliahan/{matakuliah_id}', [MataKuliahController::class, 'detailstatistik'])->name('detail.statistik');
+
     });
 
     //ADMIN DAN KOORDINATOR
@@ -822,7 +824,6 @@ Route::group(['middleware' => ['auth:dosen,web']], function () {
 
     Route::get('/gedung', [GedungController::class, 'index'])->name('gedung');
     Route::get('/gedung/ruangan', [AbRuanganController::class, 'ruangan'])->name('ruangan');
-    Route::get('/daftar-perkuliahan/{matakuliah_id}', [MataKuliahController::class, 'detailstatistik'])->name('detail.statistik');
 
     Route::get('/matakuliah/ruangan-absensi', [AbRuanganController::class, 'ruanganabsensiadmin'])->name('ruangan-absensi-admin');
 

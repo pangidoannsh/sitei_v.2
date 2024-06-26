@@ -512,6 +512,30 @@ table thead tr th {
     margin-top: 20px;
 }
 
+.absensi {
+    display: flex;
+    justify-content: space-between;
+}
+
+.absensi .col-4 {
+    flex-basis: 35%;
+    /* Atur lebar kolom */
+}
+
+.absensi h6 span {
+    display: inline-block;
+    width: 35%;
+    position: relative;
+    padding-right: 5px;
+}
+
+.absensi h6 span::after {
+    content: ":";
+    position: absolute;
+    right: 15px;
+    /* Menambahkan jarak antara teks dan titik dua */
+}
+
 .footer {
     padding: 10px 0 10px 0;
 }
@@ -530,6 +554,79 @@ table thead tr th {
 }
 
 @media screen and (max-width: 768px) {
+    .detail-waktu {
+            padding: 0px;
+        }
+    
+        .qr-code {
+            max-width: 100%;
+            /* Mengisi lebar maksimum gambar QR code 100% dari container */
+            height: auto;
+            /* Mengatur ketinggian agar gambar tidak terlalu besar */
+            margin-bottom: 10px;
+            /* Jarak antara gambar QR code */
+        }
+    
+        #closeButton {
+            width: 100%;
+            /* Mengisi lebar button 100% dari container */
+            margin-bottom: 10px;
+            /* Jarak antara button */
+        }
+    
+        .jam-waktu {
+            display: none;
+        }
+    
+        .detail-waktu-perkuliahan {
+            flex-direction: row;
+            /* Atur tata letak kolom saat layar mobile */
+        }
+    
+        .detail-waktu-perkuliahan .row {
+            margin-bottom: 0px;
+            /* Atur jarak antar baris */
+        }
+    
+        .detail-waktu-perkuliahan .row:last-child {
+            margin-bottom: 0;
+            /* Hapus margin bottom pada baris terakhir */
+        }
+    
+        .detail-waktu-perkuliahan .col {
+            margin-bottom: 0px;
+            /* Atur jarak antar kolom */
+        }
+    
+        .absensi {
+            flex-direction: row;
+            /* Mengubah tata letak menjadi satu kolom pada perangkat seluler */
+        }
+    
+        .absensi .col-4 {
+            flex-basis: 100%;
+            /* Mengisi lebar maksimum kolom pada perangkat seluler */
+            margin-bottom: 20px;
+            /* Menambahkan jarak antara kolom */
+        }
+    
+        .absensi h6 span {
+            width: 100%;
+            /* Mengisi lebar maksimum span pada perangkat seluler */
+            margin-bottom: 5px;
+            /* Menambahkan jarak antara setiap baris */
+        }
+    
+        .filter {
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 20px;
+        }
+    
+        .filter .input-group {
+            width: 100%;
+            margin-bottom: 10px;
+        }
     .anak-judul h4 {
         font-size: 16px;
     }

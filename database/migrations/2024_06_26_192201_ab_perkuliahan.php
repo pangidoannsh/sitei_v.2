@@ -15,12 +15,10 @@ class AbPerkuliahan extends Migration
     {
         Schema::create('ab_perkuliahan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mata_kuliah_id');
-            // $table->foreignId('mata_kuliah_id')->constrained('ab_matakuliah');
+            $table->foreignId('mata_kuliah_id')->constrained('ab_matakuliah');
             $table->integer('nomor_pertemuan')->unsigned();
             $table->text('materi');
-            $table->foreignId('jenis_perkuliahan_id');
-            // $table->foreignId('jenis_perkuliahan_id')->constrained('ab_jenis_perkuliahan');
+            $table->enum('jenis_perkuliahan', ['Luring', 'Daring']);
             $table->integer('buka_pertemuan')->nullable()->default(NULL);
             $table->enum('status', ['Perkuliahan Dimulai', 'Perkuliahan Selesai'])->default('Perkuliahan Dimulai');
             $table->timestamps();
