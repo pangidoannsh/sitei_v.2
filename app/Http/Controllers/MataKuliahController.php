@@ -418,7 +418,7 @@ class MataKuliahController extends Controller
     }
 
 
-    public function download_pdf($matakuliah_id)
+    public function dokumen($matakuliah_id)
     {
         $perkuliahan = Perkuliahan::find($matakuliah_id);
 

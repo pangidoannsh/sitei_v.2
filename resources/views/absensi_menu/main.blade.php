@@ -168,6 +168,26 @@
         #datatablesRuangan_filter {
             display: none;
         }
+
+        #datatablesAbsensiMahasiswa_length,
+    #datatablesAbsensiMahasiswa_filter {
+        display: none;
+    }
+
+    #datatablesRiwayatMahasiswa_length,
+    #datatablesRiwayatMahasiswa_filter {
+        display: none;
+    }
+
+    #datatablesRiwayatMataKuliah_length,
+    #datatablesRiwayatMataKuliah_filter {
+        display: none;
+    }
+
+    #datatablesDetailAbsensi_length,
+    #datatablesDetailAbsensi_filter {
+        display: none;
+    }
     </style>
 
 
@@ -521,6 +541,120 @@
         });
     </script>
 
+<script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#datatablesRiwayatMataKuliah').DataTable({
+                    "lengthMenu": [50, 100, 150, 200, 250],
+                    "language": {
+                        "sProcessing": "Sedang memproses...",
+                        "sLengthMenu": "Tampilkan _MENU_ entri",
+                        "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Cari:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Pertama",
+                            "sPrevious": "Sebelumnya",
+                            "sNext": "Selanjutnya",
+                            "sLast": "Terakhir"
+                        }
+                    }
+                });
+        
+                // Filter Prodi
+                $('#prodiFilterMatakuliahProdi').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Prodi:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(3).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(3).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+
+                // Filter Prodi Mobile
+                $('#prodiFilterMobileMatakuliahProdi').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(3).search(val).draw();
+                    } else {
+                        table.column(3).search('').draw();
+                    }
+                });
+
+                  $('#semesterFilterRiwayat').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(6).search(val).draw(); 
+                } else {
+                    table.column(6).search('').draw(); 
+                }
+            });
+
+             
+
+                // Event handler untuk panjang menu
+                $('#lengthMenuMatakuliahProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                // Event handler untuk panjang menu Mobile
+                $('#lengthMenuMobileMatakuliahProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                // Filter Pencarian
+                $('#searchFilterSemesterRiwayatProdi').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+
+                // Filter Pencarian Mobile
+                $('#searchFilterMobileRiwayatSemester').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+
+                $('#datatables2_length').after($('.filter'));
+              
+            // Filter Prodi Mobile
+                $('#semesterFilterMobileProdi').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(6).search(val).draw();
+                    } else {
+                        table.column(6).search('').draw();
+                    }
+                });
+
+                // Filter Prodi MobileKajur
+                $('#semesterFilterMobileProdiKajur').on('change', function() {
+                    var val = $(this).val();
+                    if (val) {
+                        table.column(6).search(val).draw();
+                    } else {
+                        table.column(6).search('').draw();
+                    }
+                });
+            });
+        </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -879,6 +1013,11 @@
                 table.page.len(length).draw();
             });
 
+            $('#lengthMenuRiwayatSemester').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
             // Event handler untuk panjang menu Mobile
             $('#lengthMenuMobileRuangan').on('change', function() {
                 var length = $(this).val();
@@ -900,6 +1039,180 @@
             // Tambahkan filter jenis seminar, bulan, dan tahun di samping tombol Tampilkan
             $('#datatables2_length').after($('.filter'));
         });
+
+        $(document).ready(function() {
+            var table = $('#datatablesAbsensiMahasiswa').DataTable({
+                // Konfigurasi DataTables Anda di sini
+            });
+
+            $('#ruanganFilterMahasiswa').on('change', function() {
+                var val = $(this).val();
+                    console.log("Selected Ruangan:", val); // Debugging
+
+                    // Log filtered data
+                    var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                    console.log("Filtered Data:", filteredData);
+
+                    if (val) {
+                        table.column(2).search(val).draw(); // Pastikan indeks kolom benar
+                    } else {
+                        table.column(2).search('').draw(); // Pastikan indeks kolom benar
+                    }
+                });
+            // Filter semester hari desktop
+                $('#menuHariMahasiswa').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Hari:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(3).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(3).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+            $('#lengthMenuMobileRuangan').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+            // Filter menu ruangan absensi mobile
+                $('#menuRuanganFilterMobile').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(2).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(2).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+            // Filter menu hari absensi mobile
+                $('#menuHariFilterMobile').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Hari:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(3).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(3).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+            
+            });
+
+            $(document).ready(function() {
+            var table = $('#datatablesRiwayatMahasiswa').DataTable({
+                // Konfigurasi DataTables Anda di sini
+            });
+
+            $('#semesterFilterRiwayat').on('change', function() {
+                var val = $(this).val();
+                    console.log("Selected Semester:", val); // Debugging
+
+                    // Log filtered data
+                    var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                    console.log("Filtered Data:", filteredData);
+
+                    if (val) {
+                        table.column(6).search(val).draw(); // Pastikan indeks kolom benar
+                    } else {
+                        table.column(6).search('').draw(); // Pastikan indeks kolom benar
+                    }
+                });
+            // Filter semester hari desktop
+                $('#menuHariMahasiswa').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Hari:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(3).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(3).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+            $('#lengthMenuRiwayatSemester').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                $('#searchFilterSemesterRiwayatProdi').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+            $('#lengthMenuMobileSemesterProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+            // Filter menu ruangan absensi mobile
+                $('#menuRuanganFilterMobile').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({ search: 'applied' }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(2).search(val).draw(); // Corrected column index to 3 based on your table structure
+                } else {
+                    table.column(2).search('').draw(); // Corrected column index to 3 based on your table structure
+                }
+            });
+
+            //filter semester mobile
+
+            
+            });
+
+        </script>
+
+        <script type="text/javascript">
+        
+            $(document).ready(function() {
+            var table = $('#datatablesDetailAbsensi').DataTable({
+                // Konfigurasi DataTables Anda di sini
+            });
+
+            $('#lengthMenuRiwayatSemester').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+
+                $('#searchFilterSemesterRiwayatProdi').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    table.search(value).draw();
+                });
+            $('#lengthMenuMobileMatakuliahProdi').on('change', function() {
+                    var length = $(this).val();
+                    table.page.len(length).draw();
+                });
+            $('#searchFilterSemesterRiwayatMobile').on('keyup', function() {
+                                var value = $(this).val().toLowerCase();
+                                table.search(value).draw();
+                            });
+            
+            });
+
     </script>
 
 

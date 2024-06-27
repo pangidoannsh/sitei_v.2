@@ -33,13 +33,19 @@
 
         @php
             $ruangan_list = [];
+            $hari_list = [];
 
             foreach ($ruangan as $mtk) {
                 $ruangan_list[] = $mtk->nama_ruangan;
+                if ($mtk->waktu_mulai != '-') {
+                    $hari_list[] = $mtk->waktu_mulai;
+                }
             }
 
             $ruangan_list = array_unique($ruangan_list);
+            $hari_list = array_unique($hari_list);
             sort($ruangan_list);
+            sort($hari_list);
         @endphp
         <!-- Desktop Version -->
         <div class="d-none d-md-flex justify-content-between mb-3 filter">
@@ -58,13 +64,62 @@
 
                 <div class="input-group ml-3" style="width: max-content;">
                     <label class="pt-2 pr-2" for="semesterFilterRuangan">Ruangan</label>
-                    <select id="semesterFilterRuangan" class="custom-select custom-select-md rounded-3 py-1 text-capitalize"
+                    <select id="ruanganFilterMahasiswa" class="custom-select custom-select-md rounded-3 py-1 text-capitalize"
                         style="width: 83px;">
                         <option value="" selected>Semua</option>
                         @foreach ($ruangan_list as $rgn)
                             <option value="{{ $rgn }}" class="text-capitalize">{{ $rgn }}</option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="input-group ml-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="menuHariMahasiswa">Hari</label>
+                    <select id="menuHariMahasiswa" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($hari_list as $hr)
+                            <option value="{{ $hr }}" class="text-capitalize">{{ $hr }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3 filter d-block d-md-none">
+                <div class="dataTables_length input-group" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="lengthMenuMobileRuangan">Tampilkan</label>
+                    <select id="lengthMenuMobileRuangan" class="custom-select custom-select-md rounded-3 py-1" style="width: 55px;">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                
+            </div>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3 filter d-block d-md-none">
+                <div class="input-group mt-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="menuRuanganFilterMobile">Ruangan</label>
+                    <select id="menuRuanganFilterMobile" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($ruangan_list as $rgn)
+                            <option value="{{ $rgn }}" class="text-capitalize">{{ $rgn }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+                <div class="input-group mt-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="menuHariFilterMobile">Hari</label>
+                    <select id="menuHariFilterMobile" class="custom-select custom-select-md rounded-3 py-1 text-capitalize" style="width: 83px;">
+                        <option value="" selected>Semua</option>
+                        @foreach ($hari_list as $hr)
+                            <option value="{{ $hr }}" class="text-capitalize">{{ $hr }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+                   
+                <div class="dataTables_filter input-group mt-3" style="width: max-content;">
+                    <label class="pt-2 pr-2" for="searchFilterMobileMatakuliahRuangan">Cari</label>
+                    <input type="search" class="form-control form-control-md rounded-3 py-1" style="width: 83px; id="searchFilterMobileMatakuliahRuangan" placeholder="">
                 </div>
             </div>
 
@@ -75,12 +130,13 @@
             </div>
         </div>
         <table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%"
-            id="datatablesAbsensi">
+            id="datatablesAbsensiMahasiswa">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">#</th>
                     <th class="text-center" scope="col">Gedung</th>
                     <th class="text-center" scope="col">Ruangan</th>
+                    <th class="text-center" scope="col">Hari</th>
                     <th class="text-center" scope="col">Status</th>
                     <th class="text-center" scope="col">Mata Kuliah</th>
                     <th class="text-center" scope="col">Dosen Pengampu</th>
@@ -93,6 +149,12 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $rgn->gedung->nama_gedung ?? '-' }}</td>
                         <td>{{ $rgn->nama_ruangan }}</td>
+                        <td> @if ($rgn['status'] == 'Sedang Digunakan')
+                                {{ $rgn->waktu_mulai }}
+                            @else
+                                -
+                            @endif 
+                        </td>
                         <td class="{{ $rgn['status'] == 'Sedang Digunakan' ? 'bg-success' : '' }}">{{ $rgn['status'] }}
                         </td> <!-- Status ruangan -->
                         <td>

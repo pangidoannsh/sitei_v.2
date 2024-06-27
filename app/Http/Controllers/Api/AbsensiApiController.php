@@ -36,7 +36,6 @@ class AbsensiApiController extends Controller
         ->where('perkuliahan_id', $request->input('perkuliahan_id'))
         ->exists();
 
-        // If the student has already attended the class, return error response
         if ($existingAttendance) {
             return response()->json([
                 'error' => true,
@@ -62,24 +61,20 @@ class AbsensiApiController extends Controller
             'class_id' => $attendance->class_id,
             'tanggal' => $attendance->attended_at->format('Y-m-d'),
             'nim' => $mahasiswa->nim,
-            'nama' => $mahasiswa->nama, // Masukkan nama mahasiswa ke dalam array
+            'nama' => $mahasiswa->nama,
             'waktu' => $attendance->attended_at->format('H:i:s'),
             'keterangan' => $attendance->keterangan,
-            'message' => $mahasiswa->nama.' baru saja absen'
-
+            'message' => $mahasiswa->nama . ' baru saja absen'
         ];
 
-        event(new NewAttendanceAdded($attendanceSend));
-        // broadcast(new NewAttendanceAdded($attendance))->toOthers();
-
-        return response([
+        return response()->json([
             'error' => false,
             'message' => 'Absensi berhasil direkam',
-            'attendance' => $attendance
-        ],200);
+            'attendance' => $attendanceSend // Kirim attendanceSend dengan nama mahasiswa
+        ],
+            200
+        );
     }
-
-
     public function show()
     {
         // Ambil daftar absensi berdasarkan class_id

@@ -236,7 +236,7 @@
             </div>
         </div>
         <table class="table table-responsive-lg text-center table-bordered table-striped" style="width:100%"
-            id="datatablesMataKuliah">
+            id="datatablesRiwayatMataKuliah">
             <thead class="table-dark">
                 <tr>
                     <th class="text-center" scope="col">#</th>
@@ -300,7 +300,7 @@
                                 Auth::user()->role_id == 7 ||
                                 Auth::user()->role_id == 8)
                             <td class=" text-center" style='white-space: nowrap'>
-                                <a href="{{ route('detail.statistik', ['matakuliah_id' => $mtk->id]) }}"
+                                <a href="{{ route('detail.statistik', ['matakuliah_id' => $riwayat->id]) }}"
                                     class="badge bg-info p-1 mb-1" data-bs-toggle="tooltip" title="Lihat Detail"><i
                                         class="fas fa-info-circle" aria-hidden="true"></i></a>
                                 <a href="{{ route('download_pdf', ['matakuliah_id' => $riwayat->id]) }}"

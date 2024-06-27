@@ -23,7 +23,7 @@ use Dompdf\Dompdf;
 use Pusher\Pusher;
 use App\Models\Semester;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Jobs\UbahStatusPerkuliahanJob; 
+use App\Jobs\UbahStatusPerkuliahanJob;
 
 
 class AbsensiController extends Controller
@@ -99,54 +99,49 @@ class AbsensiController extends Controller
             $countMatakuliah = null;
             $count = null;
             if ($user->role_id == 5) {
-                $countMatakuliah = MataKuliah::whereHas('semester', function ($query) 
-                {
+                $countMatakuliah = MataKuliah::whereHas('semester', function ($query) {
                     $query->whereDate('tanggal_selesai', '>=', now());
                 })
-                ->count();
-                $matakuliah = MataKuliah::whereHas('semester', function ($query) 
-                {
+                    ->count();
+                $matakuliah = MataKuliah::whereHas('semester', function ($query) {
                     $query->whereDate('tanggal_selesai', '<', Carbon::now());
                 })->with('perkuliahann')->get();
 
                 $count = $matakuliah->count();
-            }
-            elseif ($user->role_id == 6) {
+            } elseif ($user->role_id == 6) {
                 $countMatakuliah = MataKuliah::where('prodi_id', 1)
-                ->whereHas('semester', function ($query) {
-                    $query->whereDate('tanggal_selesai', '>=', now());
-                })
-                ->count();
+                    ->whereHas('semester', function ($query) {
+                        $query->whereDate('tanggal_selesai', '>=', now());
+                    })
+                    ->count();
                 $matakuliah = MataKuliah::where('prodi_id', 1)
-                ->whereHas('semester', function ($query) {
-                    $query->whereDate('tanggal_selesai', '<', Carbon::now());
-                })->with('perkuliahann')->get();
+                    ->whereHas('semester', function ($query) {
+                        $query->whereDate('tanggal_selesai', '<', Carbon::now());
+                    })->with('perkuliahann')->get();
 
                 $count = $matakuliah->count();
-            } 
-            elseif($user->role_id == 7) {
+            } elseif ($user->role_id == 7) {
                 $countMatakuliah = MataKuliah::where('prodi_id', 2)
-                ->whereHas('semester', function ($query) {
-                    $query->whereDate('tanggal_selesai', '>=', now());
-                })
-                ->count();
+                    ->whereHas('semester', function ($query) {
+                        $query->whereDate('tanggal_selesai', '>=', now());
+                    })
+                    ->count();
                 $matakuliah = MataKuliah::where('prodi_id', 2)
-                ->whereHas('semester', function ($query) {
-                    $query->whereDate('tanggal_selesai', '<', Carbon::now());
-                })->with('perkuliahann')->get();
+                    ->whereHas('semester', function ($query) {
+                        $query->whereDate('tanggal_selesai', '<', Carbon::now());
+                    })->with('perkuliahann')->get();
 
                 $count = $matakuliah->count();
-            } 
-            elseif($user->role_id == 8) {
+            } elseif ($user->role_id == 8) {
                 $countMatakuliah = MataKuliah::where('prodi_id', 3)
-                ->whereHas('semester', function ($query) {
-                    $query->whereDate('tanggal_selesai', '>=', now());
-                })
-                ->count();
+                    ->whereHas('semester', function ($query) {
+                        $query->whereDate('tanggal_selesai', '>=', now());
+                    })
+                    ->count();
                 $matakuliah = MataKuliah::where('prodi_id', 3)
-                ->whereHas('semester', function ($query) {
-                    $query->whereDate('tanggal_selesai', '<', Carbon::now());
-                })->with('perkuliahann')->get();
+                    ->whereHas('semester', function ($query) {
+                        $query->whereDate('tanggal_selesai', '<', Carbon::now());
+                    })->with('perkuliahann')->get();
 
                 $count = $matakuliah->count();
             }
@@ -355,7 +350,7 @@ class AbsensiController extends Controller
         return redirect()->route('showQrCode', ['id' => $perkuliahan->id])->with('success', 'Kelas berhasil dibuka.');
     }
 
-    
+
 
     public function perkuliahan($id)
     {
@@ -693,54 +688,49 @@ class AbsensiController extends Controller
         $countMatakuliah = null;
         $count = null;
         if ($user->role_id == 5) {
-            $countMatakuliah = MataKuliah::whereHas('semester', function ($query) 
-            {
-                $query->whereDate('tanggal_selesai', '>=', now());
-            })
-            ->count();
-            $matakuliah = MataKuliah::whereHas('semester', function ($query) 
-            {
-                $query->whereDate('tanggal_selesai', '<', Carbon::now());
-            })->with('perkuliahann')->get();
-
-            $count = $matakuliah->count();
-        }
-        elseif ($user->role_id == 6) {
-            $countMatakuliah = MataKuliah::where('prodi_id', 1)
-            ->whereHas('semester', function ($query) {
-                $query->whereDate('tanggal_selesai', '>=', now());
-            })
-            ->count();
-            $matakuliah = MataKuliah::where('prodi_id', 1)
-            ->whereHas('semester', function ($query) {
-                $query->whereDate('tanggal_selesai', '<', Carbon::now());
-            })->with('perkuliahann')->get();
-
-            $count = $matakuliah->count();
-        } 
-        elseif ($user->role_id == 7) {
-            $countMatakuliah = MataKuliah::where('prodi_id', 2)
-            ->whereHas('semester', function ($query) {
-                $query->whereDate('tanggal_selesai', '>=', now());
-            })
-            ->count();
-            $matakuliah = MataKuliah::where('prodi_id', 2)
-            ->whereHas('semester', function ($query) {
-                $query->whereDate('tanggal_selesai', '<', Carbon::now());
-            })->with('perkuliahann')->get();
-
-            $count = $matakuliah->count();
-        }
-        elseif($user->role_id == 8) {
-            $countMatakuliah = MataKuliah::where('prodi_id', 3)
-            ->whereHas('semester', function ($query) {
+            $countMatakuliah = MataKuliah::whereHas('semester', function ($query) {
                 $query->whereDate('tanggal_selesai', '>=', now());
             })
                 ->count();
-            $matakuliah = MataKuliah::where('prodi_id', 3)
-            ->whereHas('semester', function ($query) {
+            $matakuliah = MataKuliah::whereHas('semester', function ($query) {
                 $query->whereDate('tanggal_selesai', '<', Carbon::now());
             })->with('perkuliahann')->get();
+
+            $count = $matakuliah->count();
+        } elseif ($user->role_id == 6) {
+            $countMatakuliah = MataKuliah::where('prodi_id', 1)
+                ->whereHas('semester', function ($query) {
+                    $query->whereDate('tanggal_selesai', '>=', now());
+                })
+                ->count();
+            $matakuliah = MataKuliah::where('prodi_id', 1)
+                ->whereHas('semester', function ($query) {
+                    $query->whereDate('tanggal_selesai', '<', Carbon::now());
+                })->with('perkuliahann')->get();
+
+            $count = $matakuliah->count();
+        } elseif ($user->role_id == 7) {
+            $countMatakuliah = MataKuliah::where('prodi_id', 2)
+                ->whereHas('semester', function ($query) {
+                    $query->whereDate('tanggal_selesai', '>=', now());
+                })
+                ->count();
+            $matakuliah = MataKuliah::where('prodi_id', 2)
+                ->whereHas('semester', function ($query) {
+                    $query->whereDate('tanggal_selesai', '<', Carbon::now());
+                })->with('perkuliahann')->get();
+
+            $count = $matakuliah->count();
+        } elseif ($user->role_id == 8) {
+            $countMatakuliah = MataKuliah::where('prodi_id', 3)
+                ->whereHas('semester', function ($query) {
+                    $query->whereDate('tanggal_selesai', '>=', now());
+                })
+                ->count();
+            $matakuliah = MataKuliah::where('prodi_id', 3)
+                ->whereHas('semester', function ($query) {
+                    $query->whereDate('tanggal_selesai', '<', Carbon::now());
+                })->with('perkuliahann')->get();
 
             $count = $matakuliah->count();
         }
@@ -881,6 +871,6 @@ class AbsensiController extends Controller
         }
 
         $jumlah_ruangan = $ruangan->count();
-        return view('absensi_menu.mahasiswa.riwayat-absensi', compact('riwayatAbsensiGroupedFinal', 'total_absensi', 'total_matkul', 'jumlah_ruangan'));
+        return view('absensi_menu.mahasiswa.riwayat-absensi', compact('riwayatAbsensi', 'riwayatAbsensiGroupedFinal', 'total_absensi', 'total_matkul', 'jumlah_ruangan'));
     }
 }
