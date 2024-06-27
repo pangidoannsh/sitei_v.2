@@ -8,27 +8,24 @@ use App\Http\Controllers\ProgressReport\ProposalController;
 use App\Http\Controllers\ProgressReport\SkripsiController;
 
 Route::prefix('progress')->middleware(['auth:web,dosen,mahasiswa'])->group(function () {
-    Route::get('/riwayat', [ProgressController::class, 'riwayat'])->name('progress.riwayat');
-    Route::get('/proposal/tambah', [ProposalController::class, 'create'])->name('proposal.create');
-    Route::get('/skripsi/tambah', [SkripsiController::class, 'create'])->name('skripsi.create');
-    Route::get('/proposal/{id}', [ProgressController::class, 'show'])->name('progress.show');
-    Route::get('/skripsi/{id}', [ProgressController::class, 'showskripsi']);
-    Route::get('/logbookProposal/{id}', [ProgressController::class, 'logbookProposal']);
-    Route::get('/logbookSkripsi/{id}', [ProgressController::class, 'logbookSkripsi']);
+    Route::get('/riwayat', [ProgressController::class, 'riwayat'])->name('progress.riwayat'); //halaman riwayat
+    Route::get('/proposal/tambah', [ProposalController::class, 'create'])->name('proposal.create'); //halaman pembuatan logbook baru
+    Route::get('/skripsi/tambah', [SkripsiController::class, 'create'])->name('skripsi.create'); //halaman pembuatan logbook baru
+    Route::get('/proposal/{id}', [ProgressController::class, 'show'])->name('progress.show'); //menampilkan detail logbook proposal
+    Route::get('/skripsi/{id}', [ProgressController::class, 'showskripsi']); //menampilkan detail logbook skripsi
+    Route::get('/logbookProposal/{id}', [ProgressController::class, 'logbookProposal']); //untuk cetak pdf logbook proposal
+    Route::get('/logbookSkripsi/{id}', [ProgressController::class, 'logbookSkripsi']); //untuk cetak pdf logbook skripsi
     Route::get('/detailProposal/{id}', [ProgressController::class, 'detailProposal']);
     Route::get('/detailSkripsi/{id}', [ProgressController::class, 'detailSkripsi']);
-    Route::post('/skripsi', [SkripsiController::class, 'store']);
-    Route::post('/proposal', [ProposalController::class, 'store']);
-    Route::put('/proposalupdate', [ProposalController::class, 'update']);
-    Route::put('/skripsiupdate', [SkripsiController::class, 'skripsiupdate']);
-    Route::get('/statistik', [ProgressController::class, 'statistik']);
+    Route::post('/skripsi', [SkripsiController::class, 'store']); //untuk tambah data logbook skripsi
+    Route::post('/proposal', [ProposalController::class, 'store']); //untuk tambah data logbook proposal
+    Route::put('/proposalupdate', [ProposalController::class, 'update']); //untuk tambah data logbook proposal (lebih dari 1)
+    Route::put('/skripsiupdate', [SkripsiController::class, 'skripsiupdate']); //untuk tambah data logbook skripsi (lebih dari 1)
 });
 
 // Dosen Route
 Route::prefix('dosen')->middleware(['auth:dosen'])->group(function () {
     Route::get('/statistik/{id}', [DosenController::class, 'statistik'])->name('dosen.statistik');
-    Route::get('/skripsi/{id}', [DosenController::class, 'showskripsi']);
-    Route::get('/{id}', [DosenController::class, 'show'])->name('dosen.show');
     Route::put('/addingproposal/{id}', [DosenController::class, 'addproposal'])->name('proposal.add');
     Route::put('/addingskripsi/{id}', [DosenController::class, 'addskripsi']);
     Route::put('/tolakproposal/{id}', [DosenController::class, 'tolak']);

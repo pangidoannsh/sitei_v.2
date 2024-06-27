@@ -160,10 +160,8 @@
                         <div></div>
 
                         <tr>
-                            <!--<td class="text-center px-1 py-2">{{ $loop->iteration }}</td>-->
                             <td class="text-center px-1 py-2">{{ $skripsi->mahasiswa->nim }}</td>
                             <td class="text-left pl-3 pr-1 py-2 fw-bold">{{ $skripsi->mahasiswa->nama }}</td>
-                            <!-- <td class="text-center px-1 py-2">{{ $skripsi->konsentrasi->nama_konsentrasi }}</td>            -->
 
                             @if (
                                 $skripsi->status_skripsi == 'USULAN JUDUL' ||
@@ -896,12 +894,9 @@
                         </tr>
                     @endforeach
                 </tbody>
-
-
             </table>
         </div>
     </div>
-    {{-- @include('pendaftaran.dosen.components.pr-bimbingan') --}}
     <br>
     <br>
     <br>

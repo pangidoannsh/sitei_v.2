@@ -68,7 +68,7 @@ class DosenController extends Controller
 
     public function statistik($id)
     {
-        $progressMahasiswa = Mahasiswa::where('nim', $id)->first();
+        $mahasiswa = Mahasiswa::where('nim', $id)->first();
 
         $bimbinganProposal = Pr_Proposal::where('mahasiswa_nim', $id)->select('bimbingan as pembimbing')->pluck('pembimbing');
         $proposalSubBab = Pr_Proposal::where('mahasiswa_nim', $id)->select('bab1', 'bab2', 'bab3')->get();
@@ -127,8 +127,6 @@ class DosenController extends Controller
             $ProposalBab2++;
             $ProposalBab3++;
         }
-
-        // dd($proposalSubBab, $ProposalSubBab1, $ProposalSubBab2, $ProposalSubBab3);    
 
         $bimbinganSkripsi = Pr_Skripsi::where('mahasiswa_nim', $id)->select('bimbingan as pembimbingSkripsi')->pluck('pembimbingSkripsi');
         $skripsiSubBab = Pr_Skripsi::where('mahasiswa_nim', $id)->select('bab1', 'bab2', 'bab3', 'bab4', 'bab5')->get();
@@ -216,8 +214,6 @@ class DosenController extends Controller
             $skripsiBab5++;
         }
 
-        // dd($skripsiSubBab, $skripsiSubBab1, $skripsiSubBab2, $skripsiSubBab3, $skripsiSubBab4, $skripsiSubBab5);
-
         $proposal = Pr_Proposal::where('mahasiswa_nim', $id)->where('keterangan', '!=', null)->latest()->get();
         $skripsi = Pr_Skripsi::where('mahasiswa_nim', $id)->where('keterangan', '!=', null)->latest()->get();
 
@@ -226,8 +222,6 @@ class DosenController extends Controller
 
         $jumlahproposal = Pr_Proposal::where('pembimbing_nip', Auth::guard("dosen")->user()->nip)->where('keterangan', null)->count();
         $jumlahskripsi = Pr_Skripsi::where('pembimbing_nip', Auth::guard("dosen")->user()->nip)->where('keterangan', null)->count();
-
-        // ddd($progressMahasiswa);
 
         return view('progress.dosen.statistikMahasiswa', [
             'proposalSubBab1' => $ProposalSubBab1,
@@ -240,7 +234,7 @@ class DosenController extends Controller
             'skripsiSubBab4' => $skripsiSubBab4,
             'skripsiSubBab5' => $skripsiSubBab5,
             'bimbinganSkripsi' => $bimbinganSkripsi,
-            'namaMahasiswa' => $progressMahasiswa,
+            'mahasiswa' => $mahasiswa,
             'proposals' => $proposal,
             'skripsis' => $skripsi,
             'jumlah_skripsi' => $riwayatproposal + $riwayatskripsi,

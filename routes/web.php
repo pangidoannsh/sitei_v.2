@@ -63,11 +63,11 @@ use App\Http\Controllers\RekapitulasiController;
 |
 */
 
-include("doc.route.php");
-include("mbkm.route.php");
-include("pr.route.php");
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
+    include("doc.route.php");
+    include("mbkm.route.php");
+    include("pr.route.php");
     Route::get('/detail-kp/{id}', [QRController::class, 'detailkp']);
     Route::get('/detail-sempro/{id}', [QRController::class, 'detailsempro']);
     Route::get('/detail-skripsi/{id}', [QRController::class, 'detailskripsi']);
