@@ -384,7 +384,7 @@ class AbsensiController extends Controller
     {
         // Validasi input
         $request->validate([
-            'student_id' => 'required', // Mahasiswa ID harus terisi
+            'nim_mahasiswa' => 'required', // Mahasiswa ID harus terisi
             'class_id' => 'required', // ID kelas harus terisi
             'perkuliahan_id' => 'required', // ID perkuliahan harus terisi
             'nama_dosen' => 'required', // Nama dosen harus terisi
@@ -394,7 +394,7 @@ class AbsensiController extends Controller
         ]);
 
         // Memeriksa apakah mahasiswa sudah melakukan absensi untuk perkuliahan tertentu
-        $existingAbsensi = Absensi::where('student_id', $request->input('student_id'))
+        $existingAbsensi = Absensi::where('nim_mahasiswa', $request->input('nim_mahasiswa'))
             ->where('perkuliahan_id', $request->input('perkuliahan_id'))
             ->exists();
 
@@ -406,7 +406,7 @@ class AbsensiController extends Controller
 
         // Jika belum ada data absensi untuk mahasiswa dan perkuliahan tersebut, tambahkan data absensi manual
         Absensi::create([
-            'student_id' => $request->input('student_id'),
+            'nim_mahasiswa' => $request->input('nim_mahasiswa'),
             'class_id' => $request->input('class_id'),
             'perkuliahan_id' => $request->input('perkuliahan_id'),
             'nama_dosen' => $request->input('nama_dosen'),
@@ -416,11 +416,17 @@ class AbsensiController extends Controller
         ]);
 
         // Mendapatkan nama mahasiswa yang melakukan absensi
-        $mahasiswa = Mahasiswa::find($request->input('student_id'));
+        $mahasiswa = Mahasiswa::find($request->input('nim_mahasiswa'));
 
         // Membuat pesan sukses
-        $successMessage = "Absensi manual untuk mahasiswa dengan NIM {$mahasiswa->nim} - {$mahasiswa->nama} berhasil ditambahkan.";
-
+        // Cek apakah mahasiswa ditemukan
+        if ($mahasiswa) {
+            // Jika mahasiswa ditemukan, buat pesan sukses
+            $successMessage = "Absensi manual untuk mahasiswa dengan NIM {$mahasiswa->nim} - {$mahasiswa->nama} berhasil ditambahkan.";
+        } else {
+            // Jika mahasiswa tidak ditemukan, buat pesan sukses tanpa menggunakan $mahasiswa->nim dan $mahasiswa->nama
+            $successMessage = "Absensi manual berhasil ditambahkan.";
+        }
         // Redirect kembali ke halaman absensi dengan pesan sukses
         return redirect('/absensi/open-absensi/' . $request->input('class_id') . $request->input('perkuliahan_id') . '?success=true')
             ->with('success', $successMessage);
@@ -503,7 +509,7 @@ class AbsensiController extends Controller
             ->where('keterangan', 'Hadir') // Hanya ambil absensi dengan status 'Hadir'
             ->get();
         // Hitung kehadiran setiap mahasiswa
-        $attendanceCounts = $presentAttendances->groupBy('student_id')->map->count();
+        $attendanceCounts = $presentAttendances->groupBy('nim_mahasiswa')->map->count();
 
         // Filter mahasiswa yang kehadirannya kurang dari 80% dari total pertemuan
         $studentsUnderEightyPercent = $attendanceCounts->filter(function ($attendanceCount) use ($totalMeetings) {
@@ -512,7 +518,7 @@ class AbsensiController extends Controller
         });
 
         // Mahasiswa yang kehadirannya kurang dari 80%
-        $studentsUnderEightyPercent = Mahasiswa::whereIn('id', $studentsUnderEightyPercent->keys())->get();
+        $studentsUnderEightyPercent = Mahasiswa::whereIn('nim', $studentsUnderEightyPercent->keys())->get();
         $sortedUnder = $studentsUnderEightyPercent->sortBy('nim');
 
         // Urutkan mahasiswa berdasarkan NIM
@@ -783,7 +789,7 @@ class AbsensiController extends Controller
     public function detailabsensi($class_id)
     {
         $mahasiswa_id = Auth::user()->id;
-        $detailabsensimahasiswa = Absensi::where('student_id', $mahasiswa_id)
+        $detailabsensimahasiswa = Absensi::where('nim_mahasiswa', $mahasiswa_id)
             ->where('class_id', $class_id) // Sesuaikan dengan kolom yang sesuai dengan mata kuliah
             ->with(['class', 'perkuliahan'])
             ->get();
@@ -801,7 +807,7 @@ class AbsensiController extends Controller
         if ($user) {
             $mahasiswa_id = $user->id;
 
-            $riwayatAbsensi = Absensi::where('student_id', $mahasiswa_id)
+            $riwayatAbsensi = Absensi::where('nim_mahasiswa', $mahasiswa_id)
                 ->with(['class', 'perkuliahan'])
                 ->get();
 
@@ -827,7 +833,7 @@ class AbsensiController extends Controller
             $riwayatAbsensi = [];
 
 
-            $riwayatAbsensii = Absensi::where('student_id', $mahasiswa_id)
+            $riwayatAbsensii = Absensi::where('nim_mahasiswa', $mahasiswa_id)
                 ->with(['class', 'perkuliahan'])
                 ->get();
 

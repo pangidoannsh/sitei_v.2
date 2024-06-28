@@ -24,7 +24,7 @@ class AbsensiApiController extends Controller
     public function apistore(Request $request)
     {
         $request->validate([
-            'student_id' => ['required', 'exists:mahasiswa,id'],
+            'nim_mahasiswa' => ['required'],
             'class_id' => ['required', 'exists:ab_matakuliah,id'],
             'perkuliahan_id' => ['required', 'exists:ab_perkuliahan,id'],
             'nama_dosen' => ['required'],
@@ -32,7 +32,7 @@ class AbsensiApiController extends Controller
             'keterangan' => ['required']
         ]);
 
-        $existingAttendance = Absensi::where('student_id', $request->input('student_id'))
+        $existingAttendance = Absensi::where('nim_mahasiswa', $request->input('nim_mahasiswa'))
         ->where('perkuliahan_id', $request->input('perkuliahan_id'))
         ->exists();
 
@@ -44,7 +44,7 @@ class AbsensiApiController extends Controller
         }
 
         $attendance = Absensi::create([
-            'student_id' => $request->input('student_id'),
+            'nim_mahasiswa' => $request->input('nim_mahasiswa'),
             'class_id' => $request->input('class_id'),
             'perkuliahan_id' => $request->input('perkuliahan_id'),
             'attended_at' => now(),
@@ -53,14 +53,13 @@ class AbsensiApiController extends Controller
             'keterangan' => $request->input('keterangan')
         ]);
 
-        $mahasiswa = Mahasiswa::findOrFail($attendance->student_id);
+        $mahasiswa = Mahasiswa::where('nim', $attendance->nim_mahasiswa)->firstOrFail();
 
         $attendanceSend = [
             'id' => $attendance->id,
-            'student_id' => $attendance->student_id,
+            'nim_mahasiswa' => $attendance->nim_mahasiswa,
             'class_id' => $attendance->class_id,
             'tanggal' => $attendance->attended_at->format('Y-m-d'),
-            'nim' => $mahasiswa->nim,
             'nama' => $mahasiswa->nama,
             'waktu' => $attendance->attended_at->format('H:i:s'),
             'keterangan' => $attendance->keterangan,
@@ -75,6 +74,7 @@ class AbsensiApiController extends Controller
             200
         );
     }
+    
     public function show()
     {
         // Ambil daftar absensi berdasarkan class_id
@@ -90,7 +90,7 @@ class AbsensiApiController extends Controller
     public function showByStudentId($studentId)
     {
         // Ambil riwayat absensi berdasarkan ID mahasiswa dengan detail class_id dan perkuliahan_id
-        $attendanceList = Absensi::where('student_id', $studentId)
+        $attendanceList = Absensi::where('nim_mahasiswa', $studentId)
             ->join('mata_kuliah', 'attendances.class_id', '=', 'mata_kuliah.id')
             ->join('perkuliahan', 'attendances.perkuliahan_id', '=', 'perkuliahan.id')
             ->join('locations', 'mata_kuliah.ruangan_id', '=', 'locations.id')
@@ -113,9 +113,9 @@ class AbsensiApiController extends Controller
     {
         $mahasiswa = Auth::user();
 
-        $studentId = $mahasiswa->id;
+        $studentId = $mahasiswa->nim;
 
-        $attendanceList = Absensi::where('student_id', $studentId)
+        $attendanceList = Absensi::where('nim_mahasiswa', $studentId)
             ->join('ab_matakuliah', 'ab_absensi.class_id', '=', 'ab_matakuliah.id')
             ->join('ab_perkuliahan', 'ab_absensi.perkuliahan_id', '=', 'ab_perkuliahan.id')
             ->join('ab_ruangan', 'ab_matakuliah.ruangan_id', '=', 'ab_ruangan.id')
@@ -158,9 +158,9 @@ class AbsensiApiController extends Controller
     {
         $mahasiswa = Auth::user();
 
-        $studentId = $mahasiswa->id;
+        $studentId = $mahasiswa->nim;
 
-        $attendanceList = Absensi::where('student_id', $studentId)
+        $attendanceList = Absensi::where('nim_mahasiswa', $studentId)
             ->join('ab_matakuliah', 'ab_absensi.class_id', '=', 'ab_matakuliah.id')
             ->join('ab_perkuliahan', 'ab_absensi.perkuliahan_id', '=', 'ab_perkuliahan.id')
             ->join('ab_ruangan', 'ab_matakuliah.ruangan_id', '=', 'ab_ruangan.id')
@@ -196,10 +196,10 @@ class AbsensiApiController extends Controller
     // detail untuk matakuliah yg udah absensi semester berjalan
     public function showDetailAttendance($id)
     {
-        $mahasiswa_id = Auth::user()->id;
+        $mahasiswa_id = Auth::user()->nim;
         $class_id = $id;
 
-        $detailAttendance = Absensi::where('student_id', $mahasiswa_id)
+        $detailAttendance = Absensi::where('nim_mahasiswa', $mahasiswa_id)
             ->where('class_id', $class_id)
             ->join('ab_matakuliah', 'ab_absensi.class_id', '=', 'ab_matakuliah.id')
             ->join('ab_ruangan', 'ab_matakuliah.ruangan_id', '=', 'ab_ruangan.id')
@@ -219,9 +219,9 @@ class AbsensiApiController extends Controller
     {
         $mahasiswa = Auth::user();
 
-        $studentId = $mahasiswa->id;
+        $studentId = $mahasiswa->nim;
 
-        $attendanceList = Absensi::where('student_id', $studentId)
+        $attendanceList = Absensi::where('nim_mahasiswa', $studentId)
             ->join('ab_matakuliah', 'ab_absensi.class_id', '=', 'ab_matakuliah.id')
             ->join('ab_perkuliahan', 'ab_absensi.perkuliahan_id', '=', 'ab_perkuliahan.id')
             ->join('ab_ruangan', 'ab_matakuliah.ruangan_id', '=', 'ab_ruangan.id')
@@ -257,10 +257,10 @@ class AbsensiApiController extends Controller
 
     public function showDetailThen($id)
     {
-        $mahasiswa_id = Auth::user()->id;
+        $mahasiswa_id = Auth::user()->nim;
         $class_id = $id;
 
-        $detailThen = Absensi::where('student_id', $mahasiswa_id)
+        $detailThen = Absensi::where('nim_mahasiswa', $mahasiswa_id)
             ->where('class_id', $class_id)
             ->join('ab_matakuliah', 'ab_absensi.class_id', '=', 'ab_matakuliah.id')
             ->join('ab_ruangan', 'ab_matakuliah.ruangan_id', '=', 'ab_ruangan.id')
@@ -280,9 +280,9 @@ class AbsensiApiController extends Controller
     public function countAttendanceStatus()
     {
         $mahasiswa = Auth::user();
-        $studentId = $mahasiswa->id;
+        $studentId = $mahasiswa->nim;
 
-        $attendanceCounts = Absensi::where('student_id', $studentId)
+        $attendanceCounts = Absensi::where('nim_mahasiswa', $studentId)
             ->selectRaw('keterangan, count(*) as total')
             ->groupBy('keterangan')
             ->get();
@@ -322,7 +322,7 @@ class AbsensiApiController extends Controller
     }
     
     public function showBasedId($studentId){
-        $attendance = Absensi::where('student_id', $studentId)->get();
+        $attendance = Absensi::where('nim_mahasiswa', $studentId)->get();
         return response()->json(['attendances'=>$attendance], 200);
     }
 

@@ -152,7 +152,7 @@ table{
                 @foreach($groupedAttendances2 as $perkuliahanId => $attendances)
                     @foreach($attendances as $attendance)
                         @php
-                            $uniqueAttendances[$attendance->student->id] = $attendance->student; // Menyimpan entri unik berdasarkan id mahasiswa
+                            $uniqueAttendances[$attendance->student->nim] = $attendance->student; // Menyimpan entri unik berdasarkan id mahasiswa
                         @endphp
                     @endforeach
                 @endforeach
@@ -160,14 +160,14 @@ table{
                 @foreach($sortedStudents as $student)
                 <tr>
                     <td class="text-center" style="text-align: center">{{ $loop->iteration }}</td>
-                    <td class="text-center" style="text-align: center">{{ $student->nim }}</td>
-                    <td class="text-center" style="text-align: center">{{ $student->nama }}</td>
+                    <td class="text-center" style="text-align: center">{{ $student->nim ?? '-' }}</td>
+                    <td class="text-center" style="text-align: center">{{ $student->nama ?? '-' }}</td>
                     @php
                         $attendanceCounter = 0; // Counter untuk mengakses kehadiran per pertemuan
                     @endphp
                     @foreach($groupedAttendances2 as $perkuliahanId => $attendances)
                         @php
-                            $attendance = $attendances->where('student_id', $student->id)->first(); // Cari kehadiran mahasiswa pada pertemuan tertentu
+                            $attendance = $attendances->where('nim_mahasiswa', $student->nim ?? '-')->first(); // Cari kehadiran mahasiswa pada pertemuan tertentu
                         @endphp
                         <td class="text-center" style="text-align: center">
                             <!-- Periksa keterangan -->
