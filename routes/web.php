@@ -96,6 +96,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
     Route::group(['middleware' => ['auth:dosen,web,mahasiswa']], function () {
         Route::post('/logout', [LoginController::class, 'logout']);
+        Route::get('/daftar-matakuliah/{id}', [AbRuanganController::class, 'matakuliah'])->name('ruangan.matakuliah');
+
     });
 
 

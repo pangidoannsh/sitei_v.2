@@ -120,25 +120,25 @@
                                 <form id="formTambahAbsensi" action="{{ url('/absensi/tambah-manual') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" id="student_id" name="student_id"
+                                        <input type="hidden" class="form-control" id="nim_mahasiswa" name="nim_mahasiswa"
                                             readonly>
                                     </div>
                                     {{-- <div class="form-group">
                         <label for="namaMahasiswa">Nama Mahasiswa</label>
                         <select class="namas form-control" id="namas" style="width: 100%" name="student_name"></select>
                     </div> --}}
-                                    <label for="student_id" class="form-label">Mahasiswa</label>
-                                    <select name="student_id" id="mhs" style="width: 100%"
-                                        class="form-select @error('student_id') is-invalid @enderror">
+                                    <label for="nim_mahasiswa" class="form-label">Mahasiswa</label>
+                                    <select name="nim_mahasiswa" id="mhs" style="width: 100%"
+                                        class="form-select @error('nim_mahasiswa') is-invalid @enderror">
                                         <option value="">-Pilih-</option>
                                         @foreach ($mahasiswas as $mhs)
-                                            <option value="{{ $mhs->id }}"
-                                                {{ old('student_id') == $mhs->id ? 'selected' : null }}>
+                                            <option value="{{ $mhs->nim }}"
+                                                {{ old('nim_mahasiswa') == $mhs->id ? 'selected' : null }}>
                                                 {{ $mhs->nama }} ({{ $mhs->nim }})</option>
                                         @endforeach
                                     </select>
 
-                                    @error('student_id')
+                                    @error('nim_mahasiswa')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -290,8 +290,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ \Carbon\Carbon::parse($data->attended_at)->format('Y-m-d') }}</td>
-                                        <td>{{ $data->student->nim }}</td>
-                                        <td>{{ $data->student->nama }}</td>
+                                        <td>{{ $data->student->nim ?? '-'}}</td>
+                                        <td>{{ $data->student->nama ?? '-' }}</td>
                                         <td>{{ \Carbon\Carbon::parse($data->attended_at)->format('H:i:s') }}</td>
                                         <td
                                             class="@if ($data->keterangan === 'Sakit') bg-danger text-white @elseif($data->keterangan === 'Izin') bg-warning text-dark @elseif($data->keterangan === 'Hadir') bg-info text-white @else bg-secondary text-dark @endif">
@@ -346,13 +346,13 @@
         }
 
         function store() {
-            var studentId = $("#student_id").val();
+            var studentId = $("#nim_mahasiswa").val();
             var keterangan = $("#keterangan").val();
             $.ajax({
                 type: "POST",
                 url: "{{ url('/absensi/tambah-manual') }}",
                 data: {
-                    student_id: studentId,
+                    nim_mahasiswa: nimMahasiswa,
                     keterangan: keterangan,
                     _token: "{{ csrf_token() }}"
                 },

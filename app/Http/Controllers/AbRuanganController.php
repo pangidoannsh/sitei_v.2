@@ -353,10 +353,10 @@ class AbRuanganController extends Controller
 
     public function absensimahasiswa()
     {
-        $mahasiswa_id = Auth::user()->id; // Sesuaikan dengan cara Anda mendapatkan ID mahasiswa
+        $mahasiswa_id = Auth::user()->nim; // Sesuaikan dengan cara Anda mendapatkan ID mahasiswa
 
         // Ambil riwayat absensi mahasiswa
-        $riwayatAbsensi = Absensi::where('student_id', $mahasiswa_id)
+        $riwayatAbsensi = Absensi::where('nim_mahasiswa', $mahasiswa_id)
             ->with(['class', 'perkuliahan', 'mataKuliah'])
             ->get();
 
@@ -470,11 +470,11 @@ class AbRuanganController extends Controller
 
         $jumlah_ruangan = $ruangan->count();
 
-        $mahasiswa_id = Auth::user()->id; // Sesuaikan dengan cara Anda mendapatkan ID mahasiswa
+        $mahasiswa_id = Auth::user()->nim; // Sesuaikan dengan cara Anda mendapatkan ID mahasiswa
 
         $riwayatAbsensi = [];
 
-        $riwayatAbsensi = Absensi::where('student_id', $mahasiswa_id)
+        $riwayatAbsensi = Absensi::where('nim_mahasiswa', $mahasiswa_id)
             ->with(['class', 'perkuliahan'])
             ->get();
 
@@ -500,7 +500,7 @@ class AbRuanganController extends Controller
         $riwayatAbsensi = [];
 
 
-        $riwayatAbsensii = Absensi::where('student_id', $mahasiswa_id)
+        $riwayatAbsensii = Absensi::where('nim_mahasiswa', $mahasiswa_id)
             ->with(['class', 'perkuliahan'])
             ->get();
 

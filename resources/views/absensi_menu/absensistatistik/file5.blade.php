@@ -128,8 +128,8 @@ table{
             @foreach($studentsUnderEightyPercent  as $key => $student)
             <tr>
                 <td class="text-center" style="text-align: center">{{ $loop->iteration }}</td>
-                <td class="text-center" style="text-align: left; margin-left:10px">{{ $student->nama }}</td>
-                <td class="text-center" style="text-align: center">{{ number_format(($attendanceCounts[$student->id] / 15) * 100, 2) }}%</td>
+                <td class="text-center" style="text-align: left; margin-left:10px">{{ $student->nama ?? '-'}}</td>
+                <td class="text-center" style="text-align: center">{{ number_format(($attendanceCounts[$student->nim ?? '-'] / 15) * 100, 2) }}%</td>
             </tr>
             @endforeach
         </tbody>
