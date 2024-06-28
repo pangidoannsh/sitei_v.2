@@ -243,8 +243,8 @@ class ProgressController extends Controller
         $prodi = Prodi::where('id', $mahasiswa->prodi_id)->first();
         $konsentrasi = Konsentrasi::where('id', $mahasiswa->konsentrasi_id)->first();
 
-        return view('progress.proposal.show', [
-            'proposal' => $proposal,
+        return view('progress.show', [
+            'skripsi' => $proposal,
             'prodi' => $prodi,
             'konsentrasi' => $konsentrasi,
             'pendaftaran_skripsi' => $pendaftaran_skripsi
@@ -259,7 +259,7 @@ class ProgressController extends Controller
         $prodi = Prodi::where('id', $mahasiswa->prodi_id)->first();
         $konsentrasi = Konsentrasi::where('id', $mahasiswa->konsentrasi_id)->first();
 
-        return view('progress.skripsi.show', [
+        return view('progress.show', [
             'skripsi' => $skripsi,
             'prodi' => $prodi,
             'konsentrasi' => $konsentrasi,

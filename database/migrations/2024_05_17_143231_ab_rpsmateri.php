@@ -15,7 +15,8 @@ class AbRpsmateri extends Migration
     {
         Schema::create('ab_rpsmateri', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('perkuliahan_id')->constrained('ab_perkuliahan');
+            $table->foreignId('perkuliahan_id');
+            // ->constrained('ab_perkuliahan');
             $table->enum('kesesuaian', ['Sesuai', 'Tidak Sesuai']);
             $table->timestamps();
         });

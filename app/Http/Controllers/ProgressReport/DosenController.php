@@ -247,15 +247,15 @@ class DosenController extends Controller
 
         $proposal = Pr_Proposal::findOrFail($id);
         $mahasiswa = Mahasiswa::where('nim', $proposal->mahasiswa_nim)->first();
-        $PendaftaranSkripsi = PendaftaranSkripsi::where('nim', $proposal->mahasiswa_nim)->first();
+        $pendaftaran_skripsi = PendaftaranSkripsi::where('mahasiswa_nim', $proposal->mahasiswa_nim)->first();
         $prodi = Prodi::where('id', $mahasiswa->prodi_id)->first();
         $konsentrasi = Konsentrasi::where('id', $mahasiswa->konsentrasi_id)->first();
 
-        return view('dosen.show', [
+        return view('progress.dosen.show', [
             'proposal' => $proposal,
             'prodi' => $prodi,
             'konsentrasi' => $konsentrasi,
-            'PendaftaranSkripsi' => $PendaftaranSkripsi
+            'pendaftaran_skripsi' => $pendaftaran_skripsi
         ]);
     }
 

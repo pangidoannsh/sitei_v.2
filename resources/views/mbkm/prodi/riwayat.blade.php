@@ -64,9 +64,9 @@
                         @if (in_array($km->status, ['Konversi diterima', 'Nilai sudah keluar']))
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $km->mahasiswa->nim }}</td>
-                                <td class="text-center">{{ $km->mahasiswa->nama }}</td>
-                                <td class="text-center">{{ $km->mahasiswa->angkatan }}</td>
+                                <td class="text-center">{{ optional($km->mahasiswa)->nim }}</td>
+                                <td class="text-center">{{ optional($km->mahasiswa)->nama }}</td>
+                                <td class="text-center">{{ optional($km->mahasiswa)->angkatan }}</td>
                                 <td class="text-center">{{ $km->program->name }}</td>
                                 <td class="text-center">{{ $km->perusahaan }}</td>
                                 <td class="text-center ">{{ $km->judul }}</td>

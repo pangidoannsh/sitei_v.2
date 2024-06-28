@@ -25,11 +25,12 @@ Route::prefix('progress')->middleware(['auth:web,dosen,mahasiswa'])->group(funct
 
 // Dosen Route
 Route::prefix('dosen')->middleware(['auth:dosen'])->group(function () {
-    Route::get('/statistik/{id}', [DosenController::class, 'statistik'])->name('dosen.statistik');
-    Route::put('/addingproposal/{id}', [DosenController::class, 'addproposal'])->name('proposal.add');
-    Route::put('/addingskripsi/{id}', [DosenController::class, 'addskripsi']);
-    Route::put('/tolakproposal/{id}', [DosenController::class, 'tolak']);
-    Route::put('/tolakskripsi/{id}', [DosenController::class, 'tolakskripsi']);
-    Route::post('/tambahketerangan', [DosenController::class, 'addinformation']);
-    Route::post('/tambahketeranganskripsi', [DosenController::class, 'addinformationskripsi']);
+    Route::get('/statistik/{id}', [DosenController::class, 'statistik'])->name('dosen.statistik'); //statistik logbook mahasiswa
+    Route::get('/{id}', [DosenController::class, 'show'])->name('dosen.show'); //show detail logbook mahasiswa dari dosen
+    Route::put('/addingproposal/{id}', [DosenController::class, 'addproposal'])->name('proposal.add'); //store data persetujuan logbook proposal
+    Route::put('/addingskripsi/{id}', [DosenController::class, 'addskripsi']); //store data persetujuan logbook skripsi
+    Route::put('/tolakproposal/{id}', [DosenController::class, 'tolak']); //tolak persetujuan logbook proposal
+    Route::put('/tolakskripsi/{id}', [DosenController::class, 'tolakskripsi']); //tolak persetujuan logbook skripsi
+    Route::post('/tambahketerangan', [DosenController::class, 'addinformation']); //modal persetujuan proposal
+    Route::post('/tambahketeranganskripsi', [DosenController::class, 'addinformationskripsi']); //modal persetujuan skripsi
 });

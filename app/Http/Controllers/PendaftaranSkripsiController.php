@@ -360,6 +360,11 @@ class PendaftaranSkripsiController extends Controller
 
     public function createsempro($id)
     {
+        $logbook = Pr_Proposal::where("pendaftaran_skripsi", $id)->whereNotNull("keterangan")->count();
+        if ($logbook < 4) {
+            Alert::error('Gagal Mendaftar Sempro!', 'Logbook anda masih dibawah 4')->showConfirmButton('Ok', '#DC3545');
+            return redirect()->back();
+        }
         return view('pendaftaran.skripsi.sempro.create', [
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
         ]);
@@ -597,6 +602,11 @@ class PendaftaranSkripsiController extends Controller
     }
     public function createsidang($id)
     {
+        $logbook = Pr_Skripsi::where("pendaftaran_skripsi", $id)->whereNotNull("keterangan")->count();
+        if ($logbook < 8) {
+            Alert::error('Gagal Mendaftar Sidang!', 'Logbook anda masih dibawah 8')->showConfirmButton('Ok', '#DC3545');
+            return redirect()->back();
+        }
         return view('pendaftaran.skripsi.sidang.create', [
             'pendaftaran_skripsi' => PendaftaranSkripsi::where('id', $id)->get(),
         ]);
