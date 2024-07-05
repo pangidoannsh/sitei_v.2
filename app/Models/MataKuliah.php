@@ -42,6 +42,7 @@ class MataKuliah extends Model
         'rps_pertemuan_14',
         'rps_pertemuan_15',
         'rps_pertemuan_16',
+        'jenis',
     ];
 
     public function attendances()

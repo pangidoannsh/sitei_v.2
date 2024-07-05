@@ -495,6 +495,7 @@ class MataKuliahController extends Controller
             'rps_pertemuan_14' => ['required'],
             'rps_pertemuan_15' => ['required'],
             'rps_pertemuan_16' => ['required'],
+            'jenis' => ['required'],
         ]);
 
         MataKuliah::create($request->all());
@@ -543,6 +544,7 @@ class MataKuliahController extends Controller
             'jam' => ['required'],
             'ruangan_id' => ['required'],
             'kuota' => ['required'],
+            'jenis' => ['required'],
         ]);
 
         MataKuliah::where('id', $matakuliah->id)
