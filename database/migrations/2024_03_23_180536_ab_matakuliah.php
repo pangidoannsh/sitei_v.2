@@ -27,6 +27,7 @@ class AbMatakuliah extends Migration
             $table->string('jam');
             $table->string('ruangan_id');
             $table->string('kuota');
+            $table->string('jenis');
             $table->string('rps_pertemuan_1');
             $table->string('rps_pertemuan_2');
             $table->string('rps_pertemuan_3');

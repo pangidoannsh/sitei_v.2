@@ -43,7 +43,6 @@ class SertifikatMbkmController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $mahasiswa = Auth::guard("mahasiswa")->user();
 
         // Store Sertifikat

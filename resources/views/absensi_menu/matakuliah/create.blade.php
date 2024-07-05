@@ -192,7 +192,6 @@
                                 </div>
                             @enderror
                         </div>
-
                     </div>
 
                     <div class="col-md">
@@ -310,7 +309,18 @@
                                 </div>
                             @enderror
                         </div>
-
+                        <div class="mb-3 field">
+                            <label class="form-label">Jenis Matakuliah <span class="text-danger">*</span></label>
+                            <select name="jenis" class="form-select @error('jenis') is-invalid @enderror">
+                                <option value="W" selected>W</option>
+                                <option value="P">P</option>
+                            </select>
+                            @error('jenis')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="col-md">

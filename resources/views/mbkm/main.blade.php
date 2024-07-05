@@ -245,9 +245,6 @@
             display: none;
         }
     </style>
-
-
-
 </head>
 
 <body class="hold-transition layout-top-nav">
