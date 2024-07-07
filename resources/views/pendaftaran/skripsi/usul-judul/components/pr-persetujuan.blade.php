@@ -1,7 +1,7 @@
 <div class="card p-4">
     <ol class="breadcrumb col-lg-12">
         <li>
-            <a href="/progress" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan
+            <a href="/usuljudul/index" class="breadcrumb-item active fw-bold text-success px-1">Persetujuan
                 (<span>{{ $jumlah }}</span>)
             </a>
         </li>
