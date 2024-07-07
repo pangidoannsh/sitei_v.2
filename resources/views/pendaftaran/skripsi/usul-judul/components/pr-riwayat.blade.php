@@ -2,7 +2,7 @@
 
     <ol class="breadcrumb col-lg-12">
         <li>
-            <a href="/progress" class="px-1">Persetujuan
+            <a href="/usuljudul/index" class="px-1">Persetujuan
                 (<span>{{ $jumlah }}</span>)
             </a>
         </li>

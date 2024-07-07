@@ -10,7 +10,8 @@
     </title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('/assets/dist/css/bootstrap.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
@@ -131,12 +132,15 @@
                 <div class="container judul">
                     <div class="sia-jte">
                         <a>
-                            <img src="/assets/dist/img/unri.png" alt="" width="30" height="30" class="d-inline-block mr-2">
+                            <img src="/assets/dist/img/unri.png" alt="" width="30" height="30"
+                                class="d-inline-block mr-2">
                         </a>
                         <a class="navbar-brand mt-1 " href="/">SITEI
                         </a>
                     </div>
-                    <button class="navbar-toggler navbar-light bg-light border border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler navbar-light bg-light border border-secondary" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -144,7 +148,8 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link  " aria-current="page" href="/inventaris/peminjaman-dosen">Progress Report</a>
+                                <a class="nav-link  " aria-current="page" href="/inventaris/peminjaman-dosen">Progress
+                                    Report</a>
 
                             </li>
 
@@ -152,11 +157,13 @@
 
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div>
-                                    <ul class="dropdown-menu dropdown-menu-end" style="border-radius:10px;" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown-menu dropdown-menu-end" style="border-radius:10px;"
+                                        aria-labelledby="navbarDropdown">
 
                                         <li>
                                             <a class="nav-link dropdown-item " href="/profil-dosen/editpassworddsn/">
@@ -165,7 +172,8 @@
                                         </li>
 
                                         <form action="/logout" method="POST">
-                                            <input type="hidden" name="_token" value="1kf09BSG9Hzwus1sOH2nUzbqaEWfNVVz6tdaH9nz">
+                                            <input type="hidden" name="_token"
+                                                value="1kf09BSG9Hzwus1sOH2nUzbqaEWfNVVz6tdaH9nz">
                                             <li>
                                                 <button type="submit" class="dropdown-item">
                                                     <i class="bi bi-box-arrow-right"></i> <span>Keluar</span>
@@ -202,8 +210,10 @@
             <div class="content">
                 <div class="container">
 
-                    <a href="/progress/proposal/tambah" class="btn mahasiswa btn-success mb-3 font-weight-bold">+ Proposal</a>
-                    <a href="/progress/skripsi/tambah" class="btn mahasiswa btn-success mb-3 font-weight-bold">+ Skripsi</a>
+                    <a href="/progress/proposal/tambah" class="btn mahasiswa btn-success mb-3 font-weight-bold">+
+                        Proposal</a>
+                    <a href="/progress/skripsi/tambah" class="btn mahasiswa btn-success mb-3 font-weight-bold">+
+                        Skripsi</a>
 
                     <div class="container card  p-4">
 
@@ -216,12 +226,14 @@
 
                             <span class="px-2">|</span>
                             <li>
-                                <a href="/progress/riwayat" class="px-1">Riwayat (<span>{{ $jumlah_skripsi }}</span>) </a>
+                                <a href="/progress/riwayat" class="px-1">Riwayat (<span>{{ $jumlah_skripsi }}</span>)
+                                </a>
                             </li>
 
                             <span class="px-2">|</span>
                             <li>
-                                <a href="/progress/statistik" class="breadcrumb-item active fw-bold text-success px-1">Statistik</a>
+                                <a href="/progress/statistik"
+                                    class="breadcrumb-item active fw-bold text-success px-1">Statistik</a>
                             </li>
 
                         </ol>
@@ -261,7 +273,8 @@
 
         <section class="bg-dark p-1">
             <div class="container">
-                <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold" formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">( M. Seprinaldi )</a></p>
+                <p class="developer">Dikembangkan oleh Prodi Teknik Informatika UNRI <a class="text-success fw-bold"
+                        formtarget="_blank" target="_blank" href="/developer/m-seprinaldi">( M. Seprinaldi )</a></p>
             </div>
         </section>
         <!-- <div class="footer bg-dark">
@@ -387,9 +400,9 @@
 
         <script src="http://127.0.0.1:8000/js/sweetalert2.min.js"></script>
         <script>
-            let dataProgressSkripsi = <?php echo json_encode($progressReportSkripsi) ?>;
-            let dataBimbinganSkripsi = <?php echo json_encode($bimbinganSkripsi) ?>;
-             document.addEventListener('DOMContentLoaded', function() {
+            let dataProgressSkripsi = <?php echo json_encode($progressReportSkripsi); ?>;
+            let dataBimbinganSkripsi = <?php echo json_encode($bimbinganSkripsi); ?>;
+            document.addEventListener('DOMContentLoaded', function() {
                 const chart = Highcharts.chart('container', {
                     chart: {
                         type: 'column'
@@ -402,7 +415,7 @@
                     },
                     xAxis: {
                         categories: dataBimbinganSkripsi,
-                        
+
                     },
                     yAxis: {
                         min: 0,
@@ -442,8 +455,8 @@
         </script>
 
         <script>
-            let dataProgresProposal = <?php echo json_encode($progressReportProposal) ?>;
-            let dataBimbinganProposal = <?php echo json_encode($bimbinganProposal) ?>;
+            let dataProgresProposal = <?php echo json_encode($progressReportProposal); ?>;
+            let dataBimbinganProposal = <?php echo json_encode($bimbinganProposal); ?>;
 
             document.addEventListener('DOMContentLoaded', function() {
                 const chart = Highcharts.chart('container2', {
@@ -458,7 +471,7 @@
                     },
                     xAxis: {
                         categories: dataBimbinganProposal
-                        
+
                     },
                     yAxis: {
                         min: 0,
