@@ -69,8 +69,7 @@
                     </div>
 
                 </div>
-                <a href="#ModalApprove" data-toggle="modal" class="btn mt-4 btn-lg btn-success ">Usulkan
-                    Progress</a>
+                
             </div>
 
 
@@ -85,8 +84,8 @@
 
                         <label class="form-label ">BAB 1 <small class="text-secondary"> (Centang Bila
                                 Selesai)</small></label> <br />
-                        <div class="form-check">
 
+                        <div class="form-check">
                             <input type="checkbox" class="form-check-input " name="bab1[]" value="Latar Belakang">Latar
                             Belakang <br />
                             <input type="checkbox" class="form-check-input " name="bab1[]"
@@ -131,6 +130,8 @@
                 </div>
             </div>
         </div>
+        <a href="#ModalApprove" data-toggle="modal" class="btn mt-4 btn-lg btn-success ">Usulkan
+                    Progress</a>
     </div>
 
 

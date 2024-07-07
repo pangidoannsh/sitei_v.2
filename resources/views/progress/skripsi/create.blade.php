@@ -65,7 +65,7 @@
 
                     </div>
                 </div>
-                <a href="#ModalApprove" data-toggle="modal" class="btn mt-4 btn-lg btn-success ">Usulkan Progress</a>
+                
             </div>
             <div class="col-lg-4">
                 <div class="dokumen-card">
@@ -147,6 +147,7 @@
 
                 </div>
             </div>
+            <a href="#ModalApprove" data-toggle="modal" class="btn mt-4 btn-lg btn-success ">Usulkan Progress</a>
         </div>
 
 
