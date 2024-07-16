@@ -208,7 +208,7 @@ table{
                 <td colspan="3" class="text-center" >Jumlah Mahasiswa</td>
                 @foreach($groupedAttendances as $perkuliahanId => $attendances)
         @php
-            $totalStudents = $attendances->groupBy('student_id')->count(); // Menghitung jumlah mahasiswa yang hadir untuk setiap pertemuan
+            $totalStudents = $attendances->groupBy('nim_mahasiswa')->count(); // Menghitung jumlah mahasiswa yang hadir untuk setiap pertemuan
         @endphp
         <td class="text-center" style="text-align: center">{{ $totalStudents }}</td>
     @endforeach

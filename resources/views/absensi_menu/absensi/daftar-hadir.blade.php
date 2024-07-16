@@ -56,8 +56,8 @@
                     @foreach ($attendances as $daftar)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $daftar->student->nim }}</td>
-                            <td>{{ $daftar->student->nama }}</td>
+                            <td>{{ $daftar->student->nim ?? '-'}}</td>
+                            <td>{{ $daftar->student->nama ?? '-'}}</td>
                             <td>{{ \Carbon\Carbon::parse($daftar->attended_at)->format('H:i:s') }}</td>
                             <td
                                 class="@if ($daftar->keterangan === 'Sakit') bg-danger text-white @elseif($daftar->keterangan === 'Izin') bg-warning text-dark @elseif($daftar->keterangan === 'Hadir') bg-info text-white @else bg-secondary text-dark @endif"">

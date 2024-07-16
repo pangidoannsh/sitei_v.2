@@ -459,40 +459,8 @@
                 }
             });
 
-            $('#semesterFilterRiwayatMatakuliah').on('change', function() {
-                var val = $(this).val();
-                console.log("Selected Semester:", val); // Add this line for debugging
-
-                // Log filtered data
-                var filteredData = table.rows({
-                    search: 'applied'
-                }).data().toArray();
-                console.log("Filtered Data:", filteredData);
-
-                if (val) {
-                    table.column(5).search(val).draw();
-                } else {
-                    table.column(5).search('').draw();
-                }
-            });
-
-            $('#semesterFilterRiwayatMatakuliahKajur').on('change', function() {
-                var val = $(this).val();
-                console.log("Selected Semester:", val); // Add this line for debugging
-
-                // Log filtered data
-                var filteredData = table.rows({
-                    search: 'applied'
-                }).data().toArray();
-                console.log("Filtered Data:", filteredData);
-
-                if (val) {
-                    table.column(6).search(val).draw();
-                } else {
-                    table.column(6).search('').draw();
-                }
-            });
-
+            
+            
             // Event handler untuk panjang menu
             $('#lengthMenuMatakuliahProdi').on('change', function() {
                 var length = $(this).val();
@@ -519,25 +487,9 @@
 
             $('#datatables2_length').after($('.filter'));
 
-            // Filter Prodi Mobile
-            $('#semesterFilterMobileProdi').on('change', function() {
-                var val = $(this).val();
-                if (val) {
-                    table.column(5).search(val).draw();
-                } else {
-                    table.column(5).search('').draw();
-                }
-            });
+            
 
-            // Filter Prodi MobileKajur
-            $('#semesterFilterMobileProdiKajur').on('change', function() {
-                var val = $(this).val();
-                if (val) {
-                    table.column(6).search(val).draw();
-                } else {
-                    table.column(6).search('').draw();
-                }
-            });
+           
         });
     </script>
 
@@ -606,7 +558,60 @@
                 }
             });
 
+             // Filter Prodi MobileKajur
+            $('#semesterFilterMobileProdiKajur').on('change', function() {
+                var val = $(this).val();
+                if (val) {
+                    table.column(6).search(val).draw();
+                } else {
+                    table.column(6).search('').draw();
+                }
+            });
+
+            // Filter Prodi Mobile
+            $('#semesterFilterMobileProdi').on('change', function() {
+                var val = $(this).val();
+                if (val) {
+                    table.column(5).search(val).draw();
+                } else {
+                    table.column(5).search('').draw();
+                }
+            });
              
+            $('#semesterFilterRiwayatMatakuliah').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({
+                    search: 'applied'
+                }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(5).search(val).draw();
+                } else {
+                    table.column(5).search('').draw();
+                }
+            });
+
+            $('#semesterFilterRiwayatMatakuliahKajur').on('change', function() {
+                var val = $(this).val();
+                console.log("Selected Semester:", val); // Add this line for debugging
+
+                // Log filtered data
+                var filteredData = table.rows({
+                    search: 'applied'
+                }).data().toArray();
+                console.log("Filtered Data:", filteredData);
+
+                if (val) {
+                    table.column(6).search(val).draw();
+                } else {
+                    table.column(6).search('').draw();
+                }
+            });
+
 
                 // Event handler untuk panjang menu
                 $('#lengthMenuMatakuliahProdi').on('change', function() {

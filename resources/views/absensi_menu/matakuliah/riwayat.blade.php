@@ -286,8 +286,8 @@
                             <td>{{ $riwayat->semester->semester }} {{ $riwayat->semester->tahun_ajaran }}</td>
                         @endif
                         <td class="text-center">
-                            <p>1. {{ $mtk->dosenmatkul->nama_singkat ?? '-' }} </p>
-                            <p>2. {{ $mtk->dosenmatkul2->nama_singkat ?? '-' }}</p>
+                            <p>1. {{ $riwayat->dosenmatkul->nama_singkat ?? '-' }} </p>
+                            <p>2. {{ $riwayat->dosenmatkul2->nama_singkat ?? '-' }}</p>
                         </td>
                         <td>{{ $riwayat->hari }}</td>
                         <td>{{ $riwayat->jam }}</td>
@@ -357,7 +357,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            const rowCount = $('#datatablesMataKuliah tbody tr').length;
+            const rowCount = $('#datatablesRiwayatMataKuliah tbody tr').length;
             if (rowCount > 0) {
                 Swal.fire({
                     title: 'Ini adalah halaman Riwayat Mata Kuliah',
